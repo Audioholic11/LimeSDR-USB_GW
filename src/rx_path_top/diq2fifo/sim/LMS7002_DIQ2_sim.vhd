@@ -24,7 +24,7 @@ entity LMS7002_DIQ2_sim is
 		mode			: in std_logic; -- JESD207: 1; TRXIQ: 0
 		trxiqpulse	: in std_logic; -- trxiqpulse on: 1; trxiqpulse off: 0
 		ddr_en 		: in std_logic; -- DDR: 1; SDR: 0
-		mimo_en		: in std_logic; -- SISO: 1; MIMO: 0
+		mimo_en		: in std_logic; -- MIMO: 1; SISO: 0
 		fidm			: in std_logic; -- External Frame ID mode. Frame start at fsync = 0, when 0. Frame start at fsync = 1, when 1. 
 
 		-- Data to BB

@@ -27,7 +27,7 @@ entity smpl_cmp is
       mode           : in std_logic; -- JESD207: 1; TRXIQ: 0
       trxiqpulse     : in std_logic; -- trxiqpulse on: 1; trxiqpulse off: 0
       ddr_en         : in std_logic; -- DDR: 1; SDR: 0
-      mimo_en        : in std_logic; -- SISO: 1; MIMO: 0
+      mimo_en        : in std_logic; -- MIMO: 1; SISO: 0
       ch_en          : in std_logic_vector(1 downto 0); --"01" - Ch. A, "10" - Ch. B, "11" - Ch. A and Ch. B.
       fidm           : in std_logic;
       --control and status

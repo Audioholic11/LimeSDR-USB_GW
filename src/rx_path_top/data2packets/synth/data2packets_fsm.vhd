@@ -26,7 +26,8 @@ entity data2packets_fsm is
       smpl_rd_size      : in std_logic_vector(11 downto 0); --Samples to read per packet
       smpl_buff_rdy     : in std_logic;   -- Assert 1 when there is enough samples for at least one packet
       smpl_buff_rdreq   : out std_logic;  -- Read require is asserted for smpl_rd_size cycles
-      data2packets_done : in std_logic    -- Assert when packet formation cycle is done
+      data2packets_done : in std_logic;   -- Assert when packet formation cycle is done
+		chirp_sync_en		: in std_logic    -- when chirp synce enable (packet structure changes)
     
         );
 end data2packets_fsm;
@@ -74,8 +75,12 @@ begin
    if reset_n = '0' then 
       smpl_buff_rd_cnt     <= (others=>'0');
       smpl_buff_rd_cnt_max <= (others=> '0');
-   elsif (clk'event AND clk='1') then 
-      smpl_buff_rd_cnt_max <= unsigned(smpl_rd_size) - 2;
+   elsif (clk'event AND clk='1') then
+		if (chirp_sync_en='0') then
+			smpl_buff_rd_cnt_max <= unsigned(smpl_rd_size) - 2;
+		else
+			smpl_buff_rd_cnt_max <= unsigned(smpl_rd_size) - 2;
+		end if;
       if current_state = rd_smpl_buff then
          smpl_buff_rd_cnt <= smpl_buff_rd_cnt+1;
       else 

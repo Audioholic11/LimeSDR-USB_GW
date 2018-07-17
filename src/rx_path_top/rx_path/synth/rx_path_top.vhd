@@ -18,7 +18,7 @@ entity rx_path_top is
       iq_width             : integer := 12;
       invert_input_clocks  : string := "OFF";
       smpl_buff_rdusedw_w  : integer := 11; --bus width in bits 
-      pct_buff_wrusedw_w   : integer := 12  --bus width in bits 
+      pct_buff_wrusedw_w   : integer := 12  --bus width in bits
       );
    port (
       clk                  : in std_logic;
@@ -29,9 +29,11 @@ entity rx_path_top is
       mode                 : in std_logic; -- JESD207: 1; TRXIQ: 0
       trxiqpulse           : in std_logic; -- trxiqpulse on: 1; trxiqpulse off: 0
       ddr_en               : in std_logic; -- DDR: 1; SDR: 0
-      mimo_en              : in std_logic; -- SISO: 1; MIMO: 0
+      mimo_en              : in std_logic; -- MIMO: 1; SISO: 0
       ch_en                : in std_logic_vector(1 downto 0); --"01" - Ch. A, "10" - Ch. B, "11" - Ch. A and Ch. B. 
       fidm                 : in std_logic; -- External Frame ID mode. Frame start at fsync = 0, when 0. Frame start at fsync = 1, when 1.
+		chirp_sync_en			: in std_logic; -- chirp sync enable
+		
       --Rx interface data 
       DIQ                  : in std_logic_vector(iq_width-1 downto 0);
       fsync                : in std_logic;
@@ -41,7 +43,6 @@ entity rx_path_top is
       pct_fifo_wusedw      : in std_logic_vector(pct_buff_wrusedw_w-1 downto 0);
       pct_fifo_wrreq       : out std_logic;
       pct_fifo_wdata       : out std_logic_vector(63 downto 0);
-      pct_hdr_cap          : out std_logic;
       --sample nr
       clr_smpl_nr          : in std_logic;
       ld_smpl_nr           : in std_logic;
@@ -54,9 +55,14 @@ entity rx_path_top is
       smpl_cmp_start       : in std_logic;
       smpl_cmp_length      : in std_logic_vector(15 downto 0);
       smpl_cmp_done        : out std_logic;
-      smpl_cmp_err         : out std_logic
-     
-   );
+      smpl_cmp_err         : out std_logic;
+		--chirp_sync
+		chirp_sync_length		: in std_logic_vector (63 downto 0);
+		chirp_sync_trig		: in std_logic;
+		bit_pack_valid			: out std_logic;
+		smpl_buff_rdreq		: out std_logic
+		
+        );
 end rx_path_top;
 
 -- ----------------------------------------------------------------------------
@@ -85,6 +91,11 @@ signal smpl_nr_in_sync        : std_logic_vector(63 downto 0);
 signal smpl_cmp_start_sync    : std_logic;
 signal smpl_cmp_length_sync   : std_logic_vector(15 downto 0);
 
+signal chirp_sync_en_sync		: std_logic;
+signal last_chirp_timestamp	: std_logic_vector(63 downto 0);
+--signal chirp_sync_length_sync	: std_logic_vector (31 downto 0);
+--signal chirp_sync_trig_sync	: std_logic;
+
 
 
 --inst0 
@@ -97,10 +108,15 @@ signal inst1_rdusedw          : std_logic_vector(smpl_buff_rdusedw_w-1 downto 0)
 --inst2
 signal inst2_pct_hdr_0        : std_logic_vector(63 downto 0);
 signal inst2_pct_hdr_1        : std_logic_vector(63 downto 0);
+signal inst2_pct_ftr_0			: std_logic_vector(63 downto 0);
+signal inst2_pct_ftr_1			: std_logic_vector(63 downto 0);
 signal inst2_smpl_buff_rdreq  : std_logic;
 signal inst2_smpl_buff_rddata : std_logic_vector(63 downto 0);
 --inst3
 signal inst3_q                : std_logic_vector(63 downto 0);
+
+--inst2
+signal inst4_q                : std_logic_vector(63 downto 0);
 
 --internal signals
 type my_array is array (0 to 5) of std_logic_vector(63 downto 0);
@@ -114,7 +130,9 @@ signal tx_pct_loss_detect     : std_logic;
 
 begin
 
-
+-- ----------------------------------------------------------------------------
+-- sync registers
+-- ----------------------------------------------------------------------------
 sync_reg0 : entity work.sync_reg 
 port map(clk, '1', reset_n, reset_n_sync);
  
@@ -151,6 +169,12 @@ port map(clk, '1', test_ptrn_en, test_ptrn_en_sync);
 sync_reg11 : entity work.sync_reg 
 port map(clk, '1', smpl_cmp_start, smpl_cmp_start_sync);
 
+sync_reg12 : entity work.sync_reg 
+port map(clk, '1', chirp_sync_en, chirp_sync_en_sync);
+
+--sync_reg13 : entity work.sync_reg 
+--port map(clk, '1', chirp_sync_trig, chirp_sync_trig_sync);
+
 
 bus_sync_reg0 : entity work.bus_sync_reg
 generic map (2)
@@ -168,8 +192,9 @@ bus_sync_reg3 : entity work.bus_sync_reg
 generic map (16)
 port map(clk, '1', smpl_cmp_length, smpl_cmp_length_sync);
 
-
-
+--bus_sync_reg4 : entity work.bus_sync_reg
+--generic map (32)
+--port map(clk, '1', chirp_sync_length, chirp_sync_length_sync);
 
 
 -- ----------------------------------------------------------------------------
@@ -251,7 +276,25 @@ inst2_smpl_buff_rddata <=  inst1_q(47 downto 36) & "0000" &
   inst2_pct_hdr_0(47 downto 32)  <=x"0403";
   inst2_pct_hdr_0(63 downto 48)  <=x"0605";
         
-        
+--footer0
+  inst2_pct_ftr_0(31 downto 0)	<= chirp_sync_length(31 downto 0);
+  inst2_pct_ftr_0(63 downto 32)	<= x"00000000";
+  
+--footer1
+	ftr1_trigger_hold: process(reset_n, clk)
+	begin
+		if reset_n='0' then
+			last_chirp_timestamp <= (others=>'0');         
+		elsif (clk'event and clk = '1') then
+			if (chirp_sync_trig = '1') then
+			last_chirp_timestamp <= inst4_q;
+			else
+			last_chirp_timestamp <= last_chirp_timestamp;
+			end if;
+	 end if;
+	end process ftr1_trigger_hold;
+
+  inst2_pct_ftr_1(63 downto 0)	<= last_chirp_timestamp(63 downto 0);
 -- ----------------------------------------------------------------------------
 -- Instance for packing samples to packets
 -- ----------------------------------------------------------------------------       
@@ -266,13 +309,17 @@ data2packets_top_inst2 : entity work.data2packets_top
       sample_width      => sample_width_sync,
       pct_hdr_0         => inst2_pct_hdr_0,
       pct_hdr_1         => inst2_pct_hdr_1,
+		pct_ftr_0         => inst2_pct_ftr_0,
+      pct_ftr_1         => inst2_pct_ftr_1,
       pct_buff_wrusedw  => pct_fifo_wusedw,
       pct_buff_wrreq    => pct_fifo_wrreq,
       pct_buff_wrdata   => pct_fifo_wdata,
-      pct_hdr_cap       => pct_hdr_cap,
       smpl_buff_rdusedw => inst1_rdusedw,
       smpl_buff_rdreq   => inst2_smpl_buff_rdreq,
-      smpl_buff_rddata  => inst2_smpl_buff_rddata   
+      smpl_buff_rddata  => inst2_smpl_buff_rddata,
+		chirp_sync_trig   => chirp_sync_trig,
+		chirp_sync_en		=> chirp_sync_en_sync,
+		bit_pack_valid		=> bit_pack_valid
         );
         
 -- ----------------------------------------------------------------------------
@@ -318,9 +365,9 @@ smpl_cnt_inst4 : entity work.smpl_cnt
       sload       => ld_smpl_nr_sync,
       data        => smpl_nr_in_sync,
       cnt_en      => inst0_fifo_wrreq,
-      q           => smpl_nr_cnt        
+      q           => inst4_q        
         );
-        
+
 -- ----------------------------------------------------------------------------
 -- There is 6 clock cycle latency from smpl_fifo_inst1 to packet formation
 -- and smpl_cnt has to be delayed 6 cycles
@@ -340,7 +387,11 @@ begin
    end if;
 end process;
         
- inst2_pct_hdr_1 <=  delay_chain(5);      
+ inst2_pct_hdr_1 <=  delay_chain(5); 
+
+--outputs
+smpl_buff_rdreq <= inst2_smpl_buff_rdreq;
+smpl_nr_cnt <= inst4_q;
   
 end arch;   
 

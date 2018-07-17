@@ -30,6 +30,8 @@ entity data2packets is
       pct_size          : in std_logic_vector(pct_size_w-1 downto 0); --Whole packet size in 64b words (MIN 6words)
       pct_hdr_0         : in std_logic_vector(63 downto 0);
       pct_hdr_1         : in std_logic_vector(63 downto 0);
+		pct_ftr_0			: in std_logic_vector(63 downto 0);
+		pct_ftr_1			: in std_logic_vector(63 downto 0);
       pct_data          : in std_logic_vector(63 downto 0);
       pct_data_wrreq    : in std_logic;                     -- Do not assert when pct_state="11"
       pct_state         : out std_logic_vector(1 downto 0); -- 00 - Idle
@@ -38,7 +40,8 @@ entity data2packets is
                                                             -- 11 - Busy
 
       pct_wrreq         : out std_logic;
-      pct_q             : out std_logic_vector(63 downto 0)
+      pct_q             : out std_logic_vector(63 downto 0);
+		chirp_sync_en		: in std_logic
       
         );
 end data2packets;
@@ -53,9 +56,13 @@ signal reg_1      : std_logic_vector (63 downto 0);
 signal reg_2      : std_logic_vector (63 downto 0); 
 
 signal reg_0_ld   : std_logic;
+signal reg_0_ld_f : std_logic;
 signal reg_1_ld   : std_logic;
+signal reg_1_ld_f : std_logic;
 signal reg_2_ld   : std_logic;
+signal reg_2_ld_f : std_logic;
 signal reg_ld     : std_logic;
+signal reg_ld_ftr	: std_logic;
 
 signal reg_0_en   : std_logic;
 signal reg_1_en   : std_logic;
@@ -72,12 +79,13 @@ signal pct_data_wr_cnt_clr : std_logic;
 signal pct_end_cnt         : unsigned(7 downto 0);
 
 signal pct_wrreq_int       : std_logic;
+
   
 begin
 
 
 pct_data_wr_cnt_en  <= pct_data_wrreq;
-pct_data_wr_cnt_clr <= '1' when current_state = s1 else '0';
+pct_data_wr_cnt_clr <= '1' when current_state = s2 else '0';
 
 -- ----------------------------------------------------------------------------
 -- Max packet write value
@@ -87,7 +95,11 @@ pct_data_wr_cnt_max_proc : process(reset_n, clk)
       if reset_n='0' then
          pct_data_wr_cnt_max <= (others=>'0');
       elsif (clk'event and clk = '1') then
+			if (chirp_sync_en='0') then
          pct_data_wr_cnt_max <= unsigned(pct_size)-4;
+			else
+			pct_data_wr_cnt_max <= unsigned(pct_size)-6;
+			end if;
       end if;
    end process;
 
@@ -102,7 +114,11 @@ pct_end_cnt_proc : process(reset_n, clk)
          if current_state = s2 then
             pct_end_cnt <= pct_end_cnt-1;
          else
+				if (chirp_sync_en='0') then
             pct_end_cnt <= x"01";
+				else
+				pct_end_cnt <= x"03";
+				end if;
          end if;
       end if;
    end process;
@@ -127,12 +143,14 @@ pct_data_wr_cnt_proc : process(reset_n, clk)
    
   
    reg_ld <= '1' when current_state = idle AND pct_data_wrreq='1' else '0';
+	reg_ld_ftr <= '1' when current_state = S2 AND chirp_sync_en='1' AND pct_end_cnt= x"01" else '0';
    reg_en <= '1' when current_state = S2 OR pct_data_wrreq='1' else '0';
    
 -- ----------------------------------------------------------------------------
 -- Register stage 0
 -- ----------------------------------------------------------------------------   
    reg_0_ld <= reg_ld;
+	reg_0_ld_f <= reg_ld_ftr;
    reg_0_en <= reg_en;
 
  reg_stage_0 : process(reset_n, clk)
@@ -142,6 +160,8 @@ pct_data_wr_cnt_proc : process(reset_n, clk)
       elsif (clk'event and clk = '1') then
          if reg_0_ld = '1' then 
             reg_0 <= pct_hdr_0;
+			elsif (reg_0_ld_f ='1') then
+				reg_0 <= pct_ftr_0;
          elsif reg_0_en ='1' then 
             reg_0 <= reg_1;
          else 
@@ -155,6 +175,7 @@ pct_data_wr_cnt_proc : process(reset_n, clk)
 -- ----------------------------------------------------------------------------  
    
 reg_1_ld <= reg_ld;
+reg_1_ld_f <= reg_ld_ftr;
 reg_1_en <= reg_en;
    
  reg_stage_1 :  process(reset_n, clk)
@@ -164,6 +185,8 @@ reg_1_en <= reg_en;
       elsif (clk'event and clk = '1') then
          if reg_1_ld = '1' then 
             reg_1 <= pct_hdr_1;
+			elsif (reg_1_ld_f = '1') then
+				reg_1 <= pct_ftr_1;
          elsif reg_1_en ='1' then 
             reg_1 <= reg_2;
          else 
@@ -177,6 +200,7 @@ reg_1_en <= reg_en;
 -- ----------------------------------------------------------------------------  
    
 reg_2_ld <= pct_data_wrreq;
+reg_2_ld_f <= reg_ld_ftr;
 reg_2_en <= '0';
    
  reg_stage_2 :  process(reset_n, clk)
@@ -184,8 +208,10 @@ reg_2_en <= '0';
       if reset_n='0' then
          reg_2 <= (others=>'0');
       elsif (clk'event and clk = '1') then
-         if reg_2_ld = '1' then 
-            reg_2 <= pct_data;
+			if (reg_2_ld_f = '1') then
+				reg_2 <= reg_2;
+         elsif reg_2_ld = '1' then 
+            reg_2 <= pct_data;			
          elsif reg_2_en ='1' then 
             reg_2 <= reg_2;
          else 

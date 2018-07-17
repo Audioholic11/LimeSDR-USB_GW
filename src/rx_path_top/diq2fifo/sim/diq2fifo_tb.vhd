@@ -26,8 +26,8 @@ architecture tb_behave of diq2fifo_tb is
 
 	signal inst0_mode			: std_logic:='0'; -- JESD207: 1; TRXIQ: 0
 	signal inst0_trxiqpulse	: std_logic:='1'; -- trxiqpulse on: 1; trxiqpulse off: 0
-	signal inst0_ddr_en 		: std_logic:='1'; -- DDR: 1; SDR: 0
-	signal inst0_mimo_en 	: std_logic:='1'; -- MIMO: 1; SISO: 0
+	signal inst0_ddr_en 		: std_logic:='0'; -- DDR: 1; SDR: 0
+	signal inst0_mimo_en 	: std_logic:='0'; -- MIMO: 1; SISO: 0
 	signal inst1_ch_en		: std_logic_vector(1 downto 0):="10"; --"01" - Ch. A, "10" - Ch. B, "11" - Ch. A and Ch. B. 
 	signal inst0_fidm			: std_logic:='0'; -- External Frame ID mode. Frame start at fsync = 0, when 0. Frame start at fsync = 1, when 1. 
 

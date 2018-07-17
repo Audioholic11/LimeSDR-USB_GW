@@ -29,13 +29,17 @@ entity data2packets_top is
       sample_width      : in std_logic_vector(1 downto 0); --"10"-12bit, "01"-14bit, "00"-16bit;
       pct_hdr_0         : in std_logic_vector(63 downto 0);
       pct_hdr_1         : in std_logic_vector(63 downto 0);
+		pct_ftr_0         : in std_logic_vector(63 downto 0);
+      pct_ftr_1         : in std_logic_vector(63 downto 0);
       pct_buff_wrusedw  : in std_logic_vector(pct_buff_wrusedw_w-1 downto 0);   
       pct_buff_wrreq    : out std_logic;
       pct_buff_wrdata   : out std_logic_vector(63 downto 0);
       smpl_buff_rdusedw : in std_logic_vector(smpl_buff_rdusedw_w-1 downto 0);
       smpl_buff_rdreq   : out std_logic;
       smpl_buff_rddata  : in std_logic_vector(63 downto 0);
-      pct_hdr_cap       : out std_logic
+		chirp_sync_trig	: in std_logic;
+		chirp_sync_en		: in std_logic;
+		bit_pack_valid		: out std_logic
     
         );
 end data2packets_top;
@@ -77,8 +81,6 @@ signal smpl_buff_rdreq_reg          : std_logic;
 
 --input registers
 signal smpl_buff_rdusedw_reg        : std_logic_vector(smpl_buff_rdusedw_w-1 downto 0);
-
-signal pct_hdr_captured             : std_logic;
  
 begin
 
@@ -104,11 +106,15 @@ begin
    if reset_n = '0' then 
       inst2_pct_size <= (others => '0');
    elsif (clk'event AND clk='1') then
-      if sample_width = "01" then 
-         inst2_pct_size <= std_logic_vector(to_unsigned(128,inst2_pct_size'length)); --128x64b=1024Bytes
-      else 
-         inst2_pct_size <= std_logic_vector(to_unsigned(512,inst2_pct_size'length)); --512x64b=4096Bytes
-      end if;
+		if chirp_sync_en = '1' then
+				inst2_pct_size <= std_logic_vector(to_unsigned(256,inst2_pct_size'length)); --256x64b=2048Bytes
+		else			
+			if sample_width = "01" then 
+				inst2_pct_size <= std_logic_vector(to_unsigned(128,inst2_pct_size'length)); --128x64b=1024Bytes
+			else 
+				inst2_pct_size <= std_logic_vector(to_unsigned(512,inst2_pct_size'length)); --512x64b=4096Bytes
+			end if;
+		end if;
    end if;
 end process;
 
@@ -148,14 +154,18 @@ process(clk, reset_n)
 begin
    if reset_n = '0' then 
       smpl_buff_rdusedw_min <= (others=>'0');
-   elsif (clk'event AND clk='1') then 
-      if sample_width = "10" then
-         smpl_buff_rdusedw_min <= to_unsigned(680, smpl_buff_rdusedw_min'length);
-      elsif sample_width = "01" then
-         smpl_buff_rdusedw_min <= to_unsigned(144, smpl_buff_rdusedw_min'length);
-      else
-         smpl_buff_rdusedw_min <= to_unsigned(510, smpl_buff_rdusedw_min'length);
-      end if;
+   elsif (clk'event AND clk='1') then
+		if chirp_sync_en = '1' then
+			smpl_buff_rdusedw_min <= to_unsigned(336, smpl_buff_rdusedw_min'length); --336x2 (48b) when 2hdrs and 2ftrs only supporst 12bit
+		else
+			if sample_width = "10" then
+				smpl_buff_rdusedw_min <= to_unsigned(680, smpl_buff_rdusedw_min'length);--680 (512x64b) or 168(128x64b)
+			elsif sample_width = "01" then
+				smpl_buff_rdusedw_min <= to_unsigned(144, smpl_buff_rdusedw_min'length);
+			else
+				smpl_buff_rdusedw_min <= to_unsigned(510, smpl_buff_rdusedw_min'length);--inst2_pct_size-2(headers)
+			end if;
+		end if;
    end if;
 end process;
 
@@ -185,32 +195,23 @@ begin
    end if;
 end process;
 
-process(clk, reset_n)
-begin
-   if reset_n = '0' then 
-      pct_hdr_captured <= '0';
-   elsif (clk'event AND clk='1') then
-      if inst2_pct_state = "01" then 
-         pct_hdr_captured <= '1';
-      else 
-         pct_hdr_captured <= '0';
-      end if;
-   end if;
-end process;
-
 
 process(clk, reset_n)
 begin
    if reset_n = '0' then 
       inst0_smpl_rd_size <= (others=>'0');
    elsif (clk'event AND clk='1') then 
-      if sample_width = "10" then
-         inst0_smpl_rd_size <= std_logic_vector(to_unsigned(680, inst0_smpl_rd_size'length));
-      elsif sample_width = "01" then
-         inst0_smpl_rd_size <= std_logic_vector(to_unsigned(144, inst0_smpl_rd_size'length));
-      else
-         inst0_smpl_rd_size <= std_logic_vector(to_unsigned(510, inst0_smpl_rd_size'length));
-      end if;
+		if chirp_sync_en = '1' then
+			inst0_smpl_rd_size <= std_logic_vector(to_unsigned(336, inst0_smpl_rd_size'length)); --336*2 when 2hdrs and 2ftrs only supporst 12bit
+		else
+			if sample_width = "10" then
+				inst0_smpl_rd_size <= std_logic_vector(to_unsigned(680, inst0_smpl_rd_size'length));--680 (512x64b) or 168(128x64b)
+			elsif sample_width = "01" then
+				inst0_smpl_rd_size <= std_logic_vector(to_unsigned(144, inst0_smpl_rd_size'length));
+			else
+				inst0_smpl_rd_size <= std_logic_vector(to_unsigned(510, inst0_smpl_rd_size'length));--inst2_pct_size-2(headers)
+			end if;
+		end if;
    end if;
 end process;
 
@@ -227,7 +228,8 @@ data2packets_fsm_inst0 : entity work.data2packets_fsm
       smpl_rd_size      => inst0_smpl_rd_size,
       smpl_buff_rdy     => inst0_smpl_buff_rdy,
       smpl_buff_rdreq   => inst0_smpl_buff_rdreq,
-      data2packets_done => inst0_data2packets_done   
+      data2packets_done => inst0_data2packets_done,
+		chirp_sync_en		=> chirp_sync_en
         );
         
  
@@ -267,11 +269,14 @@ data2packets_inst2 : entity work.data2packets
       pct_size          => inst2_pct_size,
       pct_hdr_0         => pct_hdr_0,
       pct_hdr_1         => pct_hdr_1,
+		pct_ftr_0         => pct_ftr_0,
+      pct_ftr_1         => pct_ftr_1,
       pct_data          => inst1_data_out,
       pct_data_wrreq    => inst1_data_out_valid,
       pct_state         => inst2_pct_state,
       pct_wrreq         => inst2_pct_wrreq,
-      pct_q             => inst2_pct_q    
+      pct_q             => inst2_pct_q,
+		chirp_sync_en		=> chirp_sync_en
         );
 
 
@@ -296,9 +301,8 @@ end process;
 pct_buff_wrdata   <= pct_buff_wrdata_reg;  
 pct_buff_wrreq    <= smpl_buff_rdreq_reg;
 smpl_buff_rdreq   <= inst0_smpl_buff_rdreq;
-pct_hdr_cap       <= pct_hdr_captured;
      
-
+bit_pack_valid <= inst1_data_out_valid;
 
   
 end arch;   

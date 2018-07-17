@@ -17,11 +17,9 @@ entity tx_path_top is
    generic( 
       dev_family           : string := "Cyclone IV E";
       iq_width             : integer := 12;
-      TX_IN_PCT_SIZE       : integer := 4096; -- TX packet size in bytes
-      TX_IN_PCT_HDR_SIZE   : integer := 16;
       pct_size_w           : integer := 16;
       n_buff               : integer := 4; -- 2,4 valid values
-      in_pct_data_w        : integer := 128;
+      in_pct_data_w        : integer := 32;
       out_pct_data_w       : integer := 64;
       decomp_fifo_size     : integer := 9 -- 256 words
       );
@@ -60,11 +58,10 @@ entity tx_path_top is
       fsync                : out std_logic;
       DIQ_h                : out std_logic_vector(iq_width downto 0);
       DIQ_l                : out std_logic_vector(iq_width downto 0);
-      --fifo ports
-      in_pct_reset_n_req   : out std_logic;
-      in_pct_rdreq         : out std_logic;
+      --fifo ports 
+      in_pct_wrreq         : in std_logic;
       in_pct_data          : in std_logic_vector(in_pct_data_w-1 downto 0);
-      in_pct_rdy           : in std_logic
+      in_pct_full          : out std_logic
       );
 end tx_path_top;
 
@@ -80,7 +77,6 @@ signal rx_sample_nr_iq_rdclk        : std_logic_vector(63 downto 0);
 signal en_sync_rx_sample_clk        : std_logic;
 signal en_sync_iq_rdclk             : std_logic;
 signal pct_loss_flg_clr_sync_iq_rdclk : std_logic;
-signal pct_loss_flg_clr_sync_iq_rdclk_reg : std_logic;
 
 signal mode_sync_iq_rdclk           : std_logic;
 signal trxiqpulse_sync_iq_rdclk     : std_logic; 
@@ -244,14 +240,12 @@ end process;
    if reset_n_sync_iq_rdclk = '0' then 
       pct_loss_flg_int           <= '0';
       inst0_in_pct_clr_flag_reg  <= '1';
-      pct_loss_flg_clr_sync_iq_rdclk_reg <= '0';
    elsif (iq_rdclk'event AND iq_rdclk='1') then
       inst0_in_pct_clr_flag_reg <= inst0_in_pct_clr_flag;
-      pct_loss_flg_clr_sync_iq_rdclk_reg <= pct_loss_flg_clr_sync_iq_rdclk;
       
       if inst0_in_pct_clr_flag = '1' AND inst0_in_pct_clr_flag_reg = '0' then 
          pct_loss_flg_int <= '1';
-      elsif pct_loss_flg_clr_sync_iq_rdclk = '1' AND pct_loss_flg_clr_sync_iq_rdclk_reg = '0' then 
+      elsif pct_loss_flg_clr_sync_iq_rdclk = '1' then 
          pct_loss_flg_int <= '0';
       else 
          pct_loss_flg_int <= pct_loss_flg_int;
@@ -286,8 +280,6 @@ generic map(
   packets2data_top_inst0 : entity work.packets2data_top
    generic map (
       dev_family        => dev_family,
-      TX_IN_PCT_SIZE    => TX_IN_PCT_SIZE,    
-      TX_IN_PCT_HDR_SIZE=> TX_IN_PCT_HDR_SIZE,
       pct_size_w        => pct_size_w,
       n_buff            => n_buff, -- 2,4 valid values
       in_pct_data_w     => in_pct_data_w,
@@ -311,10 +303,10 @@ generic map(
       pct_sync_dis      => pct_sync_dis,
       sample_nr         => rx_sample_nr_iq_rdclk,
       
-      in_pct_reset_n_req=> in_pct_reset_n_req,
-      in_pct_rdreq      => in_pct_rdreq,
+      in_pct_wrreq      => in_pct_wrreq,
       in_pct_data       => in_pct_data,
-      in_pct_rdy        => in_pct_rdy,
+      in_pct_last       => open,
+      in_pct_full       => in_pct_full,
       in_pct_clr_flag   => inst0_in_pct_clr_flag,
       in_pct_buff_rdy   => inst0_in_pct_buff_rdy,
       

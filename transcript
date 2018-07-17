@@ -1,0 +1,83 @@
+vmap source_library /home/erik/git/LimeSDR-USB_GW/source_library
+# Model Technology ModelSim ALTERA vmap 10.4b Lib Mapping Utility 2015.05 May 27 2015
+# vmap -modelsim_quiet source_library /home/erik/git/LimeSDR-USB_GW/source_library 
+# Modifying /home/erik/git/LimeSDR-USB_GW/lms7_trx.mpf
+do /home/erik/git/LimeSDR-USB_GW/simulation/modelsim/LimeSDR-USB_lms7_trx_run_msim_gate_vhdl.do
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Model Technology ModelSim ALTERA vmap 10.4b Lib Mapping Utility 2015.05 May 27 2015
+# vmap -modelsim_quiet work gate_work 
+# Modifying /home/erik/git/LimeSDR-USB_GW/lms7_trx.mpf
+# 
+# vcom -93 -work work {LimeSDR-USB_lms7_trx_8_1200mv_85c_slow.vho}
+# Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+# Start time: 15:21:33 on Jul 09,2018
+# vcom -reportprogress 300 -93 -work work LimeSDR-USB_lms7_trx_8_1200mv_85c_slow.vho 
+# ** Error: (vcom-7) Failed to open design unit file "LimeSDR-USB_lms7_trx_8_1200mv_85c_slow.vho" in read mode.
+# No such file or directory. (errno = ENOENT)
+# End time: 15:21:33 on Jul 09,2018, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: /home/erik/altera_lite/15.1/modelsim_ase/linuxaloem/vcom failed.
+# Error in macro /home/erik/git/LimeSDR-USB_GW/simulation/modelsim/LimeSDR-USB_lms7_trx_run_msim_gate_vhdl.do line 8
+# /home/erik/altera_lite/15.1/modelsim_ase/linuxaloem/vcom failed.
+#     while executing
+# "vcom -93 -work work {LimeSDR-USB_lms7_trx_8_1200mv_85c_slow.vho}"
+do /home/erik/git/LimeSDR-USB_GW/src/rx_path_top/rx_path/compile.tcl
+# 
+#                            source_library { ../general/sync_reg.vhd
+#                                             ../general/bus_sync_reg.vhd                                
+#                                             ../altera_inst/fifo_inst.vhd
+#                                             ../altera_inst/lpm_cnt_inst.vhd
+#                                             ../bit_pack/synth/pack_48_to_64.vhd
+#                                             ../bit_pack/synth/pack_56_to_64.vhd
+#                                             ../bit_pack/synth/bit_pack.vhd
+#                                             ../diq2fifo/synth/test_data_dd.vhd
+#                                             ../diq2fifo/synth/lms7002_ddin.vhd
+#                                             ../diq2fifo/synth/rxiq_siso_sdr.vhd
+#                                             ../diq2fifo/synth/rxiq_siso_ddr.vhd
+#                                             ../diq2fifo/synth/rxiq_pulse_ddr.vhd
+#                                             ../diq2fifo/synth/rxiq_mimo_ddr.vhd
+#                                             ../diq2fifo/synth/rxiq_mimo.vhd
+#                                             ../diq2fifo/synth/rxiq_siso.vhd
+#                                             ../diq2fifo/synth/rxiq.vhd
+#                                             ../diq2fifo/synth/diq2fifo.vhd
+#                                             ../diq2fifo/sim/adc_data_sim.vhd
+#                                             ../diq2fifo/sim/LMS7002_DIQ2_sim.vhd
+#                                             ../data2packets/synth/data2packets.vhd
+#                                             ../data2packets/synth/data2packets_fsm.vhd
+#                                             ../smpl_cnt/synth/smpl_cnt.vhd
+#                                             ../data2packets/synth/data2packets_top.vhd
+#                                             synth/rx_path_top.vhd
+#                                             sim/rx_path_top_tb.vhd
+#                                             
+#                                             
+#                                             
+#                                             
+#                            }
+# 
+# 1
+# Courier 10 roman normal
+# 1531171329
+# ** Error: could not read "../general/sync_reg.vhd": no such file or directory
+# Error in macro /home/erik/git/LimeSDR-USB_GW/src/rx_path_top/rx_path/compile.tcl line 103
+# could not read "../general/sync_reg.vhd": no such file or directory
+#     while executing
+# "file mtime $file"
+#     ("foreach" body line 2)
+#     invoked from within
+# "foreach file $file_list {
+#     if { $last_compile_time < [file mtime $file] } {
+#       if [regexp {.vhdl?$} $file] {
+#         vcom -quiet -93 $file
+#      ..."
+#     ("foreach" body line 4)
+#     invoked from within
+# "foreach {library file_list} $library_file_list {
+#   vlib $library
+#   vmap work $library
+#   foreach file $file_list {
+#     if { $last_compile_time < [file ..."
+cd /home/erik/git/LimeSDR-USB_GW/src/rx_path_top/rx_path
