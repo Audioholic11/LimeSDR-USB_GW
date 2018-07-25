@@ -1,0 +1,223 @@
+\subsection{stream\+\_\+switch Entity Reference}
+\label{classstream__switch}\index{stream\+\_\+switch@{stream\+\_\+switch}}
+
+
+Inheritance diagram for stream\+\_\+switch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{d0/ded/classstream__switch__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for stream\+\_\+switch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{d8/d9d/classstream__switch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Entities}
+\begin{DoxyCompactItemize}
+\item 
+{\bf arch} architecture
+\end{DoxyCompactItemize}
+\subsubsection*{Libraries}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf ieee} 
+\end{DoxyCompactItemize}
+\subsubsection*{Use Clauses}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf std\+\_\+logic\+\_\+1164}   
+\item 
+{\bf numeric\+\_\+std}   
+\end{DoxyCompactItemize}
+\subsubsection*{Generics}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf data\+\_\+width} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{32} \textcolor{vhdlchar}{ }}}
+\item 
+{\bf wfm\+\_\+fifo\+\_\+wrusedw\+\_\+size} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{ }}}
+\item 
+{\bf wfm\+\_\+limit} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{4096} \textcolor{vhdlchar}{ }}}
+\end{DoxyCompactItemize}
+\subsubsection*{Ports}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clk}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reset\+\_\+n}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+in}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+in\+\_\+valid}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+in\+\_\+rdy}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dest\+\_\+sel}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf tx\+\_\+fifo\+\_\+rdy}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf tx\+\_\+fifo\+\_\+wr}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf tx\+\_\+fifo\+\_\+data}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+rdy}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+fifo\+\_\+wr}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+data}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+fifo\+\_\+wrusedw}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf wfm\+\_\+fifo\+\_\+wrusedw\+\_\+size}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 15} of file {\bf stream\+\_\+switch.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{stream\+\_\+switch@{stream\+\_\+switch}!clk@{clk}}
+\index{clk@{clk}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{clk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a4a4609c199d30b3adebbeb3a01276ec5}
+
+
+Definition at line {\bf 22} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!data\+\_\+in@{data\+\_\+in}}
+\index{data\+\_\+in@{data\+\_\+in}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{data\+\_\+in}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+in} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_ae8970283125be754ef38cafeb364ecd9}
+
+
+Definition at line {\bf 24} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!data\+\_\+in\+\_\+rdy@{data\+\_\+in\+\_\+rdy}}
+\index{data\+\_\+in\+\_\+rdy@{data\+\_\+in\+\_\+rdy}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{data\+\_\+in\+\_\+rdy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+in\+\_\+rdy} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a0f5e60b83171d50f1f98684aa7d0c891}
+
+
+Definition at line {\bf 26} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!data\+\_\+in\+\_\+valid@{data\+\_\+in\+\_\+valid}}
+\index{data\+\_\+in\+\_\+valid@{data\+\_\+in\+\_\+valid}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{data\+\_\+in\+\_\+valid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+in\+\_\+valid} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a9fe0a9f38dccdb91d670106b4bbac6fd}
+
+
+Definition at line {\bf 25} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!data\+\_\+width@{data\+\_\+width}}
+\index{data\+\_\+width@{data\+\_\+width}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{data\+\_\+width}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+width} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{32} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classstream__switch_a09dfdd4066a256170e0dc16676d1effe}
+
+
+Definition at line {\bf 17} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!dest\+\_\+sel@{dest\+\_\+sel}}
+\index{dest\+\_\+sel@{dest\+\_\+sel}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{dest\+\_\+sel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dest\+\_\+sel} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a10a17227f1ea045651684e95b1b2d36d}
+
+
+Definition at line {\bf 28} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!ieee@{ieee}}
+\index{ieee@{ieee}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{ieee}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ieee}\hspace{0.3cm}{\ttfamily [Library]}}\label{classstream__switch_a0a6af6eef40212dbaf130d57ce711256}
+
+
+Definition at line {\bf 8} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!numeric\+\_\+std@{numeric\+\_\+std}}
+\index{numeric\+\_\+std@{numeric\+\_\+std}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{numeric\+\_\+std}]{\setlength{\rightskip}{0pt plus 5cm}{\bf numeric\+\_\+std}\hspace{0.3cm}{\ttfamily [Package]}}\label{classstream__switch_a2edc34402b573437d5f25fa90ba4013e}
+
+
+Definition at line {\bf 10} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!reset\+\_\+n@{reset\+\_\+n}}
+\index{reset\+\_\+n@{reset\+\_\+n}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reset\+\_\+n} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a446ea52ed8c4a84181a47d9165ce41a5}
+
+
+Definition at line {\bf 23} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}}
+\index{std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{std\+\_\+logic\+\_\+1164}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+\_\+logic\+\_\+1164}\hspace{0.3cm}{\ttfamily [Package]}}\label{classstream__switch_acd03516902501cd1c7296a98e22c6fcb}
+
+
+Definition at line {\bf 9} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!tx\+\_\+fifo\+\_\+data@{tx\+\_\+fifo\+\_\+data}}
+\index{tx\+\_\+fifo\+\_\+data@{tx\+\_\+fifo\+\_\+data}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{tx\+\_\+fifo\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tx\+\_\+fifo\+\_\+data} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a02db5af5e4e23f03b46e97b65e5b99b9}
+
+
+Definition at line {\bf 32} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!tx\+\_\+fifo\+\_\+rdy@{tx\+\_\+fifo\+\_\+rdy}}
+\index{tx\+\_\+fifo\+\_\+rdy@{tx\+\_\+fifo\+\_\+rdy}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{tx\+\_\+fifo\+\_\+rdy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tx\+\_\+fifo\+\_\+rdy} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a42521c54f58ae5f51944dff34eb7d3a3}
+
+
+Definition at line {\bf 30} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!tx\+\_\+fifo\+\_\+wr@{tx\+\_\+fifo\+\_\+wr}}
+\index{tx\+\_\+fifo\+\_\+wr@{tx\+\_\+fifo\+\_\+wr}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{tx\+\_\+fifo\+\_\+wr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tx\+\_\+fifo\+\_\+wr} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a44df978b1db40d2ce415146ec219f5e1}
+
+
+Definition at line {\bf 31} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!wfm\+\_\+data@{wfm\+\_\+data}}
+\index{wfm\+\_\+data@{wfm\+\_\+data}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{wfm\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+data} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_ac7f55bfc3578eb55f2dd9b8c25b3b4c1}
+
+
+Definition at line {\bf 36} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!wfm\+\_\+fifo\+\_\+wr@{wfm\+\_\+fifo\+\_\+wr}}
+\index{wfm\+\_\+fifo\+\_\+wr@{wfm\+\_\+fifo\+\_\+wr}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{wfm\+\_\+fifo\+\_\+wr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+fifo\+\_\+wr} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a776cfefc970ca63f31a2374b7fc28498}
+
+
+Definition at line {\bf 35} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!wfm\+\_\+fifo\+\_\+wrusedw@{wfm\+\_\+fifo\+\_\+wrusedw}}
+\index{wfm\+\_\+fifo\+\_\+wrusedw@{wfm\+\_\+fifo\+\_\+wrusedw}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{wfm\+\_\+fifo\+\_\+wrusedw}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+fifo\+\_\+wrusedw} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf wfm\+\_\+fifo\+\_\+wrusedw\+\_\+size}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_a1e81770ee59b5bf432901508d25e7300}
+
+
+Definition at line {\bf 40} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!wfm\+\_\+fifo\+\_\+wrusedw\+\_\+size@{wfm\+\_\+fifo\+\_\+wrusedw\+\_\+size}}
+\index{wfm\+\_\+fifo\+\_\+wrusedw\+\_\+size@{wfm\+\_\+fifo\+\_\+wrusedw\+\_\+size}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{wfm\+\_\+fifo\+\_\+wrusedw\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+fifo\+\_\+wrusedw\+\_\+size} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classstream__switch_ac2f158b69e75a48ff97f4682b638fdf0}
+
+
+Definition at line {\bf 18} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!wfm\+\_\+limit@{wfm\+\_\+limit}}
+\index{wfm\+\_\+limit@{wfm\+\_\+limit}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{wfm\+\_\+limit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+limit} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{4096} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classstream__switch_a7763a28180c7aa5913a189b63f0719c3}
+
+
+Definition at line {\bf 20} of file {\bf stream\+\_\+switch.\+vhd}.
+
+\index{stream\+\_\+switch@{stream\+\_\+switch}!wfm\+\_\+rdy@{wfm\+\_\+rdy}}
+\index{wfm\+\_\+rdy@{wfm\+\_\+rdy}!stream\+\_\+switch@{stream\+\_\+switch}}
+\paragraph[{wfm\+\_\+rdy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+rdy} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classstream__switch_af7a8409146762b50f7a601699122fe07}
+
+
+Definition at line {\bf 34} of file {\bf stream\+\_\+switch.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/stream/{\bf stream\+\_\+switch.\+vhd}\end{DoxyCompactItemize}

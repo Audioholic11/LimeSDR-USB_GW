@@ -1,0 +1,81 @@
+\subsection{altera\+\_\+avalon\+\_\+spi.\+h}
+\label{altera__avalon__spi_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/altera\+\_\+avalon\+\_\+spi.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/altera\+\_\+avalon\+\_\+spi.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_ALT\_AVALON\_SPI\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_ALT\_AVALON\_SPI\_H\_\_}
+00003 
+00004 \textcolor{comment}{/******************************************************************************}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* License Agreement                                                           *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Copyright (c) 2003 Altera Corporation, San Jose, California, USA.           *}
+00009 \textcolor{comment}{* All rights reserved.                                                        *}
+00010 \textcolor{comment}{*                                                                             *}
+00011 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00012 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00013 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00014 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00015 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00016 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00019 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00020 \textcolor{comment}{*                                                                             *}
+00021 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00022 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00023 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00024 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00025 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00026 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00027 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00030 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00031 \textcolor{comment}{*                                                                             *}
+00032 \textcolor{comment}{******************************************************************************/}
+00033 \textcolor{preprocessor}{#include <stddef.h>}
+00034 
+00035 \textcolor{preprocessor}{#include "alt_types.h"}
+00036 
+00037 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00038 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"}
+00039 \{
+00040 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00041 
+00042 \textcolor{comment}{/*}
+00043 \textcolor{comment}{ * Macros used by alt\_sys\_init}
+00044 \textcolor{comment}{ */}
+00045 
+00046 \textcolor{preprocessor}{#define ALTERA\_AVALON\_SPI\_INSTANCE(name, device) extern int alt\_no\_storage}
+00047 \textcolor{preprocessor}{#define ALTERA\_AVALON\_SPI\_INIT(name, device) while (0)}
+00048 
+00049 \textcolor{comment}{/*}
+00050 \textcolor{comment}{ * Use this function to perform one SPI access on your target.  'base' should}
+00051 \textcolor{comment}{ * be the base address of your SPI peripheral, while 'slave' indicates which}
+00052 \textcolor{comment}{ * bit in the slave select register should be set.}
+00053 \textcolor{comment}{ */}
+00054 
+00055 \textcolor{comment}{/* If you need to make multiple accesses to the same slave then you should }
+00056 \textcolor{comment}{ * set the merge bit in the flags for all of them except the first.}
+00057 \textcolor{comment}{ */}
+00058 \textcolor{preprocessor}{#define ALT\_AVALON\_SPI\_COMMAND\_MERGE (0x01)}
+00059 
+00060 \textcolor{comment}{/*}
+00061 \textcolor{comment}{ * If you need the slave select line to be toggled between words then you}
+00062 \textcolor{comment}{ * should set the toggle bit in the flag.}
+00063 \textcolor{comment}{ */}
+00064 \textcolor{preprocessor}{#define ALT\_AVALON\_SPI\_COMMAND\_TOGGLE\_SS\_N (0x02)}
+00065 
+00066 
+00067 \textcolor{keywordtype}{int} alt_avalon_spi_command(alt_u32 base, alt_u32 slave,
+00068                            alt_u32 write\_length, \textcolor{keyword}{const} alt_u8 * write\_data,
+00069                            alt_u32 read\_length, alt_u8 * read\_data,
+00070                            alt_u32 flags);
+00071 
+00072 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00073 \}
+00074 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00075 
+00076 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_AVALON\_SPI\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

@@ -1,0 +1,75 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+flash\+\_\+dev.c File Reference}
+\label{alt__flash__dev_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+flash\+\_\+dev.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+flash\+\_\+dev.\+c}}
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+llist.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+flash\+\_\+dev.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}priv/alt\+\_\+file.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+flash\+\_\+dev.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/df7/alt__flash__dev_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD} (alt\+\_\+flash\+\_\+dev\+\_\+list)
+\item 
+{\bf alt\+\_\+flash\+\_\+fd} $\ast$ {\bf alt\+\_\+flash\+\_\+open\+\_\+dev} (const char $\ast$name)
+\item 
+void {\bf alt\+\_\+flash\+\_\+close\+\_\+dev} ({\bf alt\+\_\+flash\+\_\+fd} $\ast$fd)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+flash\+\_\+dev.\+c@{alt\+\_\+flash\+\_\+dev.\+c}!alt\+\_\+flash\+\_\+close\+\_\+dev@{alt\+\_\+flash\+\_\+close\+\_\+dev}}
+\index{alt\+\_\+flash\+\_\+close\+\_\+dev@{alt\+\_\+flash\+\_\+close\+\_\+dev}!alt\+\_\+flash\+\_\+dev.\+c@{alt\+\_\+flash\+\_\+dev.\+c}}
+\paragraph[{alt\+\_\+flash\+\_\+close\+\_\+dev(alt\+\_\+flash\+\_\+fd $\ast$fd)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+flash\+\_\+close\+\_\+dev (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+flash\+\_\+fd} $\ast$}]{fd}
+\end{DoxyParamCaption}
+)}\label{alt__flash__dev_8c_af01edc643964d0fe80552892fc279234}
+
+
+Definition at line {\bf 61} of file {\bf alt\+\_\+flash\+\_\+dev.\+c}.
+
+
+
+References {\bf alt\+\_\+flash\+\_\+dev\+::close}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+c@{alt\+\_\+flash\+\_\+dev.\+c}!alt\+\_\+flash\+\_\+open\+\_\+dev@{alt\+\_\+flash\+\_\+open\+\_\+dev}}
+\index{alt\+\_\+flash\+\_\+open\+\_\+dev@{alt\+\_\+flash\+\_\+open\+\_\+dev}!alt\+\_\+flash\+\_\+dev.\+c@{alt\+\_\+flash\+\_\+dev.\+c}}
+\paragraph[{alt\+\_\+flash\+\_\+open\+\_\+dev(const char $\ast$name)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+flash\+\_\+fd}$\ast$ alt\+\_\+flash\+\_\+open\+\_\+dev (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{alt__flash__dev_8c_a020293e767516cbb9a4bd1c3d44bfa74}
+
+
+Definition at line {\bf 49} of file {\bf alt\+\_\+flash\+\_\+dev.\+c}.
+
+
+
+References {\bf alt\+\_\+find\+\_\+dev()}, and {\bf alt\+\_\+flash\+\_\+dev\+::open}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{de/ddb/alt__flash__dev_8c_a020293e767516cbb9a4bd1c3d44bfa74_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+flash\+\_\+dev.\+c@{alt\+\_\+flash\+\_\+dev.\+c}!A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD@{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD}}
+\index{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD@{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD}!alt\+\_\+flash\+\_\+dev.\+c@{alt\+\_\+flash\+\_\+dev.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+A\+D(alt\+\_\+flash\+\_\+dev\+\_\+list)}]{\setlength{\rightskip}{0pt plus 5cm}A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD (
+\begin{DoxyParamCaption}
+\item[{alt\+\_\+flash\+\_\+dev\+\_\+list}]{}
+\end{DoxyParamCaption}
+)}\label{alt__flash__dev_8c_aebf3288e30875b4e2cad6b51870743d2}

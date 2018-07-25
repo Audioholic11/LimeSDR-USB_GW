@@ -1,0 +1,131 @@
+\subsection{alt\+\_\+alarm.\+h}
+\label{sys_2alt__alarm_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+alarm.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+alarm.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_ALT\_ALARM\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_ALT\_ALARM\_H\_\_}
+00003 
+00004 \textcolor{comment}{/******************************************************************************}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* License Agreement                                                           *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Copyright (c) 2004 Altera Corporation, San Jose, California, USA.           *}
+00009 \textcolor{comment}{* All rights reserved.                                                        *}
+00010 \textcolor{comment}{*                                                                             *}
+00011 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00012 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00013 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00014 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00015 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00016 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00019 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00020 \textcolor{comment}{*                                                                             *}
+00021 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00022 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00023 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00024 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00025 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00026 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00027 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00030 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00031 \textcolor{comment}{*                                                                             *}
+00032 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00033 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00034 \textcolor{comment}{******************************************************************************/}
+00035 
+00036 \textcolor{comment}{/******************************************************************************}
+00037 \textcolor{comment}{*                                                                             *}
+00038 \textcolor{comment}{* THIS IS A LIBRARY READ-ONLY SOURCE FILE. DO NOT EDIT.                       *}
+00039 \textcolor{comment}{*                                                                             *}
+00040 \textcolor{comment}{******************************************************************************/}
+00041 
+00042 \textcolor{preprocessor}{#include "alt_llist.h"}
+00043 \textcolor{preprocessor}{#include "alt_types.h"}
+00044 
+00045 \textcolor{preprocessor}{#include "priv/alt_alarm.h"}
+00046 
+00047 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00048 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"}
+00049 \{
+00050 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00051 
+00052 \textcolor{comment}{/*}
+00053 \textcolor{comment}{ * "alt\_alarm" is a structure type used by applications to register an alarm}
+00054 \textcolor{comment}{ * callback function. An instance of this type must be passed as an input}
+00055 \textcolor{comment}{ * argument to alt\_alarm\_start(). The user is not responsible for initialising}
+00056 \textcolor{comment}{ * the contents of the instance. This is done by alt\_alarm\_start(). }
+00057 \textcolor{comment}{ */}
+00058 
+00059 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }alt_alarm_s alt_alarm;
+00060 
+00061 \textcolor{comment}{/* }
+00062 \textcolor{comment}{ * alt\_alarm\_start() can be called by an application/driver in order to register}
+00063 \textcolor{comment}{ * a function for periodic callback at the system clock frequency. Be aware that}
+00064 \textcolor{comment}{ * this callback is likely to occur in interrupt context. }
+00065 \textcolor{comment}{ */}
+00066 
+00067 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} alt_alarm_start (alt_alarm* the\_alarm, 
+00068                             alt_u32    nticks, 
+00069                             alt_u32    (*callback) (\textcolor{keywordtype}{void}* context),
+00070                             \textcolor{keywordtype}{void}*      context);
+00071 
+00072 \textcolor{comment}{/*}
+00073 \textcolor{comment}{ * alt\_alarm\_stop() is used to unregister a callback. Alternatively the callback }
+00074 \textcolor{comment}{ * can return zero to unregister.}
+00075 \textcolor{comment}{ */}
+00076 
+00077 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} alt_alarm_stop (alt_alarm* the\_alarm);
+00078 
+00079 \textcolor{comment}{/*}
+00080 \textcolor{comment}{ * Obtain the system clock rate in ticks/s. }
+00081 \textcolor{comment}{ */}
+00082 
+00083 \textcolor{keyword}{static} ALT_INLINE alt_u32 ALT_ALWAYS_INLINE alt_ticks_per_second (\textcolor{keywordtype}{void})
+00084 \{
+00085   \textcolor{keywordflow}{return} _alt_tick_rate;
+00086 \}
+00087 
+00088 \textcolor{comment}{/*}
+00089 \textcolor{comment}{ * alt\_sysclk\_init() is intended to be only used by the system clock driver}
+00090 \textcolor{comment}{ * in order to initialise the value of the clock frequency.}
+00091 \textcolor{comment}{ */}
+00092 
+00093 \textcolor{keyword}{static} ALT_INLINE \textcolor{keywordtype}{int} ALT_ALWAYS_INLINE alt_sysclk_init (alt_u32 nticks)
+00094 \{
+00095   \textcolor{keywordflow}{if} (! _alt_tick_rate)
+00096   \{
+00097     _alt_tick_rate = nticks;
+00098     \textcolor{keywordflow}{return} 0;
+00099   \}
+00100   \textcolor{keywordflow}{else}
+00101   \{
+00102     \textcolor{keywordflow}{return} -1;
+00103   \}
+00104 \}
+00105 
+00106 \textcolor{comment}{/*}
+00107 \textcolor{comment}{ * alt\_nticks() returns the elapsed number of system clock ticks since reset.}
+00108 \textcolor{comment}{ */}
+00109 
+00110 \textcolor{keyword}{static} ALT_INLINE alt_u32 ALT_ALWAYS_INLINE alt_nticks (\textcolor{keywordtype}{void})
+00111 \{
+00112   \textcolor{keywordflow}{return} _alt_nticks;
+00113 \}
+00114 
+00115 \textcolor{comment}{/*}
+00116 \textcolor{comment}{ * alt\_tick() should only be called by the system clock driver. This is used}
+00117 \textcolor{comment}{ * to notify the system that the system timer period has expired.}
+00118 \textcolor{comment}{ */}
+00119 
+00120 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} alt_tick (\textcolor{keywordtype}{void});
+00121 
+00122 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00123 \}
+00124 \textcolor{preprocessor}{#endif}
+00125 
+00126 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_ALARM\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

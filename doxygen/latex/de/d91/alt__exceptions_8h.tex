@@ -1,0 +1,214 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+exceptions.h File Reference}
+\label{alt__exceptions_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+exceptions.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+exceptions.\+h}}
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+exceptions.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{d3/d70/alt__exceptions_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d4e/alt__exceptions_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum {\bf alt\+\_\+exception\+\_\+cause\+\_\+e} {\bf alt\+\_\+exception\+\_\+cause}
+\item 
+typedef enum {\bf alt\+\_\+exception\+\_\+result\+\_\+e} {\bf alt\+\_\+exception\+\_\+result}
+\end{DoxyCompactItemize}
+\subsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf alt\+\_\+exception\+\_\+cause\+\_\+e} \{ \\*
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+A\+U\+S\+E\+\_\+\+N\+O\+T\+\_\+\+P\+R\+E\+S\+E\+NT} = -\/1, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+S\+ET} = 0, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+P\+U\+\_\+\+O\+N\+L\+Y\+\_\+\+R\+E\+S\+E\+T\+\_\+\+R\+E\+Q\+U\+E\+ST} = 1, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+N\+T\+E\+R\+R\+U\+PT} = 2, 
+\\*
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+R\+A\+P\+\_\+\+I\+N\+ST} = 3, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+U\+N\+I\+M\+P\+L\+E\+M\+E\+N\+T\+E\+D\+\_\+\+I\+N\+ST} = 4, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+I\+N\+ST} = 5, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR} = 6, 
+\\*
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+T\+A\+R\+G\+E\+T\+\_\+\+PC} = 7, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR} = 8, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+S\+T\+\_\+\+A\+D\+DR} = 9, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+ST} = 10, 
+\\*
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR} = 11, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+M\+I\+SS} = 12, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+E\+X\+E\+C\+U\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON} = 13, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+R\+E\+A\+D\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON} = 14, 
+\\*
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON} = 15, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+I\+N\+S\+T\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON} = 16, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON} = 17, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+T\+L\+B\+\_\+\+E\+RR} = 18, 
+\\*
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+F\+E\+T\+C\+H\+\_\+\+E\+RR} = 19, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+F\+I\+L\+E\+\_\+\+E\+RR} = 20, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+E\+RR} = 21, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+C\+A\+C\+H\+E\+\_\+\+W\+R\+I\+T\+E\+B\+A\+C\+K\+\_\+\+E\+RR} = 22
+ \}
+\item 
+enum {\bf alt\+\_\+exception\+\_\+result\+\_\+e} \{ {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+R\+E\+I\+S\+S\+U\+E\+\_\+\+I\+N\+ST} = 0, 
+{\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+S\+K\+I\+P\+\_\+\+I\+N\+ST} = 1
+ \}
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf alt\+\_\+exception\+\_\+cause\+\_\+generated\+\_\+bad\+\_\+addr} ({\bf alt\+\_\+exception\+\_\+cause} cause)
+\item 
+void {\bf alt\+\_\+ecc\+\_\+fatal\+\_\+exception\+\_\+register} ({\bf alt\+\_\+u32} handler)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Typedef Documentation}
+\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!alt\+\_\+exception\+\_\+cause@{alt\+\_\+exception\+\_\+cause}}
+\index{alt\+\_\+exception\+\_\+cause@{alt\+\_\+exception\+\_\+cause}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}
+\paragraph[{alt\+\_\+exception\+\_\+cause}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf alt\+\_\+exception\+\_\+cause\+\_\+e} {\bf alt\+\_\+exception\+\_\+cause}}\label{alt__exceptions_8h_ac3b4cd95eecc2dc4e973c42c95dd648e}
+
+
+Definition at line {\bf 86} of file {\bf alt\+\_\+exceptions.\+h}.
+
+\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!alt\+\_\+exception\+\_\+result@{alt\+\_\+exception\+\_\+result}}
+\index{alt\+\_\+exception\+\_\+result@{alt\+\_\+exception\+\_\+result}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}
+\paragraph[{alt\+\_\+exception\+\_\+result}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf alt\+\_\+exception\+\_\+result\+\_\+e} {\bf alt\+\_\+exception\+\_\+result}}\label{alt__exceptions_8h_a9ab39d729de0c27659fe32ae2190f881}
+
+
+Definition at line {\bf 98} of file {\bf alt\+\_\+exceptions.\+h}.
+
+
+
+\subsubsection{Enumeration Type Documentation}
+\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!alt\+\_\+exception\+\_\+cause\+\_\+e@{alt\+\_\+exception\+\_\+cause\+\_\+e}}
+\index{alt\+\_\+exception\+\_\+cause\+\_\+e@{alt\+\_\+exception\+\_\+cause\+\_\+e}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}
+\paragraph[{alt\+\_\+exception\+\_\+cause\+\_\+e}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf alt\+\_\+exception\+\_\+cause\+\_\+e}}\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+A\+U\+S\+E\+\_\+\+N\+O\+T\+\_\+\+P\+R\+E\+S\+E\+NT@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+A\+U\+S\+E\+\_\+\+N\+O\+T\+\_\+\+P\+R\+E\+S\+E\+NT}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+A\+U\+S\+E\+\_\+\+N\+O\+T\+\_\+\+P\+R\+E\+S\+E\+NT@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+A\+U\+S\+E\+\_\+\+N\+O\+T\+\_\+\+P\+R\+E\+S\+E\+NT}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+A\+U\+S\+E\+\_\+\+N\+O\+T\+\_\+\+P\+R\+E\+S\+E\+NT\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53ab03c65077cdee06696ec6efb6a4417af}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+S\+ET@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+S\+ET}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+S\+ET@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+S\+ET}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+S\+ET\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53af6c6a73adf1aa0df7a4d5bf9892423ee}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+P\+U\+\_\+\+O\+N\+L\+Y\+\_\+\+R\+E\+S\+E\+T\+\_\+\+R\+E\+Q\+U\+E\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+P\+U\+\_\+\+O\+N\+L\+Y\+\_\+\+R\+E\+S\+E\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+P\+U\+\_\+\+O\+N\+L\+Y\+\_\+\+R\+E\+S\+E\+T\+\_\+\+R\+E\+Q\+U\+E\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+P\+U\+\_\+\+O\+N\+L\+Y\+\_\+\+R\+E\+S\+E\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+C\+P\+U\+\_\+\+O\+N\+L\+Y\+\_\+\+R\+E\+S\+E\+T\+\_\+\+R\+E\+Q\+U\+E\+ST\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53a7fc081560604efa925848ed4204b589c}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+N\+T\+E\+R\+R\+U\+PT@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+N\+T\+E\+R\+R\+U\+PT}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+N\+T\+E\+R\+R\+U\+PT@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+N\+T\+E\+R\+R\+U\+PT}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+N\+T\+E\+R\+R\+U\+PT\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53af4d926e02d36e21e78902fc404bbf4f5}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+R\+A\+P\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+R\+A\+P\+\_\+\+I\+N\+ST}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+R\+A\+P\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+R\+A\+P\+\_\+\+I\+N\+ST}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+R\+A\+P\+\_\+\+I\+N\+ST\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53aebf7c6f50a51346242135178592fec50}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+U\+N\+I\+M\+P\+L\+E\+M\+E\+N\+T\+E\+D\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+U\+N\+I\+M\+P\+L\+E\+M\+E\+N\+T\+E\+D\+\_\+\+I\+N\+ST}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+U\+N\+I\+M\+P\+L\+E\+M\+E\+N\+T\+E\+D\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+U\+N\+I\+M\+P\+L\+E\+M\+E\+N\+T\+E\+D\+\_\+\+I\+N\+ST}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+U\+N\+I\+M\+P\+L\+E\+M\+E\+N\+T\+E\+D\+\_\+\+I\+N\+ST\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53abfc872ef21b65fe5a2dd77833f5daf59}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+I\+N\+ST}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+I\+N\+ST}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+I\+N\+ST\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53a894eb715964b668ec2d4ed0e32dadb70}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53ae388771d5651cbda528c168fbc2b045f}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+T\+A\+R\+G\+E\+T\+\_\+\+PC@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+T\+A\+R\+G\+E\+T\+\_\+\+PC}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+T\+A\+R\+G\+E\+T\+\_\+\+PC@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+T\+A\+R\+G\+E\+T\+\_\+\+PC}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+T\+A\+R\+G\+E\+T\+\_\+\+PC\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53ad4daa79baaf28b7e57a41ab10c1a056b}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53ad831a5dd045c258c7586f33b4af5ca85}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+S\+T\+\_\+\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+S\+T\+\_\+\+A\+D\+DR}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+S\+T\+\_\+\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+S\+T\+\_\+\+A\+D\+DR}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+S\+T\+\_\+\+A\+D\+DR\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53a9a08eea9bdf84fb5bce9b39126c7f407}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+ST}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+ST}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+I\+N\+ST\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53ae6258162d85c0c3b0a780b1e905a2d56}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53a732e002953cc38c05f87a6aa61a662bf}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+M\+I\+SS@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+M\+I\+SS}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+M\+I\+SS@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+M\+I\+SS}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+M\+I\+SS\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53a810fce3ab2f5ceb92b6e73e707f1d22e}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+E\+X\+E\+C\+U\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+E\+X\+E\+C\+U\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+E\+X\+E\+C\+U\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+E\+X\+E\+C\+U\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+E\+X\+E\+C\+U\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53ae8101069360e03367af48e97e2d689a7}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+R\+E\+A\+D\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+R\+E\+A\+D\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+R\+E\+A\+D\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+R\+E\+A\+D\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+R\+E\+A\+D\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53ad6cf84739e1469a0e8a4ba614d19a18a}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53a32fd876bb736d600090d68f9d5c30055}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+I\+N\+S\+T\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+I\+N\+S\+T\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+I\+N\+S\+T\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+I\+N\+S\+T\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+I\+N\+S\+T\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53a6403b7c0a411db595de90af57b3ac25a}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53acb7c66d2e8e211b82d74da89d6a1855a}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+T\+L\+B\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+T\+L\+B\+\_\+\+E\+RR}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+T\+L\+B\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+T\+L\+B\+\_\+\+E\+RR}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+T\+L\+B\+\_\+\+E\+RR\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53a4cad710f904b74d686b286828a12c006}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+F\+E\+T\+C\+H\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+F\+E\+T\+C\+H\+\_\+\+E\+RR}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+F\+E\+T\+C\+H\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+F\+E\+T\+C\+H\+\_\+\+E\+RR}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+F\+E\+T\+C\+H\+\_\+\+E\+RR\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53ad2c112e52af6240e77e3cb532d7890a1}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+F\+I\+L\+E\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+F\+I\+L\+E\+\_\+\+E\+RR}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+F\+I\+L\+E\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+F\+I\+L\+E\+\_\+\+E\+RR}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+F\+I\+L\+E\+\_\+\+E\+RR\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53aec6269ebaf6592bc20f2acfee2420a33}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+E\+RR}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+E\+RR}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+E\+RR\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53af5b4a2d54e230de79b36a4ca5d262ca0}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+C\+A\+C\+H\+E\+\_\+\+W\+R\+I\+T\+E\+B\+A\+C\+K\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+C\+A\+C\+H\+E\+\_\+\+W\+R\+I\+T\+E\+B\+A\+C\+K\+\_\+\+E\+RR}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+C\+A\+C\+H\+E\+\_\+\+W\+R\+I\+T\+E\+B\+A\+C\+K\+\_\+\+E\+RR@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+C\+A\+C\+H\+E\+\_\+\+W\+R\+I\+T\+E\+B\+A\+C\+K\+\_\+\+E\+RR}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+C\+A\+C\+H\+E\+\_\+\+W\+R\+I\+T\+E\+B\+A\+C\+K\+\_\+\+E\+RR\label{alt__exceptions_8h_ad617d7c8cfb4131d987afb0bd91fab53a157e694bc9bbae8aa20ef35e94f621b8}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line {\bf 51} of file {\bf alt\+\_\+exceptions.\+h}.
+
+\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!alt\+\_\+exception\+\_\+result\+\_\+e@{alt\+\_\+exception\+\_\+result\+\_\+e}}
+\index{alt\+\_\+exception\+\_\+result\+\_\+e@{alt\+\_\+exception\+\_\+result\+\_\+e}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}
+\paragraph[{alt\+\_\+exception\+\_\+result\+\_\+e}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf alt\+\_\+exception\+\_\+result\+\_\+e}}\label{alt__exceptions_8h_a2dbc470ae6e88e434b26d194096780d4}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+R\+E\+I\+S\+S\+U\+E\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+R\+E\+I\+S\+S\+U\+E\+\_\+\+I\+N\+ST}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+R\+E\+I\+S\+S\+U\+E\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+R\+E\+I\+S\+S\+U\+E\+\_\+\+I\+N\+ST}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+R\+E\+I\+S\+S\+U\+E\+\_\+\+I\+N\+ST\label{alt__exceptions_8h_a2dbc470ae6e88e434b26d194096780d4a441230b4a476cd852c9b00c2c15a4569}
+}]\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+S\+K\+I\+P\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+S\+K\+I\+P\+\_\+\+I\+N\+ST}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+S\+K\+I\+P\+\_\+\+I\+N\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+S\+K\+I\+P\+\_\+\+I\+N\+ST}}\item[{\em 
+N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+T\+U\+R\+N\+\_\+\+S\+K\+I\+P\+\_\+\+I\+N\+ST\label{alt__exceptions_8h_a2dbc470ae6e88e434b26d194096780d4a1fb8cbcc08f5484d7f097eab729a60f8}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line {\bf 94} of file {\bf alt\+\_\+exceptions.\+h}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!alt\+\_\+ecc\+\_\+fatal\+\_\+exception\+\_\+register@{alt\+\_\+ecc\+\_\+fatal\+\_\+exception\+\_\+register}}
+\index{alt\+\_\+ecc\+\_\+fatal\+\_\+exception\+\_\+register@{alt\+\_\+ecc\+\_\+fatal\+\_\+exception\+\_\+register}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}
+\paragraph[{alt\+\_\+ecc\+\_\+fatal\+\_\+exception\+\_\+register(alt\+\_\+u32 handler)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+ecc\+\_\+fatal\+\_\+exception\+\_\+register (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{handler}
+\end{DoxyParamCaption}
+)}\label{alt__exceptions_8h_a1b4ba4fbdcce537a3f91e545b8e4a9be}
+
+
+Definition at line {\bf 66} of file {\bf alt\+\_\+ecc\+\_\+fatal\+\_\+exception.\+c}.
+
+
+
+References {\bf alt\+\_\+dcache\+\_\+flush()}, and {\bf alt\+\_\+exception\+\_\+ecc\+\_\+fatal\+\_\+handler}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{de/d91/alt__exceptions_8h_a1b4ba4fbdcce537a3f91e545b8e4a9be_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}!alt\+\_\+exception\+\_\+cause\+\_\+generated\+\_\+bad\+\_\+addr@{alt\+\_\+exception\+\_\+cause\+\_\+generated\+\_\+bad\+\_\+addr}}
+\index{alt\+\_\+exception\+\_\+cause\+\_\+generated\+\_\+bad\+\_\+addr@{alt\+\_\+exception\+\_\+cause\+\_\+generated\+\_\+bad\+\_\+addr}!alt\+\_\+exceptions.\+h@{alt\+\_\+exceptions.\+h}}
+\paragraph[{alt\+\_\+exception\+\_\+cause\+\_\+generated\+\_\+bad\+\_\+addr(alt\+\_\+exception\+\_\+cause cause)}]{\setlength{\rightskip}{0pt plus 5cm}int alt\+\_\+exception\+\_\+cause\+\_\+generated\+\_\+bad\+\_\+addr (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+exception\+\_\+cause}}]{cause}
+\end{DoxyParamCaption}
+)}\label{alt__exceptions_8h_a5a4a6abfcfe66c7c1b65ce91b0383e8a}
+
+
+Definition at line {\bf 187} of file {\bf alt\+\_\+instruction\+\_\+exception\+\_\+entry.\+c}.
+
+
+
+References {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+D\+A\+T\+A\+\_\+\+E\+RR}, {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+E\+C\+C\+\_\+\+T\+L\+B\+\_\+\+E\+RR}, {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR}, {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+I\+S\+A\+L\+I\+G\+N\+E\+D\+\_\+\+T\+A\+R\+G\+E\+T\+\_\+\+PC}, {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+M\+P\+U\+\_\+\+D\+A\+T\+A\+\_\+\+R\+E\+G\+I\+O\+N\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}, {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+S\+U\+P\+E\+R\+V\+I\+S\+O\+R\+\_\+\+O\+N\+L\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+A\+D\+DR}, {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+M\+I\+SS}, {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+R\+E\+A\+D\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}, and {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+T\+L\+B\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+E\+R\+M\+\_\+\+V\+I\+O\+L\+A\+T\+I\+ON}.
+

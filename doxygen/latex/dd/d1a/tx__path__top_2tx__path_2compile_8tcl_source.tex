@@ -1,0 +1,119 @@
+\subsection{compile.\+tcl}
+\label{tx__path__top_2tx__path_2compile_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/tx\+\_\+path/compile.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/tx\+\_\+path/compile.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{# ---------------------------------------------------------------------------- }
+00002 \textcolor{comment}{}\textcolor{comment}{# FILE:    compile.tcl}
+00003 \textcolor{comment}{}\textcolor{comment}{# DESCRIPTION: General compile script for ModelSim - Altera}
+00004 \textcolor{comment}{}\textcolor{comment}{# DATE:    Jan 19, 2017}
+00005 \textcolor{comment}{}\textcolor{comment}{# AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{comment}{}\textcolor{comment}{# REVISIONS: 1.0}
+00007 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------------------}
+00008 \textcolor{comment}{}
+00009 \textcolor{comment}{#This line is useful when Notepad++ text editor is used instead of default }
+00010 \textcolor{comment}{}\textcolor{comment}{#ModelSim text editor}
+00011 \textcolor{comment}{}\textcolor{comment}{#Set in ModelSim console (Needs to be done once)}
+00012 \textcolor{comment}{}\textcolor{comment}{#set PrefSource(altEditor) external\_editor}
+00013 \textcolor{comment}{}\textcolor{comment}{#To go back to default Modelsim text editor Set in ModelSim console:}
+00014 \textcolor{comment}{}\textcolor{comment}{#unset PrefSource(altEditor)}
+00015 \textcolor{comment}{}\textcolor{keyword}{proc} external\_editor \{filename linenumber\} \{ \textcolor{keyword}{exec} Notepad++.exe -n$linenumber $filename &\}\textcolor{comment}{}
+00016 \textcolor{comment}{}
+00017 
+00018 
+00019 \textcolor{keyword}{puts} \{
+00020  ----------------------------------------------------------------------------  
+00021  FILE:     compile.tcl
+00022  DESCRIPTION:  General compile script for ModelSim - Altera
+00023  DATE: Jan 19, 2017
+00024  AUTHOR(s):    Lime Microsystems
+00025  REVISIONS: 1.0
+00026  ----------------------------------------------------------------------------
+00027 \}\textcolor{comment}{}
+00028 \textcolor{comment}{}
+00029 \textcolor{comment}{# Simply change the project settings in this section}
+00030 \textcolor{comment}{}\textcolor{comment}{# for each new project. There should be no need to}
+00031 \textcolor{comment}{}\textcolor{comment}{# modify the rest of the script.}
+00032 \textcolor{comment}{}
+00033 \textcolor{comment}{#Add files to compile, follow compilation order(last file - top module)}
+00034 \textcolor{comment}{}\textcolor{keyword}{set} library\_file\_list \{
+00035                            source\_library \{ ../../general/sync\_reg.vhd
+00036                                             ../../general/bus\_sync\_reg.vhd
+00037                                             ../../general/general\_pkg.vhd
+00038                                             synth/sync\_fifo\_rw.vhd
+00039                                             ../../altera\_inst/fifo\_inst.vhd
+00040                                             ../../altera\_inst/lms7002\_ddout.vhd
+00041                                             ../bit\_unpack/synth/unpack\_64\_to\_48.vhd
+00042                                             ../bit\_unpack/synth/unpack\_64\_to\_56.vhd
+00043                                             ../bit\_unpack/synth/unpack\_64\_to\_64.vhd
+00044                                             ../bit\_unpack/synth/bit\_unpack\_64.vhd
+00045                                             ../fifo2diq/synth/txiq\_ctrl.vhd
+00046                                             ../fifo2diq/synth/txiq.vhd
+00047                                             ../fifo2diq/synth/fifo2diq.vhd
+00048                                             ../handshake\_sync/synth/handshake\_sync.vhd
+00049                                             ../packets2data/synth/p2d\_wr\_fsm.vhd
+00050                                             ../packets2data/synth/p2d\_rd\_fsm.vhd
+00051                                             ../packets2data/synth/p2d\_clr\_fsm.vhd
+00052                                             ../packets2data/synth/p2d\_sync\_fsm.vhd
+00053                                             ../packets2data/synth/packets2data.vhd
+00054                                             ../packets2data/synth/packets2data\_top.vhd
+00055                                             ../pulse\_gen/synth/pulse\_gen.vhd
+00056                                             synth/tx\_path\_top.vhd
+00057                                             sim/tx\_path\_top\_tb.vhd
+00058                                             
+00059                                             
+00060                                             
+00061                                             
+00062                            \}
+00063 \}\textcolor{comment}{}
+00064 \textcolor{comment}{}
+00065 
+00066 
+00067 \textcolor{comment}{# After sourcing the script from ModelSim for the}
+00068 \textcolor{comment}{}\textcolor{comment}{# first time use these commands to recompile.}
+00069 \textcolor{comment}{}
+00070 \textcolor{keyword}{proc} r  \{\} \{uplevel #0 source compile.tcl\}\textcolor{comment}{}
+00071 \textcolor{comment}{}\textcolor{keyword}{proc} rr \{\} \{\textcolor{keyword}{global} last\_compile\_time\textcolor{comment}{}
+00072 \textcolor{comment}{}            \textcolor{keyword}{set} last\_compile\_time 0\textcolor{comment}{}
+00073 \textcolor{comment}{}            r\}\textcolor{comment}{}
+00074 \textcolor{comment}{}\textcolor{keyword}{proc} q  \{\} \{quit -force\}\textcolor{comment}{}
+00075 \textcolor{comment}{}
+00076 \textcolor{comment}{#Does this installation support Tk?}
+00077 \textcolor{comment}{}\textcolor{keyword}{set} tk\_ok 1\textcolor{comment}{}
+00078 \textcolor{comment}{}\textcolor{keyword}{if} [\textcolor{keyword}{catch} \{\textcolor{keyword}{package} require Tk\}] \{\textcolor{keyword}{set} tk\_ok 0\}\textcolor{comment}{}
+00079 \textcolor{comment}{}
+00080 \textcolor{comment}{# Prefer a fixed point font for the transcript}
+00081 \textcolor{comment}{}\textcolor{keyword}{set} PrefMain(font) \{Courier 10 roman normal\}\textcolor{comment}{}
+00082 \textcolor{comment}{}
+00083 \textcolor{comment}{# Compile out of date files}
+00084 \textcolor{comment}{}\textcolor{keyword}{set} time\_now [\textcolor{keyword}{clock} seconds]\textcolor{comment}{}
+00085 \textcolor{comment}{}\textcolor{keyword}{if} [\textcolor{keyword}{catch} \{\textcolor{keyword}{set} last\_compile\_time\}] \{
+00086   \textcolor{keyword}{set} last\_compile\_time 0\textcolor{comment}{}
+00087 \textcolor{comment}{}\}\textcolor{comment}{}
+00088 \textcolor{comment}{}\textcolor{keyword}{foreach} \{library file\_list\} $library\_file\_list \{
+00089   vlib $library\textcolor{comment}{}
+00090 \textcolor{comment}{}  vmap work $library\textcolor{comment}{}
+00091 \textcolor{comment}{}  \textcolor{keyword}{foreach} file $file\_list \{
+00092     \textcolor{keyword}{if} \{ $last\_compile\_time < [\textcolor{keyword}{file} mtime $file] \} \{
+00093       \textcolor{keyword}{if} [regexp \{.vhdl?$\} $file] \{
+00094         vcom -quiet -93 $file\textcolor{comment}{}
+00095 \textcolor{comment}{}      \} \textcolor{keyword}{else} \{
+00096         vlog $file\textcolor{comment}{}
+00097 \textcolor{comment}{}      \}\textcolor{comment}{}
+00098 \textcolor{comment}{}      \textcolor{keyword}{set} last\_compile\_time 0\textcolor{comment}{}
+00099 \textcolor{comment}{}    \}\textcolor{comment}{}
+00100 \textcolor{comment}{}  \}\textcolor{comment}{}
+00101 \textcolor{comment}{}\}\textcolor{comment}{}
+00102 \textcolor{comment}{}\textcolor{keyword}{set} last\_compile\_time $time\_now\textcolor{comment}{}
+00103 \textcolor{comment}{}
+00104 \textcolor{keyword}{puts} \{
+00105   Script commands are:
+00106 
+00107   r = Recompile changed and dependent files
+00108  rr = Recompile everything
+00109   q = Quit without confirmation
+00110 \}\textcolor{comment}{}
+00111 \textcolor{comment}{}
+00112 
+00113 
+00114 
+\end{DoxyCode}

@@ -1,0 +1,469 @@
+\subsection{arch Architecture Reference}
+\label{classpll__ps__fsm_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{d5/d81/classpll__ps__fsm_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+225}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+226}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+227}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+228}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm\+\_\+f}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf ps\+\_\+en}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf ps\+\_\+mode}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf ps\+\_\+reset\+\_\+at\+\_\+start}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf pll\+\_\+locked}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf smpl\+\_\+cmp\+\_\+done}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf smpl\+\_\+cmp\+\_\+error}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf find\+\_\+min}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf find\+\_\+max}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf ps\+\_\+ctrl\+\_\+busy}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf ps\+\_\+ctrl\+\_\+busy\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf ps\+\_\+en\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf step\+\_\+cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf prep\+\_\+phase\+\_\+cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf step\+\_\+cnt\+\_\+max\+\_\+reg}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+229}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+230}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+231}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf state\+\_\+type}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{rst\+\_\+pll}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+pll\+\_\+lock}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{check\+\_\+cmp\+\_\+status}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{cmp\+\_\+smpls}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{min\+\_\+found}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{max\+\_\+found}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{check\+\_\+max\+\_\+steps}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ph\+\_\+shift}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+after\+\_\+ph\+\_\+shift}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{end\+\_\+srch}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{prep\+\_\+phase}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf ps\+\_\+done\+\_\+reg\+\_\+manual\+\_\+mode} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+ctrl\+\_\+busy\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+en\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+cnt\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+updwn\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+phase\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+step\+\_\+size\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pll\+\_\+reset\+\_\+req\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf smpl\+\_\+cmp\+\_\+en\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf find\+\_\+min} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf find\+\_\+max} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf step\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf step\+\_\+cnt\+\_\+min} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf step\+\_\+cnt\+\_\+max} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf step\+\_\+cnt\+\_\+diff} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf step\+\_\+cnt\+\_\+middle} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf step\+\_\+cnt\+\_\+reverse} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+ctrl\+\_\+en\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf prep\+\_\+phase\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+ctrl\+\_\+phase\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+ctrl\+\_\+updwn\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+done\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ps\+\_\+status\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf step\+\_\+cnt\+\_\+max\+\_\+reg} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf step\+\_\+cnt\+\_\+max\+\_\+constant} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf time\+\_\+count} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Attributes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf noprune} {\bfseries \textcolor{comment}{boolean}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf noprune} {\bfseries {\bfseries {\bf time\+\_\+count}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{ }\textcolor{keywordflow}{signal}\textcolor{vhdlchar}{ }\textcolor{keywordflow}{is}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{true}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 59} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!fsm@{fsm}}
+\index{fsm@{fsm}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{fsmcurrent\+\_\+state,ps\+\_\+en,ps\+\_\+mode,ps\+\_\+reset\+\_\+at\+\_\+start,pll\+\_\+locked,smpl\+\_\+cmp\+\_\+done,smpl\+\_\+cmp\+\_\+error,find\+\_\+min,find\+\_\+max,ps\+\_\+ctrl\+\_\+busy,ps\+\_\+ctrl\+\_\+busy\+\_\+reg,ps\+\_\+en\+\_\+reg,step\+\_\+cnt,prep\+\_\+phase\+\_\+cnt,wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt,step\+\_\+cnt\+\_\+max\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf ps\+\_\+en}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf ps\+\_\+mode}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf ps\+\_\+reset\+\_\+at\+\_\+start}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf pll\+\_\+locked}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf smpl\+\_\+cmp\+\_\+done}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf smpl\+\_\+cmp\+\_\+error}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf find\+\_\+min}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf find\+\_\+max}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf ps\+\_\+ctrl\+\_\+busy}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf ps\+\_\+ctrl\+\_\+busy\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf ps\+\_\+en\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf step\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf prep\+\_\+phase\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf step\+\_\+cnt\+\_\+max\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__ps__fsm_1_1arch_a41702a6ae6775ded348b8001f3b78705}
+
+
+Definition at line {\bf 197} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!fsm\+\_\+f@{fsm\+\_\+f}}
+\index{fsm\+\_\+f@{fsm\+\_\+f}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{fsm\+\_\+fclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm\+\_\+f(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__ps__fsm_1_1arch_a856d95a9c7e9538caf6d13ffdaa470a3}
+
+
+Definition at line {\bf 186} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+225@{P\+R\+O\+C\+E\+S\+S\+\_\+225}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+225@{P\+R\+O\+C\+E\+S\+S\+\_\+225}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+225clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+225(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__ps__fsm_1_1arch_aa6e28977559da0b789623f1f802482bf}
+
+
+Definition at line {\bf 108} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+226@{P\+R\+O\+C\+E\+S\+S\+\_\+226}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+226@{P\+R\+O\+C\+E\+S\+S\+\_\+226}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+226clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+226(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__ps__fsm_1_1arch_aa9f407a6813403a7fcb86e694bd69342}
+
+
+Definition at line {\bf 126} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+227@{P\+R\+O\+C\+E\+S\+S\+\_\+227}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+227@{P\+R\+O\+C\+E\+S\+S\+\_\+227}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+227clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+227(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__ps__fsm_1_1arch_abc44f9e6b639fc7f96c4c4557c3d3204}
+
+
+Definition at line {\bf 158} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+228@{P\+R\+O\+C\+E\+S\+S\+\_\+228}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+228@{P\+R\+O\+C\+E\+S\+S\+\_\+228}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+228clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+228(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__ps__fsm_1_1arch_a8ca74f53b94f37b05ef56c9a985ac165}
+
+
+Definition at line {\bf 168} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+229@{P\+R\+O\+C\+E\+S\+S\+\_\+229}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+229@{P\+R\+O\+C\+E\+S\+S\+\_\+229}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+229clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+229(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__ps__fsm_1_1arch_a75ad1969331569f56309407fd43cfd24}
+
+
+Definition at line {\bf 316} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+230@{P\+R\+O\+C\+E\+S\+S\+\_\+230}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+230@{P\+R\+O\+C\+E\+S\+S\+\_\+230}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+230clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+230(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__ps__fsm_1_1arch_ac4ad4712873e6a803eacb82de57eb6ac}
+
+
+Definition at line {\bf 394} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+231@{P\+R\+O\+C\+E\+S\+S\+\_\+231}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+231@{P\+R\+O\+C\+E\+S\+S\+\_\+231}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+231clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+231(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__ps__fsm_1_1arch_a3be751ff85c5089b35a08675eaccf938}
+
+
+Definition at line {\bf 467} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!current\+\_\+state@{current\+\_\+state}}
+\index{current\+\_\+state@{current\+\_\+state}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a7ede5b91aac1f3d1b2a884a5e191d554}
+
+
+Definition at line {\bf 92} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!find\+\_\+max@{find\+\_\+max}}
+\index{find\+\_\+max@{find\+\_\+max}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{find\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}{\bf find\+\_\+max} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a740a9642ea95578e5712e399523c1384}
+
+
+Definition at line {\bf 71} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!find\+\_\+min@{find\+\_\+min}}
+\index{find\+\_\+min@{find\+\_\+min}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{find\+\_\+min}]{\setlength{\rightskip}{0pt plus 5cm}{\bf find\+\_\+min} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_abc31a107936d7490c1eb8de4d26d5239}
+
+
+Definition at line {\bf 70} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!next\+\_\+state@{next\+\_\+state}}
+\index{next\+\_\+state@{next\+\_\+state}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{next\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a7b92f98d060e763f3dd6fa727ddb03d8}
+
+
+Definition at line {\bf 92} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!noprune@{noprune}}
+\index{noprune@{noprune}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{noprune}]{\setlength{\rightskip}{0pt plus 5cm}{\bf noprune} {\bfseries \textcolor{comment}{boolean}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Attribute]}}\label{classpll__ps__fsm_1_1arch_a2591245f99d39267157261d7823cf9ed}
+
+
+Definition at line {\bf 95} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!noprune@{noprune}}
+\index{noprune@{noprune}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{noprune}]{\setlength{\rightskip}{0pt plus 5cm}{\bf noprune} {\bfseries {\bfseries {\bf time\+\_\+count}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{ }\textcolor{keywordflow}{signal}\textcolor{vhdlchar}{ }\textcolor{keywordflow}{is}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{true}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Attribute]}}\label{classpll__ps__fsm_1_1arch_a9ee3efc1d55b6a902424d1e4f70f5e77}
+
+
+Definition at line {\bf 96} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!pll\+\_\+reset\+\_\+req\+\_\+reg@{pll\+\_\+reset\+\_\+req\+\_\+reg}}
+\index{pll\+\_\+reset\+\_\+req\+\_\+reg@{pll\+\_\+reset\+\_\+req\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{pll\+\_\+reset\+\_\+req\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pll\+\_\+reset\+\_\+req\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_ad3a69333f8c5455185c1e4bc81675a64}
+
+
+Definition at line {\bf 68} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!prep\+\_\+phase\+\_\+cnt@{prep\+\_\+phase\+\_\+cnt}}
+\index{prep\+\_\+phase\+\_\+cnt@{prep\+\_\+phase\+\_\+cnt}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{prep\+\_\+phase\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf prep\+\_\+phase\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a3e0564b36ee23de22fd6abb46b34a439}
+
+
+Definition at line {\bf 79} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+cnt\+\_\+reg@{ps\+\_\+cnt\+\_\+reg}}
+\index{ps\+\_\+cnt\+\_\+reg@{ps\+\_\+cnt\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+cnt\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+cnt\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a304c5d9f412a688e661184b3bfe6eb21}
+
+
+Definition at line {\bf 64} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+ctrl\+\_\+busy\+\_\+reg@{ps\+\_\+ctrl\+\_\+busy\+\_\+reg}}
+\index{ps\+\_\+ctrl\+\_\+busy\+\_\+reg@{ps\+\_\+ctrl\+\_\+busy\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+ctrl\+\_\+busy\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+ctrl\+\_\+busy\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a0a02f448991b17c583e9ea355da80150}
+
+
+Definition at line {\bf 62} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+ctrl\+\_\+en\+\_\+reg@{ps\+\_\+ctrl\+\_\+en\+\_\+reg}}
+\index{ps\+\_\+ctrl\+\_\+en\+\_\+reg@{ps\+\_\+ctrl\+\_\+en\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+ctrl\+\_\+en\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+ctrl\+\_\+en\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a26019b284c6deb8e37af06c4bb50298f}
+
+
+Definition at line {\bf 78} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+ctrl\+\_\+phase\+\_\+reg@{ps\+\_\+ctrl\+\_\+phase\+\_\+reg}}
+\index{ps\+\_\+ctrl\+\_\+phase\+\_\+reg@{ps\+\_\+ctrl\+\_\+phase\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+ctrl\+\_\+phase\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+ctrl\+\_\+phase\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a21ff698097d51fa4439ca51c04276e6a}
+
+
+Definition at line {\bf 80} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+ctrl\+\_\+updwn\+\_\+reg@{ps\+\_\+ctrl\+\_\+updwn\+\_\+reg}}
+\index{ps\+\_\+ctrl\+\_\+updwn\+\_\+reg@{ps\+\_\+ctrl\+\_\+updwn\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+ctrl\+\_\+updwn\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+ctrl\+\_\+updwn\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_ab20689bc7a897eeb355c7609712b2278}
+
+
+Definition at line {\bf 81} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+done\+\_\+reg@{ps\+\_\+done\+\_\+reg}}
+\index{ps\+\_\+done\+\_\+reg@{ps\+\_\+done\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+done\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+done\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_ad81e8b2587f4a686b3681f89069c7746}
+
+
+Definition at line {\bf 82} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+done\+\_\+reg\+\_\+manual\+\_\+mode@{ps\+\_\+done\+\_\+reg\+\_\+manual\+\_\+mode}}
+\index{ps\+\_\+done\+\_\+reg\+\_\+manual\+\_\+mode@{ps\+\_\+done\+\_\+reg\+\_\+manual\+\_\+mode}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+done\+\_\+reg\+\_\+manual\+\_\+mode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+done\+\_\+reg\+\_\+manual\+\_\+mode} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a8de389ee13dec8df51eef9befff5eb74}
+
+
+Definition at line {\bf 61} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+en\+\_\+reg@{ps\+\_\+en\+\_\+reg}}
+\index{ps\+\_\+en\+\_\+reg@{ps\+\_\+en\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+en\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+en\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a047d70372c347e58091e31227289f10f}
+
+
+Definition at line {\bf 63} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+phase\+\_\+reg@{ps\+\_\+phase\+\_\+reg}}
+\index{ps\+\_\+phase\+\_\+reg@{ps\+\_\+phase\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+phase\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+phase\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a742b4bfe14f9c2e9d3c37239d528c6bf}
+
+
+Definition at line {\bf 66} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+status\+\_\+reg@{ps\+\_\+status\+\_\+reg}}
+\index{ps\+\_\+status\+\_\+reg@{ps\+\_\+status\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+status\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+status\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a6edab9e957377a9eada55c76c4a7e0c0}
+
+
+Definition at line {\bf 83} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+step\+\_\+size\+\_\+reg@{ps\+\_\+step\+\_\+size\+\_\+reg}}
+\index{ps\+\_\+step\+\_\+size\+\_\+reg@{ps\+\_\+step\+\_\+size\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+step\+\_\+size\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+step\+\_\+size\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_af93c386b8dc342c17044e60a028d2415}
+
+
+Definition at line {\bf 67} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!ps\+\_\+updwn\+\_\+reg@{ps\+\_\+updwn\+\_\+reg}}
+\index{ps\+\_\+updwn\+\_\+reg@{ps\+\_\+updwn\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{ps\+\_\+updwn\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ps\+\_\+updwn\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a0e8b5079f0059cc1509f75badfd4be82}
+
+
+Definition at line {\bf 65} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!smpl\+\_\+cmp\+\_\+en\+\_\+reg@{smpl\+\_\+cmp\+\_\+en\+\_\+reg}}
+\index{smpl\+\_\+cmp\+\_\+en\+\_\+reg@{smpl\+\_\+cmp\+\_\+en\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{smpl\+\_\+cmp\+\_\+en\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf smpl\+\_\+cmp\+\_\+en\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a0cd142ac3eee354ac61abdc2a46b022b}
+
+
+Definition at line {\bf 69} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!state\+\_\+type@{state\+\_\+type}}
+\index{state\+\_\+type@{state\+\_\+type}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{state\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state\+\_\+type} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{rst\+\_\+pll}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+pll\+\_\+lock}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{check\+\_\+cmp\+\_\+status}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{cmp\+\_\+smpls}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{min\+\_\+found}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{max\+\_\+found}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{check\+\_\+max\+\_\+steps}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ph\+\_\+shift}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+after\+\_\+ph\+\_\+shift}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{end\+\_\+srch}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{prep\+\_\+phase}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classpll__ps__fsm_1_1arch_aad011a03e3d447a7944154f08342870a}
+
+
+Definition at line {\bf 90} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!step\+\_\+cnt@{step\+\_\+cnt}}
+\index{step\+\_\+cnt@{step\+\_\+cnt}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{step\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf step\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a73901df40c5b9070314a012b9960b2c0}
+
+
+Definition at line {\bf 72} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!step\+\_\+cnt\+\_\+diff@{step\+\_\+cnt\+\_\+diff}}
+\index{step\+\_\+cnt\+\_\+diff@{step\+\_\+cnt\+\_\+diff}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{step\+\_\+cnt\+\_\+diff}]{\setlength{\rightskip}{0pt plus 5cm}{\bf step\+\_\+cnt\+\_\+diff} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_ad2c48c7aac3b4683fe425f194d842997}
+
+
+Definition at line {\bf 75} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!step\+\_\+cnt\+\_\+max@{step\+\_\+cnt\+\_\+max}}
+\index{step\+\_\+cnt\+\_\+max@{step\+\_\+cnt\+\_\+max}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{step\+\_\+cnt\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}{\bf step\+\_\+cnt\+\_\+max} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a3024ca2371b27b73c1cc2d732048bc7b}
+
+
+Definition at line {\bf 74} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!step\+\_\+cnt\+\_\+max\+\_\+constant@{step\+\_\+cnt\+\_\+max\+\_\+constant}}
+\index{step\+\_\+cnt\+\_\+max\+\_\+constant@{step\+\_\+cnt\+\_\+max\+\_\+constant}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{step\+\_\+cnt\+\_\+max\+\_\+constant}]{\setlength{\rightskip}{0pt plus 5cm}{\bf step\+\_\+cnt\+\_\+max\+\_\+constant} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a0cdaf5fc95c9a37ec2698d3eab3e2d5a}
+
+
+Definition at line {\bf 86} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!step\+\_\+cnt\+\_\+max\+\_\+reg@{step\+\_\+cnt\+\_\+max\+\_\+reg}}
+\index{step\+\_\+cnt\+\_\+max\+\_\+reg@{step\+\_\+cnt\+\_\+max\+\_\+reg}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{step\+\_\+cnt\+\_\+max\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf step\+\_\+cnt\+\_\+max\+\_\+reg} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_ad0e4d1b69712b93ca389f95a5d4ea2a0}
+
+
+Definition at line {\bf 85} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!step\+\_\+cnt\+\_\+middle@{step\+\_\+cnt\+\_\+middle}}
+\index{step\+\_\+cnt\+\_\+middle@{step\+\_\+cnt\+\_\+middle}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{step\+\_\+cnt\+\_\+middle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf step\+\_\+cnt\+\_\+middle} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a8f5efbdf5161c49b1b5e8d7e2a58dcea}
+
+
+Definition at line {\bf 76} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!step\+\_\+cnt\+\_\+min@{step\+\_\+cnt\+\_\+min}}
+\index{step\+\_\+cnt\+\_\+min@{step\+\_\+cnt\+\_\+min}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{step\+\_\+cnt\+\_\+min}]{\setlength{\rightskip}{0pt plus 5cm}{\bf step\+\_\+cnt\+\_\+min} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_afc9d68fa9693a2a0b28ce9f5ff55b410}
+
+
+Definition at line {\bf 73} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!step\+\_\+cnt\+\_\+reverse@{step\+\_\+cnt\+\_\+reverse}}
+\index{step\+\_\+cnt\+\_\+reverse@{step\+\_\+cnt\+\_\+reverse}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{step\+\_\+cnt\+\_\+reverse}]{\setlength{\rightskip}{0pt plus 5cm}{\bf step\+\_\+cnt\+\_\+reverse} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a66e6a5136e39aa0ce17764ee9686fbfd}
+
+
+Definition at line {\bf 77} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!time\+\_\+count@{time\+\_\+count}}
+\index{time\+\_\+count@{time\+\_\+count}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{time\+\_\+count}]{\setlength{\rightskip}{0pt plus 5cm}{\bf time\+\_\+count} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a55deeac52740c3615655adc84e90d43d}
+
+
+Definition at line {\bf 94} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+\index{pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}!wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt@{wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt}}
+\index{wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt@{wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt}!pll\+\_\+ps\+\_\+fsm\+::arch@{pll\+\_\+ps\+\_\+fsm\+::arch}}
+\paragraph[{wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wait\+\_\+after\+\_\+ph\+\_\+shift\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__ps__fsm_1_1arch_a72fa414cd3cd9982d4497d04044b0dd9}
+
+
+Definition at line {\bf 84} of file {\bf pll\+\_\+ps\+\_\+fsm.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/dyn\+\_\+ps/synth/{\bf pll\+\_\+ps\+\_\+fsm.\+vhd}\end{DoxyCompactItemize}

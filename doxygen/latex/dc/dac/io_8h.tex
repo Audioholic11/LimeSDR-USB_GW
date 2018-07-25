@@ -1,0 +1,186 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/io.h File Reference}
+\label{io_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/io.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/io.\+h}}
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for io.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{d8/da5/io_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/de4/io_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf S\+Y\+S\+T\+E\+M\+\_\+\+B\+U\+S\+\_\+\+W\+I\+D\+TH}~32
+\item 
+\#define {\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC}(B\+A\+SE,  O\+F\+F\+S\+ET)~((void $\ast$)((({\bf alt\+\_\+u8}$\ast$)B\+A\+SE) + (O\+F\+F\+S\+ET)))
+\item 
+\#define {\bf I\+O\+R\+D\+\_\+32\+D\+I\+R\+E\+CT}(B\+A\+SE,  O\+F\+F\+S\+ET)~\+\_\+\+\_\+builtin\+\_\+ldwio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)))
+\item 
+\#define {\bf I\+O\+R\+D\+\_\+16\+D\+I\+R\+E\+CT}(B\+A\+SE,  O\+F\+F\+S\+ET)~\+\_\+\+\_\+builtin\+\_\+ldhuio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)))
+\item 
+\#define {\bf I\+O\+R\+D\+\_\+8\+D\+I\+R\+E\+CT}(B\+A\+SE,  O\+F\+F\+S\+ET)~\+\_\+\+\_\+builtin\+\_\+ldbuio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)))
+\item 
+\#define {\bf I\+O\+W\+R\+\_\+32\+D\+I\+R\+E\+CT}(B\+A\+SE,  O\+F\+F\+S\+ET,  D\+A\+TA)~\+\_\+\+\_\+builtin\+\_\+stwio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)), (D\+A\+TA))
+\item 
+\#define {\bf I\+O\+W\+R\+\_\+16\+D\+I\+R\+E\+CT}(B\+A\+SE,  O\+F\+F\+S\+ET,  D\+A\+TA)~\+\_\+\+\_\+builtin\+\_\+sthio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)), (D\+A\+TA))
+\item 
+\#define {\bf I\+O\+W\+R\+\_\+8\+D\+I\+R\+E\+CT}(B\+A\+SE,  O\+F\+F\+S\+ET,  D\+A\+TA)~\+\_\+\+\_\+builtin\+\_\+stbio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)), (D\+A\+TA))
+\item 
+\#define {\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE}(B\+A\+SE,  R\+E\+G\+N\+UM)~((void $\ast$)((({\bf alt\+\_\+u8}$\ast$)B\+A\+SE) + ((R\+E\+G\+N\+UM) $\ast$ ({\bf S\+Y\+S\+T\+E\+M\+\_\+\+B\+U\+S\+\_\+\+W\+I\+D\+TH}/8))))
+\item 
+\#define {\bf I\+O\+RD}(B\+A\+SE,  R\+E\+G\+N\+UM)~\+\_\+\+\_\+builtin\+\_\+ldwio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE} ((B\+A\+SE), (R\+E\+G\+N\+UM)))
+\item 
+\#define {\bf I\+O\+WR}(B\+A\+SE,  R\+E\+G\+N\+UM,  D\+A\+TA)~\+\_\+\+\_\+builtin\+\_\+stwio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE} ((B\+A\+SE), (R\+E\+G\+N\+UM)), (D\+A\+TA))
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{io.\+h@{io.\+h}!\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC@{\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC}}
+\index{\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC@{\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC}!io.\+h@{io.\+h}}
+\paragraph[{\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC}]{\setlength{\rightskip}{0pt plus 5cm}\#define \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{O\+F\+F\+S\+ET}
+\end{DoxyParamCaption}
+)~((void $\ast$)((({\bf alt\+\_\+u8}$\ast$)B\+A\+SE) + (O\+F\+F\+S\+ET)))}\label{io_8h_a2385be831b02d0dbafcb6fa2e4c7ed35}
+
+
+Definition at line {\bf 50} of file {\bf io.\+h}.
+
+\index{io.\+h@{io.\+h}!\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE@{\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE}}
+\index{\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE@{\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE}!io.\+h@{io.\+h}}
+\paragraph[{\+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE}]{\setlength{\rightskip}{0pt plus 5cm}\#define \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{R\+E\+G\+N\+UM}
+\end{DoxyParamCaption}
+)~((void $\ast$)((({\bf alt\+\_\+u8}$\ast$)B\+A\+SE) + ((R\+E\+G\+N\+UM) $\ast$ ({\bf S\+Y\+S\+T\+E\+M\+\_\+\+B\+U\+S\+\_\+\+W\+I\+D\+TH}/8))))}\label{io_8h_af4a120b1b51003bfa3c8345231a405e4}
+
+
+Definition at line {\bf 69} of file {\bf io.\+h}.
+
+\index{io.\+h@{io.\+h}!I\+O\+RD@{I\+O\+RD}}
+\index{I\+O\+RD@{I\+O\+RD}!io.\+h@{io.\+h}}
+\paragraph[{I\+O\+RD}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+O\+RD(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{R\+E\+G\+N\+UM}
+\end{DoxyParamCaption}
+)~\+\_\+\+\_\+builtin\+\_\+ldwio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE} ((B\+A\+SE), (R\+E\+G\+N\+UM)))}\label{io_8h_a20315e835ddf6a40257c1329677b21ec}
+
+
+Definition at line {\bf 72} of file {\bf io.\+h}.
+
+
+
+Referenced by {\bf get\+Fifo\+Data()}, and {\bf main()}.
+
+\index{io.\+h@{io.\+h}!I\+O\+R\+D\+\_\+16\+D\+I\+R\+E\+CT@{I\+O\+R\+D\+\_\+16\+D\+I\+R\+E\+CT}}
+\index{I\+O\+R\+D\+\_\+16\+D\+I\+R\+E\+CT@{I\+O\+R\+D\+\_\+16\+D\+I\+R\+E\+CT}!io.\+h@{io.\+h}}
+\paragraph[{I\+O\+R\+D\+\_\+16\+D\+I\+R\+E\+CT}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+O\+R\+D\+\_\+16\+D\+I\+R\+E\+CT(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{O\+F\+F\+S\+ET}
+\end{DoxyParamCaption}
+)~\+\_\+\+\_\+builtin\+\_\+ldhuio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)))}\label{io_8h_a709dc24106d5ac37996aaf797ad9a8fa}
+
+
+Definition at line {\bf 55} of file {\bf io.\+h}.
+
+\index{io.\+h@{io.\+h}!I\+O\+R\+D\+\_\+32\+D\+I\+R\+E\+CT@{I\+O\+R\+D\+\_\+32\+D\+I\+R\+E\+CT}}
+\index{I\+O\+R\+D\+\_\+32\+D\+I\+R\+E\+CT@{I\+O\+R\+D\+\_\+32\+D\+I\+R\+E\+CT}!io.\+h@{io.\+h}}
+\paragraph[{I\+O\+R\+D\+\_\+32\+D\+I\+R\+E\+CT}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+O\+R\+D\+\_\+32\+D\+I\+R\+E\+CT(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{O\+F\+F\+S\+ET}
+\end{DoxyParamCaption}
+)~\+\_\+\+\_\+builtin\+\_\+ldwio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)))}\label{io_8h_aae49dc7142387a7218b16c619a10c364}
+
+
+Definition at line {\bf 53} of file {\bf io.\+h}.
+
+\index{io.\+h@{io.\+h}!I\+O\+R\+D\+\_\+8\+D\+I\+R\+E\+CT@{I\+O\+R\+D\+\_\+8\+D\+I\+R\+E\+CT}}
+\index{I\+O\+R\+D\+\_\+8\+D\+I\+R\+E\+CT@{I\+O\+R\+D\+\_\+8\+D\+I\+R\+E\+CT}!io.\+h@{io.\+h}}
+\paragraph[{I\+O\+R\+D\+\_\+8\+D\+I\+R\+E\+CT}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+O\+R\+D\+\_\+8\+D\+I\+R\+E\+CT(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{O\+F\+F\+S\+ET}
+\end{DoxyParamCaption}
+)~\+\_\+\+\_\+builtin\+\_\+ldbuio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)))}\label{io_8h_abaaadebb28f562eded0efe3ec92b3fb0}
+
+
+Definition at line {\bf 57} of file {\bf io.\+h}.
+
+\index{io.\+h@{io.\+h}!I\+O\+WR@{I\+O\+WR}}
+\index{I\+O\+WR@{I\+O\+WR}!io.\+h@{io.\+h}}
+\paragraph[{I\+O\+WR}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+O\+WR(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{R\+E\+G\+N\+UM, }
+\item[{}]{D\+A\+TA}
+\end{DoxyParamCaption}
+)~\+\_\+\+\_\+builtin\+\_\+stwio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+N\+A\+T\+I\+VE} ((B\+A\+SE), (R\+E\+G\+N\+UM)), (D\+A\+TA))}\label{io_8h_ab5a401212baabdfc67a1d5adeab3faa3}
+
+
+Definition at line {\bf 74} of file {\bf io.\+h}.
+
+
+
+Referenced by {\bf main()}, and {\bf set\+\_\+led()}.
+
+\index{io.\+h@{io.\+h}!I\+O\+W\+R\+\_\+16\+D\+I\+R\+E\+CT@{I\+O\+W\+R\+\_\+16\+D\+I\+R\+E\+CT}}
+\index{I\+O\+W\+R\+\_\+16\+D\+I\+R\+E\+CT@{I\+O\+W\+R\+\_\+16\+D\+I\+R\+E\+CT}!io.\+h@{io.\+h}}
+\paragraph[{I\+O\+W\+R\+\_\+16\+D\+I\+R\+E\+CT}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+O\+W\+R\+\_\+16\+D\+I\+R\+E\+CT(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{O\+F\+F\+S\+ET, }
+\item[{}]{D\+A\+TA}
+\end{DoxyParamCaption}
+)~\+\_\+\+\_\+builtin\+\_\+sthio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)), (D\+A\+TA))}\label{io_8h_a8be5ca8d7946d1aff1184163e0e33519}
+
+
+Definition at line {\bf 62} of file {\bf io.\+h}.
+
+\index{io.\+h@{io.\+h}!I\+O\+W\+R\+\_\+32\+D\+I\+R\+E\+CT@{I\+O\+W\+R\+\_\+32\+D\+I\+R\+E\+CT}}
+\index{I\+O\+W\+R\+\_\+32\+D\+I\+R\+E\+CT@{I\+O\+W\+R\+\_\+32\+D\+I\+R\+E\+CT}!io.\+h@{io.\+h}}
+\paragraph[{I\+O\+W\+R\+\_\+32\+D\+I\+R\+E\+CT}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+O\+W\+R\+\_\+32\+D\+I\+R\+E\+CT(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{O\+F\+F\+S\+ET, }
+\item[{}]{D\+A\+TA}
+\end{DoxyParamCaption}
+)~\+\_\+\+\_\+builtin\+\_\+stwio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)), (D\+A\+TA))}\label{io_8h_a8f01ec23b273d7d78b5e2ad0b44061f9}
+
+
+Definition at line {\bf 60} of file {\bf io.\+h}.
+
+\index{io.\+h@{io.\+h}!I\+O\+W\+R\+\_\+8\+D\+I\+R\+E\+CT@{I\+O\+W\+R\+\_\+8\+D\+I\+R\+E\+CT}}
+\index{I\+O\+W\+R\+\_\+8\+D\+I\+R\+E\+CT@{I\+O\+W\+R\+\_\+8\+D\+I\+R\+E\+CT}!io.\+h@{io.\+h}}
+\paragraph[{I\+O\+W\+R\+\_\+8\+D\+I\+R\+E\+CT}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+O\+W\+R\+\_\+8\+D\+I\+R\+E\+CT(
+\begin{DoxyParamCaption}
+\item[{}]{B\+A\+SE, }
+\item[{}]{O\+F\+F\+S\+ET, }
+\item[{}]{D\+A\+TA}
+\end{DoxyParamCaption}
+)~\+\_\+\+\_\+builtin\+\_\+stbio ({\bf \+\_\+\+\_\+\+I\+O\+\_\+\+C\+A\+L\+C\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+D\+Y\+N\+A\+M\+IC} ((B\+A\+SE), (O\+F\+F\+S\+ET)), (D\+A\+TA))}\label{io_8h_a312dff8938e3fbd112a729aaa83dd0b7}
+
+
+Definition at line {\bf 64} of file {\bf io.\+h}.
+
+\index{io.\+h@{io.\+h}!S\+Y\+S\+T\+E\+M\+\_\+\+B\+U\+S\+\_\+\+W\+I\+D\+TH@{S\+Y\+S\+T\+E\+M\+\_\+\+B\+U\+S\+\_\+\+W\+I\+D\+TH}}
+\index{S\+Y\+S\+T\+E\+M\+\_\+\+B\+U\+S\+\_\+\+W\+I\+D\+TH@{S\+Y\+S\+T\+E\+M\+\_\+\+B\+U\+S\+\_\+\+W\+I\+D\+TH}!io.\+h@{io.\+h}}
+\paragraph[{S\+Y\+S\+T\+E\+M\+\_\+\+B\+U\+S\+\_\+\+W\+I\+D\+TH}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Y\+S\+T\+E\+M\+\_\+\+B\+U\+S\+\_\+\+W\+I\+D\+TH~32}\label{io_8h_aa0323188efb3e001c8a3b601fa1bb08e}
+
+
+Definition at line {\bf 45} of file {\bf io.\+h}.
+

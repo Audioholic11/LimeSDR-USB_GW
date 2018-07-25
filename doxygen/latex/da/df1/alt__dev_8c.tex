@@ -1,0 +1,103 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dev.c File Reference}
+\label{alt__dev_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dev.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dev.\+c}}
+{\ttfamily \#include $<$stddef.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$fcntl.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+dev.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}priv/alt\+\_\+file.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+dev.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/d82/alt__dev_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD} ({\bf alt\+\_\+fs\+\_\+list})
+\item 
+static int {\bf alt\+\_\+dev\+\_\+null\+\_\+write} ({\bf alt\+\_\+fd} $\ast$fd, const char $\ast$ptr, int len)
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+{\bf alt\+\_\+dev} {\bf alt\+\_\+dev\+\_\+null}
+\item 
+{\bf alt\+\_\+llist} {\bf alt\+\_\+dev\+\_\+list} = \{\&alt\+\_\+dev\+\_\+null.\+llist, \&alt\+\_\+dev\+\_\+null.\+llist\}
+\item 
+{\bf alt\+\_\+32} {\bf alt\+\_\+max\+\_\+fd} = -\/1
+\item 
+{\bf alt\+\_\+fd} {\bf alt\+\_\+fd\+\_\+list} [{\bf A\+L\+T\+\_\+\+M\+A\+X\+\_\+\+FD}]
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}!alt\+\_\+dev\+\_\+null\+\_\+write@{alt\+\_\+dev\+\_\+null\+\_\+write}}
+\index{alt\+\_\+dev\+\_\+null\+\_\+write@{alt\+\_\+dev\+\_\+null\+\_\+write}!alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}}
+\paragraph[{alt\+\_\+dev\+\_\+null\+\_\+write(alt\+\_\+fd $\ast$fd, const char $\ast$ptr, int len)}]{\setlength{\rightskip}{0pt plus 5cm}static int alt\+\_\+dev\+\_\+null\+\_\+write (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+fd} $\ast$}]{fd, }
+\item[{const char $\ast$}]{ptr, }
+\item[{int}]{len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__dev_8c_ab1892624c6ad49706966a7de5953be61}
+
+
+Definition at line {\bf 76} of file {\bf alt\+\_\+dev.\+c}.
+
+\index{alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}!A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD@{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD}}
+\index{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD@{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD}!alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+A\+D(alt\+\_\+fs\+\_\+list)}]{\setlength{\rightskip}{0pt plus 5cm}A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+fs\+\_\+list}}]{}
+\end{DoxyParamCaption}
+)}\label{alt__dev_8c_ad96872739129c2cdfbcde61d73aa0d54}
+
+
+\subsubsection{Variable Documentation}
+\index{alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}!alt\+\_\+dev\+\_\+list@{alt\+\_\+dev\+\_\+list}}
+\index{alt\+\_\+dev\+\_\+list@{alt\+\_\+dev\+\_\+list}!alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}}
+\paragraph[{alt\+\_\+dev\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+llist} alt\+\_\+dev\+\_\+list = \{\&alt\+\_\+dev\+\_\+null.\+llist, \&alt\+\_\+dev\+\_\+null.\+llist\}}\label{alt__dev_8c_a39bed231770a966001ae9f4cd2ce4074}
+
+
+Definition at line {\bf 68} of file {\bf alt\+\_\+dev.\+c}.
+
+
+
+Referenced by {\bf alt\+\_\+dev\+\_\+reg()}.
+
+\index{alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}!alt\+\_\+dev\+\_\+null@{alt\+\_\+dev\+\_\+null}}
+\index{alt\+\_\+dev\+\_\+null@{alt\+\_\+dev\+\_\+null}!alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}}
+\paragraph[{alt\+\_\+dev\+\_\+null}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+dev} alt\+\_\+dev\+\_\+null}\label{alt__dev_8c_a35be47dda8206d4e94aa85420613ceff}
+
+
+Definition at line {\bf 88} of file {\bf alt\+\_\+dev.\+c}.
+
+\index{alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}!alt\+\_\+fd\+\_\+list@{alt\+\_\+fd\+\_\+list}}
+\index{alt\+\_\+fd\+\_\+list@{alt\+\_\+fd\+\_\+list}!alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}}
+\paragraph[{alt\+\_\+fd\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+fd} alt\+\_\+fd\+\_\+list[{\bf A\+L\+T\+\_\+\+M\+A\+X\+\_\+\+FD}]}\label{alt__dev_8c_a784bb8a67810d153ce64e31703d1dfe6}
+
+
+Definition at line {\bf 131} of file {\bf alt\+\_\+dev.\+c}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+C\+L\+O\+S\+E()}, {\bf A\+L\+T\+\_\+\+F\+C\+N\+T\+L()}, {\bf alt\+\_\+fd\+\_\+lock()}, {\bf alt\+\_\+file\+\_\+locked()}, {\bf A\+L\+T\+\_\+\+F\+S\+T\+A\+T()}, {\bf alt\+\_\+get\+\_\+fd()}, {\bf alt\+\_\+getchar()}, {\bf alt\+\_\+io\+\_\+redirect()}, {\bf A\+L\+T\+\_\+\+I\+O\+C\+T\+L()}, {\bf A\+L\+T\+\_\+\+I\+S\+A\+T\+T\+Y()}, {\bf A\+L\+T\+\_\+\+L\+S\+E\+E\+K()}, {\bf A\+L\+T\+\_\+\+O\+P\+E\+N()}, {\bf alt\+\_\+open\+\_\+fd()}, {\bf A\+L\+T\+\_\+\+R\+E\+A\+D()}, {\bf alt\+\_\+release\+\_\+fd()}, and {\bf A\+L\+T\+\_\+\+W\+R\+I\+T\+E()}.
+
+\index{alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}!alt\+\_\+max\+\_\+fd@{alt\+\_\+max\+\_\+fd}}
+\index{alt\+\_\+max\+\_\+fd@{alt\+\_\+max\+\_\+fd}!alt\+\_\+dev.\+c@{alt\+\_\+dev.\+c}}
+\paragraph[{alt\+\_\+max\+\_\+fd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+32} alt\+\_\+max\+\_\+fd = -\/1}\label{alt__dev_8c_aefa50a1243bc074834e3140d00a7eca0}
+
+
+Definition at line {\bf 118} of file {\bf alt\+\_\+dev.\+c}.
+
+
+
+Referenced by {\bf alt\+\_\+fd\+\_\+lock()}, {\bf alt\+\_\+file\+\_\+locked()}, and {\bf alt\+\_\+get\+\_\+fd()}.
+

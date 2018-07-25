@@ -1,0 +1,223 @@
+\subsection{avfifo Entity Reference}
+\label{classavfifo}\index{avfifo@{avfifo}}
+
+
+Inheritance diagram for avfifo\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d1/d67/classavfifo__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for avfifo\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{d3/d55/classavfifo__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Entities}
+\begin{DoxyCompactItemize}
+\item 
+{\bf avfifo\+\_\+arch} architecture
+\end{DoxyCompactItemize}
+\subsubsection*{Libraries}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf ieee} 
+\end{DoxyCompactItemize}
+\subsubsection*{Use Clauses}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf std\+\_\+logic\+\_\+1164}   
+\item 
+{\bf numeric\+\_\+std}   
+\end{DoxyCompactItemize}
+\subsubsection*{Generics}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf width} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{32} \textcolor{vhdlchar}{ }}}
+\end{DoxyCompactItemize}
+\subsubsection*{Ports}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clk}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rsi\+\_\+nrst}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf chipselect}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf address}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf write}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf writedata}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf read}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf readdata}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf coe\+\_\+of\+\_\+d}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf coe\+\_\+of\+\_\+wr}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf coe\+\_\+of\+\_\+wrfull}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf coe\+\_\+if\+\_\+d}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf coe\+\_\+if\+\_\+rd}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf coe\+\_\+if\+\_\+rdempty}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf coe\+\_\+fifo\+\_\+rst}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 30} of file {\bf avfifo.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{avfifo@{avfifo}!address@{address}}
+\index{address@{address}!avfifo@{avfifo}}
+\paragraph[{address}]{\setlength{\rightskip}{0pt plus 5cm}{\bf address} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a7e5ab875ee7bfbff113034cc739513e6}
+
+
+Definition at line {\bf 41} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!chipselect@{chipselect}}
+\index{chipselect@{chipselect}!avfifo@{avfifo}}
+\paragraph[{chipselect}]{\setlength{\rightskip}{0pt plus 5cm}{\bf chipselect} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_ac19eff6846e514e24e6795732cf2f8a3}
+
+
+Definition at line {\bf 40} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!clk@{clk}}
+\index{clk@{clk}!avfifo@{avfifo}}
+\paragraph[{clk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a4a4609c199d30b3adebbeb3a01276ec5}
+
+
+Definition at line {\bf 37} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!coe\+\_\+fifo\+\_\+rst@{coe\+\_\+fifo\+\_\+rst}}
+\index{coe\+\_\+fifo\+\_\+rst@{coe\+\_\+fifo\+\_\+rst}!avfifo@{avfifo}}
+\paragraph[{coe\+\_\+fifo\+\_\+rst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf coe\+\_\+fifo\+\_\+rst} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a7a47ed547892e13417ac403da809caca}
+
+
+Definition at line {\bf 57} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!coe\+\_\+if\+\_\+d@{coe\+\_\+if\+\_\+d}}
+\index{coe\+\_\+if\+\_\+d@{coe\+\_\+if\+\_\+d}!avfifo@{avfifo}}
+\paragraph[{coe\+\_\+if\+\_\+d}]{\setlength{\rightskip}{0pt plus 5cm}{\bf coe\+\_\+if\+\_\+d} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_af28e6234bbc6360e04a65772a825a9a1}
+
+
+Definition at line {\bf 51} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!coe\+\_\+if\+\_\+rd@{coe\+\_\+if\+\_\+rd}}
+\index{coe\+\_\+if\+\_\+rd@{coe\+\_\+if\+\_\+rd}!avfifo@{avfifo}}
+\paragraph[{coe\+\_\+if\+\_\+rd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf coe\+\_\+if\+\_\+rd} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a406a3e98ad946269f97fb697fa1f7a3a}
+
+
+Definition at line {\bf 52} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!coe\+\_\+if\+\_\+rdempty@{coe\+\_\+if\+\_\+rdempty}}
+\index{coe\+\_\+if\+\_\+rdempty@{coe\+\_\+if\+\_\+rdempty}!avfifo@{avfifo}}
+\paragraph[{coe\+\_\+if\+\_\+rdempty}]{\setlength{\rightskip}{0pt plus 5cm}{\bf coe\+\_\+if\+\_\+rdempty} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a376f394d98b9b93ed6d71136882576e2}
+
+
+Definition at line {\bf 53} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!coe\+\_\+of\+\_\+d@{coe\+\_\+of\+\_\+d}}
+\index{coe\+\_\+of\+\_\+d@{coe\+\_\+of\+\_\+d}!avfifo@{avfifo}}
+\paragraph[{coe\+\_\+of\+\_\+d}]{\setlength{\rightskip}{0pt plus 5cm}{\bf coe\+\_\+of\+\_\+d} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a0c30e1ecb22592c39df23fd1be994ff8}
+
+
+Definition at line {\bf 47} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!coe\+\_\+of\+\_\+wr@{coe\+\_\+of\+\_\+wr}}
+\index{coe\+\_\+of\+\_\+wr@{coe\+\_\+of\+\_\+wr}!avfifo@{avfifo}}
+\paragraph[{coe\+\_\+of\+\_\+wr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf coe\+\_\+of\+\_\+wr} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a687285238f301e8507aeb708a1d573c7}
+
+
+Definition at line {\bf 48} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!coe\+\_\+of\+\_\+wrfull@{coe\+\_\+of\+\_\+wrfull}}
+\index{coe\+\_\+of\+\_\+wrfull@{coe\+\_\+of\+\_\+wrfull}!avfifo@{avfifo}}
+\paragraph[{coe\+\_\+of\+\_\+wrfull}]{\setlength{\rightskip}{0pt plus 5cm}{\bf coe\+\_\+of\+\_\+wrfull} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_af3c01bc6433ab15875b38de2e57d08ef}
+
+
+Definition at line {\bf 49} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!ieee@{ieee}}
+\index{ieee@{ieee}!avfifo@{avfifo}}
+\paragraph[{ieee}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ieee}\hspace{0.3cm}{\ttfamily [Library]}}\label{classavfifo_a0a6af6eef40212dbaf130d57ce711256}
+
+
+Definition at line {\bf 24} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!numeric\+\_\+std@{numeric\+\_\+std}}
+\index{numeric\+\_\+std@{numeric\+\_\+std}!avfifo@{avfifo}}
+\paragraph[{numeric\+\_\+std}]{\setlength{\rightskip}{0pt plus 5cm}{\bf numeric\+\_\+std}\hspace{0.3cm}{\ttfamily [Package]}}\label{classavfifo_a2edc34402b573437d5f25fa90ba4013e}
+
+
+Definition at line {\bf 26} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!read@{read}}
+\index{read@{read}!avfifo@{avfifo}}
+\paragraph[{read}]{\setlength{\rightskip}{0pt plus 5cm}{\bf read} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a21be63987e5c74ddf9828ddb045b66d4}
+
+
+Definition at line {\bf 44} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!readdata@{readdata}}
+\index{readdata@{readdata}!avfifo@{avfifo}}
+\paragraph[{readdata}]{\setlength{\rightskip}{0pt plus 5cm}{\bf readdata} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a7de0b16136079fc4665287aee3cad9f6}
+
+
+Definition at line {\bf 45} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!rsi\+\_\+nrst@{rsi\+\_\+nrst}}
+\index{rsi\+\_\+nrst@{rsi\+\_\+nrst}!avfifo@{avfifo}}
+\paragraph[{rsi\+\_\+nrst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rsi\+\_\+nrst} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a8f5074515cd4699fd14d2dbc751dcb2e}
+
+
+Definition at line {\bf 38} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}}
+\index{std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}!avfifo@{avfifo}}
+\paragraph[{std\+\_\+logic\+\_\+1164}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+\_\+logic\+\_\+1164}\hspace{0.3cm}{\ttfamily [Package]}}\label{classavfifo_acd03516902501cd1c7296a98e22c6fcb}
+
+
+Definition at line {\bf 25} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!width@{width}}
+\index{width@{width}!avfifo@{avfifo}}
+\paragraph[{width}]{\setlength{\rightskip}{0pt plus 5cm}{\bf width} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{32} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classavfifo_a64b3cab9fa613671741af6b240ff64df}
+
+
+Definition at line {\bf 34} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!write@{write}}
+\index{write@{write}!avfifo@{avfifo}}
+\paragraph[{write}]{\setlength{\rightskip}{0pt plus 5cm}{\bf write} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_aa8affe4a2fd2857b245f27ae049bf478}
+
+
+Definition at line {\bf 42} of file {\bf avfifo.\+vhd}.
+
+\index{avfifo@{avfifo}!writedata@{writedata}}
+\index{writedata@{writedata}!avfifo@{avfifo}}
+\paragraph[{writedata}]{\setlength{\rightskip}{0pt plus 5cm}{\bf writedata} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classavfifo_a8760184c9851b5e50788447ce841ce57}
+
+
+Definition at line {\bf 43} of file {\bf avfifo.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/avfifo/{\bf avfifo.\+vhd}\end{DoxyCompactItemize}

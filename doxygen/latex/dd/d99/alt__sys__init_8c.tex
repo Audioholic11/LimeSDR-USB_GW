@@ -1,0 +1,162 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/alt\+\_\+sys\+\_\+init.c File Reference}
+\label{alt__sys__init_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/alt\+\_\+sys\+\_\+init.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/alt\+\_\+sys\+\_\+init.\+c}}
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+sys\+\_\+init.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stddef.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}altera\+\_\+nios2\+\_\+gen2\+\_\+irq.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}altera\+\_\+avalon\+\_\+spi.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}altera\+\_\+avalon\+\_\+sysid\+\_\+qsys.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}i2c\+\_\+opencores.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+sys\+\_\+init.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/da5/alt__sys__init_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf A\+L\+T\+E\+R\+A\+\_\+\+N\+I\+O\+S2\+\_\+\+G\+E\+N2\+\_\+\+I\+R\+Q\+\_\+\+I\+N\+S\+T\+A\+N\+CE} (N\+I\+O\+S2\+\_\+\+C\+PU, nios2\+\_\+cpu)
+\item 
+{\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE} (S\+P\+I\+\_\+1\+\_\+\+A\+DF, spi\+\_\+1\+\_\+\+A\+DF)
+\item 
+{\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE} (S\+P\+I\+\_\+1\+\_\+\+D\+AC, spi\+\_\+1\+\_\+\+D\+AC)
+\item 
+{\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE} (S\+P\+I\+\_\+\+L\+MS, spi\+\_\+lms)
+\item 
+{\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE} (S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+0, sysid\+\_\+qsys\+\_\+0)
+\item 
+{\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE} (I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+0, i2c\+\_\+opencores\+\_\+0)
+\item 
+void {\bf alt\+\_\+irq\+\_\+init} (const void $\ast$base)
+\item 
+void {\bf alt\+\_\+sys\+\_\+init} (void)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}!alt\+\_\+irq\+\_\+init@{alt\+\_\+irq\+\_\+init}}
+\index{alt\+\_\+irq\+\_\+init@{alt\+\_\+irq\+\_\+init}!alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}}
+\paragraph[{alt\+\_\+irq\+\_\+init(const void $\ast$base)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+irq\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{const void $\ast$}]{base}
+\end{DoxyParamCaption}
+)}\label{alt__sys__init_8c_adc592f32c3a0ef8eccfc3b4ff6e3afba}
+
+
+Definition at line {\bf 85} of file {\bf alt\+\_\+sys\+\_\+init.\+c}.
+
+
+
+References {\bf alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts()}, and {\bf A\+L\+T\+E\+R\+A\+\_\+\+N\+I\+O\+S2\+\_\+\+G\+E\+N2\+\_\+\+I\+R\+Q\+\_\+\+I\+N\+IT}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, and {\bf alt\+\_\+main()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{dd/d99/alt__sys__init_8c_adc592f32c3a0ef8eccfc3b4ff6e3afba_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d99/alt__sys__init_8c_adc592f32c3a0ef8eccfc3b4ff6e3afba_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}!alt\+\_\+sys\+\_\+init@{alt\+\_\+sys\+\_\+init}}
+\index{alt\+\_\+sys\+\_\+init@{alt\+\_\+sys\+\_\+init}!alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}}
+\paragraph[{alt\+\_\+sys\+\_\+init(void)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+sys\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{alt__sys__init_8c_a25931594a172097c3ca4583f608d4b7a}
+
+
+Definition at line {\bf 96} of file {\bf alt\+\_\+sys\+\_\+init.\+c}.
+
+
+
+References {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+IT}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+\+I\+N\+IT}, and {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+IT}.
+
+
+
+Referenced by {\bf alt\+\_\+main()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{dd/d99/alt__sys__init_8c_a25931594a172097c3ca4583f608d4b7a_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}!A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE}}
+\index{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE}!alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}}
+\paragraph[{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+C\+E(\+S\+P\+I\+\_\+1\+\_\+\+A\+D\+F, spi\+\_\+1\+\_\+\+A\+D\+F)}]{\setlength{\rightskip}{0pt plus 5cm}A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE (
+\begin{DoxyParamCaption}
+\item[{S\+P\+I\+\_\+1\+\_\+\+A\+DF}]{, }
+\item[{spi\+\_\+1\+\_\+\+A\+DF}]{}
+\end{DoxyParamCaption}
+)}\label{alt__sys__init_8c_a39bc62f0049e9e9f01fd423a5d7cc44f}
+\index{alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}!A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE}}
+\index{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE}!alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}}
+\paragraph[{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+C\+E(\+S\+P\+I\+\_\+1\+\_\+\+D\+A\+C, spi\+\_\+1\+\_\+\+D\+A\+C)}]{\setlength{\rightskip}{0pt plus 5cm}A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE (
+\begin{DoxyParamCaption}
+\item[{S\+P\+I\+\_\+1\+\_\+\+D\+AC}]{, }
+\item[{spi\+\_\+1\+\_\+\+D\+AC}]{}
+\end{DoxyParamCaption}
+)}\label{alt__sys__init_8c_acf3a267ccf42da8d0ab8bf33dcec5e3c}
+\index{alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}!A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE}}
+\index{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE}!alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}}
+\paragraph[{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+C\+E(\+S\+P\+I\+\_\+\+L\+M\+S, spi\+\_\+lms)}]{\setlength{\rightskip}{0pt plus 5cm}A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+I\+N\+S\+T\+A\+N\+CE (
+\begin{DoxyParamCaption}
+\item[{S\+P\+I\+\_\+\+L\+MS}]{, }
+\item[{spi\+\_\+lms}]{}
+\end{DoxyParamCaption}
+)}\label{alt__sys__init_8c_a43422c5ef326d4b41230aa93949bfff2}
+\index{alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}!A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE}}
+\index{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE}!alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}}
+\paragraph[{A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+\+I\+N\+S\+T\+A\+N\+C\+E(\+S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+0, sysid\+\_\+qsys\+\_\+0)}]{\setlength{\rightskip}{0pt plus 5cm}A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE (
+\begin{DoxyParamCaption}
+\item[{S\+Y\+S\+I\+D\+\_\+\+Q\+S\+Y\+S\+\_\+0}]{, }
+\item[{sysid\+\_\+qsys\+\_\+0}]{}
+\end{DoxyParamCaption}
+)}\label{alt__sys__init_8c_a20060dd6eaadb102c0eadffe894d80aa}
+\index{alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}!A\+L\+T\+E\+R\+A\+\_\+\+N\+I\+O\+S2\+\_\+\+G\+E\+N2\+\_\+\+I\+R\+Q\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+N\+I\+O\+S2\+\_\+\+G\+E\+N2\+\_\+\+I\+R\+Q\+\_\+\+I\+N\+S\+T\+A\+N\+CE}}
+\index{A\+L\+T\+E\+R\+A\+\_\+\+N\+I\+O\+S2\+\_\+\+G\+E\+N2\+\_\+\+I\+R\+Q\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{A\+L\+T\+E\+R\+A\+\_\+\+N\+I\+O\+S2\+\_\+\+G\+E\+N2\+\_\+\+I\+R\+Q\+\_\+\+I\+N\+S\+T\+A\+N\+CE}!alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}}
+\paragraph[{A\+L\+T\+E\+R\+A\+\_\+\+N\+I\+O\+S2\+\_\+\+G\+E\+N2\+\_\+\+I\+R\+Q\+\_\+\+I\+N\+S\+T\+A\+N\+C\+E(\+N\+I\+O\+S2\+\_\+\+C\+P\+U, nios2\+\_\+cpu)}]{\setlength{\rightskip}{0pt plus 5cm}A\+L\+T\+E\+R\+A\+\_\+\+N\+I\+O\+S2\+\_\+\+G\+E\+N2\+\_\+\+I\+R\+Q\+\_\+\+I\+N\+S\+T\+A\+N\+CE (
+\begin{DoxyParamCaption}
+\item[{N\+I\+O\+S2\+\_\+\+C\+PU}]{, }
+\item[{nios2\+\_\+cpu}]{}
+\end{DoxyParamCaption}
+)}\label{alt__sys__init_8c_aedd666e883235959351d1037dda174b2}
+\index{alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}!I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE}}
+\index{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE}!alt\+\_\+sys\+\_\+init.\+c@{alt\+\_\+sys\+\_\+init.\+c}}
+\paragraph[{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+C\+E(\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+0, i2c\+\_\+opencores\+\_\+0)}]{\setlength{\rightskip}{0pt plus 5cm}I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE (
+\begin{DoxyParamCaption}
+\item[{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+0}]{, }
+\item[{i2c\+\_\+opencores\+\_\+0}]{}
+\end{DoxyParamCaption}
+)}\label{alt__sys__init_8c_ac64652fb18d32b85b77b10ceeafcebc1}

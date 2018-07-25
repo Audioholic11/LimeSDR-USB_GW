@@ -1,0 +1,296 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+cache.h File Reference}
+\label{alt__cache_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+cache.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+cache.\+h}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+cache.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{d9/dfb/alt__cache_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/d5c/alt__cache_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf alt\+\_\+icache\+\_\+flush} (void $\ast$start, {\bf alt\+\_\+u32} len)
+\item 
+void {\bf alt\+\_\+dcache\+\_\+flush} (void $\ast$start, {\bf alt\+\_\+u32} len)
+\item 
+void {\bf alt\+\_\+dcache\+\_\+flush\+\_\+no\+\_\+writeback} (void $\ast$start, {\bf alt\+\_\+u32} len)
+\item 
+void {\bf alt\+\_\+icache\+\_\+flush\+\_\+all} (void)
+\item 
+void {\bf alt\+\_\+dcache\+\_\+flush\+\_\+all} (void)
+\item 
+volatile void $\ast$ {\bf alt\+\_\+uncached\+\_\+malloc} (size\+\_\+t size)
+\item 
+void {\bf alt\+\_\+uncached\+\_\+free} (volatile void $\ast$ptr)
+\item 
+volatile void $\ast$ {\bf alt\+\_\+remap\+\_\+uncached} (void $\ast$ptr, {\bf alt\+\_\+u32} len)
+\item 
+void $\ast$ {\bf alt\+\_\+remap\+\_\+cached} (volatile void $\ast$ptr, {\bf alt\+\_\+u32} len)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}!alt\+\_\+dcache\+\_\+flush@{alt\+\_\+dcache\+\_\+flush}}
+\index{alt\+\_\+dcache\+\_\+flush@{alt\+\_\+dcache\+\_\+flush}!alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}}
+\paragraph[{alt\+\_\+dcache\+\_\+flush(void $\ast$start, alt\+\_\+u32 len)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+dcache\+\_\+flush (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{start, }
+\item[{{\bf alt\+\_\+u32}}]{len}
+\end{DoxyParamCaption}
+)}\label{alt__cache_8h_a9fabe1416281a97e1767ada9f7c0a337}
+
+
+Definition at line {\bf 46} of file {\bf alt\+\_\+dcache\+\_\+flush.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+TA}, and {\bf N\+I\+O\+S2\+\_\+\+D\+C\+A\+C\+H\+E\+\_\+\+L\+I\+N\+E\+\_\+\+S\+I\+ZE}.
+
+
+
+Referenced by {\bf alt\+\_\+ecc\+\_\+fatal\+\_\+exception\+\_\+register()}, and {\bf alt\+\_\+uncached\+\_\+malloc()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{d1/d0e/alt__cache_8h_a9fabe1416281a97e1767ada9f7c0a337_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}!alt\+\_\+dcache\+\_\+flush\+\_\+all@{alt\+\_\+dcache\+\_\+flush\+\_\+all}}
+\index{alt\+\_\+dcache\+\_\+flush\+\_\+all@{alt\+\_\+dcache\+\_\+flush\+\_\+all}!alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}}
+\paragraph[{alt\+\_\+dcache\+\_\+flush\+\_\+all(void)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+dcache\+\_\+flush\+\_\+all (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{alt__cache_8h_a5c773368bb72d640d39efb42ff592175}
+
+
+Definition at line {\bf 41} of file {\bf alt\+\_\+dcache\+\_\+flush\+\_\+all.\+c}.
+
+
+
+References {\bf \+\_\+\+\_\+asm\+\_\+\+\_\+()}, {\bf N\+I\+O\+S2\+\_\+\+D\+C\+A\+C\+H\+E\+\_\+\+L\+I\+N\+E\+\_\+\+S\+I\+ZE}, and {\bf N\+I\+O\+S2\+\_\+\+D\+C\+A\+C\+H\+E\+\_\+\+S\+I\+ZE}.
+
+
+
+Referenced by {\bf alt\+\_\+load()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{d1/d0e/alt__cache_8h_a5c773368bb72d640d39efb42ff592175_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{d1/d0e/alt__cache_8h_a5c773368bb72d640d39efb42ff592175_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}!alt\+\_\+dcache\+\_\+flush\+\_\+no\+\_\+writeback@{alt\+\_\+dcache\+\_\+flush\+\_\+no\+\_\+writeback}}
+\index{alt\+\_\+dcache\+\_\+flush\+\_\+no\+\_\+writeback@{alt\+\_\+dcache\+\_\+flush\+\_\+no\+\_\+writeback}!alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}}
+\paragraph[{alt\+\_\+dcache\+\_\+flush\+\_\+no\+\_\+writeback(void $\ast$start, alt\+\_\+u32 len)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+dcache\+\_\+flush\+\_\+no\+\_\+writeback (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{start, }
+\item[{{\bf alt\+\_\+u32}}]{len}
+\end{DoxyParamCaption}
+)}\label{alt__cache_8h_a1efada8073a74729b8760227ea466d32}
+
+
+Definition at line {\bf 49} of file {\bf alt\+\_\+dcache\+\_\+flush\+\_\+no\+\_\+writeback.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+T\+A\+\_\+\+N\+O\+\_\+\+W\+R\+I\+T\+E\+B\+A\+CK}, and {\bf N\+I\+O\+S2\+\_\+\+D\+C\+A\+C\+H\+E\+\_\+\+L\+I\+N\+E\+\_\+\+S\+I\+ZE}.
+
+\index{alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}!alt\+\_\+icache\+\_\+flush@{alt\+\_\+icache\+\_\+flush}}
+\index{alt\+\_\+icache\+\_\+flush@{alt\+\_\+icache\+\_\+flush}!alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}}
+\paragraph[{alt\+\_\+icache\+\_\+flush(void $\ast$start, alt\+\_\+u32 len)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+icache\+\_\+flush (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{start, }
+\item[{{\bf alt\+\_\+u32}}]{len}
+\end{DoxyParamCaption}
+)}\label{alt__cache_8h_aaafe7e3a51bfd4e77dd838ff6916676e}
+
+
+Definition at line {\bf 42} of file {\bf alt\+\_\+icache\+\_\+flush.\+c}.
+
+
+
+References {\bf \+\_\+\+\_\+asm\+\_\+\+\_\+()}, {\bf N\+I\+O\+S2\+\_\+\+I\+C\+A\+C\+H\+E\+\_\+\+L\+I\+N\+E\+\_\+\+S\+I\+ZE}, and {\bf N\+I\+O\+S2\+\_\+\+I\+C\+A\+C\+H\+E\+\_\+\+S\+I\+ZE}.
+
+
+
+Referenced by {\bf alt\+\_\+icache\+\_\+flush\+\_\+all()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{d1/d0e/alt__cache_8h_aaafe7e3a51bfd4e77dd838ff6916676e_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d1/d0e/alt__cache_8h_aaafe7e3a51bfd4e77dd838ff6916676e_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}!alt\+\_\+icache\+\_\+flush\+\_\+all@{alt\+\_\+icache\+\_\+flush\+\_\+all}}
+\index{alt\+\_\+icache\+\_\+flush\+\_\+all@{alt\+\_\+icache\+\_\+flush\+\_\+all}!alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}}
+\paragraph[{alt\+\_\+icache\+\_\+flush\+\_\+all(void)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+icache\+\_\+flush\+\_\+all (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{alt__cache_8h_a0005ac47724f3b36c4f86697eb85be70}
+
+
+Definition at line {\bf 41} of file {\bf alt\+\_\+icache\+\_\+flush\+\_\+all.\+c}.
+
+
+
+References {\bf alt\+\_\+icache\+\_\+flush()}, and {\bf N\+I\+O\+S2\+\_\+\+I\+C\+A\+C\+H\+E\+\_\+\+S\+I\+ZE}.
+
+
+
+Referenced by {\bf alt\+\_\+load()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d1/d0e/alt__cache_8h_a0005ac47724f3b36c4f86697eb85be70_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{d1/d0e/alt__cache_8h_a0005ac47724f3b36c4f86697eb85be70_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}!alt\+\_\+remap\+\_\+cached@{alt\+\_\+remap\+\_\+cached}}
+\index{alt\+\_\+remap\+\_\+cached@{alt\+\_\+remap\+\_\+cached}!alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}}
+\paragraph[{alt\+\_\+remap\+\_\+cached(volatile void $\ast$ptr, alt\+\_\+u32 len)}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ alt\+\_\+remap\+\_\+cached (
+\begin{DoxyParamCaption}
+\item[{volatile void $\ast$}]{ptr, }
+\item[{{\bf alt\+\_\+u32}}]{len}
+\end{DoxyParamCaption}
+)}\label{alt__cache_8h_a411434f520dd864f71424d8a18da3bdb}
+
+
+Definition at line {\bf 41} of file {\bf alt\+\_\+remap\+\_\+cached.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR}.
+
+\index{alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}!alt\+\_\+remap\+\_\+uncached@{alt\+\_\+remap\+\_\+uncached}}
+\index{alt\+\_\+remap\+\_\+uncached@{alt\+\_\+remap\+\_\+uncached}!alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}}
+\paragraph[{alt\+\_\+remap\+\_\+uncached(void $\ast$ptr, alt\+\_\+u32 len)}]{\setlength{\rightskip}{0pt plus 5cm}volatile void$\ast$ alt\+\_\+remap\+\_\+uncached (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{ptr, }
+\item[{{\bf alt\+\_\+u32}}]{len}
+\end{DoxyParamCaption}
+)}\label{alt__cache_8h_a493bc9202493a0cebd380dc2c208a500}
+
+
+Definition at line {\bf 49} of file {\bf alt\+\_\+remap\+\_\+uncached.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR}.
+
+\index{alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}!alt\+\_\+uncached\+\_\+free@{alt\+\_\+uncached\+\_\+free}}
+\index{alt\+\_\+uncached\+\_\+free@{alt\+\_\+uncached\+\_\+free}!alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}}
+\paragraph[{alt\+\_\+uncached\+\_\+free(volatile void $\ast$ptr)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+uncached\+\_\+free (
+\begin{DoxyParamCaption}
+\item[{volatile void $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)}\label{alt__cache_8h_a0e4a485cf0b12cdef8cc54174618f833}
+
+
+Definition at line {\bf 40} of file {\bf alt\+\_\+uncached\+\_\+free.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR}.
+
+\index{alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}!alt\+\_\+uncached\+\_\+malloc@{alt\+\_\+uncached\+\_\+malloc}}
+\index{alt\+\_\+uncached\+\_\+malloc@{alt\+\_\+uncached\+\_\+malloc}!alt\+\_\+cache.\+h@{alt\+\_\+cache.\+h}}
+\paragraph[{alt\+\_\+uncached\+\_\+malloc(size\+\_\+t size)}]{\setlength{\rightskip}{0pt plus 5cm}volatile void$\ast$ alt\+\_\+uncached\+\_\+malloc (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)}\label{alt__cache_8h_ae8c29b6eac64e62a9fb0b2662dc6c4a7}
+
+
+Definition at line {\bf 42} of file {\bf alt\+\_\+uncached\+\_\+malloc.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+C\+P\+U\+\_\+\+D\+C\+A\+C\+H\+E\+\_\+\+L\+I\+N\+E\+\_\+\+S\+I\+ZE}, {\bf alt\+\_\+dcache\+\_\+flush()}, and {\bf A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{d1/d0e/alt__cache_8h_ae8c29b6eac64e62a9fb0b2662dc6c4a7_cgraph}
+\end{center}
+\end{figure}
+
+

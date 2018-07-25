@@ -61,7 +61,10 @@ entity tx_path_top is
       --fifo ports 
       in_pct_wrreq         : in std_logic;
       in_pct_data          : in std_logic_vector(in_pct_data_w-1 downto 0);
-      in_pct_full          : out std_logic
+      in_pct_full          : out std_logic;
+		
+		--chirp
+		chirp_sync_en			: in std_logic
       );
 end tx_path_top;
 
@@ -77,6 +80,7 @@ signal rx_sample_nr_iq_rdclk        : std_logic_vector(63 downto 0);
 signal en_sync_rx_sample_clk        : std_logic;
 signal en_sync_iq_rdclk             : std_logic;
 signal pct_loss_flg_clr_sync_iq_rdclk : std_logic;
+signal chirp_sync_en_sync_iq_rd_clk	: std_logic;
 
 signal mode_sync_iq_rdclk           : std_logic;
 signal trxiqpulse_sync_iq_rdclk     : std_logic; 
@@ -110,9 +114,6 @@ signal pct_rdy_combined_vect        : std_logic_vector(n_buff downto 0);
 
 
 
-
-
-
 begin
 
 --Synchronization registers for asynchronous input ports
@@ -142,6 +143,9 @@ sync_reg7 : entity work.sync_reg
 
 sync_reg8 : entity work.sync_reg 
  port map(iq_rdclk, '1', reset_n, reset_n_sync_iq_rdclk); 
+ 
+sync_reg9 : entity work.sync_reg 
+ port map(iq_rdclk, '1', chirp_sync_en, chirp_sync_en_sync_iq_rd_clk); 
  
  
 bus_sync_reg0 : entity work.bus_sync_reg
@@ -224,13 +228,17 @@ begin
 end process;
 
 
-process(sample_width)
+pct_size_proc : process(sample_width,chirp_sync_en)
 begin
-      if sample_width = "01" then 
-         inst0_pct_size <= x"0100";
-      else 
-         inst0_pct_size <= x"0400";
-      end if;
+		if (chirp_sync_en='1') then
+			inst0_pct_size <= x"0200";--for chirp sync
+		else
+			if sample_width = "01" then 
+				inst0_pct_size <= x"0100";
+			else 
+				inst0_pct_size <= x"0400";
+			end if;
+		end if;
 end process;
 
 -- reset_n_sync_iq_rdclk is delayed two cycles, this helps awoid throwing 
@@ -313,7 +321,9 @@ generic map(
       smpl_buff_rdempty => inst0_smpl_buff_rdempty,
       smpl_buff_wrfull  => inst0_smpl_buff_wrfull,
       smpl_buff_q       => inst0_smpl_buff_q,    
-      smpl_buff_rdreq   => inst1_fifo_rdreq
+      smpl_buff_rdreq   => inst1_fifo_rdreq,
+		
+		chirp_sync_en     => chirp_sync_en_sync_iq_rd_clk
         );
         
         

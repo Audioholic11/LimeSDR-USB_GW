@@ -1,0 +1,99 @@
+\subsection{ddr2\+\_\+phy\+\_\+ddr\+\_\+timing.\+tcl}
+\label{ddr2__phy__ddr__timing_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+phy\+\_\+ddr\+\_\+timing.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+phy\+\_\+ddr\+\_\+timing.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{package} require ::quartus::ddr\_timing\_model\textcolor{comment}{}
+00002 \textcolor{comment}{}
+00003 \textcolor{comment}{# The clock period of your memory interface. Don't modify this}
+00004 \textcolor{comment}{}\textcolor{keyword}{set} ::t(period) 6.666\textcolor{comment}{}
+00005 \textcolor{comment}{}
+00006 \textcolor{comment}{# The worst case skew between any pair of traces which are nominally matched}
+00007 \textcolor{comment}{}\textcolor{keyword}{set} ::t(board\_skew) 0.020\textcolor{comment}{}
+00008 \textcolor{comment}{}\textcolor{keyword}{set} ::t(min\_additional\_dqs\_variation) 0.000\textcolor{comment}{}
+00009 \textcolor{comment}{}\textcolor{keyword}{set} ::t(max\_additional\_dqs\_variation) 0.000\textcolor{comment}{}
+00010 \textcolor{comment}{}
+00011 \textcolor{comment}{###########################################################}
+00012 \textcolor{comment}{}\textcolor{comment}{# Memory timing parameters. See Section 6 of the JEDEC spec.}
+00013 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------}
+00014 \textcolor{comment}{}\textcolor{comment}{# tDS/tDH: write timing}
+00015 \textcolor{comment}{}\textcolor{keyword}{set} ::t(DS) 0.250\textcolor{comment}{}
+00016 \textcolor{comment}{}\textcolor{keyword}{set} ::t(DH) 0.250\textcolor{comment}{}
+00017 \textcolor{comment}{}
+00018 \textcolor{comment}{# Data output timing for non-DQS capture}
+00019 \textcolor{comment}{}\textcolor{keyword}{set} ::t(AC) 0.400\textcolor{comment}{}
+00020 \textcolor{comment}{}
+00021 \textcolor{comment}{# Address and command input timing}
+00022 \textcolor{comment}{}\textcolor{keyword}{set} ::t(IS) 0.375\textcolor{comment}{}
+00023 \textcolor{comment}{}\textcolor{keyword}{set} ::t(IH) 0.375\textcolor{comment}{}
+00024 \textcolor{comment}{}
+00025 \textcolor{comment}{# DQS to CK input timing}
+00026 \textcolor{comment}{}\textcolor{keyword}{set} ::t(DSS) 0.2\textcolor{comment}{}
+00027 \textcolor{comment}{}\textcolor{keyword}{set} ::t(DSH) 0.2\textcolor{comment}{}
+00028 \textcolor{comment}{}\textcolor{keyword}{set} ::t(DQSS) 0.25\textcolor{comment}{}
+00029 \textcolor{comment}{}
+00030 \textcolor{comment}{# DQ to DQS timing on read}
+00031 \textcolor{comment}{}\textcolor{keyword}{set} ::t(DQSQ) 0.200\textcolor{comment}{}
+00032 \textcolor{comment}{}\textcolor{keyword}{set} ::t(QHS) 0.300\textcolor{comment}{}
+00033 \textcolor{comment}{}
+00034 \textcolor{comment}{# DQS to CK timing on reads}
+00035 \textcolor{comment}{}\textcolor{keyword}{set} ::t(DQSCK) 0.350\textcolor{comment}{}
+00036 \textcolor{comment}{}\textcolor{keyword}{set} ::t(HP) 3.000\textcolor{comment}{}
+00037 \textcolor{comment}{}
+00038 \textcolor{comment}{# The maximum allowed length of the mimic path depends on the device family}
+00039 \textcolor{comment}{}\textcolor{keyword}{set} ::t(mimic\_shift) 2.500\textcolor{comment}{}
+00040 \textcolor{comment}{}\textcolor{comment}{# The clock period of the PLL reference clock}
+00041 \textcolor{comment}{}\textcolor{keyword}{set} ::t(inclk\_period) 37.037\textcolor{comment}{}
+00042 \textcolor{comment}{}
+00043 \textcolor{comment}{#####################}
+00044 \textcolor{comment}{}\textcolor{comment}{# FPGA specifications}
+00045 \textcolor{comment}{}\textcolor{comment}{#####################}
+00046 \textcolor{comment}{}
+00047 \textcolor{comment}{# Duty cycle distortion from the device data sheet}
+00048 \textcolor{comment}{}\textcolor{keyword}{set} ::t(DCD\_total) 0.250\textcolor{comment}{}
+00049 \textcolor{comment}{}\textcolor{comment}{# PLL phase shift error}
+00050 \textcolor{comment}{}\textcolor{keyword}{set} ::t(PLL\_PSERR) 0.000\textcolor{comment}{}
+00051 \textcolor{comment}{}
+00052 \textcolor{comment}{###############}
+00053 \textcolor{comment}{}\textcolor{comment}{# SSN Info}
+00054 \textcolor{comment}{}\textcolor{comment}{###############}
+00055 \textcolor{comment}{}
+00056 \textcolor{keyword}{set} package\_type [get\_package\_type]\textcolor{comment}{}
+00057 \textcolor{comment}{}\textcolor{keyword}{set} ::SSN(pushout\_o) [\textcolor{keyword}{expr} [get\_micro\_node\_delay -micro SSO -parameters [list IO DQDQSABSOLUTE 
+      NONLEVELED MAX] -package\_type $package\_type -in\_fitter]/1000.0]\textcolor{comment}{}
+00058 \textcolor{comment}{}\textcolor{keyword}{set} ::SSN(pullin\_o)  [\textcolor{keyword}{expr} [get\_micro\_node\_delay -micro SSO -parameters [list IO DQDQSABSOLUTE 
+      NONLEVELED MIN] -package\_type $package\_type -in\_fitter]/-1000.0]\textcolor{comment}{}
+00059 \textcolor{comment}{}\textcolor{keyword}{set} ::SSN(pushout\_i) [\textcolor{keyword}{expr} [get\_micro\_node\_delay -micro SSI -parameters [list IO DQDQSABSOLUTE 
+      NONLEVELED MAX] -package\_type $package\_type -in\_fitter]/1000.0]\textcolor{comment}{}
+00060 \textcolor{comment}{}\textcolor{keyword}{set} ::SSN(pullin\_i)  [\textcolor{keyword}{expr} [get\_micro\_node\_delay -micro SSI -parameters [list IO DQDQSABSOLUTE 
+      NONLEVELED MIN] -package\_type $package\_type -in\_fitter]/-1000.0]\textcolor{comment}{}
+00061 \textcolor{comment}{}\textcolor{keyword}{set} ::SSN(rel\_pushout\_o) [\textcolor{keyword}{expr} [get\_micro\_node\_delay -micro SSO -parameters [list IO DQDQSRELATIVE 
+      NONLEVELED MAX] -package\_type $package\_type -in\_fitter]/1000.0]\textcolor{comment}{}
+00062 \textcolor{comment}{}\textcolor{keyword}{set} ::SSN(rel\_pullin\_o)  [\textcolor{keyword}{expr} [get\_micro\_node\_delay -micro SSO -parameters [list IO DQDQSRELATIVE 
+      NONLEVELED MIN] -package\_type $package\_type -in\_fitter]/-1000.0]\textcolor{comment}{}
+00063 \textcolor{comment}{}\textcolor{keyword}{set} ::SSN(rel\_pushout\_i) [\textcolor{keyword}{expr} [get\_micro\_node\_delay -micro SSI -parameters [list IO DQDQSRELATIVE 
+      NONLEVELED MAX] -package\_type $package\_type -in\_fitter]/1000.0]\textcolor{comment}{}
+00064 \textcolor{comment}{}\textcolor{keyword}{set} ::SSN(rel\_pullin\_i)  [\textcolor{keyword}{expr} [get\_micro\_node\_delay -micro SSI -parameters [list IO DQDQSRELATIVE 
+      NONLEVELED MIN] -package\_type $package\_type -in\_fitter]/-1000.0]\textcolor{comment}{}
+00065 \textcolor{comment}{}
+00066 \textcolor{comment}{###############}
+00067 \textcolor{comment}{}\textcolor{comment}{# Board Effects}
+00068 \textcolor{comment}{}\textcolor{comment}{###############}
+00069 \textcolor{comment}{}
+00070 \textcolor{comment}{# Board skews}
+00071 \textcolor{comment}{}\textcolor{keyword}{set} ::board(minCK\_DQS\_skew) -0.010\textcolor{comment}{}
+00072 \textcolor{comment}{}\textcolor{keyword}{set} ::board(maxCK\_DQS\_skew) 0.010\textcolor{comment}{}
+00073 \textcolor{comment}{}\textcolor{keyword}{set} ::board(tpd\_inter\_DIMM) 0.050\textcolor{comment}{}
+00074 \textcolor{comment}{}\textcolor{keyword}{set} ::board(intra\_DQS\_group\_skew) 0.020\textcolor{comment}{}
+00075 \textcolor{comment}{}\textcolor{keyword}{set} ::board(inter\_DQS\_group\_skew) 0.020\textcolor{comment}{}
+00076 \textcolor{comment}{}\textcolor{keyword}{set} ::board(addresscmd\_CK\_skew) 0.000\textcolor{comment}{}
+00077 \textcolor{comment}{}\textcolor{keyword}{set} ::t(additional\_addresscmd\_tpd) $::board(addresscmd\_CK\_skew)\textcolor{comment}{}
+00078 \textcolor{comment}{}
+00079 \textcolor{comment}{# ISI effects}
+00080 \textcolor{comment}{}\textcolor{keyword}{set} ::ISI(addresscmd\_setup) 0.000\textcolor{comment}{}
+00081 \textcolor{comment}{}\textcolor{keyword}{set} ::ISI(addresscmd\_hold) 0.000\textcolor{comment}{}
+00082 \textcolor{comment}{}\textcolor{keyword}{set} ::ISI(DQ) 0.000\textcolor{comment}{}
+00083 \textcolor{comment}{}\textcolor{keyword}{set} ::ISI(DQS) 0.000\textcolor{comment}{}
+00084 \textcolor{comment}{}
+00085 \textcolor{keyword}{set} ddr2\_phy\_use\_flexible\_timing 1\textcolor{comment}{}
+00086 \textcolor{comment}{}
+\end{DoxyCode}

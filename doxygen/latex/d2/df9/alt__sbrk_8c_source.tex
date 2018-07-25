@@ -1,0 +1,141 @@
+\subsection{alt\+\_\+sbrk.\+c}
+\label{alt__sbrk_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+sbrk.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+sbrk.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2004 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include <sys/types.h>}
+00034 
+00035 \textcolor{preprocessor}{#include "os/alt_syscall.h"}
+00036 
+00037 \textcolor{preprocessor}{#include "sys/alt_irq.h"}
+00038 \textcolor{preprocessor}{#include "sys/alt_stack.h"}
+00039 
+00040 \textcolor{preprocessor}{#include "system.h"}
+00041 
+00042 \textcolor{comment}{/*}
+00043 \textcolor{comment}{ * sbrk() is called to dynamically extend the data segment for the application.}
+00044 \textcolor{comment}{ * Thie input argument "incr" is the size of the block to allocate.}
+00045 \textcolor{comment}{ *}
+00046 \textcolor{comment}{ * This simple implementation does not perform any bounds checking. Memory will}
+00047 \textcolor{comment}{ * be allocated, even if the request region colides with the stack or overflows}
+00048 \textcolor{comment}{ * the available physical memory. }
+00049 \textcolor{comment}{ *}
+00050 \textcolor{comment}{ * ALT\_SBRK is mapped onto the sbrk() system call in alt\_syscall.h}
+00051 \textcolor{comment}{ *}
+00052 \textcolor{comment}{ * This function is called by the profiling code to allocate memory so must be}
+00053 \textcolor{comment}{ * safe if called from an interrupt context.  It must also not be instrumented}
+00054 \textcolor{comment}{ * because that would lead to an infinate loop.}
+00055 \textcolor{comment}{ */}
+00056 
+00057 \textcolor{keyword}{extern} \textcolor{keywordtype}{char} __alt_heap_start[]; \textcolor{comment}{/* set by linker */}
+00058 \textcolor{keyword}{extern} \textcolor{keywordtype}{char} __alt_heap_limit[]; \textcolor{comment}{/* set by linker */}
+00059 
+00060 \textcolor{keyword}{static} \textcolor{keywordtype}{char} *heap_end = __alt_heap_start;
+00061 
+00062 \textcolor{preprocessor}{#if defined(ALT\_EXCEPTION\_STACK) && defined(ALT\_STACK\_CHECK)}
+00063 \textcolor{keywordtype}{char} * alt\_exception\_old\_stack\_limit = NULL;
+00064 \textcolor{preprocessor}{#endif}
+00065  
+00066 caddr\_t ALT_SBRK (\textcolor{keywordtype}{int} incr) __attribute__ ((no\_instrument\_function ));
+00067 
+00068 caddr\_t ALT_SBRK (\textcolor{keywordtype}{int} incr)
+00069 \{ 
+00070   alt_irq_context context;
+00071   \textcolor{keywordtype}{char} *prev\_heap\_end; 
+00072 
+00073   context = alt_irq_disable_all();
+00074 
+00075   \textcolor{comment}{/* Always return data aligned on a word boundary */}
+00076   heap_end = (\textcolor{keywordtype}{char} *)(((\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})heap_end + 3) & ~3);
+00077 
+00078 \textcolor{preprocessor}{#ifdef ALT\_MAX\_HEAP\_BYTES}
+00079   \textcolor{comment}{/*  }
+00080 \textcolor{comment}{   * User specified a maximum heap size.  Return -1 if it would}
+00081 \textcolor{comment}{   * be exceeded by this sbrk call.}
+00082 \textcolor{comment}{   */}
+00083   \textcolor{keywordflow}{if} (((heap_end + incr) - __alt_heap_start) > ALT\_MAX\_HEAP\_BYTES) \{
+00084     alt_irq_enable_all(context);
+00085     \textcolor{keywordflow}{return} (caddr\_t)-1;
+00086   \}
+00087 \textcolor{preprocessor}{#else}
+00088   \textcolor{keywordflow}{if} ((heap_end + incr) > __alt_heap_limit) \{
+00089     alt_irq_enable_all(context);
+00090     \textcolor{keywordflow}{return} (caddr\_t)-1;
+00091   \}
+00092 \textcolor{preprocessor}{#endif}
+00093 
+00094   prev\_heap\_end = heap_end; 
+00095   heap_end += incr; 
+00096 
+00097 \textcolor{preprocessor}{#ifdef ALT\_STACK\_CHECK}
+00098   \textcolor{comment}{/*}
+00099 \textcolor{comment}{   * If the stack and heap are contiguous then extending the heap reduces the}
+00100 \textcolor{comment}{   * space available for the stack.  If we are still using the default stack}
+00101 \textcolor{comment}{   * then adjust the stack limit to note this, while checking for stack}
+00102 \textcolor{comment}{   * pointer overflow. }
+00103 \textcolor{comment}{   * If the stack limit isn't pointing at the top of the heap then the code}
+00104 \textcolor{comment}{   * is using a different stack so none of this needs to be done.}
+00105 \textcolor{comment}{   */}
+00106 
+00107   \textcolor{keywordflow}{if} (alt_stack_limit() == prev\_heap\_end)
+00108   \{
+00109     \textcolor{keywordflow}{if} (alt_stack_pointer() <= heap_end)
+00110       alt_report_stack_overflow();
+00111 
+00112     alt_set_stack_limit(heap_end);
+00113   \}
+00114 
+00115 \textcolor{preprocessor}{#ifdef ALT\_EXCEPTION\_STACK}
+00116   \textcolor{comment}{/*}
+00117 \textcolor{comment}{   * If we are executing from the exception stack then compare against the}
+00118 \textcolor{comment}{   * stack we switched away from as well.  The exception stack is a fixed}
+00119 \textcolor{comment}{   * size so doesn't need to be checked.}
+00120 \textcolor{comment}{   */}
+00121 
+00122   \textcolor{keywordflow}{if} (alt\_exception\_old\_stack\_limit == prev\_heap\_end)
+00123   \{
+00124     \textcolor{keywordflow}{if} (alt\_exception\_old\_stack\_limit <= heap_end)
+00125       alt_report_stack_overflow();
+00126 
+00127     alt\_exception\_old\_stack\_limit = heap_end;
+00128   \}
+00129 \textcolor{preprocessor}{#endif}
+00130 
+00131 \textcolor{preprocessor}{#endif}
+00132 
+00133   alt_irq_enable_all(context);
+00134 
+00135   \textcolor{keywordflow}{return} (caddr\_t) prev\_heap\_end; 
+00136 \} 
+\end{DoxyCode}

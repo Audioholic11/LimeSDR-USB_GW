@@ -1,0 +1,892 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.h File Reference}
+\label{spi__flash__lib_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.\+h}}
+{\ttfamily \#include \char`\"{}io.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$altera\+\_\+avalon\+\_\+spi.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for spi\+\_\+flash\+\_\+lib.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d1/d09/spi__flash__lib_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{d2/d50/spi__flash__lib_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf Cy\+True}~(1)
+\begin{DoxyCompactList}\small\item\em Truth value. \end{DoxyCompactList}\item 
+\#define {\bf Cy\+False}~(0)
+\begin{DoxyCompactList}\small\item\em False value. \end{DoxyCompactList}\item 
+\#define {\bf S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+ES}~10000
+\item 
+\#define {\bf S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+E\+S\+\_\+\+E\+R\+A\+SE}~3000000
+\end{DoxyCompactItemize}
+\subsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum {\bf Cy\+U3\+P\+Error\+Code\+\_\+t} {\bf Cy\+U3\+P\+Error\+Code\+\_\+t}
+\begin{DoxyCompactList}\small\item\em List of error codes defined and returned by the F\+X3 firmware library. \end{DoxyCompactList}\item 
+typedef unsigned int {\bf Cy\+U3\+P\+Return\+Status\+\_\+t}
+\item 
+typedef int {\bf Cy\+Bool\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Boolean data type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Cy\+U3\+P\+Error\+Code\+\_\+t} \{ \\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS} = 0, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT} = 0x40, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE} = 0x60, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED} = 0x\+FE, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED} = 0x\+FF, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS} = 0, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT} = 0x40, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE} = 0x60, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA}, 
+\\*
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE}, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED} = 0x\+FE, 
+{\bf C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED} = 0x\+FF
+ \}\begin{DoxyCompactList}\small\item\em List of error codes defined and returned by the F\+X3 firmware library. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf Cy\+Fx\+Spi\+Fast\+Read} ({\bf Cy\+Bool\+\_\+t} v)
+\item 
+uint8\+\_\+t {\bf Reverse\+Bit\+Order} (uint8\+\_\+t {\bf data})
+\begin{DoxyCompactList}\small\item\em Reverses bit order. \end{DoxyCompactList}\item 
+uint8\+\_\+t {\bf Flash\+Spi\+Erase\+Sector} ({\bf alt\+\_\+u32} S\+P\+I\+Base, {\bf alt\+\_\+u32} S\+P\+I\+Slave, uint8\+\_\+t is\+Erase, uint8\+\_\+t sector)
+\item 
+uint8\+\_\+t {\bf Cy\+Fx\+Spi\+Wait\+For\+Status} ({\bf alt\+\_\+u32} S\+P\+I\+Base, {\bf alt\+\_\+u32} S\+P\+I\+Slave)
+\item 
+uint8\+\_\+t {\bf Flash\+Spi\+Transfer} ({\bf alt\+\_\+u32} S\+P\+I\+Base, {\bf alt\+\_\+u32} S\+P\+I\+Slave, uint32\+\_\+t page\+Address, uint16\+\_\+t byte\+Count, uint8\+\_\+t $\ast$buffer, {\bf Cy\+Bool\+\_\+t} is\+Read)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Cy\+False@{Cy\+False}}
+\index{Cy\+False@{Cy\+False}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Cy\+False}]{\setlength{\rightskip}{0pt plus 5cm}\#define Cy\+False~(0)}\label{spi__flash__lib_8h_a6ee52b2eb5be574d03c4ddfe54f7ed16}
+
+
+False value. 
+
+
+
+Definition at line {\bf 135} of file {\bf spi\+\_\+flash\+\_\+lib.\+h}.
+
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Cy\+True@{Cy\+True}}
+\index{Cy\+True@{Cy\+True}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Cy\+True}]{\setlength{\rightskip}{0pt plus 5cm}\#define Cy\+True~(1)}\label{spi__flash__lib_8h_a036f5b38c4a7582397cd5ba4e889e4ea}
+
+
+Truth value. 
+
+
+
+Definition at line {\bf 134} of file {\bf spi\+\_\+flash\+\_\+lib.\+h}.
+
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+ES@{S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+ES}}
+\index{S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+ES@{S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+ES}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+ES}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+ES~10000}\label{spi__flash__lib_8h_a4e0b6aea306ad6f0a3b2ab9227ae51e5}
+
+
+Definition at line {\bf 136} of file {\bf spi\+\_\+flash\+\_\+lib.\+h}.
+
+
+
+Referenced by {\bf Cy\+Fx\+Spi\+Wait\+For\+Status()}.
+
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+E\+S\+\_\+\+E\+R\+A\+SE@{S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+E\+S\+\_\+\+E\+R\+A\+SE}}
+\index{S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+E\+S\+\_\+\+E\+R\+A\+SE@{S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+E\+S\+\_\+\+E\+R\+A\+SE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+E\+S\+\_\+\+E\+R\+A\+SE}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+E\+S\+\_\+\+E\+R\+A\+SE~3000000}\label{spi__flash__lib_8h_a3b4a59e267ec4b3eb4fb4f9182676b5c}
+
+
+Definition at line {\bf 137} of file {\bf spi\+\_\+flash\+\_\+lib.\+h}.
+
+
+
+Referenced by {\bf Flash\+Spi\+Erase\+Sector()}.
+
+
+
+\subsubsection{Typedef Documentation}
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Cy\+Bool\+\_\+t@{Cy\+Bool\+\_\+t}}
+\index{Cy\+Bool\+\_\+t@{Cy\+Bool\+\_\+t}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Cy\+Bool\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf Cy\+Bool\+\_\+t}}\label{spi__flash__lib_8h_adb8469c2d8c8deefaa461320adfa902c}
+
+
+Boolean data type. 
+
+
+
+Definition at line {\bf 133} of file {\bf spi\+\_\+flash\+\_\+lib.\+h}.
+
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Cy\+U3\+P\+Error\+Code\+\_\+t@{Cy\+U3\+P\+Error\+Code\+\_\+t}}
+\index{Cy\+U3\+P\+Error\+Code\+\_\+t@{Cy\+U3\+P\+Error\+Code\+\_\+t}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Cy\+U3\+P\+Error\+Code\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf Cy\+U3\+P\+Error\+Code\+\_\+t}  {\bf Cy\+U3\+P\+Error\+Code\+\_\+t}}\label{spi__flash__lib_8h_ab05f4ca55fcc053034ad1f6584c0ebdb}
+
+
+List of error codes defined and returned by the F\+X3 firmware library. 
+
+Description$\ast$$\ast$~\newline
+The error codes below help identify the cause of the failure. These errors could be returned by the base R\+T\+OS or by the F\+X3 A\+PI itself. The initial error codes are all defined and returned by the R\+T\+OS. The A\+PI specific error code start from C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT. \index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Cy\+U3\+P\+Return\+Status\+\_\+t@{Cy\+U3\+P\+Return\+Status\+\_\+t}}
+\index{Cy\+U3\+P\+Return\+Status\+\_\+t@{Cy\+U3\+P\+Return\+Status\+\_\+t}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Cy\+U3\+P\+Return\+Status\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned int {\bf Cy\+U3\+P\+Return\+Status\+\_\+t}}\label{spi__flash__lib_8h_a600f02dcd067954f74378e2a20ef0554}
+
+
+Definition at line {\bf 131} of file {\bf spi\+\_\+flash\+\_\+lib.\+h}.
+
+
+
+\subsubsection{Enumeration Type Documentation}
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Cy\+U3\+P\+Error\+Code\+\_\+t@{Cy\+U3\+P\+Error\+Code\+\_\+t}}
+\index{Cy\+U3\+P\+Error\+Code\+\_\+t@{Cy\+U3\+P\+Error\+Code\+\_\+t}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Cy\+U3\+P\+Error\+Code\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Cy\+U3\+P\+Error\+Code\+\_\+t}}\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12}
+
+
+List of error codes defined and returned by the F\+X3 firmware library. 
+
+Description$\ast$$\ast$~\newline
+The error codes below help identify the cause of the failure. These errors could be returned by the base R\+T\+OS or by the F\+X3 A\+PI itself. The initial error codes are all defined and returned by the R\+T\+OS. The A\+PI specific error code start from C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS@{C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS@{C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae591f58cdf232ec367cedb35ab9f31ce}
+}]Success code. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7f06d8fa4645ce6588da118423b92277}
+}]The OS object being accessed has been deleted. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aa550940504f010e936de640dc852d10f}
+}]Bad memory pool passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aff7e5bd37472a89ddef670ca8646af85}
+}]Bad (N\+U\+LL or unaligned) pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a399716d6df837a783ac540050c471b4c}
+}]Non-\/zero wait requested from interrupt context. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a6c6f1d7cfdf6137ec24ddbd5c97a6395}
+}]Invalid size value passed into a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ac838acf476c86885f7a6c4a5eba68956}
+}]Invalid event group passed into a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a135e8ef8e721b161e40ac488b2d9ab3e}
+}]Failed to set/get the event flags specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ab2d100ddf404a1a3308d5979ae6841f7}
+}]Invalid task option value specified for the function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a69bf48c7462adc73717b77b80a8ba83d}
+}]Invalid message queue passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ac09ecf0a0a66f1aab352be00ffa4c773}
+}]The message queue being read is empty. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12acbf43e992182dd71132f0e9bcb01462a}
+}]The message queue being written to is full. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a9140bd33cd1de74d0308917128115389}
+}]Invalid semaphore pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12afb5c31537cb5b58643676cd01a89b4de}
+}]A semaphore get operation failed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12acd495fa48ac880c53c95f1394f4727bc}
+}]Invalid thread pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a3a65fbe1614c3fbbafe7ddd07eab54af}
+}]Invalid thread priority value passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0ebba889963c845272dc8e3745110cb4}
+}]Failed to allocate memory. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a384a3ac15616b63afa9862e664f1fc4e}
+}]Failed to delete an object because it is not idle. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7f9ac966d3f6fb08f40e3fd359430f21}
+}]Failed to resume a thread. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12adf727608f5058aabc8e85e2d7c3f36f7}
+}]OS function failed because the current caller is not allowed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae1547ea3230500198e888318dc9c4234}
+}]Failed to suspend a thread. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2bb1a01e8c10b93830afe3d16b56819c}
+}]Invalid timer pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2e95eec314fd396f39112d82daefc395}
+}]Invalid (0) tick value passed to a timer function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0fe6bb5570be9b360a8aa620396bb8d4}
+}]Failed to activate a timer. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5cb4631c0e60552f3a0e640187454093}
+}]Invalid thread pre-\/emption threshold value specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ac6962fd8a824cc5bf10125c082e90d2a}
+}]Thread suspension was cancelled. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a6ee80f4b6776277c08fce269ee0d7ed6}
+}]Wait operation was aborted. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12acca2ebbbd5818ba52a5e000be5585d3e}
+}]Failed to abort wait operation on a thread. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a360f6d8d86a94ab77737df76b0bfc2ab}
+}]Invalid Mutex pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ab9e53c175d876766ba805e7189b5d508}
+}]Failed to get a mutex. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a45e0e7fe6b2f7f31e830afd357bf396a}
+}]Failed to put a mutex because it is not currently owned. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aa9fd49c8cfccf0d7e3d3e0dfb380fb95}
+}]Error in priority inheritance. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5fc4e9a5d7a3a4341066243bb20a0385}
+}]Operation failed because relevant object is not idle or done. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12abc7085a6fafd4801977da09b83453524}
+}]One or more parameters to a function are invalid. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a62cb42d955c3c4591c98331363915d50}
+}]A null pointer has been passed in unexpectedly. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12adc9e552cb8f5f3f4ba5d980b5449bbf5}
+}]The object/module being referred to has not been started. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0f257eeb8b932ec30152ebd5d6b6e1fe}
+}]An object/module that is already active is being started. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a577ae59fc33368b8d08fe7dba1be24c8}
+}]Object/module referred to has not been configured. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a10ebdee750e9ba31fc2313662cbfaa08}
+}]Timeout on relevant operation. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7811d23d9705988401195278733bcc26}
+}]Operation requested is not supported in current mode. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12af4680c7343728e7c937e497142b91c8e}
+}]Invalid function call sequence. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a17708a9edf99e9f1b5949038d2b0dc65}
+}]Function call failed as it was aborted by another thread/isr. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0c153938935399643b07a38e55c6771f}
+}]D\+MA engine failed to completed requested operation. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12af62fa97a43656e4d980481489e7842ac}
+}]Failure due to a non-\/specific system error. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a580e65667444e4705b62e09a0a569844}
+}]Bad index value was passed in as parameter. Ex\+: for string descriptor. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aea1a8b7f05d2c4aa661fda25e072e0aa}
+}]Bad enumeration method specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a51d83b81fb398bde1d7beb60111605e8}
+}]Invalid configuration specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a178ffab52f2b86ea8d2524b79acd6e5c}
+}]Internal D\+MA channel creation failed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a39fd4e4c9938ded6388b4ef4f0144d35}
+}]Internal D\+MA channel destroy failed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12acece9b26329b5cbd20aa16036f0129a1}
+}]Invalid descriptor type specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a1d7c12cc1d0dc0162264b0a3a8d6cfec}
+}]U\+SB transfer was cancelled. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a519b9ba0d11033f2899e15044a7eee79}
+}]When a U\+SB feature like remote wakeup is not enabled. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a64ae6a3b833590034940af704d55266b}
+}]When a U\+SB request / data transfer is stalled. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5622b0152b77f8b79bb91ee2ad918ed0}
+}]The block accessed has a fatal error and needs to be re-\/initialized. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a4f4915bd98cf4c7e26c86289f548c711}
+}]Loss of bus arbitration, invalid bus behaviour or bus busy. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a18124237cdd4d2603c1caddb7d8817cb}
+}]Failed to enter standby mode because one or more wakeup events are active. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a042f902e6ce55c95251a31a106525bdc}
+}]Storage device\textquotesingle{}s voltage range does not meet F\+X3S requirements. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12afb1c0aa5e6c58459967ed42d310631c4}
+}]Incorrect response received from storage device. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a57e9cfc1e46590866b6588efc69efdb8}
+}]Storage device features are not supported by F\+X3S host. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2a13efdaf82adce10ce05064523a94da}
+}]Storage device failed to move to expected state. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a1cc2aa3c19094667a75ccd48e9a19458}
+}]Storage device failed to support required commands. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae6d88797ad0bc08708deb4f35d4cbf85}
+}]Response C\+RC error detected. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a658a8fd7898dfefbf8a43cb26a75e2a1}
+}]Out of range address provided for read/write/erase access. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0f955019d4c6f12a24b18c2aa2492a6c}
+}]Non-\/existent storage partition selected for transfer. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a031b074b333141a363f82042fe80ff4d}
+}]Access to port with no connected storage device. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2c82579c63c7b3e8bf8c7c03eb3dfe96}
+}]Request to partition a device which is already partitioned. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ac1c66da5a3757dfd16efe30ee1e316ce}
+}]Request to remove partitions on an unpartitioned device. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7aa4fd19c282e487cd063ee481617d4e}
+}]Incorrect partition selected. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5fcadad146cefbd034d919dd47dc45ae}
+}]Read/write transfer was aborted (user cancellation or timeout). \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a911ead3114dc2424a708188dff7d3127}
+}]Write request addressed to a write protected storage device. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0b06994b0912563be45b0a7c5e889bc0}
+}]Storage driver initialization failed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a418d282c98549d9099af326e66b47ad5}
+}]Access to password locked SD card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2b679cc880d22bc2f7dddf88bca80921}
+}]Failure while locking/unlocking the SD card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a559a9cdd537b97171f0654485fe5866b}
+}]Failure during SD force erase operation. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aa01931e0a9db4f562b31313c2cd956d2}
+}]Block size specified for S\+D\+IO device is not supported. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12afff0d656af1e7766bc00ee7218e15d7c}
+}]Non-\/existent S\+D\+IO function being accessed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12affa1a35296d5ac5651f0031078fef298}
+}]Non-\/existent tuple of S\+D\+IO card being accessed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a923d881e44aaa5c0711779bb75bf8438}
+}]IO operation to S\+D\+IO card aborted. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a8b43312f3ec2e7c6a6648054a74dc316}
+}]IO operation to S\+D\+IO card suspended. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5fcc6b9a8f5e9bbf03c6d2688c6a3e66}
+}]Invalid command sent to the S\+D\+IO card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae00bac1493c83a268fc1ecd109d7becd}
+}]Generic error reported by S\+D\+IO card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5517f830be33d7cdd90a2bbf3fe51186}
+}]S\+D\+IO command argument is out of range. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2dbdc726fda87c09ae63562f0700fce7}
+}]Access to uninitialized S\+D\+IO function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2184cc6e8017376e31008a1c85fb0354}
+}]Access to S\+D\+IO card which is not active. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aa713a13711063fe15756c9c9f10069ba}
+}]The storage device is busy handling another request. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7fc84cc7156f819acd98f02d123fdfa0}
+}]No metadata present on card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a97affe43000134c54c74118c90018eed}
+}]Card R\+D/\+WR Threshold error crossed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae0df3263f83ada4b9c1572691c7b85f3}
+}]Card not responding to read/write transactions. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a628356834f1b0ea8c452b4cada6bb1cb}
+}]F\+X3 booter supports the No\+Re\+Enumeration feature that enables to have a single U\+SB enumeration across the F\+X3 booter and the final application. This error code is returned by Cy\+U3\+P\+Usb\+Start () to indicate that the No\+Re\+Enumeration is successful and the sequence followed for the regular enumeration post Cy\+U3\+P\+Usb\+Start () is to be skipped. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2fa7645188a571e0c32e833ab4e2dac9}
+}]The requested feature/operation is not enabled in the current configuration. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS@{C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS@{C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+S\+U\+C\+C\+E\+SS\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae591f58cdf232ec367cedb35ab9f31ce}
+}]Success code. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7f06d8fa4645ce6588da118423b92277}
+}]The OS object being accessed has been deleted. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+OL\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aa550940504f010e936de640dc852d10f}
+}]Bad memory pool passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+O\+I\+N\+T\+ER\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aff7e5bd37472a89ddef670ca8646af85}
+}]Bad (N\+U\+LL or unaligned) pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+W\+A\+IT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a399716d6df837a783ac540050c471b4c}
+}]Non-\/zero wait requested from interrupt context. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+I\+ZE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a6c6f1d7cfdf6137ec24ddbd5c97a6395}
+}]Invalid size value passed into a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+V\+E\+N\+T\+\_\+\+G\+RP\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ac838acf476c86885f7a6c4a5eba68956}
+}]Invalid event group passed into a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+E\+V\+E\+N\+TS\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a135e8ef8e721b161e40ac488b2d9ab3e}
+}]Failed to set/get the event flags specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+O\+P\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ab2d100ddf404a1a3308d5979ae6841f7}
+}]Invalid task option value specified for the function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+Q\+U\+E\+UE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a69bf48c7462adc73717b77b80a8ba83d}
+}]Invalid message queue passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+E\+M\+P\+TY\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ac09ecf0a0a66f1aab352be00ffa4c773}
+}]The message queue being read is empty. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+F\+U\+LL\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12acbf43e992182dd71132f0e9bcb01462a}
+}]The message queue being written to is full. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+S\+E\+M\+A\+P\+H\+O\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a9140bd33cd1de74d0308917128115389}
+}]Invalid semaphore pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+E\+M\+G\+E\+T\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12afb5c31537cb5b58643676cd01a89b4de}
+}]A semaphore get operation failed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+AD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12acd495fa48ac880c53c95f1394f4727bc}
+}]Invalid thread pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+R\+I\+O\+R\+I\+TY\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a3a65fbe1614c3fbbafe7ddd07eab54af}
+}]Invalid thread priority value passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+E\+R\+R\+OR\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0ebba889963c845272dc8e3745110cb4}
+}]Failed to allocate memory. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+L\+E\+T\+E\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a384a3ac15616b63afa9862e664f1fc4e}
+}]Failed to delete an object because it is not idle. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+S\+U\+M\+E\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7f9ac966d3f6fb08f40e3fd359430f21}
+}]Failed to resume a thread. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+A\+L\+L\+ER\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12adf727608f5058aabc8e85e2d7c3f36f7}
+}]OS function failed because the current caller is not allowed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae1547ea3230500198e888318dc9c4234}
+}]Failed to suspend a thread. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+M\+ER\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2bb1a01e8c10b93830afe3d16b56819c}
+}]Invalid timer pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+I\+CK\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2e95eec314fd396f39112d82daefc395}
+}]Invalid (0) tick value passed to a timer function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+C\+T\+I\+V\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0fe6bb5570be9b360a8aa620396bb8d4}
+}]Failed to activate a timer. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5cb4631c0e60552f3a0e640187454093}
+}]Invalid thread pre-\/emption threshold value specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+U\+S\+P\+E\+N\+D\+\_\+\+L\+I\+F\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ac6962fd8a824cc5bf10125c082e90d2a}
+}]Thread suspension was cancelled. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a6ee80f4b6776277c08fce269ee0d7ed6}
+}]Wait operation was aborted. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+A\+I\+T\+\_\+\+A\+B\+O\+R\+T\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12acca2ebbbd5818ba52a5e000be5585d3e}
+}]Failed to abort wait operation on a thread. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+M\+U\+T\+EX\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a360f6d8d86a94ab77737df76b0bfc2ab}
+}]Invalid Mutex pointer passed to a function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ab9e53c175d876766ba805e7189b5d508}
+}]Failed to get a mutex. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+U\+T\+E\+X\+\_\+\+P\+U\+T\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a45e0e7fe6b2f7f31e830afd357bf396a}
+}]Failed to put a mutex because it is not currently owned. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+H\+E\+R\+I\+T\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aa9fd49c8cfccf0d7e3d3e0dfb380fb95}
+}]Error in priority inheritance. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+I\+D\+LE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5fc4e9a5d7a3a4341066243bb20a0385}
+}]Operation failed because relevant object is not idle or done. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+A\+R\+G\+U\+M\+E\+NT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12abc7085a6fafd4801977da09b83453524}
+}]One or more parameters to a function are invalid. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+U\+L\+L\+\_\+\+P\+O\+I\+N\+T\+ER\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a62cb42d955c3c4591c98331363915d50}
+}]A null pointer has been passed in unexpectedly. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+T\+A\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12adc9e552cb8f5f3f4ba5d980b5449bbf5}
+}]The object/module being referred to has not been started. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+S\+T\+A\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0f257eeb8b932ec30152ebd5d6b6e1fe}
+}]An object/module that is already active is being started. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a577ae59fc33368b8d08fe7dba1be24c8}
+}]Object/module referred to has not been configured. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+I\+M\+E\+O\+UT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a10ebdee750e9ba31fc2313662cbfaa08}
+}]Timeout on relevant operation. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7811d23d9705988401195278733bcc26}
+}]Operation requested is not supported in current mode. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+CE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12af4680c7343728e7c937e497142b91c8e}
+}]Invalid function call sequence. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+B\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a17708a9edf99e9f1b5949038d2b0dc65}
+}]Function call failed as it was aborted by another thread/isr. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+M\+A\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0c153938935399643b07a38e55c6771f}
+}]D\+MA engine failed to completed requested operation. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12af62fa97a43656e4d980481489e7842ac}
+}]Failure due to a non-\/specific system error. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+I\+N\+D\+EX\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a580e65667444e4705b62e09a0a569844}
+}]Bad index value was passed in as parameter. Ex\+: for string descriptor. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+T\+H\+OD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aea1a8b7f05d2c4aa661fda25e072e0aa}
+}]Bad enumeration method specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a51d83b81fb398bde1d7beb60111605e8}
+}]Invalid configuration specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a178ffab52f2b86ea8d2524b79acd6e5c}
+}]Internal D\+MA channel creation failed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+D\+E\+S\+T\+R\+O\+Y\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a39fd4e4c9938ded6388b4ef4f0144d35}
+}]Internal D\+MA channel destroy failed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+D\+E\+S\+C\+R\+I\+P\+T\+O\+R\+\_\+\+T\+Y\+PE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12acece9b26329b5cbd20aa16036f0129a1}
+}]Invalid descriptor type specified. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+X\+F\+E\+R\+\_\+\+C\+A\+N\+C\+E\+L\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a1d7c12cc1d0dc0162264b0a3a8d6cfec}
+}]U\+SB transfer was cancelled. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+E\+A\+T\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+E\+N\+A\+B\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a519b9ba0d11033f2899e15044a7eee79}
+}]When a U\+SB feature like remote wakeup is not enabled. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+L\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a64ae6a3b833590034940af704d55266b}
+}]When a U\+SB request / data transfer is stalled. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5622b0152b77f8b79bb91ee2ad918ed0}
+}]The block accessed has a fatal error and needs to be re-\/initialized. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+L\+O\+S\+T\+\_\+\+A\+R\+B\+I\+T\+R\+A\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a4f4915bd98cf4c7e26c86289f548c711}
+}]Loss of bus arbitration, invalid bus behaviour or bus busy. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+T\+A\+N\+D\+B\+Y\+\_\+\+F\+A\+I\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a18124237cdd4d2603c1caddb7d8817cb}
+}]Failed to enter standby mode because one or more wakeup events are active. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+O\+L\+T\+A\+G\+E\+\_\+\+R\+A\+N\+GE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a042f902e6ce55c95251a31a106525bdc}
+}]Storage device\textquotesingle{}s voltage range does not meet F\+X3S requirements. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+R\+E\+S\+P\+O\+N\+SE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12afb1c0aa5e6c58459967ed42d310631c4}
+}]Incorrect response received from storage device. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+C\+A\+RD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a57e9cfc1e46590866b6588efc69efdb8}
+}]Storage device features are not supported by F\+X3S host. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+W\+R\+O\+N\+G\+\_\+\+S\+T\+A\+TE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2a13efdaf82adce10ce05064523a94da}
+}]Storage device failed to move to expected state. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+M\+D\+\_\+\+N\+O\+T\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a1cc2aa3c19094667a75ccd48e9a19458}
+}]Storage device failed to support required commands. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+RC\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae6d88797ad0bc08708deb4f35d4cbf85}
+}]Response C\+RC error detected. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+D\+DR\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a658a8fd7898dfefbf8a43cb26a75e2a1}
+}]Out of range address provided for read/write/erase access. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+N\+IT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0f955019d4c6f12a24b18c2aa2492a6c}
+}]Non-\/existent storage partition selected for transfer. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+D\+EV\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a031b074b333141a363f82042fe80ff4d}
+}]Access to port with no connected storage device. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2c82579c63c7b3e8bf8c7c03eb3dfe96}
+}]Request to partition a device which is already partitioned. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+T\+\_\+\+P\+A\+R\+T\+I\+T\+I\+O\+N\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ac1c66da5a3757dfd16efe30ee1e316ce}
+}]Request to remove partitions on an unpartitioned device. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+P\+A\+R\+T\+I\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7aa4fd19c282e487cd063ee481617d4e}
+}]Incorrect partition selected. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+R\+E\+A\+D\+\_\+\+W\+R\+I\+T\+E\+\_\+\+A\+B\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5fcadad146cefbd034d919dd47dc45ae}
+}]Read/write transfer was aborted (user cancellation or timeout). \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+R\+O\+T\+E\+C\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a911ead3114dc2424a708188dff7d3127}
+}]Write request addressed to a write protected storage device. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+I\+B\+\_\+\+I\+N\+IT\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a0b06994b0912563be45b0a7c5e889bc0}
+}]Storage driver initialization failed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a418d282c98549d9099af326e66b47ad5}
+}]Access to password locked SD card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2b679cc880d22bc2f7dddf88bca80921}
+}]Failure while locking/unlocking the SD card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+F\+O\+R\+C\+E\+\_\+\+E\+R\+A\+SE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a559a9cdd537b97171f0654485fe5866b}
+}]Failure during SD force erase operation. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+B\+L\+O\+C\+K\+S\+I\+ZE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aa01931e0a9db4f562b31313c2cd956d2}
+}]Block size specified for S\+D\+IO device is not supported. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12afff0d656af1e7766bc00ee7218e15d7c}
+}]Non-\/existent S\+D\+IO function being accessed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+T\+U\+P\+L\+E\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12affa1a35296d5ac5651f0031078fef298}
+}]Non-\/existent tuple of S\+D\+IO card being accessed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+A\+B\+O\+R\+T\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a923d881e44aaa5c0711779bb75bf8438}
+}]IO operation to S\+D\+IO card aborted. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+O\+\_\+\+S\+U\+S\+P\+E\+N\+D\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a8b43312f3ec2e7c6a6648054a74dc316}
+}]IO operation to S\+D\+IO card suspended. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+L\+L\+E\+G\+A\+L\+\_\+\+C\+MD\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5fcc6b9a8f5e9bbf03c6d2688c6a3e66}
+}]Invalid command sent to the S\+D\+IO card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+D\+I\+O\+\_\+\+U\+N\+K\+N\+O\+WN\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae00bac1493c83a268fc1ecd109d7becd}
+}]Generic error reported by S\+D\+IO card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+A\+D\+\_\+\+C\+M\+D\+\_\+\+A\+RG\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a5517f830be33d7cdd90a2bbf3fe51186}
+}]S\+D\+IO command argument is out of range. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+U\+N\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+E\+D\+\_\+\+F\+U\+N\+C\+T\+I\+ON\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2dbdc726fda87c09ae63562f0700fce7}
+}]Access to uninitialized S\+D\+IO function. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+N\+O\+T\+\_\+\+A\+C\+T\+I\+VE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2184cc6e8017376e31008a1c85fb0354}
+}]Access to S\+D\+IO card which is not active. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+B\+U\+SY\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12aa713a13711063fe15756c9c9f10069ba}
+}]The storage device is busy handling another request. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+M\+E\+T\+A\+D\+A\+TA\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a7fc84cc7156f819acd98f02d123fdfa0}
+}]No metadata present on card. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+A\+R\+D\+\_\+\+U\+N\+H\+E\+A\+L\+T\+HY\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a97affe43000134c54c74118c90018eed}
+}]Card R\+D/\+WR Threshold error crossed. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+M\+E\+D\+I\+A\+\_\+\+F\+A\+I\+L\+U\+RE\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12ae0df3263f83ada4b9c1572691c7b85f3}
+}]Card not responding to read/write transactions. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+\_\+\+R\+E\+E\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+I\+R\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a628356834f1b0ea8c452b4cada6bb1cb}
+}]F\+X3 booter supports the No\+Re\+Enumeration feature that enables to have a single U\+SB enumeration across the F\+X3 booter and the final application. This error code is returned by Cy\+U3\+P\+Usb\+Start () to indicate that the No\+Re\+Enumeration is successful and the sequence followed for the regular enumeration post Cy\+U3\+P\+Usb\+Start () is to be skipped. \index{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED@{C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED}}\item[{\em 
+C\+Y\+\_\+\+U3\+P\+\_\+\+E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+R\+N\+\_\+\+D\+I\+S\+A\+B\+L\+ED\label{spi__flash__lib_8h_af668bfc4c39252082d2e9d4c221a9e12a2fa7645188a571e0c32e833ab4e2dac9}
+}]The requested feature/operation is not enabled in the current configuration. \end{description}
+\end{Desc}
+
+
+Definition at line {\bf 26} of file {\bf spi\+\_\+flash\+\_\+lib.\+h}.
+
+
+
+\subsubsection{Function Documentation}
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Cy\+Fx\+Spi\+Fast\+Read@{Cy\+Fx\+Spi\+Fast\+Read}}
+\index{Cy\+Fx\+Spi\+Fast\+Read@{Cy\+Fx\+Spi\+Fast\+Read}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Cy\+Fx\+Spi\+Fast\+Read(\+Cy\+Bool\+\_\+t v)}]{\setlength{\rightskip}{0pt plus 5cm}void Cy\+Fx\+Spi\+Fast\+Read (
+\begin{DoxyParamCaption}
+\item[{{\bf Cy\+Bool\+\_\+t}}]{v}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8h_ab930743216d2019760dc53f7cbeb8c20}
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Cy\+Fx\+Spi\+Wait\+For\+Status@{Cy\+Fx\+Spi\+Wait\+For\+Status}}
+\index{Cy\+Fx\+Spi\+Wait\+For\+Status@{Cy\+Fx\+Spi\+Wait\+For\+Status}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Cy\+Fx\+Spi\+Wait\+For\+Status(alt\+\_\+u32 S\+P\+I\+Base, alt\+\_\+u32 S\+P\+I\+Slave)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Cy\+Fx\+Spi\+Wait\+For\+Status (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Base, }
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Slave}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8h_a1251c6f01b01518d34b337415cdbba45}
+
+
+Definition at line {\bf 134} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+References {\bf alt\+\_\+avalon\+\_\+spi\+\_\+command()}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+R\+E\+A\+D\+ST}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+W\+R\+I\+T\+E\+EN}, and {\bf S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+ES}.
+
+
+
+Referenced by {\bf Flash\+Spi\+Transfer()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/dfc/spi__flash__lib_8h_a1251c6f01b01518d34b337415cdbba45_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{d8/dfc/spi__flash__lib_8h_a1251c6f01b01518d34b337415cdbba45_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Flash\+Spi\+Erase\+Sector@{Flash\+Spi\+Erase\+Sector}}
+\index{Flash\+Spi\+Erase\+Sector@{Flash\+Spi\+Erase\+Sector}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Flash\+Spi\+Erase\+Sector(alt\+\_\+u32 S\+P\+I\+Base, alt\+\_\+u32 S\+P\+I\+Slave, uint8\+\_\+t is\+Erase, uint8\+\_\+t sector)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Flash\+Spi\+Erase\+Sector (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Base, }
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Slave, }
+\item[{uint8\+\_\+t}]{is\+Erase, }
+\item[{uint8\+\_\+t}]{sector}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8h_ab0cc7f3ae2d118d7ea4cb49f6b78f619}
+
+
+Definition at line {\bf 184} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+References {\bf alt\+\_\+avalon\+\_\+spi\+\_\+command()}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+R\+E\+A\+D\+ST}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+W\+R\+I\+T\+E\+EN}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+S\+E\+C\+T\+O\+R\+\_\+\+E\+R\+A\+SE}, {\bf F\+L\+A\+S\+H\+\_\+\+S\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE}, {\bf Reverse\+Bit\+Order()}, and {\bf S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+E\+S\+\_\+\+E\+R\+A\+SE}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/dfc/spi__flash__lib_8h_ab0cc7f3ae2d118d7ea4cb49f6b78f619_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Flash\+Spi\+Transfer@{Flash\+Spi\+Transfer}}
+\index{Flash\+Spi\+Transfer@{Flash\+Spi\+Transfer}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Flash\+Spi\+Transfer(alt\+\_\+u32 S\+P\+I\+Base, alt\+\_\+u32 S\+P\+I\+Slave, uint32\+\_\+t page\+Address, uint16\+\_\+t byte\+Count, uint8\+\_\+t $\ast$buffer, Cy\+Bool\+\_\+t is\+Read)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Flash\+Spi\+Transfer (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Base, }
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Slave, }
+\item[{uint32\+\_\+t}]{page\+Address, }
+\item[{uint16\+\_\+t}]{byte\+Count, }
+\item[{uint8\+\_\+t $\ast$}]{buffer, }
+\item[{{\bf Cy\+Bool\+\_\+t}}]{is\+Read}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8h_aa56f37b96af0a95d13ced2db1b814352}
+
+
+Definition at line {\bf 31} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+References {\bf alt\+\_\+avalon\+\_\+spi\+\_\+command()}, {\bf A\+L\+T\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+M\+E\+R\+GE}, {\bf Cy\+Fx\+Spi\+Wait\+For\+Status()}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+R\+E\+AD}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+W\+R\+I\+TE}, {\bf F\+L\+A\+S\+H\+\_\+\+P\+A\+G\+E\+\_\+\+S\+I\+ZE}, {\bf Reverse\+Bit\+Order()}, and {\bf spi\+Fast\+Read}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/dfc/spi__flash__lib_8h_aa56f37b96af0a95d13ced2db1b814352_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}!Reverse\+Bit\+Order@{Reverse\+Bit\+Order}}
+\index{Reverse\+Bit\+Order@{Reverse\+Bit\+Order}!spi\+\_\+flash\+\_\+lib.\+h@{spi\+\_\+flash\+\_\+lib.\+h}}
+\paragraph[{Reverse\+Bit\+Order(uint8\+\_\+t data)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Reverse\+Bit\+Order (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{data}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8h_aeee713216278f8150b70acddaf73af3b}
+
+
+Reverses bit order. 
+
+
+
+Definition at line {\bf 16} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+References {\bf data}.
+
+
+
+Referenced by {\bf Flash\+Spi\+Erase\+Sector()}, and {\bf Flash\+Spi\+Transfer()}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{d8/dfc/spi__flash__lib_8h_aeee713216278f8150b70acddaf73af3b_icgraph}
+\end{center}
+\end{figure}
+
+

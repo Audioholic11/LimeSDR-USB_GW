@@ -1,0 +1,489 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sys\+\_\+wrappers.h File Reference}
+\label{alt__sys__wrappers_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sys\+\_\+wrappers.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sys\+\_\+wrappers.\+h}}
+{\ttfamily \#include \char`\"{}os/alt\+\_\+syscall.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/times.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/stat.\+h$>$}\\*
+{\ttfamily \#include $<$sys/time.\+h$>$}\\*
+Include dependency graph for alt\+\_\+sys\+\_\+wrappers.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/d60/alt__sys__wrappers_8h__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf A\+L\+T\+\_\+\+C\+L\+O\+SE} (int \+\_\+\+\_\+fd)
+\item 
+int {\bf A\+L\+T\+\_\+\+E\+X\+E\+C\+VE} (const char $\ast$\+\_\+\+\_\+path, char $\ast$const \+\_\+\+\_\+argv[$\,$], char $\ast$const \+\_\+\+\_\+envp[$\,$])
+\item 
+void {\bf A\+L\+T\+\_\+\+E\+X\+IT} (int \+\_\+\+\_\+status)
+\item 
+int {\bf A\+L\+T\+\_\+\+F\+S\+T\+AT} (int file, struct stat $\ast$st)
+\item 
+int {\bf A\+L\+T\+\_\+\+F\+C\+N\+TL} (int file, int cmd,...)
+\item 
+pid\+\_\+t {\bf A\+L\+T\+\_\+\+F\+O\+RK} (void)
+\item 
+pid\+\_\+t {\bf A\+L\+T\+\_\+\+G\+E\+T\+P\+ID} (void)
+\item 
+int {\bf A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY} (struct timeval $\ast$ptimeval, struct timezone $\ast$ptimezone)
+\item 
+int {\bf A\+L\+T\+\_\+\+I\+O\+C\+TL} (int file, int req, void $\ast$arg)
+\item 
+int {\bf A\+L\+T\+\_\+\+I\+S\+A\+T\+TY} (int file)
+\item 
+int {\bf A\+L\+T\+\_\+\+K\+I\+LL} (int pid, int sig)
+\item 
+int {\bf A\+L\+T\+\_\+\+L\+I\+NK} (const char $\ast$existing, const char $\ast$new)
+\item 
+off\+\_\+t {\bf A\+L\+T\+\_\+\+L\+S\+E\+EK} (int file, off\+\_\+t ptr, int dir)
+\item 
+int {\bf A\+L\+T\+\_\+\+O\+P\+EN} (const char $\ast$file, int flags,...)
+\item 
+int {\bf A\+L\+T\+\_\+\+R\+E\+AD} (int file, void $\ast$ptr, size\+\_\+t len)
+\item 
+int {\bf A\+L\+T\+\_\+\+R\+E\+N\+A\+ME} (char $\ast$existing, char $\ast$new)
+\item 
+void $\ast$ {\bf A\+L\+T\+\_\+\+S\+B\+RK} (ptrdiff\+\_\+t incr)
+\item 
+int {\bf A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY} (const struct timeval $\ast$t, const struct timezone $\ast$tz)
+\item 
+int {\bf A\+L\+T\+\_\+\+S\+T\+AT} (const char $\ast$file, struct stat $\ast$st)
+\item 
+clock\+\_\+t {\bf A\+L\+T\+\_\+\+T\+I\+M\+ES} (struct tms $\ast$buf)
+\item 
+int {\bf A\+L\+T\+\_\+\+U\+N\+L\+I\+NK} (const char $\ast$name)
+\item 
+unsigned int {\bf A\+L\+T\+\_\+\+U\+S\+L\+E\+EP} (unsigned int us)
+\item 
+int {\bf A\+L\+T\+\_\+\+W\+A\+IT} (int $\ast$status)
+\item 
+int {\bf A\+L\+T\+\_\+\+W\+R\+I\+TE} (int file, const void $\ast$ptr, size\+\_\+t len)
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$$\ast$ {\bf A\+L\+T\+\_\+\+E\+N\+V\+I\+R\+ON}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+C\+L\+O\+SE@{A\+L\+T\+\_\+\+C\+L\+O\+SE}}
+\index{A\+L\+T\+\_\+\+C\+L\+O\+SE@{A\+L\+T\+\_\+\+C\+L\+O\+SE}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+C\+L\+O\+S\+E(int \+\_\+\+\_\+fd)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+C\+L\+O\+SE (
+\begin{DoxyParamCaption}
+\item[{int}]{\+\_\+\+\_\+fd}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a295ad4da03ce2aa86a1cdbb6797d2744}
+
+
+Definition at line {\bf 64} of file {\bf alt\+\_\+close.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+release\+\_\+fd()}, {\bf alt\+\_\+dev\+\_\+s\+::close}, and {\bf alt\+\_\+fd\+\_\+s\+::dev}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{d0/d1b/alt__sys__wrappers_8h_a295ad4da03ce2aa86a1cdbb6797d2744_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+E\+X\+E\+C\+VE@{A\+L\+T\+\_\+\+E\+X\+E\+C\+VE}}
+\index{A\+L\+T\+\_\+\+E\+X\+E\+C\+VE@{A\+L\+T\+\_\+\+E\+X\+E\+C\+VE}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+E\+X\+E\+C\+V\+E(const char $\ast$\+\_\+\+\_\+path, char $\ast$const \+\_\+\+\_\+argv[], char $\ast$const \+\_\+\+\_\+envp[])}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+E\+X\+E\+C\+VE (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{\+\_\+\+\_\+path, }
+\item[{char $\ast$const}]{\+\_\+\+\_\+argv[$\,$], }
+\item[{char $\ast$const}]{\+\_\+\+\_\+envp[$\,$]}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a3b5bc5dcc417d3e85cca5a731fa25e28}
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+E\+X\+IT@{A\+L\+T\+\_\+\+E\+X\+IT}}
+\index{A\+L\+T\+\_\+\+E\+X\+IT@{A\+L\+T\+\_\+\+E\+X\+IT}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+E\+X\+I\+T(int \+\_\+\+\_\+status)}]{\setlength{\rightskip}{0pt plus 5cm}void A\+L\+T\+\_\+\+E\+X\+IT (
+\begin{DoxyParamCaption}
+\item[{int}]{\+\_\+\+\_\+status}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a9998a2068b2abac254e6ad2666b74ade}
+
+
+Definition at line {\bf 52} of file {\bf alt\+\_\+exit.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+L\+O\+G\+\_\+\+P\+R\+I\+N\+T\+\_\+\+B\+O\+OT}, {\bf A\+L\+T\+\_\+\+O\+S\+\_\+\+S\+T\+OP}, and {\bf A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+H\+A\+LT}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+F\+C\+N\+TL@{A\+L\+T\+\_\+\+F\+C\+N\+TL}}
+\index{A\+L\+T\+\_\+\+F\+C\+N\+TL@{A\+L\+T\+\_\+\+F\+C\+N\+TL}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+F\+C\+N\+T\+L(int file, int cmd,...)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+F\+C\+N\+TL (
+\begin{DoxyParamCaption}
+\item[{int}]{file, }
+\item[{int}]{cmd, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a68c7bf22a634c424a788142642a144fc}
+
+
+Definition at line {\bf 66} of file {\bf alt\+\_\+fcntl.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf A\+L\+T\+\_\+\+F\+C\+N\+T\+L\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}, {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}, {\bf alt\+\_\+fd\+\_\+list}, and {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+F\+O\+RK@{A\+L\+T\+\_\+\+F\+O\+RK}}
+\index{A\+L\+T\+\_\+\+F\+O\+RK@{A\+L\+T\+\_\+\+F\+O\+RK}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+F\+O\+R\+K(void)}]{\setlength{\rightskip}{0pt plus 5cm}pid\+\_\+t A\+L\+T\+\_\+\+F\+O\+RK (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_af4583213bac3f366e8aced12e5a2d974}
+
+
+Definition at line {\bf 45} of file {\bf alt\+\_\+fork.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, and {\bf A\+L\+T\+\_\+\+S\+T\+U\+B\+\_\+\+W\+A\+R\+N\+I\+NG}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+F\+S\+T\+AT@{A\+L\+T\+\_\+\+F\+S\+T\+AT}}
+\index{A\+L\+T\+\_\+\+F\+S\+T\+AT@{A\+L\+T\+\_\+\+F\+S\+T\+AT}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+F\+S\+T\+A\+T(int file, struct stat $\ast$st)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+F\+S\+T\+AT (
+\begin{DoxyParamCaption}
+\item[{int}]{file, }
+\item[{struct stat $\ast$}]{st}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_af945192cccae908bd40b2f10945e6481}
+
+
+Definition at line {\bf 89} of file {\bf alt\+\_\+fstat.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+fd\+\_\+s\+::dev}, and {\bf alt\+\_\+dev\+\_\+s\+::fstat}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+G\+E\+T\+P\+ID@{A\+L\+T\+\_\+\+G\+E\+T\+P\+ID}}
+\index{A\+L\+T\+\_\+\+G\+E\+T\+P\+ID@{A\+L\+T\+\_\+\+G\+E\+T\+P\+ID}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+G\+E\+T\+P\+I\+D(void)}]{\setlength{\rightskip}{0pt plus 5cm}pid\+\_\+t A\+L\+T\+\_\+\+G\+E\+T\+P\+ID (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a3a3105d5334fbcc6bb1569fb304383d8}
+
+
+Definition at line {\bf 43} of file {\bf alt\+\_\+getpid.\+c}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY@{A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY}}
+\index{A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY@{A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y(struct timeval $\ast$ptimeval, struct timezone $\ast$ptimezone)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY (
+\begin{DoxyParamCaption}
+\item[{struct timeval $\ast$}]{ptimeval, }
+\item[{struct timezone $\ast$}]{ptimezone}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a876baa5f7786c52648faf9313b2872c2}
+
+
+Definition at line {\bf 75} of file {\bf alt\+\_\+gettod.\+c}.
+
+
+
+References {\bf alt\+\_\+nticks()}, {\bf alt\+\_\+resettime}, {\bf alt\+\_\+ticks\+\_\+per\+\_\+second()}, {\bf alt\+\_\+timezone}, and {\bf A\+L\+T\+\_\+\+US}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d1b/alt__sys__wrappers_8h_a876baa5f7786c52648faf9313b2872c2_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+I\+O\+C\+TL@{A\+L\+T\+\_\+\+I\+O\+C\+TL}}
+\index{A\+L\+T\+\_\+\+I\+O\+C\+TL@{A\+L\+T\+\_\+\+I\+O\+C\+TL}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+I\+O\+C\+T\+L(int file, int req, void $\ast$arg)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+I\+O\+C\+TL (
+\begin{DoxyParamCaption}
+\item[{int}]{file, }
+\item[{int}]{req, }
+\item[{void $\ast$}]{arg}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a0883772795b24615304d5c9752f7000a}
+
+
+Definition at line {\bf 106} of file {\bf alt\+\_\+ioctl.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV}, {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+fd\+\_\+lock()}, {\bf alt\+\_\+fd\+\_\+unlock()}, {\bf alt\+\_\+fd\+\_\+s\+::dev}, {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}, {\bf alt\+\_\+dev\+\_\+s\+::ioctl}, {\bf T\+I\+O\+C\+E\+X\+CL}, and {\bf T\+I\+O\+C\+N\+X\+CL}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{d0/d1b/alt__sys__wrappers_8h_a0883772795b24615304d5c9752f7000a_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+I\+S\+A\+T\+TY@{A\+L\+T\+\_\+\+I\+S\+A\+T\+TY}}
+\index{A\+L\+T\+\_\+\+I\+S\+A\+T\+TY@{A\+L\+T\+\_\+\+I\+S\+A\+T\+TY}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+I\+S\+A\+T\+T\+Y(int file)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+I\+S\+A\+T\+TY (
+\begin{DoxyParamCaption}
+\item[{int}]{file}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a48b5fcf983f206c3be4ca8279a2627c6}
+
+
+Definition at line {\bf 82} of file {\bf alt\+\_\+isatty.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, and {\bf alt\+\_\+fd\+\_\+list}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+K\+I\+LL@{A\+L\+T\+\_\+\+K\+I\+LL}}
+\index{A\+L\+T\+\_\+\+K\+I\+LL@{A\+L\+T\+\_\+\+K\+I\+LL}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+K\+I\+L\+L(int pid, int sig)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+K\+I\+LL (
+\begin{DoxyParamCaption}
+\item[{int}]{pid, }
+\item[{int}]{sig}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_ad2735582da1ced6fc181db0e55416cc9}
+
+
+Definition at line {\bf 49} of file {\bf alt\+\_\+kill.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+L\+I\+NK@{A\+L\+T\+\_\+\+L\+I\+NK}}
+\index{A\+L\+T\+\_\+\+L\+I\+NK@{A\+L\+T\+\_\+\+L\+I\+NK}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+L\+I\+N\+K(const char $\ast$existing, const char $\ast$new)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+L\+I\+NK (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{existing, }
+\item[{const char $\ast$}]{new}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a077166b6ff89f086bfd9c115f049826e}
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+L\+S\+E\+EK@{A\+L\+T\+\_\+\+L\+S\+E\+EK}}
+\index{A\+L\+T\+\_\+\+L\+S\+E\+EK@{A\+L\+T\+\_\+\+L\+S\+E\+EK}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+L\+S\+E\+E\+K(int file, off\+\_\+t ptr, int dir)}]{\setlength{\rightskip}{0pt plus 5cm}off\+\_\+t A\+L\+T\+\_\+\+L\+S\+E\+EK (
+\begin{DoxyParamCaption}
+\item[{int}]{file, }
+\item[{off\+\_\+t}]{ptr, }
+\item[{int}]{dir}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_aa63c8af2be3b55ad1deea0502d715b2d}
+
+
+Definition at line {\bf 70} of file {\bf alt\+\_\+lseek.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+fd\+\_\+s\+::dev}, and {\bf alt\+\_\+dev\+\_\+s\+::lseek}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+O\+P\+EN@{A\+L\+T\+\_\+\+O\+P\+EN}}
+\index{A\+L\+T\+\_\+\+O\+P\+EN@{A\+L\+T\+\_\+\+O\+P\+EN}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+O\+P\+E\+N(const char $\ast$file, int flags,...)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+O\+P\+EN (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file, }
+\item[{int}]{flags, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a2575b62bbffcdf6edd077f1a46176a51}
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+R\+E\+AD@{A\+L\+T\+\_\+\+R\+E\+AD}}
+\index{A\+L\+T\+\_\+\+R\+E\+AD@{A\+L\+T\+\_\+\+R\+E\+AD}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+R\+E\+A\+D(int file, void $\ast$ptr, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+R\+E\+AD (
+\begin{DoxyParamCaption}
+\item[{int}]{file, }
+\item[{void $\ast$}]{ptr, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a549cc3fa3ca718eedd30fb13ba39bb1b}
+
+
+Definition at line {\bf 82} of file {\bf alt\+\_\+read.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+fd\+\_\+s\+::dev}, {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}, and {\bf alt\+\_\+dev\+\_\+s\+::read}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+R\+E\+N\+A\+ME@{A\+L\+T\+\_\+\+R\+E\+N\+A\+ME}}
+\index{A\+L\+T\+\_\+\+R\+E\+N\+A\+ME@{A\+L\+T\+\_\+\+R\+E\+N\+A\+ME}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+R\+E\+N\+A\+M\+E(char $\ast$existing, char $\ast$new)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+R\+E\+N\+A\+ME (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{existing, }
+\item[{char $\ast$}]{new}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_aadf3a4b566c2ce6d46912252ae55e8ce}
+
+
+Definition at line {\bf 45} of file {\bf alt\+\_\+rename.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, and {\bf A\+L\+T\+\_\+\+S\+T\+U\+B\+\_\+\+W\+A\+R\+N\+I\+NG}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+S\+B\+RK@{A\+L\+T\+\_\+\+S\+B\+RK}}
+\index{A\+L\+T\+\_\+\+S\+B\+RK@{A\+L\+T\+\_\+\+S\+B\+RK}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+S\+B\+R\+K(ptrdiff\+\_\+t incr)}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ A\+L\+T\+\_\+\+S\+B\+RK (
+\begin{DoxyParamCaption}
+\item[{ptrdiff\+\_\+t}]{incr}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_aa8123f0db9a2a82cd1a097d9778b5ce8}
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY@{A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY}}
+\index{A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY@{A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y(const struct timeval $\ast$t, const struct timezone $\ast$tz)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY (
+\begin{DoxyParamCaption}
+\item[{const struct timeval $\ast$}]{t, }
+\item[{const struct timezone $\ast$}]{tz}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a897ea6d87afb7dc8fe66766e83fc0101}
+
+
+Definition at line {\bf 72} of file {\bf alt\+\_\+settod.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf alt\+\_\+nticks()}, {\bf alt\+\_\+resettime}, {\bf alt\+\_\+ticks\+\_\+per\+\_\+second()}, {\bf alt\+\_\+timezone}, and {\bf A\+L\+T\+\_\+\+US}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d1b/alt__sys__wrappers_8h_a897ea6d87afb7dc8fe66766e83fc0101_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+S\+T\+AT@{A\+L\+T\+\_\+\+S\+T\+AT}}
+\index{A\+L\+T\+\_\+\+S\+T\+AT@{A\+L\+T\+\_\+\+S\+T\+AT}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+S\+T\+A\+T(const char $\ast$file, struct stat $\ast$st)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+S\+T\+AT (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file, }
+\item[{struct stat $\ast$}]{st}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a947609063fd71a8cbbd262efeb68a527}
+
+
+Definition at line {\bf 49} of file {\bf alt\+\_\+stat.\+c}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+T\+I\+M\+ES@{A\+L\+T\+\_\+\+T\+I\+M\+ES}}
+\index{A\+L\+T\+\_\+\+T\+I\+M\+ES@{A\+L\+T\+\_\+\+T\+I\+M\+ES}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+T\+I\+M\+E\+S(struct tms $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}clock\+\_\+t A\+L\+T\+\_\+\+T\+I\+M\+ES (
+\begin{DoxyParamCaption}
+\item[{struct tms $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a7cf3a4fc6ebe761eec588fcff09e9248}
+
+
+Definition at line {\bf 51} of file {\bf alt\+\_\+times.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf alt\+\_\+nticks()}, and {\bf alt\+\_\+ticks\+\_\+per\+\_\+second()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d1b/alt__sys__wrappers_8h_a7cf3a4fc6ebe761eec588fcff09e9248_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+U\+N\+L\+I\+NK@{A\+L\+T\+\_\+\+U\+N\+L\+I\+NK}}
+\index{A\+L\+T\+\_\+\+U\+N\+L\+I\+NK@{A\+L\+T\+\_\+\+U\+N\+L\+I\+NK}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+U\+N\+L\+I\+N\+K(const char $\ast$name)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+U\+N\+L\+I\+NK (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a1397e40ee5d60247d900c7096042e6b7}
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+U\+S\+L\+E\+EP@{A\+L\+T\+\_\+\+U\+S\+L\+E\+EP}}
+\index{A\+L\+T\+\_\+\+U\+S\+L\+E\+EP@{A\+L\+T\+\_\+\+U\+S\+L\+E\+EP}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+U\+S\+L\+E\+E\+P(unsigned int us)}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int A\+L\+T\+\_\+\+U\+S\+L\+E\+EP (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{us}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a957c786b3728192bdb82548da7b47da7}
+
+
+Definition at line {\bf 48} of file {\bf alt\+\_\+usleep.\+c}.
+
+
+
+References {\bf alt\+\_\+busy\+\_\+sleep()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d1b/alt__sys__wrappers_8h_a957c786b3728192bdb82548da7b47da7_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+W\+A\+IT@{A\+L\+T\+\_\+\+W\+A\+IT}}
+\index{A\+L\+T\+\_\+\+W\+A\+IT@{A\+L\+T\+\_\+\+W\+A\+IT}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+W\+A\+I\+T(int $\ast$status)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+W\+A\+IT (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{status}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a20392f019d4ec5a3a1cfd2f23082f09c}
+
+
+Definition at line {\bf 44} of file {\bf alt\+\_\+wait.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}.
+
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+W\+R\+I\+TE@{A\+L\+T\+\_\+\+W\+R\+I\+TE}}
+\index{A\+L\+T\+\_\+\+W\+R\+I\+TE@{A\+L\+T\+\_\+\+W\+R\+I\+TE}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+W\+R\+I\+T\+E(int file, const void $\ast$ptr, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+W\+R\+I\+TE (
+\begin{DoxyParamCaption}
+\item[{int}]{file, }
+\item[{const void $\ast$}]{ptr, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{alt__sys__wrappers_8h_a6c5f568618dcc2cb0f29b3a24d2455fb}
+
+
+Definition at line {\bf 92} of file {\bf alt\+\_\+write.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf alt\+\_\+fd\+\_\+list}, {\bf A\+L\+T\+\_\+\+L\+O\+G\+\_\+\+W\+R\+I\+T\+E\+\_\+\+F\+U\+N\+C\+T\+I\+ON}, {\bf alt\+\_\+fd\+\_\+s\+::dev}, {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}, and {\bf alt\+\_\+dev\+\_\+s\+::write}.
+
+
+
+\subsubsection{Variable Documentation}
+\index{alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}!A\+L\+T\+\_\+\+E\+N\+V\+I\+R\+ON@{A\+L\+T\+\_\+\+E\+N\+V\+I\+R\+ON}}
+\index{A\+L\+T\+\_\+\+E\+N\+V\+I\+R\+ON@{A\+L\+T\+\_\+\+E\+N\+V\+I\+R\+ON}!alt\+\_\+sys\+\_\+wrappers.\+h@{alt\+\_\+sys\+\_\+wrappers.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+E\+N\+V\+I\+R\+ON}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$$\ast$ A\+L\+T\+\_\+\+E\+N\+V\+I\+R\+ON}\label{alt__sys__wrappers_8h_a0d658dca918111b92913e7cffed39fcf}
+
+
+Definition at line {\bf 42} of file {\bf alt\+\_\+environ.\+c}.
+

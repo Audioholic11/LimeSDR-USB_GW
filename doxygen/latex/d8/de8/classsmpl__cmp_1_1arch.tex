@@ -1,0 +1,348 @@
+\subsection{arch Architecture Reference}
+\label{classsmpl__cmp_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{da/d5f/classsmpl__cmp_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+363}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+364}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+365}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+366}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+367}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm\+\_\+f}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf cmp\+\_\+start}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf cmp\+\_\+start\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf compare\+\_\+stop}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf smpl\+\_\+err}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf wait\+\_\+cnt}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+368}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+369}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf state\+\_\+type}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+cyc}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{compare}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{compare\+\_\+done}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf diq\+\_\+h\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf smpl\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf diq\+\_\+l\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf smpl\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fidm\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf cmp\+\_\+done\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf cmp\+\_\+start\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf cmp\+\_\+error\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf cmp\+\_\+error\+\_\+cnt\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf A\+I\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf A\+Q\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf B\+I\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf B\+Q\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf I\+Q\+\_\+\+S\+E\+L\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf smpl\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf smpl\+\_\+err\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf compare\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wait\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf compare\+\_\+stop} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 52} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!fsm@{fsm}}
+\index{fsm@{fsm}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{fsmcurrent\+\_\+state,cmp\+\_\+start,cmp\+\_\+start\+\_\+reg,compare\+\_\+stop,smpl\+\_\+err,wait\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf cmp\+\_\+start}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf cmp\+\_\+start\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf compare\+\_\+stop}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf smpl\+\_\+err}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf wait\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsmpl__cmp_1_1arch_ad747cd7c29b0c63cf7afcfb49f5f19c7}
+
+
+Definition at line {\bf 242} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!fsm\+\_\+f@{fsm\+\_\+f}}
+\index{fsm\+\_\+f@{fsm\+\_\+f}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{fsm\+\_\+fclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm\+\_\+f(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsmpl__cmp_1_1arch_a856d95a9c7e9538caf6d13ffdaa470a3}
+
+
+Definition at line {\bf 231} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+363@{P\+R\+O\+C\+E\+S\+S\+\_\+363}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+363@{P\+R\+O\+C\+E\+S\+S\+\_\+363}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+363clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+363(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsmpl__cmp_1_1arch_a80ebbabf4b291f8eff768de1f4ffa502}
+
+
+Definition at line {\bf 84} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+364@{P\+R\+O\+C\+E\+S\+S\+\_\+364}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+364@{P\+R\+O\+C\+E\+S\+S\+\_\+364}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+364clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+364(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsmpl__cmp_1_1arch_a1449363031f7a28a3e142b781dd58377}
+
+
+Definition at line {\bf 103} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+365@{P\+R\+O\+C\+E\+S\+S\+\_\+365}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+365@{P\+R\+O\+C\+E\+S\+S\+\_\+365}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+365clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+365(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsmpl__cmp_1_1arch_a035f7407db8bed517db0c5eb08f00a1c}
+
+
+Definition at line {\bf 165} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+366@{P\+R\+O\+C\+E\+S\+S\+\_\+366}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+366@{P\+R\+O\+C\+E\+S\+S\+\_\+366}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+366clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+366(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsmpl__cmp_1_1arch_a4d84c6b62244277c9c0255e11e243b39}
+
+
+Definition at line {\bf 186} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+367@{P\+R\+O\+C\+E\+S\+S\+\_\+367}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+367@{P\+R\+O\+C\+E\+S\+S\+\_\+367}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+367clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+367(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsmpl__cmp_1_1arch_a6451a817d4f1fdab33e25453294933d7}
+
+
+Definition at line {\bf 199} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+368@{P\+R\+O\+C\+E\+S\+S\+\_\+368}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+368@{P\+R\+O\+C\+E\+S\+S\+\_\+368}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+368clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+368(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsmpl__cmp_1_1arch_a446a3abad15754c3ade2d6c650c5f295}
+
+
+Definition at line {\bf 279} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+369@{P\+R\+O\+C\+E\+S\+S\+\_\+369}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+369@{P\+R\+O\+C\+E\+S\+S\+\_\+369}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+369clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+369(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsmpl__cmp_1_1arch_a3433dfe510d85dc7da6cf58991c6579c}
+
+
+Definition at line {\bf 294} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!A\+I\+\_\+err@{A\+I\+\_\+err}}
+\index{A\+I\+\_\+err@{A\+I\+\_\+err}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{A\+I\+\_\+err}]{\setlength{\rightskip}{0pt plus 5cm}{\bf A\+I\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_aea658102c1797256b4751bebb460ab71}
+
+
+Definition at line {\bf 62} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!A\+Q\+\_\+err@{A\+Q\+\_\+err}}
+\index{A\+Q\+\_\+err@{A\+Q\+\_\+err}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{A\+Q\+\_\+err}]{\setlength{\rightskip}{0pt plus 5cm}{\bf A\+Q\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a8ea6f9076e094024b354defb6089ec08}
+
+
+Definition at line {\bf 63} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!B\+I\+\_\+err@{B\+I\+\_\+err}}
+\index{B\+I\+\_\+err@{B\+I\+\_\+err}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{B\+I\+\_\+err}]{\setlength{\rightskip}{0pt plus 5cm}{\bf B\+I\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_adf20f0c9c0792d358a40e3de7c2fb6a1}
+
+
+Definition at line {\bf 64} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!B\+Q\+\_\+err@{B\+Q\+\_\+err}}
+\index{B\+Q\+\_\+err@{B\+Q\+\_\+err}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{B\+Q\+\_\+err}]{\setlength{\rightskip}{0pt plus 5cm}{\bf B\+Q\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a91c545c1f1535c8f634ca98eee195f2b}
+
+
+Definition at line {\bf 65} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!cmp\+\_\+done\+\_\+reg@{cmp\+\_\+done\+\_\+reg}}
+\index{cmp\+\_\+done\+\_\+reg@{cmp\+\_\+done\+\_\+reg}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{cmp\+\_\+done\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cmp\+\_\+done\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a79d045808ffd0e157fa6de8dd4f0c761}
+
+
+Definition at line {\bf 57} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!cmp\+\_\+error\+\_\+cnt\+\_\+reg@{cmp\+\_\+error\+\_\+cnt\+\_\+reg}}
+\index{cmp\+\_\+error\+\_\+cnt\+\_\+reg@{cmp\+\_\+error\+\_\+cnt\+\_\+reg}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{cmp\+\_\+error\+\_\+cnt\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cmp\+\_\+error\+\_\+cnt\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a5b69994af5d3e6583046cd2f7afc91d5}
+
+
+Definition at line {\bf 60} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!cmp\+\_\+error\+\_\+reg@{cmp\+\_\+error\+\_\+reg}}
+\index{cmp\+\_\+error\+\_\+reg@{cmp\+\_\+error\+\_\+reg}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{cmp\+\_\+error\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cmp\+\_\+error\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a38efcc37cd2f729a56e03e03200a3d55}
+
+
+Definition at line {\bf 59} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!cmp\+\_\+start\+\_\+reg@{cmp\+\_\+start\+\_\+reg}}
+\index{cmp\+\_\+start\+\_\+reg@{cmp\+\_\+start\+\_\+reg}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{cmp\+\_\+start\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cmp\+\_\+start\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_af7aff497d208f9b903664702f44b792f}
+
+
+Definition at line {\bf 58} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!compare\+\_\+cnt@{compare\+\_\+cnt}}
+\index{compare\+\_\+cnt@{compare\+\_\+cnt}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{compare\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf compare\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a9ad96bad2e81cffcc479afd90de3fe53}
+
+
+Definition at line {\bf 71} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!compare\+\_\+stop@{compare\+\_\+stop}}
+\index{compare\+\_\+stop@{compare\+\_\+stop}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{compare\+\_\+stop}]{\setlength{\rightskip}{0pt plus 5cm}{\bf compare\+\_\+stop} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_ab87d287e529d1a777974fcf8aca45d37}
+
+
+Definition at line {\bf 73} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!current\+\_\+state@{current\+\_\+state}}
+\index{current\+\_\+state@{current\+\_\+state}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a7ede5b91aac1f3d1b2a884a5e191d554}
+
+
+Definition at line {\bf 76} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!diq\+\_\+h\+\_\+reg@{diq\+\_\+h\+\_\+reg}}
+\index{diq\+\_\+h\+\_\+reg@{diq\+\_\+h\+\_\+reg}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{diq\+\_\+h\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf diq\+\_\+h\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf smpl\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a8a0242621e103604745152fdf5eec92b}
+
+
+Definition at line {\bf 54} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!diq\+\_\+l\+\_\+reg@{diq\+\_\+l\+\_\+reg}}
+\index{diq\+\_\+l\+\_\+reg@{diq\+\_\+l\+\_\+reg}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{diq\+\_\+l\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf diq\+\_\+l\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf smpl\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_ac68d2d389ff01ebde2ac0432a42cf542}
+
+
+Definition at line {\bf 55} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!fidm\+\_\+reg@{fidm\+\_\+reg}}
+\index{fidm\+\_\+reg@{fidm\+\_\+reg}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{fidm\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fidm\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_aabd5bd4597f1514918349b94206510c4}
+
+
+Definition at line {\bf 56} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!I\+Q\+\_\+\+S\+E\+L\+\_\+err@{I\+Q\+\_\+\+S\+E\+L\+\_\+err}}
+\index{I\+Q\+\_\+\+S\+E\+L\+\_\+err@{I\+Q\+\_\+\+S\+E\+L\+\_\+err}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{I\+Q\+\_\+\+S\+E\+L\+\_\+err}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+Q\+\_\+\+S\+E\+L\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_aa4f10599eb7ece25cfc8ed7a02ad5245}
+
+
+Definition at line {\bf 66} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!next\+\_\+state@{next\+\_\+state}}
+\index{next\+\_\+state@{next\+\_\+state}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{next\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a7b92f98d060e763f3dd6fa727ddb03d8}
+
+
+Definition at line {\bf 76} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!smpl\+\_\+err@{smpl\+\_\+err}}
+\index{smpl\+\_\+err@{smpl\+\_\+err}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{smpl\+\_\+err}]{\setlength{\rightskip}{0pt plus 5cm}{\bf smpl\+\_\+err} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a92980b9d312a7da7a4ea74cbeec6cd4c}
+
+
+Definition at line {\bf 67} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!smpl\+\_\+err\+\_\+cnt@{smpl\+\_\+err\+\_\+cnt}}
+\index{smpl\+\_\+err\+\_\+cnt@{smpl\+\_\+err\+\_\+cnt}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{smpl\+\_\+err\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf smpl\+\_\+err\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a4a3e09e10359e1ca154cf01458c4bfec}
+
+
+Definition at line {\bf 68} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!state\+\_\+type@{state\+\_\+type}}
+\index{state\+\_\+type@{state\+\_\+type}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{state\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state\+\_\+type} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+cyc}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{compare}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{compare\+\_\+done}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classsmpl__cmp_1_1arch_a0233c748871fecb0cdf0079c9e2e8020}
+
+
+Definition at line {\bf 75} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+\index{smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}!wait\+\_\+cnt@{wait\+\_\+cnt}}
+\index{wait\+\_\+cnt@{wait\+\_\+cnt}!smpl\+\_\+cmp\+::arch@{smpl\+\_\+cmp\+::arch}}
+\paragraph[{wait\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wait\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsmpl__cmp_1_1arch_a164e5874734541e1114286dd6da61c5f}
+
+
+Definition at line {\bf 72} of file {\bf smpl\+\_\+cmp.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/smpl\+\_\+cmp/synth/{\bf smpl\+\_\+cmp.\+vhd}\end{DoxyCompactItemize}

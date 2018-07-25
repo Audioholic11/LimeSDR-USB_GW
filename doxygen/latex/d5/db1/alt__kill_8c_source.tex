@@ -1,0 +1,126 @@
+\subsection{alt\+\_\+kill.\+c}
+\label{alt__kill_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+kill.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+kill.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2004 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include <signal.h>}
+00034 \textcolor{preprocessor}{#include <unistd.h>}
+00035 
+00036 \textcolor{preprocessor}{#include "sys/alt_errno.h"}
+00037 \textcolor{preprocessor}{#include "os/alt_syscall.h"}
+00038 
+00039 
+00040 \textcolor{comment}{/*}
+00041 \textcolor{comment}{ * kill() is used by newlib in order to send signals to processes. Since there}
+00042 \textcolor{comment}{ * is only a single process in the HAL, the only valid values for pid are }
+00043 \textcolor{comment}{ * either the current process id, or the broadcast values, i.e. pid must be}
+00044 \textcolor{comment}{ * less than or equal to zero. }
+00045 \textcolor{comment}{ *}
+00046 \textcolor{comment}{ * ALT\_KILL is mapped onto the kill() system call in alt\_syscall.h}
+00047 \textcolor{comment}{ */}
+00048 
+00049 \textcolor{keywordtype}{int} ALT_KILL (\textcolor{keywordtype}{int} pid, \textcolor{keywordtype}{int} sig)
+00050 \{
+00051   \textcolor{keywordtype}{int} status = 0;
+00052 
+00053   \textcolor{keywordflow}{if} (pid <= 0)
+00054   \{
+00055     \textcolor{keywordflow}{switch} (sig)
+00056     \{
+00057     \textcolor{keywordflow}{case} 0:
+00058 
+00059       \textcolor{comment}{/* The null signal is used to check that a pid is valid. */}
+00060 
+00061       \textcolor{keywordflow}{break};
+00062 
+00063     \textcolor{keywordflow}{case} SIGABRT:
+00064     \textcolor{keywordflow}{case} SIGALRM:
+00065     \textcolor{keywordflow}{case} SIGFPE:
+00066     \textcolor{keywordflow}{case} SIGILL:
+00067     \textcolor{keywordflow}{case} SIGKILL:
+00068     \textcolor{keywordflow}{case} SIGPIPE:
+00069     \textcolor{keywordflow}{case} SIGQUIT:
+00070     \textcolor{keywordflow}{case} SIGSEGV:
+00071     \textcolor{keywordflow}{case} SIGTERM:
+00072     \textcolor{keywordflow}{case} SIGUSR1:
+00073     \textcolor{keywordflow}{case} SIGUSR2:
+00074     \textcolor{keywordflow}{case} SIGBUS:
+00075     \textcolor{keywordflow}{case} SIGPOLL:
+00076     \textcolor{keywordflow}{case} SIGPROF:
+00077     \textcolor{keywordflow}{case} SIGSYS:
+00078     \textcolor{keywordflow}{case} SIGTRAP:
+00079     \textcolor{keywordflow}{case} SIGVTALRM:
+00080     \textcolor{keywordflow}{case} SIGXCPU:
+00081     \textcolor{keywordflow}{case} SIGXFSZ:
+00082 
+00083       \textcolor{comment}{/* }
+00084 \textcolor{comment}{       * The Posix standard defines the default behaviour for all these signals }
+00085 \textcolor{comment}{       * as being eqivalent to a call to \_exit(). No mechanism is provided to }
+00086 \textcolor{comment}{       * change this behaviour.}
+00087 \textcolor{comment}{       */}
+00088 
+00089       \_exit(0);
+00090     \textcolor{keywordflow}{case} SIGCHLD:
+00091     \textcolor{keywordflow}{case} SIGURG:
+00092 
+00093       \textcolor{comment}{/* }
+00094 \textcolor{comment}{       * The Posix standard defines these signals to be ignored by default. No }
+00095 \textcolor{comment}{       * mechanism is provided to change this behaviour.}
+00096 \textcolor{comment}{       */}
+00097 
+00098       \textcolor{keywordflow}{break};
+00099     \textcolor{keywordflow}{default}:
+00100 
+00101       \textcolor{comment}{/* Tried to send an unsupported signal */}
+00102 
+00103       status = EINVAL;
+00104     \}
+00105   \}
+00106 
+00107   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (pid > 0)
+00108   \{
+00109     \textcolor{comment}{/* Attempted to signal a non-existant process */}
+00110 
+00111     status = ESRCH;
+00112   \}
+00113 
+00114   \textcolor{keywordflow}{if} (status)
+00115   \{
+00116     ALT_ERRNO = status;
+00117     \textcolor{keywordflow}{return} -1;
+00118   \}
+00119 
+00120   \textcolor{keywordflow}{return} 0;
+00121 \}
+\end{DoxyCode}

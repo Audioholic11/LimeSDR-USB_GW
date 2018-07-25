@@ -1,0 +1,158 @@
+\subsection{altera\+\_\+avalon\+\_\+uart\+\_\+ioctl.\+c}
+\label{altera__avalon__uart__ioctl_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+ioctl.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+ioctl.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2006 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{******************************************************************************/}
+00030 
+00031 \textcolor{preprocessor}{#include <fcntl.h>}
+00032 \textcolor{preprocessor}{#include <string.h>}
+00033 
+00034 \textcolor{preprocessor}{#include "sys/alt_irq.h"}
+00035 \textcolor{preprocessor}{#include "sys/ioctl.h"}
+00036 \textcolor{preprocessor}{#include "sys/alt_errno.h"}
+00037 
+00038 \textcolor{preprocessor}{#include "altera_avalon_uart_regs.h"}
+00039 \textcolor{preprocessor}{#include "altera_avalon_uart.h"}
+00040 
+00041 
+00042 \textcolor{preprocessor}{#if !defined(ALT\_USE\_SMALL\_DRIVERS) && !defined(ALTERA\_AVALON\_UART\_SMALL)}
+00043 
+00044 \textcolor{comment}{/* ----------------------------------------------------------- */}
+00045 \textcolor{comment}{/* ------------------------- FAST DRIVER --------------------- */}
+00046 \textcolor{comment}{/* ----------------------------------------------------------- */}
+00047 
+00048 \textcolor{comment}{/*}
+00049 \textcolor{comment}{ * To reduce the code footprint of this driver, the ioctl() function is not}
+00050 \textcolor{comment}{ * included by default. If you wish to use the ioctl features provided }
+00051 \textcolor{comment}{ * below, you can do so by adding the option : -DALTERA\_AVALON\_UART\_USE\_IOCTL}
+00052 \textcolor{comment}{ * to CPPFLAGS in the Makefile (or through the Eclipse IDE).}
+00053 \textcolor{comment}{ */}
+00054 
+00055 \textcolor{preprocessor}{#ifdef ALTERA\_AVALON\_UART\_USE\_IOCTL}
+00056 
+00057 \textcolor{comment}{/*}
+00058 \textcolor{comment}{ * altera\_avalon\_uart\_ioctl() is called by the system ioctl() function to handle}
+00059 \textcolor{comment}{ * ioctl requests for the UART. The only ioctl requests supported are TIOCMGET}
+00060 \textcolor{comment}{ * and TIOCMSET.}
+00061 \textcolor{comment}{ *}
+00062 \textcolor{comment}{ * TIOCMGET returns a termios structure that describes the current device}
+00063 \textcolor{comment}{ * configuration.}
+00064 \textcolor{comment}{ *}
+00065 \textcolor{comment}{ * TIOCMSET sets the device (if possible) to match the requested configuration.}
+00066 \textcolor{comment}{ * The requested configuration is described using a termios structure passed}
+00067 \textcolor{comment}{ * through the input argument "arg".}
+00068 \textcolor{comment}{ */}
+00069 
+00070 \textcolor{keyword}{static} \textcolor{keywordtype}{int} altera\_avalon\_uart\_tiocmget(altera_avalon_uart_state* sp,
+00071   \textcolor{keyword}{struct} termios* term);
+00072 \textcolor{keyword}{static} \textcolor{keywordtype}{int} altera\_avalon\_uart\_tiocmset(altera_avalon_uart_state* sp,
+00073   \textcolor{keyword}{struct} termios* term);
+00074 
+00075 \textcolor{keywordtype}{int} 
+00076 altera_avalon_uart_ioctl(altera_avalon_uart_state* sp, \textcolor{keywordtype}{int} req, \textcolor{keywordtype}{void}* arg)
+00077 \{
+00078   \textcolor{keywordtype}{int} rc = -ENOTTY;
+00079 
+00080   \textcolor{keywordflow}{switch} (req)
+00081   \{
+00082   \textcolor{keywordflow}{case} TIOCMGET:
+00083     rc = altera\_avalon\_uart\_tiocmget(sp, (\textcolor{keyword}{struct} termios*) arg);
+00084     \textcolor{keywordflow}{break};
+00085   \textcolor{keywordflow}{case} TIOCMSET:
+00086     rc = altera\_avalon\_uart\_tiocmset(sp, (\textcolor{keyword}{struct} termios*) arg);
+00087     \textcolor{keywordflow}{break};
+00088   \textcolor{keywordflow}{default}:
+00089     \textcolor{keywordflow}{break};
+00090   \}
+00091   \textcolor{keywordflow}{return} rc;
+00092 \}
+00093 
+00094 \textcolor{comment}{/*}
+00095 \textcolor{comment}{ * altera\_avalon\_uart\_tiocmget() is used by altera\_avalon\_uart\_ioctl() to fill}
+00096 \textcolor{comment}{ * in the input termios structure with the current device configuration. }
+00097 \textcolor{comment}{ *}
+00098 \textcolor{comment}{ * See termios.h for further details on the contents of the termios structure.}
+00099 \textcolor{comment}{ */}
+00100 
+00101 \textcolor{keyword}{static} \textcolor{keywordtype}{int} 
+00102 altera\_avalon\_uart\_tiocmget(altera_avalon_uart_state* sp,
+00103   \textcolor{keyword}{struct} termios* term)
+00104 \{
+00105   memcpy (term, &sp->termios, sizeof (\textcolor{keyword}{struct} termios));
+00106   \textcolor{keywordflow}{return} 0;
+00107 \}
+00108 
+00109 \textcolor{comment}{/*}
+00110 \textcolor{comment}{ * altera\_avalon\_uart\_tiocmset() is used by altera\_avalon\_uart\_ioctl() to }
+00111 \textcolor{comment}{ * configure the device according to the settings in the input termios }
+00112 \textcolor{comment}{ * structure. In practice the only configuration that can be changed is the}
+00113 \textcolor{comment}{ * baud rate, and then only if the hardware is configured to have a writable}
+00114 \textcolor{comment}{ * baud register.}
+00115 \textcolor{comment}{ */}
+00116 
+00117 \textcolor{keyword}{static} \textcolor{keywordtype}{int} 
+00118 altera\_avalon\_uart\_tiocmset(altera_avalon_uart_state* sp,
+00119   \textcolor{keyword}{struct} termios* term)
+00120 \{
+00121   speed_t speed;
+00122 
+00123   speed = sp->termios.c\_ispeed;
+00124 
+00125   \textcolor{comment}{/* Update the settings if the hardware supports it */}
+00126 
+00127   \textcolor{keywordflow}{if} (!(sp->flags & ALT_AVALON_UART_FB))
+00128   \{
+00129     sp->termios.c\_ispeed = sp->termios.c\_ospeed = term->c_ispeed;
+00130   \}
+00131   \textcolor{comment}{/* }
+00132 \textcolor{comment}{   * If the request was for an unsupported setting, return an error.}
+00133 \textcolor{comment}{   */}
+00134 
+00135   \textcolor{keywordflow}{if} (memcmp(term, &sp->termios, sizeof (\textcolor{keyword}{struct} termios)))
+00136   \{
+00137     sp->termios.c\_ispeed = sp->termios.c\_ospeed = speed;
+00138     \textcolor{keywordflow}{return} -EIO;
+00139   \}
+00140 
+00141   \textcolor{comment}{/*}
+00142 \textcolor{comment}{   * Otherwise, update the hardware.}
+00143 \textcolor{comment}{   */}
+00144   
+00145   IOWR_ALTERA_AVALON_UART_DIVISOR(sp->base, 
+00146     ((sp->freq/sp->termios.c\_ispeed) - 1));
+00147 
+00148   \textcolor{keywordflow}{return} 0;
+00149 \}
+00150 
+00151 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALTERA\_AVALON\_UART\_USE\_IOCTL */}\textcolor{preprocessor}{}
+00152 
+00153 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* fast driver */}\textcolor{preprocessor}{}
+\end{DoxyCode}

@@ -1,0 +1,100 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+open.c File Reference}
+\label{alt__open_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+open.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+open.\+c}}
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+errno.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+warning.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}priv/alt\+\_\+file.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}os/alt\+\_\+syscall.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+open.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/daf/alt__open_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int {\bf alt\+\_\+file\+\_\+locked} ({\bf alt\+\_\+fd} $\ast$fd)
+\item 
+int {\bf A\+L\+T\+\_\+\+O\+P\+EN} (const char $\ast$file, int flags, int mode)
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+{\bf alt\+\_\+llist} {\bf alt\+\_\+dev\+\_\+list}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+open.\+c@{alt\+\_\+open.\+c}!alt\+\_\+file\+\_\+locked@{alt\+\_\+file\+\_\+locked}}
+\index{alt\+\_\+file\+\_\+locked@{alt\+\_\+file\+\_\+locked}!alt\+\_\+open.\+c@{alt\+\_\+open.\+c}}
+\paragraph[{alt\+\_\+file\+\_\+locked(alt\+\_\+fd $\ast$fd)}]{\setlength{\rightskip}{0pt plus 5cm}static int alt\+\_\+file\+\_\+locked (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+fd} $\ast$}]{fd}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__open_8c_aa5f8f3e3dcad38d5b09bcf2e68192ae9}
+
+
+Definition at line {\bf 64} of file {\bf alt\+\_\+open.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV}, {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL}, {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+max\+\_\+fd}, {\bf alt\+\_\+fd\+\_\+s\+::dev}, and {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+O\+P\+E\+N()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{da/d46/alt__open_8c_aa5f8f3e3dcad38d5b09bcf2e68192ae9_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+open.\+c@{alt\+\_\+open.\+c}!A\+L\+T\+\_\+\+O\+P\+EN@{A\+L\+T\+\_\+\+O\+P\+EN}}
+\index{A\+L\+T\+\_\+\+O\+P\+EN@{A\+L\+T\+\_\+\+O\+P\+EN}!alt\+\_\+open.\+c@{alt\+\_\+open.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+O\+P\+E\+N(const char $\ast$file, int flags, int mode)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+O\+P\+EN (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file, }
+\item[{int}]{flags, }
+\item[{int}]{mode}
+\end{DoxyParamCaption}
+)}\label{alt__open_8c_aea160807da53190925738ea0fdade03e}
+
+
+Definition at line {\bf 105} of file {\bf alt\+\_\+open.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}, {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+file\+\_\+locked()}, {\bf alt\+\_\+find\+\_\+dev()}, {\bf alt\+\_\+find\+\_\+file()}, {\bf alt\+\_\+get\+\_\+fd()}, {\bf alt\+\_\+release\+\_\+fd()}, {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}, and {\bf alt\+\_\+dev\+\_\+s\+::open}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{da/d46/alt__open_8c_aea160807da53190925738ea0fdade03e_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Variable Documentation}
+\index{alt\+\_\+open.\+c@{alt\+\_\+open.\+c}!alt\+\_\+dev\+\_\+list@{alt\+\_\+dev\+\_\+list}}
+\index{alt\+\_\+dev\+\_\+list@{alt\+\_\+dev\+\_\+list}!alt\+\_\+open.\+c@{alt\+\_\+open.\+c}}
+\paragraph[{alt\+\_\+dev\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+llist} alt\+\_\+dev\+\_\+list}\label{alt__open_8c_a39bed231770a966001ae9f4cd2ce4074}
+
+
+Definition at line {\bf 68} of file {\bf alt\+\_\+dev.\+c}.
+

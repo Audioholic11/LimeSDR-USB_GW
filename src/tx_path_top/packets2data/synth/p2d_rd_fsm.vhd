@@ -35,7 +35,9 @@ entity p2d_rd_fsm is
       pct_buff_rdy         : in std_logic_vector(n_buff-1 downto 0);   --assert only one bit at the same time
       
       rd_fsm_rdy           : out std_logic; -- status of FSM
-      rd_fsm_rd_hold       : out std_logic
+      rd_fsm_rd_hold       : out std_logic;
+		
+		chirp_sync_en			: in std_logic
       
         );
 end p2d_rd_fsm;

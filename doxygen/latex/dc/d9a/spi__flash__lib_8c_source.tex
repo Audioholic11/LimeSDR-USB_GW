@@ -1,0 +1,239 @@
+\subsection{spi\+\_\+flash\+\_\+lib.\+c}
+\label{spi__flash__lib_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * spi\_flash\_lib.c}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Feb 3, 2016}
+00005 \textcolor{comment}{ *      Author: zydrunas}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#include "spi_flash_lib.h"}
+00009 \textcolor{preprocessor}{#include <altera_avalon_spi.h>}
+00010 \textcolor{preprocessor}{#include "sodera_pcie_brd_v1r0.h"}
+00011 
+00012 
+00016 uint8\_t ReverseBitOrder (uint8\_t data)
+00017 \{
+00018     uint8\_t rev = data;
+00019     rev = ((rev >> 1) & 0x55) | ((rev << 1) & 0xaa);
+00020     rev = ((rev >> 2) & 0x33) | ((rev << 2) & 0xcc);
+00021     rev = ((rev >> 4) & 0x0f) | ((rev << 4) & 0xf0);
+00022     \textcolor{keywordflow}{return} rev;
+00023 \}
+00024 
+00025 \textcolor{keywordtype}{char} spiFastRead = 0;
+00026 \textcolor{keywordtype}{void} FlashSpiFastRead(CyBool_t v) \{
+00027     spiFastRead = v;
+00028 \}
+00029 
+00030 \textcolor{comment}{/* SPI read / write for programmer application. */}
+00031 uint8\_t FlashSpiTransfer(alt_u32 SPIBase, alt_u32 SPISlave, uint32\_t pageAddress, uint16\_t byteCount, 
+      uint8\_t *buffer, CyBool_t isRead)
+00032 \{
+00033     uint8\_t location[4];
+00034     uint32\_t byteAddress = 0;
+00035     uint16\_t pageCount = (byteCount / FLASH_PAGE_SIZE);
+00036     \textcolor{comment}{//CyU3PReturnStatus\_t status = CY\_U3P\_SUCCESS;}
+00037     uint8\_t status = 0;
+00038 
+00039     spiFastRead = 1;\textcolor{comment}{// force fast read}
+00040 
+00041     \textcolor{keywordflow}{if} (byteCount == 0)
+00042     \{
+00043         \textcolor{keywordflow}{return} 0; \textcolor{comment}{// CY\_U3P\_SUCCESS;}
+00044     \}
+00045 
+00046     \textcolor{keywordflow}{if} ((byteCount % FLASH_PAGE_SIZE) != 0) \{
+00047         \textcolor{keywordflow}{return} 1;\textcolor{comment}{//CY\_U3P\_ERROR\_NOT\_SUPPORTED;}
+00048     \}
+00049 
+00050     byteAddress = pageAddress * FLASH_PAGE_SIZE;
+00051 
+00052     \textcolor{keywordflow}{while} (pageCount != 0) \{
+00053         location[1] = ReverseBitOrder((byteAddress >> 16) & 0xFF);       \textcolor{comment}{/* MS byte */}
+00054         location[2] = ReverseBitOrder((byteAddress >> 8) & 0xFF);
+00055         location[3] = ReverseBitOrder(byteAddress & 0xFF);               \textcolor{comment}{/* LS byte */}
+00056 
+00057         \textcolor{keywordflow}{if} (isRead) \{
+00058             location[0] = FLASH_CMD_PAGE_READ;\textcolor{comment}{// 0x03; /* Read command. */}
+00059 
+00060             \textcolor{keywordflow}{if} (!spiFastRead) \{
+00061                 \textcolor{comment}{//status = CyFxSpiWaitForStatus();}
+00062                 \textcolor{comment}{//if (status != CY\_U3P\_SUCCESS)}
+00063                 \textcolor{comment}{//    return status;}
+00064                 status = CyFxSpiWaitForStatus(SPIBase, SPISlave);
+00065                 \textcolor{keywordflow}{if} (!status)
+00066                 \{
+00067                     \textcolor{keywordflow}{return} status;
+00068                 \}
+00069             \}
+00070 
+00071             \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyFalse);//CyU3PSpiSetSsnLine(CyFalse);}
+00072             \textcolor{comment}{//status = CyU3PSpiTransmitWords(location, 4);}
+00073 
+00074             \textcolor{comment}{//if (status != CY\_U3P\_SUCCESS) \{}
+00075             \textcolor{comment}{//    CyU3PDebugPrint (2, "SPI READ command failed\(\backslash\)r\(\backslash\)n");}
+00076             \textcolor{comment}{//    CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine (CyTrue);}
+00077             \textcolor{comment}{//    return status;}
+00078             \textcolor{comment}{//\}}
+00079 
+00080             \textcolor{comment}{//status = CyU3PSpiReceiveWords(buffer, FLASH\_PAGE\_SIZE);}
+00081             \textcolor{comment}{//if (status != CY\_U3P\_SUCCESS) \{}
+00082             \textcolor{comment}{//  CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine(CyTrue);}
+00083             \textcolor{comment}{//    return status;}
+00084             \textcolor{comment}{//\}}
+00085 
+00086             \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine(CyTrue);}
+00087 
+00088             alt_avalon_spi_command(SPIBase, SPISlave, 4, location, FLASH\_PAGE\_SIZE, buffer, 0);
+00089 
+00090         \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{/* Write */}
+00091             location[0] = FLASH_CMD_PAGE_WRITE; \textcolor{comment}{//0x02; /* Write command */}
+00092 
+00093             \textcolor{comment}{//status = CyFxSpiWaitForStatus();}
+00094             \textcolor{comment}{//if (status != CY\_U3P\_SUCCESS)}
+00095             \textcolor{comment}{//    return status;}
+00096             status = CyFxSpiWaitForStatus(SPIBase, SPISlave);
+00097             \textcolor{keywordflow}{if} (status)
+00098             \{
+00099                 \textcolor{keywordflow}{return} status;
+00100             \}
+00101 
+00102             \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyFalse);//CyU3PSpiSetSsnLine(CyFalse);}
+00103             \textcolor{comment}{//status = CyU3PSpiTransmitWords(location, 4);}
+00104             \textcolor{comment}{//if (status != CY\_U3P\_SUCCESS) \{}
+00105             \textcolor{comment}{//    CyU3PDebugPrint(2, "SPI WRITE command failed\(\backslash\)r\(\backslash\)n");}
+00106             \textcolor{comment}{//    CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine(CyTrue);}
+00107             \textcolor{comment}{//    return status;}
+00108             \textcolor{comment}{//\}}
+00109 
+00110             \textcolor{comment}{//status = CyU3PSpiTransmitWords(buffer, FLASH\_PAGE\_SIZE);}
+00111             \textcolor{comment}{//if (status != CY\_U3P\_SUCCESS) \{}
+00112             \textcolor{comment}{//  CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine(CyTrue);}
+00113             \textcolor{comment}{//    return status;}
+00114             \textcolor{comment}{//\}}
+00115 
+00116             \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine(CyTrue);}
+00117 
+00118             alt_avalon_spi_command(SPIBase, SPISlave, 4, location, 0, NULL, 
+      ALT_AVALON_SPI_COMMAND_MERGE);
+00119             alt_avalon_spi_command(SPIBase, SPISlave, FLASH\_PAGE\_SIZE, buffer, 0, NULL, 0);
+00120         \}
+00121 
+00122         byteAddress += FLASH_PAGE_SIZE;
+00123         buffer += FLASH_PAGE_SIZE;
+00124         pageCount--;
+00125 
+00126         \textcolor{comment}{//if (!spiFastRead)}
+00127         \textcolor{comment}{//    CyU3PThreadSleep(15);}
+00128     \}
+00129 
+00130     \textcolor{keywordflow}{return} status; \textcolor{comment}{//CY\_U3P\_SUCCESS;}
+00131 \}
+00132 
+00133 \textcolor{comment}{/* Wait for the status response from the SPI flash. */}
+00134 uint8\_t CyFxSpiWaitForStatus(alt_u32 SPIBase, alt_u32 SPISlave)
+00135 \{
+00136     uint8\_t buf[2], rd\_buf[2];
+00137     uint32\_t retries = 0;
+00138     \textcolor{comment}{//CyU3PReturnStatus\_t status = CY\_U3P\_SUCCESS;}
+00139 
+00140     \textcolor{comment}{/* Wait for status response from SPI flash device. */}
+00141     \textcolor{keywordflow}{do} \{
+00142         buf[0] = FLASH_CMD_PAGE_WRITEEN;  \textcolor{comment}{/* Write enable command. */}
+00143 
+00144         \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyFalse);//CyU3PSpiSetSsnLine(CyFalse);}
+00145         \textcolor{comment}{//status = CyU3PSpiTransmitWords (buf, 1);}
+00146         \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine(CyTrue);}
+00147         alt_avalon_spi_command(SPIBase, SPISlave, 1, buf, 0, NULL, 0);
+00148         \textcolor{comment}{//if (status != CY\_U3P\_SUCCESS) \{}
+00149         \textcolor{comment}{//    CyU3PDebugPrint (2, "SPI WR\_ENABLE command failed\(\backslash\)n\(\backslash\)r");}
+00150         \textcolor{comment}{//    return status;}
+00151         \textcolor{comment}{//\}}
+00152 
+00153         buf[0] = FLASH_CMD_PAGE_READST;  \textcolor{comment}{/* Read status command */}
+00154 
+00155         \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyFalse);//CyU3PSpiSetSsnLine(CyFalse);}
+00156         \textcolor{comment}{//status = CyU3PSpiTransmitWords(buf, 1);}
+00157         \textcolor{comment}{//if (status != CY\_U3P\_SUCCESS) \{}
+00158         \textcolor{comment}{//    CyU3PDebugPrint(2, "SPI READ\_STATUS command failed\(\backslash\)n\(\backslash\)r");}
+00159         \textcolor{comment}{//    CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine(CyTrue);}
+00160         \textcolor{comment}{//    return status;}
+00161         \textcolor{comment}{//\}}
+00162 
+00163         \textcolor{comment}{//status = CyU3PSpiReceiveWords(rd\_buf, 2);}
+00164         \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine(CyTrue);}
+00165         \textcolor{comment}{//if(status != CY\_U3P\_SUCCESS) \{}
+00166         \textcolor{comment}{//    CyU3PDebugPrint(2, "SPI status read failed\(\backslash\)n\(\backslash\)r");}
+00167         \textcolor{comment}{//    return status;}
+00168         \textcolor{comment}{//\}}
+00169         alt_avalon_spi_command(SPIBase, SPISlave, 1, buf, 2, rd\_buf, 0);
+00170 
+00171         \textcolor{keywordflow}{if} (retries >= STATUS_RETRIES)
+00172         \{
+00173             \textcolor{keywordflow}{return} 1;
+00174         \}
+00175         retries++;
+00176 
+00177     \} \textcolor{keywordflow}{while} ((rd\_buf[0] & 0x80) || (!(rd\_buf[0] & 0x40))); \textcolor{comment}{//while ((rd\_buf[0] & 1) || (!(rd\_buf[0] &
+       0x2)));}
+00178 
+00179     \textcolor{keywordflow}{return} 0; \textcolor{comment}{//CY\_U3P\_SUCCESS;}
+00180 \}
+00181 
+00182 
+00183 \textcolor{comment}{/* Function to erase SPI flash sectors. */}
+00184 uint8\_t FlashSpiEraseSector(alt_u32 SPIBase, alt_u32 SPISlave, uint8\_t isErase, uint8\_t sector)
+00185 \{
+00186     uint32\_t temp = 0;
+00187     uint8\_t  location[4], rdBuf[2];
+00188     \textcolor{comment}{//CyU3PReturnStatus\_t status = CY\_U3P\_SUCCESS;}
+00189     \textcolor{keywordtype}{int} rdsz;
+00190     uint32\_t retries = 0;
+00191 
+00192     location[0] = FLASH_CMD_PAGE_WRITEEN;  \textcolor{comment}{/* Write enable. */}
+00193 
+00194     \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyFalse);//CyU3PSpiSetSsnLine (CyFalse);}
+00195     \textcolor{comment}{//status = CyU3PSpiTransmitWords (location, 1);}
+00196     \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine (CyTrue);}
+00197     rdsz = alt_avalon_spi_command(SPIBase, SPISlave, 1, location, 0, NULL, 0);
+00198 
+00199 \textcolor{comment}{//    if (status != CY\_U3P\_SUCCESS)}
+00200 \textcolor{comment}{//        return status;}
+00201 
+00202     \textcolor{keywordflow}{if} (isErase)
+00203     \{
+00204         location[0] = FLASH_CMD_SECTOR_ERASE; \textcolor{comment}{// Sector erase.}
+00205         temp        = sector * FLASH_SECTOR_SIZE;
+00206         location[1] = ReverseBitOrder((temp >> 16) & 0xFF);
+00207         location[2] = ReverseBitOrder((temp >> 8) & 0xFF);
+00208         location[3] = ReverseBitOrder(temp & 0xFF);
+00209 
+00210         \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyFalse);//CyU3PSpiSetSsnLine (CyFalse);}
+00211         \textcolor{comment}{//status = CyU3PSpiTransmitWords (location, 4);}
+00212         \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine (CyTrue);}
+00213         rdsz = alt_avalon_spi_command(SPIBase, SPISlave, 4, location, 0, NULL, 0);
+00214     \}
+00215 
+00216     location[0] = FLASH_CMD_PAGE_READST; \textcolor{comment}{// RDSTATUS}
+00217     \textcolor{keywordflow}{do} \{
+00218         \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyFalse);//CyU3PSpiSetSsnLine (CyFalse);}
+00219         \textcolor{comment}{//status = CyU3PSpiTransmitWords (location, 1);}
+00220         \textcolor{comment}{//status = CyU3PSpiReceiveWords(rdBuf, 1);}
+00221         \textcolor{comment}{//CyU3PGpioSetValue (FX3\_FLASH2\_SNN, CyTrue);//CyU3PSpiSetSsnLine (CyTrue);}
+00222         rdsz = alt_avalon_spi_command(SPIBase, SPISlave, 1, location,1, rdBuf, 0);
+00223 
+00224         \textcolor{comment}{//In case of something goes wrong, break the loop}
+00225         \textcolor{keywordflow}{if} (retries >= STATUS_RETRIES_ERASE)
+00226         \{
+00227             \textcolor{keywordflow}{return} 1;
+00228         \}
+00229         retries++;
+00230 
+00231     \} \textcolor{keywordflow}{while}(rdBuf[0] & 0x80);   \textcolor{comment}{//Reversed, in reality is: \} while(rdBuf[0] & 1);}
+00232 
+00233     \textcolor{keywordflow}{return} 0;
+00234 \}
+\end{DoxyCode}

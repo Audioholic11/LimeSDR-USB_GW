@@ -1,0 +1,102 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+settod.c File Reference}
+\label{alt__settod_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+settod.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+settod.\+c}}
+{\ttfamily \#include $<$sys/time.\+h$>$}\\*
+{\ttfamily \#include $<$sys/times.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+errno.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+alarm.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}os/alt\+\_\+syscall.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+settod.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/d5f/alt__settod_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+US}~(1000000)
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY} (const struct timeval $\ast$t, const struct timezone $\ast$tz)
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct timezone {\bf alt\+\_\+timezone}
+\item 
+struct timeval {\bf alt\+\_\+resettime}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+settod.\+c@{alt\+\_\+settod.\+c}!A\+L\+T\+\_\+\+US@{A\+L\+T\+\_\+\+US}}
+\index{A\+L\+T\+\_\+\+US@{A\+L\+T\+\_\+\+US}!alt\+\_\+settod.\+c@{alt\+\_\+settod.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+US}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+US~(1000000)}\label{alt__settod_8c_a614a2770a55d6436aa06a51d77cea5c3}
+
+
+Definition at line {\bf 53} of file {\bf alt\+\_\+settod.\+c}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+settod.\+c@{alt\+\_\+settod.\+c}!A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY@{A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY}}
+\index{A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY@{A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY}!alt\+\_\+settod.\+c@{alt\+\_\+settod.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y(const struct timeval $\ast$t, const struct timezone $\ast$tz)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY (
+\begin{DoxyParamCaption}
+\item[{const struct timeval $\ast$}]{t, }
+\item[{const struct timezone $\ast$}]{tz}
+\end{DoxyParamCaption}
+)}\label{alt__settod_8c_a897ea6d87afb7dc8fe66766e83fc0101}
+
+
+Definition at line {\bf 72} of file {\bf alt\+\_\+settod.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf alt\+\_\+nticks()}, {\bf alt\+\_\+resettime}, {\bf alt\+\_\+ticks\+\_\+per\+\_\+second()}, {\bf alt\+\_\+timezone}, and {\bf A\+L\+T\+\_\+\+US}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/dd5/alt__settod_8c_a897ea6d87afb7dc8fe66766e83fc0101_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Variable Documentation}
+\index{alt\+\_\+settod.\+c@{alt\+\_\+settod.\+c}!alt\+\_\+resettime@{alt\+\_\+resettime}}
+\index{alt\+\_\+resettime@{alt\+\_\+resettime}!alt\+\_\+settod.\+c@{alt\+\_\+settod.\+c}}
+\paragraph[{alt\+\_\+resettime}]{\setlength{\rightskip}{0pt plus 5cm}struct timeval alt\+\_\+resettime}\label{alt__settod_8c_a871bb39e3efcef7ed5960c633edc06af}
+
+
+Definition at line {\bf 54} of file {\bf alt\+\_\+gettod.\+c}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}, and {\bf A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}.
+
+\index{alt\+\_\+settod.\+c@{alt\+\_\+settod.\+c}!alt\+\_\+timezone@{alt\+\_\+timezone}}
+\index{alt\+\_\+timezone@{alt\+\_\+timezone}!alt\+\_\+settod.\+c@{alt\+\_\+settod.\+c}}
+\paragraph[{alt\+\_\+timezone}]{\setlength{\rightskip}{0pt plus 5cm}struct timezone alt\+\_\+timezone}\label{alt__settod_8c_a4a36ab50424b296f44e353306e335151}
+
+
+Definition at line {\bf 53} of file {\bf alt\+\_\+gettod.\+c}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}, and {\bf A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}.
+

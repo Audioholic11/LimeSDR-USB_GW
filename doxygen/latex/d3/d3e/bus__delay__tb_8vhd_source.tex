@@ -1,0 +1,83 @@
+\subsection{bus\+\_\+delay\+\_\+tb.\+vhd}
+\label{bus__delay__tb_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/bus\+\_\+delay\+\_\+tb.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/bus\+\_\+delay\+\_\+tb.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ----------------------------------------------------------------------------  }
+00002 \textcolor{keyword}{-- FILE:    busy\_delay\_tb.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION:   }
+00004 \textcolor{keyword}{-- DATE: Feb 13, 2014}
+00005 \textcolor{keyword}{-- AUTHOR(s):  Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------  }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }busy_delay_tb \textcolor{keywordflow}{is}
+00016 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{busy\_delay\_tb};
+00017 
+00018 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00019 \textcolor{keyword}{-- Architecture}
+00020 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00021 
+00022 \textcolor{keywordflow}{architecture} tb\_behave \textcolor{keywordflow}{of} busy_delay_tb is
+00023    \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{clk0_period}   \textcolor{vhdlchar}{:} \textcolor{comment}{time} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10} \textcolor{vhdlchar}{ns};
+00024    \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{clk1_period}   \textcolor{vhdlchar}{:} \textcolor{comment}{time} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10} \textcolor{vhdlchar}{ns}; 
+00025 \textcolor{keyword}{  --signals}
+00026    \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{clk0}\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{clk1}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00027    \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{reset_n}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00028    \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{busy_sign}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00029   
+00030 \textcolor{vhdlkeyword}{begin }
+00031   
+00032       clock0: \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00033 \textcolor{vhdlkeyword}{   begin}
+00034       \textcolor{vhdlchar}{clk0} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk0_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00035       \textcolor{vhdlchar}{clk0} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk0_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00036    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{clock0};
+00037 
+00038       clock: \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00039 \textcolor{vhdlkeyword}{   begin}
+00040       \textcolor{vhdlchar}{clk1} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk1_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00041       \textcolor{vhdlchar}{clk1} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk1_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00042    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{clock};
+00043    
+00044       res: \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00045 \textcolor{vhdlkeyword}{   begin}
+00046       \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{20} \textcolor{vhdlchar}{ns};
+00047       \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait};
+00048    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{res};
+00049    
+00050       busy : \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00051 \textcolor{vhdlkeyword}{   begin}
+00052       \textcolor{vhdlchar}{busy_sign} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{40} \textcolor{vhdlchar}{ns};
+00053       \textcolor{vhdlchar}{busy_sign} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{50} \textcolor{vhdlchar}{ns};
+00054       \textcolor{vhdlchar}{busy_sign} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{40} \textcolor{vhdlchar}{ns};
+00055       \textcolor{vhdlchar}{busy_sign} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{40} \textcolor{vhdlchar}{ns};
+00056       \textcolor{vhdlchar}{busy_sign} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{50} \textcolor{vhdlchar}{ns};
+00057         \textcolor{vhdlchar}{busy_sign} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait};
+00058    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{busy};
+00059    
+00060   busy\_delay\_inst : \textcolor{keywordflow}{entity} work.busy_delay
+00061 \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (
+00062       clock_period  => \textcolor{vhdllogic}{10},
+00063       delay_time        => \textcolor{vhdllogic}{1}  \textcolor{keyword}{-- delay time in ms}
+00064 \textcolor{vhdlchar}{)}
+00065 \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00066    clk         => clk1,
+00067    reset_n     => reset_n, 
+00068    busy_in     => busy_sign, 
+00069    busy_out    => \textcolor{keywordflow}{open}
+00070    
+00071     \textcolor{vhdlchar}{)};
+00072    
+00073    \textcolor{keywordflow}{end} \textcolor{vhdlchar}{tb\_behave};
+00074   
+00075   
+00076 
+00077 
+00078   
+\end{DoxyCode}

@@ -1,0 +1,62 @@
+\subsection{update\+\_\+rev.\+tcl}
+\label{update__rev_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/update\+\_\+rev.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/update\+\_\+rev.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{proc} update\_version\_number \{ input\_file output\_file \} \{
+00002    \textcolor{comment}{# If the input file can't be opened, return an error.}
+00003 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{ [\textcolor{keyword}{catch} \{open $input\_file\} input] \} \{
+00004         \textcolor{keyword}{return} -code error $input\textcolor{comment}{}
+00005 \textcolor{comment}{}   \}\textcolor{comment}{}
+00006 \textcolor{comment}{}
+00007    \textcolor{comment}{# If the output file can't be opened, return an error}
+00008 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{ [\textcolor{keyword}{catch} \{open $output\_file w\} output] \} \{
+00009         \textcolor{keyword}{return} -code error $output\textcolor{comment}{}
+00010 \textcolor{comment}{}   \}\textcolor{comment}{}
+00011 \textcolor{comment}{}
+00012    \textcolor{comment}{# Read through the input file a line at a time}
+00013 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{while} \{-1 != [\textcolor{keyword}{gets} $input line] \} \{
+00014        \textcolor{keyword}{if} \{ [regexp \{^\(\backslash\)s*constant COMPILE\_REV : INTEGER := ([[:digit:]]+);\(\backslash\)s*$\} \(\backslash\) $line match 
+      version\_number] \} \{
+00015            \textcolor{keyword}{set} decimal\_value $version\_number\textcolor{comment}{}
+00016 \textcolor{comment}{}           \textcolor{keyword}{incr} decimal\_value\textcolor{comment}{      }
+00017 \textcolor{comment}{}           \textcolor{comment}{# Substitute the new version number in for the old one }
+00018 \textcolor{comment}{}\textcolor{comment}{           }regsub $version\_number $line $decimal\_value line\textcolor{comment}{}
+00019 \textcolor{comment}{}           post\_message "File src/revision/revision.vhd updated with Current Compile Revision:
+       $decimal\_value"\textcolor{comment}{}
+00020 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{ [regexp \{^\(\backslash\)s*constant COMPILE\_YEAR\_STAMP : INTEGER := ([[:digit:]]+);\(\backslash\)s*$\} \(\backslash\) $line 
+      match version\_number] \} \{
+00021            \textcolor{keyword}{set} decimal\_value [\textcolor{keyword}{clock} format [\textcolor{keyword}{clock} seconds] -format \{%y\}]\textcolor{comment}{}
+00022 \textcolor{comment}{}           regsub $version\_number $line $decimal\_value line\textcolor{comment}{}
+00023 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{ [regexp \{^\(\backslash\)s*constant COMPILE\_MONTH\_STAMP : INTEGER := ([[:digit:]]+);\(\backslash\)s*$\} \(\backslash\) $line 
+      match version\_number] \} \{
+00024            \textcolor{keyword}{set} decimal\_value [\textcolor{keyword}{clock} format [\textcolor{keyword}{clock} seconds] -format \{%m\}]\textcolor{comment}{}
+00025 \textcolor{comment}{}           regsub $version\_number $line $decimal\_value line\textcolor{comment}{}
+00026 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{ [regexp \{^\(\backslash\)s*constant COMPILE\_DAY\_STAMP : INTEGER := ([[:digit:]]+);\(\backslash\)s*$\} \(\backslash\) $line 
+      match version\_number] \} \{
+00027            \textcolor{keyword}{set} decimal\_value [\textcolor{keyword}{clock} format [\textcolor{keyword}{clock} seconds] -format \{%d\}]\textcolor{comment}{}
+00028 \textcolor{comment}{}           regsub $version\_number $line $decimal\_value line\textcolor{comment}{}
+00029 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{ [regexp \{^\(\backslash\)s*constant COMPILE\_HOUR\_STAMP : INTEGER := ([[:digit:]]+);\(\backslash\)s*$\} \(\backslash\) $line 
+      match version\_number] \} \{
+00030            \textcolor{keyword}{set} decimal\_value [\textcolor{keyword}{clock} format [\textcolor{keyword}{clock} seconds] -format \{%H\}]\textcolor{comment}{}
+00031 \textcolor{comment}{}           regsub $version\_number $line $decimal\_value line\textcolor{comment}{}
+00032 \textcolor{comment}{}       \}\textcolor{comment}{ }
+00033 \textcolor{comment}{}       
+00034        \textcolor{comment}{# Write out the line to the new file }
+00035 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{keyword}{puts} $output $line\textcolor{comment}{ }
+00036 \textcolor{comment}{}   \}\textcolor{comment}{}
+00037 \textcolor{comment}{}   \textcolor{keyword}{close} $input\textcolor{comment}{ }
+00038 \textcolor{comment}{}   \textcolor{keyword}{close} $output\textcolor{comment}{ }
+00039 \textcolor{comment}{}\}\textcolor{comment}{}
+00040 \textcolor{comment}{}
+00041 
+00042 \textcolor{keyword}{set} file\_name "src/revision/revision.vhd"\textcolor{comment}{}
+00043 \textcolor{comment}{}\textcolor{keyword}{set} output\_file\_name $\{file\_name\}.updated\_version\_number\textcolor{comment}{}
+00044 \textcolor{comment}{}
+00045 \textcolor{keyword}{if} \{ [\textcolor{keyword}{catch} \{ update_version_number $file\_name $output\_file\_name\} res] \} \{
+00046     post\_message -type critical\_warning "Could not update version number: $res"\textcolor{comment}{}
+00047 \textcolor{comment}{}\} \textcolor{keyword}{else} \{
+00048     \textcolor{keyword}{if} \{ [\textcolor{keyword}{catch} \{ \textcolor{keyword}{file} rename -force $output\_file\_name $file\_name\} res] \} \{
+00049         post\_message -type critical\_warning "Could not update version number: $res"\textcolor{comment}{}
+00050 \textcolor{comment}{}    \}\textcolor{comment}{}
+00051 \textcolor{comment}{}\}
+\end{DoxyCode}

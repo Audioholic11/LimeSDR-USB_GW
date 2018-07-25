@@ -1,0 +1,106 @@
+\subsection{alt\+\_\+fcntl.\+c}
+\label{alt__fcntl_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+fcntl.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+fcntl.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2004 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include <unistd.h>}
+00034 \textcolor{preprocessor}{#include <fcntl.h>}
+00035 
+00036 \textcolor{preprocessor}{#include <stdio.h>}
+00037 \textcolor{preprocessor}{#include <stdarg.h>}
+00038 
+00039 \textcolor{preprocessor}{#include "sys/alt_errno.h"}
+00040 \textcolor{preprocessor}{#include "priv/alt_file.h"}
+00041 \textcolor{preprocessor}{#include "alt_types.h"}
+00042 \textcolor{preprocessor}{#include "os/alt_syscall.h"}
+00043 
+00044 \textcolor{preprocessor}{#define ALT\_FCNTL\_FLAGS\_MASK ((alt\_u32) (O\_APPEND | O\_NONBLOCK))}
+00045 
+00046 \textcolor{comment}{/*}
+00047 \textcolor{comment}{ * fcntl() is a limited implementation of the standard fcntl() system call.}
+00048 \textcolor{comment}{ * It can be used to change the state of the flags associated with an open}
+00049 \textcolor{comment}{ * file descriptor. Normally these flags are set during the call to}
+00050 \textcolor{comment}{ * open(). It is anticipated that the main use of this function will be to}
+00051 \textcolor{comment}{ * change the state of a device from blocking to non-blocking (where this is}
+00052 \textcolor{comment}{ * supported). }
+00053 \textcolor{comment}{ *}
+00054 \textcolor{comment}{ * The input argument "fd" is the file descriptor to be manipulated. "cmd"}
+00055 \textcolor{comment}{ * is the command to execute. This can be either F\_GETFL (return the }
+00056 \textcolor{comment}{ * current value of the flags) or F\_SETFL (set the value of the flags).}
+00057 \textcolor{comment}{ *}
+00058 \textcolor{comment}{ * If "cmd" is F\_SETFL then the argument "arg" is the new value of flags,}
+00059 \textcolor{comment}{ * otherwise "arg" is ignored. Only the flags: O\_APPEND and O\_NONBLOCK}
+00060 \textcolor{comment}{ * can be updated by a call to fcntl(). All other flags remain}
+00061 \textcolor{comment}{ * unchanged.}
+00062 \textcolor{comment}{ *}
+00063 \textcolor{comment}{ * ALT\_FCNTL is mapped onto the fcntl() system call in alt\_syscall.h}
+00064 \textcolor{comment}{ */}
+00065  
+00066 \textcolor{keywordtype}{int} ALT_FCNTL (\textcolor{keywordtype}{int} file, \textcolor{keywordtype}{int} cmd, ...)
+00067 \{ 
+00068   alt_fd*  fd;
+00069   \textcolor{keywordtype}{long}     flags;
+00070   va\_list  argp;
+00071 
+00072   \textcolor{comment}{/*}
+00073 \textcolor{comment}{   * A common error case is that when the file descriptor was created, the call}
+00074 \textcolor{comment}{   * to open() failed resulting in a negative file descriptor. This is trapped}
+00075 \textcolor{comment}{   * below so that we don't try and process an invalid file descriptor.}
+00076 \textcolor{comment}{   */}
+00077 
+00078   fd = (file < 0) ? NULL : &alt_fd_list[file];
+00079   
+00080   \textcolor{keywordflow}{if} (fd)
+00081   \{
+00082     \textcolor{keywordflow}{switch} (cmd)
+00083     \{
+00084     \textcolor{keywordflow}{case} F\_GETFL:
+00085       \textcolor{keywordflow}{return} fd->fd_flags & ~((alt_u32) ALT_FD_FLAGS_MASK);
+00086     \textcolor{keywordflow}{case} F\_SETFL:
+00087       va\_start(argp, cmd);
+00088       flags = va\_arg(argp, \textcolor{keywordtype}{long});
+00089       fd->fd_flags &= ~ALT_FCNTL_FLAGS_MASK;
+00090       fd->fd_flags |= (flags & ALT_FCNTL_FLAGS_MASK);
+00091       va\_end(argp);
+00092       \textcolor{keywordflow}{return} 0;
+00093     \textcolor{keywordflow}{default}:
+00094       ALT_ERRNO = EINVAL;
+00095       \textcolor{keywordflow}{return} -1;
+00096     \}
+00097   \}
+00098 
+00099   ALT_ERRNO = EBADFD;
+00100   \textcolor{keywordflow}{return} -1;
+00101 \}
+\end{DoxyCode}

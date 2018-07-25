@@ -1,0 +1,125 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sim.h File Reference}
+\label{alt__sim_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sim.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sim.\+h}}
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+sim.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{d5/de7/alt__sim_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{dc/dd8/alt__sim_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+F\+A\+IL}()~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}cmpltui r0, r0, 0xabc1\char`\"{}); \} while (0)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+P\+A\+SS}()~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}cmpltui r0, r0, 0xabc2\char`\"{}); \} while (0)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+I\+N\+\_\+\+T\+O\+P\+\_\+\+O\+F\+\_\+\+H\+O\+T\+\_\+\+L\+O\+OP}()~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}cmpltui r0, r0, 0xabc3\char`\"{}); \} while (0)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+H\+A\+LT}(exit\+\_\+code)~{\bf alt\+\_\+sim\+\_\+halt}(exit\+\_\+code)
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} void {\bf alt\+\_\+sim\+\_\+halt} (int exit\+\_\+code)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}!A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+F\+A\+IL@{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+F\+A\+IL}}
+\index{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+F\+A\+IL@{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+F\+A\+IL}!alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+F\+A\+IL}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+F\+A\+IL(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}cmpltui r0, r0, 0xabc1\char`\"{}); \} while (0)}\label{alt__sim_8h_a8cbb84e565224578e04d00881f3a93b5}
+
+
+Definition at line {\bf 40} of file {\bf alt\+\_\+sim.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+sim\+\_\+halt()}.
+
+\index{alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}!A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+H\+A\+LT@{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+H\+A\+LT}}
+\index{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+H\+A\+LT@{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+H\+A\+LT}!alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+H\+A\+LT}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+H\+A\+LT(
+\begin{DoxyParamCaption}
+\item[{}]{exit\+\_\+code}
+\end{DoxyParamCaption}
+)~{\bf alt\+\_\+sim\+\_\+halt}(exit\+\_\+code)}\label{alt__sim_8h_ae17fde27111994220e541bf2ff79bbfb}
+
+
+Definition at line {\bf 88} of file {\bf alt\+\_\+sim.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+E\+X\+I\+T()}.
+
+\index{alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}!A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+I\+N\+\_\+\+T\+O\+P\+\_\+\+O\+F\+\_\+\+H\+O\+T\+\_\+\+L\+O\+OP@{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+I\+N\+\_\+\+T\+O\+P\+\_\+\+O\+F\+\_\+\+H\+O\+T\+\_\+\+L\+O\+OP}}
+\index{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+I\+N\+\_\+\+T\+O\+P\+\_\+\+O\+F\+\_\+\+H\+O\+T\+\_\+\+L\+O\+OP@{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+I\+N\+\_\+\+T\+O\+P\+\_\+\+O\+F\+\_\+\+H\+O\+T\+\_\+\+L\+O\+OP}!alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+I\+N\+\_\+\+T\+O\+P\+\_\+\+O\+F\+\_\+\+H\+O\+T\+\_\+\+L\+O\+OP}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+I\+N\+\_\+\+T\+O\+P\+\_\+\+O\+F\+\_\+\+H\+O\+T\+\_\+\+L\+O\+OP(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}cmpltui r0, r0, 0xabc3\char`\"{}); \} while (0)}\label{alt__sim_8h_a05c77a243ca9f29ac452cbbabd16a72d}
+
+
+Definition at line {\bf 46} of file {\bf alt\+\_\+sim.\+h}.
+
+\index{alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}!A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+P\+A\+SS@{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+P\+A\+SS}}
+\index{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+P\+A\+SS@{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+P\+A\+SS}!alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+P\+A\+SS}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+P\+A\+SS(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}cmpltui r0, r0, 0xabc2\char`\"{}); \} while (0)}\label{alt__sim_8h_a80f2c62b629666aeaf482919be40fce5}
+
+
+Definition at line {\bf 43} of file {\bf alt\+\_\+sim.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+sim\+\_\+halt()}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}!alt\+\_\+sim\+\_\+halt@{alt\+\_\+sim\+\_\+halt}}
+\index{alt\+\_\+sim\+\_\+halt@{alt\+\_\+sim\+\_\+halt}!alt\+\_\+sim.\+h@{alt\+\_\+sim.\+h}}
+\paragraph[{alt\+\_\+sim\+\_\+halt(int exit\+\_\+code)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} void alt\+\_\+sim\+\_\+halt (
+\begin{DoxyParamCaption}
+\item[{int}]{exit\+\_\+code}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__sim_8h_a68ded69f85d24b232b35e01294b7d100}
+
+
+Definition at line {\bf 52} of file {\bf alt\+\_\+sim.\+h}.
+
+
+
+References {\bf \+\_\+\+\_\+asm\+\_\+\+\_\+()}, {\bf A\+L\+T\+\_\+\+C\+P\+U\+\_\+\+F\+R\+EQ}, {\bf alt\+\_\+gmon\+\_\+data}, {\bf A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+F\+A\+IL}, and {\bf A\+L\+T\+\_\+\+S\+I\+M\+\_\+\+P\+A\+SS}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{d8/d1c/alt__sim_8h_a68ded69f85d24b232b35e01294b7d100_cgraph}
+\end{center}
+\end{figure}
+
+

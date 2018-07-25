@@ -1,0 +1,84 @@
+\subsection{alt\+\_\+uncached\+\_\+malloc.\+c}
+\label{alt__uncached__malloc_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+uncached\+\_\+malloc.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+uncached\+\_\+malloc.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2003,2007 Altera Corporation, San Jose, California, USA.      *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{******************************************************************************/}
+00030 
+00031 \textcolor{preprocessor}{#include <malloc.h>}
+00032 \textcolor{preprocessor}{#include "sys/alt_warning.h"}
+00033 \textcolor{preprocessor}{#include "sys/alt_cache.h"}
+00034 \textcolor{preprocessor}{#include "system.h"}
+00035 
+00036 \textcolor{comment}{/*}
+00037 \textcolor{comment}{ * Allocate a block of uncached memory.}
+00038 \textcolor{comment}{ * Return pointer to the block of memory or NULL if can't allocate it.}
+00039 \textcolor{comment}{ */}
+00040 
+00041 \textcolor{keyword}{volatile} \textcolor{keywordtype}{void}* 
+00042 alt_uncached_malloc(\textcolor{keywordtype}{size\_t} size)
+00043 \{
+00044 \textcolor{preprocessor}{#if ALT\_CPU\_DCACHE\_SIZE > 0}
+00045 \textcolor{preprocessor}{#ifdef ALT\_CPU\_DCACHE\_BYPASS\_MASK}
+00046 
+00047   \textcolor{keywordtype}{void}* ptr;
+00048 
+00049   \textcolor{comment}{/* Round up size to an integer number of data cache lines. Required to guarantee that}
+00050 \textcolor{comment}{   * cacheable and non-cacheable data won't be mixed on the same cache line. */} 
+00051   \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} num\_lines = (size + ALT_CPU_DCACHE_LINE_SIZE - 1) / 
+      ALT_CPU_DCACHE_LINE_SIZE;
+00052   \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} aligned\_size = num\_lines * ALT_CPU_DCACHE_LINE_SIZE;
+00053 
+00054   \textcolor{comment}{/* Use memalign() Newlib routine to allocate starting on a data cache aligned address.}
+00055 \textcolor{comment}{   * Required to guarantee that cacheable and non-cacheable data won't be mixed on the}
+00056 \textcolor{comment}{   * same cache line. */} 
+00057   ptr = memalign(ALT\_CPU\_DCACHE\_LINE\_SIZE, aligned\_size);
+00058 
+00059   \textcolor{keywordflow}{if} (ptr == NULL) \{
+00060     \textcolor{keywordflow}{return} NULL; \textcolor{comment}{/* Out of memory */}
+00061   \}
+00062 
+00063   \textcolor{comment}{/* Ensure that the memory region isn't in the data cache. */}
+00064   alt_dcache_flush(ptr, aligned\_size);
+00065 
+00066   \textcolor{keywordflow}{return} (\textcolor{keyword}{volatile} \textcolor{keywordtype}{void}*) (((alt_u32)ptr) | ALT\_CPU\_DCACHE\_BYPASS\_MASK);
+00067 
+00068 \textcolor{preprocessor}{#else }\textcolor{comment}{/* No address mask option enabled. */}\textcolor{preprocessor}{}
+00069   \textcolor{comment}{/* Generate a link time error, should this function ever be called. */}
+00070   ALT_LINK_ERROR(\textcolor{stringliteral}{"alt\_uncached\_malloc() is not available because CPU is not configured to use bit 31 of
+       address to bypass data cache"});
+00071   \textcolor{keywordflow}{return} NULL;
+00072 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* No address mask option enabled. */}\textcolor{preprocessor}{}
+00073 \textcolor{preprocessor}{#else }\textcolor{comment}{/* No data cache */}\textcolor{preprocessor}{}
+00074   \textcolor{comment}{/* Just use regular malloc. */}
+00075   \textcolor{keywordflow}{return} malloc(size);
+00076 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* No data cache */}\textcolor{preprocessor}{}
+00077 \}
+\end{DoxyCode}

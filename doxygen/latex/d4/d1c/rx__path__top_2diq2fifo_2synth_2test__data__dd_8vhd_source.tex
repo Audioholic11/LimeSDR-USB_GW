@@ -1,0 +1,85 @@
+\subsection{test\+\_\+data\+\_\+dd.\+vhd}
+\label{rx__path__top_2diq2fifo_2synth_2test__data__dd_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/diq2fifo/synth/test\+\_\+data\+\_\+dd.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/diq2fifo/synth/test\+\_\+data\+\_\+dd.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    file\_name.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: describe}
+00004 \textcolor{keyword}{-- DATE:    Feb 13, 2014}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }test_data_dd \textcolor{keywordflow}{is}
+00016   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00017 \textcolor{keyword}{        --input ports }
+00018         \textcolor{vhdlchar}{clk}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00019         \textcolor{vhdlchar}{reset_n}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020             \textcolor{vhdlchar}{fr_start}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00021             \textcolor{vhdlchar}{mimo_en}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00022           
+00023             \textcolor{vhdlchar}{data_h}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00024             \textcolor{vhdlchar}{data_l}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}
+00025 
+00026 \textcolor{keyword}{        --output ports }
+00027         
+00028         \textcolor{vhdlchar}{)};
+00029 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{test\_data\_dd};
+00030 
+00031 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00032 \textcolor{keyword}{-- Architecture}
+00033 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00034 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} test_data_dd is
+00035 \textcolor{keyword}{--declare signals,  components here}
+00036 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{cnt_h}        \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00037 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{cnt_l}        \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00038 
+00039 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{iq_sel}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00040 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{iq_sel_out}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00041 
+00042   
+00043 \textcolor{vhdlkeyword}{begin}
+00044 
+00045   \textcolor{keywordflow}{process}(reset_n, clk)
+00046 \textcolor{vhdlkeyword}{    begin}
+00047       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00048           \textcolor{vhdlchar}{iq_sel}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; 
+00049         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00050             \textcolor{vhdlchar}{iq_sel}\textcolor{vhdlchar}{<=} \textcolor{keywordflow}{not} \textcolor{vhdlchar}{iq_sel};
+00051         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00052     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00053      
+00054 \textcolor{keywordflow}{process}(reset_n, clk)
+00055 \textcolor{vhdlkeyword}{    begin}
+00056         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00057             \textcolor{vhdlchar}{cnt_h} \textcolor{vhdlchar}{<=}\textcolor{vhdllogic}{"000000000001"}; 
+00058             \textcolor{vhdlchar}{cnt_l} \textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00059         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00060             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{iq_sel} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00061                 \textcolor{vhdlchar}{cnt_h} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{cnt_h} \textcolor{vhdlchar}{+} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00062                 \textcolor{vhdlchar}{cnt_l} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{cnt_l} \textcolor{vhdlchar}{+} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00063             \textcolor{keywordflow}{else} 
+00064                 \textcolor{vhdlchar}{cnt_h} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{cnt_h};
+00065                 \textcolor{vhdlchar}{cnt_l} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{cnt_l};
+00066             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00067         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00068 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00069      
+00070      
+00071 \textcolor{vhdlchar}{iq_sel_out}\textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{iq_sel} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{fr_start}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} \textcolor{keywordflow}{not} \textcolor{vhdlchar}{iq_sel};
+00072 
+00073 \textcolor{vhdlchar}{data_l}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{iq_sel_out} \textcolor{vhdlchar}{&} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{cnt_l}\textcolor{vhdlchar}{)};
+00074 \textcolor{vhdlchar}{data_h}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{iq_sel_out} \textcolor{vhdlchar}{&} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{cnt_h}\textcolor{vhdlchar}{)};
+00075   
+00076 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};
+00077 
+00078 
+00079 
+00080 
+\end{DoxyCode}

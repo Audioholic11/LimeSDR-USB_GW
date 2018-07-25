@@ -1,0 +1,579 @@
+\subsection{wfm\+\_\+player\+\_\+top.\+vhd}
+\label{wfm__player__top_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/wfm\+\_\+ram\+\_\+buffer/wfm\+\_\+player\+\_\+top.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/wfm\+\_\+ram\+\_\+buffer/wfm\+\_\+player\+\_\+top.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    wfm\_player\_top.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: describe}
+00004 \textcolor{keyword}{-- DATE:    June 20, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }wfm_player_top \textcolor{keywordflow}{is}
+00016     \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(}
+00017             \textcolor{vhdlchar}{dev_family}          \textcolor{vhdlchar}{:} \textcolor{comment}{string}  \textcolor{vhdlchar}{:=} \textcolor{keyword}{"Cyclone IV E"}; 
+00018 \textcolor{keyword}{            --DDR2 controller parameters}
+00019             \textcolor{vhdlchar}{cntrl_rate}          \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};\textcolor{keyword}{ --1 - full rate, 2 - half rate}
+00020             \textcolor{vhdlchar}{cntrl_bus_size}      \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{16};
+00021             \textcolor{vhdlchar}{addr_size}           \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{24};
+00022             \textcolor{vhdlchar}{lcl_bus_size}        \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{63};
+00023             \textcolor{vhdlchar}{lcl_burst_length}    \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00024             \textcolor{vhdlchar}{cmd_fifo_size}       \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{9};
+00025 \textcolor{keyword}{            --WFM player parameters}
+00026             \textcolor{vhdlchar}{wfm_infifo_size} \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{11};
+00027             \textcolor{vhdlchar}{wfm_outfifo_size}    \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{11};
+00028             \textcolor{vhdlchar}{data_width}          \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32};
+00029             \textcolor{vhdlchar}{iq_width}                \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{12};
+00030             \textcolor{vhdlchar}{dcmpr_fifo_size} \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10}
+00031 \textcolor{vhdlchar}{)};
+00032   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00033 \textcolor{keyword}{      --input ports}
+00034         \textcolor{vhdlchar}{reset_n}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00035         \textcolor{vhdlchar}{ddr2_pll_ref_clk}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00036      
+00037         \textcolor{vhdlchar}{wcmd_clk}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00038         
+00039         \textcolor{vhdlchar}{rcmd_clk}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00040         
+00041         \textcolor{vhdlchar}{wfm_load}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00042         \textcolor{vhdlchar}{wfm_play_stop}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- 1- play, 0- stop}
+00043 
+00044         \textcolor{vhdlchar}{wfm_data}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{data_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00045         \textcolor{vhdlchar}{wfm_wr}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00046         \textcolor{vhdlchar}{wfm_rdy}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00047         \textcolor{vhdlchar}{wfm_infifo_wrusedw}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wfm_infifo_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00048         
+00049         \textcolor{vhdlchar}{sample_width}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- "00"-16bit, "01"-14bit, "10"-12bit}
+00050         \textcolor{vhdlchar}{fr_start}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00051         \textcolor{vhdlchar}{ch_en}                       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00052       \textcolor{vhdlchar}{mimo_en}                   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00053 
+00054         \textcolor{vhdlchar}{iq_clk}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00055         \textcolor{vhdlchar}{dd_iq_h}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00056         \textcolor{vhdlchar}{dd_iq_l}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00057 \textcolor{keyword}{--      dd\_iq\_h\_uns             : out std\_logic\_vector(15 downto 0);}
+00058 \textcolor{keyword}{--      dd\_iq\_l\_uns             : out std\_logic\_vector(15 downto 0);}
+00059 
+00060 
+00061 \textcolor{keyword}{        --DDR2 external memory signals  }
+00062         \textcolor{vhdlchar}{mem_odt}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00063         \textcolor{vhdlchar}{mem_cs_n}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00064         \textcolor{vhdlchar}{mem_cke}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00065         \textcolor{vhdlchar}{mem_addr}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00066         \textcolor{vhdlchar}{mem_ba}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00067         \textcolor{vhdlchar}{mem_ras_n}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00068         \textcolor{vhdlchar}{mem_cas_n}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00069         \textcolor{vhdlchar}{mem_we_n}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00070         \textcolor{vhdlchar}{mem_dm}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00071         \textcolor{vhdlchar}{phy_clk}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00072         \textcolor{vhdlchar}{mem_clk}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00073         \textcolor{vhdlchar}{mem_clk_n}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00074         \textcolor{vhdlchar}{mem_dq}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00075         \textcolor{vhdlchar}{mem_dqs}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00076 \textcolor{vhdlkeyword}{        begin}\textcolor{vhdlchar}{\_test}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00077         \textcolor{vhdlchar}{insert_error}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00078         \textcolor{vhdlchar}{pnf_per_bit}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00079         \textcolor{vhdlchar}{pnf_per_bit_persist}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00080         \textcolor{vhdlchar}{pass}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00081         \textcolor{vhdlchar}{fail}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}; 
+00082         \textcolor{vhdlchar}{test_complete}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00083         
+00084         
+00085         \textcolor{vhdlchar}{)};
+00086 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{wfm\_player\_top};
+00087 
+00088 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00089 \textcolor{keyword}{-- Architecture}
+00090 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00091 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} wfm_player_top is
+00092 \textcolor{keyword}{--declare signals,  components here}
+00093 
+00094 
+00095 \textcolor{keyword}{--reset signals}
+00096 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{ddr2_reset_n}                     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00097 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wcmd_reset_n}                 \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00098 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{rcmd_reset_n}                 \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00099 
+00100 \textcolor{keyword}{--ddr2 controller signals}
+00101 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{ddr2_phy_clk} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00102 
+00103 \textcolor{keyword}{--wfm player signals}
+00104 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_wcmd_rdy}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00105 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_wcmd_addr}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{addr_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00106 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_wcmd_wr}           \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00107 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_wcmd_brst_en}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};    
+00108 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_wcmd_data}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{cntrl_bus_size}\textcolor{vhdlchar}{*}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{*}\textcolor{vhdlchar}{cntrl_rate}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00109 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_rcmd_addr}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{addr_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00110 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_rcmd_wr}           \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00111 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_rcmd_brst_en}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00112 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_wcmd_reset_n}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00113 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_player_rcmd_reset_n}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00114 
+00115 \textcolor{keyword}{--DDR2 controller signals}
+00116 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_wcmd_rdy}               \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00117 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_rcmd_rdy}               \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00118 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_phy_clk}                \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00119 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_local_ready}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00120 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_local_rdata}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{cntrl_bus_size}\textcolor{vhdlchar}{*}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{*}\textcolor{vhdlchar}{
+      cntrl_rate}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00121 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_local_rdata_valid}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00122 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_local_init_done}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00123 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_init_done_wcmd0}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00124 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_init_done_wcmd1}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00125 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_init_done_rcmd0}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00126 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{DDR2_ctrl_init_done_rcmd1}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00127 
+00128 \textcolor{keyword}{--wfm outfifo signals}
+00129 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_out_fifo_rdreq}               \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00130 
+00131 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_out_fifo_rdempty}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00132 
+00133 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dcmpr_rdempty}                        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00134 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dcmpr_q}                              \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{data_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00135 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dcmpr_wusedw}                     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{dcmpr_fifo_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}; 
+00136 
+00137 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{rdfifo_read}                      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00138 
+00139 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_load_i}                           \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00140 
+00141 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dd_iq_l_int}                      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00142 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dd_iq_h_int}                      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00143 
+00144 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_load_reg_pll_refclk}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00145 
+00146 
+00147 \textcolor{keywordflow}{component} wfm_player \textcolor{keywordflow}{is}
+00148     \textcolor{keywordflow}{generic}(
+00149             dev_family          : \textcolor{comment}{string}  := \textcolor{keyword}{"Cyclone IV E"}; 
+00150             wfm_infifo_size : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{11};
+00151             wfm_outfifo_size    : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{11};
+00152             data_width          : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32};
+00153             iq_width                : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{12};
+00154             addr_size           : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{24};
+00155             cntrl_bus_size      : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{16};
+00156             lcl_burst_length    : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00157             cntrl_rate          : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{keyword}{ --1 - full rate, 2 - half rate}
+00158 );
+00159   \textcolor{keywordflow}{port} (
+00160         ddr2_phy_clk            : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00161         ddr2_phy_reset_n        : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00162 
+00163         wfm_load                    : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00164         wfm_play_stop           : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic}; \textcolor{keyword}{-- 1- play, 0- stop}
+00165 
+00166         wfm_data                    : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(data_width\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00167         wfm_wr                  : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00168         wfm_infifo_wrusedw  : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(wfm_infifo_size\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00169 
+00170         wcmd_clk                    : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00171         wcmd_reset_n            : \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00172         wcmd_rdy                    : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00173         wcmd_addr               : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(addr_size\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00174         wcmd_wr                 : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00175         wcmd_brst_en            : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}; \textcolor{keyword}{--1- writes in burst, 0- single write}
+00176         wcmd_data               : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(cntrl_bus_size*\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}*
+      cntrl_rate\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00177         rcmd_clk                    : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00178         rcmd_reset_n            : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00179         rcmd_rdy                    : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00180         rcmd_addr               : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(addr_size\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00181         rcmd_wr                 : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00182         rcmd_brst_en            : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}\textcolor{keyword}{ --1- reads in burst, 0- single read}
+00183         
+00184         );
+00185 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00186 
+00187 
+00188 \textcolor{keywordflow}{component} DDR2_ctrl_top \textcolor{keywordflow}{is}
+00189         \textcolor{keywordflow}{generic}(
+00190             cntrl_rate          : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}; \textcolor{keyword}{--1 - full rate, 2 - half rate}
+00191             cntrl_bus_size      : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{16};
+00192             addr_size           : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{24};
+00193             lcl_bus_size        : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{63};
+00194             lcl_burst_length    : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00195             cmd_fifo_size       : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{9};
+00196             outfifo_size        : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10}\textcolor{keyword}{  --DDR2 outfifo buffer size}
+00197         );
+00198         \textcolor{keywordflow}{port} (
+00199 
+00200       pll_ref_clk       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00201       global_reset_n    : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00202         soft_reset_n        : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00203 
+00204         wcmd_clk                : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00205         wcmd_reset_n        : \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00206         wcmd_rdy                : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00207         wcmd_addr           : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(addr_size\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00208         wcmd_wr             : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00209         wcmd_brst_en        : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic}; \textcolor{keyword}{--1- writes in burst, 0- single write}
+00210         wcmd_data           : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(cntrl_bus_size*\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}*cntrl_rate\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00211         rcmd_clk                : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00212         rcmd_reset_n        : \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00213         rcmd_rdy                : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00214         rcmd_addr           : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(addr_size\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00215         rcmd_wr             : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00216         rcmd_brst_en        : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic}; \textcolor{keyword}{--1- reads in burst, 0- single read}
+00217         outbuf_wrusedw      : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(outfifo_size\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00218 
+00219         local_ready         : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00220         local_rdata         : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(cntrl_bus_size*\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}*cntrl_rate\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00221         local_rdata_valid   : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00222         local_init_done : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00223 
+00224         mem_odt             : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00225         mem_cs_n                : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00226         mem_cke             : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00227         mem_addr                : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00228         mem_ba              : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00229         mem_ras_n           : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00230         mem_cas_n           : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00231         mem_we_n                : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00232         mem_dm              : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00233         phy_clk             : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00234 \textcolor{keyword}{        --aux\_full\_rate\_clk : out std\_logic;}
+00235 \textcolor{keyword}{        --aux\_half\_rate\_clk : out std\_logic;}
+00236 \textcolor{keyword}{        --reset\_request\_n   : out std\_logic;}
+00237         mem_clk             : \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00238         mem_clk_n           : \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00239         mem_dq              : \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00240         mem_dqs             : \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} (\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00241         begin_test              : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00242         insert_error            : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00243         pnf_per_bit             : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00244         pnf_per_bit_persist     : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00245         pass                    : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00246         fail                    : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}; 
+00247         test_complete           : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00248 
+00249 \textcolor{keyword}{      --output ports }
+00250         
+00251         );
+00252 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00253 
+00254 
+00255 \textcolor{keywordflow}{component}  fifo_inst \textcolor{keywordflow}{is}
+00256   \textcolor{keywordflow}{generic}(
+00257         dev_family          : \textcolor{comment}{string}  := \textcolor{keyword}{"Cyclone IV E"};
+00258         wrwidth             : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{24};
+00259         wrusedw_witdth      : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}; \textcolor{keyword}{--12=2048 words }
+00260         rdwidth             : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{48};
+00261         rdusedw_width       : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{11};
+00262         show_ahead          : \textcolor{comment}{string}  := \textcolor{keyword}{"ON"}
+00263   );  
+00264   \textcolor{keywordflow}{port} (
+00265 \textcolor{keyword}{      --input ports }
+00266       reset_n               : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00267       wrclk                 : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00268       wrreq                 : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00269       data                  : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(wrwidth\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00270       wrfull                : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00271         wrempty             : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00272       wrusedw               : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(wrusedw_witdth\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00273       rdclk                 : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00274       rdreq                 : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00275       q                     : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(rdwidth\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00276       rdempty               : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00277       rdusedw               : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(rdusedw_width\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0})     
+00278         );
+00279 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00280 
+00281 \textcolor{keywordflow}{component} decompress \textcolor{keywordflow}{is}
+00282   \textcolor{keywordflow}{generic} (
+00283             dev_family      : \textcolor{comment}{string}  := \textcolor{keyword}{"Cyclone IV E"};
+00284             data_width      : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{31};
+00285             fifo_rsize      : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{9} ;
+00286             fifo_wsize      : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10}
+00287             );
+00288   \textcolor{keywordflow}{port} (
+00289 \textcolor{keyword}{        --input ports }
+00290             wclk          : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00291             rclk          : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00292             reset_n       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00293             data_in       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(data_width\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00294             data_in_valid : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic}; \textcolor{keyword}{-- data\_in leading signal which indicates valid incomong data}
+00295             sample_width  : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}); \textcolor{keyword}{-- "00"-16bit, "01"-14bit, "10"-12bit}
+00296             rdreq         : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00297             rdempty       : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00298             rdusedw       : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(fifo_rsize\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00299             wfull         : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00300             wusedw        : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(fifo_wsize\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00301             dataout_valid : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00302             decmpr_data   : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0})    
+00303         );
+00304 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00305 
+00306 
+00307 \textcolor{keywordflow}{component} rd_tx_fifo \textcolor{keywordflow}{is}
+00308   \textcolor{keywordflow}{generic}(sampl_width : \textcolor{comment}{integer}:=\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12});
+00309   \textcolor{keywordflow}{port} (
+00310 \textcolor{keyword}{        --input ports }
+00311       clk           : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00312       reset_n       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00313       fr_start      : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00314       ch_en         : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00315       mimo_en       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00316       fifo_empty    : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00317       fifo_data : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00318 \textcolor{keyword}{        --output ports }
+00319       fifo_read : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00320       diq_h         : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00321       diq_l         : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0})
+00322         );
+00323 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00324 
+00325   
+00326 \textcolor{vhdlkeyword}{begin}
+00327 
+00328 \textcolor{vhdlchar}{wfm_load_i}\textcolor{vhdlchar}{<=}\textcolor{keywordflow}{not} \textcolor{vhdlchar}{wfm_load};
+00329 
+00330 
+00331 
+00332 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00333 \textcolor{keyword}{-- To synchronize DDR2\_ctrl\_local\_init\_done signal to wcmd\_clk}
+00334 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00335 \textcolor{keywordflow}{process} (reset_n, wcmd_clk) \textcolor{keywordflow}{is} 
+00336 \textcolor{vhdlkeyword}{begin }
+00337     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00338         \textcolor{vhdlchar}{DDR2_ctrl_init_done_wcmd0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00339         \textcolor{vhdlchar}{DDR2_ctrl_init_done_wcmd1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00340         \textcolor{vhdlchar}{wfm_player_wcmd_reset_n}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00341     \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wcmd_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wcmd_clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00342         \textcolor{vhdlchar}{DDR2_ctrl_init_done_wcmd0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{DDR2_ctrl_local_init_done};
+00343         \textcolor{vhdlchar}{DDR2_ctrl_init_done_wcmd1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{DDR2_ctrl_init_done_wcmd0};
+00344         
+00345         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{DDR2_ctrl_init_done_wcmd1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00346             \textcolor{vhdlchar}{wfm_player_wcmd_reset_n}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00347         \textcolor{keywordflow}{else} 
+00348             \textcolor{vhdlchar}{wfm_player_wcmd_reset_n}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00349         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00350     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};         
+00351 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00352 
+00353 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00354 \textcolor{keyword}{-- To synchronize DDR2\_ctrl\_local\_init\_done signal to rcmd\_clk}
+00355 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00356 \textcolor{keywordflow}{process} (reset_n, rcmd_clk) \textcolor{keywordflow}{is} 
+00357 \textcolor{vhdlkeyword}{begin }
+00358     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00359         \textcolor{vhdlchar}{DDR2_ctrl_init_done_rcmd0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00360         \textcolor{vhdlchar}{DDR2_ctrl_init_done_rcmd1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00361         \textcolor{vhdlchar}{wfm_player_rcmd_reset_n}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00362     \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rcmd_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{rcmd_clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00363         \textcolor{vhdlchar}{DDR2_ctrl_init_done_rcmd0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{DDR2_ctrl_local_init_done};
+00364         \textcolor{vhdlchar}{DDR2_ctrl_init_done_rcmd1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{DDR2_ctrl_init_done_rcmd0};
+00365         
+00366         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{DDR2_ctrl_init_done_rcmd1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00367             \textcolor{vhdlchar}{wfm_player_rcmd_reset_n}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00368         \textcolor{keywordflow}{else} 
+00369             \textcolor{vhdlchar}{wfm_player_rcmd_reset_n}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00370         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00371     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};         
+00372 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00373 
+00374 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00375 \textcolor{keyword}{-- DDR2 reset }
+00376 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00377 \textcolor{keywordflow}{process} (reset_n, ddr2_pll_ref_clk) \textcolor{keywordflow}{is} 
+00378 \textcolor{vhdlkeyword}{begin }
+00379     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00380         \textcolor{vhdlchar}{ddr2_reset_n}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00381         \textcolor{vhdlchar}{wfm_load_reg_pll_refclk}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00382     \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ddr2_pll_ref_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{ddr2_pll_ref_clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00383         \textcolor{vhdlchar}{wfm_load_reg_pll_refclk}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wfm_load_reg_pll_refclk}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{wfm_load};
+00384         
+00385         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wfm_load_reg_pll_refclk}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wfm_load_reg_pll_refclk}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00386             \textcolor{vhdlchar}{ddr2_reset_n}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00387         \textcolor{keywordflow}{else} 
+00388             \textcolor{vhdlchar}{ddr2_reset_n}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00389         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00390         
+00391     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};         
+00392 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00393 
+00394 
+00395 
+00396 
+00397 
+00398 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00399 \textcolor{keyword}{-- WFM player inst}
+00400 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00401 wfm_player_inst : wfm_player
+00402     \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (
+00403             dev_family          => dev_family, 
+00404             wfm_infifo_size => wfm_infifo_size,
+00405             wfm_outfifo_size    => wfm_outfifo_size,
+00406             data_width          => data_width, 
+00407             iq_width                => iq_width, 
+00408             addr_size           => addr_size, 
+00409             cntrl_bus_size      => cntrl_bus_size,
+00410             lcl_burst_length    => lcl_burst_length,
+00411             cntrl_rate          => cntrl_rate 
+00412 \textcolor{vhdlchar}{)}
+00413   \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00414 
+00415 
+00416         ddr2_phy_clk            => DDR2_ctrl_phy_clk,
+00417         ddr2_phy_reset_n        => DDR2_ctrl_local_init_done,
+00418 
+00419         wfm_load                    => wfm_load,
+00420         wfm_play_stop           => wfm_play_stop,
+00421 
+00422         wfm_data                    => wfm_data,
+00423         wfm_wr                  => wfm_wr,
+00424         wfm_infifo_wrusedw  => wfm_infifo_wrusedw,
+00425 
+00426         wcmd_clk                    => wcmd_clk,
+00427         wcmd_reset_n            => wfm_player_wcmd_reset_n,
+00428         wcmd_rdy                    => DDR2_ctrl_wcmd_rdy,
+00429         wcmd_addr               => wfm_player_wcmd_addr,
+00430         wcmd_wr                 => wfm_player_wcmd_wr,
+00431         wcmd_brst_en            => wfm_player_wcmd_brst_en,
+00432         wcmd_data               => wfm_player_wcmd_data,
+00433         rcmd_clk                    => rcmd_clk,
+00434         rcmd_reset_n            => wfm_player_rcmd_reset_n,
+00435         rcmd_rdy                    => DDR2_ctrl_rcmd_rdy,
+00436         rcmd_addr               => wfm_player_rcmd_addr,
+00437         rcmd_wr                 => wfm_player_rcmd_wr,
+00438         rcmd_brst_en            => wfm_player_rcmd_brst_en
+00439 
+00440         \textcolor{vhdlchar}{)};
+00441 
+00442 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00443 \textcolor{keyword}{-- DDR2 controller instance}
+00444 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00445   DDR2\_ctrl\_top\_inst : \textcolor{keywordflow}{entity} work.DDR2_ctrl_top 
+00446 \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (
+00447             cntrl_rate          => cntrl_rate,\textcolor{keyword}{ --1 - full rate, 2 - half rate}
+00448             cntrl_bus_size      => cntrl_bus_size,
+00449             addr_size           => addr_size,
+00450             lcl_bus_size        => lcl_bus_size,
+00451             lcl_burst_length    => lcl_burst_length,
+00452             cmd_fifo_size       => cmd_fifo_size,
+00453             outfifo_size        => dcmpr_fifo_size
+00454 \textcolor{vhdlchar}{)}
+00455 \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00456       pll_ref_clk           => ddr2_pll_ref_clk,
+00457       global_reset_n        => ddr2_reset_n,
+00458         soft_reset_n            => ddr2_reset_n,
+00459 
+00460         wcmd_clk                    => wcmd_clk, 
+00461         wcmd_reset_n            => wfm_player_wcmd_reset_n, 
+00462         wcmd_rdy                    => DDR2_ctrl_wcmd_rdy, 
+00463         wcmd_addr               => wfm_player_wcmd_addr, 
+00464         wcmd_wr                 => wfm_player_wcmd_wr, 
+00465         wcmd_brst_en            => wfm_player_wcmd_brst_en, 
+00466         wcmd_data               => wfm_player_wcmd_data, 
+00467         rcmd_clk                    => rcmd_clk, 
+00468         rcmd_reset_n            => wfm_player_rcmd_reset_n, 
+00469         rcmd_rdy                    => DDR2_ctrl_rcmd_rdy, 
+00470         rcmd_addr               => wfm_player_rcmd_addr, 
+00471         rcmd_wr                 => wfm_player_rcmd_wr, 
+00472         rcmd_brst_en            => wfm_player_rcmd_brst_en,
+00473         outbuf_wrusedw          => dcmpr_wusedw,    
+00474 
+00475         local_ready             => DDR2_ctrl_local_ready,
+00476         local_rdata             => DDR2_ctrl_local_rdata,
+00477         local_rdata_valid       => DDR2_ctrl_local_rdata_valid,
+00478         local_init_done     => DDR2_ctrl_local_init_done,
+00479 
+00480         mem_odt                 => mem_odt,
+00481         mem_cs_n                    => mem_cs_n,
+00482         mem_cke                 => mem_cke,
+00483         mem_addr                    => mem_addr,
+00484         mem_ba                  => mem_ba,
+00485         mem_ras_n               => mem_ras_n,
+00486         mem_cas_n               => mem_cas_n,
+00487         mem_we_n                    => mem_we_n,
+00488         mem_dm                  => mem_dm,
+00489         phy_clk                 => DDR2_ctrl_phy_clk,
+00490 \textcolor{keyword}{        --aux\_full\_rate\_clk : out std\_logic;}
+00491 \textcolor{keyword}{        --aux\_half\_rate\_clk : out std\_logic;}
+00492 \textcolor{keyword}{        --reset\_request\_n   : out std\_logic;}
+00493         mem_clk                 => mem_clk,
+00494         mem_clk_n               => mem_clk_n,
+00495         mem_dq                  => mem_dq,
+00496         mem_dqs                 => mem_dqs,
+00497         begin_test              => begin_test,
+00498         insert_error            => insert_error,
+00499         pnf_per_bit             => pnf_per_bit, 
+00500         pnf_per_bit_persist  => pnf_per_bit_persist,
+00501         pass                    => pass,
+00502         fail                    => fail, 
+00503         test_complete           => test_complete
+00504     
+00505     \textcolor{vhdlchar}{)};
+00506      
+00507 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00508 \textcolor{keyword}{-- Payload decompress module}
+00509 \textcolor{keyword}{-- ----------------------------------------------------------------------------  }
+00510 dcmpr :  decompress 
+00511   \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map}  (
+00512                     dev_family => dev_family,
+00513                     data_width => data_width,
+00514                fifo_rsize => dcmpr\_fifo\_size+2,
+00515                     fifo_wsize => dcmpr_fifo_size
+00516                     \textcolor{vhdlchar}{)}
+00517   \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00518 \textcolor{keyword}{        --input ports }
+00519         wclk          => DDR2_ctrl_phy_clk,  
+00520         rclk          => iq_clk, 
+00521         reset_n       => wfm_load_i, 
+00522         data_in       => DDR2_ctrl_local_rdata, 
+00523         data_in_valid => DDR2_ctrl_local_rdata_valid, 
+00524         sample_width  => sample_width,
+00525         rdreq         => rdfifo_read,
+00526         rdempty       => dcmpr_rdempty,
+00527         rdusedw       => \textcolor{keywordflow}{open}, 
+00528         wfull         => \textcolor{keywordflow}{open}, 
+00529         wusedw        => dcmpr_wusedw,
+00530         dataout_valid => \textcolor{keywordflow}{open},  
+00531         decmpr_data   => dcmpr_q    
+00532         \textcolor{vhdlchar}{)};  
+00533          
+00534 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00535 \textcolor{keyword}{-- Read and form samples from decompress fifo}
+00536 \textcolor{keyword}{-- ----------------------------------------------------------------------------         }
+00537 rd_fifo : rd_tx_fifo 
+00538   \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (sampl_width =>\textcolor{vhdllogic}{12}\textcolor{vhdlchar}{)}
+00539   \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00540       clk           => iq_clk,
+00541       reset_n       => wfm_load_i, 
+00542       fr_start      => fr_start, 
+00543       ch_en         => ch_en,
+00544       mimo_en       => mimo_en,
+00545       fifo_empty    => dcmpr_rdempty,
+00546       fifo_data => dcmpr_q, 
+00547       fifo_read => rdfifo_read, 
+00548       diq_h         => dd_iq_h_int, 
+00549       diq_l         => dd_iq_l_int
+00550         \textcolor{vhdlchar}{)};      
+00551 
+00552 
+00553 
+00554 \textcolor{vhdlchar}{phy_clk}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{DDR2_ctrl_phy_clk};
+00555 
+00556 \textcolor{vhdlchar}{dd_iq_h}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{dd_iq_l_int};
+00557 \textcolor{vhdlchar}{dd_iq_l}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{dd_iq_h_int};   
+00558 
+00559 
+00560 \textcolor{keyword}{--dd\_iq\_h\_uns<="000" & dd\_iq\_l\_int(12) & std\_logic\_vector(signed(dd\_iq\_l\_int(11 downto 0))+2048);}
+00561 \textcolor{keyword}{--dd\_iq\_l\_uns<="000" & dd\_iq\_l\_int(12) & std\_logic\_vector(signed(dd\_iq\_h\_int(11 downto 0))+2048);}
+00562 
+00563 \textcolor{vhdlchar}{wfm_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wfm_player_wcmd_reset_n};
+00564 
+00565   
+00566 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00567 
+00568 
+00569 
+00570 
+00571 
+00572 
+\end{DoxyCode}

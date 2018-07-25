@@ -1,0 +1,101 @@
+\subsection{transition\+\_\+count.\+vhd}
+\label{transition__count_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/self\+\_\+test/transition\+\_\+count.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/self\+\_\+test/transition\+\_\+count.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    transition\_count.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: Counts signal transitions}
+00004 \textcolor{keyword}{-- DATE:    Sep 5, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }transition_count \textcolor{keywordflow}{is}
+00016   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00017 \textcolor{keyword}{        --input ports }
+00018             \textcolor{vhdlchar}{clk}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00019             \textcolor{vhdlchar}{reset_n}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020             \textcolor{vhdlchar}{trans_wire}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00021           
+00022             \textcolor{vhdlchar}{test_en}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00023             \textcolor{vhdlchar}{test_cnt}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00024             \textcolor{vhdlchar}{test_complete}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00025             \textcolor{vhdlchar}{test_pass_fail}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00026      
+00027         \textcolor{vhdlchar}{)};
+00028 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{transition\_count};
+00029 
+00030 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00031 \textcolor{keyword}{-- Architecture}
+00032 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00033 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} transition_count is
+00034 \textcolor{keyword}{--declare signals,  components here}
+00035 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{trans_wire_reg} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00036 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{high_trans}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00037 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{low_trans}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00038 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{trans_cnt}        \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00039 
+00040 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{test_en_reg}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00041 
+00042 
+00043   
+00044 \textcolor{vhdlkeyword}{begin}
+00045 
+00046 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00047 \textcolor{keyword}{-- Register chain to capture low to high and high to low transitions}
+00048 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00049 \textcolor{keywordflow}{process}(reset_n, clk)
+00050 \textcolor{vhdlkeyword}{begin }
+00051     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00052         \textcolor{vhdlchar}{trans_wire_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00053     \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00054         \textcolor{vhdlchar}{trans_wire_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{trans_wire};
+00055         \textcolor{vhdlchar}{trans_wire_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{trans_wire_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00056         \textcolor{vhdlchar}{trans_wire_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{trans_wire_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00057     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00058 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00059 
+00060 \textcolor{vhdlchar}{high_trans}  \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{trans_wire_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"01"} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00061 \textcolor{vhdlchar}{low_trans}   \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{trans_wire_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"10"} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00062 
+00063 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00064 \textcolor{keyword}{-- To count transitions}
+00065 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00066 \textcolor{keywordflow}{process}(reset_n, clk)
+00067 \textcolor{vhdlkeyword}{begin }
+00068     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00069         \textcolor{vhdlchar}{test_en_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00070         \textcolor{vhdlchar}{trans_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00071     \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00072         \textcolor{vhdlchar}{test_en_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{test_en};
+00073         \textcolor{vhdlchar}{test_en_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{test_en_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00074         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{test_en_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00075             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{high_trans}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{low_trans}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00076                 \textcolor{vhdlchar}{trans_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{trans_cnt}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00077             \textcolor{keywordflow}{else}
+00078                 \textcolor{vhdlchar}{trans_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{trans_cnt};
+00079             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00080         \textcolor{keywordflow}{else} 
+00081             \textcolor{vhdlchar}{trans_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00082         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00083     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00084 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00085 
+00086 \textcolor{vhdlchar}{test_cnt}\textcolor{vhdlchar}{<=}\textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{trans_cnt}\textcolor{vhdlchar}{)};
+00087 \textcolor{vhdlchar}{test_complete}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{test_en_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00088 \textcolor{vhdlchar}{test_pass_fail}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00089 
+00090 
+00091 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};
+00092 
+00093 
+00094 
+00095 
+00096 
+\end{DoxyCode}

@@ -1,0 +1,782 @@
+\subsection{arch Architecture Reference}
+\label{classrx__pll__top_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{d1/d08/classrx__pll__top_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Components}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clkctrl}  {\bfseries }  
+\item 
+{\bf altpll}  {\bfseries }  
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf pll\+\_\+areset\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pll\+\_\+inclk\+\_\+global} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf c0\+\_\+global} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf c1\+\_\+global} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rcnfig\+\_\+en\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rcnfig\+\_\+data\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{143} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rcnfig\+\_\+areset\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dynps\+\_\+areset\+\_\+n\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dynps\+\_\+en\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dynps\+\_\+dir\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dynps\+\_\+cnt\+\_\+sel\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dynps\+\_\+phase\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dynps\+\_\+step\+\_\+size\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rcnfig\+\_\+en\+\_\+sync\+\_\+scanclk} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dynps\+\_\+mode\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dynps\+\_\+tst\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf smpl\+\_\+cmp\+\_\+done\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf smpl\+\_\+cmp\+\_\+error\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst0\+\_\+wr\+\_\+rom} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst0\+\_\+reconfig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst0\+\_\+config\+\_\+data} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst1\+\_\+busy} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst1\+\_\+pll\+\_\+areset} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst1\+\_\+pll\+\_\+configupdate} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst1\+\_\+pll\+\_\+scanclk} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst1\+\_\+pll\+\_\+scanclkena} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst1\+\_\+pll\+\_\+scandata} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst1\+\_\+rom\+\_\+address\+\_\+out} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst1\+\_\+write\+\_\+rom\+\_\+ena} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst1\+\_\+pll\+\_\+areset\+\_\+in} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst2\+\_\+pll\+\_\+phasestep} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst2\+\_\+ps\+\_\+status} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst2\+\_\+ps\+\_\+busy} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst2\+\_\+ps\+\_\+done} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst2\+\_\+pll\+\_\+reset\+\_\+req} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst2\+\_\+pll\+\_\+phasecounterselect} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst2\+\_\+pll\+\_\+phaseupdown} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst3\+\_\+inclk} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst3\+\_\+clk} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{4} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst3\+\_\+locked} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst3\+\_\+locked\+\_\+scanclk} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst3\+\_\+phasedone} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst3\+\_\+scandataout} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst3\+\_\+scandone} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst4\+\_\+rcfig\+\_\+complete} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst5\+\_\+c0\+\_\+pol\+\_\+h} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst5\+\_\+c0\+\_\+pol\+\_\+l} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf inst5\+\_\+dataout} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf drct\+\_\+c0\+\_\+dly\+\_\+chain} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf drct\+\_\+c0\+\_\+ndly}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf drct\+\_\+c1\+\_\+dly\+\_\+chain} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf drct\+\_\+c1\+\_\+ndly}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf c0\+\_\+mux} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf c1\+\_\+mux} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf locked\+\_\+mux} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Instantiations}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf sync\+\_\+reg0}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg1}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg2}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg3}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg4}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg5}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg6}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg7}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg8}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg9}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf sync\+\_\+reg10}  {\bfseries entity sync\+\_\+reg}   
+\item 
+{\bf bus\+\_\+sync\+\_\+reg0}  {\bfseries entity bus\+\_\+sync\+\_\+reg}   
+\item 
+{\bf bus\+\_\+sync\+\_\+reg1}  {\bfseries entity bus\+\_\+sync\+\_\+reg}   
+\item 
+{\bf bus\+\_\+sync\+\_\+reg2}  {\bfseries entity bus\+\_\+sync\+\_\+reg}   
+\item 
+{\bf bus\+\_\+sync\+\_\+reg3}  {\bfseries entity bus\+\_\+sync\+\_\+reg}   
+\item 
+{\bf config\+\_\+ctrl\+\_\+inst0}  {\bfseries entity config\+\_\+ctrl}   
+\item 
+{\bf pll\+\_\+reconfig\+\_\+module\+\_\+inst1}  {\bfseries entity pll\+\_\+reconfig\+\_\+module}   
+\item 
+{\bf pll\+\_\+ps\+\_\+top\+\_\+inst2}  {\bfseries entity pll\+\_\+ps\+\_\+top}   
+\item 
+{\bf altpll\+\_\+inst3}  {\bfseries altpll}   
+\item 
+{\bf pll\+\_\+reconfig\+\_\+status\+\_\+inst4}  {\bfseries entity pll\+\_\+reconfig\+\_\+status}   
+\item 
+{\bf lcell0}  {\bfseries lcell}   
+\item 
+{\bf lcellx}  {\bfseries lcell}   
+\item 
+{\bf lcell0}  {\bfseries lcell}   
+\item 
+{\bf lcellx}  {\bfseries lcell}   
+\item 
+{\bf altddio\+\_\+out\+\_\+component\+\_\+int5}  {\bfseries altddio\+\_\+out}   
+\item 
+{\bf clkctrl\+\_\+inst6}  {\bfseries clkctrl}   
+\item 
+{\bf clkctrl\+\_\+inst7}  {\bfseries clkctrl}   
+\item 
+{\bf clkctrl\+\_\+inst8}  {\bfseries clkctrl}   
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 82} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!altddio\+\_\+out\+\_\+component\+\_\+int5@{altddio\+\_\+out\+\_\+component\+\_\+int5}}
+\index{altddio\+\_\+out\+\_\+component\+\_\+int5@{altddio\+\_\+out\+\_\+component\+\_\+int5}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{altddio\+\_\+out\+\_\+component\+\_\+int5}]{\setlength{\rightskip}{0pt plus 5cm}{\bf altddio\+\_\+out\+\_\+component\+\_\+int5} {\bfseries \textcolor{vhdlchar}{altddio\+\_\+out}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_ad469d03c076e5d8b2be842aebe2da6aa}
+
+
+Definition at line {\bf 593} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!altpll@{altpll}}
+\index{altpll@{altpll}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{altpll}]{\setlength{\rightskip}{0pt plus 5cm}{\bf altpll} {\bfseries \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Component]}}\label{classrx__pll__top_1_1arch_ad45c11bbc2e898d68e19fa2eb5ba73d5}
+
+
+Definition at line {\bf 162} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!altpll\+\_\+inst3@{altpll\+\_\+inst3}}
+\index{altpll\+\_\+inst3@{altpll\+\_\+inst3}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{altpll\+\_\+inst3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf altpll\+\_\+inst3} {\bfseries \textcolor{vhdlchar}{altpll}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a1bf6908ce974bb8d4d0cc3aef066ed0c}
+
+
+Definition at line {\bf 488} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!bus\+\_\+sync\+\_\+reg0@{bus\+\_\+sync\+\_\+reg0}}
+\index{bus\+\_\+sync\+\_\+reg0@{bus\+\_\+sync\+\_\+reg0}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{bus\+\_\+sync\+\_\+reg0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bus\+\_\+sync\+\_\+reg0} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{bus\+\_\+sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_ab4c40aac4a7c660b0e025e7682ee4bb4}
+
+
+Definition at line {\bf 289} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!bus\+\_\+sync\+\_\+reg1@{bus\+\_\+sync\+\_\+reg1}}
+\index{bus\+\_\+sync\+\_\+reg1@{bus\+\_\+sync\+\_\+reg1}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{bus\+\_\+sync\+\_\+reg1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bus\+\_\+sync\+\_\+reg1} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{bus\+\_\+sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a07ed000d8c6d58a6438ff28822e7ff7b}
+
+
+Definition at line {\bf 293} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!bus\+\_\+sync\+\_\+reg2@{bus\+\_\+sync\+\_\+reg2}}
+\index{bus\+\_\+sync\+\_\+reg2@{bus\+\_\+sync\+\_\+reg2}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{bus\+\_\+sync\+\_\+reg2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bus\+\_\+sync\+\_\+reg2} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{bus\+\_\+sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a2a3b3c53d21a3f7ac9d60f1270d56b18}
+
+
+Definition at line {\bf 297} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!bus\+\_\+sync\+\_\+reg3@{bus\+\_\+sync\+\_\+reg3}}
+\index{bus\+\_\+sync\+\_\+reg3@{bus\+\_\+sync\+\_\+reg3}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{bus\+\_\+sync\+\_\+reg3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bus\+\_\+sync\+\_\+reg3} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{bus\+\_\+sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_aa1cbf31d0c793511fb15635508103769}
+
+
+Definition at line {\bf 301} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!c0\+\_\+global@{c0\+\_\+global}}
+\index{c0\+\_\+global@{c0\+\_\+global}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{c0\+\_\+global}]{\setlength{\rightskip}{0pt plus 5cm}{\bf c0\+\_\+global} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a456ed1b62886656f2f830c81e565dab7}
+
+
+Definition at line {\bf 87} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!c0\+\_\+mux@{c0\+\_\+mux}}
+\index{c0\+\_\+mux@{c0\+\_\+mux}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{c0\+\_\+mux}]{\setlength{\rightskip}{0pt plus 5cm}{\bf c0\+\_\+mux} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_ac07d5ac03a3bc82899e169199c6b5578}
+
+
+Definition at line {\bf 151} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!c1\+\_\+global@{c1\+\_\+global}}
+\index{c1\+\_\+global@{c1\+\_\+global}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{c1\+\_\+global}]{\setlength{\rightskip}{0pt plus 5cm}{\bf c1\+\_\+global} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_aea1152478f9bba839a2ff5bbd4d7f79d}
+
+
+Definition at line {\bf 88} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!c1\+\_\+mux@{c1\+\_\+mux}}
+\index{c1\+\_\+mux@{c1\+\_\+mux}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{c1\+\_\+mux}]{\setlength{\rightskip}{0pt plus 5cm}{\bf c1\+\_\+mux} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a337f878b96f7b3f9ae0ef07e427b95da}
+
+
+Definition at line {\bf 151} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!clkctrl@{clkctrl}}
+\index{clkctrl@{clkctrl}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{clkctrl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clkctrl} {\bfseries \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Component]}}\label{classrx__pll__top_1_1arch_a0fcdc0c9163d60d00a6394eb52494d7f}
+
+
+Definition at line {\bf 154} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!clkctrl\+\_\+inst6@{clkctrl\+\_\+inst6}}
+\index{clkctrl\+\_\+inst6@{clkctrl\+\_\+inst6}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{clkctrl\+\_\+inst6}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clkctrl\+\_\+inst6} {\bfseries \textcolor{vhdlchar}{clkctrl}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a78be1e3fc631624e5a3abafd30067bd1}
+
+
+Definition at line {\bf 603} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!clkctrl\+\_\+inst7@{clkctrl\+\_\+inst7}}
+\index{clkctrl\+\_\+inst7@{clkctrl\+\_\+inst7}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{clkctrl\+\_\+inst7}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clkctrl\+\_\+inst7} {\bfseries \textcolor{vhdlchar}{clkctrl}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a98fdc44d571fd3880c8fc12c0431a724}
+
+
+Definition at line {\bf 610} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!clkctrl\+\_\+inst8@{clkctrl\+\_\+inst8}}
+\index{clkctrl\+\_\+inst8@{clkctrl\+\_\+inst8}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{clkctrl\+\_\+inst8}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clkctrl\+\_\+inst8} {\bfseries \textcolor{vhdlchar}{clkctrl}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a1393ce323de1af19da645cfe9e9cabda}
+
+
+Definition at line {\bf 617} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!config\+\_\+ctrl\+\_\+inst0@{config\+\_\+ctrl\+\_\+inst0}}
+\index{config\+\_\+ctrl\+\_\+inst0@{config\+\_\+ctrl\+\_\+inst0}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{config\+\_\+ctrl\+\_\+inst0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf config\+\_\+ctrl\+\_\+inst0} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{config\+\_\+ctrl}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a6d8a8f5a76d0f92386b33b32ce4c3607}
+
+
+Definition at line {\bf 320} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!drct\+\_\+c0\+\_\+dly\+\_\+chain@{drct\+\_\+c0\+\_\+dly\+\_\+chain}}
+\index{drct\+\_\+c0\+\_\+dly\+\_\+chain@{drct\+\_\+c0\+\_\+dly\+\_\+chain}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{drct\+\_\+c0\+\_\+dly\+\_\+chain}]{\setlength{\rightskip}{0pt plus 5cm}{\bf drct\+\_\+c0\+\_\+dly\+\_\+chain} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf drct\+\_\+c0\+\_\+ndly}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a12a8bb2551a74ed34c942a41cc272602}
+
+
+Definition at line {\bf 148} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!drct\+\_\+c1\+\_\+dly\+\_\+chain@{drct\+\_\+c1\+\_\+dly\+\_\+chain}}
+\index{drct\+\_\+c1\+\_\+dly\+\_\+chain@{drct\+\_\+c1\+\_\+dly\+\_\+chain}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{drct\+\_\+c1\+\_\+dly\+\_\+chain}]{\setlength{\rightskip}{0pt plus 5cm}{\bf drct\+\_\+c1\+\_\+dly\+\_\+chain} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf drct\+\_\+c1\+\_\+ndly}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_adc1c3c224f0f1793d87829ee32f97367}
+
+
+Definition at line {\bf 149} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!dynps\+\_\+areset\+\_\+n\+\_\+sync@{dynps\+\_\+areset\+\_\+n\+\_\+sync}}
+\index{dynps\+\_\+areset\+\_\+n\+\_\+sync@{dynps\+\_\+areset\+\_\+n\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{dynps\+\_\+areset\+\_\+n\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynps\+\_\+areset\+\_\+n\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a97eec311db3d8462ca31bfd1b43dbbc3}
+
+
+Definition at line {\bf 94} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!dynps\+\_\+cnt\+\_\+sel\+\_\+sync@{dynps\+\_\+cnt\+\_\+sel\+\_\+sync}}
+\index{dynps\+\_\+cnt\+\_\+sel\+\_\+sync@{dynps\+\_\+cnt\+\_\+sel\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{dynps\+\_\+cnt\+\_\+sel\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynps\+\_\+cnt\+\_\+sel\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a790f3c7c2b0c037fecf37811e00419f0}
+
+
+Definition at line {\bf 97} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!dynps\+\_\+dir\+\_\+sync@{dynps\+\_\+dir\+\_\+sync}}
+\index{dynps\+\_\+dir\+\_\+sync@{dynps\+\_\+dir\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{dynps\+\_\+dir\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynps\+\_\+dir\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a5e588b1b4311f4aeb6d89d68a9054548}
+
+
+Definition at line {\bf 96} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!dynps\+\_\+en\+\_\+sync@{dynps\+\_\+en\+\_\+sync}}
+\index{dynps\+\_\+en\+\_\+sync@{dynps\+\_\+en\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{dynps\+\_\+en\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynps\+\_\+en\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_ad28dd2b2219a571c1ca271752b95a644}
+
+
+Definition at line {\bf 95} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!dynps\+\_\+mode\+\_\+sync@{dynps\+\_\+mode\+\_\+sync}}
+\index{dynps\+\_\+mode\+\_\+sync@{dynps\+\_\+mode\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{dynps\+\_\+mode\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynps\+\_\+mode\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a1cfacd9a6287a05268b925bccf2a2d64}
+
+
+Definition at line {\bf 101} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!dynps\+\_\+phase\+\_\+sync@{dynps\+\_\+phase\+\_\+sync}}
+\index{dynps\+\_\+phase\+\_\+sync@{dynps\+\_\+phase\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{dynps\+\_\+phase\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynps\+\_\+phase\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a2b0b6a03e648ee0a31119e3a7235b843}
+
+
+Definition at line {\bf 98} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!dynps\+\_\+step\+\_\+size\+\_\+sync@{dynps\+\_\+step\+\_\+size\+\_\+sync}}
+\index{dynps\+\_\+step\+\_\+size\+\_\+sync@{dynps\+\_\+step\+\_\+size\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{dynps\+\_\+step\+\_\+size\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynps\+\_\+step\+\_\+size\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a4c1b3cc6a917e83131c4ee59e16295f6}
+
+
+Definition at line {\bf 99} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!dynps\+\_\+tst\+\_\+sync@{dynps\+\_\+tst\+\_\+sync}}
+\index{dynps\+\_\+tst\+\_\+sync@{dynps\+\_\+tst\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{dynps\+\_\+tst\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynps\+\_\+tst\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_ae6bd0156f4ff344cbca18d052dee2ef3}
+
+
+Definition at line {\bf 102} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst0\+\_\+config\+\_\+data@{inst0\+\_\+config\+\_\+data}}
+\index{inst0\+\_\+config\+\_\+data@{inst0\+\_\+config\+\_\+data}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst0\+\_\+config\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst0\+\_\+config\+\_\+data} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a742ff4a65905d63cc0ecdcc038ce75d6}
+
+
+Definition at line {\bf 111} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst0\+\_\+reconfig@{inst0\+\_\+reconfig}}
+\index{inst0\+\_\+reconfig@{inst0\+\_\+reconfig}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst0\+\_\+reconfig}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst0\+\_\+reconfig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_acb828f5e9c48a5910c6924a0a06e323c}
+
+
+Definition at line {\bf 110} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst0\+\_\+wr\+\_\+rom@{inst0\+\_\+wr\+\_\+rom}}
+\index{inst0\+\_\+wr\+\_\+rom@{inst0\+\_\+wr\+\_\+rom}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst0\+\_\+wr\+\_\+rom}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst0\+\_\+wr\+\_\+rom} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_ae106e8669773a7099e804da907c9a305}
+
+
+Definition at line {\bf 109} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst1\+\_\+busy@{inst1\+\_\+busy}}
+\index{inst1\+\_\+busy@{inst1\+\_\+busy}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst1\+\_\+busy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst1\+\_\+busy} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_ae1cc1593d4ae88fc0efa2b764a2876f9}
+
+
+Definition at line {\bf 113} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst1\+\_\+pll\+\_\+areset@{inst1\+\_\+pll\+\_\+areset}}
+\index{inst1\+\_\+pll\+\_\+areset@{inst1\+\_\+pll\+\_\+areset}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst1\+\_\+pll\+\_\+areset}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst1\+\_\+pll\+\_\+areset} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a665b427473828ad16ef2f7efa61f5186}
+
+
+Definition at line {\bf 114} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst1\+\_\+pll\+\_\+areset\+\_\+in@{inst1\+\_\+pll\+\_\+areset\+\_\+in}}
+\index{inst1\+\_\+pll\+\_\+areset\+\_\+in@{inst1\+\_\+pll\+\_\+areset\+\_\+in}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst1\+\_\+pll\+\_\+areset\+\_\+in}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst1\+\_\+pll\+\_\+areset\+\_\+in} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_ad616c4c0283ff7faa965efd68be789f9}
+
+
+Definition at line {\bf 121} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst1\+\_\+pll\+\_\+configupdate@{inst1\+\_\+pll\+\_\+configupdate}}
+\index{inst1\+\_\+pll\+\_\+configupdate@{inst1\+\_\+pll\+\_\+configupdate}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst1\+\_\+pll\+\_\+configupdate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst1\+\_\+pll\+\_\+configupdate} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a6fff26ffbf18ab854b6bb7305c837112}
+
+
+Definition at line {\bf 115} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst1\+\_\+pll\+\_\+scanclk@{inst1\+\_\+pll\+\_\+scanclk}}
+\index{inst1\+\_\+pll\+\_\+scanclk@{inst1\+\_\+pll\+\_\+scanclk}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst1\+\_\+pll\+\_\+scanclk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst1\+\_\+pll\+\_\+scanclk} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_afa953d37f118fd5a395ae0a9cd1fe9df}
+
+
+Definition at line {\bf 116} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst1\+\_\+pll\+\_\+scanclkena@{inst1\+\_\+pll\+\_\+scanclkena}}
+\index{inst1\+\_\+pll\+\_\+scanclkena@{inst1\+\_\+pll\+\_\+scanclkena}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst1\+\_\+pll\+\_\+scanclkena}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst1\+\_\+pll\+\_\+scanclkena} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a66ed288adc9c117f80fc331994d49033}
+
+
+Definition at line {\bf 117} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst1\+\_\+pll\+\_\+scandata@{inst1\+\_\+pll\+\_\+scandata}}
+\index{inst1\+\_\+pll\+\_\+scandata@{inst1\+\_\+pll\+\_\+scandata}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst1\+\_\+pll\+\_\+scandata}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst1\+\_\+pll\+\_\+scandata} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a859b285388a6eb4b388aa797a764963b}
+
+
+Definition at line {\bf 118} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst1\+\_\+rom\+\_\+address\+\_\+out@{inst1\+\_\+rom\+\_\+address\+\_\+out}}
+\index{inst1\+\_\+rom\+\_\+address\+\_\+out@{inst1\+\_\+rom\+\_\+address\+\_\+out}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst1\+\_\+rom\+\_\+address\+\_\+out}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst1\+\_\+rom\+\_\+address\+\_\+out} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a35d403018ea0272bf97c58c101888e1d}
+
+
+Definition at line {\bf 119} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst1\+\_\+write\+\_\+rom\+\_\+ena@{inst1\+\_\+write\+\_\+rom\+\_\+ena}}
+\index{inst1\+\_\+write\+\_\+rom\+\_\+ena@{inst1\+\_\+write\+\_\+rom\+\_\+ena}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst1\+\_\+write\+\_\+rom\+\_\+ena}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst1\+\_\+write\+\_\+rom\+\_\+ena} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a57a094e4fd05a5ad0c147d4416b0bde3}
+
+
+Definition at line {\bf 120} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst2\+\_\+pll\+\_\+phasecounterselect@{inst2\+\_\+pll\+\_\+phasecounterselect}}
+\index{inst2\+\_\+pll\+\_\+phasecounterselect@{inst2\+\_\+pll\+\_\+phasecounterselect}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst2\+\_\+pll\+\_\+phasecounterselect}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst2\+\_\+pll\+\_\+phasecounterselect} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a6a77af208dbec7738e6c9317bda87915}
+
+
+Definition at line {\bf 128} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst2\+\_\+pll\+\_\+phasestep@{inst2\+\_\+pll\+\_\+phasestep}}
+\index{inst2\+\_\+pll\+\_\+phasestep@{inst2\+\_\+pll\+\_\+phasestep}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst2\+\_\+pll\+\_\+phasestep}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst2\+\_\+pll\+\_\+phasestep} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_ace91b87fa8c7b210c4ed2e63a77f99ac}
+
+
+Definition at line {\bf 123} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst2\+\_\+pll\+\_\+phaseupdown@{inst2\+\_\+pll\+\_\+phaseupdown}}
+\index{inst2\+\_\+pll\+\_\+phaseupdown@{inst2\+\_\+pll\+\_\+phaseupdown}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst2\+\_\+pll\+\_\+phaseupdown}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst2\+\_\+pll\+\_\+phaseupdown} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a9584139c33d288142f69230d24cf8663}
+
+
+Definition at line {\bf 129} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst2\+\_\+pll\+\_\+reset\+\_\+req@{inst2\+\_\+pll\+\_\+reset\+\_\+req}}
+\index{inst2\+\_\+pll\+\_\+reset\+\_\+req@{inst2\+\_\+pll\+\_\+reset\+\_\+req}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst2\+\_\+pll\+\_\+reset\+\_\+req}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst2\+\_\+pll\+\_\+reset\+\_\+req} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_ac0fd38e99a0c0d9d4ebee13b3c8f0788}
+
+
+Definition at line {\bf 127} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst2\+\_\+ps\+\_\+busy@{inst2\+\_\+ps\+\_\+busy}}
+\index{inst2\+\_\+ps\+\_\+busy@{inst2\+\_\+ps\+\_\+busy}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst2\+\_\+ps\+\_\+busy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst2\+\_\+ps\+\_\+busy} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a7c0edc14c5e95284059c4f1a760c748f}
+
+
+Definition at line {\bf 125} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst2\+\_\+ps\+\_\+done@{inst2\+\_\+ps\+\_\+done}}
+\index{inst2\+\_\+ps\+\_\+done@{inst2\+\_\+ps\+\_\+done}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst2\+\_\+ps\+\_\+done}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst2\+\_\+ps\+\_\+done} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_afa387e2b25d8f226f82c7a8b2a71722e}
+
+
+Definition at line {\bf 126} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst2\+\_\+ps\+\_\+status@{inst2\+\_\+ps\+\_\+status}}
+\index{inst2\+\_\+ps\+\_\+status@{inst2\+\_\+ps\+\_\+status}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst2\+\_\+ps\+\_\+status}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst2\+\_\+ps\+\_\+status} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a8eeed8f437c843452a57d48c35bd7ee9}
+
+
+Definition at line {\bf 124} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst3\+\_\+clk@{inst3\+\_\+clk}}
+\index{inst3\+\_\+clk@{inst3\+\_\+clk}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst3\+\_\+clk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst3\+\_\+clk} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{4} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a574bc5c4cc47278bec8600e66cf2a437}
+
+
+Definition at line {\bf 133} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst3\+\_\+inclk@{inst3\+\_\+inclk}}
+\index{inst3\+\_\+inclk@{inst3\+\_\+inclk}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst3\+\_\+inclk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst3\+\_\+inclk} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a884ef298f8bc2ca4b72db3dde7d0f4a3}
+
+
+Definition at line {\bf 132} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst3\+\_\+locked@{inst3\+\_\+locked}}
+\index{inst3\+\_\+locked@{inst3\+\_\+locked}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst3\+\_\+locked}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst3\+\_\+locked} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a94f94c7cea5f7dd30efae5c43184e0fd}
+
+
+Definition at line {\bf 134} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst3\+\_\+locked\+\_\+scanclk@{inst3\+\_\+locked\+\_\+scanclk}}
+\index{inst3\+\_\+locked\+\_\+scanclk@{inst3\+\_\+locked\+\_\+scanclk}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst3\+\_\+locked\+\_\+scanclk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst3\+\_\+locked\+\_\+scanclk} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a613f879e3e2b1c164a78b34a70923599}
+
+
+Definition at line {\bf 135} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst3\+\_\+phasedone@{inst3\+\_\+phasedone}}
+\index{inst3\+\_\+phasedone@{inst3\+\_\+phasedone}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst3\+\_\+phasedone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst3\+\_\+phasedone} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a196195b9358a1cef94b5f1be50689f57}
+
+
+Definition at line {\bf 136} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst3\+\_\+scandataout@{inst3\+\_\+scandataout}}
+\index{inst3\+\_\+scandataout@{inst3\+\_\+scandataout}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst3\+\_\+scandataout}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst3\+\_\+scandataout} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a3b7dfb234387ab208681fd63283c1ddf}
+
+
+Definition at line {\bf 137} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst3\+\_\+scandone@{inst3\+\_\+scandone}}
+\index{inst3\+\_\+scandone@{inst3\+\_\+scandone}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst3\+\_\+scandone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst3\+\_\+scandone} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_aaef1938bb7255f50a84c95ec92dd0583}
+
+
+Definition at line {\bf 138} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst4\+\_\+rcfig\+\_\+complete@{inst4\+\_\+rcfig\+\_\+complete}}
+\index{inst4\+\_\+rcfig\+\_\+complete@{inst4\+\_\+rcfig\+\_\+complete}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst4\+\_\+rcfig\+\_\+complete}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst4\+\_\+rcfig\+\_\+complete} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a06b6c1224b1d404f4159053adf92243d}
+
+
+Definition at line {\bf 141} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst5\+\_\+c0\+\_\+pol\+\_\+h@{inst5\+\_\+c0\+\_\+pol\+\_\+h}}
+\index{inst5\+\_\+c0\+\_\+pol\+\_\+h@{inst5\+\_\+c0\+\_\+pol\+\_\+h}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst5\+\_\+c0\+\_\+pol\+\_\+h}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst5\+\_\+c0\+\_\+pol\+\_\+h} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_aba4b16531433b5a817053c9a3a049096}
+
+
+Definition at line {\bf 144} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst5\+\_\+c0\+\_\+pol\+\_\+l@{inst5\+\_\+c0\+\_\+pol\+\_\+l}}
+\index{inst5\+\_\+c0\+\_\+pol\+\_\+l@{inst5\+\_\+c0\+\_\+pol\+\_\+l}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst5\+\_\+c0\+\_\+pol\+\_\+l}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst5\+\_\+c0\+\_\+pol\+\_\+l} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a0a660fb0226cb75afa40f44c247bb5fb}
+
+
+Definition at line {\bf 145} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!inst5\+\_\+dataout@{inst5\+\_\+dataout}}
+\index{inst5\+\_\+dataout@{inst5\+\_\+dataout}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{inst5\+\_\+dataout}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inst5\+\_\+dataout} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a9e0494c1f938d777cb9a5e2c4c83b9b1}
+
+
+Definition at line {\bf 146} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!lcell0@{lcell0}}
+\index{lcell0@{lcell0}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{lcell0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lcell0} {\bfseries \textcolor{vhdlchar}{lcell}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a8edbd2f53cc1b21b1cc1cfea81ac5721}
+
+
+Definition at line {\bf 525} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!lcell0@{lcell0}}
+\index{lcell0@{lcell0}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{lcell0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lcell0} {\bfseries \textcolor{vhdlchar}{lcell}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a8edbd2f53cc1b21b1cc1cfea81ac5721}
+
+
+Definition at line {\bf 549} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!lcellx@{lcellx}}
+\index{lcellx@{lcellx}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{lcellx}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lcellx} {\bfseries \textcolor{vhdlchar}{lcell}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a39a88fc9c6506e5fde79d7e0e7f250c0}
+
+
+Definition at line {\bf 525} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!lcellx@{lcellx}}
+\index{lcellx@{lcellx}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{lcellx}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lcellx} {\bfseries \textcolor{vhdlchar}{lcell}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a39a88fc9c6506e5fde79d7e0e7f250c0}
+
+
+Definition at line {\bf 549} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!locked\+\_\+mux@{locked\+\_\+mux}}
+\index{locked\+\_\+mux@{locked\+\_\+mux}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{locked\+\_\+mux}]{\setlength{\rightskip}{0pt plus 5cm}{\bf locked\+\_\+mux} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_affbccd7f7035231c453759af3c002e86}
+
+
+Definition at line {\bf 152} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!pll\+\_\+areset\+\_\+n@{pll\+\_\+areset\+\_\+n}}
+\index{pll\+\_\+areset\+\_\+n@{pll\+\_\+areset\+\_\+n}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{pll\+\_\+areset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pll\+\_\+areset\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_ab2d47d329926d648b7278c7d71d90863}
+
+
+Definition at line {\bf 84} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!pll\+\_\+inclk\+\_\+global@{pll\+\_\+inclk\+\_\+global}}
+\index{pll\+\_\+inclk\+\_\+global@{pll\+\_\+inclk\+\_\+global}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{pll\+\_\+inclk\+\_\+global}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pll\+\_\+inclk\+\_\+global} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a22f55dac898fbe6b3293a133fe5cacce}
+
+
+Definition at line {\bf 85} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!pll\+\_\+ps\+\_\+top\+\_\+inst2@{pll\+\_\+ps\+\_\+top\+\_\+inst2}}
+\index{pll\+\_\+ps\+\_\+top\+\_\+inst2@{pll\+\_\+ps\+\_\+top\+\_\+inst2}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{pll\+\_\+ps\+\_\+top\+\_\+inst2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pll\+\_\+ps\+\_\+top\+\_\+inst2} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{pll\+\_\+ps\+\_\+top}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_ae787d1c78cb03817967f002bcb927b40}
+
+
+Definition at line {\bf 401} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!pll\+\_\+reconfig\+\_\+module\+\_\+inst1@{pll\+\_\+reconfig\+\_\+module\+\_\+inst1}}
+\index{pll\+\_\+reconfig\+\_\+module\+\_\+inst1@{pll\+\_\+reconfig\+\_\+module\+\_\+inst1}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{pll\+\_\+reconfig\+\_\+module\+\_\+inst1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pll\+\_\+reconfig\+\_\+module\+\_\+inst1} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{pll\+\_\+reconfig\+\_\+module}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a1252476711d26778427401836348cbba}
+
+
+Definition at line {\bf 353} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!pll\+\_\+reconfig\+\_\+status\+\_\+inst4@{pll\+\_\+reconfig\+\_\+status\+\_\+inst4}}
+\index{pll\+\_\+reconfig\+\_\+status\+\_\+inst4@{pll\+\_\+reconfig\+\_\+status\+\_\+inst4}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{pll\+\_\+reconfig\+\_\+status\+\_\+inst4}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pll\+\_\+reconfig\+\_\+status\+\_\+inst4} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{pll\+\_\+reconfig\+\_\+status}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a35909e9ea126026354593f3e01599492}
+
+
+Definition at line {\bf 502} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!rcnfig\+\_\+areset\+\_\+sync@{rcnfig\+\_\+areset\+\_\+sync}}
+\index{rcnfig\+\_\+areset\+\_\+sync@{rcnfig\+\_\+areset\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{rcnfig\+\_\+areset\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rcnfig\+\_\+areset\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a8cdf56b96d2359d7a612375740f0347f}
+
+
+Definition at line {\bf 92} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!rcnfig\+\_\+data\+\_\+sync@{rcnfig\+\_\+data\+\_\+sync}}
+\index{rcnfig\+\_\+data\+\_\+sync@{rcnfig\+\_\+data\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{rcnfig\+\_\+data\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rcnfig\+\_\+data\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{143} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_aeb0e03518473f8fa10f74ea61ee4c502}
+
+
+Definition at line {\bf 91} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!rcnfig\+\_\+en\+\_\+sync@{rcnfig\+\_\+en\+\_\+sync}}
+\index{rcnfig\+\_\+en\+\_\+sync@{rcnfig\+\_\+en\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{rcnfig\+\_\+en\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rcnfig\+\_\+en\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a5c4a61a308c5fe29678c56bf2e0a4103}
+
+
+Definition at line {\bf 90} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!rcnfig\+\_\+en\+\_\+sync\+\_\+scanclk@{rcnfig\+\_\+en\+\_\+sync\+\_\+scanclk}}
+\index{rcnfig\+\_\+en\+\_\+sync\+\_\+scanclk@{rcnfig\+\_\+en\+\_\+sync\+\_\+scanclk}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{rcnfig\+\_\+en\+\_\+sync\+\_\+scanclk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rcnfig\+\_\+en\+\_\+sync\+\_\+scanclk} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a1b09eba9896414d169f1e8bedc7f6b8b}
+
+
+Definition at line {\bf 100} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!smpl\+\_\+cmp\+\_\+done\+\_\+sync@{smpl\+\_\+cmp\+\_\+done\+\_\+sync}}
+\index{smpl\+\_\+cmp\+\_\+done\+\_\+sync@{smpl\+\_\+cmp\+\_\+done\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{smpl\+\_\+cmp\+\_\+done\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf smpl\+\_\+cmp\+\_\+done\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_aff6e77923a0e5b9cee8794ef498efb5a}
+
+
+Definition at line {\bf 104} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!smpl\+\_\+cmp\+\_\+error\+\_\+sync@{smpl\+\_\+cmp\+\_\+error\+\_\+sync}}
+\index{smpl\+\_\+cmp\+\_\+error\+\_\+sync@{smpl\+\_\+cmp\+\_\+error\+\_\+sync}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{smpl\+\_\+cmp\+\_\+error\+\_\+sync}]{\setlength{\rightskip}{0pt plus 5cm}{\bf smpl\+\_\+cmp\+\_\+error\+\_\+sync} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrx__pll__top_1_1arch_a9db60f3a31f7739740a797c16b3a0001}
+
+
+Definition at line {\bf 105} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg0@{sync\+\_\+reg0}}
+\index{sync\+\_\+reg0@{sync\+\_\+reg0}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg0} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a6d0f2de0bd56b397adfb1e48896e42ef}
+
+
+Definition at line {\bf 254} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg1@{sync\+\_\+reg1}}
+\index{sync\+\_\+reg1@{sync\+\_\+reg1}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg1} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a8fc8454c91408892606d3cf049de8638}
+
+
+Definition at line {\bf 257} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg10@{sync\+\_\+reg10}}
+\index{sync\+\_\+reg10@{sync\+\_\+reg10}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg10}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg10} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_ae6db6a7e561a7df9162e58e0234fa611}
+
+
+Definition at line {\bf 284} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg2@{sync\+\_\+reg2}}
+\index{sync\+\_\+reg2@{sync\+\_\+reg2}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg2} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_acd983ae79613adccfa068b86d26343cf}
+
+
+Definition at line {\bf 260} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg3@{sync\+\_\+reg3}}
+\index{sync\+\_\+reg3@{sync\+\_\+reg3}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg3} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a20af2a21d294a21228a5805525b852eb}
+
+
+Definition at line {\bf 263} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg4@{sync\+\_\+reg4}}
+\index{sync\+\_\+reg4@{sync\+\_\+reg4}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg4}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg4} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_ab5fb1d0b0aabe7b2934f0691cf747050}
+
+
+Definition at line {\bf 266} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg5@{sync\+\_\+reg5}}
+\index{sync\+\_\+reg5@{sync\+\_\+reg5}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg5}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg5} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_ad42bca53a1398af47b45ead69c39f7d2}
+
+
+Definition at line {\bf 269} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg6@{sync\+\_\+reg6}}
+\index{sync\+\_\+reg6@{sync\+\_\+reg6}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg6}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg6} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a4ad101436233ef0ced8478165476d6ea}
+
+
+Definition at line {\bf 272} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg7@{sync\+\_\+reg7}}
+\index{sync\+\_\+reg7@{sync\+\_\+reg7}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg7}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg7} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_abc82c2116ca5d686a75265e0700ced0f}
+
+
+Definition at line {\bf 275} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg8@{sync\+\_\+reg8}}
+\index{sync\+\_\+reg8@{sync\+\_\+reg8}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg8}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg8} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_a0b58a7cce800b7229df5690cd0a3e1c2}
+
+
+Definition at line {\bf 278} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+\index{rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}!sync\+\_\+reg9@{sync\+\_\+reg9}}
+\index{sync\+\_\+reg9@{sync\+\_\+reg9}!rx\+\_\+pll\+\_\+top\+::arch@{rx\+\_\+pll\+\_\+top\+::arch}}
+\paragraph[{sync\+\_\+reg9}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+reg9} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{sync\+\_\+reg}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classrx__pll__top_1_1arch_ad427c2115b432af5129d6a9ccb7a4788}
+
+
+Definition at line {\bf 281} of file {\bf rx\+\_\+pll\+\_\+top.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+pll\+\_\+top/synth/{\bf rx\+\_\+pll\+\_\+top.\+vhd}\end{DoxyCompactItemize}

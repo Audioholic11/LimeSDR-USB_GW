@@ -1,0 +1,158 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.c File Reference}
+\label{software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c}}
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}i2c\+\_\+opencores\+\_\+regs.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}i2c\+\_\+opencores.\+h\char`\"{}}\\*
+Include dependency graph for i2c\+\_\+opencores.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/df6/software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf I2\+C\+\_\+init} ({\bf alt\+\_\+u32} base, {\bf alt\+\_\+u32} clk, {\bf alt\+\_\+u32} speed)
+\item 
+int {\bf I2\+C\+\_\+start} ({\bf alt\+\_\+u32} base, {\bf alt\+\_\+u32} add, {\bf alt\+\_\+u32} read)
+\item 
+{\bf alt\+\_\+u32} {\bf I2\+C\+\_\+read} ({\bf alt\+\_\+u32} base, {\bf alt\+\_\+u32} last)
+\item 
+{\bf alt\+\_\+u32} {\bf I2\+C\+\_\+write} ({\bf alt\+\_\+u32} base, {\bf alt\+\_\+u8} {\bf data}, {\bf alt\+\_\+u32} last)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c@{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c}!I2\+C\+\_\+init@{I2\+C\+\_\+init}}
+\index{I2\+C\+\_\+init@{I2\+C\+\_\+init}!software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c@{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c}}
+\paragraph[{I2\+C\+\_\+init(alt\+\_\+u32 base, alt\+\_\+u32 clk, alt\+\_\+u32 speed)}]{\setlength{\rightskip}{0pt plus 5cm}void I2\+C\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{base, }
+\item[{{\bf alt\+\_\+u32}}]{clk, }
+\item[{{\bf alt\+\_\+u32}}]{speed}
+\end{DoxyParamCaption}
+)}\label{software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c_ada86d79d83b1d3fff34392a03cb07646}
+
+
+Definition at line {\bf 28} of file {\bf i2c\+\_\+opencores.\+c}.
+
+
+
+References {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+I\+A\+C\+K\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+T\+R\+\_\+\+E\+N\+\_\+\+M\+SK}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+CR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+TR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+P\+R\+E\+R\+HI}, and {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+P\+R\+E\+R\+LO}.
+
+
+
+Referenced by {\bf main()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{df/d5c/software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c_ada86d79d83b1d3fff34392a03cb07646_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c@{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c}!I2\+C\+\_\+read@{I2\+C\+\_\+read}}
+\index{I2\+C\+\_\+read@{I2\+C\+\_\+read}!software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c@{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c}}
+\paragraph[{I2\+C\+\_\+read(alt\+\_\+u32 base, alt\+\_\+u32 last)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+u32} I2\+C\+\_\+read (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{base, }
+\item[{{\bf alt\+\_\+u32}}]{last}
+\end{DoxyParamCaption}
+)}\label{software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c_a754cda16bfe38b030087c4c064948c5c}
+
+
+Definition at line {\bf 105} of file {\bf i2c\+\_\+opencores.\+c}.
+
+
+
+References {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+N\+A\+C\+K\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+R\+D\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+S\+T\+O\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+T\+I\+P\+\_\+\+M\+SK}, {\bf I\+O\+R\+D\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+R\+XR}, {\bf I\+O\+R\+D\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+SR}, and {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+CR}.
+
+
+
+Referenced by {\bf main()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{df/d5c/software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c_a754cda16bfe38b030087c4c064948c5c_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c@{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c}!I2\+C\+\_\+start@{I2\+C\+\_\+start}}
+\index{I2\+C\+\_\+start@{I2\+C\+\_\+start}!software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c@{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c}}
+\paragraph[{I2\+C\+\_\+start(alt\+\_\+u32 base, alt\+\_\+u32 add, alt\+\_\+u32 read)}]{\setlength{\rightskip}{0pt plus 5cm}int I2\+C\+\_\+start (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{base, }
+\item[{{\bf alt\+\_\+u32}}]{add, }
+\item[{{\bf alt\+\_\+u32}}]{read}
+\end{DoxyParamCaption}
+)}\label{software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c_aa5555d01f96e84375ef649c121816ef8}
+
+
+Definition at line {\bf 59} of file {\bf i2c\+\_\+opencores.\+c}.
+
+
+
+References {\bf I2\+C\+\_\+\+A\+CK}, {\bf I2\+C\+\_\+\+N\+O\+A\+CK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+S\+T\+A\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+W\+R\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+R\+X\+N\+A\+C\+K\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+T\+I\+P\+\_\+\+M\+SK}, {\bf I\+O\+R\+D\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+SR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+CR}, and {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+T\+XR}.
+
+
+
+Referenced by {\bf Configure\+\_\+\+L\+M75()}, and {\bf main()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{df/d5c/software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c_aa5555d01f96e84375ef649c121816ef8_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c@{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c}!I2\+C\+\_\+write@{I2\+C\+\_\+write}}
+\index{I2\+C\+\_\+write@{I2\+C\+\_\+write}!software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c@{software/lms\+\_\+ctr\+\_\+bsp/drivers/src/i2c\+\_\+opencores.\+c}}
+\paragraph[{I2\+C\+\_\+write(alt\+\_\+u32 base, alt\+\_\+u8 data, alt\+\_\+u32 last)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+u32} I2\+C\+\_\+write (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{base, }
+\item[{{\bf alt\+\_\+u8}}]{data, }
+\item[{{\bf alt\+\_\+u32}}]{last}
+\end{DoxyParamCaption}
+)}\label{software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c_ad7789475981fa199176d514e35daac08}
+
+
+Definition at line {\bf 145} of file {\bf i2c\+\_\+opencores.\+c}.
+
+
+
+References {\bf I2\+C\+\_\+\+A\+CK}, {\bf I2\+C\+\_\+\+N\+O\+A\+CK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+S\+T\+O\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+W\+R\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+R\+X\+N\+A\+C\+K\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+T\+I\+P\+\_\+\+M\+SK}, {\bf I\+O\+R\+D\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+SR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+CR}, and {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+T\+XR}.
+
+
+
+Referenced by {\bf Configure\+\_\+\+L\+M75()}, and {\bf main()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{df/d5c/software_2lms__ctr__bsp_2drivers_2src_2i2c__opencores_8c_ad7789475981fa199176d514e35daac08_icgraph}
+\end{center}
+\end{figure}
+
+

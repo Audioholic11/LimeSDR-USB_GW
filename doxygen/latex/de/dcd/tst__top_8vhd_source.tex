@@ -1,0 +1,141 @@
+\subsection{tst\+\_\+top.\+vhd}
+\label{tst__top_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/self\+\_\+test/tst\+\_\+top.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/self\+\_\+test/tst\+\_\+top.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00002 \textcolor{keyword}{-- FILE:          tst\_top.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION:   Test module}
+00004 \textcolor{keyword}{-- DATE:          10:55 AM Monday, May 14, 2018?}
+00005 \textcolor{keyword}{-- AUTHOR(s):     Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 
+00009 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00010 \textcolor{keyword}{--NOTES:}
+00011 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00012 \textcolor{keyword}{-- altera vhdl\_input\_version vhdl\_2008}
+00013 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00014 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00015 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00016 \textcolor{vhdlkeyword}{use }work.tstcfg_pkg.\textcolor{keywordflow}{all};
+00017 
+00018 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00019 \textcolor{keyword}{-- Entity declaration}
+00020 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00021 \textcolor{keywordflow}{entity }tst_top \textcolor{keywordflow}{is}
+00022    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00023 \textcolor{keyword}{      --input ports }
+00024       \textcolor{vhdlchar}{FX3_clk}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00025       \textcolor{vhdlchar}{reset_n}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00026       
+00027       \textcolor{vhdlchar}{Si5351C_clk_0}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00028       \textcolor{vhdlchar}{Si5351C_clk_1}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00029       \textcolor{vhdlchar}{Si5351C_clk_2}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00030       \textcolor{vhdlchar}{Si5351C_clk_3}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00031       \textcolor{vhdlchar}{Si5351C_clk_5}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00032       \textcolor{vhdlchar}{Si5351C_clk_6}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00033       \textcolor{vhdlchar}{Si5351C_clk_7}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00034       \textcolor{vhdlchar}{LMK_CLK}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00035       \textcolor{vhdlchar}{ADF_MUXOUT}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00036       
+00037 \textcolor{keyword}{      --DDR2 external memory signals    }
+00038       \textcolor{vhdlchar}{mem_pllref_clk}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00039       \textcolor{vhdlchar}{mem_odt}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00040       \textcolor{vhdlchar}{mem_cs_n}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00041       \textcolor{vhdlchar}{mem_cke}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00042       \textcolor{vhdlchar}{mem_addr}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00043       \textcolor{vhdlchar}{mem_ba}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00044       \textcolor{vhdlchar}{mem_ras_n}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00045       \textcolor{vhdlchar}{mem_cas_n}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00046       \textcolor{vhdlchar}{mem_we_n}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00047       \textcolor{vhdlchar}{mem_dm}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00048       \textcolor{vhdlchar}{mem_clk}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00049       \textcolor{vhdlchar}{mem_clk_n}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00050       \textcolor{vhdlchar}{mem_dq}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00051       \textcolor{vhdlchar}{mem_dqs}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00052       
+00053 \textcolor{keyword}{      -- To configuration memory}
+00054       \textcolor{vhdlchar}{to_tstcfg}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{vhdlchar}{t_TO_TSTCFG};
+00055       \textcolor{vhdlchar}{from_tstcfg}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{vhdlchar}{t_FROM_TSTCFG}
+00056    \textcolor{vhdlchar}{)};
+00057 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{tst\_top};
+00058 
+00059 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00060 \textcolor{keyword}{-- Architecture}
+00061 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00062 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} tst_top is
+00063 \textcolor{keyword}{--declare signals,  components here}
+00064 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{my_sig_name} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}; 
+00065 
+00066   
+00067 \textcolor{vhdlkeyword}{begin}
+00068 
+00069 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00070 \textcolor{keyword}{-- clock\_test instance}
+00071 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00072    clock\_test\_inst0 : \textcolor{keywordflow}{entity} work.clock_test
+00073    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00074 \textcolor{keyword}{      --input ports }
+00075       FX3_clk           => FX3_clk,
+00076       reset_n           => reset_n,
+00077       test_en           => from\_tstcfg.TEST\_EN\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00078       test_frc_err      => from\_tstcfg.TEST\_FRC\_ERR\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00079       test_cmplt        => to\_tstcfg.TEST\_CMPLT\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00080       test_rez          => to\_tstcfg.TEST\_REZ\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},      
+00081       Si5351C_clk_0     => Si5351C_clk_0,
+00082       Si5351C_clk_1     => Si5351C_clk_1,
+00083       Si5351C_clk_2     => Si5351C_clk_2,
+00084       Si5351C_clk_3     => Si5351C_clk_3,
+00085       Si5351C_clk_5     => Si5351C_clk_5,
+00086       Si5351C_clk_6     => Si5351C_clk_6,
+00087       Si5351C_clk_7     => Si5351C_clk_7,
+00088       LMK_CLK           => LMK_CLK,
+00089       ADF_MUXOUT        => ADF_MUXOUT,      
+00090       FX3_clk_cnt       => to\_tstcfg.FX3\_CLK\_CNT,
+00091       Si5351C_clk_0_cnt => to\_tstcfg.Si5351C\_CLK0\_CNT,
+00092       Si5351C_clk_1_cnt => to\_tstcfg.Si5351C\_CLK1\_CNT,
+00093       Si5351C_clk_2_cnt => to\_tstcfg.Si5351C\_CLK2\_CNT,
+00094       Si5351C_clk_3_cnt => to\_tstcfg.Si5351C\_CLK3\_CNT,
+00095       Si5351C_clk_5_cnt => to\_tstcfg.Si5351C\_CLK5\_CNT,
+00096       Si5351C_clk_6_cnt => to\_tstcfg.Si5351C\_CLK6\_CNT,
+00097       Si5351C_clk_7_cnt => to\_tstcfg.Si5351C\_CLK7\_CNT,
+00098       LMK_CLK_cnt       => to\_tstcfg.LMK\_CLK\_CNT,
+00099       ADF_MUXOUT_cnt    => to\_tstcfg.ADF\_CNT
+00100    \textcolor{vhdlchar}{)};
+00101    
+00102 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00103 \textcolor{keyword}{-- DDR2 external memory test instance}
+00104 \textcolor{keyword}{-- ----------------------------------------------------------------------------   }
+00105    ddr2\_tester\_inst2 : \textcolor{keywordflow}{entity} work.ddr2_tester
+00106    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00107         global_reset_n          => from\_tstcfg.test\_en\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)},
+00108         pll_ref_clk             => Si5351C_clk_1,
+00109         soft_reset_n            => from\_tstcfg.test\_en\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)},
+00110         begin_test              => '0',\textcolor{keyword}{ -- unused}
+00111         insert_error            => from\_tstcfg.test\_frc\_err\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)},
+00112 \textcolor{keyword}{      --DDR2 external memory signals    }
+00113         mem_odt                 => mem_odt,
+00114         mem_cs_n                    => mem_cs_n,
+00115         mem_cke                 => mem_cke,
+00116         mem_addr                    => mem_addr,
+00117         mem_ba                  => mem_ba,
+00118         mem_ras_n               => mem_ras_n,
+00119         mem_cas_n               => mem_cas_n,
+00120         mem_we_n                    => mem_we_n,
+00121         mem_dm                  => mem_dm,
+00122         mem_clk                 => mem_clk,
+00123         mem_clk_n               => mem_clk_n,
+00124         mem_dq                  => mem_dq,
+00125         mem_dqs                 => mem_dqs, 
+00126 \textcolor{keyword}{        --test results}
+00127         pnf_per_bit             => \textcolor{keywordflow}{open},
+00128         pnf_per_bit_persist     => to\_tstcfg.DDR2\_2\_pnf\_per\_bit,
+00129       pass                  => to\_tstcfg.DDR2\_2\_STATUS\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)},
+00130         fail                    => to\_tstcfg.DDR2\_2\_STATUS\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)},
+00131         test_complete           => to\_tstcfg.DDR2\_2\_STATUS\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}
+00132    \textcolor{vhdlchar}{)};
+00133   
+00134 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00135 
+00136 
+\end{DoxyCode}

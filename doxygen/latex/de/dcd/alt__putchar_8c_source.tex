@@ -1,0 +1,73 @@
+\subsection{alt\+\_\+putchar.\+c}
+\label{alt__putchar_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+putchar.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+putchar.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2015 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include <stdio.h>}
+00034 
+00035 \textcolor{preprocessor}{#ifdef ALT\_USE\_DIRECT\_DRIVERS}
+00036 \textcolor{preprocessor}{#include "system.h"}
+00037 \textcolor{preprocessor}{#include "sys/alt_driver.h"}
+00038 \textcolor{preprocessor}{#include "sys/alt_stdio.h"}
+00039 \textcolor{preprocessor}{#endif}
+00040 \textcolor{preprocessor}{#ifdef ALT\_SEMIHOSTING}
+00041 \textcolor{preprocessor}{#include "sys/alt_stdio.h"}
+00042 \textcolor{preprocessor}{#include "unistd.h"}
+00043 \textcolor{preprocessor}{#endif}
+00044 
+00045 \textcolor{comment}{/*}
+00046 \textcolor{comment}{ * Uses the ALT\_DRIVER\_WRITE() macro to call directly to driver if available.}
+00047 \textcolor{comment}{ * Otherwise, uses newlib provided putchar() routine.}
+00048 \textcolor{comment}{ */}
+00049 \textcolor{keywordtype}{int} 
+00050 alt_putchar(\textcolor{keywordtype}{int} c)
+00051 \{
+00052 \textcolor{preprocessor}{#ifdef ALT\_SEMIHOSTING}
+00053     \textcolor{keywordtype}{char}        c1 = (char)(c & 0xff);
+00054     \textcolor{keywordflow}{return} write(STDOUT\_FILENO,&c1,1);
+00055 \textcolor{preprocessor}{#else}
+00056 \textcolor{preprocessor}{#ifdef ALT\_USE\_DIRECT\_DRIVERS}
+00057     ALT_DRIVER_WRITE_EXTERNS(ALT_STDOUT_DEV);
+00058     \textcolor{keywordtype}{char}        c1 = (char)(c & 0xff);
+00059 
+00060     \textcolor{keywordflow}{if} (ALT_DRIVER_WRITE(ALT_STDOUT_DEV, &c1, 1, 0) == -1) \{
+00061         \textcolor{keywordflow}{return} -1;
+00062     \}
+00063     \textcolor{keywordflow}{return} c;
+00064 \textcolor{preprocessor}{#else}
+00065     \textcolor{keywordflow}{return} putchar(c);
+00066 \textcolor{preprocessor}{#endif}
+00067 \textcolor{preprocessor}{#endif}
+00068 \}
+\end{DoxyCode}

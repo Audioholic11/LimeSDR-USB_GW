@@ -1,0 +1,90 @@
+\subsection{L\+T\+E\+\_\+rx\+\_\+path\+\_\+tb.\+vhd}
+\label{LTE__rx__path__tb_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/symbols/\+L\+T\+E\+\_\+rx\+\_\+path\+\_\+tb.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/symbols/\+L\+T\+E\+\_\+rx\+\_\+path\+\_\+tb.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    LTE\_rx\_path\_tb.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: }
+00004 \textcolor{keyword}{-- DATE:    Feb 13, 2014}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }LTE_rx_path_tb \textcolor{keywordflow}{is}
+00016 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{LTE\_rx\_path\_tb};
+00017 
+00018 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00019 \textcolor{keyword}{-- Architecture}
+00020 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00021 
+00022 \textcolor{keywordflow}{architecture} tb\_behave \textcolor{keywordflow}{of} LTE_rx_path_tb is
+00023     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{clk0_period}   \textcolor{vhdlchar}{:} \textcolor{comment}{time} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10} \textcolor{vhdlchar}{ns};
+00024     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{clk1_period}   \textcolor{vhdlchar}{:} \textcolor{comment}{time} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10} \textcolor{vhdlchar}{ns}; 
+00025 \textcolor{keyword}{  --signals}
+00026     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{clk0}\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{clk1}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00027     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00028 
+00029 
+00030 \textcolor{vhdlkeyword}{begin }
+00031   
+00032     clock0: \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00033 \textcolor{vhdlkeyword}{    begin}
+00034         \textcolor{vhdlchar}{clk0} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk0_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00035         \textcolor{vhdlchar}{clk0} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk0_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00036     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{clock0};
+00037 
+00038     clock: \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00039 \textcolor{vhdlkeyword}{    begin}
+00040         \textcolor{vhdlchar}{clk1} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk1_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00041         \textcolor{vhdlchar}{clk1} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk1_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00042     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{clock};
+00043     
+00044         res: \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00045 \textcolor{vhdlkeyword}{    begin}
+00046         \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{20} \textcolor{vhdlchar}{ns};
+00047         \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait};
+00048     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{res};
+00049     
+00050   
+00051   LTE\_rx\_path\_inst : \textcolor{keywordflow}{entity} work.rx_path 
+00052 
+00053 \textcolor{keywordflow}{GENERIC} \textcolor{keywordflow}{map} (dev_family => \textcolor{keyword}{"Cyclone IV E"}  ,
+00054         diq_width => \textcolor{vhdllogic}{12},
+00055         infifo_wrsize => \textcolor{vhdllogic}{12},
+00056         outfifo_size => \textcolor{vhdllogic}{13}
+00057         \textcolor{vhdlchar}{)}
+00058     \textcolor{keywordflow}{PORT} \textcolor{keywordflow}{map}
+00059     (
+00060         reset           => reset_n,
+00061         en              => '1',
+00062         data_src        => '1',
+00063         outfifo_full    => '0',
+00064         DIQ2_IQSEL2     => '0',
+00065         mimo_en             => '1',
+00066         pct_clr_detect => '0',
+00067         clr\_pct\_los\_flg => '0',
+00068         clr_smpl_nr     => '0',
+00069         fr_start            => '0',
+00070         clk             => clk0,
+00071         ch_en           => "\textcolor{vhdllogic}{0000000000000011}",
+00072         DIQ2\_D          => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'0'\textcolor{vhdlchar}{)},
+00073         outfifo\_wusedw => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'0'\textcolor{vhdlchar}{)},
+00074         smpl_width      => "\textcolor{vhdllogic}{10}",
+00075         outfifo_wr      => \textcolor{keywordflow}{open},
+00076         wrrxfifo_wr     => \textcolor{keywordflow}{open},
+00077         outfifo_data    => \textcolor{keywordflow}{open}
+00078     \textcolor{vhdlchar}{)};
+00079     
+00080     \textcolor{keywordflow}{end} \textcolor{vhdlchar}{tb\_behave};
+00081   
+00082   
+00083 
+00084 
+00085   
+\end{DoxyCode}

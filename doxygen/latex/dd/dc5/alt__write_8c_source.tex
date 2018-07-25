@@ -1,0 +1,143 @@
+\subsection{alt\+\_\+write.\+c}
+\label{alt__write_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+write.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+write.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2006 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include <unistd.h>}
+00034 \textcolor{preprocessor}{#include <fcntl.h>}
+00035 
+00036 \textcolor{preprocessor}{#include "sys/alt_errno.h"}
+00037 \textcolor{preprocessor}{#include "sys/alt_warning.h"}
+00038 \textcolor{preprocessor}{#include "priv/alt_file.h"}
+00039 \textcolor{preprocessor}{#include "os/alt_syscall.h"}
+00040 
+00041 \textcolor{preprocessor}{#include "sys/alt_log_printf.h"}
+00042 
+00043 \textcolor{comment}{/*}
+00044 \textcolor{comment}{ * The write() system call is used to write a block of data to a file or }
+00045 \textcolor{comment}{ * device. This function simply vectors the request to the device driver }
+00046 \textcolor{comment}{ * associated with the input file descriptor "file". }
+00047 \textcolor{comment}{ *}
+00048 \textcolor{comment}{ * ALT\_WRITE is mapped onto the write() system call in alt\_syscall.h}
+00049 \textcolor{comment}{ */}
+00050  
+00051 \textcolor{preprocessor}{#ifdef ALT\_USE\_DIRECT\_DRIVERS}
+00052 
+00053 \textcolor{preprocessor}{#include "system.h"}
+00054 \textcolor{preprocessor}{#include "sys/alt_driver.h"}
+00055 
+00056 \textcolor{comment}{/*}
+00057 \textcolor{comment}{ * Provide minimal version that just writes to the stdout/stderr devices}
+00058 \textcolor{comment}{ * when provided.}
+00059 \textcolor{comment}{ */}
+00060 
+00061 \textcolor{keywordtype}{int} ALT_WRITE (\textcolor{keywordtype}{int} file, \textcolor{keyword}{const} \textcolor{keywordtype}{void} *ptr, \textcolor{keywordtype}{size\_t} len)
+00062 \{
+00063 \textcolor{preprocessor}{#ifdef ALT\_STDOUT\_PRESENT}
+00064     ALT_DRIVER_WRITE_EXTERNS(ALT_STDOUT_DEV);
+00065 \textcolor{preprocessor}{#endif}
+00066 \textcolor{preprocessor}{#ifdef ALT\_STDERR\_PRESENT}
+00067     ALT_DRIVER_WRITE_EXTERNS(ALT_STDERR_DEV);
+00068 \textcolor{preprocessor}{#endif}
+00069 
+00070 \textcolor{preprocessor}{#if !defined(ALT\_STDOUT\_PRESENT) && !defined(ALT\_STDERR\_PRESENT)}
+00071     \textcolor{comment}{/* Generate a link time warning, should this function ever be called. */}
+00072     ALT_STUB_WARNING(write);
+00073 \textcolor{preprocessor}{#endif}
+00074 
+00075     \textcolor{keywordflow}{switch} (file) \{
+00076 \textcolor{preprocessor}{#ifdef ALT\_STDOUT\_PRESENT}
+00077     \textcolor{keywordflow}{case} 1: \textcolor{comment}{/* stdout file descriptor */}
+00078         \textcolor{keywordflow}{return} ALT_DRIVER_WRITE(ALT_STDOUT_DEV, ptr, len, 0);
+00079 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_STDOUT\_PRESENT */}\textcolor{preprocessor}{}
+00080 \textcolor{preprocessor}{#ifdef ALT\_STDERR\_PRESENT}
+00081     \textcolor{keywordflow}{case} 2: \textcolor{comment}{/* stderr file descriptor */}
+00082         \textcolor{keywordflow}{return} ALT_DRIVER_WRITE(ALT_STDERR_DEV, ptr, len, 0);
+00083 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_STDERR\_PRESENT */}\textcolor{preprocessor}{}
+00084     \textcolor{keywordflow}{default}:
+00085         ALT_ERRNO = EBADFD;
+00086         \textcolor{keywordflow}{return} -1;
+00087     \}
+00088 \}
+00089 
+00090 \textcolor{preprocessor}{#else }\textcolor{comment}{/* !ALT\_USE\_DIRECT\_DRIVERS */}\textcolor{preprocessor}{}
+00091 
+00092 \textcolor{keywordtype}{int} ALT_WRITE (\textcolor{keywordtype}{int} file, \textcolor{keyword}{const} \textcolor{keywordtype}{void} *ptr, \textcolor{keywordtype}{size\_t} len)
+00093 \{
+00094   alt_fd*  fd;
+00095   \textcolor{keywordtype}{int}      rval;
+00096 
+00097   \textcolor{comment}{/*}
+00098 \textcolor{comment}{   * A common error case is that when the file descriptor was created, the call}
+00099 \textcolor{comment}{   * to open() failed resulting in a negative file descriptor. This is trapped}
+00100 \textcolor{comment}{   * below so that we don't try and process an invalid file descriptor.}
+00101 \textcolor{comment}{   */}
+00102 
+00103   fd = (file < 0) ? NULL : &alt_fd_list[file];
+00104   
+00105   \textcolor{keywordflow}{if} (fd)
+00106   \{
+00107     \textcolor{comment}{/*}
+00108 \textcolor{comment}{     * If the file has not been opened with write access, or if the driver does}
+00109 \textcolor{comment}{     * not provide an implementation of write(), generate an error. Otherwise}
+00110 \textcolor{comment}{     * call the drivers write() function to process the request.}
+00111 \textcolor{comment}{     */}
+00112 
+00113     \textcolor{keywordflow}{if} (((fd->fd_flags & O\_ACCMODE) != O\_RDONLY) && fd->dev->write)
+00114     \{
+00115       
+00116       \textcolor{comment}{/* ALT\_LOG - see altera\_hal/HAL/inc/sys/alt\_log\_printf.h */}
+00117       ALT_LOG_WRITE_FUNCTION(ptr,len);
+00118 
+00119       \textcolor{keywordflow}{if} ((rval = fd->dev->write(fd, ptr, len)) < 0)
+00120       \{
+00121         ALT_ERRNO = -rval;
+00122         \textcolor{keywordflow}{return} -1;
+00123       \}
+00124       \textcolor{keywordflow}{return} rval;
+00125     \}
+00126     \textcolor{keywordflow}{else}
+00127     \{
+00128       ALT_ERRNO = EACCES;
+00129     \}
+00130   \}
+00131   \textcolor{keywordflow}{else}  
+00132   \{
+00133     ALT_ERRNO = EBADFD;
+00134   \}
+00135   \textcolor{keywordflow}{return} -1;
+00136 \}
+00137 
+00138 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_USE\_DIRECT\_DRIVERS */}\textcolor{preprocessor}{}
+\end{DoxyCode}

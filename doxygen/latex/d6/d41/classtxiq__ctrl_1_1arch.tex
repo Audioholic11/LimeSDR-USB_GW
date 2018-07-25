@@ -1,0 +1,245 @@
+\subsection{arch Architecture Reference}
+\label{classtxiq__ctrl_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{dd/d3f/classtxiq__ctrl_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+507}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+508}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+509}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+510}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf cnt\+\_\+p}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm\+\_\+f}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf pct\+\_\+buff\+\_\+rdy}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf pct\+\_\+sync\+\_\+pulse}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf cnt\+\_\+max}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf txiq\+\_\+rdreq\+\_\+in}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf txant\+\_\+en\+\_\+wait\+\_\+cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf txant\+\_\+dis\+\_\+wait\+\_\+cnt}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+511}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf state\+\_\+type}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{txant\+\_\+enable\+\_\+wait}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{rd\+\_\+samples}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{txant\+\_\+dis\+\_\+wait}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+rd\+\_\+cycles}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf txiq\+\_\+en\+\_\+mux} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf txiq\+\_\+en\+\_\+mode\+\_\+1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf cnt\+\_\+max} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf txant\+\_\+en\+\_\+wait\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf txant\+\_\+dis\+\_\+wait\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf txant\+\_\+en\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 38} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!cnt\+\_\+p@{cnt\+\_\+p}}
+\index{cnt\+\_\+p@{cnt\+\_\+p}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{cnt\+\_\+pclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} cnt\+\_\+p(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classtxiq__ctrl_1_1arch_a5fb1c3b72864a30c8695427179b30e8d}
+
+
+Definition at line {\bf 105} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!fsm@{fsm}}
+\index{fsm@{fsm}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{fsmcurrent\+\_\+state,pct\+\_\+buff\+\_\+rdy,pct\+\_\+sync\+\_\+pulse,cnt,cnt\+\_\+max,txiq\+\_\+rdreq\+\_\+in,txant\+\_\+en\+\_\+wait\+\_\+cnt,txant\+\_\+dis\+\_\+wait\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf pct\+\_\+buff\+\_\+rdy}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf pct\+\_\+sync\+\_\+pulse}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf cnt\+\_\+max}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf txiq\+\_\+rdreq\+\_\+in}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf txant\+\_\+en\+\_\+wait\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf txant\+\_\+dis\+\_\+wait\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classtxiq__ctrl_1_1arch_a255ad90024faa60daf6cfbc311a8c335}
+
+
+Definition at line {\bf 137} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!fsm\+\_\+f@{fsm\+\_\+f}}
+\index{fsm\+\_\+f@{fsm\+\_\+f}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{fsm\+\_\+fclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm\+\_\+f(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classtxiq__ctrl_1_1arch_a856d95a9c7e9538caf6d13ffdaa470a3}
+
+
+Definition at line {\bf 126} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+507@{P\+R\+O\+C\+E\+S\+S\+\_\+507}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+507@{P\+R\+O\+C\+E\+S\+S\+\_\+507}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+507clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+507(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classtxiq__ctrl_1_1arch_a9875313ef5bec986291f1dfd9343dd24}
+
+
+Definition at line {\bf 55} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+508@{P\+R\+O\+C\+E\+S\+S\+\_\+508}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+508@{P\+R\+O\+C\+E\+S\+S\+\_\+508}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+508clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+508(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classtxiq__ctrl_1_1arch_a5d27b68a3b5b583b5c77540403ea3286}
+
+
+Definition at line {\bf 66} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+509@{P\+R\+O\+C\+E\+S\+S\+\_\+509}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+509@{P\+R\+O\+C\+E\+S\+S\+\_\+509}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+509clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+509(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classtxiq__ctrl_1_1arch_ae3325f767562a651bd5a13015f09917c}
+
+
+Definition at line {\bf 80} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+510@{P\+R\+O\+C\+E\+S\+S\+\_\+510}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+510@{P\+R\+O\+C\+E\+S\+S\+\_\+510}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+510current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+510(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classtxiq__ctrl_1_1arch_a19bb0666045cf428dd8fa0d00738738d}
+
+
+Definition at line {\bf 94} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+511@{P\+R\+O\+C\+E\+S\+S\+\_\+511}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+511@{P\+R\+O\+C\+E\+S\+S\+\_\+511}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+511clk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+511(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classtxiq__ctrl_1_1arch_af81dbaa61950cf95e3699fdf884a77c5}
+
+
+Definition at line {\bf 191} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!cnt@{cnt}}
+\index{cnt@{cnt}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classtxiq__ctrl_1_1arch_ab542534ef27a544efb82f82536b78dd3}
+
+
+Definition at line {\bf 42} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!cnt\+\_\+max@{cnt\+\_\+max}}
+\index{cnt\+\_\+max@{cnt\+\_\+max}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{cnt\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cnt\+\_\+max} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classtxiq__ctrl_1_1arch_a53f00cb27741d24ec5f9e97036a02a0a}
+
+
+Definition at line {\bf 43} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!current\+\_\+state@{current\+\_\+state}}
+\index{current\+\_\+state@{current\+\_\+state}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classtxiq__ctrl_1_1arch_a7ede5b91aac1f3d1b2a884a5e191d554}
+
+
+Definition at line {\bf 49} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!next\+\_\+state@{next\+\_\+state}}
+\index{next\+\_\+state@{next\+\_\+state}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{next\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classtxiq__ctrl_1_1arch_a7b92f98d060e763f3dd6fa727ddb03d8}
+
+
+Definition at line {\bf 49} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!state\+\_\+type@{state\+\_\+type}}
+\index{state\+\_\+type@{state\+\_\+type}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{state\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state\+\_\+type} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{txant\+\_\+enable\+\_\+wait}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{rd\+\_\+samples}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{txant\+\_\+dis\+\_\+wait}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+rd\+\_\+cycles}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classtxiq__ctrl_1_1arch_a66b569dbb5c8417559e9ef0a59224a71}
+
+
+Definition at line {\bf 48} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!txant\+\_\+dis\+\_\+wait\+\_\+cnt@{txant\+\_\+dis\+\_\+wait\+\_\+cnt}}
+\index{txant\+\_\+dis\+\_\+wait\+\_\+cnt@{txant\+\_\+dis\+\_\+wait\+\_\+cnt}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{txant\+\_\+dis\+\_\+wait\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf txant\+\_\+dis\+\_\+wait\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classtxiq__ctrl_1_1arch_a1f4684468423f2e77d93810b5e556e8b}
+
+
+Definition at line {\bf 45} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!txant\+\_\+en\+\_\+reg@{txant\+\_\+en\+\_\+reg}}
+\index{txant\+\_\+en\+\_\+reg@{txant\+\_\+en\+\_\+reg}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{txant\+\_\+en\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf txant\+\_\+en\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classtxiq__ctrl_1_1arch_af593512e6495fe445ded7c924030003a}
+
+
+Definition at line {\bf 46} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!txant\+\_\+en\+\_\+wait\+\_\+cnt@{txant\+\_\+en\+\_\+wait\+\_\+cnt}}
+\index{txant\+\_\+en\+\_\+wait\+\_\+cnt@{txant\+\_\+en\+\_\+wait\+\_\+cnt}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{txant\+\_\+en\+\_\+wait\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf txant\+\_\+en\+\_\+wait\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classtxiq__ctrl_1_1arch_a5936ce0de4846cdd340e69dd7b8cea08}
+
+
+Definition at line {\bf 44} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!txiq\+\_\+en\+\_\+mode\+\_\+1@{txiq\+\_\+en\+\_\+mode\+\_\+1}}
+\index{txiq\+\_\+en\+\_\+mode\+\_\+1@{txiq\+\_\+en\+\_\+mode\+\_\+1}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{txiq\+\_\+en\+\_\+mode\+\_\+1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf txiq\+\_\+en\+\_\+mode\+\_\+1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classtxiq__ctrl_1_1arch_afd7b5439f52256c80ed760c889b2b22e}
+
+
+Definition at line {\bf 41} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+\index{txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}!txiq\+\_\+en\+\_\+mux@{txiq\+\_\+en\+\_\+mux}}
+\index{txiq\+\_\+en\+\_\+mux@{txiq\+\_\+en\+\_\+mux}!txiq\+\_\+ctrl\+::arch@{txiq\+\_\+ctrl\+::arch}}
+\paragraph[{txiq\+\_\+en\+\_\+mux}]{\setlength{\rightskip}{0pt plus 5cm}{\bf txiq\+\_\+en\+\_\+mux} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classtxiq__ctrl_1_1arch_a3ed49ada4e90e142b18daf0b58662754}
+
+
+Definition at line {\bf 40} of file {\bf txiq\+\_\+ctrl.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/fifo2diq/synth/{\bf txiq\+\_\+ctrl.\+vhd}\end{DoxyCompactItemize}

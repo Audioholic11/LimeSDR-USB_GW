@@ -1,0 +1,79 @@
+\subsection{sodera\+\_\+pcie\+\_\+brd\+\_\+v1r0.\+h}
+\label{sodera__pcie__brd__v1r0_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/sodera\+\_\+pcie\+\_\+brd\+\_\+v1r0.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/sodera\+\_\+pcie\+\_\+brd\+\_\+v1r0.\+h}}
+
+\begin{DoxyCode}
+00001 
+00011 \textcolor{preprocessor}{#ifndef \_SODERA\_PCIE\_BRD\_V1R0\_H\_}
+00012 \textcolor{preprocessor}{#define \_SODERA\_PCIE\_BRD\_V1R0\_H\_}
+00013 
+00014 \textcolor{preprocessor}{#include "LMS64C_protocol.h"}
+00015 
+00016 \textcolor{preprocessor}{#pragma message ("**** sodera\_pcie\_brd\_v1r0 ****")}
+00017 
+00018 \textcolor{comment}{//LMS control pins}
+00019 \textcolor{preprocessor}{#define FX3\_GPIO42          42 //LMS reset through FPGA}
+00020 \textcolor{preprocessor}{#define FX3\_GPIO43          43 //FMC adf4002 SNN}
+00021 \textcolor{preprocessor}{#define FX3\_GPIO44          44 //rfdio exp brd ssn}
+00022 
+00023 \textcolor{preprocessor}{#define FX3\_FLASH1\_SNN      54}
+00024 \textcolor{preprocessor}{#define FX3\_FLASH2\_SNN      45}
+00025 
+00026 \textcolor{preprocessor}{#define FX3\_SPI\_CS          46 //LMS CS}
+00027 \textcolor{preprocessor}{#define FX3\_FPGA\_SNN        47}
+00028 \textcolor{preprocessor}{#define FX3\_ADF\_SNN         57 //onboard ADF SS}
+00029 
+00030 \textcolor{preprocessor}{#define FX3\_LED0            39}
+00031 \textcolor{preprocessor}{#define FX3\_LED1            40}
+00032 \textcolor{preprocessor}{#define FX3\_LED2            41}
+00033 
+00034 \textcolor{preprocessor}{#define FX3\_GPIO0           33}
+00035 \textcolor{preprocessor}{#define FX3\_GPIO1           34}
+00036 \textcolor{preprocessor}{#define FX3\_GPIO2           35}
+00037 \textcolor{preprocessor}{#define FX3\_GPIO3           36}
+00038 \textcolor{preprocessor}{#define FX3\_GPIO5           37}
+00039 \textcolor{preprocessor}{#define FX3\_GPIO4           38}
+00040 
+00041 \textcolor{comment}{//FPGA Passive serial interface configuration}
+00042 \textcolor{preprocessor}{#define FPGA\_PS\_METHOD\_SPI //select PS programming method - FPGA PS over SPI}
+00043 
+00044 \textcolor{preprocessor}{#define FPGA\_PS\_NCONFIG     51}
+00045 \textcolor{preprocessor}{#define FPGA\_PS\_NSTATUS     49}
+00046 \textcolor{preprocessor}{#define FPGA\_PS\_CONFDONE    48}
+00047 \textcolor{preprocessor}{#define FPGA\_PS\_OE          50}
+00048 
+00049 \textcolor{comment}{//I2C devices}
+00050 \textcolor{preprocessor}{#define SI5351\_I2C\_ADDR     0x60 //0xC0}
+00051 \textcolor{preprocessor}{#define   LM75\_I2C\_ADDR     0x48 //0x90}
+00052 
+00053 \textcolor{comment}{//get info}
+00054 \textcolor{preprocessor}{#define DEV\_TYPE            LMS\_DEV\_SODERAPCIE}
+00055 \textcolor{preprocessor}{#define HW\_VER              1}
+00056 \textcolor{preprocessor}{#define EXP\_BOARD           EXP\_BOARD\_UNKNOWN}
+00057 
+00058 \textcolor{comment}{//FPGA Cyclone IV GX (EP4GX30F23C7N) bitstream (RBF) size in bytes}
+00059 \textcolor{preprocessor}{#define FPGA\_SIZE           2751361 //1191788}
+00060 
+00061 \textcolor{comment}{//FLash memory (M25P16, 16M-bit))}
+00062 \textcolor{comment}{//FLash memory (S25FL164K, 64M-bit)}
+00063 \textcolor{preprocessor}{#define FLASH\_PAGE\_SIZE     0x100 //256 bytes, SPI Page size to be used for transfers}
+00064 \textcolor{preprocessor}{#define FLASH\_SECTOR\_SIZE   0x10000 //256 pages * 256 page size = 65536 bytes}
+00065 \textcolor{comment}{//#define FLASH\_BLOCK\_SIZE  (FLASH\_SECTOR\_SIZE/FLASH\_PAGE\_SIZE) //in pages}
+00066 
+00067 \textcolor{comment}{//FLASH memory layout}
+00068 \textcolor{preprocessor}{#define FLASH\_LAYOUT\_FPGA\_METADATA  64//FPGA autoload metadata (start sector)}
+00069 \textcolor{preprocessor}{#define FLASH\_LAYOUT\_FPGA\_BITSTREAM 0//FPGA bitstream (start sector) till end}
+00070 
+00071 \textcolor{preprocessor}{#define FLASH\_CMD\_SECTOR\_ERASE 0x1B //Depends on flash, reversed: 0xD8 or 0x20}
+00072 \textcolor{preprocessor}{#define FLASH\_CMD\_PAGE\_WRITE   0x40 //Reversed 0x02}
+00073 \textcolor{preprocessor}{#define FLASH\_CMD\_PAGE\_WRITEEN 0x60 //Reversed 0x06}
+00074 \textcolor{preprocessor}{#define FLASH\_CMD\_PAGE\_READ    0xC0 //Reversed 0x03}
+00075 \textcolor{preprocessor}{#define FLASH\_CMD\_PAGE\_READST  0xA0 //Reversed 0x05}
+00076 \textcolor{preprocessor}{#define FLASH\_CMD\_READJEDECID  0xF9 //Reversed 0x9F}
+00077 
+00078 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}\{
+00079     uint32\_t Bitream_size;
+00080     uint8\_t Autoload;
+00081 \}tBoard_Config_FPGA; \textcolor{comment}{//tBoard\_Config\_FPGA or tBoard\_cfg\_FPGA}
+00082 
+00083 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

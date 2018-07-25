@@ -1,0 +1,81 @@
+\subsection{lms7002\+\_\+ddout.\+vhd}
+\label{tx__modules_2lms7002__ddout_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+modules/lms7002\+\_\+ddout.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+modules/lms7002\+\_\+ddout.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    lms7002\_ddout.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: takes data in SDR and ouputs double data rate}
+00004 \textcolor{keyword}{-- DATE:    Mar 14, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{vhdlkeyword}{LIBRARY }\textcolor{keywordflow}{altera\_mf};
+00013 \textcolor{vhdlkeyword}{USE }altera_mf.altera\_mf\_components.\textcolor{keywordflow}{all};
+00014 
+00015 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00016 \textcolor{keyword}{-- Entity declaration}
+00017 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00018 \textcolor{keywordflow}{entity }lms7002_ddout \textcolor{keywordflow}{is}
+00019     \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(} \textcolor{vhdlchar}{dev_family} \textcolor{vhdlchar}{:} \textcolor{comment}{string} \textcolor{vhdlchar}{:=} \textcolor{keyword}{"Cyclone IV E"};
+00020                 \textcolor{vhdlchar}{iq_width}        \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}
+00021     \textcolor{vhdlchar}{)};
+00022     \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00023 \textcolor{keyword}{      --input ports }
+00024       \textcolor{vhdlchar}{clk}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00025       \textcolor{vhdlchar}{reset_n}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00026         \textcolor{vhdlchar}{data_in_h}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00027         \textcolor{vhdlchar}{data_in_l}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00028 \textcolor{keyword}{        --output ports }
+00029         \textcolor{vhdlchar}{txiq}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00030         \textcolor{vhdlchar}{txiqsel}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00031         
+00032         \textcolor{vhdlchar}{)};
+00033 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{lms7002\_ddout};
+00034 
+00035 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00036 \textcolor{keyword}{-- Architecture}
+00037 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00038 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} lms7002_ddout is
+00039 \textcolor{keyword}{--declare signals,  components here}
+00040 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{aclr}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00041 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{datout}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00042 
+00043 \textcolor{vhdlkeyword}{begin}
+00044 
+00045 
+00046 \textcolor{vhdlchar}{aclr}\textcolor{vhdlchar}{<=}\textcolor{keywordflow}{not} \textcolor{vhdlchar}{reset_n};
+00047 
+00048     ALTDDIO\_OUT\_component : ALTDDIO\_OUT
+00049     \textcolor{keywordflow}{GENERIC} \textcolor{keywordflow}{MAP} (
+00050         extend\_oe\_disable       => \textcolor{keyword}{"OFF"},
+00051         intended\_device\_family  => \textcolor{keyword}{"Cyclone IV E"}  ,
+00052         invert\_output               => \textcolor{keyword}{"OFF"},
+00053         lpm\_hint                    => \textcolor{keyword}{"UNUSED"},
+00054         lpm\_type                    => \textcolor{keyword}{"altddio\_out"},
+00055         oe\_reg                      => \textcolor{keyword}{"UNREGISTERED"},
+00056         power\_up\_high               => \textcolor{keyword}{"OFF"},
+00057         width                       => iq\_width+1
+00058     \textcolor{vhdlchar}{)}
+00059     \textcolor{keywordflow}{PORT} \textcolor{keywordflow}{MAP} (
+00060         aclr            => aclr,
+00061         datain\_h    => data_in_h,
+00062         datain\_l    => data_in_l,
+00063         outclock    => clk,
+00064         dataout         => datout
+00065     \textcolor{vhdlchar}{)};
+00066     
+00067     \textcolor{vhdlchar}{txiq}        \textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{datout}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00068     \textcolor{vhdlchar}{txiqsel} \textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{datout}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}\textcolor{vhdlchar}{)};
+00069     
+00070   
+00071 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00072 
+00073 
+00074 
+00075 
+00076 
+\end{DoxyCode}

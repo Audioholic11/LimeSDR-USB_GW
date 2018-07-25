@@ -1,0 +1,85 @@
+\subsection{alt\+\_\+putcharbuf.\+c}
+\label{alt__putcharbuf_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+putcharbuf.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+putcharbuf.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2015 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 
+00034 \textcolor{preprocessor}{#ifdef ALT\_SEMIHOSTING}
+00035 \textcolor{preprocessor}{#include "sys/alt_stdio.h"}
+00036 \textcolor{preprocessor}{#include "unistd.h"}
+00037 
+00038 \textcolor{preprocessor}{#ifndef ALT\_PUTBUF\_SIZE}
+00039 \textcolor{preprocessor}{#define ALT\_PUTBUF\_SIZE 64}
+00040 \textcolor{preprocessor}{#endif}
+00041 
+00042 \textcolor{comment}{// Buffer for the printed chars}
+00043 \textcolor{keyword}{static} \textcolor{keywordtype}{char} buf[ALT\_PUTBUF\_SIZE] =\{0\};
+00044 \textcolor{comment}{// index into the buffer}
+00045 \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} fill\_index;
+00046 
+00047 \textcolor{comment}{/* }
+00048 \textcolor{comment}{ * ALT putcharbuf funtion}
+00049 \textcolor{comment}{ * Used only for semihosting. }
+00050 \textcolor{comment}{ * Not thread safe!}
+00051 \textcolor{comment}{ * This fucntion buffers up chars to be printed until either alt\_putbufflush()}
+00052 \textcolor{comment}{ * is called or the buffer is full.}
+00053 \textcolor{comment}{ * It is called by alt\_printf when semihosting is turned on}
+00054 \textcolor{comment}{ * Its purpose is to minimize the number of Break 1 issuesd by the semihosting}
+00055 \textcolor{comment}{ * libraries. }
+00056 \textcolor{comment}{ */}
+00057 \textcolor{keywordtype}{int} 
+00058 alt\_putcharbuf(\textcolor{keywordtype}{int} c)
+00059 \{
+00060     buf[fill\_index++] = (char)(c & 0xff);
+00061     \textcolor{keywordflow}{if}(fill\_index >= ALT\_PUTBUF\_SIZE)
+00062         alt\_putbufflush();
+00063     \textcolor{keywordflow}{return} c;
+00064 \}
+00065 
+00066 \textcolor{comment}{/*}
+00067 \textcolor{comment}{ * ALT putbufflush }
+00068 \textcolor{comment}{ * used only for smehosting}
+00069 \textcolor{comment}{ * Not thread safe!}
+00070 \textcolor{comment}{ * Dumps all the chars in the buffer to STDOUT}
+00071 \textcolor{comment}{ */}
+00072 \textcolor{keywordtype}{int} 
+00073 alt\_putbufflush()
+00074 \{
+00075     \textcolor{keywordtype}{int} results;
+00076     results = write(STDOUT\_FILENO,buf,fill\_index);
+00077     fill\_index = 0;
+00078     \textcolor{keywordflow}{return} results;
+00079 \}
+00080 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

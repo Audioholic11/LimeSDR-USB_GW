@@ -1,0 +1,195 @@
+\subsection{bit\+\_\+pack.\+vhd}
+\label{rx__path__top_2bit__pack_2synth_2bit__pack_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/bit\+\_\+pack/synth/bit\+\_\+pack.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/bit\+\_\+pack/synth/bit\+\_\+pack.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00002 \textcolor{keyword}{-- FILE:     bit\_pack.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION:    packs data from 12 or 14 bit samples to 16 bit data}
+00004 \textcolor{keyword}{-- DATE:    Nov 15, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):    Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }bit_pack \textcolor{keywordflow}{is}
+00016 
+00017   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00018 \textcolor{keyword}{        --input ports }
+00019         \textcolor{vhdlchar}{clk}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020         \textcolor{vhdlchar}{reset_n}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00021         \textcolor{vhdlchar}{data_in}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00022         \textcolor{vhdlchar}{data_in_valid}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00023         \textcolor{vhdlchar}{sample_width}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --"10"-12bit, "01"-14bit, "00"-16bit;}
+00024 \textcolor{keyword}{        --output ports }
+00025         \textcolor{vhdlchar}{data_out}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00026         \textcolor{vhdlchar}{data_out_valid}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}       
+00027         \textcolor{vhdlchar}{)};
+00028 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{bit\_pack};
+00029 
+00030 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00031 \textcolor{keyword}{-- Architecture}
+00032 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00033 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} bit_pack is
+00034 \textcolor{keyword}{--Declare signals,  components here}
+00035 
+00036 
+00037 \textcolor{keyword}{--inst0 signals}
+00038 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_data64_out}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00039 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_data48_in}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{47} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00040 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_data_out_valid}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00041 
+00042 \textcolor{keyword}{--inst1 signals}
+00043 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_data64_out}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00044 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_data56_in}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{55} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00045 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_data_out_valid}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00046 
+00047 \textcolor{keyword}{--mux signals}
+00048 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux0_data64}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00049 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux0_data_out_valid}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00050 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux0_sel}               \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00051 
+00052 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux0_data64_reg}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00053 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux0_data_out_valid_reg}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00054 
+00055 \textcolor{keyword}{--mux signals}
+00056 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux1_data64}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00057 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux1_data_out_valid}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00058 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux1_sel}               \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00059 
+00060 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux1_data64_reg}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00061 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mux1_data_out_valid_reg}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00062 
+00063 
+00064 
+00065 \textcolor{keywordflow}{component} pack_48_to_64 \textcolor{keywordflow}{is}
+00066   \textcolor{keywordflow}{port} (
+00067 \textcolor{keyword}{      --input ports }
+00068       clk               : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00069       reset_n           : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00070       data_in_wrreq     : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00071       data48_in         : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{47} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00072       data64_out        : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00073       data_out_valid    : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}       
+00074         );
+00075 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00076 
+00077 
+00078 \textcolor{keywordflow}{component} pack_56_to_64 \textcolor{keywordflow}{is}
+00079   \textcolor{keywordflow}{port} (
+00080 \textcolor{keyword}{      --input ports }
+00081       clk               : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00082       reset_n           : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00083       data_in_wrreq     : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00084       data56_in         : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{55} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00085       data64_out        : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00086       data_out_valid    : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}       
+00087         );
+00088 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00089   
+00090 \textcolor{vhdlkeyword}{begin}
+00091 
+00092 
+00093 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00094 \textcolor{keyword}{-- Component instances}
+00095 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00096 
+00097 inst0\_data48\_in <=   data\_in(\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{52}) & 
+00098                      \textcolor{vhdlchar}{data_in}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{47} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{36}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}
+00099                      \textcolor{vhdlchar}{data_in}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{20}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}
+00100                      \textcolor{vhdlchar}{data_in}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)};
+00101 
+00102 inst0 : pack_48_to_64 
+00103 \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00104       clk               => clk,
+00105       reset_n           => reset_n,
+00106       data_in_wrreq     => data_in_valid,
+00107       data48_in         => inst0_data48_in,
+00108       data64_out        => inst0_data64_out,
+00109       data_out_valid    => inst0_data_out_valid
+00110 \textcolor{vhdlchar}{)};
+00111 
+00112 inst1\_data56\_in <=   data\_in(\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{50}) &
+00113                      \textcolor{vhdlchar}{data_in}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{47} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{34}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} 
+00114                      \textcolor{vhdlchar}{data_in}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{18}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} 
+00115                      \textcolor{vhdlchar}{data_in}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)};
+00116 
+00117 inst1 : pack_56_to_64 
+00118 \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00119       clk            => clk,
+00120       reset_n        => reset_n,
+00121       data_in_wrreq  => data_in_valid,
+00122       data56_in      => inst1_data56_in,
+00123       data64_out     => inst1_data64_out,
+00124       data_out_valid => inst1_data_out_valid
+00125 \textcolor{vhdlchar}{)};
+00126 
+00127 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00128 \textcolor{keyword}{-- MUX 0 }
+00129 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00130 
+00131 \textcolor{vhdlchar}{mux0_sel}                \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{sample_width}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00132 
+00133 \textcolor{vhdlchar}{mux0_data64}             \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst0_data64_out} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{mux0_sel}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} 
+00134                         inst1\_data64\_out;
+00135                
+00136 \textcolor{vhdlchar}{mux0_data_out_valid}     \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst0_data_out_valid} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{mux0_sel}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} 
+00137                         inst1\_data\_out\_valid;
+00138 
+00139 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00140 \textcolor{keyword}{-- MUX 0 registers}
+00141 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00142 \textcolor{keywordflow}{process}(clk, reset_n)
+00143 \textcolor{vhdlkeyword}{begin }
+00144    \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00145       \textcolor{vhdlchar}{mux0_data64_reg}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00146       \textcolor{vhdlchar}{mux0_data_out_valid_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00147    \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00148       \textcolor{vhdlchar}{mux0_data64_reg}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mux0_data64};
+00149       \textcolor{vhdlchar}{mux0_data_out_valid_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mux0_data_out_valid};
+00150    \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00151 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00152 
+00153 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00154 \textcolor{keyword}{-- MUX 1 }
+00155 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00156 \textcolor{vhdlchar}{mux1_sel}                \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{sample_width}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{sample_width}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00157 
+00158 \textcolor{vhdlchar}{mux1_data64}             \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mux0_data64_reg}         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{mux1_sel}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} 
+00159                         \textcolor{vhdlchar}{data_in};
+00160 
+00161 \textcolor{vhdlchar}{mux1_data_out_valid}     \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mux0_data_out_valid_reg} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{mux1_sel}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} 
+00162                         \textcolor{vhdlchar}{data_in_valid};
+00163 
+00164 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00165 \textcolor{keyword}{-- MUX 1 registers}
+00166 \textcolor{keyword}{-- ----------------------------------------------------------------------------                            
+              }
+00167 \textcolor{keywordflow}{process}(clk, reset_n)
+00168 \textcolor{vhdlkeyword}{begin }
+00169    \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00170       \textcolor{vhdlchar}{mux1_data64_reg}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00171       \textcolor{vhdlchar}{mux1_data_out_valid_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00172    \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00173       \textcolor{vhdlchar}{mux1_data64_reg}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mux1_data64};
+00174       \textcolor{vhdlchar}{mux1_data_out_valid_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mux1_data_out_valid};
+00175    \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00176 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00177 
+00178 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00179 \textcolor{keyword}{-- Registers to output ports}
+00180 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00181 
+00182 \textcolor{vhdlchar}{data_out}       \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mux1_data64_reg};
+00183 \textcolor{vhdlchar}{data_out_valid} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mux1_data_out_valid_reg};
+00184 
+00185 
+00186 
+00187 
+00188 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00189 
+\end{DoxyCode}

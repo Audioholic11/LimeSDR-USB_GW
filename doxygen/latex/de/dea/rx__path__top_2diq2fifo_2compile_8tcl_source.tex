@@ -1,0 +1,97 @@
+\subsection{compile.\+tcl}
+\label{rx__path__top_2diq2fifo_2compile_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/diq2fifo/compile.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/diq2fifo/compile.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{# ---------------------------------------------------------------------------- }
+00002 \textcolor{comment}{}\textcolor{comment}{# FILE:    compile.tcl}
+00003 \textcolor{comment}{}\textcolor{comment}{# DESCRIPTION: General compile script for ModelSim - Altera}
+00004 \textcolor{comment}{}\textcolor{comment}{# DATE:    Jan 19, 2017}
+00005 \textcolor{comment}{}\textcolor{comment}{# AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{comment}{}\textcolor{comment}{# REVISIONS: 1.0}
+00007 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------------------}
+00008 \textcolor{comment}{}
+00009 \textcolor{keyword}{puts} \{
+00010  ----------------------------------------------------------------------------  
+00011  FILE:     compile.tcl
+00012  DESCRIPTION:  General compile script for ModelSim - Altera
+00013  DATE: Jan 19, 2017
+00014  AUTHOR(s):    Lime Microsystems
+00015  REVISIONS: 1.0
+00016  ----------------------------------------------------------------------------
+00017 \}\textcolor{comment}{}
+00018 \textcolor{comment}{}
+00019 \textcolor{comment}{# Simply change the project settings in this section}
+00020 \textcolor{comment}{}\textcolor{comment}{# for each new project. There should be no need to}
+00021 \textcolor{comment}{}\textcolor{comment}{# modify the rest of the script.}
+00022 \textcolor{comment}{}
+00023 \textcolor{comment}{#Add files to compile, follow compilation order(last file - top module)}
+00024 \textcolor{comment}{}\textcolor{keyword}{set} library\_file\_list \{
+00025                            source\_library \{ ../general/sync\_reg.vhd
+00026                                             ../general/bus\_sync\_reg.vhd
+00027                                             
+00028                                             synth/lms7002\_ddin.vhd
+00029                                             synth/test\_data\_dd.vhd
+00030                                             synth/rxiq\_siso\_sdr.vhd
+00031                                             synth/rxiq\_siso\_ddr.vhd
+00032                                             synth/rxiq\_pulse\_ddr.vhd
+00033                                             synth/rxiq\_mimo\_ddr.vhd
+00034                                             synth/rxiq\_mimo.vhd
+00035                                             synth/rxiq\_siso.vhd
+00036                                             synth/rxiq.vhd
+00037                                             synth/diq2fifo.vhd                                        
+         
+00038                                             sim/adc\_data\_sim.vhd
+00039                                             sim/LMS7002\_DIQ2\_sim.vhd
+00040                                             sim/diq2fifo\_tb.vhd
+00041                            \}
+00042 \}\textcolor{comment}{}
+00043 \textcolor{comment}{}
+00044 
+00045 
+00046 \textcolor{comment}{# After sourcing the script from ModelSim for the}
+00047 \textcolor{comment}{}\textcolor{comment}{# first time use these commands to recompile.}
+00048 \textcolor{comment}{}
+00049 \textcolor{keyword}{proc} r  \{\} \{uplevel #0 source compile.tcl\}\textcolor{comment}{}
+00050 \textcolor{comment}{}\textcolor{keyword}{proc} rr \{\} \{\textcolor{keyword}{global} last\_compile\_time\textcolor{comment}{}
+00051 \textcolor{comment}{}            \textcolor{keyword}{set} last\_compile\_time 0\textcolor{comment}{}
+00052 \textcolor{comment}{}            r\}\textcolor{comment}{}
+00053 \textcolor{comment}{}\textcolor{keyword}{proc} q  \{\} \{quit -force\}\textcolor{comment}{}
+00054 \textcolor{comment}{}
+00055 \textcolor{comment}{#Does this installation support Tk?}
+00056 \textcolor{comment}{}\textcolor{keyword}{set} tk\_ok 1\textcolor{comment}{}
+00057 \textcolor{comment}{}\textcolor{keyword}{if} [\textcolor{keyword}{catch} \{\textcolor{keyword}{package} require Tk\}] \{\textcolor{keyword}{set} tk\_ok 0\}\textcolor{comment}{}
+00058 \textcolor{comment}{}
+00059 \textcolor{comment}{# Prefer a fixed point font for the transcript}
+00060 \textcolor{comment}{}\textcolor{keyword}{set} PrefMain(font) \{Courier 10 roman normal\}\textcolor{comment}{}
+00061 \textcolor{comment}{}
+00062 \textcolor{comment}{# Compile out of date files}
+00063 \textcolor{comment}{}\textcolor{keyword}{set} time\_now [\textcolor{keyword}{clock} seconds]\textcolor{comment}{}
+00064 \textcolor{comment}{}\textcolor{keyword}{if} [\textcolor{keyword}{catch} \{\textcolor{keyword}{set} last\_compile\_time\}] \{
+00065   \textcolor{keyword}{set} last\_compile\_time 0\textcolor{comment}{}
+00066 \textcolor{comment}{}\}\textcolor{comment}{}
+00067 \textcolor{comment}{}\textcolor{keyword}{foreach} \{library file\_list\} $library\_file\_list \{
+00068   vlib $library\textcolor{comment}{}
+00069 \textcolor{comment}{}  vmap work $library\textcolor{comment}{}
+00070 \textcolor{comment}{}  \textcolor{keyword}{foreach} file $file\_list \{
+00071     \textcolor{keyword}{if} \{ $last\_compile\_time < [\textcolor{keyword}{file} mtime $file] \} \{
+00072       \textcolor{keyword}{if} [regexp \{.vhdl?$\} $file] \{
+00073         vcom -quiet -93 $file\textcolor{comment}{}
+00074 \textcolor{comment}{}      \} \textcolor{keyword}{else} \{
+00075         vlog $file\textcolor{comment}{}
+00076 \textcolor{comment}{}      \}\textcolor{comment}{}
+00077 \textcolor{comment}{}      \textcolor{keyword}{set} last\_compile\_time 0\textcolor{comment}{}
+00078 \textcolor{comment}{}    \}\textcolor{comment}{}
+00079 \textcolor{comment}{}  \}\textcolor{comment}{}
+00080 \textcolor{comment}{}\}\textcolor{comment}{}
+00081 \textcolor{comment}{}\textcolor{keyword}{set} last\_compile\_time $time\_now\textcolor{comment}{}
+00082 \textcolor{comment}{}
+00083 \textcolor{keyword}{puts} \{
+00084   Script commands are:
+00085 
+00086   r = Recompile changed and dependent files
+00087  rr = Recompile everything
+00088   q = Quit without confirmation
+00089 \}\textcolor{comment}{}
+00090 \textcolor{comment}{}
+00091 
+\end{DoxyCode}

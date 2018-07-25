@@ -1,0 +1,151 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+tick.c File Reference}
+\label{alt__tick_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+tick.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+tick.\+c}}
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+alarm.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}os/alt\+\_\+hooks.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+tick.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/ded/alt__tick_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD} ({\bf alt\+\_\+alarm\+\_\+list})
+\item 
+void {\bf alt\+\_\+alarm\+\_\+stop} ({\bf alt\+\_\+alarm} $\ast$alarm)
+\item 
+void {\bf alt\+\_\+tick} (void)
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+{\bf alt\+\_\+u32} {\bf \+\_\+alt\+\_\+tick\+\_\+rate} = 0
+\item 
+volatile {\bf alt\+\_\+u32} {\bf \+\_\+alt\+\_\+nticks} = 0
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}!alt\+\_\+alarm\+\_\+stop@{alt\+\_\+alarm\+\_\+stop}}
+\index{alt\+\_\+alarm\+\_\+stop@{alt\+\_\+alarm\+\_\+stop}!alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}}
+\paragraph[{alt\+\_\+alarm\+\_\+stop(alt\+\_\+alarm $\ast$alarm)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+alarm\+\_\+stop (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+alarm} $\ast$}]{alarm}
+\end{DoxyParamCaption}
+)}\label{alt__tick_8c_a7c0cdd82408cd34231062e38aaa9fe41}
+
+
+Definition at line {\bf 66} of file {\bf alt\+\_\+tick.\+c}.
+
+
+
+References {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf alt\+\_\+llist\+\_\+remove()}, and {\bf alt\+\_\+alarm\+\_\+s\+::llist}.
+
+
+
+Referenced by {\bf alt\+\_\+tick()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d4b/alt__tick_8c_a7c0cdd82408cd34231062e38aaa9fe41_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d4b/alt__tick_8c_a7c0cdd82408cd34231062e38aaa9fe41_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}!A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD@{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD}}
+\index{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD@{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD}!alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+A\+D(alt\+\_\+alarm\+\_\+list)}]{\setlength{\rightskip}{0pt plus 5cm}A\+L\+T\+\_\+\+L\+L\+I\+S\+T\+\_\+\+H\+E\+AD (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+alarm\+\_\+list}}]{}
+\end{DoxyParamCaption}
+)}\label{alt__tick_8c_aa49fd3fdc3bddebd1f025c2afc43ea41}
+\index{alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}!alt\+\_\+tick@{alt\+\_\+tick}}
+\index{alt\+\_\+tick@{alt\+\_\+tick}!alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}}
+\paragraph[{alt\+\_\+tick(void)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+tick (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{alt__tick_8c_a8717d54d19301f7004086a20324a16ff}
+
+
+Definition at line {\bf 87} of file {\bf alt\+\_\+tick.\+c}.
+
+
+
+References {\bf \+\_\+alt\+\_\+nticks}, {\bf alt\+\_\+alarm\+\_\+list}, {\bf alt\+\_\+alarm\+\_\+stop()}, {\bf A\+L\+T\+\_\+\+O\+S\+\_\+\+T\+I\+M\+E\+\_\+\+T\+I\+CK}, {\bf alt\+\_\+alarm\+\_\+s\+::callback}, {\bf alt\+\_\+alarm\+\_\+s\+::context}, {\bf if()}, {\bf alt\+\_\+alarm\+\_\+s\+::llist}, {\bf alt\+\_\+llist\+\_\+s\+::next}, {\bf alt\+\_\+alarm\+\_\+s\+::rollover}, and {\bf alt\+\_\+alarm\+\_\+s\+::time}.
+
+
+
+Referenced by {\bf alt\+\_\+nticks()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d4b/alt__tick_8c_a8717d54d19301f7004086a20324a16ff_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d4b/alt__tick_8c_a8717d54d19301f7004086a20324a16ff_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Variable Documentation}
+\index{alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}!\+\_\+alt\+\_\+nticks@{\+\_\+alt\+\_\+nticks}}
+\index{\+\_\+alt\+\_\+nticks@{\+\_\+alt\+\_\+nticks}!alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}}
+\paragraph[{\+\_\+alt\+\_\+nticks}]{\setlength{\rightskip}{0pt plus 5cm}volatile {\bf alt\+\_\+u32} \+\_\+alt\+\_\+nticks = 0}\label{alt__tick_8c_a77abfd0b880465ee1511f2d648424428}
+
+
+Definition at line {\bf 51} of file {\bf alt\+\_\+tick.\+c}.
+
+
+
+Referenced by {\bf alt\+\_\+nticks()}, and {\bf alt\+\_\+tick()}.
+
+\index{alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}!\+\_\+alt\+\_\+tick\+\_\+rate@{\+\_\+alt\+\_\+tick\+\_\+rate}}
+\index{\+\_\+alt\+\_\+tick\+\_\+rate@{\+\_\+alt\+\_\+tick\+\_\+rate}!alt\+\_\+tick.\+c@{alt\+\_\+tick.\+c}}
+\paragraph[{\+\_\+alt\+\_\+tick\+\_\+rate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+u32} \+\_\+alt\+\_\+tick\+\_\+rate = 0}\label{alt__tick_8c_abbfc6eca4ab60b513c03b9aee1e07533}
+
+
+Definition at line {\bf 44} of file {\bf alt\+\_\+tick.\+c}.
+
+
+
+Referenced by {\bf alt\+\_\+sysclk\+\_\+init()}, and {\bf alt\+\_\+ticks\+\_\+per\+\_\+second()}.
+

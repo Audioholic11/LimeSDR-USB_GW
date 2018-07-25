@@ -1,0 +1,171 @@
+\subsection{alt\+\_\+exceptions.\+h}
+\label{alt__exceptions_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+exceptions.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+exceptions.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_ALT\_EXCEPTIONS\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_ALT\_EXCEPTIONS\_H\_\_}
+00003 
+00004 \textcolor{comment}{/******************************************************************************}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* License Agreement                                                           *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Copyright (c) 2008 Altera Corporation, San Jose, California, USA.           *}
+00009 \textcolor{comment}{* All rights reserved.                                                        *}
+00010 \textcolor{comment}{*                                                                             *}
+00011 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00012 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00013 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00014 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00015 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00016 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00019 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00020 \textcolor{comment}{*                                                                             *}
+00021 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00022 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00023 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00024 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00025 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00026 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00027 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00030 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00031 \textcolor{comment}{*                                                                             *}
+00032 \textcolor{comment}{******************************************************************************/}
+00033 \textcolor{preprocessor}{#include "alt_types.h"}
+00034 \textcolor{preprocessor}{#include "system.h"}
+00035 
+00036 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00037 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"}
+00038 \{
+00039 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00040 
+00041 \textcolor{comment}{/*}
+00042 \textcolor{comment}{ * This file defines instruction-generated exception handling and registry}
+00043 \textcolor{comment}{ * API, exception type enumeration, and handler return value enumeration for}
+00044 \textcolor{comment}{ * Nios II.}
+00045 \textcolor{comment}{ */}
+00046 
+00047 \textcolor{comment}{/*}
+00048 \textcolor{comment}{ * The following enumeration describes the value in the CPU EXCEPTION}
+00049 \textcolor{comment}{ * register CAUSE bit field.}
+00050 \textcolor{comment}{ */}
+00051 \textcolor{keyword}{enum} alt_exception_cause_e \{
+00052   \textcolor{comment}{/*}
+00053 \textcolor{comment}{   * This value is passed to an exception handler's cause argument if}
+00054 \textcolor{comment}{   * "extra exceptions" information (EXECPTION) register is not}
+00055 \textcolor{comment}{   * present in the processor hardware configuration.}
+00056 \textcolor{comment}{   */}
+00057   NIOS2_EXCEPTION_CAUSE_NOT_PRESENT            = -1,
+00058 
+00059   \textcolor{comment}{/*}
+00060 \textcolor{comment}{   * Real values}
+00061 \textcolor{comment}{   */}
+00062   NIOS2_EXCEPTION_RESET                        = 0,
+00063   NIOS2_EXCEPTION_CPU_ONLY_RESET_REQUEST       = 1,
+00064   NIOS2_EXCEPTION_INTERRUPT                    = 2,
+00065   NIOS2_EXCEPTION_TRAP_INST                    = 3,
+00066   NIOS2_EXCEPTION_UNIMPLEMENTED_INST           = 4,
+00067   NIOS2_EXCEPTION_ILLEGAL_INST                 = 5,
+00068   NIOS2_EXCEPTION_MISALIGNED_DATA_ADDR         = 6,
+00069   NIOS2_EXCEPTION_MISALIGNED_TARGET_PC         = 7,
+00070   NIOS2_EXCEPTION_DIVISION_ERROR               = 8,
+00071   NIOS2_EXCEPTION_SUPERVISOR_ONLY_INST_ADDR    = 9,
+00072   NIOS2_EXCEPTION_SUPERVISOR_ONLY_INST         = 10,
+00073   NIOS2_EXCEPTION_SUPERVISOR_ONLY_DATA_ADDR    = 11,
+00074   NIOS2_EXCEPTION_TLB_MISS                     = 12,
+00075   NIOS2_EXCEPTION_TLB_EXECUTE_PERM_VIOLATION   = 13,
+00076   NIOS2_EXCEPTION_TLB_READ_PERM_VIOLATION      = 14,
+00077   NIOS2_EXCEPTION_TLB_WRITE_PERM_VIOLATION     = 15,
+00078   NIOS2_EXCEPTION_MPU_INST_REGION_VIOLATION    = 16,
+00079   NIOS2_EXCEPTION_MPU_DATA_REGION_VIOLATION    = 17,
+00080   NIOS2_EXCEPTION_ECC_TLB_ERR                  = 18,
+00081   NIOS2_EXCEPTION_ECC_FETCH_ERR                = 19,
+00082   NIOS2_EXCEPTION_ECC_REGISTER_FILE_ERR        = 20,
+00083   NIOS2_EXCEPTION_ECC_DATA_ERR                 = 21,
+00084   NIOS2_EXCEPTION_ECC_DATA_CACHE_WRITEBACK_ERR = 22
+00085 \};
+00086 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} alt_exception_cause_e alt_exception_cause;
+00087 
+00088 \textcolor{comment}{/*}
+00089 \textcolor{comment}{ * These define valid return values for a user-defined instruction-generated}
+00090 \textcolor{comment}{ * exception handler. The handler should return one of these to indicate}
+00091 \textcolor{comment}{ * whether to re-issue the instruction that triggered the exception, or to}
+00092 \textcolor{comment}{ * skip it.}
+00093 \textcolor{comment}{ */}
+00094 \textcolor{keyword}{enum} alt_exception_result_e \{
+00095   NIOS2_EXCEPTION_RETURN_REISSUE_INST = 0,
+00096   NIOS2_EXCEPTION_RETURN_SKIP_INST    = 1
+00097 \};
+00098 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} alt_exception_result_e alt_exception_result;
+00099 
+00100 \textcolor{comment}{/*}
+00101 \textcolor{comment}{ * alt\_instruction\_exception\_register() can be used to register an exception}
+00102 \textcolor{comment}{ * handler for instruction-generated exceptions that are not handled by the}
+00103 \textcolor{comment}{ * built-in exception handler (i.e. for interrupts).}
+00104 \textcolor{comment}{ *}
+00105 \textcolor{comment}{ * The registry API is optionally enabled through the "Enable}
+00106 \textcolor{comment}{ * Instruction-related Exception API" HAL BSP setting, which will}
+00107 \textcolor{comment}{ * define the macro below.}
+00108 \textcolor{comment}{ */}
+00109 \textcolor{preprocessor}{#ifdef ALT\_INCLUDE\_INSTRUCTION\_RELATED\_EXCEPTION\_API}
+00110 \textcolor{keywordtype}{void} alt\_instruction\_exception\_register (
+00111   alt\_exception\_result (*exception\_handler)(
+00112     alt\_exception\_cause cause,
+00113     alt_u32 exception\_pc,
+00114     alt_u32 bad\_addr) );
+00115 \textcolor{preprocessor}{#endif }\textcolor{comment}{/*ALT\_INCLUDE\_INSTRUCTION\_RELATED\_EXCEPTION\_API */}\textcolor{preprocessor}{}
+00116 
+00117 \textcolor{comment}{/*}
+00118 \textcolor{comment}{ * alt\_exception\_cause\_generated\_bad\_addr() indicates whether a particular}
+00119 \textcolor{comment}{ * exception cause value was from an exception-type that generated a valid}
+00120 \textcolor{comment}{ * address in the BADADDR register. The contents of BADADDR is passed to}
+00121 \textcolor{comment}{ * a user-registered exception handler in all cases, whether valid or not.}
+00122 \textcolor{comment}{ * This routine should be called to validate the bad\_addr argument to}
+00123 \textcolor{comment}{ * your exception handler.}
+00124 \textcolor{comment}{ *}
+00125 \textcolor{comment}{ * Note that this routine will return false (0) for causes }
+00126 \textcolor{comment}{ * NIOS2\_EXCEPTION\_TLB\_MISS and NIOS2\_EXCEPTION\_ECC\_TLB\_ERR.}
+00127 \textcolor{comment}{ * You must read the TLBMISC.D field to determine if BADADDR}
+00128 \textcolor{comment}{ * is valid for these (valid if TLBMISC.D = 1).}
+00129 \textcolor{comment}{ */}
+00130 \textcolor{keywordtype}{int} alt_exception_cause_generated_bad_addr(alt\_exception\_cause cause);
+00131 
+00132 \textcolor{comment}{/*}
+00133 \textcolor{comment}{ * alt\_ecc\_fatal\_exception\_register() is called to register a handler to}
+00134 \textcolor{comment}{ * service likely fatal ECC error exceptions. Likely the handler will}
+00135 \textcolor{comment}{ * assume that correct execution of the running software is not possible}
+00136 \textcolor{comment}{ * and re-initialize the processor (e.g. jump to reset address).}
+00137 \textcolor{comment}{ * }
+00138 \textcolor{comment}{ * Passing null (0x0) in the handler argument will disable a previously-}
+00139 \textcolor{comment}{ * registered handler.}
+00140 \textcolor{comment}{ *}
+00141 \textcolor{comment}{ * Note that if no handler is registered, just normal exception processing}
+00142 \textcolor{comment}{ * occurs on a likely fatal ECC exception and the exception processing}
+00143 \textcolor{comment}{ * code might trigger an infinite exception loop.}
+00144 \textcolor{comment}{ *}
+00145 \textcolor{comment}{ * Note that the handler isn't a C function: it must be written in }
+00146 \textcolor{comment}{ * assembly-code because it doesn't support C language calling conventions}
+00147 \textcolor{comment}{ * and it can't return.}
+00148 \textcolor{comment}{ *}
+00149 \textcolor{comment}{ * The handler code must be carefully written to avoid triggering}
+00150 \textcolor{comment}{ * another fatal ECC exception and creating an infinite exception loop.}
+00151 \textcolor{comment}{ * The handler must avoid reading registers in case the fatal ECC}
+00152 \textcolor{comment}{ * error is a register file ECC error.}
+00153 \textcolor{comment}{ * If a data cache is present, the handler must avoid instructions that}
+00154 \textcolor{comment}{ * access the data cache in case the fatal ECC error is a data cache }
+00155 \textcolor{comment}{ * related ECC error. This includes cacheable load, cacheable store, }
+00156 \textcolor{comment}{ * non-cacheable store (because it looks in the data cache to update the}
+00157 \textcolor{comment}{ * data cache if it hits), and all data cache management instructions except}
+00158 \textcolor{comment}{ * for INITD.}
+00159 \textcolor{comment}{ */}
+00160 \textcolor{keywordtype}{void} alt_ecc_fatal_exception_register(alt_u32 handler);
+00161 
+00162 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00163 \}
+00164 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00165 
+00166 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_EXCEPTIONS\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

@@ -1,0 +1,101 @@
+\subsection{lpm\+\_\+cnt\+\_\+inst.\+vhd}
+\label{src_2altera__inst_2lpm__cnt__inst_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/altera\+\_\+inst/lpm\+\_\+cnt\+\_\+inst.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/altera\+\_\+inst/lpm\+\_\+cnt\+\_\+inst.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    lpm\_cnt\_inst.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: describe file}
+00004 \textcolor{keyword}{-- DATE:    Jan 27, 2017}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{vhdlkeyword}{LIBRARY }\textcolor{keywordflow}{lpm};
+00013 \textcolor{vhdlkeyword}{USE }\textcolor{keywordflow}{lpm.all};
+00014 
+00015 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00016 \textcolor{keyword}{-- Entity declaration}
+00017 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00018 \textcolor{keywordflow}{entity }lpm_cnt_inst \textcolor{keywordflow}{is}
+00019    \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(}
+00020       \textcolor{vhdlchar}{cnt_width}   \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{64}
+00021    \textcolor{vhdlchar}{)};
+00022    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00023 
+00024       \textcolor{vhdlchar}{clk}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00025       \textcolor{vhdlchar}{reset_n}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00026         \textcolor{vhdlchar}{cin}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic} ;
+00027         \textcolor{vhdlchar}{cnt_en}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic} ;
+00028         \textcolor{vhdlchar}{data}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{cnt_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00029       \textcolor{vhdlchar}{sclr}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00030         \textcolor{vhdlchar}{sload}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic} ;
+00031         \textcolor{vhdlchar}{cout}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic} ;
+00032         \textcolor{vhdlchar}{q}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{cnt_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}
+00033 
+00034 
+00035         \textcolor{vhdlchar}{)};
+00036 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{lpm\_cnt\_inst};
+00037 
+00038 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00039 \textcolor{keyword}{-- Architecture}
+00040 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00041 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} lpm_cnt_inst is
+00042 \textcolor{keyword}{--declare signals,  components here}
+00043 
+00044 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{aclr} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00045 
+00046 
+00047     \textcolor{keywordflow}{COMPONENT} lpm\_counter
+00048     \textcolor{keywordflow}{GENERIC} (
+00049         lpm\_direction          : \textcolor{comment}{STRING};
+00050         lpm\_port\_updown     : \textcolor{comment}{STRING};
+00051         lpm\_type                 : \textcolor{comment}{STRING};
+00052         lpm\_width             : \textcolor{comment}{NATURAL}
+00053     );
+00054     \textcolor{keywordflow}{PORT} (
+00055             aclr          : \textcolor{keywordflow}{IN} \textcolor{comment}{STD\_LOGIC} ;
+00056             cin       : \textcolor{keywordflow}{IN} \textcolor{comment}{STD\_LOGIC} ;
+00057             clock         : \textcolor{keywordflow}{IN} \textcolor{comment}{STD\_LOGIC} ;
+00058             cnt\_en     : \textcolor{keywordflow}{IN} \textcolor{comment}{STD\_LOGIC} ;
+00059             data          : \textcolor{keywordflow}{IN} \textcolor{comment}{STD\_LOGIC\_VECTOR} (cnt\_width\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00060          sclr        : \textcolor{keywordflow}{IN} \textcolor{comment}{STD\_LOGIC};
+00061             sload         : \textcolor{keywordflow}{IN} \textcolor{comment}{STD\_LOGIC} ;
+00062             cout          : \textcolor{keywordflow}{OUT} \textcolor{comment}{STD\_LOGIC} ;
+00063             q            : \textcolor{keywordflow}{OUT} \textcolor{comment}{STD\_LOGIC\_VECTOR} (cnt\_width\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0})
+00064     );
+00065     \textcolor{keywordflow}{END} \textcolor{keywordflow}{COMPONENT};
+00066 
+00067   
+00068 \textcolor{vhdlkeyword}{begin}
+00069 
+00070 \textcolor{vhdlchar}{aclr} \textcolor{vhdlchar}{<=} \textcolor{keywordflow}{NOT} \textcolor{vhdlchar}{reset_n};
+00071 
+00072     LPM\_COUNTER\_component : LPM\_COUNTER
+00073     \textcolor{keywordflow}{GENERIC} \textcolor{keywordflow}{MAP} (
+00074         lpm\_direction     => \textcolor{keyword}{"UP"},
+00075         lpm\_port\_updown   => \textcolor{keyword}{"PORT\_UNUSED"},
+00076         lpm\_type          => \textcolor{keyword}{"LPM\_COUNTER"},
+00077         lpm\_width         => cnt_width
+00078     \textcolor{vhdlchar}{)}
+00079     \textcolor{keywordflow}{PORT} \textcolor{keywordflow}{MAP} (
+00080         aclr     => aclr,
+00081         cin      => cin,
+00082         clock    => clk,
+00083         cnt\_en   => cnt_en,
+00084         data     => data,
+00085       sclr     => sclr,
+00086         sload    => sload,
+00087         cout     => cout,
+00088         q        => q
+00089     \textcolor{vhdlchar}{)};
+00090   
+00091 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00092 
+00093 
+00094 
+00095 
+00096 
+\end{DoxyCode}

@@ -1,0 +1,64 @@
+\subsection{rstn\+\_\+pulse.\+vhd}
+\label{rstn__pulse_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/rstn\+\_\+pulse.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/rstn\+\_\+pulse.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    rst\_pulse.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: makes single reset\_n pulse }
+00004 \textcolor{keyword}{-- DATE:    Feb 13, 2014}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }rstn_pulse \textcolor{keywordflow}{is}
+00016   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00017 \textcolor{keyword}{        --input ports }
+00018         \textcolor{vhdlchar}{clk}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00019           \textcolor{vhdlchar}{reset_n}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020         \textcolor{vhdlchar}{resetn_in}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00021           \textcolor{vhdlchar}{rstn_pulse_out}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00022 
+00023 \textcolor{keyword}{        --output ports }
+00024         
+00025         \textcolor{vhdlchar}{)};
+00026 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{rstn\_pulse};
+00027 
+00028 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00029 \textcolor{keyword}{-- Architecture}
+00030 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00031 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} rstn_pulse is
+00032 \textcolor{keyword}{--declare signals,  components here}
+00033 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{resetn_in_reg} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00034 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{resetn_in_reg1} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00035 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{resetn_in_reg2} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00036 
+00037   
+00038 \textcolor{vhdlkeyword}{begin}
+00039 
+00040   \textcolor{keywordflow}{process}(reset_n, clk)
+00041 \textcolor{vhdlkeyword}{    begin}
+00042       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00043         \textcolor{vhdlchar}{resetn_in_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00044           \textcolor{vhdlchar}{resetn_in_reg1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00045           \textcolor{vhdlchar}{resetn_in_reg2}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};  
+00046         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00047           \textcolor{vhdlchar}{resetn_in_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{resetn_in};
+00048             \textcolor{vhdlchar}{resetn_in_reg1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{resetn_in_reg};
+00049             \textcolor{vhdlchar}{resetn_in_reg2}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{resetn_in_reg1};
+00050         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00051     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00052      
+00053     \textcolor{vhdlchar}{rstn_pulse_out}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{resetn_in_reg2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and}   \textcolor{vhdlchar}{resetn_in_reg1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00054   
+00055 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00056 
+00057 
+00058 
+00059 
+\end{DoxyCode}

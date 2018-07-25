@@ -1,0 +1,153 @@
+\subsection{nios\+\_\+cpu.\+vhd}
+\label{nios__cpu_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/nios\+\_\+cpu/nios\+\_\+cpu.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/nios\+\_\+cpu/nios\+\_\+cpu.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:  nios\_cpu.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: NIOS CPU top level}
+00004 \textcolor{keyword}{-- DATE: Feb 12, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s): Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }nios_cpu \textcolor{keywordflow}{is}
+00016    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00017       \textcolor{vhdlchar}{clk100}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic};
+00018       \textcolor{vhdlchar}{exfifo_if_d}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00019       \textcolor{vhdlchar}{exfifo_if_rd}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};
+00020       \textcolor{vhdlchar}{exfifo_if_rdempty} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic};
+00021       \textcolor{vhdlchar}{exfifo_of_d}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00022       \textcolor{vhdlchar}{exfifo_of_wr}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};
+00023       \textcolor{vhdlchar}{exfifo_of_wrfull}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic};
+00024       \textcolor{vhdlchar}{exfifo_rst}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};
+00025       \textcolor{vhdlchar}{leds}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00026       \textcolor{vhdlchar}{lms_ctr_gpio}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00027       \textcolor{vhdlchar}{spi_lms_MISO}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic};
+00028       \textcolor{vhdlchar}{spi_lms_MOSI}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};
+00029       \textcolor{vhdlchar}{spi_lms_SCLK}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};
+00030       \textcolor{vhdlchar}{spi_lms_SS_n}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00031       \textcolor{vhdlchar}{spi_1_MOSI}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};
+00032       \textcolor{vhdlchar}{spi_1_SCLK}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};
+00033       \textcolor{vhdlchar}{spi_1_SS_n}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00034       \textcolor{vhdlchar}{switch}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00035       \textcolor{vhdlchar}{i2c_scl}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic};
+00036       \textcolor{vhdlchar}{i2c_sda}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic}
+00037         \textcolor{vhdlchar}{)};
+00038 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{nios\_cpu};
+00039 
+00040 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00041 \textcolor{keyword}{-- Architecture}
+00042 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00043 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} nios_cpu is
+00044 \textcolor{keyword}{--declare signals,  components here}
+00045 
+00046 
+00047 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dac_MOSI}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{dac_SCLK}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{dac_SS}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{adf_MOSI}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{adf_SCLK}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{adf_SS}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00048 
+00049 
+00050    \textcolor{keywordflow}{component} lms_ctr \textcolor{keywordflow}{is}
+00051       \textcolor{keywordflow}{port} (
+00052          clk_clk                                 : \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic}                    := 'X';             \textcolor{keyword}{
+      -- clk}
+00053          exfifo_if_d_export                      : \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}) := (\textcolor{keywordflow}{others} => 'X'); \textcolor{keyword}{
+      -- export}
+00054          exfifo_if_rd_export                     : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- export}
+00055          exfifo_if_rdempty_export                : \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic}                    := 'X';             \textcolor{keyword}{
+      -- export}
+00056          exfifo_of_d_export                      : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});                    \textcolor{keyword}{
+      -- export}
+00057          exfifo_of_wr_export                     : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- export}
+00058          exfifo_of_wrfull_export                 : \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic}                    := 'X';             \textcolor{keyword}{
+      -- export}
+00059          exfifo_rst_export                       : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- export}
+00060          leds_external_connection_export         : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});                    \textcolor{keyword}{
+      -- export}
+00061          lms_ctr_gpio_external_connection_export : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});                    \textcolor{keyword}{
+      -- export}
+00062          scl_exp_export                          : \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic}                    := 'X';             \textcolor{keyword}{
+      -- export}
+00063          sda_exp_export                          : \textcolor{keywordflow}{inout} \textcolor{comment}{std\_logic}                    := 'X';             \textcolor{keyword}{
+      -- export}
+00064          spi_lms_external_MISO                   : \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic}                    := 'X';             \textcolor{keyword}{
+      -- MISO}
+00065          spi_lms_external_MOSI                   : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- MOSI}
+00066          spi_lms_external_SCLK                   : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- SCLK}
+00067          spi_lms_external_SS_n                   : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});                    \textcolor{keyword}{
+      -- SS\_n}
+00068          switch_external_connection_export       : \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}) := (\textcolor{keywordflow}{others} => 'X'); \textcolor{keyword}{
+      -- export}
+00069          spi_1_dac_external_MISO                 : \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic}                    := 'X';             \textcolor{keyword}{
+      -- MISO}
+00070          spi_1_dac_external_MOSI                 : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- MOSI}
+00071          spi_1_dac_external_SCLK                 : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- SCLK}
+00072          spi_1_dac_external_SS_n                 : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- SS\_n}
+00073          spi_1_adf_external_MISO                 : \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic}                    := 'X';             \textcolor{keyword}{
+      -- MISO}
+00074          spi_1_adf_external_MOSI                 : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- MOSI}
+00075          spi_1_adf_external_SCLK                 : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic};                                       \textcolor{keyword}{
+      -- SCLK}
+00076          spi_1_adf_external_SS_n                 : \textcolor{keywordflow}{out}   \textcolor{comment}{std\_logic}\textcolor{keyword}{                                       
+       -- SS\_n}
+00077       );    
+00078     \textcolor{keywordflow}{end} \textcolor{keywordflow}{component} \textcolor{vhdlchar}{lms_ctr};
+00079   
+00080 \textcolor{vhdlkeyword}{begin}
+00081 
+00082    u0 : \textcolor{keywordflow}{component} lms_ctr
+00083       \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00084          clk_clk                                 => clk100,
+00085          exfifo_if_d_export                      => exfifo_if_d,
+00086          exfifo_if_rd_export                     => exfifo_if_rd,
+00087          exfifo_if_rdempty_export                => exfifo_if_rdempty,
+00088          exfifo_of_d_export                      => exfifo_of_d,
+00089          exfifo_of_wr_export                     => exfifo_of_wr,
+00090          exfifo_of_wrfull_export                 => exfifo_of_wrfull,
+00091          exfifo_rst_export                       => exfifo_rst,
+00092          leds_external_connection_export         => leds,
+00093          lms_ctr_gpio_external_connection_export => lms_ctr_gpio,
+00094          spi_lms_external_MISO                   => spi_lms_MISO,
+00095          spi_lms_external_MOSI                   => spi_lms_MOSI,
+00096          spi_lms_external_SCLK                   => spi_lms_SCLK,
+00097          spi_lms_external_SS_n                   => spi_lms_SS_n,
+00098          switch_external_connection_export       => switch,
+00099          scl_exp_export                          => i2c_scl,
+00100          sda_exp_export                          => i2c_sda,
+00101          spi_1_dac_external_MISO                 => '0',
+00102          spi_1_dac_external_MOSI                 => dac_MOSI,
+00103          spi_1_dac_external_SCLK                 => dac_SCLK,
+00104          spi_1_dac_external_SS_n                 => dac_SS,
+00105          spi_1_adf_external_MISO                 => '0',
+00106          spi_1_adf_external_MOSI                 => adf_MOSI,
+00107          spi_1_adf_external_SCLK                 => adf_SCLK,
+00108          spi_1_adf_external_SS_n                 => adf_SS
+00109 
+00110       \textcolor{vhdlchar}{)};
+00111       
+00112 \textcolor{keyword}{      -- SPI switch to select between ADF4002 and AD5601.}
+00113 \textcolor{keyword}{      -- This is neccessary, while ADF4002 CLOCK\_PHASE = 0 and AD5601 CLOCK\_PHASE = 1}
+00114       \textcolor{vhdlchar}{spi_1_MOSI} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{adf_MOSI} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{adf_SS} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{dac_MOSI};
+00115       \textcolor{vhdlchar}{spi_1_SCLK} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{adf_SCLK} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{adf_SS} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{dac_SCLK};
+00116       
+00117       \textcolor{vhdlchar}{spi_1_SS_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{adf_SS} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{dac_SS};
+00118 
+00119 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00120 
+00121 
+00122 
+00123 
+\end{DoxyCode}

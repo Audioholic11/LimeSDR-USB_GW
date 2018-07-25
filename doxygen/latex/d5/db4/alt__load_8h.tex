@@ -1,0 +1,87 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+load.h File Reference}
+\label{alt__load_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+load.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+load.\+h}}
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+load.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{d0/d8b/alt__load_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{da/d3d/alt__load_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+L\+O\+A\+D\+\_\+\+S\+E\+C\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+N\+A\+ME}(name)
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+load\+\_\+section} ({\bf alt\+\_\+u32} $\ast$from, {\bf alt\+\_\+u32} $\ast$to, {\bf alt\+\_\+u32} $\ast$end)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+load.\+h@{alt\+\_\+load.\+h}!A\+L\+T\+\_\+\+L\+O\+A\+D\+\_\+\+S\+E\+C\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+N\+A\+ME@{A\+L\+T\+\_\+\+L\+O\+A\+D\+\_\+\+S\+E\+C\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+N\+A\+ME}}
+\index{A\+L\+T\+\_\+\+L\+O\+A\+D\+\_\+\+S\+E\+C\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+N\+A\+ME@{A\+L\+T\+\_\+\+L\+O\+A\+D\+\_\+\+S\+E\+C\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+N\+A\+ME}!alt\+\_\+load.\+h@{alt\+\_\+load.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+L\+O\+A\+D\+\_\+\+S\+E\+C\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+N\+A\+ME}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+L\+O\+A\+D\+\_\+\+S\+E\+C\+T\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+N\+A\+ME(
+\begin{DoxyParamCaption}
+\item[{}]{name}
+\end{DoxyParamCaption}
+)}\label{alt__load_8h_ad9c1a16e98e8df712d7f55cfc13f8072}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{                                                            \(\backslash\)
+    extern \textcolor{keywordtype}{void} \_alt\_partition\_##name##\_start;                 \(\backslash\)
+    extern \textcolor{keywordtype}{void} \_alt\_partition\_##name##\_end;                   \(\backslash\)
+    extern \textcolor{keywordtype}{void} \_alt\_partition\_##name##\_load\_addr;             \
+                                                               \
+    alt_load_section(&\_alt\_partition\_##name##\_load\_addr,       \(\backslash\)
+                     &\_alt\_partition\_##name##\_start,           \(\backslash\)
+                     &\_alt\_partition\_##name##\_end);            \(\backslash\)
+  \}
+\end{DoxyCode}
+
+
+Definition at line {\bf 48} of file {\bf alt\+\_\+load.\+h}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+load.\+h@{alt\+\_\+load.\+h}!alt\+\_\+load\+\_\+section@{alt\+\_\+load\+\_\+section}}
+\index{alt\+\_\+load\+\_\+section@{alt\+\_\+load\+\_\+section}!alt\+\_\+load.\+h@{alt\+\_\+load.\+h}}
+\paragraph[{alt\+\_\+load\+\_\+section(alt\+\_\+u32 $\ast$from, alt\+\_\+u32 $\ast$to, alt\+\_\+u32 $\ast$end)}]{\setlength{\rightskip}{0pt plus 5cm}static void {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+load\+\_\+section (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32} $\ast$}]{from, }
+\item[{{\bf alt\+\_\+u32} $\ast$}]{to, }
+\item[{{\bf alt\+\_\+u32} $\ast$}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__load_8h_ae422fde4004c84c6fe58c3eeba7a2969}
+
+
+Definition at line {\bf 67} of file {\bf alt\+\_\+load.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+load()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{d5/db4/alt__load_8h_ae422fde4004c84c6fe58c3eeba7a2969_icgraph}
+\end{center}
+\end{figure}
+
+

@@ -1,0 +1,77 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dcache\+\_\+flush.c File Reference}
+\label{alt__dcache__flush_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dcache\+\_\+flush.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dcache\+\_\+flush.\+c}}
+{\ttfamily \#include \char`\"{}nios2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+cache.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+dcache\+\_\+flush.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{d7/d0b/alt__dcache__flush_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+TA}(i)~{\bf \+\_\+\+\_\+asm\+\_\+\+\_\+} volatile (\char`\"{}flushda (\%0)\char`\"{} \+:: \char`\"{}r\char`\"{} (i));
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf alt\+\_\+dcache\+\_\+flush} (void $\ast$start, {\bf alt\+\_\+u32} len)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+dcache\+\_\+flush.\+c@{alt\+\_\+dcache\+\_\+flush.\+c}!A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+TA@{A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+TA}}
+\index{A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+TA@{A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+TA}!alt\+\_\+dcache\+\_\+flush.\+c@{alt\+\_\+dcache\+\_\+flush.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+TA}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+TA(
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)~{\bf \+\_\+\+\_\+asm\+\_\+\+\_\+} volatile (\char`\"{}flushda (\%0)\char`\"{} \+:: \char`\"{}r\char`\"{} (i));}\label{alt__dcache__flush_8c_a2500f5d90b8ab8bfa44f0fa24db88645}
+
+
+Definition at line {\bf 37} of file {\bf alt\+\_\+dcache\+\_\+flush.\+c}.
+
+
+
+Referenced by {\bf alt\+\_\+dcache\+\_\+flush()}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+dcache\+\_\+flush.\+c@{alt\+\_\+dcache\+\_\+flush.\+c}!alt\+\_\+dcache\+\_\+flush@{alt\+\_\+dcache\+\_\+flush}}
+\index{alt\+\_\+dcache\+\_\+flush@{alt\+\_\+dcache\+\_\+flush}!alt\+\_\+dcache\+\_\+flush.\+c@{alt\+\_\+dcache\+\_\+flush.\+c}}
+\paragraph[{alt\+\_\+dcache\+\_\+flush(void $\ast$start, alt\+\_\+u32 len)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+dcache\+\_\+flush (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{start, }
+\item[{{\bf alt\+\_\+u32}}]{len}
+\end{DoxyParamCaption}
+)}\label{alt__dcache__flush_8c_a9fabe1416281a97e1767ada9f7c0a337}
+
+
+Definition at line {\bf 46} of file {\bf alt\+\_\+dcache\+\_\+flush.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+F\+L\+U\+S\+H\+\_\+\+D\+A\+TA}, and {\bf N\+I\+O\+S2\+\_\+\+D\+C\+A\+C\+H\+E\+\_\+\+L\+I\+N\+E\+\_\+\+S\+I\+ZE}.
+
+
+
+Referenced by {\bf alt\+\_\+ecc\+\_\+fatal\+\_\+exception\+\_\+register()}, and {\bf alt\+\_\+uncached\+\_\+malloc()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{d6/db7/alt__dcache__flush_8c_a9fabe1416281a97e1767ada9f7c0a337_icgraph}
+\end{center}
+\end{figure}
+
+

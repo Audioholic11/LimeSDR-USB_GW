@@ -1,0 +1,199 @@
+\subsection{i2c\+\_\+opencores.\+c}
+\label{software_2lms__ctr__app_2i2c__opencores_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/i2c\+\_\+opencores.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/i2c\+\_\+opencores.\+c}}
+
+\begin{DoxyCode}
+00001 
+00002 \textcolor{preprocessor}{#include "alt_types.h"}
+00003 \textcolor{preprocessor}{#include "i2c_opencores_regs.h"}
+00004 \textcolor{preprocessor}{#include "i2c_opencores.h"}
+00005 
+00006 \textcolor{preprocessor}{#define MAX\_RETRIES 1000}
+00007 
+00008 \textcolor{comment}{// #define I2C\_DEBUG}
+00009 \textcolor{comment}{//int I2C\_init(alt\_u32 base,alt\_u32 clk, alt\_u32 speed)}
+00010 \textcolor{comment}{//int I2C\_start(alt\_u32 base, alt\_u32 add, alt\_u32 write);}
+00011 \textcolor{comment}{//alt\_u32 I2C\_read(alt\_u32 base);}
+00012 \textcolor{comment}{//int I2C\_write(alt\_u32 base, alt\_u8 data);}
+00013 \textcolor{comment}{//int I2C\_stop(alt\_u32 base);}
+00014 
+00015 \textcolor{comment}{/* these functions are polled only.  */}
+00016 \textcolor{comment}{/* all functions wait until the I2C is done before exiting */}
+00017 
+00018 
+00019 \textcolor{comment}{/****************************************************************}
+00020 \textcolor{comment}{int I2C\_init}
+00021 \textcolor{comment}{            This function inititlizes the prescalor for the scl}
+00022 \textcolor{comment}{            and then enables the core. This must be run before}
+00023 \textcolor{comment}{            any other i2c code is executed}
+00024 \textcolor{comment}{inputs}
+00025 \textcolor{comment}{      base = the base address of the component}
+00026 \textcolor{comment}{      clk = freuqency of the clock driving this component  ( in Hz)}
+00027 \textcolor{comment}{      speed = SCL speed ie 100K, 400K ...            (in Hz)}
+00028 \textcolor{comment}{15-OCT-07 initial release}
+00029 \textcolor{comment}{*****************************************************************/}
+00030 \textcolor{keywordtype}{void} I2C_init(alt_u32 base,alt_u32 clk,alt_u32 speed)
+00031 \{
+00032   alt_u32 prescale = (clk/( 5 * speed))-1;
+00033 \textcolor{preprocessor}{#ifdef  I2C\_DEBUG}
+00034         printf(\textcolor{stringliteral}{" Initializing  I2C at 0x%x, \(\backslash\)n\(\backslash\)twith clock speed 0x%x \(\backslash\)n\(\backslash\)tand SCL speed 0x%x \(\backslash\)n\(\backslash\)tand
+       prescale 0x%x\(\backslash\)n"},base,clk,speed,prescale);
+00035 \textcolor{preprocessor}{#endif}
+00036   IOWR_I2C_OPENCORES_CTR(base, 0x00); \textcolor{comment}{/* turn off the core*/}
+00037 
+00038   IOWR_I2C_OPENCORES_CR(base, I2C_OPENCORES_CR_IACK_MSK); \textcolor{comment}{/* clearn any pening IRQ*/}
+00039 
+00040   IOWR_I2C_OPENCORES_PRERLO(base, (0xff & prescale));  \textcolor{comment}{/* load low presacle bit*/}
+00041 
+00042   IOWR_I2C_OPENCORES_PRERHI(base, (0xff & (prescale>>8)));  \textcolor{comment}{/* load upper prescale bit */}
+00043 
+00044   IOWR_I2C_OPENCORES_CTR(base, I2C_OPENCORES_CTR_EN_MSK); \textcolor{comment}{/* turn on the core*/}
+00045 
+00046 \}
+00047 
+00048 \textcolor{comment}{/****************************************************************}
+00049 \textcolor{comment}{int I2C\_start}
+00050 \textcolor{comment}{            Sets the start bit and then sends the first byte which}
+00051 \textcolor{comment}{            is the address of the device + the write bit.}
+00052 \textcolor{comment}{inputs}
+00053 \textcolor{comment}{      base = the base address of the component}
+00054 \textcolor{comment}{      add = address of I2C device}
+00055 \textcolor{comment}{      read =  1== read    0== write}
+00056 \textcolor{comment}{return value}
+00057 \textcolor{comment}{       0 if address is acknowledged}
+00058 \textcolor{comment}{       1 if address was not acknowledged}
+00059 \textcolor{comment}{15-OCT-07 initial release}
+00060 \textcolor{comment}{*****************************************************************/}
+00061 \textcolor{keywordtype}{int} I2C_start(alt_u32 base, alt_u32 add, alt_u32 read)
+00062 \{
+00063     \textcolor{keywordtype}{int} retries = 0;
+00064 \textcolor{preprocessor}{#ifdef  I2C\_DEBUG}
+00065         printf(\textcolor{stringliteral}{" Start  I2C at 0x%x, \(\backslash\)n\(\backslash\)twith address 0x%x \(\backslash\)n\(\backslash\)tand read 0x%x \(\backslash\)n\(\backslash\)tand prescale 0x%x\(\backslash\)n"},base,
+      add,read);
+00066 \textcolor{preprocessor}{#endif}
+00067 
+00068           \textcolor{comment}{/* transmit the address shifted by one and the read/write bit*/}
+00069   IOWR_I2C_OPENCORES_TXR(base, ((add<<1) + (0x1 & read)));
+00070 
+00071           \textcolor{comment}{/* set start and write  bits which will start the transaction*/}
+00072   IOWR_I2C_OPENCORES_CR(base, I2C_OPENCORES_CR_STA_MSK | I2C_OPENCORES_CR_WR_MSK );
+00073 
+00074           \textcolor{comment}{/* wait for the trnasaction to be over.*/}
+00075   \textcolor{keywordflow}{while}( (IORD_I2C_OPENCORES_SR(base) & I2C_OPENCORES_SR_TIP_MSK) && (retries++ < 
+      MAX_RETRIES));
+00076 
+00077          \textcolor{comment}{/* now check to see if the address was acknowledged */}
+00078    \textcolor{keywordflow}{if}((IORD_I2C_OPENCORES_SR(base) & I2C_OPENCORES_SR_RXNACK_MSK) || retries >= 
+      MAX_RETRIES)
+00079    \{
+00080 \textcolor{preprocessor}{#ifdef  I2C\_DEBUG}
+00081         printf(\textcolor{stringliteral}{"\(\backslash\)tNOACK\(\backslash\)n"});
+00082 \textcolor{preprocessor}{#endif}
+00083         \textcolor{keywordflow}{return} (I2C_NOACK);
+00084    \}
+00085    \textcolor{keywordflow}{else}
+00086    \{
+00087 \textcolor{preprocessor}{#ifdef  I2C\_DEBUG}
+00088         printf(\textcolor{stringliteral}{"\(\backslash\)tACK\(\backslash\)n"});
+00089 \textcolor{preprocessor}{#endif}
+00090        \textcolor{keywordflow}{return} (I2C_ACK);
+00091    \}
+00092 \}
+00093 
+00094 \textcolor{comment}{/****************************************************************}
+00095 \textcolor{comment}{int I2C\_read}
+00096 \textcolor{comment}{            assumes that any addressing and start}
+00097 \textcolor{comment}{            has already been done.}
+00098 \textcolor{comment}{            reads one byte of data from the slave.  on the last read}
+00099 \textcolor{comment}{            we don't acknowldge and set the stop bit.}
+00100 \textcolor{comment}{inputs}
+00101 \textcolor{comment}{      base = the base address of the component}
+00102 \textcolor{comment}{      last = on the last read there must not be a ack}
+00103 \textcolor{comment}{}
+00104 \textcolor{comment}{return value}
+00105 \textcolor{comment}{       byte read back.}
+00106 \textcolor{comment}{15-OCT-07 initial release}
+00107 \textcolor{comment}{*****************************************************************/}
+00108 alt_u32 I2C_read(alt_u32 base,alt_u32 last)
+00109 \{
+00110     \textcolor{keywordtype}{int} retries = 0;
+00111 \textcolor{preprocessor}{#ifdef  I2C\_DEBUG}
+00112         printf(\textcolor{stringliteral}{" Read I2C at 0x%x, \(\backslash\)n\(\backslash\)twith last0x%x\(\backslash\)n"},base,last);
+00113 \textcolor{preprocessor}{#endif}
+00114   \textcolor{keywordflow}{if}( last)
+00115   \{
+00116                \textcolor{comment}{/* start a read and no ack and stop bit*/}
+00117            IOWR_I2C_OPENCORES_CR(base, I2C_OPENCORES_CR_RD_MSK |
+00118                I2C_OPENCORES_CR_NACK_MSK | I2C_OPENCORES_CR_STO_MSK);
+00119   \}
+00120   \textcolor{keywordflow}{else}
+00121   \{
+00122           \textcolor{comment}{/* start read*/}
+00123           IOWR_I2C_OPENCORES_CR(base, I2C_OPENCORES_CR_RD_MSK );
+00124   \}
+00125           \textcolor{comment}{/* wait for the trnasaction to be over.*/}
+00126   \textcolor{keywordflow}{while}( (IORD_I2C_OPENCORES_SR(base) & I2C_OPENCORES_SR_TIP_MSK) && (retries++ < 
+      MAX_RETRIES));
+00127 
+00128          \textcolor{comment}{/* now read the data */}
+00129         \textcolor{keywordflow}{return} (IORD_I2C_OPENCORES_RXR(base));
+00130 
+00131 \}
+00132 
+00133 \textcolor{comment}{/****************************************************************}
+00134 \textcolor{comment}{int I2C\_write}
+00135 \textcolor{comment}{            assumes that any addressing and start}
+00136 \textcolor{comment}{            has already been done.}
+00137 \textcolor{comment}{            writes one byte of data from the slave.}
+00138 \textcolor{comment}{            If last is set the stop bit set.}
+00139 \textcolor{comment}{inputs}
+00140 \textcolor{comment}{      base = the base address of the component}
+00141 \textcolor{comment}{      data = byte to write}
+00142 \textcolor{comment}{      last = on the last read there must not be a ack}
+00143 \textcolor{comment}{}
+00144 \textcolor{comment}{return value}
+00145 \textcolor{comment}{       0 if address is acknowledged}
+00146 \textcolor{comment}{       1 if address was not acknowledged}
+00147 \textcolor{comment}{15-OCT-07 initial release}
+00148 \textcolor{comment}{*****************************************************************/}
+00149 alt_u32 I2C_write(alt_u32 base,alt_u8 data, alt_u32 last)
+00150 \{
+00151     \textcolor{keywordtype}{int} retries = 0;
+00152 \textcolor{preprocessor}{  #ifdef  I2C\_DEBUG}
+00153         printf(\textcolor{stringliteral}{" Read I2C at 0x%x, \(\backslash\)n\(\backslash\)twith data 0x%x,\(\backslash\)n\(\backslash\)twith last0x%x\(\backslash\)n"},base,data,last);
+00154 \textcolor{preprocessor}{#endif}
+00155                  \textcolor{comment}{/* transmit the data*/}
+00156   IOWR_I2C_OPENCORES_TXR(base, data);
+00157 
+00158   \textcolor{keywordflow}{if}( last)
+00159   \{
+00160                \textcolor{comment}{/* start a read and no ack and stop bit*/}
+00161            IOWR_I2C_OPENCORES_CR(base, I2C_OPENCORES_CR_WR_MSK |
+00162                I2C_OPENCORES_CR_STO_MSK);
+00163   \}
+00164   \textcolor{keywordflow}{else}
+00165   \{
+00166           \textcolor{comment}{/* start read*/}
+00167           IOWR_I2C_OPENCORES_CR(base, I2C_OPENCORES_CR_WR_MSK );
+00168   \}
+00169            \textcolor{comment}{/* wait for the trnasaction to be over.*/}
+00170   \textcolor{keywordflow}{while}( (IORD_I2C_OPENCORES_SR(base) & I2C_OPENCORES_SR_TIP_MSK) && (retries++ < 
+      MAX_RETRIES));
+00171 
+00172          \textcolor{comment}{/* now check to see if the address was acknowledged */}
+00173    \textcolor{keywordflow}{if}(IORD_I2C_OPENCORES_SR(base) & I2C_OPENCORES_SR_RXNACK_MSK)
+00174    \{
+00175 \textcolor{preprocessor}{#ifdef  I2C\_DEBUG}
+00176         printf(\textcolor{stringliteral}{"\(\backslash\)tNOACK\(\backslash\)n"});
+00177 \textcolor{preprocessor}{#endif}
+00178         \textcolor{keywordflow}{return} (I2C_NOACK);
+00179    \}
+00180    \textcolor{keywordflow}{else}
+00181    \{
+00182 \textcolor{preprocessor}{#ifdef  I2C\_DEBUG}
+00183         printf(\textcolor{stringliteral}{"\(\backslash\)tACK\(\backslash\)n"});
+00184 \textcolor{preprocessor}{#endif}
+00185        \textcolor{keywordflow}{return} (I2C_ACK);
+00186    \}
+00187 
+00188 \}
+\end{DoxyCode}

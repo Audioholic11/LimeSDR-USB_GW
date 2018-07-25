@@ -1,0 +1,103 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gettod.c File Reference}
+\label{alt__gettod_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gettod.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gettod.\+c}}
+{\ttfamily \#include $<$sys/time.\+h$>$}\\*
+{\ttfamily \#include $<$sys/times.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+alarm.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}os/alt\+\_\+syscall.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+gettod.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/dbf/alt__gettod_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+US}~(1000000)
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY} (struct timeval $\ast$ptimeval, struct timezone $\ast$ptimezone)
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct timezone {\bf alt\+\_\+timezone} = \{0, 0\}
+\item 
+struct timeval {\bf alt\+\_\+resettime} = \{0, 0\}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+gettod.\+c@{alt\+\_\+gettod.\+c}!A\+L\+T\+\_\+\+US@{A\+L\+T\+\_\+\+US}}
+\index{A\+L\+T\+\_\+\+US@{A\+L\+T\+\_\+\+US}!alt\+\_\+gettod.\+c@{alt\+\_\+gettod.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+US}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+US~(1000000)}\label{alt__gettod_8c_a614a2770a55d6436aa06a51d77cea5c3}
+
+
+Definition at line {\bf 45} of file {\bf alt\+\_\+gettod.\+c}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+gettod.\+c@{alt\+\_\+gettod.\+c}!A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY@{A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY}}
+\index{A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY@{A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY}!alt\+\_\+gettod.\+c@{alt\+\_\+gettod.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y(struct timeval $\ast$ptimeval, struct timezone $\ast$ptimezone)}]{\setlength{\rightskip}{0pt plus 5cm}int A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+AY (
+\begin{DoxyParamCaption}
+\item[{struct timeval $\ast$}]{ptimeval, }
+\item[{struct timezone $\ast$}]{ptimezone}
+\end{DoxyParamCaption}
+)}\label{alt__gettod_8c_a876baa5f7786c52648faf9313b2872c2}
+
+
+Definition at line {\bf 75} of file {\bf alt\+\_\+gettod.\+c}.
+
+
+
+References {\bf alt\+\_\+nticks()}, {\bf alt\+\_\+resettime}, {\bf alt\+\_\+ticks\+\_\+per\+\_\+second()}, {\bf alt\+\_\+timezone}, and {\bf A\+L\+T\+\_\+\+US}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/dc8/alt__gettod_8c_a876baa5f7786c52648faf9313b2872c2_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Variable Documentation}
+\index{alt\+\_\+gettod.\+c@{alt\+\_\+gettod.\+c}!alt\+\_\+resettime@{alt\+\_\+resettime}}
+\index{alt\+\_\+resettime@{alt\+\_\+resettime}!alt\+\_\+gettod.\+c@{alt\+\_\+gettod.\+c}}
+\paragraph[{alt\+\_\+resettime}]{\setlength{\rightskip}{0pt plus 5cm}struct timeval alt\+\_\+resettime = \{0, 0\}}\label{alt__gettod_8c_a871bb39e3efcef7ed5960c633edc06af}
+
+
+Definition at line {\bf 54} of file {\bf alt\+\_\+gettod.\+c}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}, and {\bf A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}.
+
+\index{alt\+\_\+gettod.\+c@{alt\+\_\+gettod.\+c}!alt\+\_\+timezone@{alt\+\_\+timezone}}
+\index{alt\+\_\+timezone@{alt\+\_\+timezone}!alt\+\_\+gettod.\+c@{alt\+\_\+gettod.\+c}}
+\paragraph[{alt\+\_\+timezone}]{\setlength{\rightskip}{0pt plus 5cm}struct timezone alt\+\_\+timezone = \{0, 0\}}\label{alt__gettod_8c_a4a36ab50424b296f44e353306e335151}
+
+
+Definition at line {\bf 53} of file {\bf alt\+\_\+gettod.\+c}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}, and {\bf A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}.
+

@@ -1,0 +1,61 @@
+\subsection{i2c\+\_\+opencores\+\_\+sw.\+tcl}
+\label{i2c__opencores__sw_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/i2c\+\_\+opencores\+\_\+v13/i2c\+\_\+opencores\+\_\+sw.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/i2c\+\_\+opencores\+\_\+v13/i2c\+\_\+opencores\+\_\+sw.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{#}
+00002 \textcolor{comment}{}\textcolor{comment}{# i2c\_opencores\_sw.tcl}
+00003 \textcolor{comment}{}\textcolor{comment}{#}
+00004 \textcolor{comment}{}
+00005 \textcolor{comment}{# Create a new driver}
+00006 \textcolor{comment}{}create\_driver i2c\_opencores\_driver\textcolor{comment}{}
+00007 \textcolor{comment}{}
+00008 \textcolor{comment}{# Associate it with some hardware known as "i2c\_opencores"}
+00009 \textcolor{comment}{}set\_sw\_property hw\_class\_name i2c\_opencores\textcolor{comment}{}
+00010 \textcolor{comment}{}
+00011 \textcolor{comment}{# The version of this driver}
+00012 \textcolor{comment}{}set\_sw\_property version 11.0\textcolor{comment}{}
+00013 \textcolor{comment}{}
+00014 \textcolor{comment}{# This driver may be incompatible with versions of hardware less}
+00015 \textcolor{comment}{}\textcolor{comment}{# than specified below. Updates to hardware and device drivers}
+00016 \textcolor{comment}{}\textcolor{comment}{# rendering the driver incompatible with older versions of}
+00017 \textcolor{comment}{}\textcolor{comment}{# hardware are noted with this property assignment.}
+00018 \textcolor{comment}{}\textcolor{comment}{#}
+00019 \textcolor{comment}{}\textcolor{comment}{# Multiple-Version compatibility was introduced in version 7.1;}
+00020 \textcolor{comment}{}\textcolor{comment}{# prior versions are therefore excluded.}
+00021 \textcolor{comment}{}set\_sw\_property min\_compatible\_hw\_version 7.1\textcolor{comment}{}
+00022 \textcolor{comment}{}
+00023 \textcolor{comment}{# Initialize the driver in alt\_sys\_init()}
+00024 \textcolor{comment}{}set\_sw\_property auto\_initialize true\textcolor{comment}{}
+00025 \textcolor{comment}{}
+00026 \textcolor{comment}{# Location in generated BSP that above sources will be copied into}
+00027 \textcolor{comment}{}set\_sw\_property bsp\_subdirectory drivers\textcolor{comment}{}
+00028 \textcolor{comment}{}
+00029 
+00030 \textcolor{comment}{# Interrupt properties:}
+00031 \textcolor{comment}{}\textcolor{comment}{# This peripheral has an IRQ output but the driver doesn't currently}
+00032 \textcolor{comment}{}\textcolor{comment}{# have any interrupt service routine. To ensure that the BSP tools}
+00033 \textcolor{comment}{}\textcolor{comment}{# do not otherwise limit the BSP functionality for users of the}
+00034 \textcolor{comment}{}\textcolor{comment}{# Nios II enhanced interrupt port, these settings advertise }
+00035 \textcolor{comment}{}\textcolor{comment}{# compliance with both legacy and enhanced interrupt APIs, and to state}
+00036 \textcolor{comment}{}\textcolor{comment}{# that any driver ISR supports preemption. If an interrupt handler}
+00037 \textcolor{comment}{}\textcolor{comment}{# is added to this driver, these must be re-examined for validity.}
+00038 \textcolor{comment}{}set\_sw\_property isr\_preemption\_supported true\textcolor{comment}{}
+00039 \textcolor{comment}{}set\_sw\_property supported\_interrupt\_apis "legacy\_interrupt\_api enhanced\_interrupt\_api"\textcolor{comment}{}
+00040 \textcolor{comment}{}
+00041 \textcolor{comment}{#}
+00042 \textcolor{comment}{}\textcolor{comment}{# Source file listings...}
+00043 \textcolor{comment}{}\textcolor{comment}{#}
+00044 \textcolor{comment}{}
+00045 \textcolor{comment}{# C/C++ source files}
+00046 \textcolor{comment}{}add\_sw\_property c\_source HAL/src/i2c\_opencores.c\textcolor{comment}{}
+00047 \textcolor{comment}{}
+00048 \textcolor{comment}{# Include files}
+00049 \textcolor{comment}{}add\_sw\_property include\_source HAL/inc/i2c\_opencores.h\textcolor{comment}{}
+00050 \textcolor{comment}{}add\_sw\_property include\_source inc/i2c\_opencores\_regs.h\textcolor{comment}{}
+00051 \textcolor{comment}{}
+00052 \textcolor{comment}{# This driver supports HAL & UCOSII BSP (OS) types}
+00053 \textcolor{comment}{}add\_sw\_property supported\_bsp\_type HAL\textcolor{comment}{}
+00054 \textcolor{comment}{}add\_sw\_property supported\_bsp\_type UCOSII\textcolor{comment}{}
+00055 \textcolor{comment}{}
+00056 \textcolor{comment}{# End of file}
+\end{DoxyCode}

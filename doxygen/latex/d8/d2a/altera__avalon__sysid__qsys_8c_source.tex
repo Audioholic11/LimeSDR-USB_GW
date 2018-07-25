@@ -1,0 +1,87 @@
+\subsection{altera\+\_\+avalon\+\_\+sysid\+\_\+qsys.\+c}
+\label{altera__avalon__sysid__qsys_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+sysid\+\_\+qsys.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+sysid\+\_\+qsys.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2003 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include "altera_avalon_sysid_qsys.h"}
+00034 \textcolor{preprocessor}{#include "altera_avalon_sysid_qsys_regs.h"}
+00035 \textcolor{preprocessor}{#include "alt_types.h"}
+00036 \textcolor{preprocessor}{#include <io.h>}
+00037 
+00038 \textcolor{comment}{/*}
+00039 \textcolor{comment}{*  This component is special: there's only one of it.}
+00040 \textcolor{comment}{*  Therefore we can dispense with a bunch of complexity}
+00041 \textcolor{comment}{*  normally associated with components, such as specialized}
+00042 \textcolor{comment}{*  structs containing parameter info, and instead use that}
+00043 \textcolor{comment}{*  info by name directly out of system.h.  A downside of this}
+00044 \textcolor{comment}{*  approach is that each time the system is regenerated, and}
+00045 \textcolor{comment}{*  system.h changes, this file must be recompiled.  Fortunately}
+00046 \textcolor{comment}{*  this file is, and is likely to remain, quite small.}
+00047 \textcolor{comment}{*/}
+00048 \textcolor{preprocessor}{#include "system.h"}
+00049 
+00050 \textcolor{preprocessor}{#ifdef SYSID\_BASE}
+00051 \textcolor{comment}{/*}
+00052 \textcolor{comment}{*  return values:}
+00053 \textcolor{comment}{*    0 if the hardware and software appear to be in sync}
+00054 \textcolor{comment}{*    1 if software appears to be older than hardware}
+00055 \textcolor{comment}{*   -1 if hardware appears to be older than software}
+00056 \textcolor{comment}{*/}
+00057 
+00058 alt_32 alt\_avalon\_sysid\_qsys\_test(\textcolor{keywordtype}{void})
+00059 \{
+00060   \textcolor{comment}{/* Read the hardware-tag, aka value0, from the hardware. */}
+00061   alt_u32 hardware\_id = IORD_ALTERA_AVALON_SYSID_QSYS_ID(SYSID\_BASE);
+00062 
+00063   \textcolor{comment}{/* Read the time-of-generation, aka value1, from the hardware register. */}
+00064   alt_u32 hardware\_timestamp = IORD_ALTERA_AVALON_SYSID_QSYS_TIMESTAMP(SYSID\_BASE);
+00065 
+00066   \textcolor{comment}{/* Return 0 if the hardware and software appear to be in sync. */}
+00067   \textcolor{keywordflow}{if} ((SYSID\_TIMESTAMP == hardware\_timestamp) && (SYSID\_ID == hardware\_id))
+00068   \{
+00069     \textcolor{keywordflow}{return} 0;
+00070   \}
+00071 
+00072   \textcolor{comment}{/*}
+00073 \textcolor{comment}{  *  Return 1 if software appears to be older than hardware (that is,}
+00074 \textcolor{comment}{  *  the value returned by the hardware is larger than that recorded by}
+00075 \textcolor{comment}{  *  the generator function).}
+00076 \textcolor{comment}{  *  If the hardware time happens to match the generator program's value}
+00077 \textcolor{comment}{  *  (but the hardware tag, value0, doesn't match or 0 would have been}
+00078 \textcolor{comment}{  *  returned above), return an arbitrary value, let's say -1.}
+00079 \textcolor{comment}{  */}
+00080   \textcolor{keywordflow}{return} ((alt_32)(hardware\_timestamp - SYSID\_TIMESTAMP)) > 0 ? 1 : -1;
+00081 \}
+00082 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

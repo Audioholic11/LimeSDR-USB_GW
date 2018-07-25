@@ -1,0 +1,75 @@
+\subsection{ddr2\+\_\+ex\+\_\+lfsr8.\+vhd}
+\label{ddr2__ex__lfsr8_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+ex\+\_\+lfsr8.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+ex\+\_\+lfsr8.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00002 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00003 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_arith.\textcolor{keywordflow}{all};
+00004 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_unsigned.\textcolor{keywordflow}{all};
+00005 
+00006 
+00007 \textcolor{keyword}{--}
+00008 \textcolor{keywordflow}{entity }ddr2_ex_lfsr8 \textcolor{keywordflow}{is}
+00009 
+00010     \textcolor{keywordflow}{generic}
+00011     \textcolor{vhdlchar}{(}
+00012         \textcolor{vhdlchar}{seed}                 \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}\textcolor{keyword}{        -- starting seed}
+00013     \textcolor{vhdlchar}{)};
+00014     \textcolor{keywordflow}{port}
+00015     \textcolor{vhdlchar}{(}
+00016 \textcolor{keyword}{        -- globals}
+00017         \textcolor{vhdlchar}{clk}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}   \textcolor{comment}{std\_logic};
+00018         \textcolor{vhdlchar}{reset_n}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}   \textcolor{comment}{std\_logic};
+00019 
+00020 \textcolor{keyword}{        -- local interface, read and write data}
+00021         enable               : \textcolor{keywordflow}{in}   \textcolor{comment}{std\_logic};
+00022         \textcolor{vhdlchar}{pause}                \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}   \textcolor{comment}{std\_logic};
+00023         \textcolor{vhdlchar}{load}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}   \textcolor{comment}{std\_logic};
+00024 
+00025         \textcolor{vhdlchar}{data}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}  \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8} \textcolor{vhdlchar}{-} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00026         \textcolor{vhdlchar}{ldata}                \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}   \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8} \textcolor{vhdlchar}{-} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}
+00027     \textcolor{vhdlchar}{)};
+00028 \textcolor{keyword}{--}
+00029 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{ddr2\_ex\_lfsr8};
+00030 
+00031 \textcolor{keyword}{--}
+00032 \textcolor{keywordflow}{architecture} rtl \textcolor{keywordflow}{of} ddr2_ex_lfsr8 is
+00033 \textcolor{keywordflow}{signal}  \textcolor{vhdlchar}{lfsr_data}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8} \textcolor{vhdlchar}{-} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00034 
+00035 \textcolor{vhdlkeyword}{begin}
+00036 
+00037     \textcolor{vhdlchar}{data} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{lfsr_data};
+00038 
+00039     \textcolor{keywordflow}{process}(clk, reset_n)
+00040 \textcolor{vhdlkeyword}{    begin}
+00041         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00042 \textcolor{keyword}{            -- Reset - asynchronously reset to seed value}
+00043             \textcolor{vhdlchar}{lfsr_data} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{conv\_std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{seed}\textcolor{vhdlchar}{,} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)};
+00044 
+00045         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{rising\_edge}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00046 \textcolor{keyword}{            -- Registered mode - synchronous propagation of signals}
+00047 
+00048             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{enable} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00049                 \textcolor{vhdlchar}{lfsr_data} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{conv\_std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{seed}\textcolor{vhdlchar}{,} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)};
+00050             \textcolor{keywordflow}{else}
+00051                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{load} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00052                     \textcolor{vhdlchar}{lfsr_data} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{ldata};
+00053                 \textcolor{keywordflow}{else}
+00054                     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pause} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00055                         \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)};
+00056                         \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00057                         \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{xor} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)};
+00058                         \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{xor} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)};
+00059                         \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{xor} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)};
+00060                         \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)};
+00061                         \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{6}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)};
+00062                         \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{lfsr_data}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{6}\textcolor{vhdlchar}{)};
+00063                     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00064                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00065             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00066         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00067     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00068 
+00069 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{rtl};
+00070 
+\end{DoxyCode}

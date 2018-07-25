@@ -1,0 +1,246 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gmon.c File Reference}
+\label{alt__gmon_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gmon.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gmon.\+c}}
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}priv/nios2\+\_\+gmon\+\_\+data.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+alarm.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+gmon.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/d53/alt__gmon_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf mcount\+\_\+fn\+\_\+arc}
+\item 
+struct {\bf mcount\+\_\+fn\+\_\+entry}
+\end{DoxyCompactItemize}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET}~32
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+EA}(dest)~{\bf \+\_\+\+\_\+asm\+\_\+\+\_\+} (\char`\"{}mov \%0, ea\char`\"{} \+: \char`\"{}=r\char`\"{} (dest))
+\item 
+\#define {\bf H\+A\+S\+H\+\_\+\+B\+U\+C\+K\+E\+TS}~64 /$\ast$ Must be a power of 2 $\ast$/
+\item 
+\#define {\bf M\+C\+O\+U\+N\+T\+\_\+\+S\+L\+A\+B\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}~1020
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf \+\_\+\+\_\+mcount\+\_\+record} (void $\ast$self\+\_\+pc, void $\ast$from\+\_\+pc, struct {\bf mcount\+\_\+fn\+\_\+entry} $\ast$fn\+\_\+entry, struct {\bf mcount\+\_\+fn\+\_\+entry} $\ast$$\ast$fn\+\_\+head) {\bf \+\_\+\+\_\+attribute\+\_\+\+\_\+}((no\+\_\+instrument\+\_\+function))
+\item 
+static \+\_\+\+\_\+inline\+\_\+\+\_\+ void $\ast$ {\bf mcount\+\_\+allocate} (unsigned int size) {\bf \+\_\+\+\_\+attribute\+\_\+\+\_\+}((no\+\_\+instrument\+\_\+function))
+\item 
+static int {\bf nios2\+\_\+pcsample\+\_\+init} (void)
+\item 
+static {\bf alt\+\_\+u32} {\bf nios2\+\_\+pcsample} (void $\ast$context)
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static char $\ast$ {\bf mcount\+\_\+slab\+\_\+ptr} = 0
+\item 
+static int {\bf mcount\+\_\+slab\+\_\+size} = 0
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!H\+A\+S\+H\+\_\+\+B\+U\+C\+K\+E\+TS@{H\+A\+S\+H\+\_\+\+B\+U\+C\+K\+E\+TS}}
+\index{H\+A\+S\+H\+\_\+\+B\+U\+C\+K\+E\+TS@{H\+A\+S\+H\+\_\+\+B\+U\+C\+K\+E\+TS}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{H\+A\+S\+H\+\_\+\+B\+U\+C\+K\+E\+TS}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+A\+S\+H\+\_\+\+B\+U\+C\+K\+E\+TS~64 /$\ast$ Must be a power of 2 $\ast$/}\label{alt__gmon_8c_ae24800ac4a3276b955346dc053d18325}
+
+
+Referenced by {\bf nios2\+\_\+pcsample\+\_\+init()}.
+
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!M\+C\+O\+U\+N\+T\+\_\+\+S\+L\+A\+B\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT@{M\+C\+O\+U\+N\+T\+\_\+\+S\+L\+A\+B\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}}
+\index{M\+C\+O\+U\+N\+T\+\_\+\+S\+L\+A\+B\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT@{M\+C\+O\+U\+N\+T\+\_\+\+S\+L\+A\+B\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{M\+C\+O\+U\+N\+T\+\_\+\+S\+L\+A\+B\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+C\+O\+U\+N\+T\+\_\+\+S\+L\+A\+B\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT~1020}\label{alt__gmon_8c_aa7f7005d7a067d8ebc5072b3810d0255}
+
+
+Definition at line {\bf 123} of file {\bf alt\+\_\+gmon.\+c}.
+
+
+
+Referenced by {\bf mcount\+\_\+allocate()}.
+
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+EA@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+EA}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+EA@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+EA}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+EA}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+EA(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~{\bf \+\_\+\+\_\+asm\+\_\+\+\_\+} (\char`\"{}mov \%0, ea\char`\"{} \+: \char`\"{}=r\char`\"{} (dest))}\label{alt__gmon_8c_a113c2b8014ebaa0351af83bd4b4e1972}
+
+
+Definition at line {\bf 46} of file {\bf alt\+\_\+gmon.\+c}.
+
+
+
+Referenced by {\bf nios2\+\_\+pcsample()}.
+
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET@{P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET}}
+\index{P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET@{P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET~32}\label{alt__gmon_8c_ac71ae84465cc4b6fec42ff59c4600888}
+
+
+Definition at line {\bf 44} of file {\bf alt\+\_\+gmon.\+c}.
+
+
+
+Referenced by {\bf \+\_\+\+\_\+mcount\+\_\+record()}, {\bf nios2\+\_\+pcsample()}, and {\bf nios2\+\_\+pcsample\+\_\+init()}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!\+\_\+\+\_\+mcount\+\_\+record@{\+\_\+\+\_\+mcount\+\_\+record}}
+\index{\+\_\+\+\_\+mcount\+\_\+record@{\+\_\+\+\_\+mcount\+\_\+record}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{\+\_\+\+\_\+mcount\+\_\+record(void $\ast$self\+\_\+pc, void $\ast$from\+\_\+pc, struct mcount\+\_\+fn\+\_\+entry $\ast$fn\+\_\+entry, struct mcount\+\_\+fn\+\_\+entry $\ast$$\ast$fn\+\_\+head) \+\_\+\+\_\+attribute\+\_\+\+\_\+((no\+\_\+instrument\+\_\+function))}]{\setlength{\rightskip}{0pt plus 5cm}void \+\_\+\+\_\+mcount\+\_\+record (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{self\+\_\+pc, }
+\item[{void $\ast$}]{from\+\_\+pc, }
+\item[{struct {\bf mcount\+\_\+fn\+\_\+entry} $\ast$}]{fn\+\_\+entry, }
+\item[{struct {\bf mcount\+\_\+fn\+\_\+entry} $\ast$$\ast$}]{fn\+\_\+head}
+\end{DoxyParamCaption}
+)}\label{alt__gmon_8c_ad0d8fbd85cd1aaf02a95900a404b747d}
+
+
+Definition at line {\bf 159} of file {\bf alt\+\_\+gmon.\+c}.
+
+
+
+References {\bf alt\+\_\+alarm\+\_\+start()}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf alt\+\_\+ticks\+\_\+per\+\_\+second()}, {\bf mcount\+\_\+fn\+\_\+entry\+::arc\+\_\+head}, {\bf mcount\+\_\+fn\+\_\+arc\+::count}, {\bf mcount\+\_\+fn\+\_\+arc\+::from\+\_\+pc}, {\bf G\+M\+O\+N\+\_\+\+D\+A\+T\+A\+\_\+\+P\+R\+O\+F\+I\+L\+E\+\_\+\+D\+A\+TA}, {\bf G\+M\+O\+N\+\_\+\+D\+A\+T\+A\+\_\+\+P\+R\+O\+F\+I\+L\+E\+\_\+\+R\+A\+TE}, {\bf mcount\+\_\+allocate()}, {\bf mcount\+\_\+fn\+\_\+arc\+::next}, {\bf mcount\+\_\+fn\+\_\+entry\+::next}, {\bf nios2\+\_\+pcsample()}, {\bf nios2\+\_\+pcsample\+\_\+init()}, {\bf P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET}, and {\bf mcount\+\_\+fn\+\_\+entry\+::self\+\_\+pc}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{df/d27/alt__gmon_8c_ad0d8fbd85cd1aaf02a95900a404b747d_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!mcount\+\_\+allocate@{mcount\+\_\+allocate}}
+\index{mcount\+\_\+allocate@{mcount\+\_\+allocate}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{mcount\+\_\+allocate(unsigned int size) \+\_\+\+\_\+attribute\+\_\+\+\_\+((no\+\_\+instrument\+\_\+function))}]{\setlength{\rightskip}{0pt plus 5cm}static \+\_\+\+\_\+inline\+\_\+\+\_\+ void $\ast$ mcount\+\_\+allocate (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__gmon_8c_afa9d72059eebf3edbc311759d516283e}
+
+
+Definition at line {\bf 133} of file {\bf alt\+\_\+gmon.\+c}.
+
+
+
+References {\bf data}, {\bf M\+C\+O\+U\+N\+T\+\_\+\+S\+L\+A\+B\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}, and {\bf mcount\+\_\+slab\+\_\+ptr}.
+
+
+
+Referenced by {\bf \+\_\+\+\_\+mcount\+\_\+record()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{df/d27/alt__gmon_8c_afa9d72059eebf3edbc311759d516283e_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!nios2\+\_\+pcsample@{nios2\+\_\+pcsample}}
+\index{nios2\+\_\+pcsample@{nios2\+\_\+pcsample}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{nios2\+\_\+pcsample(void $\ast$context)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf alt\+\_\+u32} nios2\+\_\+pcsample (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{context}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__gmon_8c_afea3bab1d6fda2f329204fff51d88089}
+
+
+Definition at line {\bf 248} of file {\bf alt\+\_\+gmon.\+c}.
+
+
+
+References {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+EA}, and {\bf P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET}.
+
+
+
+Referenced by {\bf \+\_\+\+\_\+mcount\+\_\+record()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{df/d27/alt__gmon_8c_afea3bab1d6fda2f329204fff51d88089_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!nios2\+\_\+pcsample\+\_\+init@{nios2\+\_\+pcsample\+\_\+init}}
+\index{nios2\+\_\+pcsample\+\_\+init@{nios2\+\_\+pcsample\+\_\+init}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{nios2\+\_\+pcsample\+\_\+init(void)}]{\setlength{\rightskip}{0pt plus 5cm}static int nios2\+\_\+pcsample\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__gmon_8c_a8a18358fab8ad3fcab640f98ede7db18}
+
+
+Definition at line {\bf 79} of file {\bf alt\+\_\+gmon.\+c}.
+
+
+
+References {\bf G\+M\+O\+N\+\_\+\+D\+A\+T\+A\+\_\+\+S\+I\+ZE}, {\bf H\+A\+S\+H\+\_\+\+B\+U\+C\+K\+E\+TS}, and {\bf P\+C\+S\+A\+M\+P\+L\+E\+\_\+\+B\+Y\+T\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+C\+K\+ET}.
+
+
+
+Referenced by {\bf \+\_\+\+\_\+mcount\+\_\+record()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{df/d27/alt__gmon_8c_a8a18358fab8ad3fcab640f98ede7db18_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Variable Documentation}
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!mcount\+\_\+slab\+\_\+ptr@{mcount\+\_\+slab\+\_\+ptr}}
+\index{mcount\+\_\+slab\+\_\+ptr@{mcount\+\_\+slab\+\_\+ptr}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{mcount\+\_\+slab\+\_\+ptr}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ mcount\+\_\+slab\+\_\+ptr = 0\hspace{0.3cm}{\ttfamily [static]}}\label{alt__gmon_8c_a0734a881ed6cfe8ddf79f97c28cdb6fb}
+
+
+Definition at line {\bf 120} of file {\bf alt\+\_\+gmon.\+c}.
+
+
+
+Referenced by {\bf mcount\+\_\+allocate()}.
+
+\index{alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}!mcount\+\_\+slab\+\_\+size@{mcount\+\_\+slab\+\_\+size}}
+\index{mcount\+\_\+slab\+\_\+size@{mcount\+\_\+slab\+\_\+size}!alt\+\_\+gmon.\+c@{alt\+\_\+gmon.\+c}}
+\paragraph[{mcount\+\_\+slab\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}int mcount\+\_\+slab\+\_\+size = 0\hspace{0.3cm}{\ttfamily [static]}}\label{alt__gmon_8c_adf5566bdaccb05e4ecdde37d07689061}
+
+
+Definition at line {\bf 121} of file {\bf alt\+\_\+gmon.\+c}.
+

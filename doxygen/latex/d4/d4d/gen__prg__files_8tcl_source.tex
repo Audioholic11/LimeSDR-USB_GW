@@ -1,0 +1,17 @@
+\subsection{gen\+\_\+prg\+\_\+files.\+tcl}
+\label{gen__prg__files_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/gen\+\_\+prg\+\_\+files.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/gen\+\_\+prg\+\_\+files.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{#Copy and Rename .sof file by hardware version }
+00002 \textcolor{comment}{}\textcolor{keyword}{file} copy -force -- output\_files/LimeSDR-USB\_lms7\_trx.sof output\_files/LimeSDR-USB\_lms7\_trx\_HW\_1.4.sof\textcolor{comment}{}
+00003 \textcolor{comment}{}qexec "quartus\_cpf -c output\_files/jic\_file\_setup.cof"\textcolor{comment}{}
+00004 \textcolor{comment}{}post\_message "*******************************************************************"\textcolor{comment}{}
+00005 \textcolor{comment}{}post\_message "Generated programming file: LimeSDR-USB\_lms7\_trx\_HW\_1.4.jic" -submsgs [list "Output file
+       saved in /output\_files directory"]\textcolor{comment}{}
+00006 \textcolor{comment}{}post\_message "*******************************************************************"\textcolor{comment}{}
+00007 \textcolor{comment}{}qexec "quartus\_cpf -c output\_files/rbf\_file\_setup.cof"\textcolor{comment}{}
+00008 \textcolor{comment}{}post\_message "*******************************************************************"\textcolor{comment}{}
+00009 \textcolor{comment}{}post\_message "Generated programming file: LimeSDR-USB\_lms7\_trx\_HW\_1.4.rbf" -submsgs [list "Output file
+       saved in /output\_files directory"]\textcolor{comment}{}
+00010 \textcolor{comment}{}post\_message "*******************************************************************"
+\end{DoxyCode}

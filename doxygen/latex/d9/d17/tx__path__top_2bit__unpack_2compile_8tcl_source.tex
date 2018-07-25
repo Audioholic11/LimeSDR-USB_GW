@@ -1,0 +1,111 @@
+\subsection{compile.\+tcl}
+\label{tx__path__top_2bit__unpack_2compile_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/bit\+\_\+unpack/compile.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/bit\+\_\+unpack/compile.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{# ---------------------------------------------------------------------------- }
+00002 \textcolor{comment}{}\textcolor{comment}{# FILE:    compile.tcl}
+00003 \textcolor{comment}{}\textcolor{comment}{# DESCRIPTION: General compile script for ModelSim - Altera}
+00004 \textcolor{comment}{}\textcolor{comment}{# DATE:    Jan 19, 2017}
+00005 \textcolor{comment}{}\textcolor{comment}{# AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{comment}{}\textcolor{comment}{# REVISIONS: 1.0}
+00007 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------------------}
+00008 \textcolor{comment}{}
+00009 \textcolor{comment}{#This line is useful when Notepad++ text editor is used instead of default }
+00010 \textcolor{comment}{}\textcolor{comment}{#ModelSim text editor}
+00011 \textcolor{comment}{}\textcolor{comment}{#Set in ModelSim console (Needs to be done once)}
+00012 \textcolor{comment}{}\textcolor{comment}{#set PrefSource(altEditor) external\_editor}
+00013 \textcolor{comment}{}\textcolor{comment}{#To go back to default Modelsim text editor Set in ModelSim console:}
+00014 \textcolor{comment}{}\textcolor{comment}{#unset PrefSource(altEditor)}
+00015 \textcolor{comment}{}\textcolor{keyword}{proc} external\_editor \{filename linenumber\} \{ \textcolor{keyword}{exec} Notepad++.exe -n$linenumber $filename &\}\textcolor{comment}{}
+00016 \textcolor{comment}{}
+00017 
+00018 
+00019 \textcolor{keyword}{puts} \{
+00020  ----------------------------------------------------------------------------  
+00021  FILE:     compile.tcl
+00022  DESCRIPTION:  General compile script for ModelSim - Altera
+00023  DATE: Jan 19, 2017
+00024  AUTHOR(s):    Lime Microsystems
+00025  REVISIONS: 1.0
+00026  ----------------------------------------------------------------------------
+00027 \}\textcolor{comment}{}
+00028 \textcolor{comment}{}
+00029 \textcolor{comment}{# Simply change the project settings in this section}
+00030 \textcolor{comment}{}\textcolor{comment}{# for each new project. There should be no need to}
+00031 \textcolor{comment}{}\textcolor{comment}{# modify the rest of the script.}
+00032 \textcolor{comment}{}
+00033 \textcolor{comment}{#Add files to compile, follow compilation order(last file - top module)}
+00034 \textcolor{comment}{}\textcolor{keyword}{set} library\_file\_list \{
+00035                            source\_library \{ ../general/sync\_reg.vhd
+00036                                             ../general/bus\_sync\_reg.vhd                               
+       
+00037                                             ../altera\_inst/fifo\_inst.vhd
+00038                                             ../pulse\_divider/synth/pulse\_gen.vhd
+00039                                             ../bit\_pack/synth/pack\_48\_to\_64.vhd
+00040                                             ../bit\_pack/synth/pack\_56\_to\_64.vhd
+00041                                             ../bit\_pack/synth/bit\_pack.vhd
+00042                                             synth/unpack\_32\_to\_48.vhd
+00043                                             synth/unpack\_32\_to\_56.vhd
+00044                                             synth/unpack\_32\_to\_64.vhd
+00045                                             synth/bit\_unpack.vhd
+00046                                             synth/unpack\_64\_to\_48.vhd
+00047                                             synth/unpack\_64\_to\_56.vhd
+00048                                             synth/unpack\_64\_to\_64.vhd
+00049                                             synth/bit\_unpack\_64.vhd
+00050                                             sim/bit\_unpack\_tb.vhd
+00051                                             sim/bit\_unpack\_64\_tb.vhd
+00052                                             
+00053                            \}
+00054 \}\textcolor{comment}{}
+00055 \textcolor{comment}{}
+00056 
+00057 
+00058 \textcolor{comment}{# After sourcing the script from ModelSim for the}
+00059 \textcolor{comment}{}\textcolor{comment}{# first time use these commands to recompile.}
+00060 \textcolor{comment}{}
+00061 \textcolor{keyword}{proc} r  \{\} \{uplevel #0 source compile.tcl\}\textcolor{comment}{}
+00062 \textcolor{comment}{}\textcolor{keyword}{proc} rr \{\} \{\textcolor{keyword}{global} last\_compile\_time\textcolor{comment}{}
+00063 \textcolor{comment}{}            \textcolor{keyword}{set} last\_compile\_time 0\textcolor{comment}{}
+00064 \textcolor{comment}{}            r\}\textcolor{comment}{}
+00065 \textcolor{comment}{}\textcolor{keyword}{proc} q  \{\} \{quit -force\}\textcolor{comment}{}
+00066 \textcolor{comment}{}
+00067 \textcolor{comment}{#Does this installation support Tk?}
+00068 \textcolor{comment}{}\textcolor{keyword}{set} tk\_ok 1\textcolor{comment}{}
+00069 \textcolor{comment}{}\textcolor{keyword}{if} [\textcolor{keyword}{catch} \{\textcolor{keyword}{package} require Tk\}] \{\textcolor{keyword}{set} tk\_ok 0\}\textcolor{comment}{}
+00070 \textcolor{comment}{}
+00071 \textcolor{comment}{# Prefer a fixed point font for the transcript}
+00072 \textcolor{comment}{}\textcolor{keyword}{set} PrefMain(font) \{Courier 10 roman normal\}\textcolor{comment}{}
+00073 \textcolor{comment}{}
+00074 \textcolor{comment}{# Compile out of date files}
+00075 \textcolor{comment}{}\textcolor{keyword}{set} time\_now [\textcolor{keyword}{clock} seconds]\textcolor{comment}{}
+00076 \textcolor{comment}{}\textcolor{keyword}{if} [\textcolor{keyword}{catch} \{\textcolor{keyword}{set} last\_compile\_time\}] \{
+00077   \textcolor{keyword}{set} last\_compile\_time 0\textcolor{comment}{}
+00078 \textcolor{comment}{}\}\textcolor{comment}{}
+00079 \textcolor{comment}{}\textcolor{keyword}{foreach} \{library file\_list\} $library\_file\_list \{
+00080   vlib $library\textcolor{comment}{}
+00081 \textcolor{comment}{}  vmap work $library\textcolor{comment}{}
+00082 \textcolor{comment}{}  \textcolor{keyword}{foreach} file $file\_list \{
+00083     \textcolor{keyword}{if} \{ $last\_compile\_time < [\textcolor{keyword}{file} mtime $file] \} \{
+00084       \textcolor{keyword}{if} [regexp \{.vhdl?$\} $file] \{
+00085         vcom -quiet -93 $file\textcolor{comment}{}
+00086 \textcolor{comment}{}      \} \textcolor{keyword}{else} \{
+00087         vlog $file\textcolor{comment}{}
+00088 \textcolor{comment}{}      \}\textcolor{comment}{}
+00089 \textcolor{comment}{}      \textcolor{keyword}{set} last\_compile\_time 0\textcolor{comment}{}
+00090 \textcolor{comment}{}    \}\textcolor{comment}{}
+00091 \textcolor{comment}{}  \}\textcolor{comment}{}
+00092 \textcolor{comment}{}\}\textcolor{comment}{}
+00093 \textcolor{comment}{}\textcolor{keyword}{set} last\_compile\_time $time\_now\textcolor{comment}{}
+00094 \textcolor{comment}{}
+00095 \textcolor{keyword}{puts} \{
+00096   Script commands are:
+00097 
+00098   r = Recompile changed and dependent files
+00099  rr = Recompile everything
+00100   q = Quit without confirmation
+00101 \}\textcolor{comment}{}
+00102 \textcolor{comment}{}
+00103 
+00104 
+00105 
+\end{DoxyCode}

@@ -1,0 +1,28 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+debug.h File Reference}
+\label{alt__debug_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+debug.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+debug.\+h}}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+E\+B\+U\+G\+\_\+\+A\+S\+S\+E\+RT}(condition)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+debug.\+h@{alt\+\_\+debug.\+h}!A\+L\+T\+\_\+\+D\+E\+B\+U\+G\+\_\+\+A\+S\+S\+E\+RT@{A\+L\+T\+\_\+\+D\+E\+B\+U\+G\+\_\+\+A\+S\+S\+E\+RT}}
+\index{A\+L\+T\+\_\+\+D\+E\+B\+U\+G\+\_\+\+A\+S\+S\+E\+RT@{A\+L\+T\+\_\+\+D\+E\+B\+U\+G\+\_\+\+A\+S\+S\+E\+RT}!alt\+\_\+debug.\+h@{alt\+\_\+debug.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+E\+B\+U\+G\+\_\+\+A\+S\+S\+E\+RT}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+E\+B\+U\+G\+\_\+\+A\+S\+S\+E\+RT(
+\begin{DoxyParamCaption}
+\item[{}]{condition}
+\end{DoxyParamCaption}
+)}\label{alt__debug_8h_a936c5fe92715446c8d2e0794e2ef0b2b}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (!condition) \(\backslash\)
+\{                                                   \
+  __asm__ \textcolor{keyword}{volatile} (\textcolor{stringliteral}{"break"});                       \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line {\bf 40} of file {\bf alt\+\_\+debug.\+h}.
+

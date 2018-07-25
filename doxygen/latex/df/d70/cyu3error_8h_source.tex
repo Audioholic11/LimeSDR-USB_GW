@@ -1,0 +1,133 @@
+\subsection{cyu3error.\+h}
+\label{cyu3error_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/cyu3error.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/cyu3error.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ ## Cypress FX3 Core Library Header (cyu3error.h)}
+00003 \textcolor{comment}{ ## ===========================}
+00004 \textcolor{comment}{ ##}
+00005 \textcolor{comment}{ ##  Copyright Cypress Semiconductor Corporation, 2010-2014,}
+00006 \textcolor{comment}{ ##  All Rights Reserved}
+00007 \textcolor{comment}{ ##  UNPUBLISHED, LICENSED SOFTWARE.}
+00008 \textcolor{comment}{ ##}
+00009 \textcolor{comment}{ ##  CONFIDENTIAL AND PROPRIETARY INFORMATION}
+00010 \textcolor{comment}{ ##  WHICH IS THE PROPERTY OF CYPRESS.}
+00011 \textcolor{comment}{ ##}
+00012 \textcolor{comment}{ ##  Use of this file is governed}
+00013 \textcolor{comment}{ ##  by the license agreement included in the file}
+00014 \textcolor{comment}{ ##}
+00015 \textcolor{comment}{ ##     <install>/license/license.txt}
+00016 \textcolor{comment}{ ##}
+00017 \textcolor{comment}{ ##  where <install> is the Cypress software}
+00018 \textcolor{comment}{ ##  installation root directory path.}
+00019 \textcolor{comment}{ ##}
+00020 \textcolor{comment}{ ## ===========================}
+00021 \textcolor{comment}{ */}
+00022 
+00023 \textcolor{preprocessor}{#ifndef \_INCLUDED\_CYU3ERROR\_H\_}
+00024 \textcolor{preprocessor}{#define \_INCLUDED\_CYU3ERROR\_H\_}
+00025 
+00026 \textcolor{preprocessor}{#include "cyu3types.h"}
+00027 \textcolor{preprocessor}{#include "cyu3externcstart.h"}
+00028 
+00045 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} CyU3PErrorCode_t
+00046 \{
+00047     CY_U3P_SUCCESS = 0,                 
+00049     CY_U3P_ERROR_DELETED,               
+00050     CY_U3P_ERROR_BAD_POOL,              
+00051     CY_U3P_ERROR_BAD_POINTER,           
+00052     CY_U3P_ERROR_INVALID_WAIT,          
+00053     CY_U3P_ERROR_BAD_SIZE,              
+00054     CY_U3P_ERROR_BAD_EVENT_GRP,         
+00055     CY_U3P_ERROR_NO_EVENTS,             
+00056     CY_U3P_ERROR_BAD_OPTION,            
+00057     CY_U3P_ERROR_BAD_QUEUE,             
+00058     CY_U3P_ERROR_QUEUE_EMPTY,           
+00059     CY_U3P_ERROR_QUEUE_FULL,            
+00060     CY_U3P_ERROR_BAD_SEMAPHORE,         
+00061     CY_U3P_ERROR_SEMGET_FAILED,         
+00062     CY_U3P_ERROR_BAD_THREAD,            
+00063     CY_U3P_ERROR_BAD_PRIORITY,          
+00064     CY_U3P_ERROR_MEMORY_ERROR,          
+00065     CY_U3P_ERROR_DELETE_FAILED,         
+00066     CY_U3P_ERROR_RESUME_FAILED,         
+00067     CY_U3P_ERROR_INVALID_CALLER,        
+00068     CY_U3P_ERROR_SUSPEND_FAILED,        
+00069     CY_U3P_ERROR_BAD_TIMER,             
+00070     CY_U3P_ERROR_BAD_TICK,              
+00071     CY_U3P_ERROR_ACTIVATE_FAILED,       
+00072     CY_U3P_ERROR_BAD_THRESHOLD,         
+00073     CY_U3P_ERROR_SUSPEND_LIFTED,        
+00074     CY_U3P_ERROR_WAIT_ABORTED,          
+00075     CY_U3P_ERROR_WAIT_ABORT_FAILED,     
+00076     CY_U3P_ERROR_BAD_MUTEX,             
+00077     CY_U3P_ERROR_MUTEX_FAILURE,         
+00078     CY_U3P_ERROR_MUTEX_PUT_FAILED,      
+00079     CY_U3P_ERROR_INHERIT_FAILED,        
+00080     CY_U3P_ERROR_NOT_IDLE,              
+00082     CY_U3P_ERROR_BAD_ARGUMENT = 0x40,   
+00083     CY_U3P_ERROR_NULL_POINTER,          
+00084     CY_U3P_ERROR_NOT_STARTED,           
+00085     CY_U3P_ERROR_ALREADY_STARTED,       
+00086     CY_U3P_ERROR_NOT_CONFIGURED,        
+00087     CY_U3P_ERROR_TIMEOUT,               
+00088     CY_U3P_ERROR_NOT_SUPPORTED,         
+00089     CY_U3P_ERROR_INVALID_SEQUENCE,      
+00090     CY_U3P_ERROR_ABORTED,               
+00091     CY_U3P_ERROR_DMA_FAILURE,           
+00092     CY_U3P_ERROR_FAILURE,               
+00093     CY_U3P_ERROR_BAD_INDEX,             
+00094     CY_U3P_ERROR_BAD_ENUM_METHOD,       
+00095     CY_U3P_ERROR_INVALID_CONFIGURATION, 
+00096     CY_U3P_ERROR_CHANNEL_CREATE_FAILED, 
+00097     CY_U3P_ERROR_CHANNEL_DESTROY_FAILED,
+00098     CY_U3P_ERROR_BAD_DESCRIPTOR_TYPE,   
+00099     CY_U3P_ERROR_XFER_CANCELLED,        
+00100     CY_U3P_ERROR_FEATURE_NOT_ENABLED,   
+00101     CY_U3P_ERROR_STALLED,               
+00102     CY_U3P_ERROR_BLOCK_FAILURE,         
+00103     CY_U3P_ERROR_LOST_ARBITRATION,      
+00104     CY_U3P_ERROR_STANDBY_FAILED,        
+00107     CY_U3P_ERROR_INVALID_VOLTAGE_RANGE = 0x60,  
+00108     CY_U3P_ERROR_CARD_WRONG_RESPONSE,           
+00109     CY_U3P_ERROR_UNSUPPORTED_CARD,              
+00110     CY_U3P_ERROR_CARD_WRONG_STATE,              
+00111     CY_U3P_ERROR_CMD_NOT_SUPPORTED,             
+00112     CY_U3P_ERROR_CRC,                           
+00113     CY_U3P_ERROR_INVALID_ADDR,                  
+00114     CY_U3P_ERROR_INVALID_UNIT,                  
+00115     CY_U3P_ERROR_INVALID_DEV,                   
+00116     CY_U3P_ERROR_ALREADY_PARTITIONED,           
+00117     CY_U3P_ERROR_NOT_PARTITIONED,               
+00118     CY_U3P_ERROR_BAD_PARTITION,                 
+00119     CY_U3P_ERROR_READ_WRITE_ABORTED,            
+00120     CY_U3P_ERROR_WRITE_PROTECTED,               
+00121     CY_U3P_ERROR_SIB_INIT,                      
+00122     CY_U3P_ERROR_CARD_LOCKED,                   
+00123     CY_U3P_ERROR_CARD_LOCK_FAILURE,             
+00124     CY_U3P_ERROR_CARD_FORCE_ERASE,              
+00125     CY_U3P_ERROR_INVALID_BLOCKSIZE,             
+00126     CY_U3P_ERROR_INVALID_FUNCTION,              
+00127     CY_U3P_ERROR_TUPLE_NOT_FOUND,               
+00128     CY_U3P_ERROR_IO_ABORTED,                    
+00129     CY_U3P_ERROR_IO_SUSPENDED,              
+00130     CY_U3P_ERROR_ILLEGAL_CMD,                   
+00131     CY_U3P_ERROR_SDIO_UNKNOWN,                  
+00132     CY_U3P_ERROR_BAD_CMD_ARG,                   
+00133     CY_U3P_ERROR_UNINITIALIZED_FUNCTION,        
+00134     CY_U3P_ERROR_CARD_NOT_ACTIVE,               
+00135     CY_U3P_ERROR_DEVICE_BUSY,                   
+00136     CY_U3P_ERROR_NO_METADATA,           
+00137     CY_U3P_ERROR_CARD_UNHEALTHY,        
+00138     CY_U3P_ERROR_MEDIA_FAILURE,         
+00140     CY_U3P_ERROR_NO_REENUM_REQUIRED = 0xFE, 
+00146     CY_U3P_ERROR_OPERN_DISABLED = 0xFF      
+00148 \} CyU3PErrorCode_t;
+00149 
+00150 \textcolor{preprocessor}{#include "cyu3externcend.h"}
+00151 
+00152 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_INCLUDED\_CYU3ERROR\_H\_ */}\textcolor{preprocessor}{}
+00153 
+00154 \textcolor{comment}{/*[]*/}
+00155 
+\end{DoxyCode}

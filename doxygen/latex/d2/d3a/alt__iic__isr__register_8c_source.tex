@@ -1,0 +1,97 @@
+\subsection{alt\+\_\+iic\+\_\+isr\+\_\+register.\+c}
+\label{alt__iic__isr__register_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+iic\+\_\+isr\+\_\+register.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+iic\+\_\+isr\+\_\+register.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2009      Altera Corporation, San Jose, California, USA.      *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 \textcolor{preprocessor}{#include <errno.h>}
+00033 \textcolor{preprocessor}{#include "system.h"}
+00034 
+00035 \textcolor{comment}{/*}
+00036 \textcolor{comment}{ * Provides an interrupt registry mechanism for the any CPUs internal interrupt}
+00037 \textcolor{comment}{ * controller (IIC) when the enhanced interrupt API is active.}
+00038 \textcolor{comment}{ */}
+00039 \textcolor{preprocessor}{#ifndef ALT\_CPU\_EIC\_PRESENT}
+00040 \textcolor{preprocessor}{#ifdef ALT\_ENHANCED\_INTERRUPT\_API\_PRESENT}
+00041 
+00042 \textcolor{preprocessor}{#include "alt_types.h"}
+00043 \textcolor{preprocessor}{#include "sys/alt_irq.h"}
+00044 \textcolor{preprocessor}{#include "priv/alt_iic_isr_register.h"}
+00045 
+00046 \textcolor{comment}{/*}
+00047 \textcolor{comment}{ * The header, alt\_irq\_entry.h, contains the exception entry point, and is}
+00048 \textcolor{comment}{ * provided by the processor component. It is included here, so that the code}
+00049 \textcolor{comment}{ * will be added to the executable only if alt\_irq\_register() is present, i.e.}
+00050 \textcolor{comment}{ * if no interrupts are registered - there's no need to provide any }
+00051 \textcolor{comment}{ * interrupt handling.}
+00052 \textcolor{comment}{ */}
+00053 
+00054 \textcolor{preprocessor}{#include "sys/alt_irq_entry.h"}
+00055 
+00056 \textcolor{comment}{/*}
+00057 \textcolor{comment}{ * The header, alt\_irq\_table.h contains a table describing which function}
+00058 \textcolor{comment}{ * handles each interrupt.}
+00059 \textcolor{comment}{ */}
+00060 
+00061 \textcolor{preprocessor}{#include "priv/alt_irq_table.h"}
+00062 
+00075 \textcolor{keywordtype}{int} alt_iic_isr_register(alt_u32 ic\_id, alt_u32 irq, alt_isr_func isr, 
+00076   \textcolor{keywordtype}{void} *isr\_context, \textcolor{keywordtype}{void} *flags)
+00077 \{
+00078   \textcolor{keywordtype}{int} rc = -EINVAL;  
+00079   \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = irq;             \textcolor{comment}{/* IRQ interpreted as the interrupt ID. */}
+00080   alt_irq_context status;
+00081 
+00082   \textcolor{keywordflow}{if} (\textcolor{keywordtype}{id} < ALT_NIRQ)
+00083   \{
+00084     \textcolor{comment}{/* }
+00085 \textcolor{comment}{     * interrupts are disabled while the handler tables are updated to ensure}
+00086 \textcolor{comment}{     * that an interrupt doesn't occur while the tables are in an inconsistant}
+00087 \textcolor{comment}{     * state.}
+00088 \textcolor{comment}{     */}
+00089 
+00090     status = alt_irq_disable_all();
+00091 
+00092     alt_irq[id].handler = isr;
+00093     alt_irq[id].context = isr\_context;
+00094 
+00095     rc = (isr) ? alt\_ic\_irq\_enable(ic\_id, \textcolor{keywordtype}{id}) : alt\_ic\_irq\_disable(ic\_id, \textcolor{keywordtype}{id});
+00096 
+00097     alt_irq_enable_all(status);
+00098   \}
+00099 
+00100   \textcolor{keywordflow}{return} rc; 
+00101 \}
+00102 
+00103 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_ENHANCED\_INTERRUPT\_API\_PRESENT */}\textcolor{preprocessor}{}
+00104 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_CPU\_EIC\_PRESENT */}\textcolor{preprocessor}{}
+\end{DoxyCode}

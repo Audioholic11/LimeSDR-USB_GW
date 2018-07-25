@@ -1,0 +1,308 @@
+\subsection{txtspcfg.\+vhd}
+\label{txtspcfg_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/txtspcfg.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/txtspcfg.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    txtspcfg.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: Serial configuration interface to control TX modules}
+00004 \textcolor{keyword}{-- DATE:    June 07, 2007}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:   }
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 
+00009 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00010 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00011 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00012 \textcolor{vhdlkeyword}{use }work.mem_package.\textcolor{keywordflow}{all};
+00013 
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keyword}{-- Entity declaration}
+00016 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00017 \textcolor{keywordflow}{entity }txtspcfg \textcolor{keywordflow}{is}
+00018     \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00019 \textcolor{keyword}{        -- Address and location of this module}
+00020 \textcolor{keyword}{        -- Will be hard wired at the top level}
+00021         \textcolor{vhdlchar}{maddress}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{9} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00022         \textcolor{vhdlchar}{mimo_en} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- MIMO enable, from TOP SPI (always 1)}
+00023     
+00024 \textcolor{keyword}{        -- Serial port IOs}
+00025         \textcolor{vhdlchar}{sdin}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{     -- Data in}
+00026         \textcolor{vhdlchar}{sclk}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{     -- Data clock}
+00027         \textcolor{vhdlchar}{sen} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- Enable signal (active low)}
+00028         \textcolor{vhdlchar}{sdout}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{    -- Data out}
+00029     
+00030 \textcolor{keyword}{        -- Signals coming from the pins or top level serial interface}
+00031         \textcolor{vhdlchar}{lreset}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{     -- Logic reset signal, resets logic cells only  (use only one reset)}
+00032         \textcolor{vhdlchar}{mreset}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{     -- Memory reset signal, resets configuration memory only (use only one
+       reset)}
+00033 \textcolor{keyword}{        --txen: in std\_logic;   -- Power down all modules when txen=0 not used}
+00034         
+00035         \textcolor{vhdlchar}{oen}\textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --nc}
+00036         
+00037 \textcolor{keyword}{        -- PLL reconfiguration lines}
+00038         \textcolor{vhdlchar}{spi_pll_locked}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00039         \textcolor{vhdlchar}{spi_config_controls} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00040         \textcolor{vhdlchar}{spi_config_data}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{143} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00041         
+00042 \textcolor{keyword}{        -- Control lines        (spi controlled signals)}
+00043         \textcolor{vhdlchar}{stream_load}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{  --    load data to ram}
+00044         \textcolor{vhdlchar}{stream_txen}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{    -- enable streaming from ram}
+00045         \textcolor{vhdlchar}{stream_rxen}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{    -- enable streaming to fx3}
+00046         \textcolor{vhdlchar}{stream_rxdsrc}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00047         \textcolor{vhdlchar}{lms_gpio0}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00048         \textcolor{vhdlchar}{lms_gpio1}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00049         \textcolor{vhdlchar}{lms_gpio2}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00050         \textcolor{vhdlchar}{fx3_reset}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00051         \textcolor{vhdlchar}{ps_en_0}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00052         \textcolor{vhdlchar}{ps_en_1}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00053         \textcolor{vhdlchar}{up_dn_0}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00054         \textcolor{vhdlchar}{up_dn_1}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00055         \textcolor{vhdlchar}{phase}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{9} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00056         \textcolor{vhdlchar}{pll_areset}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00057 \textcolor{keyword}{--      en      : out std\_logic;}
+00058         \textcolor{vhdlchar}{stateo}\textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00059         \textcolor{vhdlchar}{lte_synch_dis}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{    -- 1 - LTE synchronization disabled, 0 - LTE
+       synchronization enabled}
+00060         \textcolor{vhdlchar}{lte_txpct_loss_clr}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{  -- 1 - clear txpct\_loss flag on LTE packets,}
+00061         \textcolor{vhdlchar}{lte_mimo_en}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{    -- 1 - mimo mode enabled}
+00062         \textcolor{vhdlchar}{lte_ch_en}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{   --LSb first chanell}
+00063         \textcolor{vhdlchar}{lte_smpl_width}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{     -- "10"-12bit, "01"-14bit,
+       "00"-16bit;}
+00064         \textcolor{vhdlchar}{lte_clr_smpl_nr}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00065         \textcolor{vhdlchar}{lms_rst}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00066         \textcolor{vhdlchar}{lms_ss}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00067         \textcolor{vhdlchar}{phase_reg_sel}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00068         \textcolor{vhdlchar}{drct_clk_en}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00069 
+00070     \textcolor{vhdlchar}{)};
+00071 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{txtspcfg};
+00072 
+00073 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00074 \textcolor{keyword}{-- Architecture}
+00075 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00076 \textcolor{keywordflow}{architecture} txtspcfg\_arch \textcolor{keywordflow}{of} txtspcfg is
+00077 
+00078     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst_reg}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{     -- Instruction register}
+00079     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst_reg_en}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00080 
+00081     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{din_reg}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{      -- Data in register}
+00082     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{din_reg_en}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00083     
+00084     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dout_reg}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{     -- Data out register}
+00085     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dout_reg_sen}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{dout_reg_len}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00086     
+00087     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{:} \textcolor{vhdlchar}{marray32x16};\textcolor{keyword}{                                    -- Config memory}
+00088     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{mem_we}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00089     
+00090     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{oe}\textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{                                       -- Tri state buffers control}
+00091     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{spi_config_data_rev}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{143} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00092     
+00093 \textcolor{keyword}{    -- Components}
+00094 \textcolor{vhdlkeyword}{    use }work.mcfg_components.mcfg32wm\_fsm;
+00095     \textcolor{keywordflow}{for} \textcolor{keywordflow}{all}\textcolor{vhdlchar}{:} \textcolor{vhdlchar}{mcfg32wm\_fsm} \textcolor{keywordflow}{use} \textcolor{keywordflow}{entity} \textcolor{vhdlchar}{work}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{mcfg32wm\_fsm}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{mcfg32wm\_fsm\_arch}\textcolor{vhdlchar}{)};
+00096 
+00097 \textcolor{vhdlkeyword}{begin}
+00098 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00099 \textcolor{keyword}{    -- Finite state machines}
+00100 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00101     fsm: mcfg32wm_fsm \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}( 
+00102         address => maddress, mimo_en => mimo_en, inst_reg => inst_reg, sclk => 
+      sclk, sen => sen, reset => lreset,
+00103         inst_reg_en => inst_reg_en, din_reg_en => din_reg_en, dout_reg_sen => 
+      dout_reg_sen,
+00104         dout_reg_len => dout_reg_len, mem_we => mem_we, oe => oe, stateo => 
+      stateo\textcolor{vhdlchar}{)};
+00105         
+00106 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00107 \textcolor{keyword}{    -- Instruction register}
+00108 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00109     inst\_reg\_proc: \textcolor{keywordflow}{process}(sclk, lreset)
+00110         \textcolor{keywordflow}{variable} \textcolor{vhdlchar}{i}\textcolor{vhdlchar}{:} \textcolor{comment}{integer};
+00111 \textcolor{vhdlkeyword}{    begin}
+00112         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{lreset} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00113             inst\_reg <= (\textcolor{keywordflow}{others} => '0');
+00114         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{sclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{sclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00115             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{inst_reg_en} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00116                 \textcolor{keywordflow}{for} \textcolor{vhdlchar}{i} \textcolor{keywordflow}{in} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{loop}
+00117                     inst\_reg(i) <= inst\_reg(i-1);
+00118                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{loop};
+00119                 inst\_reg(\textcolor{vhdllogic}{0}) <= sdin;
+00120             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00121         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00122     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{inst\_reg\_proc};
+00123 
+00124 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00125 \textcolor{keyword}{    -- Data input register}
+00126 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00127     din\_reg\_proc: \textcolor{keywordflow}{process}(sclk, lreset)
+00128         \textcolor{keywordflow}{variable} \textcolor{vhdlchar}{i}\textcolor{vhdlchar}{:} \textcolor{comment}{integer};
+00129 \textcolor{vhdlkeyword}{    begin}
+00130         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{lreset} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00131             \textcolor{vhdlchar}{din_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00132         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{sclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{sclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00133             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{din_reg_en} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00134                 \textcolor{keywordflow}{for} \textcolor{vhdlchar}{i} \textcolor{keywordflow}{in} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{loop}
+00135                     \textcolor{vhdlchar}{din_reg}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{i}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{din_reg}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{i}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00136                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{loop};
+00137                 \textcolor{vhdlchar}{din_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{sdin};
+00138             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00139         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00140     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{din\_reg\_proc};
+00141 
+00142 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00143 \textcolor{keyword}{    -- Data output register}
+00144 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00145     dout\_reg\_proc: \textcolor{keywordflow}{process}(sclk, lreset)
+00146         \textcolor{keywordflow}{variable} \textcolor{vhdlchar}{i}\textcolor{vhdlchar}{:} \textcolor{comment}{integer};
+00147 \textcolor{vhdlkeyword}{    begin}
+00148         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{lreset} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00149             \textcolor{vhdlchar}{dout_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00150         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{sclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{sclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00151 \textcolor{keyword}{            -- Shift operation}
+00152             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{dout_reg_sen} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00153                 \textcolor{keywordflow}{for} \textcolor{vhdlchar}{i} \textcolor{keywordflow}{in} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{loop}
+00154                     \textcolor{vhdlchar}{dout_reg}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{i}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{dout_reg}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{i}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00155                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{loop};
+00156                 \textcolor{vhdlchar}{dout_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{dout_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)};
+00157 \textcolor{keyword}{            -- Load operation}
+00158             \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{dout_reg_len} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00159                 \textcolor{keywordflow}{case} \textcolor{vhdlchar}{inst_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{is}\textcolor{keyword}{    -- mux read-only outputs}
+00160                     \textcolor{keywordflow}{when} \textcolor{vhdllogic}{"00011"} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{dout_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{3}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{
+      spi_pll_locked} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00161                     \textcolor{keywordflow}{when} \textcolor{keywordflow}{others}  \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{dout_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{to\_integer}\textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{inst_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)};
+00162                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{case};
+00163             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};               
+00164         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00165     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{dout\_reg\_proc};
+00166     
+00167 \textcolor{keyword}{    -- Tri state buffer to connect multiple serial interfaces in parallel}
+00168 \textcolor{keyword}{    --sdout <= dout\_reg(7) when oe = '1' else 'Z';}
+00169 
+00170 \textcolor{keyword}{--  sdout <= dout\_reg(7);}
+00171 \textcolor{keyword}{--  oen <= oe;}
+00172 
+00173     \textcolor{vhdlchar}{sdout} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{dout_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{oe};
+00174     \textcolor{vhdlchar}{oen} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{oe};
+00175 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00176 \textcolor{keyword}{    -- Configuration memory}
+00177 \textcolor{keyword}{    -- --------------------------------------------------------------------------------------------- }
+00178     ram: \textcolor{keywordflow}{process}(sclk, mreset)\textcolor{keyword}{ --(remap)}
+00179 \textcolor{vhdlkeyword}{    begin}
+00180 \textcolor{keyword}{        -- Defaults}
+00181         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{mreset} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}            
+00182             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}      \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"1000000010000011"};\textcolor{keyword}{ --  16 free, UNUSED[15:0],gw\_version[4:0] (03 mimo mode)}
+00183             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)}      \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000011"};\textcolor{keyword}{ --  0 free, lte\_ch\_en[15:0]}
+00184             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}      \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0010010000010100"};\textcolor{keyword}{ --  3 free, UNUSED[15],ps\_en\_1,up\_dn\_1,pll\_areset, ps\_en\_0,
+       up\_dn\_0, phase[9:0]}
+00185             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3}\textcolor{vhdlchar}{)}      \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000000"};\textcolor{keyword}{ --  14 free, UNUSED[15:3],PLL\_LOCKED, RESERVED,
+       PLL\_EN\_CONFIG}
+00186 \textcolor{keyword}{            --mem(3)    <= "0000000000000000"; --10 free, UNUSED[15:6],PLL\_STATUS, PLL\_IND[3:0],
+       PLL\_EN\_CONFIG}
+00187             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}      \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000101110000"};\textcolor{keyword}{ --  5 free, CHP\_current[10:8],VCO\_pScale,
+       LF\_Res[6:2],LF\_Cap[1:0] }
+00188             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)}      \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000001001010"};\textcolor{keyword}{ --  10 free, UNUSED[8:0],lte\_clr\_smpl\_nr, lte\_synch\_dis,
+       ch\_sel, stream\_rxdsrc, stream\_rxen, stream\_txen, stream\_load}
+00189             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{6}\textcolor{vhdlchar}{)}      \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000000"};\textcolor{keyword}{ --  13 free, UNUSED[12:0], lms\_gpio2 (0 - out1), lms\_gpio1
+       ,lms\_gpio0}
+00190             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)}      \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000001010"};\textcolor{keyword}{ --  11 free, lte\_txpct\_loss\_clr, UNUSED[10:0],
+       lte\_smpl\_width[1:0], lte\_mimo\_en, fx3\_reset}
+00191             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}      \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000000"};\textcolor{keyword}{ --  0 free, N\_high\_cnt[15:8],N\_low\_cnt[7:0]}
+00192             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{9}\textcolor{vhdlchar}{)}  \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000100000001"};\textcolor{keyword}{ --  0 free, M\_high\_cnt[15:8],M\_low\_cnt[7:0]}
+00193             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{10}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000100000001"};\textcolor{keyword}{ --  0 free, c0\_high\_cnt[15:8],c0\_low\_cnt[7:0]}
+00194             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000100000001"};\textcolor{keyword}{ --  0 free, c1\_high\_cnt[15:8],c1\_low\_cnt[7:0]}
+00195             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000000"};\textcolor{keyword}{ --  0 free, c2\_high\_cnt[15:8],c2\_low\_cnt[7:0]}
+00196             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{13}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000000"};\textcolor{keyword}{ --  0 free, c3\_high\_cnt[15:8],c3\_low\_cnt[7:0]}
+00197             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{14}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000000"};\textcolor{keyword}{ --  0 free, c4\_high\_cnt[15:8],c4\_low\_cnt[7:0]}
+00198             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0001010100000001"};\textcolor{keyword}{ -- 2 free, c4\_odd\_div, c4\_bypass, c3\_odd\_div, c3\_bypass,
+       c2\_odd\_div, c2\_bypass, c1\_odd\_div, c1\_bypass, c0\_odd\_div, c0\_bypass, M\_odd\_div, M\_bypass, N\_odd\_div, N\_bypass}
+00199             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{16}\textcolor{vhdlchar}{)}  \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000000"};\textcolor{keyword}{ -- PLL\_LOCKED[15:0]         }
+00200             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{20}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000001111111"};\textcolor{keyword}{ -- FMC, RFDIO, ETC control}
+00201             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{21}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000000"};\textcolor{keyword}{ -- RFDIO GPIOs}
+00202             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{22}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000010101"};\textcolor{keyword}{ -- drct\_clk\_en, phase\_reg\_sel}
+00203 \textcolor{keyword}{            --}
+00204             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{29}\textcolor{vhdlchar}{)}  \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000001110"};\textcolor{keyword}{ -- 00 frre, Board ID (SoDeRa PCIE)}
+00205             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{30}\textcolor{vhdlchar}{)}  \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000000001"};\textcolor{keyword}{ -- 00 free, Function (1)}
+00206             \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31}\textcolor{vhdlchar}{)}  \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"0000000000001000"};\textcolor{keyword}{ -- 00 free, GW wersion (8)}
+00207             
+00208             
+00209         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{sclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{sclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00210                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{mem_we} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00211                     \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{to\_integer}\textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{inst_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{din_reg}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{14} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{
+      sdin};
+00212                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00213                 
+00214 \textcolor{keyword}{                --if dout\_reg\_len = '0' then}
+00215 \textcolor{keyword}{                    --mem(9)  <= bsigi(14 downto 0) & bstate;}
+00216 \textcolor{keyword}{                    --mem(10) <= bsigq(7 downto 0) & bsigi(22 downto 15);}
+00217 \textcolor{keyword}{                    --mem(11)(14 downto 0) <= bsigq(22 downto 8);}
+00218 \textcolor{keyword}{                --end if;}
+00219                 
+00220         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00221     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{ram};
+00222     
+00223 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00224 \textcolor{keyword}{    -- Decoding logic}
+00225 \textcolor{keyword}{    -- ---------------------------------------------------------------------------------------------}
+00226 \textcolor{keyword}{    --edit by new map}
+00227     \textcolor{vhdlchar}{lte_ch_en}               \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00228     \textcolor{vhdlchar}{phase}                       \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{9} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00229     \textcolor{vhdlchar}{up_dn_0}                 \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{10}\textcolor{vhdlchar}{)};
+00230     \textcolor{vhdlchar}{ps_en_0}                 \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11}\textcolor{vhdlchar}{)};
+00231     \textcolor{vhdlchar}{pll_areset}              \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}\textcolor{vhdlchar}{)};  
+00232     \textcolor{vhdlchar}{up_dn_1}                 \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{13}\textcolor{vhdlchar}{)};
+00233     \textcolor{vhdlchar}{ps_en_1}                 \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{14}\textcolor{vhdlchar}{)};  
+00234     \textcolor{vhdlchar}{lte_mimo_en}             \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00235     \textcolor{vhdlchar}{lte_smpl_width}      \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}; 
+00236     \textcolor{vhdlchar}{stream_load}             \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00237     \textcolor{vhdlchar}{stream_txen}             \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00238     \textcolor{vhdlchar}{stream_rxen}             \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)};
+00239     \textcolor{vhdlchar}{stream_rxdsrc}           \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3}\textcolor{vhdlchar}{)};
+00240     \textcolor{vhdlchar}{lte_synch_dis}           \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)};
+00241     \textcolor{vhdlchar}{lte_clr_smpl_nr}     \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{6}\textcolor{vhdlchar}{)};
+00242     \textcolor{vhdlchar}{lms_gpio0}               \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{6}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00243     \textcolor{vhdlchar}{lms_gpio1}               \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{6}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00244     \textcolor{vhdlchar}{lms_gpio2}               \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{6}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)};
+00245     \textcolor{vhdlchar}{lte_txpct_loss_clr}  \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)};
+00246     \textcolor{vhdlchar}{fx3_reset}               \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00247     \textcolor{vhdlchar}{lms_rst}                 \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{20}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00248     \textcolor{vhdlchar}{lms_ss}                  \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{20}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00249     \textcolor{vhdlchar}{drct_clk_en}             \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{22}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)};
+00250     \textcolor{vhdlchar}{phase_reg_sel}           \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{22}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00251     \textcolor{vhdlchar}{drct_clk_en}             \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{22}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)};
+00252     \textcolor{vhdlchar}{phase_reg_sel}           \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{22}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00253     
+00254 
+00255     
+00256 \textcolor{keyword}{    -- PLL}
+00257     \textcolor{vhdlchar}{spi_config_data_rev}       \textcolor{vhdlchar}{<=}  \textcolor{vhdllogic}{"00"} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{6} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}  \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{
+      mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}\textcolor{vhdlchar}{)}  \textcolor{vhdlchar}{&} \textcolor{vhdllogic}{"00000"} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{10} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}
+00258                          \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}  \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}\textcolor{keyword}{ --N}
+00259                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}
+00260                         
+00261                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{9} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}  \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}\textcolor{keyword}{ --M }
+00262                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{9} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}
+00263                         
+00264                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{10}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}\textcolor{keyword}{ --c0}
+00265                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{5} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{10}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}  \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}
+00266                          
+00267                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{6} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}\textcolor{keyword}{ --c1}
+00268                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}  \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} 
+00269                         
+00270                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}\textcolor{keyword}{ --c2}
+00271                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{9} \textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}  \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}
+00272                         
+00273                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{10}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{13}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}\textcolor{keyword}{ --c3}
+00274                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}  \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{13}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}  \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}
+00275   
+00276                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{14}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&}\textcolor{keyword}{ --c4}
+00277                         \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{13}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{14}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}  \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} ;
+00278                                 
+00279                                 
+00280 \textcolor{vhdlchar}{for\_lop} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{i} \textcolor{keywordflow}{in} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{to} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{143} \textcolor{keywordflow}{generate}
+00281    \textcolor{vhdlchar}{spi_config_data}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{i}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{spi_config_data_rev}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{143-}\textcolor{vhdlchar}{i}\textcolor{vhdlchar}{)};  
+00282 \textcolor{keywordflow}{end} \textcolor{keywordflow}{generate};
+00283                                                                     
+00284     \textcolor{vhdlchar}{spi_config_controls}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{mem}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00285 
+00286 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{txtspcfg\_arch};
+\end{DoxyCode}

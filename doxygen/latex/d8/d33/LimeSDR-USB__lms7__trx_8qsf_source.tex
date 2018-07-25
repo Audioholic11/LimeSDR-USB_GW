@@ -1,0 +1,943 @@
+\subsection{Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+lms7\+\_\+trx.qsf}
+\label{LimeSDR-USB__lms7__trx_8qsf_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+lms7\+\_\+trx.\+qsf@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+lms7\+\_\+trx.\+qsf}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{# -------------------------------------------------------------------------- #}
+00002 \textcolor{keyword}{#}
+00003 \textcolor{keyword}{# Copyright (C) 1991-2015 Altera Corporation. All rights reserved.}
+00004 \textcolor{keyword}{# Your use of Altera Corporation's design tools, logic functions}
+00005 \textcolor{keyword}{# and other software and tools, and its AMPP partner logic}
+00006 \textcolor{keyword}{# functions, and any output files from any of the foregoing}
+00007 \textcolor{keyword}{# (including device programming or simulation files), and any}
+00008 \textcolor{keyword}{# associated documentation or information are expressly subject}
+00009 \textcolor{keyword}{# to the terms and conditions of the Altera Program License}
+00010 \textcolor{keyword}{# Subscription Agreement, the Altera Quartus II License Agreement,}
+00011 \textcolor{keyword}{# the Altera MegaCore Function License Agreement, or other}
+00012 \textcolor{keyword}{# applicable license agreement, including, without limitation,}
+00013 \textcolor{keyword}{# that your use is for the sole purpose of programming logic}
+00014 \textcolor{keyword}{# devices manufactured by Altera and sold by Altera or its}
+00015 \textcolor{keyword}{# authorized distributors.  Please refer to the applicable}
+00016 \textcolor{keyword}{# agreement for further details.}
+00017 \textcolor{keyword}{#}
+00018 \textcolor{keyword}{# -------------------------------------------------------------------------- #}
+00019 \textcolor{keyword}{#}
+00020 \textcolor{keyword}{# Quartus II 64-Bit}
+00021 \textcolor{keyword}{# Version 15.0.0 Build 145 04/22/2015 SJ Web Edition}
+00022 \textcolor{keyword}{# Date created = 13:31:32  June 04, 2015}
+00023 \textcolor{keyword}{#}
+00024 \textcolor{keyword}{# -------------------------------------------------------------------------- #}
+00025 \textcolor{keyword}{#}
+00026 \textcolor{keyword}{# Notes:}
+00027 \textcolor{keyword}{#}
+00028 \textcolor{keyword}{# 1) The default values for assignments are stored in the file:}
+00029 \textcolor{keyword}{#       LimeSDR-USB\_lms7\_trx\_assignment\_defaults.qdf}
+00030 \textcolor{keyword}{#    If this file doesn't exist, see file:}
+00031 \textcolor{keyword}{#       assignment\_defaults.qdf}
+00032 \textcolor{keyword}{#}
+00033 \textcolor{keyword}{# 2) Altera recommends that you do not modify this file. This}
+00034 \textcolor{keyword}{#    file is updated automatically by the Quartus II software}
+00035 \textcolor{keyword}{#    and any changes you make may be lost or overwritten.}
+00036 \textcolor{keyword}{#}
+00037 \textcolor{keyword}{# -------------------------------------------------------------------------- #}
+00038 
+00039 set\_global\_assignment -name PRE\_FLOW\_SCRIPT\_FILE "quartus\_sh:gui.tcl"
+00040 set\_global\_assignment -name FAMILY "Cyclone IV E"
+00041 set\_global\_assignment -name DEVICE EP4CE40F23C8
+00042 set\_global\_assignment -name TOP\_LEVEL\_ENTITY lms7\_trx\_top
+00043 set\_global\_assignment -name ORIGINAL\_QUARTUS\_VERSION \textcolor{vhdllogic}{15}.\textcolor{vhdllogic}{0}.\textcolor{vhdllogic}{0}
+00044 set\_global\_assignment -name PROJECT\_CREATION\_TIME\_DATE "15:\textcolor{vhdllogic}{20}:\textcolor{vhdllogic}{53}  APRIL \textcolor{vhdllogic}{08}, 2016"
+00045 set\_global\_assignment -name LAST\_QUARTUS\_VERSION \textcolor{vhdllogic}{15}.\textcolor{vhdllogic}{1}.\textcolor{vhdllogic}{0}
+00046 set\_global\_assignment -name PROJECT\_OUTPUT\_DIRECTORY output\_files
+00047 set\_global\_assignment -name MIN\_CORE\_JUNCTION\_TEMP \textcolor{vhdllogic}{0}
+00048 set\_global\_assignment -name MAX\_CORE\_JUNCTION\_TEMP \textcolor{vhdllogic}{85}
+00049 set\_global\_assignment -name EDA\_SIMULATION\_TOOL "ModelSim-Altera (VHDL)"
+00050 set\_global\_assignment -name POWER\_PRESET\_COOLING\_SOLUTION "23 MM HEAT SINK \textcolor{keywordflow}{WITH} \textcolor{vhdllogic}{200} LFPM AIRFLOW"
+00051 set\_global\_assignment -name POWER\_BOARD\_THERMAL\_MODEL "NONE (CONSERVATIVE)"
+00052 set\_global\_assignment -name STRATIX\_DEVICE\_IO\_STANDARD "3.3-V LVCMOS"
+00053 set\_location\_assignment PIN\_R22 -to FX3\_DQ[15]
+00054 set\_location\_assignment PIN\_M21 -to FX3\_DQ[14]
+00055 set\_location\_assignment PIN\_M22 -to FX3\_DQ[13]
+00056 set\_location\_assignment PIN\_U19 -to FX3\_DQ[12]
+00057 set\_location\_assignment PIN\_U20 -to FX3\_DQ[11]
+00058 set\_location\_assignment PIN\_U21 -to FX3\_DQ[10]
+00059 set\_location\_assignment PIN\_U22 -to FX3\_DQ[9]
+00060 set\_location\_assignment PIN\_V21 -to FX3\_DQ[8]
+00061 set\_location\_assignment PIN\_V22 -to FX3\_DQ[7]
+00062 set\_location\_assignment PIN\_W20 -to FX3\_DQ[6]
+00063 set\_location\_assignment PIN\_W21 -to FX3\_DQ[5]
+00064 set\_location\_assignment PIN\_W22 -to FX3\_DQ[4]
+00065 set\_location\_assignment PIN\_Y21 -to FX3\_DQ[3]
+00066 set\_location\_assignment PIN\_Y22 -to FX3\_DQ[2]
+00067 set\_location\_assignment PIN\_AA21 -to FX3\_DQ[1]
+00068 set\_location\_assignment PIN\_M19 -to FX3\_DQ[0]
+00069 set\_location\_assignment PIN\_T21 -to FX3\_PCLK
+00070 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[15]
+00071 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[14]
+00072 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[13]
+00073 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[12]
+00074 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[11]
+00075 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[10]
+00076 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[9]
+00077 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[8]
+00078 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[7]
+00079 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[6]
+00080 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[5]
+00081 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[4]
+00082 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[3]
+00083 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[2]
+00084 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[1]
+00085 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[0]
+00086 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_PCLK
+00087 set\_location\_assignment PIN\_C6 -to LMS\_RESET
+00088 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_RESET
+00089 set\_location\_assignment PIN\_C3 -to LMS\_RXEN
+00090 set\_location\_assignment PIN\_B10 -to LMS\_TXEN
+00091 set\_global\_assignment -name ENABLE\_OCT\_DONE OFF
+00092 set\_global\_assignment -name ENABLE\_CONFIGURATION\_PINS OFF
+00093 set\_global\_assignment -name ENABLE\_BOOT\_SEL\_PIN OFF
+00094 set\_global\_assignment -name USE\_CONFIGURATION\_DEVICE \textcolor{keywordflow}{ON}
+00095 set\_global\_assignment -name CRC\_ERROR\_OPEN\_DRAIN OFF
+00096 set\_global\_assignment -name RESERVE\_ALL\_UNUSED\_PINS\_WEAK\_PULLUP "AS INPUT TRI-STATED"
+00097 set\_global\_assignment -name OUTPUT\_IO\_TIMING\_NEAR\_END\_VMEAS "HALF VCCIO" -rise
+00098 set\_global\_assignment -name OUTPUT\_IO\_TIMING\_NEAR\_END\_VMEAS "HALF VCCIO" -fall
+00099 set\_global\_assignment -name OUTPUT\_IO\_TIMING\_FAR\_END\_VMEAS "HALF \textcolor{keywordflow}{SIGNAL} SWING" -rise
+00100 set\_global\_assignment -name OUTPUT\_IO\_TIMING\_FAR\_END\_VMEAS "HALF \textcolor{keywordflow}{SIGNAL} SWING" -fall
+00101 set\_global\_assignment -name ON\_CHIP\_BITSTREAM\_DECOMPRESSION OFF
+00102 set\_global\_assignment -name OPTIMIZATION\_MODE "HIGH PERFORMANCE EFFORT"
+00103 set\_location\_assignment PIN\_K7 -to BRDG\_SPI\_FPGA\_SS
+00104 set\_location\_assignment PIN\_B2 -to BRDG\_SPI\_SCLK
+00105 set\_location\_assignment PIN\_B1 -to BRDG\_SPI\_MOSI
+00106 set\_location\_assignment PIN\_C1 -to BRDG\_SPI\_MISO
+00107 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to BRDG\_SPI\_FPGA\_SS
+00108 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to BRDG\_SPI\_MISO
+00109 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to BRDG\_SPI\_MOSI
+00110 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to BRDG\_SPI\_SCLK
+00111 set\_location\_assignment PIN\_T2 -to SI\_CLK0
+00112 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to SI\_CLK0
+00113 set\_location\_assignment PIN\_A13 -to LMS\_DIQ1\_D[11]
+00114 set\_location\_assignment PIN\_A14 -to LMS\_DIQ1\_D[10]
+00115 set\_location\_assignment PIN\_A15 -to LMS\_DIQ1\_D[9]
+00116 set\_location\_assignment PIN\_A16 -to LMS\_DIQ1\_D[8]
+00117 set\_location\_assignment PIN\_A17 -to LMS\_DIQ1\_D[7]
+00118 set\_location\_assignment PIN\_A18 -to LMS\_DIQ1\_D[6]
+00119 set\_location\_assignment PIN\_C13 -to LMS\_DIQ1\_D[5]
+00120 set\_location\_assignment PIN\_B13 -to LMS\_DIQ1\_D[4]
+00121 set\_location\_assignment PIN\_B14 -to LMS\_DIQ1\_D[3]
+00122 set\_location\_assignment PIN\_B15 -to LMS\_DIQ1\_D[2]
+00123 set\_location\_assignment PIN\_B16 -to LMS\_DIQ1\_D[1]
+00124 set\_location\_assignment PIN\_B17 -to LMS\_DIQ1\_D[0]
+00125 set\_location\_assignment PIN\_C4 -to LMS\_DIQ1\_IQSEL
+00126 set\_location\_assignment PIN\_A3 -to LMS\_DIQ2\_D[11]
+00127 set\_location\_assignment PIN\_A4 -to LMS\_DIQ2\_D[10]
+00128 set\_location\_assignment PIN\_A5 -to LMS\_DIQ2\_D[9]
+00129 set\_location\_assignment PIN\_A6 -to LMS\_DIQ2\_D[8]
+00130 set\_location\_assignment PIN\_A7 -to LMS\_DIQ2\_D[7]
+00131 set\_location\_assignment PIN\_A8 -to LMS\_DIQ2\_D[6]
+00132 set\_location\_assignment PIN\_A9 -to LMS\_DIQ2\_D[5]
+00133 set\_location\_assignment PIN\_A10 -to LMS\_DIQ2\_D[4]
+00134 set\_location\_assignment PIN\_B3 -to LMS\_DIQ2\_D[3]
+00135 set\_location\_assignment PIN\_B4 -to LMS\_DIQ2\_D[2]
+00136 set\_location\_assignment PIN\_B6 -to LMS\_DIQ2\_D[1]
+00137 set\_location\_assignment PIN\_B7 -to LMS\_DIQ2\_D[0]
+00138 set\_location\_assignment PIN\_C7 -to LMS\_DIQ2\_IQSEL2
+00139 set\_location\_assignment PIN\_B20 -to LMS\_FCLK1
+00140 set\_location\_assignment PIN\_E5 -to LMS\_FCLK2
+00141 set\_location\_assignment PIN\_G21 -to LMS\_MCLK1
+00142 set\_location\_assignment PIN\_B11 -to LMS\_MCLK2
+00143 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_TXEN
+00144 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_RXEN
+00145 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[5]
+00146 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_FCLK1
+00147 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[0]
+00148 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[1]
+00149 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[2]
+00150 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[3]
+00151 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[4]
+00152 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[6]
+00153 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[7]
+00154 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[8]
+00155 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[9]
+00156 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[10]
+00157 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_D[11]
+00158 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_FCLK2
+00159 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_IQSEL2
+00160 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ1\_IQSEL
+00161 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_MCLK2
+00162 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[0]
+00163 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[1]
+00164 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[2]
+00165 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[3]
+00166 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[4]
+00167 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[5]
+00168 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[6]
+00169 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[7]
+00170 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[8]
+00171 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[9]
+00172 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[10]
+00173 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_DIQ2\_D[11]
+00174 set\_location\_assignment PIN\_L6 -to FX3\_CTL0
+00175 set\_location\_assignment PIN\_L7 -to FX3\_CTL1
+00176 set\_location\_assignment PIN\_M1 -to FX3\_CTL2
+00177 set\_location\_assignment PIN\_M2 -to FX3\_CTL3
+00178 set\_location\_assignment PIN\_M3 -to FX3\_CTL4
+00179 set\_location\_assignment PIN\_M4 -to FX3\_CTL5
+00180 set\_location\_assignment PIN\_M6 -to FX3\_CTL6
+00181 set\_location\_assignment PIN\_M7 -to FX3\_CTL7
+00182 set\_location\_assignment PIN\_M8 -to FX3\_CTL8
+00183 set\_location\_assignment PIN\_N5 -to FX3\_CTL11
+00184 set\_location\_assignment PIN\_N6 -to FX3\_CTL12
+00185 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL0
+00186 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL1
+00187 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL2
+00188 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL3
+00189 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL4
+00190 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL5
+00191 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL6
+00192 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL7
+00193 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL8
+00194 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL11
+00195 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_CTL12
+00196 set\_location\_assignment PIN\_E1 -to FPGA\_LED2\_R
+00197 set\_location\_assignment PIN\_J4 -to FPGA\_LED2\_G
+00198 set\_location\_assignment PIN\_E3 -to FPGA\_LED1\_R
+00199 set\_location\_assignment PIN\_D2 -to FPGA\_LED1\_G
+00200 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to FPGA\_LED2\_R
+00201 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to FPGA\_LED2\_G
+00202 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to FPGA\_LED1\_R
+00203 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to FPGA\_LED1\_G
+00204 set\_location\_assignment PIN\_T17 -to EXT\_GND
+00205 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to EXT\_GND
+00206 set\_global\_assignment -name TRI\_STATE\_SPI\_PINS \textcolor{keywordflow}{ON}
+00207 set\_global\_assignment -name FORCE\_CONFIGURATION\_VCCIO \textcolor{keywordflow}{ON}
+00208 set\_global\_assignment -name RESERVE\_DATA0\_AFTER\_CONFIGURATION "USE AS REGULAR IO"
+00209 set\_global\_assignment -name RESERVE\_DATA1\_AFTER\_CONFIGURATION "USE AS REGULAR IO"
+00210 set\_global\_assignment -name RESERVE\_FLASH\_NCE\_AFTER\_CONFIGURATION "USE AS REGULAR IO"
+00211 set\_global\_assignment -name RESERVE\_DCLK\_AFTER\_CONFIGURATION "USE AS REGULAR IO"
+00212 set\_location\_assignment PIN\_J6 -to LM75\_OS
+00213 set\_location\_assignment PIN\_E4 -to FAN\_CTRL
+00214 set\_global\_assignment -name ENABLE\_SIGNALTAP OFF
+00215 set\_global\_assignment -name USE\_SIGNALTAP\_FILE signal\_tap/debug.stp
+00216 set\_location\_assignment PIN\_N16 -to FX3\_DQ[31]
+00217 set\_location\_assignment PIN\_N17 -to FX3\_DQ[30]
+00218 set\_location\_assignment PIN\_N18 -to FX3\_DQ[29]
+00219 set\_location\_assignment PIN\_N19 -to FX3\_DQ[28]
+00220 set\_location\_assignment PIN\_N20 -to FX3\_DQ[27]
+00221 set\_location\_assignment PIN\_N21 -to FX3\_DQ[26]
+00222 set\_location\_assignment PIN\_N22 -to FX3\_DQ[25]
+00223 set\_location\_assignment PIN\_P15 -to FX3\_DQ[24]
+00224 set\_location\_assignment PIN\_P16 -to FX3\_DQ[23]
+00225 set\_location\_assignment PIN\_M20 -to FX3\_DQ[22]
+00226 set\_location\_assignment PIN\_P21 -to FX3\_DQ[21]
+00227 set\_location\_assignment PIN\_P22 -to FX3\_DQ[20]
+00228 set\_location\_assignment PIN\_R18 -to FX3\_DQ[19]
+00229 set\_location\_assignment PIN\_R19 -to FX3\_DQ[18]
+00230 set\_location\_assignment PIN\_R20 -to FX3\_DQ[17]
+00231 set\_location\_assignment PIN\_R21 -to FX3\_DQ[16]
+00232 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[31]
+00233 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[30]
+00234 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[29]
+00235 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[28]
+00236 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[27]
+00237 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[26]
+00238 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[25]
+00239 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[24]
+00240 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[23]
+00241 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[22]
+00242 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[21]
+00243 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[20]
+00244 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[19]
+00245 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[18]
+00246 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[17]
+00247 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_DQ[16]
+00248 set\_global\_assignment -name POST\_FLOW\_SCRIPT\_FILE "quartus\_sh:gen\_prg\_files.tcl"
+00249 set\_location\_assignment PIN\_K8 -to FPGA\_SPI1\_SCLK
+00250 set\_location\_assignment PIN\_L8 -to FPGA\_SPI1\_MOSI
+00251 set\_location\_assignment PIN\_J3 -to FPGA\_SPI1\_DAC\_SS
+00252 set\_location\_assignment PIN\_J5 -to FPGA\_SPI1\_ADF\_SS
+00253 set\_location\_assignment PIN\_E6 -to FPGA\_SPI0\_SCLK
+00254 set\_location\_assignment PIN\_D7 -to FPGA\_SPI0\_MOSI
+00255 set\_location\_assignment PIN\_C8 -to FPGA\_SPI0\_MISO
+00256 set\_location\_assignment PIN\_D10 -to FPGA\_SPI0\_LMS\_SS
+00257 set\_location\_assignment PIN\_J2 -to ADF\_MUXOUT
+00258 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_odt[0]
+00259 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_odt[0]
+00260 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_clk[0]
+00261 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_clk[0]
+00262 set\_instance\_assignment -name PAD\_TO\_CORE\_DELAY \textcolor{vhdllogic}{0} -to DDR2\_1\_clk[0]
+00263 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_clk\_n[0]
+00264 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_clk\_n[0]
+00265 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_cs\_n[0]
+00266 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_cs\_n[0]
+00267 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_cke[0]
+00268 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_cke[0]
+00269 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[0]
+00270 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[0]
+00271 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[1]
+00272 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[1]
+00273 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[2]
+00274 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[2]
+00275 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[3]
+00276 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[3]
+00277 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[4]
+00278 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[4]
+00279 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[5]
+00280 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[5]
+00281 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[6]
+00282 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[6]
+00283 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[7]
+00284 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[7]
+00285 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[8]
+00286 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[8]
+00287 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[9]
+00288 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[9]
+00289 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[10]
+00290 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[10]
+00291 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[11]
+00292 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[11]
+00293 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_addr[12]
+00294 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_addr[12]
+00295 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_ba[0]
+00296 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_ba[0]
+00297 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_ba[1]
+00298 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_ba[1]
+00299 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_ba[2]
+00300 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_ba[2]
+00301 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_ras\_n
+00302 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_ras\_n
+00303 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_cas\_n
+00304 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_cas\_n
+00305 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_we\_n
+00306 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_1\_we\_n
+00307 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[0]
+00308 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[0]
+00309 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[1]
+00310 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[1]
+00311 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[2]
+00312 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[2]
+00313 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[3]
+00314 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[3]
+00315 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[4]
+00316 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[4]
+00317 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[5]
+00318 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[5]
+00319 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[6]
+00320 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[6]
+00321 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[7]
+00322 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[7]
+00323 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[8]
+00324 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[8]
+00325 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[9]
+00326 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[9]
+00327 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[10]
+00328 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[10]
+00329 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[11]
+00330 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[11]
+00331 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[12]
+00332 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[12]
+00333 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[13]
+00334 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[13]
+00335 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[14]
+00336 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[14]
+00337 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dq[15]
+00338 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dq[15]
+00339 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dqs[0]
+00340 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dqs[0]
+00341 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dqs[1]
+00342 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dqs[1]
+00343 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dm[0]
+00344 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dm[0]
+00345 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_1\_dm[1]
+00346 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_1\_dm[1]
+00347 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[0]
+00348 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[1]
+00349 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[2]
+00350 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[3]
+00351 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[4]
+00352 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[5]
+00353 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[6]
+00354 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[7]
+00355 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[8]
+00356 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[9]
+00357 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[10]
+00358 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[11]
+00359 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[12]
+00360 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[13]
+00361 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[14]
+00362 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dq[15]
+00363 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[0]
+00364 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[1]
+00365 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[2]
+00366 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[3]
+00367 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[4]
+00368 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[5]
+00369 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[6]
+00370 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[7]
+00371 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[8]
+00372 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[9]
+00373 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[10]
+00374 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[11]
+00375 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[12]
+00376 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[13]
+00377 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[14]
+00378 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dq[15]
+00379 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dqs[0]
+00380 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dqs[1]
+00381 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dqs[0]
+00382 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dqs[1]
+00383 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dm[0]
+00384 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_1\_dm[1]
+00385 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dm[0]
+00386 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_1\_dm[1]
+00387 set\_instance\_assignment -name CKN\_CK\_PAIR \textcolor{keywordflow}{ON} -from DDR2\_1\_clk\_n[0] -to DDR2\_1\_clk[0]
+00388 set\_location\_assignment PIN\_AA4 -to DDR2\_1\_dq[15]
+00389 set\_location\_assignment PIN\_U9 -to DDR2\_1\_dq[14]
+00390 set\_location\_assignment PIN\_Y7 -to DDR2\_1\_dq[13]
+00391 set\_location\_assignment PIN\_W8 -to DDR2\_1\_dq[12]
+00392 set\_location\_assignment PIN\_V8 -to DDR2\_1\_dq[11]
+00393 set\_location\_assignment PIN\_W7 -to DDR2\_1\_dq[10]
+00394 set\_location\_assignment PIN\_AA5 -to DDR2\_1\_dq[9]
+00395 set\_location\_assignment PIN\_W6 -to DDR2\_1\_dq[8]
+00396 set\_location\_assignment PIN\_Y10 -to DDR2\_1\_dq[7]
+00397 set\_location\_assignment PIN\_AA8 -to DDR2\_1\_dq[6]
+00398 set\_location\_assignment PIN\_W10 -to DDR2\_1\_dq[5]
+00399 set\_location\_assignment PIN\_V11 -to DDR2\_1\_dq[4]
+00400 set\_location\_assignment PIN\_AA9 -to DDR2\_1\_dq[3]
+00401 set\_location\_assignment PIN\_AB7 -to DDR2\_1\_dq[2]
+00402 set\_location\_assignment PIN\_AB8 -to DDR2\_1\_dq[1]
+00403 set\_location\_assignment PIN\_U10 -to DDR2\_1\_dq[0]
+00404 set\_location\_assignment PIN\_V10 -to DDR2\_1\_dqs[1]
+00405 set\_location\_assignment PIN\_AB9 -to DDR2\_1\_dqs[0]
+00406 set\_location\_assignment PIN\_V5 -to DDR2\_1\_dm[1]
+00407 set\_location\_assignment PIN\_AA7 -to DDR2\_1\_dm[0]
+00408 set\_location\_assignment PIN\_U7 -to DDR2\_1\_clk[0]
+00409 set\_location\_assignment PIN\_U8 -to DDR2\_1\_clk\_n[0]
+00410 set\_location\_assignment PIN\_T8 -to DDR2\_1\_addr[12]
+00411 set\_location\_assignment PIN\_W2 -to DDR2\_1\_addr[11]
+00412 set\_location\_assignment PIN\_Y6 -to DDR2\_1\_addr[10]
+00413 set\_location\_assignment PIN\_V7 -to DDR2\_1\_addr[9]
+00414 set\_location\_assignment PIN\_Y1 -to DDR2\_1\_addr[8]
+00415 set\_location\_assignment PIN\_AB5 -to DDR2\_1\_addr[7]
+00416 set\_location\_assignment PIN\_Y2 -to DDR2\_1\_addr[6]
+00417 set\_location\_assignment PIN\_AB3 -to DDR2\_1\_addr[5]
+00418 set\_location\_assignment PIN\_AA1 -to DDR2\_1\_addr[4]
+00419 set\_location\_assignment PIN\_V6 -to DDR2\_1\_addr[3]
+00420 set\_location\_assignment PIN\_Y3 -to DDR2\_1\_addr[2]
+00421 set\_location\_assignment PIN\_AA3 -to DDR2\_1\_addr[1]
+00422 set\_location\_assignment PIN\_W1 -to DDR2\_1\_addr[0]
+00423 set\_location\_assignment PIN\_V3 -to DDR2\_1\_ba[1]
+00424 set\_location\_assignment PIN\_V4 -to DDR2\_1\_ba[0]
+00425 set\_location\_assignment PIN\_T4 -to DDR2\_1\_cas\_n
+00426 set\_location\_assignment PIN\_R7 -to DDR2\_1\_cke[0]
+00427 set\_location\_assignment PIN\_R6 -to DDR2\_1\_cs\_n[0]
+00428 set\_location\_assignment PIN\_P6 -to DDR2\_1\_odt[0]
+00429 set\_location\_assignment PIN\_T5 -to DDR2\_1\_ras\_n
+00430 set\_location\_assignment PIN\_T7 -to DDR2\_1\_we\_n
+00431 set\_location\_assignment PIN\_V1 -to DDR2\_1\_ba[2]
+00432 set\_instance\_assignment -name WEAK\_PULL\_UP\_RESISTOR \textcolor{keywordflow}{ON} -to FPGA\_SPI1\_DAC\_SS
+00433 set\_global\_assignment -name SEARCH\_PATH "h:\(\backslash\)\(\backslash\)working\_dir\(\backslash\)\(\backslash\)altera\(\backslash\)\(\backslash\)limesdr-usb\(\backslash\)\(\backslash\)lms7\_trx\(\backslash\)\(\backslash\)symbols"
+00434 set\_global\_assignment -name SEARCH\_PATH symbols/
+00435 set\_location\_assignment PIN\_F16 -to TX2\_2\_LB\_SH
+00436 set\_location\_assignment PIN\_F11 -to TX2\_2\_LB\_L
+00437 set\_location\_assignment PIN\_H11 -to TX2\_2\_LB\_H
+00438 set\_location\_assignment PIN\_E15 -to TX2\_2\_LB\_AT
+00439 set\_location\_assignment PIN\_G15 -to TX1\_2\_LB\_SH
+00440 set\_location\_assignment PIN\_F14 -to TX1\_2\_LB\_L
+00441 set\_location\_assignment PIN\_F15 -to TX1\_2\_LB\_H
+00442 set\_location\_assignment PIN\_E16 -to TX1\_2\_LB\_AT
+00443 set\_location\_assignment PIN\_N7 -to FX3\_LED\_R\_LS
+00444 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_LED\_R\_LS
+00445 set\_location\_assignment PIN\_P2 -to FX3\_LED\_G\_LS
+00446 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to FX3\_LED\_G\_LS
+00447 set\_location\_assignment PIN\_G5 -to FX3\_LED\_G
+00448 set\_location\_assignment PIN\_H5 -to FX3\_LED\_R
+00449 set\_location\_assignment PIN\_H17 -to HW\_VER[3]
+00450 set\_location\_assignment PIN\_F20 -to HW\_VER[0]
+00451 set\_location\_assignment PIN\_F19 -to HW\_VER[1]
+00452 set\_location\_assignment PIN\_G18 -to HW\_VER[2]
+00453 set\_instance\_assignment -name WEAK\_PULL\_UP\_RESISTOR \textcolor{keywordflow}{ON} -to HW\_VER[3]
+00454 set\_instance\_assignment -name WEAK\_PULL\_UP\_RESISTOR \textcolor{keywordflow}{ON} -to HW\_VER[0]
+00455 set\_instance\_assignment -name WEAK\_PULL\_UP\_RESISTOR \textcolor{keywordflow}{ON} -to HW\_VER[1]
+00456 set\_instance\_assignment -name WEAK\_PULL\_UP\_RESISTOR \textcolor{keywordflow}{ON} -to HW\_VER[2]
+00457 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_odt[0]
+00458 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_odt[0]
+00459 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_clk[0]
+00460 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_clk[0]
+00461 set\_instance\_assignment -name PAD\_TO\_CORE\_DELAY \textcolor{vhdllogic}{0} -to DDR2\_2\_clk[0]
+00462 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_clk\_n[0]
+00463 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_clk\_n[0]
+00464 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_cs\_n[0]
+00465 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_cs\_n[0]
+00466 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_cke[0]
+00467 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_cke[0]
+00468 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[0]
+00469 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[0]
+00470 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[1]
+00471 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[1]
+00472 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[2]
+00473 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[2]
+00474 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[3]
+00475 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[3]
+00476 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[4]
+00477 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[4]
+00478 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[5]
+00479 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[5]
+00480 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[6]
+00481 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[6]
+00482 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[7]
+00483 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[7]
+00484 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[8]
+00485 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[8]
+00486 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[9]
+00487 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[9]
+00488 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[10]
+00489 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[10]
+00490 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[11]
+00491 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[11]
+00492 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_addr[12]
+00493 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_addr[12]
+00494 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_ba[0]
+00495 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_ba[0]
+00496 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_ba[1]
+00497 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_ba[1]
+00498 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_ba[2]
+00499 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_ba[2]
+00500 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_ras\_n
+00501 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_ras\_n
+00502 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_cas\_n
+00503 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_cas\_n
+00504 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_we\_n
+00505 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to DDR2\_2\_we\_n
+00506 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[0]
+00507 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[0]
+00508 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[1]
+00509 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[1]
+00510 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[2]
+00511 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[2]
+00512 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[3]
+00513 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[3]
+00514 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[4]
+00515 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[4]
+00516 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[5]
+00517 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[5]
+00518 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[6]
+00519 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[6]
+00520 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[7]
+00521 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[7]
+00522 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[8]
+00523 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[8]
+00524 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[9]
+00525 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[9]
+00526 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[10]
+00527 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[10]
+00528 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[11]
+00529 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[11]
+00530 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[12]
+00531 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[12]
+00532 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[13]
+00533 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[13]
+00534 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[14]
+00535 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[14]
+00536 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dq[15]
+00537 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dq[15]
+00538 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dqs[0]
+00539 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dqs[0]
+00540 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dqs[1]
+00541 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dqs[1]
+00542 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dm[0]
+00543 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dm[0]
+00544 set\_instance\_assignment -name IO\_STANDARD "SSTL-18 CLASS I" -to DDR2\_2\_dm[1]
+00545 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW 12MA -to DDR2\_2\_dm[1]
+00546 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[0]
+00547 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[1]
+00548 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[2]
+00549 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[3]
+00550 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[4]
+00551 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[5]
+00552 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[6]
+00553 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[7]
+00554 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[8]
+00555 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[9]
+00556 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[10]
+00557 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[11]
+00558 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[12]
+00559 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[13]
+00560 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[14]
+00561 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dq[15]
+00562 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[0]
+00563 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[1]
+00564 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[2]
+00565 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[3]
+00566 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[4]
+00567 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[5]
+00568 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[6]
+00569 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[7]
+00570 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[8]
+00571 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[9]
+00572 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[10]
+00573 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[11]
+00574 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[12]
+00575 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[13]
+00576 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[14]
+00577 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dq[15]
+00578 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dqs[0]
+00579 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dqs[1]
+00580 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dqs[0]
+00581 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dqs[1]
+00582 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dm[0]
+00583 set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG FLEXIBLE\_TIMING -to DDR2\_2\_dm[1]
+00584 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dm[0]
+00585 set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP \textcolor{vhdllogic}{3078784} -to DDR2\_2\_dm[1]
+00586 set\_instance\_assignment -name CKN\_CK\_PAIR \textcolor{keywordflow}{ON} -from DDR2\_2\_clk\_n[0] -to DDR2\_2\_clk[0]
+00587 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to SI\_CLK1
+00588 set\_location\_assignment PIN\_AA12 -to SI\_CLK1
+00589 set\_location\_assignment PIN\_T9 -to DDR2\_2\_we\_n
+00590 set\_location\_assignment PIN\_T11 -to DDR2\_2\_ras\_n
+00591 set\_location\_assignment PIN\_T12 -to DDR2\_2\_odt[0]
+00592 set\_location\_assignment PIN\_V13 -to DDR2\_2\_dqs[0]
+00593 set\_location\_assignment PIN\_Y13 -to DDR2\_2\_dqs[1]
+00594 set\_location\_assignment PIN\_W15 -to DDR2\_2\_dq[0]
+00595 set\_location\_assignment PIN\_V14 -to DDR2\_2\_dq[1]
+00596 set\_location\_assignment PIN\_AB20 -to DDR2\_2\_dq[2]
+00597 set\_location\_assignment PIN\_AB18 -to DDR2\_2\_dq[3]
+00598 set\_location\_assignment PIN\_T15 -to DDR2\_2\_dq[4]
+00599 set\_location\_assignment PIN\_W17 -to DDR2\_2\_dq[5]
+00600 set\_location\_assignment PIN\_AB16 -to DDR2\_2\_dq[6]
+00601 set\_location\_assignment PIN\_V15 -to DDR2\_2\_dq[7]
+00602 set\_location\_assignment PIN\_W13 -to DDR2\_2\_dq[8]
+00603 set\_location\_assignment PIN\_AB13 -to DDR2\_2\_dq[9]
+00604 set\_location\_assignment PIN\_AA15 -to DDR2\_2\_dq[10]
+00605 set\_location\_assignment PIN\_AB14 -to DDR2\_2\_dq[11]
+00606 set\_location\_assignment PIN\_AA14 -to DDR2\_2\_dq[12]
+00607 set\_location\_assignment PIN\_AB15 -to DDR2\_2\_dq[13]
+00608 set\_location\_assignment PIN\_AA13 -to DDR2\_2\_dq[14]
+00609 set\_location\_assignment PIN\_U12 -to DDR2\_2\_dq[15]
+00610 set\_location\_assignment PIN\_AA16 -to DDR2\_2\_dm[0]
+00611 set\_location\_assignment PIN\_AA10 -to DDR2\_2\_dm[1]
+00612 set\_location\_assignment PIN\_Y8 -to DDR2\_2\_cs\_n[0]
+00613 set\_location\_assignment PIN\_R15 -to DDR2\_2\_clk\_n[0]
+00614 set\_location\_assignment PIN\_R14 -to DDR2\_2\_clk[0]
+00615 set\_location\_assignment PIN\_AB10 -to DDR2\_2\_cke[0]
+00616 set\_location\_assignment PIN\_T10 -to DDR2\_2\_cas\_n
+00617 set\_location\_assignment PIN\_U13 -to DDR2\_2\_ba[0]
+00618 set\_location\_assignment PIN\_T13 -to DDR2\_2\_ba[1]
+00619 set\_location\_assignment PIN\_V2 -to DDR2\_2\_ba[2]
+00620 set\_location\_assignment PIN\_U15 -to DDR2\_2\_addr[0]
+00621 set\_location\_assignment PIN\_AA17 -to DDR2\_2\_addr[1]
+00622 set\_location\_assignment PIN\_T14 -to DDR2\_2\_addr[2]
+00623 set\_location\_assignment PIN\_Y17 -to DDR2\_2\_addr[3]
+00624 set\_location\_assignment PIN\_T16 -to DDR2\_2\_addr[4]
+00625 set\_location\_assignment PIN\_P7 -to DDR2\_2\_addr[5]
+00626 set\_location\_assignment PIN\_U17 -to DDR2\_2\_addr[6]
+00627 set\_location\_assignment PIN\_N8 -to DDR2\_2\_addr[7]
+00628 set\_location\_assignment PIN\_R16 -to DDR2\_2\_addr[8]
+00629 set\_location\_assignment PIN\_AA20 -to DDR2\_2\_addr[9]
+00630 set\_location\_assignment PIN\_AB17 -to DDR2\_2\_addr[10]
+00631 set\_location\_assignment PIN\_U16 -to DDR2\_2\_addr[11]
+00632 set\_location\_assignment PIN\_U14 -to DDR2\_2\_addr[12]
+00633 set\_location\_assignment PIN\_AB12 -to SI\_CLK2
+00634 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to SI\_CLK2
+00635 set\_location\_assignment PIN\_U1 -to BOM\_VER[2]
+00636 set\_location\_assignment PIN\_U2 -to BOM\_VER[1]
+00637 set\_location\_assignment PIN\_R2 -to BOM\_VER[0]
+00638 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to BOM\_VER[0]
+00639 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to BOM\_VER[1]
+00640 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to BOM\_VER[2]
+00641 set\_location\_assignment PIN\_B12 -to LMK\_CLK
+00642 set\_location\_assignment PIN\_T22 -to SI\_CLK3
+00643 set\_location\_assignment PIN\_G1 -to SI\_CLK5
+00644 set\_location\_assignment PIN\_AA11 -to SI\_CLK6
+00645 set\_location\_assignment PIN\_AB11 -to SI\_CLK7
+00646 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to SI\_CLK3
+00647 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to SI\_CLK7
+00648 set\_instance\_assignment -name IO\_STANDARD "1.\textcolor{vhdllogic}{8} V" -to SI\_CLK6
+00649 set\_global\_assignment -name SEED \textcolor{vhdllogic}{1}
+00650 set\_global\_assignment -name SYNCHRONIZER\_IDENTIFICATION AUTO
+00651 set\_location\_assignment PIN\_B18 -to LMS\_CORE\_LDO\_EN
+00652 set\_location\_assignment PIN\_B9 -to LMS\_TXNRX1
+00653 set\_location\_assignment PIN\_B8 -to LMS\_TXNRX2
+00654 set\_location\_assignment PIN\_J7 -to FPGA\_I2C\_SDA
+00655 set\_location\_assignment PIN\_H7 -to FPGA\_I2C\_SCL
+00656 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to FPGA\_I2C\_SDA
+00657 set\_instance\_assignment -name IO\_STANDARD "3.3-V LVCMOS" -to FPGA\_I2C\_SCL
+00658 set\_instance\_assignment -name WEAK\_PULL\_UP\_RESISTOR \textcolor{keywordflow}{ON} -to FPGA\_I2C\_SDA
+00659 set\_instance\_assignment -name WEAK\_PULL\_UP\_RESISTOR \textcolor{keywordflow}{ON} -to FPGA\_I2C\_SCL
+00660 set\_location\_assignment PIN\_B22 -to PWR\_SRC
+00661 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to PWR\_SRC
+00662 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_CORE\_LDO\_EN
+00663 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMK\_CLK
+00664 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to TX1\_2\_LB\_AT
+00665 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to TX1\_2\_LB\_H
+00666 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to TX1\_2\_LB\_L
+00667 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to TX1\_2\_LB\_SH
+00668 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to TX2\_2\_LB\_AT
+00669 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to TX2\_2\_LB\_L
+00670 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to TX2\_2\_LB\_SH
+00671 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_TXNRX2
+00672 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_TXNRX1
+00673 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to TX2\_2\_LB\_H
+00674 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to FPGA\_SPI0\_LMS\_SS
+00675 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to FPGA\_SPI0\_MISO
+00676 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to FPGA\_SPI0\_MOSI
+00677 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to FPGA\_SPI0\_SCLK
+00678 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_IQSEL2
+00679 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[0]
+00680 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[1]
+00681 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[2]
+00682 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[3]
+00683 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[4]
+00684 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[5]
+00685 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[6]
+00686 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[7]
+00687 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[8]
+00688 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[9]
+00689 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[10]
+00690 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_DIQ2\_D[11]
+00691 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MINIMUM CURRENT" -to LMS\_MCLK2
+00692 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[11]
+00693 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[10]
+00694 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[9]
+00695 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[8]
+00696 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[7]
+00697 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[6]
+00698 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[5]
+00699 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[4]
+00700 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[3]
+00701 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[2]
+00702 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[1]
+00703 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_D[0]
+00704 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_DIQ1\_IQSEL
+00705 set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT" -to LMS\_FCLK1
+00706 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to LMS\_MCLK1
+00707 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to HW\_VER[0]
+00708 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to HW\_VER[1]
+00709 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to HW\_VER[2]
+00710 set\_instance\_assignment -name IO\_STANDARD "2.\textcolor{vhdllogic}{5} V" -to HW\_VER[3]
+00711 set\_location\_assignment PIN\_H8 -to FPGA\_GPIO[0]
+00712 set\_location\_assignment PIN\_H6 -to FPGA\_GPIO[1]
+00713 set\_location\_assignment PIN\_H2 -to FPGA\_GPIO[2]
+00714 set\_location\_assignment PIN\_H1 -to FPGA\_GPIO[3]
+00715 set\_location\_assignment PIN\_G4 -to FPGA\_GPIO[4]
+00716 set\_location\_assignment PIN\_G3 -to FPGA\_GPIO[5]
+00717 set\_location\_assignment PIN\_F2 -to FPGA\_GPIO[6]
+00718 set\_location\_assignment PIN\_F1 -to FPGA\_GPIO[7]
+00719 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to LMS\_DIQ1\_D[0]
+00720 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{0} -to LMS\_DIQ1\_D[1]
+00721 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to LMS\_DIQ1\_D[2]
+00722 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to LMS\_DIQ1\_D[3]
+00723 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to LMS\_DIQ1\_D[4]
+00724 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to LMS\_DIQ1\_D[6]
+00725 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{0} -to LMS\_DIQ1\_D[7]
+00726 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{0} -to LMS\_DIQ1\_D[8]
+00727 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to LMS\_DIQ1\_D[9]
+00728 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to LMS\_DIQ1\_D[10]
+00729 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{0} -to LMS\_DIQ1\_D[11]
+00730 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[0]
+00731 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[1]
+00732 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[2]
+00733 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[3]
+00734 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[4]
+00735 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[5]
+00736 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[6]
+00737 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[7]
+00738 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[8]
+00739 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[9]
+00740 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[10]
+00741 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[11]
+00742 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[12]
+00743 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[13]
+00744 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[14]
+00745 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[15]
+00746 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[16]
+00747 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[17]
+00748 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[18]
+00749 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[19]
+00750 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[20]
+00751 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[21]
+00752 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[22]
+00753 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[23]
+00754 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[24]
+00755 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[25]
+00756 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[26]
+00757 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[27]
+00758 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[28]
+00759 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[29]
+00760 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[30]
+00761 set\_instance\_assignment -name CLOCK\_TO\_OUTPUT\_DELAY \textcolor{vhdllogic}{1} -to FX3\_DQ[31]
+00762 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[0]
+00763 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[1]
+00764 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[2]
+00765 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[3]
+00766 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[4]
+00767 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[5]
+00768 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[6]
+00769 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[7]
+00770 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[8]
+00771 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[9]
+00772 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[10]
+00773 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[11]
+00774 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[12]
+00775 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[13]
+00776 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[14]
+00777 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[15]
+00778 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[16]
+00779 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[17]
+00780 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[18]
+00781 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[19]
+00782 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[20]
+00783 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[21]
+00784 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[22]
+00785 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[23]
+00786 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[24]
+00787 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[25]
+00788 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[26]
+00789 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[27]
+00790 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[28]
+00791 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[29]
+00792 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[30]
+00793 set\_instance\_assignment -name FAST\_OUTPUT\_REGISTER \textcolor{keywordflow}{ON} -to FX3\_DQ[31]
+00794 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/smpl\_cmp/synth/smpl\_cmp.vhd
+00795 set\_global\_assignment -name VHDL\_FILE src/dyn\_ps/synth/pll\_ps\_top.vhd
+00796 set\_global\_assignment -name VHDL\_FILE src/dyn\_ps/synth/pll\_ps\_fsm.vhd
+00797 set\_global\_assignment -name VHDL\_FILE src/dyn\_ps/synth/pll\_ps.vhd
+00798 set\_global\_assignment -name QIP\_FILE lms\_ctr/synthesis/lms\_ctr.qip
+00799 set\_global\_assignment -name SDC\_FILE FX3\_timing.sdc
+00800 set\_global\_assignment -name SDC\_FILE lms7\_trx\_timing.sdc
+00801 set\_global\_assignment -name QIP\_FILE ip/ddr2/ddr2.qip
+00802 set\_global\_assignment -name VHDL\_FILE src/general/general\_pkg.vhd
+00803 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/pulse\_gen/synth/pulse\_gen.vhd
+00804 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/fifo2diq/synth/txiq\_ctrl.vhd
+00805 set\_global\_assignment -name VHDL\_FILE src/tx\_pll\_top/synth/tx\_pll\_top.vhd
+00806 set\_global\_assignment -name VHDL\_FILE src/rx\_pll\_top/synth/rx\_pll\_top.vhd
+00807 set\_global\_assignment -name VHDL\_FILE src/altera\_inst/lms7002\_ddout.vhd
+00808 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/handshake\_sync/synth/handshake\_sync.vhd
+00809 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/tx\_path/synth/tx\_path\_top.vhd
+00810 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/tx\_path/synth/sync\_fifo\_rw.vhd
+00811 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/packets2data/synth/packets2data\_top.vhd
+00812 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/packets2data/synth/packets2data.vhd
+00813 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/packets2data/synth/p2d\_wr\_fsm.vhd
+00814 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/packets2data/synth/p2d\_sync\_fsm.vhd
+00815 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/packets2data/synth/p2d\_rd\_fsm.vhd
+00816 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/packets2data/synth/p2d\_clr\_fsm.vhd
+00817 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/fifo2diq/synth/txiq.vhd
+00818 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/fifo2diq/synth/fifo2diq.vhd
+00819 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/bit\_unpack/synth/unpack\_64\_to\_64.vhd
+00820 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/bit\_unpack/synth/unpack\_64\_to\_56.vhd
+00821 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/bit\_unpack/synth/unpack\_64\_to\_48.vhd
+00822 set\_global\_assignment -name VHDL\_FILE src/tx\_path\_top/bit\_unpack/synth/bit\_unpack\_64.vhd
+00823 set\_global\_assignment -name VHDL\_FILE src/general/bus\_sync\_reg.vhd
+00824 set\_global\_assignment -name VHDL\_FILE src/altera\_inst/lpm\_cnt\_inst.vhd
+00825 set\_global\_assignment -name VHDL\_FILE src/altera\_inst/lms7002\_ddin.vhd
+00826 set\_global\_assignment -name VHDL\_FILE src/altera\_inst/fifo\_inst.vhd
+00827 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/smpl\_cnt/synth/smpl\_cnt.vhd
+00828 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/rx\_path/synth/rx\_path\_top.vhd
+00829 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/diq2fifo/synth/test\_data\_dd.vhd
+00830 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/diq2fifo/synth/rxiq\_siso\_sdr.vhd
+00831 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/diq2fifo/synth/rxiq\_siso\_ddr.vhd
+00832 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/diq2fifo/synth/rxiq\_siso.vhd
+00833 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/diq2fifo/synth/rxiq\_pulse\_ddr.vhd
+00834 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/diq2fifo/synth/rxiq\_mimo\_ddr.vhd
+00835 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/diq2fifo/synth/rxiq\_mimo.vhd
+00836 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/diq2fifo/synth/rxiq.vhd
+00837 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/diq2fifo/synth/diq2fifo.vhd
+00838 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/data2packets/synth/data2packets\_top.vhd
+00839 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/data2packets/synth/data2packets\_fsm.vhd
+00840 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/data2packets/synth/data2packets.vhd
+00841 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/bit\_pack/synth/pack\_56\_to\_64.vhd
+00842 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/bit\_pack/synth/pack\_48\_to\_64.vhd
+00843 set\_global\_assignment -name VHDL\_FILE src/rx\_path\_top/bit\_pack/synth/bit\_pack.vhd
+00844 set\_global\_assignment -name VHDL\_FILE src/general/gpio\_ctrl\_top.vhd
+00845 set\_global\_assignment -name VHDL\_FILE src/txiqmux/synth/txiqmux.vhd
+00846 set\_global\_assignment -name VHDL\_FILE src/txiqmux/synth/txiq\_tst\_ptrn.vhd
+00847 set\_global\_assignment -name VHDL\_FILE src/general/busy\_delay.vhd
+00848 set\_global\_assignment -name QIP\_FILE software/lms\_ctr\_app/mem\_init/meminit.qip
+00849 set\_global\_assignment -name VHDL\_FILE src/nios\_cpu/nios\_cpu.vhd
+00850 set\_global\_assignment -name VHDL\_FILE src/fx3/slaveFIFO5b/slaveFIFO5b.vhd
+00851 set\_global\_assignment -name VHDL\_FILE src/fx3/slaveFIFO5b/FX3\_slaveFIFO5b\_top.vhd
+00852 set\_global\_assignment -name QIP\_FILE ip/clkctrl/clkctrl/synthesis/clkctrl.qip
+00853 set\_global\_assignment -name VHDL\_FILE src/general/FX3\_LED\_ctrl.vhd
+00854 set\_global\_assignment -name VHDL\_FILE src/revision/revision.vhd
+00855 set\_global\_assignment -name QIP\_FILE ip/ddr2\_traffic\_gen/ddr2\_traffic\_gen/synthesis/ddr2\_traffic\_gen.qip
+00856 set\_global\_assignment -name VHDL\_FILE src/general/rstn\_pulse.vhd
+00857 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/wfm\_wcmd\_fsm.vhd
+00858 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/wfm\_rcmd\_fsm.vhd
+00859 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/wfm\_player\_top.vhd
+00860 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/wfm\_player.vhd
+00861 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/wfm\_pct\_gen.vhd
+00862 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/pct\_payload\_extrct.vhd
+00863 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/ddr2\_data\_check.vhd
+00864 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/LFSR.vhd
+00865 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/ddr2\_cmdfifo\_tst.vhd
+00866 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/DDR2\_ctrl\_top.vhd
+00867 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/DDR2\_arb.vhd
+00868 set\_global\_assignment -name VHDL\_FILE src/spi/pllcfg.vhd
+00869 set\_global\_assignment -name VHDL\_FILE src/testing/pkt\_tester.vhd
+00870 set\_global\_assignment -name VHDL\_FILE src/general/my\_busmux.vhd
+00871 set\_global\_assignment -name VHDL\_FILE src/reg\_phase\_shift/simple\_reg.vhd
+00872 set\_global\_assignment -name VHDL\_FILE src/reg\_phase\_shift/phase\_shift.vhd
+00873 set\_global\_assignment -name QIP\_FILE ip/pll\_reconfig\_module/pll\_reconfig\_module.qip
+00874 set\_global\_assignment -name VHDL\_FILE src/data\_manipulation/decompress.vhd
+00875 set\_global\_assignment -name VHDL\_FILE src/wfm\_ram\_buffer/sl\_ctrl.vhd
+00876 set\_global\_assignment -name VHDL\_FILE src/pll\_reconfig\_ctrl/config\_ctrl.vhd
+00877 set\_global\_assignment -name VHDL\_FILE src/spi/miso\_mux.vhd
+00878 set\_global\_assignment -name VHDL\_FILE src/spi/mem\_package.vhd
+00879 set\_global\_assignment -name VHDL\_FILE src/spi/mcfg32wm\_fsm.vhd
+00880 set\_global\_assignment -name VHDL\_FILE src/spi/mcfg\_components.vhd
+00881 set\_global\_assignment -name VHDL\_FILE src/fx3/slaveFIFO2b\_stream.vhd
+00882 set\_global\_assignment -name VHDL\_FILE src/general/alive.vhd
+00883 set\_global\_assignment -name BDF\_FILE lms7\_trx\_top.bdf
+00884 set\_global\_assignment -name QIP\_FILE ip/ddo/ddrox1.qip
+00885 set\_global\_assignment -name QIP\_FILE ip/pll/pll.qip
+00886 set\_global\_assignment -name VHDL\_FILE src/general/synchronizer.vhd
+00887 set\_global\_assignment -name QIP\_FILE ip/fpga\_pll/fpga\_pll.qip
+00888 set\_global\_assignment -name VHDL\_FILE src/general/capture\_signal.vhd
+00889 set\_global\_assignment -name VHDL\_FILE src/general/bus\_synch.vhd
+00890 set\_global\_assignment -name BDF\_FILE symbols/rx\_synchronizers.bdf
+00891 set\_global\_assignment -name BDF\_FILE symbols/tx\_synchronizers.bdf
+00892 set\_global\_assignment -name VHDL\_FILE src/testing/fx3\_fifo\_data.vhd
+00893 set\_global\_assignment -name VHDL\_FILE src/pll\_reconfig\_ctrl/pll\_reconfig\_status.vhd
+00894 set\_global\_assignment -name VHDL\_FILE src/spi/pllcfg\_top.vhd
+00895 set\_global\_assignment -name VHDL\_FILE src/spi/fpgacfg.vhd
+00896 set\_global\_assignment -name VHDL\_FILE src/general/my\_sw.vhd
+00897 set\_global\_assignment -name SIGNALTAP\_FILE signal\_tap/debug.stp
+00898 set\_global\_assignment -name VHDL\_FILE src/tx\_modules/rd\_tx\_fifo.vhd
+00899 set\_global\_assignment -name VHDL\_FILE src/self\_test/ddr2\_tester.vhd
+00900 set\_global\_assignment -name VHDL\_FILE src/self\_test/tstcfg.vhd
+00901 set\_global\_assignment -name VHDL\_FILE src/general/FPGA\_LED1\_cntrl.vhd
+00902 set\_global\_assignment -name VHDL\_FILE src/general/FPGA\_LED2\_ctrl.vhd
+00903 set\_global\_assignment -name VHDL\_FILE src/self\_test/clock\_test.vhd
+00904 set\_global\_assignment -name VHDL\_FILE src/self\_test/clk\_no\_ref\_test.vhd
+00905 set\_global\_assignment -name VHDL\_FILE src/self\_test/clk\_with\_ref\_test.vhd
+00906 set\_global\_assignment -name VHDL\_FILE src/self\_test/singl\_clk\_with\_ref\_test.vhd
+00907 set\_global\_assignment -name VHDL\_FILE src/self\_test/transition\_count.vhd
+00908 set\_global\_assignment -name QIP\_FILE ip/txpll/txpll.qip
+00909 set\_global\_assignment -name VHDL\_FILE src/stream/stream\_switch.vhd
+00910 set\_global\_assignment -name BDF\_FILE symbols/pll\_block\_rx.bdf
+00911 set\_global\_assignment -name VHDL\_FILE src/general/sync\_reg.vhd
+00912 set\_global\_assignment -name VHDL\_FILE src/general/gpio\_ctrl.vhd
+00913 set\_global\_assignment -name VHDL\_FILE src/spi/periphcfg.vhd
+00914 set\_global\_assignment -name VERILOG\_FILE src/gpio\_chirp\_sync/gpio\_chirp\_sync\_top.v
+00915 set\_global\_assignment -name VERILOG\_FILE src/gpio\_chirp\_sync/counter.v
+00916 set\_global\_assignment -name VERILOG\_FILE src/gpio\_chirp\_sync/SM\_2.v
+00917 set\_global\_assignment -name VERILOG\_FILE src/gpio\_chirp\_sync/timern.v
+00918 set\_global\_assignment -name VERILOG\_FILE src/gpio\_chirp\_sync/SM.v
+00919 set\_global\_assignment -name VHDL\_FILE src/gpio\_chirp\_sync/gpio\_chirp\_sync\_top.vhd
+00920 set\_global\_assignment -name VERILOG\_FILE src/gpio\_chirp\_sync/gpio\_sync\_FSM.v
+00921 set\_global\_assignment -name EDA\_OUTPUT\_DATA\_FORMAT VHDL -section\_id eda\_simulation
+00922 set\_global\_assignment -name EDA\_USER\_COMPILED\_SIMULATION\_LIBRARY\_DIRECTORY \textcolor{keyword}{"<None>"} -section\_id 
+      eda\_simulation
+00923 set\_global\_assignment -name EDA\_GENERATE\_FUNCTIONAL\_NETLIST OFF -section\_id eda\_simulation
+00924 set\_global\_assignment -name EDA\_TEST\_BENCH\_ENABLE\_STATUS COMMAND\_MACRO\_MODE -section\_id eda\_simulation
+00925 set\_global\_assignment -name EDA\_SIMULATION\_RUN\_SCRIPT src/rx\_path\_top/rx\_path/compile.tcl -section\_id 
+      eda\_simulation
+00926 set\_global\_assignment -name EDA\_TEST\_BENCH\_NAME rx\_path\_top\_tb -section\_id eda\_simulation
+00927 set\_global\_assignment -name EDA\_DESIGN\_INSTANCE\_NAME NA -section\_id rx\_path\_top\_tb
+00928 set\_global\_assignment -name EDA\_TEST\_BENCH\_MODULE\_NAME rx\_path\_top\_tb -section\_id rx\_path\_top\_tb
+00929 set\_global\_assignment -name EDA\_NATIVELINK\_SIMULATION\_TEST\_BENCH rx\_path\_top\_tb -section\_id eda\_simulation
+00930 set\_global\_assignment -name EDA\_TEST\_BENCH\_FILE src/rx\_path\_top/rx\_path/sim/rx\_path\_top\_tb.vhd -section\_id 
+      rx\_path\_top\_tb
+00931 set\_global\_assignment -name PARTITION\_NETLIST\_TYPE SOURCE -section\_id Top
+00932 set\_global\_assignment -name PARTITION\_FITTER\_PRESERVATION\_LEVEL PLACEMENT\_AND\_ROUTING -section\_id Top
+00933 set\_global\_assignment -name PARTITION\_COLOR \textcolor{vhdllogic}{16764057} -section\_id Top
+00934 set\_global\_assignment -name VHDL\_FILE src/gpio\_chirp\_sync/gpio\_chirp\_sync\_FSM.vhd
+00935 set\_instance\_assignment -name PARTITION\_HIERARCHY root\_partition -to | -section\_id Top
+\end{DoxyCode}

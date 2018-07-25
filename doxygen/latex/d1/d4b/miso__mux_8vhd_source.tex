@@ -1,0 +1,51 @@
+\subsection{miso\+\_\+mux.\+vhd}
+\label{miso__mux_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/miso\+\_\+mux.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/miso\+\_\+mux.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    miso\_mux.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: mux for spi miso signal}
+00004 \textcolor{keyword}{-- DATE:    Feb 13, 2014}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }miso_mux \textcolor{keywordflow}{is}
+00016   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00017 \textcolor{keyword}{        --input ports }
+00018         \textcolor{vhdlchar}{fpga_miso}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00019         \textcolor{vhdlchar}{ext_miso}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020           \textcolor{vhdlchar}{fpga_cs}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00021           \textcolor{vhdlchar}{ext_cs}                \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00022 
+00023 \textcolor{keyword}{        --output ports }
+00024         \textcolor{vhdlchar}{out_miso}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00025         \textcolor{vhdlchar}{)};
+00026 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{miso\_mux};
+00027 
+00028 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00029 \textcolor{keyword}{-- Architecture}
+00030 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00031 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} miso_mux is
+00032 \textcolor{keyword}{--declare signals,  components here}
+00033 
+00034 
+00035   
+00036 \textcolor{vhdlkeyword}{begin}
+00037 
+00038 \textcolor{vhdlchar}{out_miso}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fpga_miso} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fpga_cs}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{else} 
+00039                 \textcolor{vhdlchar}{ext_miso} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fpga_cs}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{ext_cs}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{else}
+00040                 \textcolor{vhdlchar}{'}\textcolor{vhdlchar}{Z}\textcolor{vhdlchar}{'};
+00041   
+00042 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00043 
+00044 
+00045 
+00046 
+\end{DoxyCode}

@@ -1,0 +1,237 @@
+\subsection{arch Architecture Reference}
+\label{classwfm__pct__gen_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{de/dcd/classwfm__pct__gen_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+590}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+591}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+592}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+593}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+594}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+595}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf payload\+\_\+cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf data\+\_\+cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf nco\+\_\+sig}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm\+\_\+f}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf wfm\+\_\+load\+\_\+reg}} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf wfm\+\_\+infifo\+\_\+wrusedw}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf payload\+\_\+cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf pct\+\_\+cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf n\+\_\+packets}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf payload\+\_\+size}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf state\+\_\+type}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{head0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{head1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{head2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{head3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{payload}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{check\+\_\+n\+\_\+packets}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{check\+\_\+fifo}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+load}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\item 
+{\bfseries {\bf nco\+\_\+array}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{5} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+load\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf payload\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf nco\+\_\+sig} {\bfseries {\bfseries {\bf nco\+\_\+array}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 40} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!fsm@{fsm}}
+\index{fsm@{fsm}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{fsmcurrent\+\_\+state,wfm\+\_\+load\+\_\+reg(2),wfm\+\_\+infifo\+\_\+wrusedw,payload\+\_\+cnt,pct\+\_\+cnt,n\+\_\+packets,payload\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf wfm\+\_\+load\+\_\+reg}} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf wfm\+\_\+infifo\+\_\+wrusedw}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf payload\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf pct\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf n\+\_\+packets}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf payload\+\_\+size}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__pct__gen_1_1arch_aa555d563271a1258961b6d1ad5e6f74b}
+
+
+Definition at line {\bf 179} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!fsm\+\_\+f@{fsm\+\_\+f}}
+\index{fsm\+\_\+f@{fsm\+\_\+f}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{fsm\+\_\+fclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm\+\_\+f(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__pct__gen_1_1arch_a856d95a9c7e9538caf6d13ffdaa470a3}
+
+
+Definition at line {\bf 168} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+590@{P\+R\+O\+C\+E\+S\+S\+\_\+590}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+590@{P\+R\+O\+C\+E\+S\+S\+\_\+590}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+590reset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+590(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__pct__gen_1_1arch_a58a139c86fd1d5da596307376cca00b1}
+
+
+Definition at line {\bf 67} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+591@{P\+R\+O\+C\+E\+S\+S\+\_\+591}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+591@{P\+R\+O\+C\+E\+S\+S\+\_\+591}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+591reset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+591(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__pct__gen_1_1arch_ac836e7c0776c5a6498b30ec67abf6331}
+
+
+Definition at line {\bf 79} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+592@{P\+R\+O\+C\+E\+S\+S\+\_\+592}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+592@{P\+R\+O\+C\+E\+S\+S\+\_\+592}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+592reset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+592(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__pct__gen_1_1arch_a419193a6b0dc1626d7e433117d8d199a}
+
+
+Definition at line {\bf 95} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+593@{P\+R\+O\+C\+E\+S\+S\+\_\+593}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+593@{P\+R\+O\+C\+E\+S\+S\+\_\+593}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+593reset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+593(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__pct__gen_1_1arch_a4f2bd8c2bbda90435f91f08786dc4929}
+
+
+Definition at line {\bf 115} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+594@{P\+R\+O\+C\+E\+S\+S\+\_\+594}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+594@{P\+R\+O\+C\+E\+S\+S\+\_\+594}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+594current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+594(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__pct__gen_1_1arch_a20aa6fed0ff10957a9e16919650821c2}
+
+
+Definition at line {\bf 135} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+595@{P\+R\+O\+C\+E\+S\+S\+\_\+595}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+595@{P\+R\+O\+C\+E\+S\+S\+\_\+595}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+595current\+\_\+state,payload\+\_\+cnt,data\+\_\+cnt,nco\+\_\+sig}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+595(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf payload\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf data\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf nco\+\_\+sig}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__pct__gen_1_1arch_a16d292c53fdc93c7ebcb6001e8c9da0e}
+
+
+Definition at line {\bf 147} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!current\+\_\+state@{current\+\_\+state}}
+\index{current\+\_\+state@{current\+\_\+state}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__pct__gen_1_1arch_a7ede5b91aac1f3d1b2a884a5e191d554}
+
+
+Definition at line {\bf 44} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!data\+\_\+cnt@{data\+\_\+cnt}}
+\index{data\+\_\+cnt@{data\+\_\+cnt}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{data\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__pct__gen_1_1arch_a05d24202975e58937462d57bf2ec4bef}
+
+
+Definition at line {\bf 51} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!nco\+\_\+array@{nco\+\_\+array}}
+\index{nco\+\_\+array@{nco\+\_\+array}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{nco\+\_\+array}]{\setlength{\rightskip}{0pt plus 5cm}{\bf nco\+\_\+array} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{5} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classwfm__pct__gen_1_1arch_adac347f02306d2f0e0cd7d83951183dc}
+
+
+Definition at line {\bf 49} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!nco\+\_\+sig@{nco\+\_\+sig}}
+\index{nco\+\_\+sig@{nco\+\_\+sig}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{nco\+\_\+sig}]{\setlength{\rightskip}{0pt plus 5cm}{\bf nco\+\_\+sig} {\bfseries {\bfseries {\bf nco\+\_\+array}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__pct__gen_1_1arch_aa14258ff37a7a86727f1714f30fcc46e}
+
+
+Definition at line {\bf 50} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!next\+\_\+state@{next\+\_\+state}}
+\index{next\+\_\+state@{next\+\_\+state}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{next\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__pct__gen_1_1arch_a7b92f98d060e763f3dd6fa727ddb03d8}
+
+
+Definition at line {\bf 44} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!payload\+\_\+cnt@{payload\+\_\+cnt}}
+\index{payload\+\_\+cnt@{payload\+\_\+cnt}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{payload\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf payload\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__pct__gen_1_1arch_aa5e5699701b9a8844852d086f695daa5}
+
+
+Definition at line {\bf 47} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!pct\+\_\+cnt@{pct\+\_\+cnt}}
+\index{pct\+\_\+cnt@{pct\+\_\+cnt}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{pct\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__pct__gen_1_1arch_ab6322708be25970bef4a7c020a6d8aec}
+
+
+Definition at line {\bf 48} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!state\+\_\+type@{state\+\_\+type}}
+\index{state\+\_\+type@{state\+\_\+type}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{state\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state\+\_\+type} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{head0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{head1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{head2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{head3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{payload}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{check\+\_\+n\+\_\+packets}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{check\+\_\+fifo}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+load}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classwfm__pct__gen_1_1arch_a04a6eab944d36da76bef08538af12b70}
+
+
+Definition at line {\bf 42} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+\index{wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}!wfm\+\_\+load\+\_\+reg@{wfm\+\_\+load\+\_\+reg}}
+\index{wfm\+\_\+load\+\_\+reg@{wfm\+\_\+load\+\_\+reg}!wfm\+\_\+pct\+\_\+gen\+::arch@{wfm\+\_\+pct\+\_\+gen\+::arch}}
+\paragraph[{wfm\+\_\+load\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+load\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__pct__gen_1_1arch_a7dda474bf4fc4204be7dd77925f280ea}
+
+
+Definition at line {\bf 46} of file {\bf wfm\+\_\+pct\+\_\+gen.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/wfm\+\_\+ram\+\_\+buffer/{\bf wfm\+\_\+pct\+\_\+gen.\+vhd}\end{DoxyCompactItemize}

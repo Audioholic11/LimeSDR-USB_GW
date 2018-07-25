@@ -1,0 +1,281 @@
+\subsection{alt\+\_\+gmon.\+c}
+\label{alt__gmon_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gmon.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gmon.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2003-2005 Altera Corporation, San Jose, California, USA.      *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{******************************************************************************/}
+00030 
+00031 \textcolor{preprocessor}{#include <assert.h>}
+00032 \textcolor{preprocessor}{#include <string.h>}
+00033 \textcolor{preprocessor}{#include <unistd.h>}
+00034 
+00035 \textcolor{preprocessor}{#include "priv/nios2_gmon_data.h"}
+00036 
+00037 \textcolor{preprocessor}{#include "sys/alt_irq.h"}
+00038 \textcolor{preprocessor}{#include "sys/alt_alarm.h"}
+00039 
+00040 
+00041 \textcolor{comment}{/* Macros */}
+00042 
+00043 \textcolor{comment}{/* How large should the bins be which we use to generate the histogram */}
+00044 \textcolor{preprocessor}{#define PCSAMPLE\_BYTES\_PER\_BUCKET 32}
+00045 
+00046 \textcolor{preprocessor}{#define NIOS2\_READ\_EA(dest)  \_\_asm\_\_ ("mov %0, ea" : "=r" (dest))}
+00047 
+00048 \textcolor{comment}{/* The compiler inserts calls to mcount() at the start of}
+00049 \textcolor{comment}{ * every function call. The structure mcount\_fn\_arc records t}
+00050 \textcolor{comment}{ * he return address of the function called (in from\_pc)}
+00051 \textcolor{comment}{ * and the return address of the mcount function}
+00052 \textcolor{comment}{ * (in self\_pc). The number of times this arc is executed is}
+00053 \textcolor{comment}{ * recorded in the field count.}
+00054 \textcolor{comment}{ */}
+00055 \textcolor{keyword}{struct }mcount_fn_arc
+00056 \{
+00057   \textcolor{keyword}{struct }mcount_fn_arc * next;
+00058   \textcolor{keywordtype}{void} * from_pc;
+00059   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} count;
+00060 \};
+00061 
+00062 \textcolor{comment}{/* We need to maintain a list of pointers to the heads of each adjacency}
+00063 \textcolor{comment}{ * list so that we can find them when writing out the gmon.out file. Since}
+00064 \textcolor{comment}{ * we don't know at the start of program execution how many functions will}
+00065 \textcolor{comment}{ * be called we use a list structure to do this.}
+00066 \textcolor{comment}{ */}
+00067 \textcolor{keyword}{struct }mcount_fn_entry
+00068 \{
+00069   \textcolor{keyword}{struct }mcount_fn_entry * next;
+00070   \textcolor{keywordtype}{void} * self_pc;
+00071   \textcolor{keyword}{struct }mcount_fn_arc * arc_head;
+00072 \};
+00073 
+00074 \textcolor{comment}{/* function prototypes */}
+00075 
+00076 \textcolor{keywordtype}{void} __mcount_record(\textcolor{keywordtype}{void} * self\_pc, \textcolor{keywordtype}{void} * from_pc, \textcolor{keyword}{struct} mcount_fn_entry * fn\_entry, \textcolor{keyword}{struct} 
+      mcount_fn_entry * * fn\_head) __attribute__ ((no\_instrument\_function));
+00077 
+00078 \textcolor{keyword}{static} \_\_inline\_\_ \textcolor{keywordtype}{void} * mcount_allocate(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} size) __attribute__ ((no\_instrument\_function));
+00079 \textcolor{keyword}{static} \textcolor{keywordtype}{int} nios2_pcsample_init(\textcolor{keywordtype}{void}) __attribute__ ((no\_instrument\_function));
+00080 static alt_u32 nios2_pcsample(\textcolor{keywordtype}{void}* alarm) __attribute__ ((no\_instrument\_function));
+00081 
+00082 \textcolor{comment}{/* global variables */}
+00083 
+00084 \textcolor{comment}{/* stext and etext are defined in the linker script */}
+00085 extern \textcolor{keywordtype}{char} stext[];
+00086 extern \textcolor{keywordtype}{char} etext[];
+00087 
+00088 \textcolor{comment}{/* Is the PC sampling stuff enabled yet? */}
+00089 static \textcolor{keywordtype}{int} pcsample\_need\_init = 1;
+00090 
+00091 \textcolor{preprocessor}{#define HASH\_BUCKETS 64 }\textcolor{comment}{/* Must be a power of 2 */}\textcolor{preprocessor}{}
+00092 
+00093 \textcolor{comment}{/* This points to the list of adjacency list pointers. */}
+00094 \textcolor{keyword}{struct }mcount_fn_entry * \_\_mcount\_fn\_head[HASH_BUCKETS];
+00095 
+00096 \textcolor{comment}{/* pointer to the in-memory buffer containing the histogram */}
+00097 \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}* s\_pcsamples = 0;
+00098 
+00099 \textcolor{comment}{/* the address of the start and end of text section */}
+00100 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} s\_low\_pc  = (\textcolor{keywordtype}{unsigned} int)stext;
+00101 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} s\_high\_pc = (\textcolor{keywordtype}{unsigned} int)etext;
+00102 
+00103 \textcolor{comment}{/* the alarm structure to register for pc sampling */}
+00104 \textcolor{keyword}{static} alt_alarm s\_nios2\_pcsample\_alarm;
+00105 
+00106 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} alt_gmon_data[GMON_DATA_SIZE] =
+00107 \{
+00108   0x6e6f6d67, \textcolor{comment}{/* "gmon" */}
+00109   GMON_DATA_SIZE,
+00110   0,
+00111   (\textcolor{keywordtype}{unsigned} int)stext,
+00112   (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})etext,
+00113   PCSAMPLE_BYTES_PER_BUCKET,
+00114   0,
+00115   (\textcolor{keywordtype}{unsigned} int)\_\_mcount\_fn\_head,
+00116   (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})(\_\_mcount\_fn\_head + HASH_BUCKETS)
+00117 \};
+00118 
+00119 \textcolor{comment}{/* This holds the current slab of memory we're allocating out of */}
+00120 \textcolor{keyword}{static} \textcolor{keywordtype}{char} * mcount_slab_ptr = 0;
+00121 \textcolor{keyword}{static} \textcolor{keywordtype}{int}    mcount_slab_size = 0;
+00122 
+00123 \textcolor{preprocessor}{#define MCOUNT\_SLAB\_INCREMENT 1020}
+00124 
+00125 
+00126 \textcolor{comment}{/*}
+00127 \textcolor{comment}{ * We can't use malloc to allocate memory because that's too complicated, and}
+00128 \textcolor{comment}{ * can't be called at interrupt time.  Use the lower level allocator instead}
+00129 \textcolor{comment}{ * because that's interrupt safe (and because we never free anything).}
+00130 \textcolor{comment}{ *}
+00131 \textcolor{comment}{ * For speed, we allocate a block of data at once.}
+00132 \textcolor{comment}{ */}
+00133 \textcolor{keyword}{static} \_\_inline\_\_ \textcolor{keywordtype}{void} * mcount_allocate(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} size)
+00134 \{
+00135   \textcolor{keywordtype}{void} * data;
+00136 
+00137   \textcolor{keywordflow}{if} (size > mcount\_slab\_size)
+00138   \{
+00139     mcount\_slab\_ptr = sbrk(MCOUNT_SLAB_INCREMENT);
+00140     mcount\_slab\_size = MCOUNT_SLAB_INCREMENT;
+00141   \}
+00142 
+00143   data = mcount_slab_ptr;
+00144   mcount\_slab\_ptr += size;
+00145   mcount\_slab\_size -= size;
+00146 
+00147   \textcolor{keywordflow}{return} data;
+00148 \}
+00149 
+00150 
+00151 \textcolor{comment}{/*}
+00152 \textcolor{comment}{ * Add the arc with the values of frompc and topc given to the graph.}
+00153 \textcolor{comment}{ * This function might be called at interrupt time so must be able to}
+00154 \textcolor{comment}{ * cope with reentrancy.}
+00155 \textcolor{comment}{ *}
+00156 \textcolor{comment}{ * The fast case, where we have already allocated a function arc, has been}
+00157 \textcolor{comment}{ * handled by the assmebler code.}
+00158 \textcolor{comment}{ */}
+00159 \textcolor{keywordtype}{void} __mcount_record(\textcolor{keywordtype}{void} * self_pc, \textcolor{keywordtype}{void} * from_pc, \textcolor{keyword}{struct} mcount_fn_entry * fn\_entry, \textcolor{keyword}{struct} 
+      mcount_fn_entry * * fn\_head)
+00160 \{
+00161   alt_irq_context context;
+00162   \textcolor{keyword}{struct }mcount_fn_arc * arc\_entry;
+00163 
+00164   \textcolor{comment}{/* Keep trying to start up the PC sampler until it is running.}
+00165 \textcolor{comment}{   * (It can't start until the timer is going).}
+00166 \textcolor{comment}{   */}
+00167   \textcolor{keywordflow}{if} (pcsample\_need\_init)
+00168   \{
+00169     pcsample\_need\_init = 0;
+00170     pcsample\_need\_init = nios2_pcsample_init();
+00171   \}
+00172 
+00173   \textcolor{comment}{/*}
+00174 \textcolor{comment}{   * We must disable interrupts around the allocation and the list update to}
+00175 \textcolor{comment}{   * prevent corruption if the instrumented function is re-entrant.}
+00176 \textcolor{comment}{   *}
+00177 \textcolor{comment}{   * It's safe for the code above to be stepping through the chain and be}
+00178 \textcolor{comment}{   * interrupted by this code modifying it - there is an edge case which will}
+00179 \textcolor{comment}{   * leave two copies of the same arc on the list (both with count=1), but}
+00180 \textcolor{comment}{   * this is dealt with on the host.}
+00181 \textcolor{comment}{   */}
+00182   context = alt_irq_disable_all();
+00183 
+00184   \textcolor{keywordflow}{if} (fn\_entry == NULL)
+00185   \{
+00186     \textcolor{comment}{/* Add it to the list of functions we must output later. */}
+00187     fn\_entry = (\textcolor{keyword}{struct }mcount_fn_entry *)mcount_allocate(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} 
+      mcount_fn_entry));
+00188 
+00189     fn\_entry->self_pc = self_pc;
+00190     fn\_entry->arc_head = NULL;
+00191 
+00192     fn\_entry->next = *fn\_head;
+00193     *fn\_head = fn\_entry;
+00194   \}
+00195 
+00196   \textcolor{comment}{/* We will need a new list entry - if there was a list entry before}
+00197 \textcolor{comment}{   * then the assembler code would have handled it. */}
+00198   arc\_entry = (\textcolor{keyword}{struct }mcount_fn_arc *)mcount_allocate(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} 
+      mcount_fn_arc));
+00199 
+00200   arc\_entry->from_pc = from_pc;
+00201   arc\_entry->count = 1;
+00202 
+00203   arc\_entry->next = fn\_entry->arc_head;
+00204   fn\_entry->arc_head = arc\_entry;
+00205 
+00206   alt_irq_enable_all(context);
+00207 \}
+00208 
+00209 
+00210 \textcolor{comment}{/*}
+00211 \textcolor{comment}{ * nios2\_pcsample\_init starts profiling.}
+00212 \textcolor{comment}{ * It is called the first time mcount is called, and on subsequent calls to}
+00213 \textcolor{comment}{ * mcount until it returns zero. It initializes the pc histogram and turns on}
+00214 \textcolor{comment}{ * timer driven pc sampling.}
+00215 \textcolor{comment}{ */}
+00216 \textcolor{keyword}{static} \textcolor{keywordtype}{int} nios2_pcsample_init(\textcolor{keywordtype}{void})
+00217 \{
+00218   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} pcsamples\_size; 
+00219 
+00220   \textcolor{comment}{/* We sample the PC every tick */}
+00221   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} prof\_rate = alt_ticks_per_second();
+00222   \textcolor{keywordflow}{if} (prof\_rate == 0)
+00223     \textcolor{keywordflow}{return} 1;
+00224 
+00225   \textcolor{comment}{/* allocate the histogram buffer s\_pcsamples */}
+00226   pcsamples\_size = (s\_high\_pc - s\_low\_pc)/PCSAMPLE_BYTES_PER_BUCKET;
+00227   s\_pcsamples    = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}*)sbrk(pcsamples\_size * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}));
+00228 
+00229   \textcolor{keywordflow}{if} (s\_pcsamples != 0)
+00230   \{
+00231     \textcolor{comment}{/* initialize the buffer to zero */}
+00232     memset(s\_pcsamples, 0, pcsamples\_size * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}));
+00233 
+00234     alt\_gmon\_data[GMON_DATA_PROFILE_DATA] = (int)s\_pcsamples;
+00235     alt\_gmon\_data[GMON_DATA_PROFILE_RATE] = prof\_rate;
+00236 
+00237     \textcolor{comment}{/* Sample every tick (it's cheap) */}
+00238     alt_alarm_start(&s\_nios2\_pcsample\_alarm, 1, nios2_pcsample, 0);
+00239   \}
+00240 
+00241   \textcolor{keywordflow}{return} 0;
+00242 \}
+00243 
+00244 
+00245 \textcolor{comment}{/*}
+00246 \textcolor{comment}{ * Sample the PC value and store it in the histogram}
+00247 \textcolor{comment}{ */}
+00248 \textcolor{keyword}{static} alt_u32 nios2_pcsample(\textcolor{keywordtype}{void}* context)
+00249 \{
+00250   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} pc;
+00251   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bucket;
+00252 
+00253   \textcolor{comment}{/* read the exception return address - this will be}
+00254 \textcolor{comment}{   * inaccurate if there are nested interrupts but we}
+00255 \textcolor{comment}{   * assume that this is rare and the inaccuracy will}
+00256 \textcolor{comment}{   * not be great */}
+00257   NIOS2_READ_EA(pc);
+00258 
+00259   \textcolor{comment}{/*}
+00260 \textcolor{comment}{   * If we're within the profilable range then increment the relevant}
+00261 \textcolor{comment}{   * bucket in the histogram}
+00262 \textcolor{comment}{   */}
+00263   \textcolor{keywordflow}{if} (pc >= s\_low\_pc && pc < s\_high\_pc && s\_pcsamples != 0)
+00264   \{
+00265     bucket = (pc - s\_low\_pc)/PCSAMPLE_BYTES_PER_BUCKET;
+00266     s\_pcsamples[bucket]++;
+00267   \}
+00268 
+00269   \textcolor{comment}{/* Sample every tick */}
+00270   \textcolor{keywordflow}{return} 1;
+00271 \}
+00272 
+\end{DoxyCode}

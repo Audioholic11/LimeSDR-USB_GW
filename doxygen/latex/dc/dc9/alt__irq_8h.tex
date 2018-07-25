@@ -1,0 +1,296 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+irq.h File Reference}
+\label{alt__irq_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+irq.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+irq.\+h}}
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}nios2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}priv/alt\+\_\+legacy\+\_\+irq.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+irq.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d44/alt__irq_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d65/alt__irq_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+E\+N\+A\+B\+L\+ED}~1
+\item 
+\#define {\bf A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+D\+I\+S\+A\+B\+L\+ED}~0
+\item 
+\#define {\bf A\+L\+T\+\_\+\+N\+I\+RQ}~{\bf N\+I\+O\+S2\+\_\+\+N\+I\+RQ}
+\end{DoxyCompactItemize}
+\subsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int {\bf alt\+\_\+irq\+\_\+context}
+\item 
+typedef void($\ast$ {\bf alt\+\_\+isr\+\_\+func}) (void $\ast$isr\+\_\+context, {\bf alt\+\_\+u32} id)
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+enabled} (void)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+context} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+disable\+\_\+all} (void)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} void {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+enable\+\_\+all} ({\bf alt\+\_\+irq\+\_\+context} context)
+\item 
+void {\bf alt\+\_\+irq\+\_\+init} (const void $\ast$base)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} void {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts} (void)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+pending} (void)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+D\+I\+S\+A\+B\+L\+ED@{A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+D\+I\+S\+A\+B\+L\+ED}}
+\index{A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+D\+I\+S\+A\+B\+L\+ED@{A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+D\+I\+S\+A\+B\+L\+ED}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+D\+I\+S\+A\+B\+L\+ED}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+D\+I\+S\+A\+B\+L\+ED~0}\label{alt__irq_8h_a43a692dc27baa63b6556c9ef27aa11cf}
+
+
+Definition at line {\bf 63} of file {\bf alt\+\_\+irq.\+h}.
+
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+E\+N\+A\+B\+L\+ED@{A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+E\+N\+A\+B\+L\+ED}}
+\index{A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+E\+N\+A\+B\+L\+ED@{A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+E\+N\+A\+B\+L\+ED}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+E\+N\+A\+B\+L\+ED}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+E\+N\+A\+B\+L\+ED~1}\label{alt__irq_8h_a0d06164317590074d63fafca4947b51b}
+
+
+Definition at line {\bf 62} of file {\bf alt\+\_\+irq.\+h}.
+
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!A\+L\+T\+\_\+\+N\+I\+RQ@{A\+L\+T\+\_\+\+N\+I\+RQ}}
+\index{A\+L\+T\+\_\+\+N\+I\+RQ@{A\+L\+T\+\_\+\+N\+I\+RQ}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+N\+I\+RQ}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+N\+I\+RQ~{\bf N\+I\+O\+S2\+\_\+\+N\+I\+RQ}}\label{alt__irq_8h_a72dc306b129d80d2397a0c66a90ad333}
+
+
+Definition at line {\bf 68} of file {\bf alt\+\_\+irq.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+register()}.
+
+
+
+\subsubsection{Typedef Documentation}
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+context@{alt\+\_\+irq\+\_\+context}}
+\index{alt\+\_\+irq\+\_\+context@{alt\+\_\+irq\+\_\+context}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+context}]{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf alt\+\_\+irq\+\_\+context}}\label{alt__irq_8h_a80ef27457a34b1d96cd5c2ec53a4917a}
+
+
+Definition at line {\bf 73} of file {\bf alt\+\_\+irq.\+h}.
+
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!alt\+\_\+isr\+\_\+func@{alt\+\_\+isr\+\_\+func}}
+\index{alt\+\_\+isr\+\_\+func@{alt\+\_\+isr\+\_\+func}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+isr\+\_\+func}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ alt\+\_\+isr\+\_\+func) (void $\ast$isr\+\_\+context, {\bf alt\+\_\+u32} id)}\label{alt__irq_8h_a330a3e79cd0e08c6cd5f3c105223c0ce}
+
+
+Definition at line {\bf 79} of file {\bf alt\+\_\+irq.\+h}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts@{alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts}}
+\index{alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts@{alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts(void)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} void {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__irq_8h_a9fb0eaa9eb5a4ddc14ec1ce1ab9db173}
+
+
+Definition at line {\bf 176} of file {\bf alt\+\_\+irq.\+h}.
+
+
+
+References {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK}, {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+M\+SK}, and {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+init()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/dc9/alt__irq_8h_a9fb0eaa9eb5a4ddc14ec1ce1ab9db173_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+disable\+\_\+all@{alt\+\_\+irq\+\_\+disable\+\_\+all}}
+\index{alt\+\_\+irq\+\_\+disable\+\_\+all@{alt\+\_\+irq\+\_\+disable\+\_\+all}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+disable\+\_\+all(void)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+context} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+irq\+\_\+disable\+\_\+all (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__irq_8h_a50f02542fdb2765415d3f7cb2a49c7e8}
+
+
+Definition at line {\bf 114} of file {\bf alt\+\_\+irq.\+h}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE}, {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE}, {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US}, {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK}, and {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US}.
+
+
+
+Referenced by {\bf \+\_\+\+\_\+mcount\+\_\+record()}, {\bf alt\+\_\+alarm\+\_\+start()}, {\bf alt\+\_\+alarm\+\_\+stop()}, {\bf alt\+\_\+irq\+\_\+disable()}, {\bf alt\+\_\+irq\+\_\+enable()}, {\bf alt\+\_\+irq\+\_\+register()}, {\bf A\+L\+T\+\_\+\+S\+B\+R\+K()}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+read()}, and {\bf altera\+\_\+avalon\+\_\+uart\+\_\+write()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/dc9/alt__irq_8h_a50f02542fdb2765415d3f7cb2a49c7e8_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+enable\+\_\+all@{alt\+\_\+irq\+\_\+enable\+\_\+all}}
+\index{alt\+\_\+irq\+\_\+enable\+\_\+all@{alt\+\_\+irq\+\_\+enable\+\_\+all}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+enable\+\_\+all(alt\+\_\+irq\+\_\+context context)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} void {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+irq\+\_\+enable\+\_\+all (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+irq\+\_\+context}}]{context}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__irq_8h_afd307e708b8dcd0cb6674e1d190d3dfe}
+
+
+Definition at line {\bf 144} of file {\bf alt\+\_\+irq.\+h}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE}, {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE}, {\bf alt\+\_\+irq\+\_\+init()}, {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US}, {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK}, and {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US}.
+
+
+
+Referenced by {\bf \+\_\+\+\_\+mcount\+\_\+record()}, {\bf alt\+\_\+alarm\+\_\+start()}, {\bf alt\+\_\+alarm\+\_\+stop()}, {\bf alt\+\_\+irq\+\_\+disable()}, {\bf alt\+\_\+irq\+\_\+enable()}, {\bf alt\+\_\+irq\+\_\+register()}, {\bf A\+L\+T\+\_\+\+S\+B\+R\+K()}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+read()}, and {\bf altera\+\_\+avalon\+\_\+uart\+\_\+write()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/dc9/alt__irq_8h_afd307e708b8dcd0cb6674e1d190d3dfe_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/dc9/alt__irq_8h_afd307e708b8dcd0cb6674e1d190d3dfe_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+enabled@{alt\+\_\+irq\+\_\+enabled}}
+\index{alt\+\_\+irq\+\_\+enabled@{alt\+\_\+irq\+\_\+enabled}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+enabled(void)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+irq\+\_\+enabled (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__irq_8h_a74bab53fc450e814f057c8523648182b}
+
+
+Definition at line {\bf 96} of file {\bf alt\+\_\+irq.\+h}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE}, {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE}, {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US}, and {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK}.
+
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+init@{alt\+\_\+irq\+\_\+init}}
+\index{alt\+\_\+irq\+\_\+init@{alt\+\_\+irq\+\_\+init}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+init(const void $\ast$base)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+irq\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{const void $\ast$}]{base}
+\end{DoxyParamCaption}
+)}\label{alt__irq_8h_adc592f32c3a0ef8eccfc3b4ff6e3afba}
+
+
+Definition at line {\bf 85} of file {\bf alt\+\_\+sys\+\_\+init.\+c}.
+
+
+
+References {\bf alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts()}, and {\bf A\+L\+T\+E\+R\+A\+\_\+\+N\+I\+O\+S2\+\_\+\+G\+E\+N2\+\_\+\+I\+R\+Q\+\_\+\+I\+N\+IT}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, and {\bf alt\+\_\+main()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{dc/dc9/alt__irq_8h_adc592f32c3a0ef8eccfc3b4ff6e3afba_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/dc9/alt__irq_8h_adc592f32c3a0ef8eccfc3b4ff6e3afba_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+pending@{alt\+\_\+irq\+\_\+pending}}
+\index{alt\+\_\+irq\+\_\+pending@{alt\+\_\+irq\+\_\+pending}!alt\+\_\+irq.\+h@{alt\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+pending(void)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+irq\+\_\+pending (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__irq_8h_a1e568aff96ac0760fc059347e9c8faa6}
+
+
+Definition at line {\bf 231} of file {\bf alt\+\_\+irq.\+h}.
+
+
+
+References {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+P\+E\+N\+D\+I\+NG}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+handler()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{dc/dc9/alt__irq_8h_a1e568aff96ac0760fc059347e9c8faa6_icgraph}
+\end{center}
+\end{figure}
+
+

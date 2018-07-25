@@ -1,0 +1,110 @@
+\subsection{alt\+\_\+get\+\_\+fd.\+c}
+\label{alt__get__fd_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+get\+\_\+fd.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+get\+\_\+fd.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2004 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include <stddef.h>}
+00034 \textcolor{preprocessor}{#include <stdio.h>}
+00035 \textcolor{preprocessor}{#include <errno.h>}
+00036 
+00037 \textcolor{preprocessor}{#include "sys/alt_dev.h"}
+00038 \textcolor{preprocessor}{#include "priv/alt_file.h"}
+00039 
+00040 \textcolor{preprocessor}{#include "alt_types.h"}
+00041 
+00042 \textcolor{preprocessor}{#include "system.h"}
+00043 
+00044 \textcolor{comment}{/*}
+00045 \textcolor{comment}{ * alt\_get\_fd() is called to allocate a new file descriptor from the file}
+00046 \textcolor{comment}{ * descriptor pool. If a file descriptor is succesfully allocated, it is }
+00047 \textcolor{comment}{ * configured to refer to device "dev".}
+00048 \textcolor{comment}{ *}
+00049 \textcolor{comment}{ * The return value is the index of the file descriptor structure (i.e. }
+00050 \textcolor{comment}{ * the offset of the file descriptor within the file descriptor array). A}
+00051 \textcolor{comment}{ * negative value indicates failure.}
+00052 \textcolor{comment}{ */}
+00053 
+00054 \textcolor{keywordtype}{int} alt_get_fd (alt_dev* dev)
+00055 \{
+00056   alt_32 i;
+00057   \textcolor{keywordtype}{int} rc = -EMFILE;
+00058   
+00059   \textcolor{comment}{/* }
+00060 \textcolor{comment}{   * Take the alt\_fd\_list\_lock semaphore in order to avoid races when }
+00061 \textcolor{comment}{   * accessing the file descriptor pool.}
+00062 \textcolor{comment}{   */}
+00063   
+00064   ALT_SEM_PEND(alt\_fd\_list\_lock, 0);
+00065   
+00066   \textcolor{comment}{/* }
+00067 \textcolor{comment}{   * Search through the list of file descriptors, and allocate the first}
+00068 \textcolor{comment}{   * free descriptor that's found. }
+00069 \textcolor{comment}{   *}
+00070 \textcolor{comment}{   * If a free descriptor is found, then the value of "alt\_max\_fd" is }
+00071 \textcolor{comment}{   * updated accordingly. "alt\_max\_fd" is a 'highwater mark' which }
+00072 \textcolor{comment}{   * indicates the highest file descriptor ever allocated. This is used to}
+00073 \textcolor{comment}{   * improve efficency when searching the file descriptor list, and }
+00074 \textcolor{comment}{   * therefore reduce contention on the alt\_fd\_list\_lock semaphore. }
+00075 \textcolor{comment}{   */}
+00076 
+00077   \textcolor{keywordflow}{for} (i = 0; i < ALT_MAX_FD; i++)
+00078   \{
+00079     \textcolor{keywordflow}{if} (!alt_fd_list[i].dev)
+00080     \{
+00081       alt_fd_list[i].dev = dev;
+00082       \textcolor{keywordflow}{if} (i > alt_max_fd)
+00083       \{
+00084         alt_max_fd = i;
+00085       \}
+00086       rc = i;
+00087       \textcolor{keywordflow}{goto} alt\_get\_fd\_exit;
+00088     \}
+00089   \}
+00090 
+00091  alt\_get\_fd\_exit:
+00092 
+00093   \textcolor{comment}{/*}
+00094 \textcolor{comment}{   * Release the alt\_fd\_list\_lock semaphore now that we are done with the}
+00095 \textcolor{comment}{   * file descriptor pool.}
+00096 \textcolor{comment}{   */}
+00097 
+00098   ALT_SEM_POST(alt\_fd\_list\_lock);
+00099 
+00100   \textcolor{keywordflow}{return} rc;
+00101 \}
+00102 
+00103 
+00104 
+00105 
+\end{DoxyCode}

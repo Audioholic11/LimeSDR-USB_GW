@@ -1,0 +1,177 @@
+\subsection{arch Architecture Reference}
+\label{classrd__tx__fifo_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=189pt]{d3/d37/classrd__tx__fifo_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+420}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+smpl\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+empty}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+421}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+smpl\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf ch\+\_\+en}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf iq\+\_\+sel}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+data}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf mimo\+\_\+en}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+data\+\_\+reg}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+422}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+smpl\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+empty}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf ch\+\_\+en}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf mimo\+\_\+en}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf smpl\+\_\+fsm\+\_\+f}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf smpl\+\_\+fsm}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+smpl\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+empty}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf smpl\+\_\+state}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{tx\+\_\+A}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{tx\+\_\+B}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf current\+\_\+smpl\+\_\+state} {\bfseries {\bfseries {\bf smpl\+\_\+state}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf next\+\_\+smpl\+\_\+state} {\bfseries {\bfseries {\bf smpl\+\_\+state}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf read\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf iq\+\_\+sel\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf iq\+\_\+sel} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+data\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 36} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+420@{P\+R\+O\+C\+E\+S\+S\+\_\+420}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+420@{P\+R\+O\+C\+E\+S\+S\+\_\+420}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+420current\+\_\+smpl\+\_\+state,fifo\+\_\+empty}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+420(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+smpl\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+empty}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classrd__tx__fifo_1_1arch_a53ffd18ee32003ecde115bf83391e219}
+
+
+Definition at line {\bf 53} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+421@{P\+R\+O\+C\+E\+S\+S\+\_\+421}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+421@{P\+R\+O\+C\+E\+S\+S\+\_\+421}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+421current\+\_\+smpl\+\_\+state,ch\+\_\+en,iq\+\_\+sel,fifo\+\_\+data,mimo\+\_\+en,fifo\+\_\+data\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+421(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+smpl\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf ch\+\_\+en}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf iq\+\_\+sel}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+data}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf mimo\+\_\+en}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+data\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classrd__tx__fifo_1_1arch_aeb4e89f9a2c12ac1574344441a6c8b6d}
+
+
+Definition at line {\bf 68} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+422@{P\+R\+O\+C\+E\+S\+S\+\_\+422}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+422@{P\+R\+O\+C\+E\+S\+S\+\_\+422}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+422current\+\_\+smpl\+\_\+state,fifo\+\_\+empty,ch\+\_\+en,mimo\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+422(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+smpl\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+empty}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf ch\+\_\+en}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf mimo\+\_\+en}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classrd__tx__fifo_1_1arch_aef84ae51efdb7d4e337d08f929d55e8f}
+
+
+Definition at line {\bf 131} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!smpl\+\_\+fsm@{smpl\+\_\+fsm}}
+\index{smpl\+\_\+fsm@{smpl\+\_\+fsm}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{smpl\+\_\+fsmcurrent\+\_\+smpl\+\_\+state,fifo\+\_\+empty}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} smpl\+\_\+fsm(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+smpl\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+empty}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classrd__tx__fifo_1_1arch_a598fd769e9eb8f8627fcb8102ab99435}
+
+
+Definition at line {\bf 164} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!smpl\+\_\+fsm\+\_\+f@{smpl\+\_\+fsm\+\_\+f}}
+\index{smpl\+\_\+fsm\+\_\+f@{smpl\+\_\+fsm\+\_\+f}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{smpl\+\_\+fsm\+\_\+fclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} smpl\+\_\+fsm\+\_\+f(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classrd__tx__fifo_1_1arch_ab93523f33c97a78e667091c1dd1cf4d4}
+
+
+Definition at line {\bf 154} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!current\+\_\+smpl\+\_\+state@{current\+\_\+smpl\+\_\+state}}
+\index{current\+\_\+smpl\+\_\+state@{current\+\_\+smpl\+\_\+state}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{current\+\_\+smpl\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf current\+\_\+smpl\+\_\+state} {\bfseries {\bfseries {\bf smpl\+\_\+state}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrd__tx__fifo_1_1arch_aff968233326c1dc28e4cb2667cfec632}
+
+
+Definition at line {\bf 40} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!fifo\+\_\+data\+\_\+reg@{fifo\+\_\+data\+\_\+reg}}
+\index{fifo\+\_\+data\+\_\+reg@{fifo\+\_\+data\+\_\+reg}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{fifo\+\_\+data\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+data\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrd__tx__fifo_1_1arch_a7b62d32678f8397e601c7966b4ecb0bc}
+
+
+Definition at line {\bf 45} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!iq\+\_\+sel@{iq\+\_\+sel}}
+\index{iq\+\_\+sel@{iq\+\_\+sel}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{iq\+\_\+sel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf iq\+\_\+sel} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrd__tx__fifo_1_1arch_af706125a169a27839f0c0c204f99823a}
+
+
+Definition at line {\bf 44} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!iq\+\_\+sel\+\_\+sig@{iq\+\_\+sel\+\_\+sig}}
+\index{iq\+\_\+sel\+\_\+sig@{iq\+\_\+sel\+\_\+sig}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{iq\+\_\+sel\+\_\+sig}]{\setlength{\rightskip}{0pt plus 5cm}{\bf iq\+\_\+sel\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrd__tx__fifo_1_1arch_a97b7b9cf9fbc00b946142dc85711c848}
+
+
+Definition at line {\bf 43} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!next\+\_\+smpl\+\_\+state@{next\+\_\+smpl\+\_\+state}}
+\index{next\+\_\+smpl\+\_\+state@{next\+\_\+smpl\+\_\+state}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{next\+\_\+smpl\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf next\+\_\+smpl\+\_\+state} {\bfseries {\bfseries {\bf smpl\+\_\+state}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrd__tx__fifo_1_1arch_a09c3369b3e970c2d755aae6bb1736cdb}
+
+
+Definition at line {\bf 40} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!read\+\_\+sig@{read\+\_\+sig}}
+\index{read\+\_\+sig@{read\+\_\+sig}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{read\+\_\+sig}]{\setlength{\rightskip}{0pt plus 5cm}{\bf read\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classrd__tx__fifo_1_1arch_a5393a912be9da66d258240ece326a45e}
+
+
+Definition at line {\bf 42} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+\index{rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}!smpl\+\_\+state@{smpl\+\_\+state}}
+\index{smpl\+\_\+state@{smpl\+\_\+state}!rd\+\_\+tx\+\_\+fifo\+::arch@{rd\+\_\+tx\+\_\+fifo\+::arch}}
+\paragraph[{smpl\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf smpl\+\_\+state} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{tx\+\_\+A}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{tx\+\_\+B}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classrd__tx__fifo_1_1arch_a25bbeeed149b94158b9561c166c23a7f}
+
+
+Definition at line {\bf 39} of file {\bf rd\+\_\+tx\+\_\+fifo.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+modules/{\bf rd\+\_\+tx\+\_\+fifo.\+vhd}\end{DoxyCompactItemize}

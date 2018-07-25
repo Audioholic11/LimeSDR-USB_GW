@@ -1,0 +1,80 @@
+\subsection{i2c\+\_\+opencores\+\_\+regs.\+h}
+\label{ip_2i2c__opencores__v13_2inc_2i2c__opencores__regs_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/i2c\+\_\+opencores\+\_\+v13/inc/i2c\+\_\+opencores\+\_\+regs.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/i2c\+\_\+opencores\+\_\+v13/inc/i2c\+\_\+opencores\+\_\+regs.\+h}}
+
+\begin{DoxyCode}
+00001 
+00002 
+00003 \textcolor{preprocessor}{#ifndef \_\_I2C\_OPENCORES\_REGS\_H\_\_}
+00004 \textcolor{preprocessor}{#define \_\_I2C\_OPENCORES\_REGS\_H\_\_}
+00005 
+00006 \textcolor{preprocessor}{#include <io.h>}
+00007 \textcolor{comment}{/* prescal   clock/(5*desired\_SCL) */}
+00008 \textcolor{comment}{/* all registers are 8 bits wide but on 32 bit address boundaries.*/}
+00009 \textcolor{comment}{/* reg definitions take from i2c\_specs.pdf in the docs folder */}
+00010 
+00011 \textcolor{preprocessor}{#define IOADDR\_I2C\_OPENCORES\_PRERLO(base)           \_\_IO\_CALC\_ADDRESS\_NATIVE(base, 0)}
+00012 \textcolor{preprocessor}{#define IORD\_I2C\_OPENCORES\_PRERLO(base)             IORD(base, 0)}
+00013 \textcolor{preprocessor}{#define IOWR\_I2C\_OPENCORES\_PRERLO(base, data)       IOWR(base, 0, data)}
+00014 
+00015 
+00016 \textcolor{preprocessor}{#define IOADDR\_I2C\_OPENCORES\_PRERHI(base)           \_\_IO\_CALC\_ADDRESS\_NATIVE(base, 0)}
+00017 \textcolor{preprocessor}{#define IORD\_I2C\_OPENCORES\_PRERHI(base)             IORD(base, 1)}
+00018 \textcolor{preprocessor}{#define IOWR\_I2C\_OPENCORES\_PRERHI(base, data)       IOWR(base, 1, data)}
+00019 
+00020 
+00021 \textcolor{preprocessor}{#define IOADDR\_I2C\_OPENCORES\_CTR(base)      \_\_IO\_CALC\_ADDRESS\_NATIVE(base, 2)}
+00022 \textcolor{preprocessor}{#define IORD\_I2C\_OPENCORES\_CTR(base)        IORD(base, 2)}
+00023 \textcolor{preprocessor}{#define IOWR\_I2C\_OPENCORES\_CTR(base, data)  IOWR(base, 2, data)}
+00024 \textcolor{comment}{/* bit definitions*/}
+00025 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CTR\_EN\_MSK             (0x80)}
+00026 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CTR\_EN\_OFST            (7)}
+00027 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CTR\_IEN\_MSK            (0x40)}
+00028 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CTR\_IEN\_OFST           (6)}
+00029 
+00030 
+00031 \textcolor{preprocessor}{#define IOADDR\_I2C\_OPENCORES\_TXR(base)       \_\_IO\_CALC\_ADDRESS\_NATIVE(base, 3)}
+00032 \textcolor{preprocessor}{#define IOWR\_I2C\_OPENCORES\_TXR(base, data)   IOWR(base, 3, data)}
+00033 \textcolor{comment}{/* bit definitions*/}
+00034 \textcolor{preprocessor}{#define I2C\_OPENCORES\_TXR\_RD\_MSK             (0x1)}
+00035 \textcolor{preprocessor}{#define I2C\_OPENCORES\_TXR\_RD\_OFST            (0)}
+00036 \textcolor{preprocessor}{#define I2C\_OPENCORES\_TXR\_WR\_MSK             (0x0)}
+00037 \textcolor{preprocessor}{#define I2C\_OPENCORES\_TXR\_WR\_OFST            (0)}
+00038 
+00039 
+00040 \textcolor{preprocessor}{#define IOADDR\_I2C\_OPENCORES\_RXR(base)       \_\_IO\_CALC\_ADDRESS\_NATIVE(base, 3)}
+00041 \textcolor{preprocessor}{#define IORD\_I2C\_OPENCORES\_RXR(base)         IORD(base, 3)}
+00042 
+00043 
+00044 \textcolor{preprocessor}{#define IOADDR\_I2C\_OPENCORES\_CR(base)       \_\_IO\_CALC\_ADDRESS\_NATIVE(base, 4)}
+00045 \textcolor{preprocessor}{#define IOWR\_I2C\_OPENCORES\_CR(base, data)   IOWR(base, 4, data)}
+00046 \textcolor{comment}{/* bit definitions*/}
+00047 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_STA\_MSK             (0x80)}
+00048 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_STA\_OFST            (7)}
+00049 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_STO\_MSK             (0x40)}
+00050 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_STO\_OFST            (6)}
+00051 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_RD\_MSK              (0x20)}
+00052 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_RD\_OFST             (5)}
+00053 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_WR\_MSK              (0x10)}
+00054 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_WR\_OFST             (4)}
+00055 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_NACK\_MSK             (0x8)}
+00056 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_NACK\_OFST            (3)}
+00057 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_IACK\_MSK            (0x1)}
+00058 \textcolor{preprocessor}{#define I2C\_OPENCORES\_CR\_IACK\_OFST           (0)}
+00059 
+00060 
+00061 \textcolor{preprocessor}{#define IOADDR\_I2C\_OPENCORES\_SR(base)       \_\_IO\_CALC\_ADDRESS\_NATIVE(base, 4)}
+00062 \textcolor{preprocessor}{#define IORD\_I2C\_OPENCORES\_SR(base)         IORD(base, 4)}
+00063 \textcolor{comment}{/* bit definitions*/}
+00064 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_RXNACK\_MSK           (0x80)}
+00065 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_RXNACK\_OFST          (7)}
+00066 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_BUSY\_MSK            (0x40)}
+00067 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_BUSY\_OFST           (6)}
+00068 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_AL\_MSK              (0x20)}
+00069 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_AL\_OFST             (5)}
+00070 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_TIP\_MSK             (0x2)}
+00071 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_TIP\_OFST            (1)}
+00072 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_IF\_MSK              (0x1)}
+00073 \textcolor{preprocessor}{#define I2C\_OPENCORES\_SR\_IF\_OFST             (0)}
+00074 
+00075 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_I2C\_OPENCORES\_REGS\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

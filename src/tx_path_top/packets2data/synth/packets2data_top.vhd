@@ -54,7 +54,9 @@ entity packets2data_top is
       smpl_buff_rdempty : out std_logic;
       smpl_buff_wrfull  : out std_logic;
       smpl_buff_q       : out std_logic_vector(out_pct_data_w-1 downto 0);
-      smpl_buff_rdreq   : in std_logic
+      smpl_buff_rdreq   : in std_logic;
+		
+		chirp_sync_en		: in std_logic
       
         );
 end packets2data_top;
@@ -146,7 +148,9 @@ smpl_buff_wrfull <= fifo_full_sig;
       
       smpl_buff_full    => fifo_full_sig,
       smpl_buff_q       => inst0_smpl_buff_q,    
-      smpl_buff_valid   => inst0_smpl_buff_valid
+      smpl_buff_valid   => inst0_smpl_buff_valid,
+		
+		chirp_sync_en		=> chirp_sync_en
         );
         
         

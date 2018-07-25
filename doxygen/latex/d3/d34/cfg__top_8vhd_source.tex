@@ -1,0 +1,188 @@
+\subsection{cfg\+\_\+top.\+vhd}
+\label{cfg__top_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/cfg\+\_\+top.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/cfg\+\_\+top.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00002 \textcolor{keyword}{-- FILE:          cfg\_top.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION:   Wrapper file for SPI configuration memories}
+00004 \textcolor{keyword}{-- DATE:          11:09 AM Friday, May 11, 2018}
+00005 \textcolor{keyword}{-- AUTHOR(s):     Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 
+00009 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00010 \textcolor{keyword}{--NOTES:}
+00011 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00012 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00013 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00014 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00015 \textcolor{vhdlkeyword}{use }work.fpgacfg_pkg.\textcolor{keywordflow}{all};
+00016 \textcolor{vhdlkeyword}{use }work.pllcfg_pkg.\textcolor{keywordflow}{all};
+00017 \textcolor{vhdlkeyword}{use }work.tstcfg_pkg.\textcolor{keywordflow}{all};
+00018 \textcolor{vhdlkeyword}{use }work.periphcfg_pkg.\textcolor{keywordflow}{all};
+00019 
+00020 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00021 \textcolor{keyword}{-- Entity declaration}
+00022 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00023 \textcolor{keywordflow}{entity }cfg_top \textcolor{keywordflow}{is}
+00024    \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(}
+00025 \textcolor{keyword}{      -- CFG\_START\_ADDR has to be multiple of 32, because there are 32 addresses}
+00026       \textcolor{vhdlchar}{FPGACFG_START_ADDR}   \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0};
+00027       \textcolor{vhdlchar}{PLLCFG_START_ADDR}    \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32};
+00028       \textcolor{vhdlchar}{TSTCFG_START_ADDR}    \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{64};
+00029       \textcolor{vhdlchar}{PERIPHCFG_START_ADDR} \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{192}
+00030       \textcolor{vhdlchar}{)};
+00031    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00032 \textcolor{keyword}{      -- Serial port IOs}
+00033       \textcolor{vhdlchar}{sdin}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};\textcolor{keyword}{   -- Data in}
+00034       \textcolor{vhdlchar}{sclk}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};\textcolor{keyword}{   -- Data clock}
+00035       \textcolor{vhdlchar}{sen}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};\textcolor{keyword}{   -- Enable signal (active low)}
+00036       \textcolor{vhdlchar}{sdout}                \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{  -- Data out      }
+00037 \textcolor{keyword}{      -- Signals coming from the pins or top level serial interface}
+00038       \textcolor{vhdlchar}{lreset}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};\textcolor{keyword}{   -- Logic reset signal, resets logic cells only  (use only one
+       reset)}
+00039       \textcolor{vhdlchar}{mreset}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};\textcolor{keyword}{   -- Memory reset signal, resets configuration memory only (use
+       only one reset)}
+00040       \textcolor{vhdlchar}{to_fpgacfg}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{vhdlchar}{t_TO_FPGACFG};
+00041       \textcolor{vhdlchar}{from_fpgacfg}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{vhdlchar}{t_FROM_FPGACFG};
+00042       \textcolor{vhdlchar}{to_pllcfg}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{vhdlchar}{t_TO_PLLCFG};
+00043       \textcolor{vhdlchar}{from_pllcfg}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{vhdlchar}{t_FROM_PLLCFG};
+00044       \textcolor{vhdlchar}{to_tstcfg}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{vhdlchar}{t_TO_TSTCFG};
+00045       \textcolor{vhdlchar}{to_tstcfg_from_rxtx}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{vhdlchar}{t_TO_TSTCFG_FROM_RXTX};
+00046       \textcolor{vhdlchar}{from_tstcfg}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{vhdlchar}{t_FROM_TSTCFG};
+00047       \textcolor{vhdlchar}{to_periphcfg}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{vhdlchar}{t_TO_PERIPHCFG};
+00048       \textcolor{vhdlchar}{from_periphcfg}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{vhdlchar}{t_FROM_PERIPHCFG}
+00049    \textcolor{vhdlchar}{)};
+00050 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{cfg\_top};
+00051 
+00052 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00053 \textcolor{keyword}{-- Architecture}
+00054 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00055 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} cfg_top is
+00056 \textcolor{keyword}{--declare signals,  components here}
+00057 \textcolor{keyword}{--inst0 }
+00058 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_sdout}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00059 
+00060 \textcolor{keyword}{--inst1}
+00061 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_sdoutA}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00062 
+00063 \textcolor{keyword}{--inst3}
+00064 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst3_sdout}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00065 
+00066 \textcolor{keyword}{--inst6}
+00067 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst6_sdout}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00068 
+00069 \textcolor{vhdlkeyword}{begin}
+00070 
+00071 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00072 \textcolor{keyword}{-- fpgacfg instance}
+00073 \textcolor{keyword}{-- ----------------------------------------------------------------------------     }
+00074    fpgacfg\_inst0 : \textcolor{keywordflow}{entity} work.fpgacfg
+00075    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00076 \textcolor{keyword}{      -- Address and location of this module}
+00077 \textcolor{keyword}{      -- Will be hard wired at the top level}
+00078       maddress    => \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}to\_unsigned\textcolor{vhdlchar}{(}FPGACFG\_START\_ADDR/32,\textcolor{vhdllogic}{10}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)},
+00079       mimo_en     => '1',   
+00080 \textcolor{keyword}{      -- Serial port IOs}
+00081       sdin        => sdin,
+00082       sclk        => sclk,
+00083       sen         => sen,
+00084       sdout       => inst0_sdout,  
+00085 \textcolor{keyword}{      -- Signals coming from the pins or top level serial interface}
+00086       lreset      => lreset,\textcolor{keyword}{   -- Logic reset signal, resets logic cells only  (use only one reset)}
+00087       mreset      => mreset,\textcolor{keyword}{   -- Memory reset signal, resets configuration memory only (use only one
+       reset)      }
+00088       oen         => \textcolor{keywordflow}{open},
+00089       stateo      => \textcolor{keywordflow}{open},      
+00090       to\_fpgacfg  => to_fpgacfg,
+00091       from\_fpgacfg=> from_fpgacfg
+00092    \textcolor{vhdlchar}{)};
+00093    
+00094 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00095 \textcolor{keyword}{-- pllcfg instance}
+00096 \textcolor{keyword}{-- ----------------------------------------------------------------------------  }
+00097    pllcfg\_inst1 : \textcolor{keywordflow}{entity} work.pllcfg
+00098    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00099 \textcolor{keyword}{      -- Address and location of this module}
+00100 \textcolor{keyword}{      -- Will be hard wired at the top level}
+00101       maddress       => \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}to\_unsigned\textcolor{vhdlchar}{(}PLLCFG\_START\_ADDR/32,\textcolor{vhdllogic}{10}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)},
+00102       mimo_en        => '1',      
+00103 \textcolor{keyword}{      -- Serial port A IOs}
+00104       sdinA          => sdin,
+00105       sclkA          => sclk,
+00106       senA           => sen,
+00107       sdoutA         => inst1_sdoutA,    
+00108       oenA           => \textcolor{keywordflow}{open},     
+00109 \textcolor{keyword}{      -- Serial port B IOs}
+00110       sdinB          => '0',
+00111       sclkB          => '0',
+00112       senB           => '1',
+00113       sdoutB         => \textcolor{keywordflow}{open},    
+00114       oenB           => \textcolor{keywordflow}{open},       
+00115 \textcolor{keyword}{      -- Signals coming from the pins or top level serial interface}
+00116       lreset         => lreset,\textcolor{keyword}{ -- Logic reset signal, resets logic cells only  (use only one reset)}
+00117       mreset         => mreset,\textcolor{keyword}{-- Memory reset signal, resets configuration memory only (use only one
+       reset)      }
+00118       to\_pllcfg      => to_pllcfg,
+00119       from\_pllcfg    => from_pllcfg
+00120    \textcolor{vhdlchar}{)};
+00121    
+00122 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00123 \textcolor{keyword}{-- tstcfg instance}
+00124 \textcolor{keyword}{-- ----------------------------------------------------------------------------    }
+00125    tstcfg\_inst3 : \textcolor{keywordflow}{entity} work.tstcfg
+00126    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00127 \textcolor{keyword}{      -- Address and location of this module}
+00128 \textcolor{keyword}{      -- Will be hard wired at the top level}
+00129       maddress             => \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}to\_unsigned\textcolor{vhdlchar}{(}TSTCFG\_START\_ADDR/32,\textcolor{vhdllogic}{10}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)},
+00130       mimo_en              => '1',   
+00131 \textcolor{keyword}{      -- Serial port IOs}
+00132       sdin                 => sdin,
+00133       sclk                 => sclk,
+00134       sen                  => sen,
+00135       sdout                => inst3_sdout,  
+00136 \textcolor{keyword}{      -- Signals coming from the pins or top level serial interface}
+00137       lreset               => lreset,\textcolor{keyword}{   -- Logic reset signal, resets logic cells only  (use only one
+       reset)}
+00138       mreset               => mreset,\textcolor{keyword}{   -- Memory reset signal, resets configuration memory only (use only
+       one reset)      }
+00139       oen                  => \textcolor{keywordflow}{open},
+00140       stateo               => \textcolor{keywordflow}{open},    
+00141       to_tstcfg            => to_tstcfg,
+00142       to_tstcfg_from_rxtx  => to_tstcfg_from_rxtx,
+00143       from_tstcfg          => from_tstcfg
+00144    \textcolor{vhdlchar}{)};
+00145 
+00146    
+00147 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00148 \textcolor{keyword}{-- tstcfg instance}
+00149 \textcolor{keyword}{-- ----------------------------------------------------------------------------    }
+00150    periphcfg\_inst6 : \textcolor{keywordflow}{entity} work.periphcfg
+00151    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00152 \textcolor{keyword}{      -- Address and location of this module}
+00153 \textcolor{keyword}{      -- Will be hard wired at the top level}
+00154       maddress    => \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}to\_unsigned\textcolor{vhdlchar}{(}PERIPHCFG\_START\_ADDR/32,\textcolor{vhdllogic}{10}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)},
+00155       mimo_en     => '1',   
+00156 \textcolor{keyword}{      -- Serial port IOs}
+00157       sdin        => sdin,
+00158       sclk        => sclk,
+00159       sen         => sen,
+00160       sdout       => inst6_sdout,  
+00161 \textcolor{keyword}{      -- Signals coming from the pins or top level serial interface}
+00162       lreset      => lreset,\textcolor{keyword}{   -- Logic reset signal, resets logic cells only  (use only one reset)}
+00163       mreset      => mreset,\textcolor{keyword}{   -- Memory reset signal, resets configuration memory only (use only one
+       reset)      }
+00164       oen         => \textcolor{keywordflow}{open},
+00165       stateo      => \textcolor{keywordflow}{open},    
+00166       to\_periphcfg   => to_periphcfg,
+00167       from\_periphcfg => from_periphcfg
+00168    \textcolor{vhdlchar}{)};
+00169 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00170 \textcolor{keyword}{-- Output ports}
+00171 \textcolor{keyword}{-- ----------------------------------------------------------------------------    }
+00172    \textcolor{vhdlchar}{sdout} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst0_sdout} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{inst1_sdoutA} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{inst3_sdout} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{inst6_sdout};
+00173   
+00174 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00175 
+00176 
+\end{DoxyCode}

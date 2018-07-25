@@ -1,0 +1,214 @@
+\subsection{txiqmux Entity Reference}
+\label{classtxiqmux}\index{txiqmux@{txiqmux}}
+
+
+Collaboration diagram for txiqmux\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{d3/dbd/classtxiqmux__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Entities}
+\begin{DoxyCompactItemize}
+\item 
+{\bf arch} architecture
+\end{DoxyCompactItemize}
+\subsubsection*{Libraries}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf ieee} 
+\end{DoxyCompactItemize}
+\subsubsection*{Use Clauses}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf std\+\_\+logic\+\_\+1164}   
+\item 
+{\bf numeric\+\_\+std}   
+\end{DoxyCompactItemize}
+\subsubsection*{Generics}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf diq\+\_\+width} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{ }}}
+\end{DoxyCompactItemize}
+\subsubsection*{Ports}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clk}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reset\+\_\+n}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf test\+\_\+ptrn\+\_\+en}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf test\+\_\+ptrn\+\_\+fidm}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf test\+\_\+ptrn\+\_\+I}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf test\+\_\+ptrn\+\_\+Q}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf test\+\_\+data\+\_\+en}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf test\+\_\+data\+\_\+mimo\+\_\+en}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf mux\+\_\+sel}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf tx\+\_\+diq\+\_\+h}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf tx\+\_\+diq\+\_\+l}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+diq\+\_\+h}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+diq\+\_\+l}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf diq\+\_\+h}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf diq\+\_\+l}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 15} of file {\bf txiqmux.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{txiqmux@{txiqmux}!clk@{clk}}
+\index{clk@{clk}!txiqmux@{txiqmux}}
+\paragraph[{clk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a4a4609c199d30b3adebbeb3a01276ec5}
+
+
+Definition at line {\bf 21} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!diq\+\_\+h@{diq\+\_\+h}}
+\index{diq\+\_\+h@{diq\+\_\+h}!txiqmux@{txiqmux}}
+\paragraph[{diq\+\_\+h}]{\setlength{\rightskip}{0pt plus 5cm}{\bf diq\+\_\+h} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a918b13cef611bea417f2b37e8fe90f68}
+
+
+Definition at line {\bf 34} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!diq\+\_\+l@{diq\+\_\+l}}
+\index{diq\+\_\+l@{diq\+\_\+l}!txiqmux@{txiqmux}}
+\paragraph[{diq\+\_\+l}]{\setlength{\rightskip}{0pt plus 5cm}{\bf diq\+\_\+l} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_adfa59559758477b259c01cef13f30dc0}
+
+
+Definition at line {\bf 37} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!diq\+\_\+width@{diq\+\_\+width}}
+\index{diq\+\_\+width@{diq\+\_\+width}!txiqmux@{txiqmux}}
+\paragraph[{diq\+\_\+width}]{\setlength{\rightskip}{0pt plus 5cm}{\bf diq\+\_\+width} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classtxiqmux_a72012255b2336a3619392835aa664f99}
+
+
+Definition at line {\bf 18} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!ieee@{ieee}}
+\index{ieee@{ieee}!txiqmux@{txiqmux}}
+\paragraph[{ieee}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ieee}\hspace{0.3cm}{\ttfamily [Library]}}\label{classtxiqmux_a0a6af6eef40212dbaf130d57ce711256}
+
+
+Definition at line {\bf 8} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!mux\+\_\+sel@{mux\+\_\+sel}}
+\index{mux\+\_\+sel@{mux\+\_\+sel}!txiqmux@{txiqmux}}
+\paragraph[{mux\+\_\+sel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mux\+\_\+sel} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a814c3f03bc84b0d7e34d2db86a250bc0}
+
+
+Definition at line {\bf 29} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!numeric\+\_\+std@{numeric\+\_\+std}}
+\index{numeric\+\_\+std@{numeric\+\_\+std}!txiqmux@{txiqmux}}
+\paragraph[{numeric\+\_\+std}]{\setlength{\rightskip}{0pt plus 5cm}{\bf numeric\+\_\+std}\hspace{0.3cm}{\ttfamily [Package]}}\label{classtxiqmux_a2edc34402b573437d5f25fa90ba4013e}
+
+
+Definition at line {\bf 10} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!reset\+\_\+n@{reset\+\_\+n}}
+\index{reset\+\_\+n@{reset\+\_\+n}!txiqmux@{txiqmux}}
+\paragraph[{reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reset\+\_\+n} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a446ea52ed8c4a84181a47d9165ce41a5}
+
+
+Definition at line {\bf 22} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}}
+\index{std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}!txiqmux@{txiqmux}}
+\paragraph[{std\+\_\+logic\+\_\+1164}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+\_\+logic\+\_\+1164}\hspace{0.3cm}{\ttfamily [Package]}}\label{classtxiqmux_acd03516902501cd1c7296a98e22c6fcb}
+
+
+Definition at line {\bf 9} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!test\+\_\+data\+\_\+en@{test\+\_\+data\+\_\+en}}
+\index{test\+\_\+data\+\_\+en@{test\+\_\+data\+\_\+en}!txiqmux@{txiqmux}}
+\paragraph[{test\+\_\+data\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\+\_\+data\+\_\+en} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a53396ffb2a84491bfc5f42ee26223d63}
+
+
+Definition at line {\bf 27} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!test\+\_\+data\+\_\+mimo\+\_\+en@{test\+\_\+data\+\_\+mimo\+\_\+en}}
+\index{test\+\_\+data\+\_\+mimo\+\_\+en@{test\+\_\+data\+\_\+mimo\+\_\+en}!txiqmux@{txiqmux}}
+\paragraph[{test\+\_\+data\+\_\+mimo\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\+\_\+data\+\_\+mimo\+\_\+en} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a70d20c42a807ec8ab919dba1b237a7ce}
+
+
+Definition at line {\bf 28} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!test\+\_\+ptrn\+\_\+en@{test\+\_\+ptrn\+\_\+en}}
+\index{test\+\_\+ptrn\+\_\+en@{test\+\_\+ptrn\+\_\+en}!txiqmux@{txiqmux}}
+\paragraph[{test\+\_\+ptrn\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\+\_\+ptrn\+\_\+en} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a391310ea8421fe2b82c83e4daec63313}
+
+
+Definition at line {\bf 23} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!test\+\_\+ptrn\+\_\+fidm@{test\+\_\+ptrn\+\_\+fidm}}
+\index{test\+\_\+ptrn\+\_\+fidm@{test\+\_\+ptrn\+\_\+fidm}!txiqmux@{txiqmux}}
+\paragraph[{test\+\_\+ptrn\+\_\+fidm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\+\_\+ptrn\+\_\+fidm} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a94306a29988f033358d8e78e57c5c605}
+
+
+Definition at line {\bf 24} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!test\+\_\+ptrn\+\_\+I@{test\+\_\+ptrn\+\_\+I}}
+\index{test\+\_\+ptrn\+\_\+I@{test\+\_\+ptrn\+\_\+I}!txiqmux@{txiqmux}}
+\paragraph[{test\+\_\+ptrn\+\_\+I}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\+\_\+ptrn\+\_\+I} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a9a92d4dee913f8c65c51bb3783b3f929}
+
+
+Definition at line {\bf 25} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!test\+\_\+ptrn\+\_\+Q@{test\+\_\+ptrn\+\_\+Q}}
+\index{test\+\_\+ptrn\+\_\+Q@{test\+\_\+ptrn\+\_\+Q}!txiqmux@{txiqmux}}
+\paragraph[{test\+\_\+ptrn\+\_\+Q}]{\setlength{\rightskip}{0pt plus 5cm}{\bf test\+\_\+ptrn\+\_\+Q} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_ae66a9cf54abde4379233985a943fff76}
+
+
+Definition at line {\bf 26} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!tx\+\_\+diq\+\_\+h@{tx\+\_\+diq\+\_\+h}}
+\index{tx\+\_\+diq\+\_\+h@{tx\+\_\+diq\+\_\+h}!txiqmux@{txiqmux}}
+\paragraph[{tx\+\_\+diq\+\_\+h}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tx\+\_\+diq\+\_\+h} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a305039ecf855d90d2b9c5fa3bf732b7c}
+
+
+Definition at line {\bf 30} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!tx\+\_\+diq\+\_\+l@{tx\+\_\+diq\+\_\+l}}
+\index{tx\+\_\+diq\+\_\+l@{tx\+\_\+diq\+\_\+l}!txiqmux@{txiqmux}}
+\paragraph[{tx\+\_\+diq\+\_\+l}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tx\+\_\+diq\+\_\+l} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a3a1a113b4d94a0d7e35d5c9cca305c6f}
+
+
+Definition at line {\bf 31} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!wfm\+\_\+diq\+\_\+h@{wfm\+\_\+diq\+\_\+h}}
+\index{wfm\+\_\+diq\+\_\+h@{wfm\+\_\+diq\+\_\+h}!txiqmux@{txiqmux}}
+\paragraph[{wfm\+\_\+diq\+\_\+h}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+diq\+\_\+h} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_adf65a68a6a34fb1ebd271256b065eaa6}
+
+
+Definition at line {\bf 32} of file {\bf txiqmux.\+vhd}.
+
+\index{txiqmux@{txiqmux}!wfm\+\_\+diq\+\_\+l@{wfm\+\_\+diq\+\_\+l}}
+\index{wfm\+\_\+diq\+\_\+l@{wfm\+\_\+diq\+\_\+l}!txiqmux@{txiqmux}}
+\paragraph[{wfm\+\_\+diq\+\_\+l}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+diq\+\_\+l} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf diq\+\_\+width}} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classtxiqmux_a152904dcf222aec576522cdda80aa48a}
+
+
+Definition at line {\bf 33} of file {\bf txiqmux.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/txiqmux/synth/{\bf txiqmux.\+vhd}\end{DoxyCompactItemize}

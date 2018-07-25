@@ -1,0 +1,87 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+sbrk.c File Reference}
+\label{alt__sbrk_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+sbrk.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+sbrk.\+c}}
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}os/alt\+\_\+syscall.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+stack.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+sbrk.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d87/alt__sbrk_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+caddr\+\_\+t {\bf A\+L\+T\+\_\+\+S\+B\+RK} (int incr) {\bf \+\_\+\+\_\+attribute\+\_\+\+\_\+}((no\+\_\+instrument\+\_\+function))
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char {\bf \+\_\+\+\_\+alt\+\_\+heap\+\_\+start} [$\,$]
+\item 
+char {\bf \+\_\+\+\_\+alt\+\_\+heap\+\_\+limit} [$\,$]
+\item 
+static char $\ast$ {\bf heap\+\_\+end} = {\bf \+\_\+\+\_\+alt\+\_\+heap\+\_\+start}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+sbrk.\+c@{alt\+\_\+sbrk.\+c}!A\+L\+T\+\_\+\+S\+B\+RK@{A\+L\+T\+\_\+\+S\+B\+RK}}
+\index{A\+L\+T\+\_\+\+S\+B\+RK@{A\+L\+T\+\_\+\+S\+B\+RK}!alt\+\_\+sbrk.\+c@{alt\+\_\+sbrk.\+c}}
+\paragraph[{A\+L\+T\+\_\+\+S\+B\+R\+K(int incr) \+\_\+\+\_\+attribute\+\_\+\+\_\+((no\+\_\+instrument\+\_\+function))}]{\setlength{\rightskip}{0pt plus 5cm}caddr\+\_\+t A\+L\+T\+\_\+\+S\+B\+RK (
+\begin{DoxyParamCaption}
+\item[{int}]{incr}
+\end{DoxyParamCaption}
+)}\label{alt__sbrk_8c_a2d4a4ff44ba7d5ce3bda24889881cafb}
+
+
+Definition at line {\bf 68} of file {\bf alt\+\_\+sbrk.\+c}.
+
+
+
+References {\bf \+\_\+\+\_\+alt\+\_\+heap\+\_\+limit}, {\bf \+\_\+\+\_\+alt\+\_\+heap\+\_\+start}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf alt\+\_\+report\+\_\+stack\+\_\+overflow()}, {\bf alt\+\_\+set\+\_\+stack\+\_\+limit()}, {\bf alt\+\_\+stack\+\_\+limit()}, {\bf alt\+\_\+stack\+\_\+pointer()}, and {\bf heap\+\_\+end}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/df9/alt__sbrk_8c_a2d4a4ff44ba7d5ce3bda24889881cafb_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Variable Documentation}
+\index{alt\+\_\+sbrk.\+c@{alt\+\_\+sbrk.\+c}!\+\_\+\+\_\+alt\+\_\+heap\+\_\+limit@{\+\_\+\+\_\+alt\+\_\+heap\+\_\+limit}}
+\index{\+\_\+\+\_\+alt\+\_\+heap\+\_\+limit@{\+\_\+\+\_\+alt\+\_\+heap\+\_\+limit}!alt\+\_\+sbrk.\+c@{alt\+\_\+sbrk.\+c}}
+\paragraph[{\+\_\+\+\_\+alt\+\_\+heap\+\_\+limit}]{\setlength{\rightskip}{0pt plus 5cm}char \+\_\+\+\_\+alt\+\_\+heap\+\_\+limit[$\,$]}\label{alt__sbrk_8c_ac3242a1456808d9d49cbfccb41b7697c}
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+S\+B\+R\+K()}.
+
+\index{alt\+\_\+sbrk.\+c@{alt\+\_\+sbrk.\+c}!\+\_\+\+\_\+alt\+\_\+heap\+\_\+start@{\+\_\+\+\_\+alt\+\_\+heap\+\_\+start}}
+\index{\+\_\+\+\_\+alt\+\_\+heap\+\_\+start@{\+\_\+\+\_\+alt\+\_\+heap\+\_\+start}!alt\+\_\+sbrk.\+c@{alt\+\_\+sbrk.\+c}}
+\paragraph[{\+\_\+\+\_\+alt\+\_\+heap\+\_\+start}]{\setlength{\rightskip}{0pt plus 5cm}char \+\_\+\+\_\+alt\+\_\+heap\+\_\+start[$\,$]}\label{alt__sbrk_8c_a4e46431249aff7d84015d2b40b41fd8e}
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+S\+B\+R\+K()}.
+
+\index{alt\+\_\+sbrk.\+c@{alt\+\_\+sbrk.\+c}!heap\+\_\+end@{heap\+\_\+end}}
+\index{heap\+\_\+end@{heap\+\_\+end}!alt\+\_\+sbrk.\+c@{alt\+\_\+sbrk.\+c}}
+\paragraph[{heap\+\_\+end}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ heap\+\_\+end = {\bf \+\_\+\+\_\+alt\+\_\+heap\+\_\+start}\hspace{0.3cm}{\ttfamily [static]}}\label{alt__sbrk_8c_aa2a0cb9b31e7f4015c682831b5cfc2e1}
+
+
+Definition at line {\bf 60} of file {\bf alt\+\_\+sbrk.\+c}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+S\+B\+R\+K()}.
+

@@ -1,0 +1,67 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+alarm\+\_\+start.c File Reference}
+\label{alt__alarm__start_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+alarm\+\_\+start.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+alarm\+\_\+start.\+c}}
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+alarm.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+alarm\+\_\+start.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d8c/alt__alarm__start_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf alt\+\_\+alarm\+\_\+start} ({\bf alt\+\_\+alarm} $\ast$alarm, {\bf alt\+\_\+u32} nticks, {\bf alt\+\_\+u32}($\ast$callback)(void $\ast$context), void $\ast$context)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+alarm\+\_\+start.\+c@{alt\+\_\+alarm\+\_\+start.\+c}!alt\+\_\+alarm\+\_\+start@{alt\+\_\+alarm\+\_\+start}}
+\index{alt\+\_\+alarm\+\_\+start@{alt\+\_\+alarm\+\_\+start}!alt\+\_\+alarm\+\_\+start.\+c@{alt\+\_\+alarm\+\_\+start.\+c}}
+\paragraph[{alt\+\_\+alarm\+\_\+start(alt\+\_\+alarm $\ast$alarm, alt\+\_\+u32 nticks, alt\+\_\+u32($\ast$callback)(void $\ast$context), void $\ast$context)}]{\setlength{\rightskip}{0pt plus 5cm}int alt\+\_\+alarm\+\_\+start (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+alarm} $\ast$}]{alarm, }
+\item[{{\bf alt\+\_\+u32}}]{nticks, }
+\item[{{\bf alt\+\_\+u32}($\ast$)(void $\ast$context)}]{callback, }
+\item[{void $\ast$}]{context}
+\end{DoxyParamCaption}
+)}\label{alt__alarm__start_8c_a2335119470ec26f00044b77dc1e3ad9c}
+
+
+Definition at line {\bf 64} of file {\bf alt\+\_\+alarm\+\_\+start.\+c}.
+
+
+
+References {\bf alt\+\_\+alarm\+\_\+list}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf alt\+\_\+llist\+\_\+insert()}, {\bf alt\+\_\+nticks()}, {\bf alt\+\_\+ticks\+\_\+per\+\_\+second()}, {\bf alt\+\_\+alarm\+\_\+s\+::callback}, {\bf alt\+\_\+alarm\+\_\+s\+::context}, {\bf alt\+\_\+alarm\+\_\+s\+::llist}, {\bf alt\+\_\+alarm\+\_\+s\+::rollover}, and {\bf alt\+\_\+alarm\+\_\+s\+::time}.
+
+
+
+Referenced by {\bf \+\_\+\+\_\+mcount\+\_\+record()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d33/alt__alarm__start_8c_a2335119470ec26f00044b77dc1e3ad9c_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{d3/d33/alt__alarm__start_8c_a2335119470ec26f00044b77dc1e3ad9c_icgraph}
+\end{center}
+\end{figure}
+
+

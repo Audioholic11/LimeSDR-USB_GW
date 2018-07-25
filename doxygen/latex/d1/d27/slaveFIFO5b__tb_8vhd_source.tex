@@ -1,0 +1,129 @@
+\subsection{slave\+F\+I\+F\+O5b\+\_\+tb.\+vhd}
+\label{slaveFIFO5b__tb_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/fx3/slave\+F\+I\+F\+O5b/slave\+F\+I\+F\+O5b\+\_\+tb.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/fx3/slave\+F\+I\+F\+O5b/slave\+F\+I\+F\+O5b\+\_\+tb.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    slaveFIFO5b\_tb.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: }
+00004 \textcolor{keyword}{-- DATE:    Feb 13, 2014}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }slaveFIFO5b_tb \textcolor{keywordflow}{is}
+00016 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{slaveFIFO5b\_tb};
+00017 
+00018 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00019 \textcolor{keyword}{-- Architecture}
+00020 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00021 
+00022 \textcolor{keywordflow}{architecture} tb\_behave \textcolor{keywordflow}{of} slaveFIFO5b_tb is
+00023     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{clk0_period}   \textcolor{vhdlchar}{:} \textcolor{comment}{time} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}.\textcolor{vhdllogic}{55208} \textcolor{vhdlchar}{ns};
+00024     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{clk1_period}   \textcolor{vhdlchar}{:} \textcolor{comment}{time} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10} \textcolor{vhdlchar}{ns}; 
+00025 \textcolor{keyword}{  --signals}
+00026     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{clk0}\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{clk1}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00027     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00028   
+00029 
+00030 \textcolor{vhdlkeyword}{begin }
+00031   
+00032     clock0: \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00033 \textcolor{vhdlkeyword}{    begin}
+00034         \textcolor{vhdlchar}{clk0} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk0_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00035         \textcolor{vhdlchar}{clk0} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk0_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00036     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{clock0};
+00037 
+00038     clock: \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00039 \textcolor{vhdlkeyword}{    begin}
+00040         \textcolor{vhdlchar}{clk1} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk1_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00041         \textcolor{vhdlchar}{clk1} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdlchar}{clk1_period}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00042     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{clock};
+00043     
+00044         res: \textcolor{keywordflow}{process} \textcolor{keywordflow}{is}
+00045 \textcolor{vhdlkeyword}{    begin}
+00046         \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait} \textcolor{keywordflow}{for} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{20} \textcolor{vhdlchar}{ns};
+00047         \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; \textcolor{keywordflow}{wait};
+00048     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{res};
+00049     
+00050 
+00051   slaveFIFO\_inst : \textcolor{keywordflow}{entity} work.slaveFIFO5b 
+00052 \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (
+00053     num_of_sockets      => \textcolor{vhdllogic}{1},
+00054     data_width              => \textcolor{vhdllogic}{16},
+00055     data_dma_size           => \textcolor{vhdllogic}{1024},\textcolor{keyword}{                            --data endpoint dma size in bytes}
+00056     control_dma_size        => \textcolor{vhdllogic}{1024},\textcolor{keyword}{                            --control endpoint dma size in bytes}
+00057     data_pct_size           => \textcolor{vhdllogic}{1024},\textcolor{keyword}{                            --packet size in bytes}
+00058     control_pct_size        => \textcolor{vhdllogic}{64},\textcolor{keyword}{                              --packet size in bytes, should be less then
+       max dma size}
+00059     socket0_wrusedw_size => \textcolor{vhdllogic}{11},
+00060     socket0_rdusedw_size    => \textcolor{vhdllogic}{10},
+00061     socket1_wrusedw_size => \textcolor{vhdllogic}{11},
+00062     socket1_rdusedw_size    => \textcolor{vhdllogic}{10},
+00063     socket2_wrusedw_size => \textcolor{vhdllogic}{11},
+00064     socket2_rdusedw_size    => \textcolor{vhdllogic}{10},
+00065     socket3_wrusedw_size => \textcolor{vhdllogic}{11},
+00066     socket3_rdusedw_size    => \textcolor{vhdllogic}{10}
+00067 \textcolor{vhdlchar}{)}
+00068 \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00069         reset_n                     => reset_n,
+00070         clk                 => clk0, 
+00071         clk_out             => \textcolor{keywordflow}{open},
+00072         usb_speed               => '1', 
+00073         slcs                    => \textcolor{keywordflow}{open},
+00074         fdata                   => \textcolor{keywordflow}{open},        
+00075         faddr                   => \textcolor{keywordflow}{open},
+00076         slrd                    => \textcolor{keywordflow}{open},
+00077         sloe                    => \textcolor{keywordflow}{open},
+00078         slwr                    => \textcolor{keywordflow}{open},
+00079                     
+00080       flaga                 => '1',                               
+00081         flagb                   => '1',
+00082       flagc                 => '0',
+00083       flagd                 => '0',
+00084 
+00085         pktend              => \textcolor{keywordflow}{open},
+00086         EPSWITCH                    => \textcolor{keywordflow}{open},
+00087 
+00088         socket0_fifo_data       => \textcolor{keywordflow}{open},
+00089         socket0_fifo_q          => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00090         socket0_fifo_wrusedw    => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00091         socket0_fifo_rdusedw    => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00092         socket0_fifo_wr     => \textcolor{keywordflow}{open},
+00093         socket0_fifo_rd     => \textcolor{keywordflow}{open},
+00094 
+00095         socket1_fifo_data       => \textcolor{keywordflow}{open},
+00096         socket1_fifo_q          => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00097         socket1_fifo_wrusedw    => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00098         socket1_fifo_rdusedw    => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00099         socket1_fifo_wr     => \textcolor{keywordflow}{open},
+00100         socket1_fifo_rd     => \textcolor{keywordflow}{open},
+00101 
+00102         socket2_fifo_data       => \textcolor{keywordflow}{open},
+00103         socket2_fifo_q          => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00104         socket2_fifo_wrusedw    => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00105         socket2_fifo_rdusedw    => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00106         socket2_fifo_wr     => \textcolor{keywordflow}{open},
+00107         socket2_fifo_rd     => \textcolor{keywordflow}{open},
+00108 
+00109         socket3_fifo_data       => \textcolor{keywordflow}{open},
+00110         socket3_fifo_q          => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00111         socket3_fifo_wrusedw    => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00112         socket3_fifo_rdusedw    => \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}=>'1'\textcolor{vhdlchar}{)},
+00113         socket3_fifo_wr     => \textcolor{keywordflow}{open},
+00114         socket3_fifo_rd     => \textcolor{keywordflow}{open}
+00115     
+00116     \textcolor{vhdlchar}{)};
+00117     
+00118     \textcolor{keywordflow}{end} \textcolor{vhdlchar}{tb\_behave};
+00119   
+00120   
+00121 
+00122 
+00123   
+\end{DoxyCode}

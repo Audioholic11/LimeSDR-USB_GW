@@ -1,0 +1,120 @@
+\subsection{config\+\_\+ctrl.\+vhd}
+\label{config__ctrl_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/pll\+\_\+reconfig\+\_\+ctrl/config\+\_\+ctrl.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/pll\+\_\+reconfig\+\_\+ctrl/config\+\_\+ctrl.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    config\_ctrl.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: controls altpll\_reconfig module}
+00004 \textcolor{keyword}{-- DATE:    April 6, 2015}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{IEEE};
+00009 \textcolor{vhdlkeyword}{use }IEEE.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }IEEE.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keywordflow}{entity }config_ctrl \textcolor{keywordflow}{is}
+00013 \textcolor{keywordflow}{port}\textcolor{vhdlchar}{(}
+00014     \textcolor{vhdlchar}{clk}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00015     \textcolor{vhdlchar}{rst}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00016     \textcolor{vhdlchar}{busy}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00017     
+00018     \textcolor{vhdlchar}{addr}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00019     \textcolor{vhdlchar}{rd_data}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020     \textcolor{vhdlchar}{spi_data}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{143} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00021     \textcolor{vhdlchar}{en_config}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}    \textcolor{comment}{std\_logic};
+00022     \textcolor{vhdlchar}{en_clk}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00023     \textcolor{vhdlchar}{wr_rom}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00024     \textcolor{vhdlchar}{reconfig}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00025     config\_data : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00026 \textcolor{vhdlchar}{)};
+00027 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{config\_ctrl};
+00028 
+00029 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} config_ctrl is
+00030     \textcolor{keywordflow}{type} \textcolor{vhdlchar}{fsm_type} \textcolor{keywordflow}{is} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{s0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{w0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{s1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{w1}\textcolor{vhdlchar}{)};
+00031     
+00032     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{state_r}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{:} \textcolor{vhdlchar}{fsm_type};
+00033     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fall_r}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fall_n} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00034     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{q_r}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{q_n} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00035     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{addr_r}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{addr_n} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00036     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{clk_ctrl_r}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{clk_ctrl_n} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00037     
+00038     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{config}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00039     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{stop_clk} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00040 \textcolor{vhdlkeyword}{begin}
+00041 
+00042     reg\_proc : \textcolor{keywordflow}{process}(clk, rst)
+00043 \textcolor{vhdlkeyword}{    begin}
+00044         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{rst} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00045             \textcolor{vhdlchar}{state_r}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{idle};
+00046             \textcolor{vhdlchar}{clk_ctrl_r}  \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00047             \textcolor{vhdlchar}{addr_r}          \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00048             \textcolor{vhdlchar}{fall_r}          \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00049             \textcolor{vhdlchar}{q_r}             \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00050         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{rising\_edge}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00051             \textcolor{vhdlchar}{state_r}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{state_n};
+00052             \textcolor{vhdlchar}{clk_ctrl_r}  \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{clk_ctrl_n};
+00053             \textcolor{vhdlchar}{addr_r}      \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{addr_n};
+00054             \textcolor{vhdlchar}{q_r}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{q_n};
+00055             \textcolor{vhdlchar}{fall_r}      \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fall_n};
+00056         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00057     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00058     
+00059     \textcolor{vhdlchar}{addr_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{addr};
+00060     \textcolor{vhdlchar}{fall_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fall_r}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{en_config};
+00061     
+00062     config  <= '1' \textcolor{keywordflow}{when} fall\_r = "\textcolor{vhdllogic}{01}" \textcolor{keywordflow}{else} '0'; -- detect config. \textcolor{keywordflow}{signal} change from '0' \textcolor{keywordflow}{to} '1'
+00063     \textcolor{vhdlchar}{stop_clk} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{fall_r} \textcolor{vhdlchar}{=} \textcolor{vhdllogic}{"10"} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};\textcolor{keyword}{    -- detect config. signal change from '1' to '0'}
+00064     
+00065     data\_proc : \textcolor{keywordflow}{process}(spi_data, q_r, rd_data, addr_r)
+00066 \textcolor{vhdlkeyword}{    begin}
+00067         \textcolor{vhdlchar}{q_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{q_r};
+00068         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{rd_data} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00069             \textcolor{vhdlchar}{q_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{spi_data}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{to\_integer}\textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{addr_r}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)};
+00070         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00071     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00072     
+00073     config\_data <= q\_r;
+00074     \textcolor{vhdlchar}{en_clk} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{clk_ctrl_r};
+00075     
+00076     ctrl\_proc : \textcolor{keywordflow}{process}(busy, state_r, config, clk_ctrl_r, stop_clk)
+00077 \textcolor{vhdlkeyword}{    begin}
+00078         \textcolor{vhdlchar}{state_n}    \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{state_r};
+00079         \textcolor{vhdlchar}{clk_ctrl_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{clk_ctrl_r};
+00080         \textcolor{vhdlchar}{wr_rom}   \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00081         \textcolor{vhdlchar}{reconfig} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00082         \textcolor{keywordflow}{case} \textcolor{vhdlchar}{state_r} \textcolor{keywordflow}{is}
+00083             \textcolor{keywordflow}{when} \textcolor{vhdlchar}{idle} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{        -- wait for configuration commnad}
+00084                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{config} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{busy} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00085                     \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{s0};
+00086                 \textcolor{keywordflow}{else}
+00087                     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{stop_clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00088                         \textcolor{vhdlchar}{clk_ctrl_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00089                     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00090                     \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{state_r};
+00091                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00092             \textcolor{keywordflow}{when} \textcolor{vhdlchar}{s0} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{          -- write data from SPI reg. to the altera pll reconfiguration core}
+00093                 \textcolor{vhdlchar}{wr_rom} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00094                 \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{w0};
+00095             \textcolor{keywordflow}{when} \textcolor{vhdlchar}{w0} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{          -- wait}
+00096                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{busy} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00097                     \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{s1};
+00098                 \textcolor{keywordflow}{else}
+00099                     \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{state_r};
+00100                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};\textcolor{keyword}{         --- assert reconfiguration signal}
+00101             \textcolor{keywordflow}{when} \textcolor{vhdlchar}{s1} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}
+00102                 \textcolor{vhdlchar}{reconfig} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00103                 \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{w1};
+00104             \textcolor{keywordflow}{when} \textcolor{vhdlchar}{w1} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{          -- disable clock output}
+00105                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{busy} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00106                     \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{idle};
+00107                     \textcolor{vhdlchar}{clk_ctrl_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};\textcolor{keyword}{      -- enable PLL clock input}
+00108                 \textcolor{keywordflow}{else}
+00109                     \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{state_r};
+00110                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00111             \textcolor{keywordflow}{when} \textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} 
+00112                 \textcolor{vhdlchar}{state_n} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{idle};
+00113         \textcolor{keywordflow}{end} \textcolor{keywordflow}{case};
+00114     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00115 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};
+\end{DoxyCode}

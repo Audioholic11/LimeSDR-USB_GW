@@ -1,0 +1,333 @@
+\subsection{pll\+\_\+top.\+vhd}
+\label{pll__top_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/pll\+\_\+top/pll\+\_\+top.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/pll\+\_\+top/pll\+\_\+top.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00002 \textcolor{keyword}{-- FILE:          pll\_top.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION:   Top wrapper file for PLLs}
+00004 \textcolor{keyword}{-- DATE:          10:50 AM Wednesday, May 9, 2018}
+00005 \textcolor{keyword}{-- AUTHOR(s):     Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 
+00009 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00010 \textcolor{keyword}{--NOTES:}
+00011 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00012 \textcolor{keyword}{-- altera vhdl\_input\_version vhdl\_2008}
+00013 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00014 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00015 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00016 \textcolor{vhdlkeyword}{use }work.pllcfg_pkg.\textcolor{keywordflow}{all};
+00017 
+00018 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00019 \textcolor{keyword}{-- Entity declaration}
+00020 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00021 \textcolor{keywordflow}{entity }pll_top \textcolor{keywordflow}{is}
+00022    \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(}
+00023       \textcolor{vhdlchar}{N_PLL}                         \textcolor{vhdlchar}{:} \textcolor{comment}{integer}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00024 \textcolor{keyword}{      -- TX pll parameters}
+00025       \textcolor{vhdlchar}{TXPLL_BANDWIDTH_TYPE}          \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"AUTO"};
+00026       \textcolor{vhdlchar}{TXPLL_CLK0_DIVIDE_BY}          \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00027       \textcolor{vhdlchar}{TXPLL_CLK0_DUTY_CYCLE}         \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{50};
+00028       \textcolor{vhdlchar}{TXPLL_CLK0_MULTIPLY_BY}        \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00029       \textcolor{vhdlchar}{TXPLL_CLK0_PHASE_SHIFT}        \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{"0"};
+00030       \textcolor{vhdlchar}{TXPLL_CLK1_DIVIDE_BY}          \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00031       \textcolor{vhdlchar}{TXPLL_CLK1_DUTY_CYCLE}         \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{50};
+00032       \textcolor{vhdlchar}{TXPLL_CLK1_MULTIPLY_BY}        \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00033       \textcolor{vhdlchar}{TXPLL_CLK1_PHASE_SHIFT}        \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{"0"};
+00034       \textcolor{vhdlchar}{TXPLL_COMPENSATE_CLOCK}        \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"CLK1"};
+00035       \textcolor{vhdlchar}{TXPLL_INCLK0_INPUT_FREQUENCY}  \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{6250};
+00036       \textcolor{vhdlchar}{TXPLL_INTENDED_DEVICE_FAMILY}  \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"Cyclone IV E"};
+00037       \textcolor{vhdlchar}{TXPLL_OPERATION_MODE}          \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"SOURCE\_SYNCHRONOUS"};
+00038       \textcolor{vhdlchar}{TXPLL_SCAN_CHAIN_MIF_FILE}     \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"ip/txpll/pll.mif"};
+00039       \textcolor{vhdlchar}{TXPLL_DRCT_C0_NDLY}            \textcolor{vhdlchar}{:} \textcolor{comment}{integer}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00040       \textcolor{vhdlchar}{TXPLL_DRCT_C1_NDLY}            \textcolor{vhdlchar}{:} \textcolor{comment}{integer}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00041 \textcolor{keyword}{      -- RX pll parameters}
+00042       \textcolor{vhdlchar}{RXPLL_BANDWIDTH_TYPE}          \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"AUTO"};
+00043       \textcolor{vhdlchar}{RXPLL_CLK0_DIVIDE_BY}          \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00044       \textcolor{vhdlchar}{RXPLL_CLK0_DUTY_CYCLE}         \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{50};
+00045       \textcolor{vhdlchar}{RXPLL_CLK0_MULTIPLY_BY}        \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00046       \textcolor{vhdlchar}{RXPLL_CLK0_PHASE_SHIFT}        \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{"0"};
+00047       \textcolor{vhdlchar}{RXPLL_CLK1_DIVIDE_BY}          \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00048       \textcolor{vhdlchar}{RXPLL_CLK1_DUTY_CYCLE}         \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{50};
+00049       \textcolor{vhdlchar}{RXPLL_CLK1_MULTIPLY_BY}        \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00050       \textcolor{vhdlchar}{RXPLL_CLK1_PHASE_SHIFT}        \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{"0"};
+00051       \textcolor{vhdlchar}{RXPLL_COMPENSATE_CLOCK}        \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"CLK1"};
+00052       \textcolor{vhdlchar}{RXPLL_INCLK0_INPUT_FREQUENCY}  \textcolor{vhdlchar}{:} \textcolor{comment}{NATURAL}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{6250};
+00053       \textcolor{vhdlchar}{RXPLL_INTENDED_DEVICE_FAMILY}  \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"Cyclone IV E"};
+00054       \textcolor{vhdlchar}{RXPLL_OPERATION_MODE}          \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"SOURCE\_SYNCHRONOUS"};
+00055       \textcolor{vhdlchar}{RXPLL_SCAN_CHAIN_MIF_FILE}     \textcolor{vhdlchar}{:} \textcolor{comment}{STRING}    \textcolor{vhdlchar}{:=} \textcolor{keyword}{"ip/pll/pll.mif"};
+00056       \textcolor{vhdlchar}{RXPLL_DRCT_C0_NDLY}            \textcolor{vhdlchar}{:} \textcolor{comment}{integer}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00057       \textcolor{vhdlchar}{RXPLL_DRCT_C1_NDLY}            \textcolor{vhdlchar}{:} \textcolor{comment}{integer}   \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}
+00058 
+00059    \textcolor{vhdlchar}{)};
+00060    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00061 \textcolor{keyword}{      -- TX PLL ports}
+00062       \textcolor{vhdlchar}{txpll_inclk}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00063       \textcolor{vhdlchar}{txpll_reconfig_clk}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00064       \textcolor{vhdlchar}{txpll_logic_reset_n}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00065       \textcolor{vhdlchar}{txpll_clk_ena}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00066       \textcolor{vhdlchar}{txpll_drct_clk_en}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00067       \textcolor{vhdlchar}{txpll_c0}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00068       \textcolor{vhdlchar}{txpll_c1}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00069       \textcolor{vhdlchar}{txpll_locked}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00070 \textcolor{keyword}{      --}
+00071       \textcolor{vhdlchar}{txpll_smpl_cmp_en}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00072       \textcolor{vhdlchar}{txpll_smpl_cmp_done}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00073       \textcolor{vhdlchar}{txpll_smpl_cmp_error} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00074       \textcolor{vhdlchar}{txpll_smpl_cmp_cnt}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00075 \textcolor{keyword}{      -- RX pll ports}
+00076       \textcolor{vhdlchar}{rxpll_inclk}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00077       \textcolor{vhdlchar}{rxpll_reconfig_clk}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00078       \textcolor{vhdlchar}{rxpll_logic_reset_n}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00079       \textcolor{vhdlchar}{rxpll_clk_ena}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00080       \textcolor{vhdlchar}{rxpll_drct_clk_en}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}; 
+00081       \textcolor{vhdlchar}{rxpll_c0}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00082       \textcolor{vhdlchar}{rxpll_c1}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00083       \textcolor{vhdlchar}{rxpll_locked}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00084 \textcolor{keyword}{      --}
+00085       \textcolor{vhdlchar}{rxpll_smpl_cmp_en}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};      
+00086       \textcolor{vhdlchar}{rxpll_smpl_cmp_done}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00087       \textcolor{vhdlchar}{rxpll_smpl_cmp_error} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00088       \textcolor{vhdlchar}{rxpll_smpl_cmp_cnt}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00089 \textcolor{keyword}{      -- pllcfg ports}
+00090       \textcolor{vhdlchar}{to_pllcfg}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{vhdlchar}{t_TO_PLLCFG};
+00091       \textcolor{vhdlchar}{from_pllcfg}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{vhdlchar}{t_FROM_PLLCFG}
+00092       \textcolor{vhdlchar}{)};
+00093 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{pll\_top};
+00094 
+00095 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00096 \textcolor{keyword}{-- Architecture}
+00097 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00098 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} pll_top is
+00099 \textcolor{keyword}{--declare signals,  components here}
+00100 \textcolor{keyword}{--inst0}
+00101 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_pll_locked}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00102 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_smpl_cmp_en}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00103 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_busy}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00104 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_dynps_done}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00105 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_dynps_status}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00106 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_rcnfig_status} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00107 
+00108 \textcolor{keyword}{--inst1}
+00109 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_pll_locked}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00110 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_smpl_cmp_en}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00111 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_busy}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00112 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_dynps_done}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00113 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_dynps_status}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00114 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_rcnfig_status} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00115 
+00116 \textcolor{keyword}{--inst2}
+00117 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_pllcfg_busy}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_PLL}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00118 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_pllcfg_done}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_PLL}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00119 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_pll_lock}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_PLL}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00120 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_phcfg_start}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_PLL}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00121 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_pllcfg_start}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_PLL}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00122 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_pllrst_start}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_PLL}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00123 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_auto_phcfg_done}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_PLL}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00124 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_auto_phcfg_err}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_PLL}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00125 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_phcfg_mode}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00126 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_phcfg_tst}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00127 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_phcfg_updn}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00128 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_cnt_ind}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00129 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_cnt_phase}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00130 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_pllcfg_data}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{143} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00131 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_auto_phcfg_smpls} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00132 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst2_auto_phcfg_step}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00133 
+00134 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{pllcfg_busy}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00135 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{pllcfg_done}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00136 
+00137   
+00138 \textcolor{vhdlkeyword}{begin}
+00139 
+00140 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00141 \textcolor{keyword}{-- TX PLL instance}
+00142 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00143 tx\_pll\_top\_inst0 : \textcolor{keywordflow}{entity} work.tx_pll_top
+00144    \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map}(
+00145       bandwidth_type          => TXPLL_BANDWIDTH_TYPE,
+00146       clk0_divide_by          => TXPLL_CLK0_DIVIDE_BY,
+00147       clk0_duty_cycle         => TXPLL_CLK0_DUTY_CYCLE,
+00148       clk0_multiply_by        => TXPLL_CLK0_MULTIPLY_BY,
+00149       clk0_phase_shift        => TXPLL_CLK0_PHASE_SHIFT,
+00150       clk1_divide_by          => TXPLL_CLK1_DIVIDE_BY,
+00151       clk1_duty_cycle         => TXPLL_CLK1_DUTY_CYCLE,
+00152       clk1_multiply_by        => TXPLL_CLK1_MULTIPLY_BY,
+00153       clk1_phase_shift        => TXPLL_CLK1_PHASE_SHIFT,
+00154       compensate_clock        => TXPLL_COMPENSATE_CLOCK,
+00155       inclk0_input_frequency  => TXPLL_INCLK0_INPUT_FREQUENCY,
+00156       intended_device_family  => TXPLL_INTENDED_DEVICE_FAMILY,
+00157       operation_mode          => TXPLL_OPERATION_MODE,
+00158       scan_chain_mif_file     => TXPLL_SCAN_CHAIN_MIF_FILE,
+00159       drct_c0_ndly            => TXPLL_DRCT_C0_NDLY,
+00160       drct_c1_ndly            => TXPLL_DRCT_C1_NDLY
+00161    \textcolor{vhdlchar}{)}
+00162    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00163 \textcolor{keyword}{   --PLL input }
+00164    pll_inclk         => txpll_inclk,
+00165    pll_areset        => inst2_pllrst_start\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00166    pll_logic_reset_n => txpll_logic_reset_n,
+00167    inv_c0            => '0',
+00168    c0                => txpll_c0,\textcolor{keyword}{ --muxed clock output}
+00169    c1                => txpll_c1,\textcolor{keyword}{ --muxed clock output}
+00170    pll_locked        => inst0_pll_locked,
+00171 \textcolor{keyword}{   --Bypass control}
+00172    clk_ena           => txpll_clk_ena,\textcolor{keyword}{       --clock output enable}
+00173    drct_clk_en       => txpll_drct_clk_en,\textcolor{keyword}{   --1 - Direct clk, 0 - PLL clocks }
+00174 \textcolor{keyword}{   --Reconfiguration ports}
+00175    rcnfg_clk         => txpll_reconfig_clk,
+00176    rcnfig_areset     => inst2_pllrst_start\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00177    rcnfig_en         => inst2_pllcfg_start\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00178    rcnfig_data       => inst2_pllcfg_data,
+00179    rcnfig_status     => inst0_rcnfig_status,
+00180 \textcolor{keyword}{   --Dynamic phase shift ports}
+00181    dynps_areset_n    => \textcolor{keywordflow}{not} inst2\_pllrst\_start \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00182    dynps_mode        => inst2_phcfg_mode,\textcolor{keyword}{ -- 0 - manual, 1 - auto}
+00183    dynps_en          => inst2_phcfg_start\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00184    dynps_tst         => inst2_phcfg_tst,
+00185    dynps_dir         => inst2_phcfg_updn,
+00186    dynps_cnt_sel     => inst2_cnt_ind\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00187 \textcolor{keyword}{   -- max phase steps in auto mode, phase steps to shift in manual mode}
+00188    dynps_phase       => inst2_cnt_phase\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{9} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00189    dynps_step_size   => inst2_auto_phcfg_step\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{9} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00190    dynps_busy        => \textcolor{keywordflow}{open},
+00191    dynps_done        => inst0_dynps_done,
+00192    dynps_status      => inst0_dynps_status,
+00193 \textcolor{keyword}{   --signals from sample compare module (required for automatic phase searching)}
+00194    smpl_cmp_en       => inst0_smpl_cmp_en,
+00195    smpl_cmp_done     => txpll_smpl_cmp_done,
+00196    smpl_cmp_error    => txpll_smpl_cmp_error,
+00197 \textcolor{keyword}{   --Overall configuration PLL status}
+00198    busy              => inst0_busy   
+00199    \textcolor{vhdlchar}{)};
+00200    
+00201 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00202 \textcolor{keyword}{-- RX PLL instance}
+00203 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00204 rx\_pll\_top\_inst0 : \textcolor{keywordflow}{entity} work.rx_pll_top
+00205    \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map}(
+00206       bandwidth_type          => RXPLL_BANDWIDTH_TYPE,
+00207       clk0_divide_by          => RXPLL_CLK0_DIVIDE_BY,
+00208       clk0_duty_cycle         => RXPLL_CLK0_DUTY_CYCLE,
+00209       clk0_multiply_by        => RXPLL_CLK0_MULTIPLY_BY,
+00210       clk0_phase_shift        => RXPLL_CLK0_PHASE_SHIFT,
+00211       clk1_divide_by          => RXPLL_CLK1_DIVIDE_BY,
+00212       clk1_duty_cycle         => RXPLL_CLK1_DUTY_CYCLE,
+00213       clk1_multiply_by        => RXPLL_CLK1_MULTIPLY_BY,
+00214       clk1_phase_shift        => RXPLL_CLK1_PHASE_SHIFT,
+00215       compensate_clock        => RXPLL_COMPENSATE_CLOCK,
+00216       inclk0_input_frequency  => RXPLL_INCLK0_INPUT_FREQUENCY,
+00217       intended_device_family  => RXPLL_INTENDED_DEVICE_FAMILY,
+00218       operation_mode          => RXPLL_OPERATION_MODE,
+00219       scan_chain_mif_file     => RXPLL_SCAN_CHAIN_MIF_FILE,
+00220       drct_c0_ndly            => RXPLL_DRCT_C0_NDLY,
+00221       drct_c1_ndly            => RXPLL_DRCT_C1_NDLY
+00222    \textcolor{vhdlchar}{)}
+00223    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00224 \textcolor{keyword}{   --PLL input }
+00225    pll_inclk         => rxpll_inclk,
+00226    pll_areset        => inst2_pllrst_start\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)},
+00227    pll_logic_reset_n => rxpll_logic_reset_n,
+00228    inv_c0            => '0',
+00229    c0                => rxpll_c0,\textcolor{keyword}{ --muxed clock output}
+00230    c1                => rxpll_c1,\textcolor{keyword}{ --muxed clock output}
+00231    pll_locked        => inst1_pll_locked,
+00232 \textcolor{keyword}{   --Bypass control}
+00233    clk_ena           => rxpll_clk_ena,\textcolor{keyword}{       --clock output enable}
+00234    drct_clk_en       => rxpll_drct_clk_en,\textcolor{keyword}{   --1 - Direct clk, 0 - PLL clocks }
+00235 \textcolor{keyword}{   --Reconfiguration ports}
+00236    rcnfg_clk         => rxpll_reconfig_clk,
+00237    rcnfig_areset     => inst2_pllrst_start\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)},
+00238    rcnfig_en         => inst2_pllcfg_start\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)},
+00239    rcnfig_data       => inst2_pllcfg_data,
+00240    rcnfig_status     => inst1_rcnfig_status,
+00241 \textcolor{keyword}{   --Dynamic phase shift ports}
+00242    dynps_areset_n    => \textcolor{keywordflow}{not} inst2\_pllrst\_start \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)},
+00243    dynps_mode        => inst2_phcfg_mode,\textcolor{keyword}{ -- 0 - manual, 1 - auto}
+00244    dynps_en          => inst2_phcfg_start\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)},
+00245    dynps_tst         => inst2_phcfg_tst,
+00246    dynps_dir         => inst2_phcfg_updn,
+00247    dynps_cnt_sel     => inst2_cnt_ind\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00248 \textcolor{keyword}{   -- max phase steps in auto mode, phase steps to shift in manual mode}
+00249    dynps_phase       => inst2_cnt_phase\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{9} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00250    dynps_step_size   => inst2_auto_phcfg_step\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{9} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)},
+00251    dynps_busy        => \textcolor{keywordflow}{open},
+00252    dynps_done        => inst1_dynps_done,
+00253    dynps_status      => inst1_dynps_status,
+00254 \textcolor{keyword}{   --signals from sample compare module (required for automatic phase searching)}
+00255    smpl_cmp_en       => inst1_smpl_cmp_en,
+00256    smpl_cmp_done     => rxpll_smpl_cmp_done,
+00257    smpl_cmp_error    => rxpll_smpl_cmp_error,
+00258 \textcolor{keyword}{   --Overall configuration PLL status}
+00259    busy              => inst1_busy   
+00260    \textcolor{vhdlchar}{)};
+00261 
+00262   
+00263    \textcolor{vhdlchar}{pllcfg_busy} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst1_busy} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{inst0_busy};
+00264    \textcolor{vhdlchar}{pllcfg_done} \textcolor{vhdlchar}{<=} \textcolor{keywordflow}{not} \textcolor{vhdlchar}{pllcfg_busy};
+00265    
+00266    
+00267 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00268 \textcolor{keyword}{-- pllcfg\_top instance}
+00269 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00270    \textcolor{keywordflow}{process}(pllcfg_busy) 
+00271 \textcolor{vhdlkeyword}{      begin }
+00272          inst2\_pllcfg\_busy <= (others=>'0');
+00273          inst2\_pllcfg\_busy(\textcolor{vhdllogic}{0}) <= pllcfg\_busy;
+00274    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00275    
+00276    \textcolor{keywordflow}{process}(pllcfg_done) 
+00277 \textcolor{vhdlkeyword}{      begin }
+00278          inst2\_pllcfg\_done <= (others=>'1');
+00279          inst2\_pllcfg\_done(\textcolor{vhdllogic}{0}) <= pllcfg\_done;
+00280    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00281    
+00282    inst2\_pll\_lock          <= inst1\_pll\_locked     & inst0\_pll\_locked;   
+00283    inst2\_auto\_phcfg\_done   <= inst1\_dynps\_done     & inst0\_dynps\_done; 
+00284    inst2\_auto\_phcfg\_err    <= inst1\_dynps\_status   & inst0\_dynps\_status;
+00285 
+00286    pll\_ctrl\_inst2 : \textcolor{keywordflow}{entity} work.pll_ctrl 
+00287    \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map}(
+00288       n\_pll => N_PLL
+00289    \textcolor{vhdlchar}{)}
+00290    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00291       to_pllcfg         => to_pllcfg,
+00292       from_pllcfg       => from_pllcfg,
+00293 \textcolor{keyword}{         -- Status Inputs}
+00294       pllcfg_busy       => inst2_pllcfg_busy,
+00295       pllcfg_done       => inst2_pllcfg_done,
+00296 \textcolor{keyword}{         -- PLL Lock flags}
+00297       pll_lock          => inst2_pll_lock,
+00298 \textcolor{keyword}{         -- PLL Configuration Related}
+00299       phcfg_mode        => inst2_phcfg_mode,
+00300       phcfg_tst         => inst2_phcfg_tst,
+00301       phcfg_start       => inst2_phcfg_start,\textcolor{keyword}{   --}
+00302       pllcfg_start      => inst2_pllcfg_start,\textcolor{keyword}{  --}
+00303       pllrst_start      => inst2_pllrst_start,\textcolor{keyword}{  --}
+00304       phcfg_updn        => inst2_phcfg_updn,
+00305       cnt_ind           => inst2_cnt_ind,\textcolor{keyword}{       --}
+00306       cnt_phase         => inst2_cnt_phase,\textcolor{keyword}{     --}
+00307       pllcfg_data       => inst2_pllcfg_data,
+00308       auto_phcfg_done   => inst2_auto_phcfg_done,
+00309       auto_phcfg_err    => inst2_auto_phcfg_err,
+00310       auto_phcfg_smpls  => inst2_auto_phcfg_smpls,
+00311       auto_phcfg_step   => inst2_auto_phcfg_step
+00312         
+00313       \textcolor{vhdlchar}{)};
+00314 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00315 \textcolor{keyword}{-- Output ports}
+00316 \textcolor{keyword}{-- ----------------------------------------------------------------------------  }
+00317 \textcolor{vhdlchar}{txpll_locked}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst0_pll_locked};
+00318 \textcolor{vhdlchar}{txpll_smpl_cmp_en}    \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst0_smpl_cmp_en};
+00319 \textcolor{vhdlchar}{txpll_smpl_cmp_cnt}   \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst2_auto_phcfg_smpls};
+00320 
+00321 \textcolor{vhdlchar}{rxpll_locked}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst1_pll_locked};
+00322 \textcolor{vhdlchar}{rxpll_smpl_cmp_en}    \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst1_smpl_cmp_en};
+00323 \textcolor{vhdlchar}{rxpll_smpl_cmp_cnt}   \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst2_auto_phcfg_smpls};
+00324 
+00325 
+00326 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00327 
+00328 
+\end{DoxyCode}

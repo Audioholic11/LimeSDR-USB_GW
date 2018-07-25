@@ -1,0 +1,1450 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/nios2.h File Reference}
+\label{nios2_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/nios2.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/nios2.\+h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{df/dcd/nios2_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+N\+I\+RQ}~32
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+ET}(et)~do \{ \+\_\+\+\_\+asm (\char`\"{}mov \%0, et\char`\"{} \+: \char`\"{}=r\char`\"{} (et) ); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+ET}(et)~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}mov et, \%z0\char`\"{} \+: \+: \char`\"{}rM\char`\"{} (et)); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+SP}(sp)~do \{ \+\_\+\+\_\+asm (\char`\"{}mov \%0, sp\char`\"{} \+: \char`\"{}=r\char`\"{} (sp) ); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+B\+R\+E\+AK}()~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}break\char`\"{}); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+P\+O\+R\+T\+\_\+\+S\+T\+A\+C\+K\+\_\+\+O\+V\+E\+R\+F\+L\+OW}()~do \{ \+\_\+\+\_\+asm volatile(\char`\"{}break 3\char`\"{}); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(0); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US}(src)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(0, src); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+S\+T\+A\+T\+US}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(1); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+S\+T\+A\+T\+US}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(2); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+E\+N\+A\+B\+LE}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(3); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE}(src)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(3, src); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+P\+E\+N\+D\+I\+NG}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(4); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+P\+U\+ID}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(5); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+C\+E\+P\+T\+I\+ON}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(7); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+P\+T\+E\+A\+D\+DR}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(8); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+T\+E\+A\+D\+DR}(src)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(8, src); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+A\+CC}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(9); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+A\+CC}(src)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(9, src); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+M\+I\+SC}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(10); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+M\+I\+SC}(src)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(10, src); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+C\+C\+I\+NJ}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(11); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+C\+C\+I\+NJ}(src)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(11, src); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+A\+D\+A\+D\+DR}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(12); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+O\+N\+F\+IG}(src)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(13, src); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+O\+N\+F\+IG}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(13); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+B\+A\+SE}(src)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(14, src); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+B\+A\+SE}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(14); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+A\+CC}(src)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(15, src); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+A\+CC}(dest)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(15); \} while (0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+US}~status
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+S\+T\+A\+T\+US}~estatus
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+B\+S\+T\+A\+T\+US}~bstatus
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+I\+E\+N\+A\+B\+LE}~ienable
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+I\+P\+E\+N\+D\+I\+NG}~ipending
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+C\+P\+U\+ID}~cpuid
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK}~(0x00000001)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+O\+F\+ST}~(0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+M\+SK}~(0x00000002)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+O\+F\+ST}~(1)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+M\+SK}~(0x00000004)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+O\+F\+ST}~(2)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+M\+SK}~(0x00000008)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+O\+F\+ST}~(3)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+M\+SK}~(0x000003f0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+O\+F\+ST}~(4)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+M\+SK}~(0x0000fc00)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+O\+F\+ST}~(10)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+M\+SK}~(0x003f0000)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+O\+F\+ST}~(16)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+M\+SK}~(0x00400000)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+O\+F\+ST}~(22)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+M\+SK}~(0x00800000)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+O\+F\+ST}~(23)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+M\+SK}~(0x80000000)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+O\+F\+ST}~(31)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+M\+A\+SK}~(0x0000007c)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+O\+F\+ST}~(2)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+M\+A\+SK}~(0x80000000)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+O\+F\+ST}~(31)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+O\+F\+ST}~2
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+M\+A\+SK}~0x3ffffc
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+O\+F\+ST}~22
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+M\+A\+SK}~0xffc00000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+O\+F\+ST}~0
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+M\+A\+SK}~0xfffff
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+O\+F\+ST}~20
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+M\+A\+SK}~0x100000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+O\+F\+ST}~21
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+M\+A\+SK}~0x200000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+O\+F\+ST}~22
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+M\+A\+SK}~0x400000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+O\+F\+ST}~23
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+M\+A\+SK}~0x800000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+O\+F\+ST}~24
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+M\+A\+SK}~0x1000000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+O\+F\+ST}~25
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+M\+A\+SK}~0xfe000000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+O\+F\+ST}~0
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+M\+A\+SK}~0x1
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST}~1
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK}~0x2
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+O\+F\+ST}~2
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+M\+A\+SK}~0x4
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+O\+F\+ST}~3
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+M\+A\+SK}~0x8
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+O\+F\+ST}~4
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+M\+A\+SK}~0x3fff0
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+O\+F\+ST}~18
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+M\+A\+SK}~0x40000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+O\+F\+ST}~19
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+M\+A\+SK}~0x80000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+O\+F\+ST}~20
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+M\+A\+SK}~0xf00000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+O\+F\+ST}~24
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+M\+A\+SK}~0x1000000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+O\+F\+ST}~0
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+M\+A\+SK}~0x3
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+O\+F\+ST}~2
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+M\+A\+SK}~0xc
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+O\+F\+ST}~4
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+M\+A\+SK}~0x30
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+O\+F\+ST}~6
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+M\+A\+SK}~0xc0
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+O\+F\+ST}~8
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+M\+A\+SK}~0x300
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+O\+F\+ST}~10
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+M\+A\+SK}~0xc00
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+O\+F\+ST}~12
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+M\+A\+SK}~0x3000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+O\+F\+ST}~14
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+M\+A\+SK}~0xc000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+O\+F\+ST}~16
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+M\+A\+SK}~0x30000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+O\+F\+ST}~18
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+M\+A\+SK}~0xc0000
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+M\+A\+SK}~(0x00000001)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+O\+F\+ST}~(0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+M\+A\+SK}~(0x00000002)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+O\+F\+ST}~(1)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+M\+A\+SK}~(0x00000004)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+O\+F\+ST}~(2)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+M\+A\+SK}~(0x00000008)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+O\+F\+ST}~(3)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+M\+A\+SK}~(0x00000001)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+O\+F\+ST}~(0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+M\+A\+SK}~(0x0000003e)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+O\+F\+ST}~(1)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+M\+A\+SK}~(0xffffffc0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+O\+F\+ST}~(6)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+M\+A\+SK}~(0xffffffc0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+O\+F\+ST}~(6)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+M\+A\+SK}~(0xffffffc0)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+O\+F\+ST}~(6)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+M\+A\+SK}~(0x00000020)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+O\+F\+ST}~(5)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK}~(0x0000001c)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST}~(2)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+M\+A\+SK}~(0x00000002)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+O\+F\+ST}~(1)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+M\+A\+SK}~(0x00000001)
+\item 
+\#define {\bf N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+O\+F\+ST}~(0)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+B\+R\+E\+AK@{N\+I\+O\+S2\+\_\+\+B\+R\+E\+AK}}
+\index{N\+I\+O\+S2\+\_\+\+B\+R\+E\+AK@{N\+I\+O\+S2\+\_\+\+B\+R\+E\+AK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+B\+R\+E\+AK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+B\+R\+E\+AK(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}break\char`\"{}); \} while (0)}\label{nios2_8h_a7026dab1cb67e8210a6f236922dfba14}
+
+
+Definition at line {\bf 67} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+B\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+B\+S\+T\+A\+T\+US}}
+\index{N\+I\+O\+S2\+\_\+\+B\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+B\+S\+T\+A\+T\+US}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+B\+S\+T\+A\+T\+US}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+B\+S\+T\+A\+T\+US~bstatus}\label{nios2_8h_a72ca6b7521fd2cf19726fa51f3346c36}
+
+
+Definition at line {\bf 153} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+M\+A\+SK~(0x00000002)}\label{nios2_8h_abaad2f10821ddd584d451648103eeaaa}
+
+
+Definition at line {\bf 267} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+A\+N\+I\+\_\+\+O\+F\+ST~(1)}\label{nios2_8h_a2015a0e32c6f6a0e9ea20c088c07a9c8}
+
+
+Definition at line {\bf 268} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+M\+A\+SK~(0x00000004)}\label{nios2_8h_a70b4a9c7154bc9db7eca3b7fee101274}
+
+
+Definition at line {\bf 269} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+N\+\_\+\+O\+F\+ST~(2)}\label{nios2_8h_a37b273e6347f687c09345e20b3a0bcca}
+
+
+Definition at line {\bf 270} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+M\+A\+SK~(0x00000008)}\label{nios2_8h_a3f37846c7a3285733875d98e527c8737}
+
+
+Definition at line {\bf 271} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+E\+X\+C\+\_\+\+O\+F\+ST~(3)}\label{nios2_8h_a3997b20b47cd6120b5c2a813008030ef}
+
+
+Definition at line {\bf 272} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+M\+A\+SK~(0x00000001)}\label{nios2_8h_a631239a3b9b48af3970d3a8efc116e2d}
+
+
+Definition at line {\bf 265} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+G\+\_\+\+P\+E\+\_\+\+O\+F\+ST~(0)}\label{nios2_8h_a1eaee9129af2e1b54bab839400f029fd}
+
+
+Definition at line {\bf 266} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+C\+P\+U\+ID@{N\+I\+O\+S2\+\_\+\+C\+P\+U\+ID}}
+\index{N\+I\+O\+S2\+\_\+\+C\+P\+U\+ID@{N\+I\+O\+S2\+\_\+\+C\+P\+U\+ID}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+C\+P\+U\+ID}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+C\+P\+U\+ID~cpuid}\label{nios2_8h_a7908bed7102290cfa768b95539b6125f}
+
+
+Definition at line {\bf 156} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+M\+A\+SK~0x300}\label{nios2_8h_a96ec304e617f5493262ddbcee81ee974}
+
+
+Definition at line {\bf 252} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+D\+A\+T\+\_\+\+O\+F\+ST~8}\label{nios2_8h_a5a21fbe075b71529d9449f7be4c2a03d}
+
+
+Definition at line {\bf 251} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+M\+A\+SK~0xc0}\label{nios2_8h_a9eae44ac92ed480ca14544185b5b4bb7}
+
+
+Definition at line {\bf 250} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+C\+T\+A\+G\+\_\+\+O\+F\+ST~6}\label{nios2_8h_aa311766055005a3ae3413313c2c09f03}
+
+
+Definition at line {\bf 249} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+M\+A\+SK~0x3000}\label{nios2_8h_a6b04faeba914f397cf08709e40e01405}
+
+
+Definition at line {\bf 256} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M0\+\_\+\+O\+F\+ST~12}\label{nios2_8h_ae5a07059d27510eb67f030591c4ed972}
+
+
+Definition at line {\bf 255} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+M\+A\+SK~0xc000}\label{nios2_8h_a853512204d550f915d04858dc3f4bebf}
+
+
+Definition at line {\bf 258} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M1\+\_\+\+O\+F\+ST~14}\label{nios2_8h_a2dbd1ef78197bff459745fc5979c6f94}
+
+
+Definition at line {\bf 257} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+M\+A\+SK~0x30000}\label{nios2_8h_a73bd69e433a866f0e12efd72ce1c56d3}
+
+
+Definition at line {\bf 260} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M2\+\_\+\+O\+F\+ST~16}\label{nios2_8h_aa2175b16f4045fb8911ad53bea651d7a}
+
+
+Definition at line {\bf 259} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+M\+A\+SK~0xc0000}\label{nios2_8h_a304454b8f0792f85a95a7972e20040f2}
+
+
+Definition at line {\bf 262} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+D\+T\+C\+M3\+\_\+\+O\+F\+ST~18}\label{nios2_8h_abc8e7cc4ae8223b33616c5dee424e149}
+
+
+Definition at line {\bf 261} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+M\+A\+SK~0x30}\label{nios2_8h_a302b3dd0abfd5101f2c1553a0042e183}
+
+
+Definition at line {\bf 248} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+D\+A\+T\+\_\+\+O\+F\+ST~4}\label{nios2_8h_a3ad741eb57d73fec34f186cc2fca501f}
+
+
+Definition at line {\bf 247} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+M\+A\+SK~0xc}\label{nios2_8h_a3e74b0836d561ba277e36e5c553c63ec}
+
+
+Definition at line {\bf 246} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+I\+C\+T\+A\+G\+\_\+\+O\+F\+ST~2}\label{nios2_8h_aec97f89cb19b0a19362e388fa2109e49}
+
+
+Definition at line {\bf 245} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+M\+A\+SK~0x3}\label{nios2_8h_aa552377c26a733ee06cdfe4d29629d0c}
+
+
+Definition at line {\bf 244} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+R\+F\+\_\+\+O\+F\+ST~0}\label{nios2_8h_a3d6ff301573c5c32d4757d5c9c7c1c4c}
+
+
+Definition at line {\bf 243} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+M\+A\+SK~0xc00}\label{nios2_8h_ae33e5765611a8913dce76cb3812b0ba1}
+
+
+Definition at line {\bf 254} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+C\+C\+I\+N\+J\+\_\+\+R\+E\+G\+\_\+\+T\+L\+B\+\_\+\+O\+F\+ST~10}\label{nios2_8h_a57d39dfc531b4ab6142d8069c071bcda}
+
+
+Definition at line {\bf 253} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+E\+S\+T\+A\+T\+US}}
+\index{N\+I\+O\+S2\+\_\+\+E\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+E\+S\+T\+A\+T\+US}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+S\+T\+A\+T\+US}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+S\+T\+A\+T\+US~estatus}\label{nios2_8h_a7d034056f9e1737521bfb86e1bc4f0ab}
+
+
+Definition at line {\bf 152} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+M\+A\+SK~(0x0000007c)}\label{nios2_8h_aa3e05815adb290916e9f699af8c9cc11}
+
+
+Definition at line {\bf 195} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+C\+A\+U\+S\+E\+\_\+\+O\+F\+ST~(2)}\label{nios2_8h_a56440808e259123a40ee625b56935ff6}
+
+
+Definition at line {\bf 196} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+M\+A\+SK~(0x80000000)}\label{nios2_8h_af92a59cccea64fe57ac9f31472b505c2}
+
+
+Definition at line {\bf 197} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+R\+E\+G\+\_\+\+E\+C\+C\+F\+T\+L\+\_\+\+O\+F\+ST~(31)}\label{nios2_8h_a3e139dfdf9769941b7cdc7532adb16b6}
+
+
+Definition at line {\bf 198} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+I\+E\+N\+A\+B\+LE@{N\+I\+O\+S2\+\_\+\+I\+E\+N\+A\+B\+LE}}
+\index{N\+I\+O\+S2\+\_\+\+I\+E\+N\+A\+B\+LE@{N\+I\+O\+S2\+\_\+\+I\+E\+N\+A\+B\+LE}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+I\+E\+N\+A\+B\+LE}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+I\+E\+N\+A\+B\+LE~ienable}\label{nios2_8h_ace4053c902157cae6da788ad0f822e35}
+
+
+Definition at line {\bf 154} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+I\+P\+E\+N\+D\+I\+NG@{N\+I\+O\+S2\+\_\+\+I\+P\+E\+N\+D\+I\+NG}}
+\index{N\+I\+O\+S2\+\_\+\+I\+P\+E\+N\+D\+I\+NG@{N\+I\+O\+S2\+\_\+\+I\+P\+E\+N\+D\+I\+NG}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+I\+P\+E\+N\+D\+I\+NG}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+I\+P\+E\+N\+D\+I\+NG~ipending}\label{nios2_8h_a531b545c2314222d0cd5cf83e3df451c}
+
+
+Definition at line {\bf 155} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+M\+A\+SK~(0x00000020)}\label{nios2_8h_aa22a5a4fe42cb02a6ec97c90665472d1}
+
+
+Definition at line {\bf 287} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+C\+\_\+\+O\+F\+ST~(5)}\label{nios2_8h_a878e4e5d4a30f0ffa1a13412ac3d632c}
+
+
+Definition at line {\bf 288} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+M\+A\+SK~(0xffffffc0)}\label{nios2_8h_a40b536937f0ebf231d08b1e1b8348cc2}
+
+
+Definition at line {\bf 283} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+L\+I\+M\+I\+T\+\_\+\+O\+F\+ST~(6)}\label{nios2_8h_a5bd84a46c3b6bb33f66e4f0a44d1823c}
+
+
+Definition at line {\bf 284} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+M\+A\+SK~(0xffffffc0)}\label{nios2_8h_ae81675d911ca2c34da95b24f7158c4e0}
+
+
+Definition at line {\bf 285} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+M\+A\+S\+K\+\_\+\+O\+F\+ST~(6)}\label{nios2_8h_a1d4be3f49cdaef1f58e88a8a5c854fc7}
+
+
+Definition at line {\bf 286} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK~(0x0000001c)}\label{nios2_8h_a5d9ba76e47ae29b02fa6d4dfe54a4826}
+
+
+Definition at line {\bf 289} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST~(2)}\label{nios2_8h_a36e8385c8c83bc5a25a2a07746bb9f1b}
+
+
+Definition at line {\bf 290} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+M\+A\+SK~(0x00000002)}\label{nios2_8h_a24c0c5678a5a7ba9caabcb19ca6acfc0}
+
+
+Definition at line {\bf 291} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+R\+D\+\_\+\+O\+F\+ST~(1)}\label{nios2_8h_a066005379b28b72b5b38227b0e55e693}
+
+
+Definition at line {\bf 292} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+M\+A\+SK~(0x00000001)}\label{nios2_8h_a7b26c566bb8094eaefe661b504164dce}
+
+
+Definition at line {\bf 293} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+A\+C\+C\+\_\+\+W\+R\+\_\+\+O\+F\+ST~(0)}\label{nios2_8h_a4c849d299cc5c64ae4c92925e1a2e370}
+
+
+Definition at line {\bf 294} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+M\+A\+SK~(0xffffffc0)}\label{nios2_8h_acd0cc782bd29cac75c4bd0f30407e3e7}
+
+
+Definition at line {\bf 279} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+B\+A\+S\+E\+\_\+\+A\+D\+D\+R\+\_\+\+O\+F\+ST~(6)}\label{nios2_8h_a6e6758f1584275c132bc897aa9fbc140}
+
+
+Definition at line {\bf 280} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+M\+A\+SK~(0x00000001)}\label{nios2_8h_a0cc7dd3fc32c21c67ae115c5c84e14fa}
+
+
+Definition at line {\bf 275} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+D\+\_\+\+O\+F\+ST~(0)}\label{nios2_8h_a9ec3f5a0c0f778017a3013ef1094c910}
+
+
+Definition at line {\bf 276} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+M\+A\+SK~(0x0000003e)}\label{nios2_8h_a6b1e1e8fc7a0d87eef65d760664002aa}
+
+
+Definition at line {\bf 277} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+M\+P\+U\+B\+A\+S\+E\+\_\+\+I\+N\+D\+E\+X\+\_\+\+O\+F\+ST~(1)}\label{nios2_8h_a46a88b78e0e8fc790984976f806b677d}
+
+
+Definition at line {\bf 278} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+N\+I\+RQ@{N\+I\+O\+S2\+\_\+\+N\+I\+RQ}}
+\index{N\+I\+O\+S2\+\_\+\+N\+I\+RQ@{N\+I\+O\+S2\+\_\+\+N\+I\+RQ}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+N\+I\+RQ}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+N\+I\+RQ~32}\label{nios2_8h_abd1039763ffe41f4858f7089cee25e9f}
+
+
+Definition at line {\bf 47} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+M\+A\+SK~0xffc00000}\label{nios2_8h_a5b3660b428fd05bc7c1fb3c79bd46ca8}
+
+
+Definition at line {\bf 204} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+P\+T\+B\+A\+S\+E\+\_\+\+O\+F\+ST~22}\label{nios2_8h_ab58258e4324fae75fc4cf820f9749450}
+
+
+Definition at line {\bf 203} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+M\+A\+SK~0x3ffffc}\label{nios2_8h_a473e4f978c7ae3de98ebe43ea7307e4c}
+
+
+Definition at line {\bf 202} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+P\+T\+E\+A\+D\+D\+R\+\_\+\+R\+E\+G\+\_\+\+V\+P\+N\+\_\+\+O\+F\+ST~2}\label{nios2_8h_a7951dcf273cf91c0ff273439c0e9bc46}
+
+
+Definition at line {\bf 201} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+A\+D\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+A\+D\+A\+D\+DR}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+A\+D\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+A\+D\+A\+D\+DR}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+A\+D\+A\+D\+DR}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+A\+D\+A\+D\+DR(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(12); \} while (0)}\label{nios2_8h_a38bb1b733c577cbe158cfe4b972cd801}
+
+
+Definition at line {\bf 127} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+S\+T\+A\+T\+US}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+S\+T\+A\+T\+US}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+S\+T\+A\+T\+US}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+B\+S\+T\+A\+T\+US(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(2); \} while (0)}\label{nios2_8h_a9748570dfcacbc2ff6fe7498c79af465}
+
+
+Definition at line {\bf 85} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+O\+N\+F\+IG@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+O\+N\+F\+IG}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+O\+N\+F\+IG@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+O\+N\+F\+IG}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+O\+N\+F\+IG}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+O\+N\+F\+IG(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(13); \} while (0)}\label{nios2_8h_a0320435665ab475ef81ebe0275ed7245}
+
+
+Definition at line {\bf 133} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+P\+U\+ID@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+P\+U\+ID}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+P\+U\+ID@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+P\+U\+ID}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+P\+U\+ID}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+C\+P\+U\+ID(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(5); \} while (0)}\label{nios2_8h_ab7ee70246af44f3fa0a2493bfceda237}
+
+
+Definition at line {\bf 97} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+C\+C\+I\+NJ@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+C\+C\+I\+NJ}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+C\+C\+I\+NJ@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+C\+C\+I\+NJ}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+C\+C\+I\+NJ}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+C\+C\+I\+NJ(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(11); \} while (0)}\label{nios2_8h_a79e59a81103997bba69a4629f120b957}
+
+
+Definition at line {\bf 121} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+S\+T\+A\+T\+US}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+S\+T\+A\+T\+US}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+S\+T\+A\+T\+US}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+S\+T\+A\+T\+US(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(1); \} while (0)}\label{nios2_8h_a650b7547049556cc3a8f2bffd9546094}
+
+
+Definition at line {\bf 82} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+ET@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+ET}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+ET@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+ET}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+ET(
+\begin{DoxyParamCaption}
+\item[{}]{et}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+asm (\char`\"{}mov \%0, et\char`\"{} \+: \char`\"{}=r\char`\"{} (et) ); \} while (0)}\label{nios2_8h_a3f027a5a7fad410b1632a912c8535589}
+
+
+Definition at line {\bf 54} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+stack\+\_\+limit()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+C\+E\+P\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+C\+E\+P\+T\+I\+ON}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+C\+E\+P\+T\+I\+ON@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+C\+E\+P\+T\+I\+ON}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+C\+E\+P\+T\+I\+ON}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+C\+E\+P\+T\+I\+ON(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(7); \} while (0)}\label{nios2_8h_a02cf093aca7ccc8bd9dbd93ee0f8ddbc}
+
+
+Definition at line {\bf 100} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+E\+N\+A\+B\+LE@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+E\+N\+A\+B\+LE}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+E\+N\+A\+B\+LE@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+E\+N\+A\+B\+LE}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+E\+N\+A\+B\+LE}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+E\+N\+A\+B\+LE(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(3); \} while (0)}\label{nios2_8h_af9afd57142bb960a25c8c9fec953a5c6}
+
+
+Definition at line {\bf 88} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+P\+E\+N\+D\+I\+NG@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+P\+E\+N\+D\+I\+NG}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+P\+E\+N\+D\+I\+NG@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+P\+E\+N\+D\+I\+NG}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+P\+E\+N\+D\+I\+NG}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+I\+P\+E\+N\+D\+I\+NG(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(4); \} while (0)}\label{nios2_8h_ad754ba8ddf36bff36bbe6ce921dbbd80}
+
+
+Definition at line {\bf 94} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+pending()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+A\+CC@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+A\+CC}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+A\+CC@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+A\+CC}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+A\+CC}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+A\+CC(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(15); \} while (0)}\label{nios2_8h_a0f4f3b01591588dbf3b3d0e572ba0677}
+
+
+Definition at line {\bf 145} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+B\+A\+SE@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+B\+A\+SE}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+B\+A\+SE@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+B\+A\+SE}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+B\+A\+SE}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+M\+P\+U\+B\+A\+SE(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(14); \} while (0)}\label{nios2_8h_a08964a8c1c440ece517bc53c8a30e7cc}
+
+
+Definition at line {\bf 139} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+P\+T\+E\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+P\+T\+E\+A\+D\+DR}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+P\+T\+E\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+P\+T\+E\+A\+D\+DR}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+P\+T\+E\+A\+D\+DR}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+P\+T\+E\+A\+D\+DR(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(8); \} while (0)}\label{nios2_8h_ad3bee4ef0b1fc91bea2b38cfdf663333}
+
+
+Definition at line {\bf 103} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+SP@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+SP}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+SP@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+SP}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+SP}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+SP(
+\begin{DoxyParamCaption}
+\item[{}]{sp}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+asm (\char`\"{}mov \%0, sp\char`\"{} \+: \char`\"{}=r\char`\"{} (sp) ); \} while (0)}\label{nios2_8h_a9b2388f2038197c762b6345fd904e889}
+
+
+Definition at line {\bf 61} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+stack\+\_\+pointer()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+S\+T\+A\+T\+US(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(0); \} while (0)}\label{nios2_8h_aa958b3987ddd03320537f37f2276c44f}
+
+
+Definition at line {\bf 76} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, and {\bf alt\+\_\+irq\+\_\+enabled()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+A\+CC@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+A\+CC}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+A\+CC@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+A\+CC}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+A\+CC}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+A\+CC(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(9); \} while (0)}\label{nios2_8h_af81001bfebec43ad1cac9e16c64d3c04}
+
+
+Definition at line {\bf 109} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+M\+I\+SC@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+M\+I\+SC}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+M\+I\+SC@{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+M\+I\+SC}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+M\+I\+SC}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+A\+D\+\_\+\+T\+L\+B\+M\+I\+SC(
+\begin{DoxyParamCaption}
+\item[{}]{dest}
+\end{DoxyParamCaption}
+)~do \{ dest = \+\_\+\+\_\+builtin\+\_\+rdctl(10); \} while (0)}\label{nios2_8h_ae8779c59f54e9ceb55201d6d896eec86}
+
+
+Definition at line {\bf 115} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+R\+E\+P\+O\+R\+T\+\_\+\+S\+T\+A\+C\+K\+\_\+\+O\+V\+E\+R\+F\+L\+OW@{N\+I\+O\+S2\+\_\+\+R\+E\+P\+O\+R\+T\+\_\+\+S\+T\+A\+C\+K\+\_\+\+O\+V\+E\+R\+F\+L\+OW}}
+\index{N\+I\+O\+S2\+\_\+\+R\+E\+P\+O\+R\+T\+\_\+\+S\+T\+A\+C\+K\+\_\+\+O\+V\+E\+R\+F\+L\+OW@{N\+I\+O\+S2\+\_\+\+R\+E\+P\+O\+R\+T\+\_\+\+S\+T\+A\+C\+K\+\_\+\+O\+V\+E\+R\+F\+L\+OW}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+R\+E\+P\+O\+R\+T\+\_\+\+S\+T\+A\+C\+K\+\_\+\+O\+V\+E\+R\+F\+L\+OW}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+R\+E\+P\+O\+R\+T\+\_\+\+S\+T\+A\+C\+K\+\_\+\+O\+V\+E\+R\+F\+L\+OW(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+asm volatile(\char`\"{}break 3\char`\"{}); \} while (0)}\label{nios2_8h_a49afea648f99c88a26acbac6246cc23d}
+
+
+Definition at line {\bf 70} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+report\+\_\+stack\+\_\+overflow()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+US}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+US}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+US}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+US~status}\label{nios2_8h_ad34427532598ae3ebfa7d23d3b17b608}
+
+
+Definition at line {\bf 151} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+M\+SK~(0x0000fc00)}\label{nios2_8h_adb909a5a4a6624d47ecc4fcb1099d1a9}
+
+
+Definition at line {\bf 183} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+R\+S\+\_\+\+O\+F\+ST~(10)}\label{nios2_8h_a8ffd44e86e548dc548c6768f29d198b1}
+
+
+Definition at line {\bf 184} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+M\+SK~(0x00000004)}\label{nios2_8h_a64888be8f301859fc55000100d8b262c}
+
+
+Definition at line {\bf 177} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+H\+\_\+\+O\+F\+ST~(2)}\label{nios2_8h_acb2607282fef918f3617104e8265c6bf}
+
+
+Definition at line {\bf 178} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+M\+SK~(0x00000008)}\label{nios2_8h_a9cffcdafe76226a1ead22925e42eb2a1}
+
+
+Definition at line {\bf 179} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+H\+\_\+\+O\+F\+ST~(3)}\label{nios2_8h_a377f98e7303a4f6a206337b46bcf4f7b}
+
+
+Definition at line {\bf 180} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+M\+SK~(0x000003f0)}\label{nios2_8h_ae7b58cda92c4f6f6c83a9e2daeffdfdf}
+
+
+Definition at line {\bf 181} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+I\+L\+\_\+\+O\+F\+ST~(4)}\label{nios2_8h_ad084220bf77c1d9d039851729cc30df3}
+
+
+Definition at line {\bf 182} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+M\+SK~(0x00400000)}\label{nios2_8h_a6152da1c59926c2740dcb9fbdfd3e96c}
+
+
+Definition at line {\bf 187} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+M\+I\+\_\+\+O\+F\+ST~(22)}\label{nios2_8h_a53e628ac5b14ac1bd602d12537915d9c}
+
+
+Definition at line {\bf 188} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+M\+SK~(0x00000001)}\label{nios2_8h_ab72a90fc3af428ec4aeabaecd009be0e}
+
+
+Definition at line {\bf 173} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts()}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, and {\bf alt\+\_\+irq\+\_\+enabled()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+I\+E\+\_\+\+O\+F\+ST~(0)}\label{nios2_8h_a802439d6552d752804a47e843ea03b62}
+
+
+Definition at line {\bf 174} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+M\+SK~(0x003f0000)}\label{nios2_8h_a50383173c2fe598509f261ff1ba62c3c}
+
+
+Definition at line {\bf 185} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+R\+S\+\_\+\+O\+F\+ST~(16)}\label{nios2_8h_a5d847db40d631480824d77a1909434bc}
+
+
+Definition at line {\bf 186} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+M\+SK~(0x00800000)}\label{nios2_8h_aa65e3c7cd868e0409f30b4efb3293339}
+
+
+Definition at line {\bf 189} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+S\+I\+E\+\_\+\+O\+F\+ST~(23)}\label{nios2_8h_a643fb9a1fe3b029060a1c4f7882d248c}
+
+
+Definition at line {\bf 190} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+M\+SK~(0x80000000)}\label{nios2_8h_a5bc9644ac75f8d2f5d1527b472fa0267}
+
+
+Definition at line {\bf 191} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+R\+S\+\_\+\+O\+F\+ST~(31)}\label{nios2_8h_a24b97dd63c602153a21059a16f151049}
+
+
+Definition at line {\bf 192} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+M\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+M\+SK@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+M\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+M\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+M\+SK~(0x00000002)}\label{nios2_8h_a8b4290b0e9594bcbaf2dd399f37303f8}
+
+
+Definition at line {\bf 175} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+U\+\_\+\+O\+F\+ST~(1)}\label{nios2_8h_a7bea56bb0028e97c89d03a424372e0a7}
+
+
+Definition at line {\bf 176} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+M\+A\+SK~0x1000000}\label{nios2_8h_a0265f8c890ac3241e45c9e56d53c0b97}
+
+
+Definition at line {\bf 218} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+C\+\_\+\+O\+F\+ST~24}\label{nios2_8h_a8209191a81108ad3b1e559b5e7306338}
+
+
+Definition at line {\bf 217} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+M\+A\+SK~0x100000}\label{nios2_8h_a59243aa4438becd0aa22f9d022861cbb}
+
+
+Definition at line {\bf 210} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+G\+\_\+\+O\+F\+ST~20}\label{nios2_8h_a7d2cbd8522d1f327751def5fe969a0d5}
+
+
+Definition at line {\bf 209} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+M\+A\+SK~0xfe000000}\label{nios2_8h_abd7e700149da6c2050c7ba53707548c6}
+
+
+Definition at line {\bf 220} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+I\+G\+\_\+\+O\+F\+ST~25}\label{nios2_8h_acbae5d01bfdd37c7a6c7ac6ca2481150}
+
+
+Definition at line {\bf 219} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+M\+A\+SK~0xfffff}\label{nios2_8h_a618dbc07c36700ac72bcf71ec2c9e472}
+
+
+Definition at line {\bf 208} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+P\+F\+N\+\_\+\+O\+F\+ST~0}\label{nios2_8h_aa2626f669c60df1ecb656b39790847d1}
+
+
+Definition at line {\bf 207} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+M\+A\+SK~0x800000}\label{nios2_8h_a423c56dc6145ad454db34fe3cff783bd}
+
+
+Definition at line {\bf 216} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+R\+\_\+\+O\+F\+ST~23}\label{nios2_8h_a57105c85d09fe71a6377cac532cbdcf8}
+
+
+Definition at line {\bf 215} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+M\+A\+SK~0x400000}\label{nios2_8h_a26dc8b860a460dadc26e209711ac17de}
+
+
+Definition at line {\bf 214} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+W\+\_\+\+O\+F\+ST~22}\label{nios2_8h_a1d3410fc7a0bc76840af4246331b236d}
+
+
+Definition at line {\bf 213} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+M\+A\+SK~0x200000}\label{nios2_8h_ac0cfd0ae9e54cf7f7d54a803fdf71faa}
+
+
+Definition at line {\bf 212} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+A\+C\+C\+\_\+\+R\+E\+G\+\_\+\+X\+\_\+\+O\+F\+ST~21}\label{nios2_8h_aed7fc5ea18365cdcc92c4414bd037d69}
+
+
+Definition at line {\bf 211} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+M\+A\+SK~0x4}\label{nios2_8h_a09fca40b1c134863ffa5844b31dc2650}
+
+
+Definition at line {\bf 228} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+B\+A\+D\+\_\+\+O\+F\+ST~2}\label{nios2_8h_ac1ed4797945f0d4f0389ee6dc19b3204}
+
+
+Definition at line {\bf 227} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+M\+A\+SK~0x1}\label{nios2_8h_a8b926d1b8892800379a644fef17ff4bb}
+
+
+Definition at line {\bf 224} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+\_\+\+O\+F\+ST~0}\label{nios2_8h_a72a4d1d3ac512d48b6500da227b76cd0}
+
+
+Definition at line {\bf 223} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+M\+A\+SK~0x8}\label{nios2_8h_a82864e33892d9a6e78128b8ff360111c}
+
+
+Definition at line {\bf 230} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+D\+B\+L\+\_\+\+O\+F\+ST~3}\label{nios2_8h_a42aa5b5cd42993c02ba9f389324c3f1d}
+
+
+Definition at line {\bf 229} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+M\+A\+SK~0x1000000}\label{nios2_8h_ac44e54325b10fd9f19228e99b918544e}
+
+
+Definition at line {\bf 240} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+E\+E\+\_\+\+O\+F\+ST~24}\label{nios2_8h_a6540f242a1ea685971a2c56e12c70c90}
+
+
+Definition at line {\bf 239} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+M\+A\+SK~0x2}\label{nios2_8h_a4a58e8570b24ecb7b71b8702d8c1317f}
+
+
+Definition at line {\bf 226} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+E\+R\+M\+\_\+\+O\+F\+ST~1}\label{nios2_8h_a9f585c28956fda2e6dc63736e6bee3f1}
+
+
+Definition at line {\bf 225} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+M\+A\+SK~0x3fff0}\label{nios2_8h_a7d222030def1685e9b138e4ea6728f5f}
+
+
+Definition at line {\bf 232} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+P\+I\+D\+\_\+\+O\+F\+ST~4}\label{nios2_8h_ad5993cca0d86a22a70b7f3c601cdb2d9}
+
+
+Definition at line {\bf 231} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+M\+A\+SK~0x80000}\label{nios2_8h_a28ef7da32e52d2e6a612a0401293bdaa}
+
+
+Definition at line {\bf 236} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+R\+D\+\_\+\+O\+F\+ST~19}\label{nios2_8h_a4220564107aa0292cc8a5d6278265a0f}
+
+
+Definition at line {\bf 235} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+M\+A\+SK~0xf00000}\label{nios2_8h_a2cde4fb21fc83dba1302f4a30bdc6285}
+
+
+Definition at line {\bf 238} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+A\+Y\+\_\+\+O\+F\+ST~20}\label{nios2_8h_a2a25ef0819415b9aad86533c2f0652d3}
+
+
+Definition at line {\bf 237} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+M\+A\+SK}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+M\+A\+SK@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+M\+A\+SK}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+M\+A\+SK~0x40000}\label{nios2_8h_ae826f4ca026ae8e7a40de7111fca8bd3}
+
+
+Definition at line {\bf 234} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+O\+F\+ST}}
+\index{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+O\+F\+ST@{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+O\+F\+ST}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+O\+F\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+T\+L\+B\+M\+I\+S\+C\+\_\+\+R\+E\+G\+\_\+\+W\+E\+\_\+\+O\+F\+ST~18}\label{nios2_8h_aa0d37e372460c06c388e7aa8abc9139d}
+
+
+Definition at line {\bf 233} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+O\+N\+F\+IG@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+O\+N\+F\+IG}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+O\+N\+F\+IG@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+O\+N\+F\+IG}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+O\+N\+F\+IG}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+C\+O\+N\+F\+IG(
+\begin{DoxyParamCaption}
+\item[{}]{src}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(13, src); \} while (0)}\label{nios2_8h_a39694196de976d8e564971cb4388124c}
+
+
+Definition at line {\bf 130} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+C\+C\+I\+NJ@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+C\+C\+I\+NJ}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+C\+C\+I\+NJ@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+C\+C\+I\+NJ}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+C\+C\+I\+NJ}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+C\+C\+I\+NJ(
+\begin{DoxyParamCaption}
+\item[{}]{src}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(11, src); \} while (0)}\label{nios2_8h_a928591ec81a1af2a8885eda048913413}
+
+
+Definition at line {\bf 124} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+ET@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+ET}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+ET@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+ET}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+ET(
+\begin{DoxyParamCaption}
+\item[{}]{et}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+asm volatile (\char`\"{}mov et, \%z0\char`\"{} \+: \+: \char`\"{}rM\char`\"{} (et)); \} while (0)}\label{nios2_8h_af5e20c4521f0800f2ed22939a7d114d6}
+
+
+Definition at line {\bf 57} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+set\+\_\+stack\+\_\+limit()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE(
+\begin{DoxyParamCaption}
+\item[{}]{src}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(3, src); \} while (0)}\label{nios2_8h_af79e611c38be6e02449bb916de76f664}
+
+
+Definition at line {\bf 91} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+disable()}, {\bf alt\+\_\+irq\+\_\+enable()}, {\bf alt\+\_\+irq\+\_\+interruptible()}, {\bf alt\+\_\+irq\+\_\+non\+\_\+interruptible()}, and {\bf altera\+\_\+nios2\+\_\+gen2\+\_\+irq\+\_\+init()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+A\+CC@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+A\+CC}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+A\+CC@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+A\+CC}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+A\+CC}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+A\+CC(
+\begin{DoxyParamCaption}
+\item[{}]{src}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(15, src); \} while (0)}\label{nios2_8h_a42bbb0c9bc747b55a6c7c6eb65cfb40c}
+
+
+Definition at line {\bf 142} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+B\+A\+SE@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+B\+A\+SE}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+B\+A\+SE@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+B\+A\+SE}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+B\+A\+SE}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+M\+P\+U\+B\+A\+SE(
+\begin{DoxyParamCaption}
+\item[{}]{src}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(14, src); \} while (0)}\label{nios2_8h_afb8594bf6fcc68aa5703ae50cec0852f}
+
+
+Definition at line {\bf 136} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+T\+E\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+T\+E\+A\+D\+DR}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+T\+E\+A\+D\+DR@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+T\+E\+A\+D\+DR}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+T\+E\+A\+D\+DR}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+P\+T\+E\+A\+D\+DR(
+\begin{DoxyParamCaption}
+\item[{}]{src}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(8, src); \} while (0)}\label{nios2_8h_a7612d44fcd7a72dbabe99d9209006f09}
+
+
+Definition at line {\bf 106} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US(
+\begin{DoxyParamCaption}
+\item[{}]{src}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(0, src); \} while (0)}\label{nios2_8h_a3adafd4d9a38bd8589a0e46c44ec761c}
+
+
+Definition at line {\bf 79} of file {\bf nios2.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+cpu\+\_\+enable\+\_\+interrupts()}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+interruptible()}, and {\bf alt\+\_\+irq\+\_\+non\+\_\+interruptible()}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+A\+CC@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+A\+CC}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+A\+CC@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+A\+CC}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+A\+CC}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+A\+CC(
+\begin{DoxyParamCaption}
+\item[{}]{src}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(9, src); \} while (0)}\label{nios2_8h_a7c56ce1dbdab5a013a4d5dbaf4044997}
+
+
+Definition at line {\bf 112} of file {\bf nios2.\+h}.
+
+\index{nios2.\+h@{nios2.\+h}!N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+M\+I\+SC@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+M\+I\+SC}}
+\index{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+M\+I\+SC@{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+M\+I\+SC}!nios2.\+h@{nios2.\+h}}
+\paragraph[{N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+M\+I\+SC}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+T\+L\+B\+M\+I\+SC(
+\begin{DoxyParamCaption}
+\item[{}]{src}
+\end{DoxyParamCaption}
+)~do \{ \+\_\+\+\_\+builtin\+\_\+wrctl(10, src); \} while (0)}\label{nios2_8h_aa1f109124880548a0a51104c7ea08fa4}
+
+
+Definition at line {\bf 118} of file {\bf nios2.\+h}.
+

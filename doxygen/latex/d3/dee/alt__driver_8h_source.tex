@@ -1,0 +1,173 @@
+\subsection{alt\+\_\+driver.\+h}
+\label{alt__driver_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+driver.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+driver.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_ALT\_DRIVER\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_ALT\_DRIVER\_H\_\_}
+00003 
+00004 \textcolor{comment}{/******************************************************************************}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* License Agreement                                                           *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Copyright (c) 2006 Altera Corporation, San Jose, California, USA.           *}
+00009 \textcolor{comment}{* All rights reserved.                                                        *}
+00010 \textcolor{comment}{*                                                                             *}
+00011 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00012 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00013 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00014 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00015 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00016 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00019 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00020 \textcolor{comment}{*                                                                             *}
+00021 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00022 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00023 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00024 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00025 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00026 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00027 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00030 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00031 \textcolor{comment}{*                                                                             *}
+00032 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00033 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00034 \textcolor{comment}{******************************************************************************/}
+00035 
+00036 \textcolor{comment}{/*}
+00037 \textcolor{comment}{ * Macros used to access a driver without HAL file descriptors.}
+00038 \textcolor{comment}{ */}
+00039 
+00040 \textcolor{comment}{/*}
+00041 \textcolor{comment}{ * ALT\_MODULE\_CLASS}
+00042 \textcolor{comment}{ *}
+00043 \textcolor{comment}{ * This macro returns the module class name for the specified module instance.}
+00044 \textcolor{comment}{ * It uses information in the system.h file.}
+00045 \textcolor{comment}{ * Neither the instance name or class name are quoted (so that they can}
+00046 \textcolor{comment}{ * be used with other pre-processor macros).}
+00047 \textcolor{comment}{ *}
+00048 \textcolor{comment}{ * Example:}
+00049 \textcolor{comment}{ *   Assume the design has an instance of an altera\_avalon\_uart called uart1.}
+00050 \textcolor{comment}{ *   Calling ALT\_MODULE\_CLASS(uart1) returns altera\_avalon\_uart.}
+00051 \textcolor{comment}{ */}
+00052 
+00053 \textcolor{preprocessor}{#define ALT\_MODULE\_CLASS(instance) ALT\_MODULE\_CLASS\_ ## instance}
+00054 
+00055 
+00056 \textcolor{comment}{/*}
+00057 \textcolor{comment}{ * ALT\_DRIVER\_FUNC\_NAME}
+00058 \textcolor{comment}{ *}
+00059 \textcolor{comment}{ *   --> instance               Instance name.}
+00060 \textcolor{comment}{ *   --> func                   Function name.}
+00061 \textcolor{comment}{ *}
+00062 \textcolor{comment}{ * This macro returns the device driver function name of the specified}
+00063 \textcolor{comment}{ * module instance for the specified function name.}
+00064 \textcolor{comment}{ *}
+00065 \textcolor{comment}{ * Example:}
+00066 \textcolor{comment}{ *   Assume the design has an instance of an altera\_avalon\_uart called uart1.}
+00067 \textcolor{comment}{ *   Calling ALT\_DRIVER\_FUNC\_NAME(uart1, write) returns }
+00068 \textcolor{comment}{ *   altera\_avalon\_uart\_write.}
+00069 \textcolor{comment}{ */}
+00070 
+00071 \textcolor{preprocessor}{#define ALT\_DRIVER\_FUNC\_NAME(instance, func) \(\backslash\)}
+00072 \textcolor{preprocessor}{  ALT\_DRIVER\_FUNC\_NAME1(ALT\_MODULE\_CLASS(instance), func)}
+00073 \textcolor{preprocessor}{#define ALT\_DRIVER\_FUNC\_NAME1(module\_class, func) \(\backslash\)}
+00074 \textcolor{preprocessor}{  ALT\_DRIVER\_FUNC\_NAME2(module\_class, func)}
+00075 \textcolor{preprocessor}{#define ALT\_DRIVER\_FUNC\_NAME2(module\_class, func) \(\backslash\)}
+00076 \textcolor{preprocessor}{  module\_class ## \_ ## func}
+00077 
+00078 \textcolor{comment}{/*}
+00079 \textcolor{comment}{ * ALT\_DRIVER\_STATE\_STRUCT}
+00080 \textcolor{comment}{ *}
+00081 \textcolor{comment}{ *   --> instance               Instance name.}
+00082 \textcolor{comment}{ *}
+00083 \textcolor{comment}{ * This macro returns the device driver state type name of the specified}
+00084 \textcolor{comment}{ * module instance.}
+00085 \textcolor{comment}{ *}
+00086 \textcolor{comment}{ * Example:}
+00087 \textcolor{comment}{ *   Assume the design has an instance of an altera\_avalon\_uart called uart1.}
+00088 \textcolor{comment}{ *   Calling ALT\_DRIVER\_STATE\_STRUCT(uart1) returns:}
+00089 \textcolor{comment}{ *     struct altera\_avalon\_uart\_state\_s}
+00090 \textcolor{comment}{ *}
+00091 \textcolor{comment}{ * Note that the ALT\_DRIVER\_FUNC\_NAME macro is used even though "state" isn't}
+00092 \textcolor{comment}{ * really a function but it does match the required naming convention.}
+00093 \textcolor{comment}{ */}
+00094 \textcolor{preprocessor}{#define ALT\_DRIVER\_STATE\_STRUCT(instance) \(\backslash\)}
+00095 \textcolor{preprocessor}{    struct ALT\_DRIVER\_FUNC\_NAME(instance, state\_s)}
+00096 
+00097 \textcolor{comment}{/*}
+00098 \textcolor{comment}{ * ALT\_DRIVER\_STATE}
+00099 \textcolor{comment}{ *}
+00100 \textcolor{comment}{ *   --> instance               Instance name.}
+00101 \textcolor{comment}{ *}
+00102 \textcolor{comment}{ * This macro returns the device driver state name of the specified}
+00103 \textcolor{comment}{ * module instance.}
+00104 \textcolor{comment}{ *}
+00105 \textcolor{comment}{ * Example:}
+00106 \textcolor{comment}{ *   Assume the design has an instance of an altera\_avalon\_uart called uart1.}
+00107 \textcolor{comment}{ *   Calling ALT\_DRIVER\_STATE(uart1) returns uart1.}
+00108 \textcolor{comment}{ */}
+00109 \textcolor{preprocessor}{#define ALT\_DRIVER\_STATE(instance) instance}
+00110 
+00111 \textcolor{comment}{/*}
+00112 \textcolor{comment}{ * ALT\_DRIVER\_WRITE}
+00113 \textcolor{comment}{ *}
+00114 \textcolor{comment}{ *   --> instance               Instance name.}
+00115 \textcolor{comment}{ *   --> buffer                 Write buffer.}
+00116 \textcolor{comment}{ *   --> len                    Length of write buffer data.}
+00117 \textcolor{comment}{ *   --> flags                  Control flags (e.g. O\_NONBLOCK)}
+00118 \textcolor{comment}{ *}
+00119 \textcolor{comment}{ * This macro calls the "write" function of the specified driver instance.}
+00120 \textcolor{comment}{ */}
+00121 
+00122 \textcolor{preprocessor}{#define ALT\_DRIVER\_WRITE\_EXTERNS(instance)                                  \(\backslash\)}
+00123 \textcolor{preprocessor}{    extern ALT\_DRIVER\_STATE\_STRUCT(instance) ALT\_DRIVER\_STATE(instance);    \(\backslash\)}
+00124 \textcolor{preprocessor}{    extern int ALT\_DRIVER\_FUNC\_NAME(instance, write)                        \(\backslash\)}
+00125 \textcolor{preprocessor}{      (ALT\_DRIVER\_STATE\_STRUCT(instance) *, const char *, int, int);}
+00126 
+00127 \textcolor{preprocessor}{#define ALT\_DRIVER\_WRITE(instance, buffer, len, flags)                      \(\backslash\)}
+00128 \textcolor{preprocessor}{    ALT\_DRIVER\_FUNC\_NAME(instance, write)(&ALT\_DRIVER\_STATE(instance), buffer, len, flags)}
+00129 
+00130 
+00131 \textcolor{comment}{/*}
+00132 \textcolor{comment}{ * ALT\_DRIVER\_READ}
+00133 \textcolor{comment}{ *}
+00134 \textcolor{comment}{ *   --> instance               Instance name.}
+00135 \textcolor{comment}{ *   <-- buffer                 Read buffer.}
+00136 \textcolor{comment}{ *   --> len                    Length of read buffer.}
+00137 \textcolor{comment}{ *   --> flags                  Control flags (e.g. O\_NONBLOCK)}
+00138 \textcolor{comment}{ *}
+00139 \textcolor{comment}{ * This macro calls the "read" function of the specified driver instance.}
+00140 \textcolor{comment}{ */}
+00141 
+00142 \textcolor{preprocessor}{#define ALT\_DRIVER\_READ\_EXTERNS(instance)                                   \(\backslash\)}
+00143 \textcolor{preprocessor}{    extern ALT\_DRIVER\_STATE\_STRUCT(instance) ALT\_DRIVER\_STATE(instance);    \(\backslash\)}
+00144 \textcolor{preprocessor}{    extern int ALT\_DRIVER\_FUNC\_NAME(instance, read)                         \(\backslash\)}
+00145 \textcolor{preprocessor}{      (ALT\_DRIVER\_STATE\_STRUCT(instance) *, const char *, int, int);}
+00146 
+00147 \textcolor{preprocessor}{#define ALT\_DRIVER\_READ(instance, buffer, len, flags)                       \(\backslash\)}
+00148 \textcolor{preprocessor}{    ALT\_DRIVER\_FUNC\_NAME(instance, read)(&ALT\_DRIVER\_STATE(instance), buffer, len, flags)}
+00149 
+00150 \textcolor{comment}{/*}
+00151 \textcolor{comment}{ * ALT\_DRIVER\_IOCTL}
+00152 \textcolor{comment}{ *}
+00153 \textcolor{comment}{ *   --> instance               Instance name.}
+00154 \textcolor{comment}{ *   --> req                    ioctl request (e.g. TIOCSTIMEOUT)}
+00155 \textcolor{comment}{ *   --> arg                    Optional argument (void*)}
+00156 \textcolor{comment}{ *}
+00157 \textcolor{comment}{ * This macro calls the "ioctl" function of the specified driver instance}
+00158 \textcolor{comment}{ */}
+00159 
+00160 \textcolor{preprocessor}{#define ALT\_DRIVER\_IOCTL\_EXTERNS(instance)                                  \(\backslash\)}
+00161 \textcolor{preprocessor}{    extern ALT\_DRIVER\_STATE\_STRUCT(instance) ALT\_DRIVER\_STATE(instance);    \(\backslash\)}
+00162 \textcolor{preprocessor}{    extern int ALT\_DRIVER\_FUNC\_NAME(instance, ioctl)                        \(\backslash\)}
+00163 \textcolor{preprocessor}{      (ALT\_DRIVER\_STATE\_STRUCT(instance) *, int, void*);}
+00164 
+00165 \textcolor{preprocessor}{#define ALT\_DRIVER\_IOCTL(instance, req, arg)                                \(\backslash\)}
+00166 \textcolor{preprocessor}{    ALT\_DRIVER\_FUNC\_NAME(instance, ioctl)(&ALT\_DRIVER\_STATE(instance), req, arg)}
+00167 
+00168 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_DRIVER\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

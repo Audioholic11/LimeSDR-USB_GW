@@ -1,0 +1,305 @@
+\subsection{nios2.\+h}
+\label{nios2_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/nios2.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/nios2.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_NIOS2\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_NIOS2\_H\_\_}
+00003 
+00004 \textcolor{comment}{/******************************************************************************}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* License Agreement                                                           *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Copyright (c) 2008 Altera Corporation, San Jose, California, USA.           *}
+00009 \textcolor{comment}{* All rights reserved.                                                        *}
+00010 \textcolor{comment}{*                                                                             *}
+00011 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00012 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00013 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00014 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00015 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00016 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00019 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00020 \textcolor{comment}{*                                                                             *}
+00021 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00022 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00023 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00024 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00025 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00026 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00027 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00030 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00031 \textcolor{comment}{*                                                                             *}
+00032 \textcolor{comment}{******************************************************************************/}
+00033 
+00034 \textcolor{comment}{/*}
+00035 \textcolor{comment}{ * This header provides processor specific macros for accessing the Nios2}
+00036 \textcolor{comment}{ * control registers.}
+00037 \textcolor{comment}{ */}
+00038 
+00039 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00040 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"}
+00041 \{
+00042 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00043 
+00044 \textcolor{comment}{/*}
+00045 \textcolor{comment}{ * Number of available IRQs in internal interrupt controller.}
+00046 \textcolor{comment}{ */}
+00047 \textcolor{preprocessor}{#define NIOS2\_NIRQ 32}
+00048 
+00049 \textcolor{comment}{/*}
+00050 \textcolor{comment}{ * Macros for accessing select Nios II general-purpose registers.}
+00051 \textcolor{comment}{ */}
+00052 
+00053 \textcolor{comment}{/* ET (Exception Temporary) register */} 
+00054 \textcolor{preprocessor}{#define NIOS2\_READ\_ET(et) \(\backslash\)}
+00055 \textcolor{preprocessor}{    do \{ \_\_asm ("mov %0, et" : "=r" (et) ); \} while (0)}
+00056 
+00057 \textcolor{preprocessor}{#define NIOS2\_WRITE\_ET(et) \(\backslash\)}
+00058 \textcolor{preprocessor}{    do \{ \_\_asm volatile ("mov et, %z0" : : "rM" (et)); \} while (0)}
+00059 
+00060 \textcolor{comment}{/* SP (Stack Pointer) register */} 
+00061 \textcolor{preprocessor}{#define NIOS2\_READ\_SP(sp) \(\backslash\)}
+00062 \textcolor{preprocessor}{    do \{ \_\_asm ("mov %0, sp" : "=r" (sp) ); \} while (0)}
+00063 
+00064 \textcolor{comment}{/*}
+00065 \textcolor{comment}{ * Macros for useful processor instructions.}
+00066 \textcolor{comment}{ */}
+00067 \textcolor{preprocessor}{#define NIOS2\_BREAK() \(\backslash\)}
+00068 \textcolor{preprocessor}{    do \{ \_\_asm volatile ("break"); \} while (0)}
+00069 
+00070 \textcolor{preprocessor}{#define NIOS2\_REPORT\_STACK\_OVERFLOW() \(\backslash\)}
+00071 \textcolor{preprocessor}{    do \{ \_\_asm volatile("break 3"); \} while (0)}
+00072 
+00073 \textcolor{comment}{/*}
+00074 \textcolor{comment}{ * Macros for accessing Nios II control registers.}
+00075 \textcolor{comment}{ */}
+00076 \textcolor{preprocessor}{#define NIOS2\_READ\_STATUS(dest) \(\backslash\)}
+00077 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(0); \} while (0)}
+00078 
+00079 \textcolor{preprocessor}{#define NIOS2\_WRITE\_STATUS(src) \(\backslash\)}
+00080 \textcolor{preprocessor}{    do \{ \_\_builtin\_wrctl(0, src); \} while (0)}
+00081 
+00082 \textcolor{preprocessor}{#define NIOS2\_READ\_ESTATUS(dest) \(\backslash\)}
+00083 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(1); \} while (0)}
+00084 
+00085 \textcolor{preprocessor}{#define NIOS2\_READ\_BSTATUS(dest) \(\backslash\)}
+00086 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(2); \} while (0)}
+00087 
+00088 \textcolor{preprocessor}{#define NIOS2\_READ\_IENABLE(dest) \(\backslash\)}
+00089 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(3); \} while (0)}
+00090 
+00091 \textcolor{preprocessor}{#define NIOS2\_WRITE\_IENABLE(src) \(\backslash\)}
+00092 \textcolor{preprocessor}{    do \{ \_\_builtin\_wrctl(3, src); \} while (0)}
+00093 
+00094 \textcolor{preprocessor}{#define NIOS2\_READ\_IPENDING(dest) \(\backslash\)}
+00095 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(4); \} while (0)}
+00096 
+00097 \textcolor{preprocessor}{#define NIOS2\_READ\_CPUID(dest) \(\backslash\)}
+00098 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(5); \} while (0)}
+00099 
+00100 \textcolor{preprocessor}{#define NIOS2\_READ\_EXCEPTION(dest) \(\backslash\)}
+00101 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(7); \} while (0)}
+00102 
+00103 \textcolor{preprocessor}{#define NIOS2\_READ\_PTEADDR(dest) \(\backslash\)}
+00104 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(8); \} while (0)}
+00105 
+00106 \textcolor{preprocessor}{#define NIOS2\_WRITE\_PTEADDR(src) \(\backslash\)}
+00107 \textcolor{preprocessor}{    do \{ \_\_builtin\_wrctl(8, src); \} while (0)}
+00108 
+00109 \textcolor{preprocessor}{#define NIOS2\_READ\_TLBACC(dest) \(\backslash\)}
+00110 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(9); \} while (0)}
+00111 
+00112 \textcolor{preprocessor}{#define NIOS2\_WRITE\_TLBACC(src) \(\backslash\)}
+00113 \textcolor{preprocessor}{    do \{ \_\_builtin\_wrctl(9, src); \} while (0)}
+00114 
+00115 \textcolor{preprocessor}{#define NIOS2\_READ\_TLBMISC(dest) \(\backslash\)}
+00116 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(10); \} while (0)}
+00117 
+00118 \textcolor{preprocessor}{#define NIOS2\_WRITE\_TLBMISC(src) \(\backslash\)}
+00119 \textcolor{preprocessor}{    do \{ \_\_builtin\_wrctl(10, src); \} while (0)}
+00120 
+00121 \textcolor{preprocessor}{#define NIOS2\_READ\_ECCINJ(dest) \(\backslash\)}
+00122 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(11); \} while (0)}
+00123 
+00124 \textcolor{preprocessor}{#define NIOS2\_WRITE\_ECCINJ(src) \(\backslash\)}
+00125 \textcolor{preprocessor}{    do \{ \_\_builtin\_wrctl(11, src); \} while (0)}
+00126 
+00127 \textcolor{preprocessor}{#define NIOS2\_READ\_BADADDR(dest) \(\backslash\)}
+00128 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(12); \} while (0)}
+00129 
+00130 \textcolor{preprocessor}{#define NIOS2\_WRITE\_CONFIG(src) \(\backslash\)}
+00131 \textcolor{preprocessor}{    do \{ \_\_builtin\_wrctl(13, src); \} while (0)}
+00132 
+00133 \textcolor{preprocessor}{#define NIOS2\_READ\_CONFIG(dest) \(\backslash\)}
+00134 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(13); \} while (0)}
+00135 
+00136 \textcolor{preprocessor}{#define NIOS2\_WRITE\_MPUBASE(src) \(\backslash\)}
+00137 \textcolor{preprocessor}{    do \{ \_\_builtin\_wrctl(14, src); \} while (0)}
+00138 
+00139 \textcolor{preprocessor}{#define NIOS2\_READ\_MPUBASE(dest) \(\backslash\)}
+00140 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(14); \} while (0)}
+00141 
+00142 \textcolor{preprocessor}{#define NIOS2\_WRITE\_MPUACC(src) \(\backslash\)}
+00143 \textcolor{preprocessor}{    do \{ \_\_builtin\_wrctl(15, src); \} while (0)}
+00144 
+00145 \textcolor{preprocessor}{#define NIOS2\_READ\_MPUACC(dest) \(\backslash\)}
+00146 \textcolor{preprocessor}{    do \{ dest = \_\_builtin\_rdctl(15); \} while (0)}
+00147 
+00148 \textcolor{comment}{/*}
+00149 \textcolor{comment}{ * Nios II control registers that are always present}
+00150 \textcolor{comment}{ */}
+00151 \textcolor{preprocessor}{#define NIOS2\_STATUS   status}
+00152 \textcolor{preprocessor}{#define NIOS2\_ESTATUS  estatus}
+00153 \textcolor{preprocessor}{#define NIOS2\_BSTATUS  bstatus}
+00154 \textcolor{preprocessor}{#define NIOS2\_IENABLE  ienable}
+00155 \textcolor{preprocessor}{#define NIOS2\_IPENDING ipending}
+00156 \textcolor{preprocessor}{#define NIOS2\_CPUID cpuid}
+00157 
+00158 \textcolor{comment}{/*}
+00159 \textcolor{comment}{ * Bit masks & offsets for Nios II control registers.}
+00160 \textcolor{comment}{ * The presence and size of a field is sometimes dependent on the Nios II}
+00161 \textcolor{comment}{ * configuration.  Bit masks for every possible field and the maximum size of}
+00162 \textcolor{comment}{ * that field are defined.}
+00163 \textcolor{comment}{ *}
+00164 \textcolor{comment}{ * All bit-masks are expressed relative to the position}
+00165 \textcolor{comment}{ * of the data with a register. To read data that is LSB-}
+00166 \textcolor{comment}{ * aligned, the register read data should be masked, then}
+00167 \textcolor{comment}{ * right-shifted by the designated "OFST" macro value. The}
+00168 \textcolor{comment}{ * opposite should be used for register writes when starting}
+00169 \textcolor{comment}{ * with LSB-aligned data.}
+00170 \textcolor{comment}{ */}
+00171 
+00172 \textcolor{comment}{/* STATUS, ESTATUS, BSTATUS, and SSTATUS registers */}
+00173 \textcolor{preprocessor}{#define NIOS2\_STATUS\_PIE\_MSK  (0x00000001)}
+00174 \textcolor{preprocessor}{#define NIOS2\_STATUS\_PIE\_OFST (0)}
+00175 \textcolor{preprocessor}{#define NIOS2\_STATUS\_U\_MSK    (0x00000002)}
+00176 \textcolor{preprocessor}{#define NIOS2\_STATUS\_U\_OFST   (1)}
+00177 \textcolor{preprocessor}{#define NIOS2\_STATUS\_EH\_MSK   (0x00000004)}
+00178 \textcolor{preprocessor}{#define NIOS2\_STATUS\_EH\_OFST  (2)}
+00179 \textcolor{preprocessor}{#define NIOS2\_STATUS\_IH\_MSK     (0x00000008)}
+00180 \textcolor{preprocessor}{#define NIOS2\_STATUS\_IH\_OFST    (3)}
+00181 \textcolor{preprocessor}{#define NIOS2\_STATUS\_IL\_MSK     (0x000003f0)}
+00182 \textcolor{preprocessor}{#define NIOS2\_STATUS\_IL\_OFST    (4)}
+00183 \textcolor{preprocessor}{#define NIOS2\_STATUS\_CRS\_MSK    (0x0000fc00)}
+00184 \textcolor{preprocessor}{#define NIOS2\_STATUS\_CRS\_OFST   (10)}
+00185 \textcolor{preprocessor}{#define NIOS2\_STATUS\_PRS\_MSK    (0x003f0000)}
+00186 \textcolor{preprocessor}{#define NIOS2\_STATUS\_PRS\_OFST   (16)}
+00187 \textcolor{preprocessor}{#define NIOS2\_STATUS\_NMI\_MSK    (0x00400000)}
+00188 \textcolor{preprocessor}{#define NIOS2\_STATUS\_NMI\_OFST   (22)}
+00189 \textcolor{preprocessor}{#define NIOS2\_STATUS\_RSIE\_MSK   (0x00800000)}
+00190 \textcolor{preprocessor}{#define NIOS2\_STATUS\_RSIE\_OFST  (23)}
+00191 \textcolor{preprocessor}{#define NIOS2\_STATUS\_SRS\_MSK    (0x80000000)}
+00192 \textcolor{preprocessor}{#define NIOS2\_STATUS\_SRS\_OFST   (31)}
+00193 
+00194 \textcolor{comment}{/* EXCEPTION register */}
+00195 \textcolor{preprocessor}{#define NIOS2\_EXCEPTION\_REG\_CAUSE\_MASK (0x0000007c)}
+00196 \textcolor{preprocessor}{#define NIOS2\_EXCEPTION\_REG\_CAUSE\_OFST (2)}
+00197 \textcolor{preprocessor}{#define NIOS2\_EXCEPTION\_REG\_ECCFTL\_MASK (0x80000000)}
+00198 \textcolor{preprocessor}{#define NIOS2\_EXCEPTION\_REG\_ECCFTL\_OFST (31)}
+00199 
+00200 \textcolor{comment}{/* PTEADDR (Page Table Entry Address) register */}
+00201 \textcolor{preprocessor}{#define NIOS2\_PTEADDR\_REG\_VPN\_OFST 2}
+00202 \textcolor{preprocessor}{#define NIOS2\_PTEADDR\_REG\_VPN\_MASK 0x3ffffc}
+00203 \textcolor{preprocessor}{#define NIOS2\_PTEADDR\_REG\_PTBASE\_OFST 22}
+00204 \textcolor{preprocessor}{#define NIOS2\_PTEADDR\_REG\_PTBASE\_MASK 0xffc00000}
+00205 
+00206 \textcolor{comment}{/* TLBACC (TLB Access) register */}
+00207 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_PFN\_OFST 0}
+00208 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_PFN\_MASK 0xfffff}
+00209 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_G\_OFST 20}
+00210 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_G\_MASK 0x100000}
+00211 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_X\_OFST 21}
+00212 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_X\_MASK 0x200000}
+00213 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_W\_OFST 22}
+00214 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_W\_MASK 0x400000}
+00215 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_R\_OFST 23}
+00216 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_R\_MASK 0x800000}
+00217 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_C\_OFST 24}
+00218 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_C\_MASK 0x1000000}
+00219 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_IG\_OFST 25}
+00220 \textcolor{preprocessor}{#define NIOS2\_TLBACC\_REG\_IG\_MASK 0xfe000000}
+00221 
+00222 \textcolor{comment}{/* TLBMISC (TLB Miscellaneous) register */}
+00223 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_D\_OFST 0}
+00224 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_D\_MASK 0x1}
+00225 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_PERM\_OFST 1}
+00226 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_PERM\_MASK 0x2}
+00227 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_BAD\_OFST 2}
+00228 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_BAD\_MASK 0x4}
+00229 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_DBL\_OFST 3}
+00230 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_DBL\_MASK 0x8}
+00231 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_PID\_OFST 4}
+00232 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_PID\_MASK 0x3fff0}
+00233 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_WE\_OFST 18}
+00234 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_WE\_MASK 0x40000}
+00235 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_RD\_OFST 19}
+00236 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_RD\_MASK 0x80000}
+00237 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_WAY\_OFST 20}
+00238 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_WAY\_MASK 0xf00000}
+00239 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_EE\_OFST 24}
+00240 \textcolor{preprocessor}{#define NIOS2\_TLBMISC\_REG\_EE\_MASK 0x1000000}
+00241 
+00242 \textcolor{comment}{/* ECCINJ (ECC Inject) register */}
+00243 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_RF\_OFST 0}
+00244 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_RF\_MASK 0x3}
+00245 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_ICTAG\_OFST 2}
+00246 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_ICTAG\_MASK 0xc}
+00247 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_ICDAT\_OFST 4}
+00248 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_ICDAT\_MASK 0x30}
+00249 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DCTAG\_OFST 6}
+00250 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DCTAG\_MASK 0xc0}
+00251 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DCDAT\_OFST 8}
+00252 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DCDAT\_MASK 0x300}
+00253 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_TLB\_OFST 10}
+00254 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_TLB\_MASK 0xc00}
+00255 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DTCM0\_OFST 12}
+00256 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DTCM0\_MASK 0x3000}
+00257 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DTCM1\_OFST 14}
+00258 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DTCM1\_MASK 0xc000}
+00259 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DTCM2\_OFST 16}
+00260 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DTCM2\_MASK 0x30000}
+00261 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DTCM3\_OFST 18}
+00262 \textcolor{preprocessor}{#define NIOS2\_ECCINJ\_REG\_DTCM3\_MASK 0xc0000}
+00263 
+00264 \textcolor{comment}{/* CONFIG register */}
+00265 \textcolor{preprocessor}{#define NIOS2\_CONFIG\_REG\_PE\_MASK (0x00000001)}
+00266 \textcolor{preprocessor}{#define NIOS2\_CONFIG\_REG\_PE\_OFST (0)}
+00267 \textcolor{preprocessor}{#define NIOS2\_CONFIG\_REG\_ANI\_MASK (0x00000002)}
+00268 \textcolor{preprocessor}{#define NIOS2\_CONFIG\_REG\_ANI\_OFST (1)}
+00269 \textcolor{preprocessor}{#define NIOS2\_CONFIG\_REG\_ECCEN\_MASK (0x00000004)}
+00270 \textcolor{preprocessor}{#define NIOS2\_CONFIG\_REG\_ECCEN\_OFST (2)}
+00271 \textcolor{preprocessor}{#define NIOS2\_CONFIG\_REG\_ECCEXC\_MASK (0x00000008)}
+00272 \textcolor{preprocessor}{#define NIOS2\_CONFIG\_REG\_ECCEXC\_OFST (3)}
+00273 
+00274 \textcolor{comment}{/* MPUBASE (MPU Base Address) Register */}
+00275 \textcolor{preprocessor}{#define NIOS2\_MPUBASE\_D\_MASK         (0x00000001)}
+00276 \textcolor{preprocessor}{#define NIOS2\_MPUBASE\_D\_OFST         (0)}
+00277 \textcolor{preprocessor}{#define NIOS2\_MPUBASE\_INDEX\_MASK     (0x0000003e)}
+00278 \textcolor{preprocessor}{#define NIOS2\_MPUBASE\_INDEX\_OFST     (1)}
+00279 \textcolor{preprocessor}{#define NIOS2\_MPUBASE\_BASE\_ADDR\_MASK (0xffffffc0)}
+00280 \textcolor{preprocessor}{#define NIOS2\_MPUBASE\_BASE\_ADDR\_OFST (6)}
+00281 
+00282 \textcolor{comment}{/* MPUACC (MPU Access) Register */}
+00283 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_LIMIT\_MASK (0xffffffc0)}
+00284 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_LIMIT\_OFST (6)}
+00285 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_MASK\_MASK  (0xffffffc0)}
+00286 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_MASK\_OFST  (6)}
+00287 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_C\_MASK     (0x00000020)}
+00288 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_C\_OFST     (5)}
+00289 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_PERM\_MASK  (0x0000001c)}
+00290 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_PERM\_OFST  (2)}
+00291 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_RD\_MASK    (0x00000002)}
+00292 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_RD\_OFST    (1)}
+00293 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_WR\_MASK    (0x00000001)}
+00294 \textcolor{preprocessor}{#define NIOS2\_MPUACC\_WR\_OFST    (0)}
+00295 
+00296 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00297 \}
+00298 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00299 
+00300 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_NIOS2\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

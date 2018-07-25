@@ -1,0 +1,150 @@
+\subsection{arch Architecture Reference}
+\label{classpll__reconfig__status_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{dd/d80/classpll__reconfig__status_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+276}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm\+\_\+f}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reconfig\+\_\+en}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf scandone\+\_\+fall}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf ps\+\_\+status}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf exclude\+\_\+ps\+\_\+status}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+277}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf state\+\_\+type}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{reconfig\+\_\+begin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+ps\+\_\+begin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ps\+\_\+begin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{reconfig\+\_\+complete}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf scandone\+\_\+reg0} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf scandone\+\_\+reg1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf scandone\+\_\+fall} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 34} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!fsm@{fsm}}
+\index{fsm@{fsm}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{fsmcurrent\+\_\+state,reconfig\+\_\+en,scandone\+\_\+fall,ps\+\_\+status,exclude\+\_\+ps\+\_\+status}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reconfig\+\_\+en}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf scandone\+\_\+fall}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf ps\+\_\+status}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf exclude\+\_\+ps\+\_\+status}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__reconfig__status_1_1arch_a9241229141bedea8daac0bc1b34d0e74}
+
+
+Definition at line {\bf 72} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!fsm\+\_\+f@{fsm\+\_\+f}}
+\index{fsm\+\_\+f@{fsm\+\_\+f}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{fsm\+\_\+fclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm\+\_\+f(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__reconfig__status_1_1arch_a856d95a9c7e9538caf6d13ffdaa470a3}
+
+
+Definition at line {\bf 61} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+276@{P\+R\+O\+C\+E\+S\+S\+\_\+276}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+276@{P\+R\+O\+C\+E\+S\+S\+\_\+276}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+276current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+276(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__reconfig__status_1_1arch_ad2ddf33b36238c2764039bdd6b455410}
+
+
+Definition at line {\bf 49} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+277@{P\+R\+O\+C\+E\+S\+S\+\_\+277}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+277@{P\+R\+O\+C\+E\+S\+S\+\_\+277}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+277reset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+277(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpll__reconfig__status_1_1arch_ac33ab1221f8a8b7dc1b990d913809baa}
+
+
+Definition at line {\bf 115} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!current\+\_\+state@{current\+\_\+state}}
+\index{current\+\_\+state@{current\+\_\+state}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__reconfig__status_1_1arch_a7ede5b91aac1f3d1b2a884a5e191d554}
+
+
+Definition at line {\bf 38} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!next\+\_\+state@{next\+\_\+state}}
+\index{next\+\_\+state@{next\+\_\+state}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{next\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__reconfig__status_1_1arch_a7b92f98d060e763f3dd6fa727ddb03d8}
+
+
+Definition at line {\bf 38} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!scandone\+\_\+fall@{scandone\+\_\+fall}}
+\index{scandone\+\_\+fall@{scandone\+\_\+fall}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{scandone\+\_\+fall}]{\setlength{\rightskip}{0pt plus 5cm}{\bf scandone\+\_\+fall} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__reconfig__status_1_1arch_ab24d2cfaf91e6c433ac1a93c0e25630b}
+
+
+Definition at line {\bf 41} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!scandone\+\_\+reg0@{scandone\+\_\+reg0}}
+\index{scandone\+\_\+reg0@{scandone\+\_\+reg0}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{scandone\+\_\+reg0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf scandone\+\_\+reg0} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__reconfig__status_1_1arch_a3a3be0db31d25f23e34117d58c1b8253}
+
+
+Definition at line {\bf 40} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!scandone\+\_\+reg1@{scandone\+\_\+reg1}}
+\index{scandone\+\_\+reg1@{scandone\+\_\+reg1}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{scandone\+\_\+reg1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf scandone\+\_\+reg1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpll__reconfig__status_1_1arch_ad1df4a27f6245d720410cf18ad685e96}
+
+
+Definition at line {\bf 40} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+\index{pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}!state\+\_\+type@{state\+\_\+type}}
+\index{state\+\_\+type@{state\+\_\+type}!pll\+\_\+reconfig\+\_\+status\+::arch@{pll\+\_\+reconfig\+\_\+status\+::arch}}
+\paragraph[{state\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state\+\_\+type} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{reconfig\+\_\+begin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wait\+\_\+ps\+\_\+begin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ps\+\_\+begin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{reconfig\+\_\+complete}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classpll__reconfig__status_1_1arch_a65ebda908b4034d25ab2b5a3b1fce59f}
+
+
+Definition at line {\bf 36} of file {\bf pll\+\_\+reconfig\+\_\+status.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/pll\+\_\+reconfig\+\_\+ctrl/{\bf pll\+\_\+reconfig\+\_\+status.\+vhd}\end{DoxyCompactItemize}

@@ -1,0 +1,47 @@
+\subsection{gui.\+tcl}
+\label{gui_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/gui.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/gui.\+tcl}}
+
+\begin{DoxyCode}
+00001  
+00002 \textcolor{comment}{# Create a standard Yes/No message box dialog passing in the }
+00003 \textcolor{comment}{}\textcolor{comment}{# dialog title and text.}
+00004 \textcolor{comment}{}\textcolor{keyword}{proc} CreateDialog \{title text\} \{
+00005    \textcolor{keyword}{tk\_messageBox} \(\backslash\)
+00006       -type yesno \(\backslash\)
+00007       -title $title \(\backslash\)
+00008       -default yes \(\backslash\)
+00009       -message $text \(\backslash\)
+00010       -icon question\textcolor{comment}{}
+00011 \textcolor{comment}{}\}\textcolor{comment}{}
+00012 \textcolor{comment}{} 
+00013 \textcolor{comment}{# Do this when user clicks Yes}
+00014 \textcolor{comment}{}\textcolor{keyword}{proc} Yes \{\} \{
+00015    post\_message -type info "*******************************************************************"\textcolor{comment}{}
+00016 \textcolor{comment}{}   post\_message -type info "User request to update project revision"\textcolor{comment}{}
+00017 \textcolor{comment}{}   source "update\_rev.tcl"\textcolor{comment}{}
+00018 \textcolor{comment}{}   post\_message -type info "*******************************************************************"\textcolor{comment}{}
+00019 \textcolor{comment}{}
+00020 
+00021 
+00022 \}\textcolor{comment}{}
+00023 \textcolor{comment}{} 
+00024 \textcolor{comment}{# Do this when user clicks No}
+00025 \textcolor{comment}{}\textcolor{keyword}{proc} No \{\} \{
+00026    post\_message -type warning "*******************************************************************"\textcolor{comment}{}
+00027 \textcolor{comment}{}   post\_message -type warning "Project revision was not updated."\textcolor{comment}{}
+00028 \textcolor{comment}{}   post\_message -type warning "*******************************************************************"\textcolor{comment}{}
+00029 \textcolor{comment}{}\}\textcolor{comment}{}
+00030 \textcolor{comment}{} 
+00031 \textcolor{comment}{#################}
+00032 \textcolor{comment}{}\textcolor{comment}{# Program Start #}
+00033 \textcolor{comment}{}\textcolor{comment}{#################}
+00034 \textcolor{comment}{}init\_tk\textcolor{comment}{}
+00035 \textcolor{comment}{}\textcolor{keyword}{set} dialogTitle "Project revision update"\textcolor{comment}{}
+00036 \textcolor{comment}{}\textcolor{keyword}{set} dialogText "Update project revision?"\textcolor{comment}{}
+00037 \textcolor{comment}{} 
+00038 \textcolor{keyword}{if} \{[CreateDialog $dialogTitle $dialogText] == yes\} \{
+00039    Yes\textcolor{comment}{}
+00040 \textcolor{comment}{}\} \textcolor{keyword}{else} \{
+00041    No\textcolor{comment}{}
+00042 \textcolor{comment}{}\}
+\end{DoxyCode}

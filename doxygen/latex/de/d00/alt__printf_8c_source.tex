@@ -1,0 +1,137 @@
+\subsection{alt\+\_\+printf.\+c}
+\label{alt__printf_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+printf.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+printf.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2015 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{comment}{/*}
+00034 \textcolor{comment}{ * This file provides a very minimal printf implementation for use with very}
+00035 \textcolor{comment}{ * small applications.  Only the following format strings are supported:}
+00036 \textcolor{comment}{ *   %x}
+00037 \textcolor{comment}{ *   %s}
+00038 \textcolor{comment}{ *   %c}
+00039 \textcolor{comment}{ *   %%}
+00040 \textcolor{comment}{ */}
+00041 
+00042 \textcolor{preprocessor}{#include <stdarg.h>}
+00043 \textcolor{preprocessor}{#include "sys/alt_stdio.h"}
+00044 \textcolor{preprocessor}{#ifdef ALT\_SEMIHOSTING}
+00045 \textcolor{preprocessor}{#define alt\_putchar(x) alt\_putcharbuf(x)}
+00046 \textcolor{preprocessor}{#endif}
+00047 \textcolor{comment}{/* }
+00048 \textcolor{comment}{ * ALT printf function }
+00049 \textcolor{comment}{ */}
+00050 \textcolor{keywordtype}{void} 
+00051 alt_printf(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* fmt, ... )
+00052 \{
+00053     va\_list args;
+00054     va\_start(args, fmt);
+00055     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *w;
+00056     \textcolor{keywordtype}{char} c;
+00057 
+00058     \textcolor{comment}{/* Process format string. */}
+00059     w = fmt;
+00060     \textcolor{keywordflow}{while} ((c = *w++) != 0)
+00061     \{
+00062         \textcolor{comment}{/* If not a format escape character, just print  */}
+00063         \textcolor{comment}{/* character.  Otherwise, process format string. */}
+00064         \textcolor{keywordflow}{if} (c != \textcolor{charliteral}{'%'})
+00065         \{
+00066             alt_putchar(c);
+00067         \}
+00068         \textcolor{keywordflow}{else}
+00069         \{
+00070             \textcolor{comment}{/* Get format character.  If none     */}
+00071             \textcolor{comment}{/* available, processing is complete. */}
+00072             \textcolor{keywordflow}{if} ((c = *w++) != 0)
+00073             \{
+00074                 \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'%'})
+00075                 \{
+00076                     \textcolor{comment}{/* Process "%" escape sequence. */}
+00077                     alt_putchar(c);
+00078                 \} 
+00079                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'c'})
+00080                 \{
+00081                     \textcolor{keywordtype}{int} v = va\_arg(args, \textcolor{keywordtype}{int});
+00082                     alt_putchar(v);
+00083                 \}
+00084                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'x'})
+00085                 \{
+00086                     \textcolor{comment}{/* Process hexadecimal number format. */}
+00087                     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} v = va\_arg(args, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long});
+00088                     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} digit;
+00089                     \textcolor{keywordtype}{int} digit\_shift;
+00090 
+00091                     \textcolor{comment}{/* If the number value is zero, just print and continue. */}
+00092                     \textcolor{keywordflow}{if} (v == 0)
+00093                     \{
+00094                         alt_putchar(\textcolor{charliteral}{'0'});
+00095                         \textcolor{keywordflow}{continue};
+00096                     \}
+00097 
+00098                     \textcolor{comment}{/* Find first non-zero digit. */}
+00099                     digit\_shift = 28;
+00100                     \textcolor{keywordflow}{while} (!(v & (0xF << digit\_shift)))
+00101                         digit\_shift -= 4;
+00102 
+00103                     \textcolor{comment}{/* Print digits. */}
+00104                     \textcolor{keywordflow}{for} (; digit\_shift >= 0; digit\_shift -= 4)
+00105                     \{
+00106                         digit = (v & (0xF << digit\_shift)) >> digit\_shift;
+00107                         \textcolor{keywordflow}{if} (digit <= 9)
+00108                             c = \textcolor{charliteral}{'0'} + digit;
+00109                         \textcolor{keywordflow}{else}
+00110                             c = \textcolor{charliteral}{'a'} + digit - 10;
+00111                         alt_putchar(c);
+00112                     \}
+00113                 \}
+00114                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'s'})
+00115                 \{
+00116                     \textcolor{comment}{/* Process string format. */}
+00117                     \textcolor{keywordtype}{char} *s = va\_arg(args, \textcolor{keywordtype}{char} *);
+00118 
+00119                     \textcolor{keywordflow}{while}(*s)
+00120                       alt_putchar(*s++);
+00121                 \}
+00122             \}
+00123             \textcolor{keywordflow}{else}
+00124             \{
+00125                 \textcolor{keywordflow}{break};
+00126             \}
+00127         \}
+00128     \}
+00129 \textcolor{preprocessor}{#ifdef ALT\_SEMIHOSTING}
+00130     alt\_putbufflush();
+00131 \textcolor{preprocessor}{#endif}
+00132 \}
+\end{DoxyCode}

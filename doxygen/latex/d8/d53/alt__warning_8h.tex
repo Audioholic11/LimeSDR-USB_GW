@@ -1,0 +1,114 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+warning.h File Reference}
+\label{alt__warning_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+warning.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+warning.\+h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d12/alt__warning_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+W\+A\+R\+N\+I\+NG}(symbol,  msg)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+S\+T\+U\+B\+\_\+\+W\+A\+R\+N\+I\+NG}(name)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+O\+B\+S\+O\+L\+E\+T\+E\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+W\+A\+R\+N\+I\+NG}(name)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR}(msg)
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf \+\_\+\+\_\+alt\+\_\+invalid} (void)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}!A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR@{A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR}}
+\index{A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR@{A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR}!alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+OR(
+\begin{DoxyParamCaption}
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)}\label{alt__warning_8h_a0a0a7a464b428d67460ab4f7774367fb}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+ALT_LINK_WARNING (__alt_invalid, msg); \
+  __alt_invalid()
+\end{DoxyCode}
+
+
+Definition at line {\bf 67} of file {\bf alt\+\_\+warning.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+remap\+\_\+cached()}, {\bf alt\+\_\+remap\+\_\+uncached()}, {\bf alt\+\_\+uncached\+\_\+free()}, and {\bf alt\+\_\+uncached\+\_\+malloc()}.
+
+\index{alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}!A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+W\+A\+R\+N\+I\+NG@{A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+W\+A\+R\+N\+I\+NG}}
+\index{A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+W\+A\+R\+N\+I\+NG@{A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+W\+A\+R\+N\+I\+NG}!alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+W\+A\+R\+N\+I\+NG}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+L\+I\+N\+K\+\_\+\+W\+A\+R\+N\+I\+NG(
+\begin{DoxyParamCaption}
+\item[{}]{symbol, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)}\label{alt__warning_8h_a53c9798256ce1ec14c6f44c3fc0ec402}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+__asm__(\textcolor{stringliteral}{".ifndef \_\_evoke\_link\_warning\_"} #symbol                                          \(\backslash\)
+          \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t .section .gnu.warning."} #symbol                                            \(\backslash\)
+          \textcolor{stringliteral}{"\(\backslash\)n\_\_evoke\_link\_warning\_"} #symbol \textcolor{stringliteral}{":\(\backslash\)n\(\backslash\)t .string \(\backslash\)x22"} msg \textcolor{stringliteral}{"\(\backslash\)x22 \(\backslash\)n\(\backslash\)t .previous"} \(\backslash\)
+          \textcolor{stringliteral}{"\(\backslash\)n .endif"});
+\end{DoxyCode}
+
+
+Definition at line {\bf 51} of file {\bf alt\+\_\+warning.\+h}.
+
+\index{alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}!A\+L\+T\+\_\+\+O\+B\+S\+O\+L\+E\+T\+E\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+W\+A\+R\+N\+I\+NG@{A\+L\+T\+\_\+\+O\+B\+S\+O\+L\+E\+T\+E\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+W\+A\+R\+N\+I\+NG}}
+\index{A\+L\+T\+\_\+\+O\+B\+S\+O\+L\+E\+T\+E\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+W\+A\+R\+N\+I\+NG@{A\+L\+T\+\_\+\+O\+B\+S\+O\+L\+E\+T\+E\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+W\+A\+R\+N\+I\+NG}!alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+O\+B\+S\+O\+L\+E\+T\+E\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+W\+A\+R\+N\+I\+NG}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+O\+B\+S\+O\+L\+E\+T\+E\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+W\+A\+R\+N\+I\+NG(
+\begin{DoxyParamCaption}
+\item[{}]{name}
+\end{DoxyParamCaption}
+)}\label{alt__warning_8h_ab89a5160e388e0166eae4dac2bf07e52}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+ALT_LINK_WARNING (name, \(\backslash\)
+    \textcolor{stringliteral}{"warning: "} #name \textcolor{stringliteral}{" is a deprecated function"})
+\end{DoxyCode}
+
+
+Definition at line {\bf 63} of file {\bf alt\+\_\+warning.\+h}.
+
+\index{alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}!A\+L\+T\+\_\+\+S\+T\+U\+B\+\_\+\+W\+A\+R\+N\+I\+NG@{A\+L\+T\+\_\+\+S\+T\+U\+B\+\_\+\+W\+A\+R\+N\+I\+NG}}
+\index{A\+L\+T\+\_\+\+S\+T\+U\+B\+\_\+\+W\+A\+R\+N\+I\+NG@{A\+L\+T\+\_\+\+S\+T\+U\+B\+\_\+\+W\+A\+R\+N\+I\+NG}!alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+S\+T\+U\+B\+\_\+\+W\+A\+R\+N\+I\+NG}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+S\+T\+U\+B\+\_\+\+W\+A\+R\+N\+I\+NG(
+\begin{DoxyParamCaption}
+\item[{}]{name}
+\end{DoxyParamCaption}
+)}\label{alt__warning_8h_a6ebd90c5b5c9fffb20d53c5fa5e4d6e4}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+ALT_LINK_WARNING (name, \(\backslash\)
+    \textcolor{stringliteral}{"warning: "} #name \textcolor{stringliteral}{" is not implemented and will always fail"})
+\end{DoxyCode}
+
+
+Definition at line {\bf 59} of file {\bf alt\+\_\+warning.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+E\+X\+E\+C\+V\+E()}, {\bf A\+L\+T\+\_\+\+F\+O\+R\+K()}, {\bf A\+L\+T\+\_\+\+L\+I\+N\+K()}, {\bf A\+L\+T\+\_\+\+R\+E\+N\+A\+M\+E()}, and {\bf A\+L\+T\+\_\+\+U\+N\+L\+I\+N\+K()}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}!\+\_\+\+\_\+alt\+\_\+invalid@{\+\_\+\+\_\+alt\+\_\+invalid}}
+\index{\+\_\+\+\_\+alt\+\_\+invalid@{\+\_\+\+\_\+alt\+\_\+invalid}!alt\+\_\+warning.\+h@{alt\+\_\+warning.\+h}}
+\paragraph[{\+\_\+\+\_\+alt\+\_\+invalid(void)}]{\setlength{\rightskip}{0pt plus 5cm}void \+\_\+\+\_\+alt\+\_\+invalid (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{alt__warning_8h_a327982b59851cfdd543e4223dee0f056}

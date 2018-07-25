@@ -1,0 +1,354 @@
+\subsection{arch Architecture Reference}
+\label{classdecompress_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{da/d4f/classdecompress_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+218}{\bfseries  ( {\bfseries {\bfseries {\bf state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf data\+\_\+in\+\_\+valid}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf Next\+State\+Reg00}{\bfseries  ( {\bfseries {\bfseries {\bf wclk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf nxt\+\_\+state\+\_\+decoder00}{\bfseries  ( {\bfseries {\bfseries {\bf state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf sample\+\_\+width}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf data\+\_\+in\+\_\+valid}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf data\+\_\+in}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf data\+\_\+in\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+d0\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+d1\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+d2\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+d3\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+d4\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+d5\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+d6\+\_\+reg}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf fifo\+\_\+d7\+\_\+reg}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+219}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf wclk}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Components}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf fifo\+\_\+inst}  {\bfseries }  
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf cmds}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{Idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec12\+\_\+0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec12\+\_\+1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec12\+\_\+2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec12\+\_\+3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+4}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+5}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+6}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec16\+\_\+0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec16\+\_\+1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec16\+\_\+2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec16\+\_\+3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf data\+\_\+in\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+in\+\_\+valid\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf state} {\bfseries {\bfseries {\bf cmds}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf next\+\_\+state} {\bfseries {\bfseries {\bf cmds}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d0} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d1} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d2} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d3} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d0\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d1\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d2\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d3\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d4} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d5} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d6} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d7} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d4\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d5\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d6\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d7\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+d} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{127} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dec\+\_\+fifo\+\_\+wr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+rdreq} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+rdempty} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Instantiations}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf fifo}  {\bfseries fifo\+\_\+inst}   
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 47} of file {\bf decompress.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{decompress\+::arch@{decompress\+::arch}!Next\+State\+Reg00@{Next\+State\+Reg00}}
+\index{Next\+State\+Reg00@{Next\+State\+Reg00}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{Next\+State\+Reg00wclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} Next\+State\+Reg00(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf wclk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdecompress_1_1arch_aa8dc07ddd756218f5bee8cd94cd56135}
+
+
+Definition at line {\bf 123} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!nxt\+\_\+state\+\_\+decoder00@{nxt\+\_\+state\+\_\+decoder00}}
+\index{nxt\+\_\+state\+\_\+decoder00@{nxt\+\_\+state\+\_\+decoder00}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{nxt\+\_\+state\+\_\+decoder00state,sample\+\_\+width,data\+\_\+in\+\_\+valid,data\+\_\+in,data\+\_\+in\+\_\+reg,fifo\+\_\+d0\+\_\+reg,fifo\+\_\+d1\+\_\+reg,fifo\+\_\+d2\+\_\+reg,fifo\+\_\+d3\+\_\+reg,fifo\+\_\+d4\+\_\+reg,fifo\+\_\+d5\+\_\+reg,fifo\+\_\+d6\+\_\+reg,fifo\+\_\+d7\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} nxt\+\_\+state\+\_\+decoder00(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf sample\+\_\+width}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf data\+\_\+in\+\_\+valid}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf data\+\_\+in}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf data\+\_\+in\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+d0\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+d1\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+d2\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+d3\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+d4\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+d5\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+d6\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf fifo\+\_\+d7\+\_\+reg}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdecompress_1_1arch_a2f0c55ce3f3d7bcb47e47936c07b5217}
+
+
+Definition at line {\bf 142} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+218@{P\+R\+O\+C\+E\+S\+S\+\_\+218}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+218@{P\+R\+O\+C\+E\+S\+S\+\_\+218}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+218state,data\+\_\+in\+\_\+valid}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+218(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf data\+\_\+in\+\_\+valid}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdecompress_1_1arch_a91b12622abbe6eb72a512130a8304553}
+
+
+Definition at line {\bf 111} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+219@{P\+R\+O\+C\+E\+S\+S\+\_\+219}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+219@{P\+R\+O\+C\+E\+S\+S\+\_\+219}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+219reset\+\_\+n,wclk}]{\setlength{\rightskip}{0pt plus 5cm}P\+R\+O\+C\+E\+S\+S\+\_\+219 (
+\begin{DoxyParamCaption}
+\item[{}]{reset\+\_\+n, }
+\item[{}]{wclk}
+\end{DoxyParamCaption}
+)}\label{classdecompress_1_1arch_a3e467956b246db71d24be803b41b1cc1}
+
+
+Definition at line {\bf 266} of file {\bf decompress.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{decompress\+::arch@{decompress\+::arch}!cmds@{cmds}}
+\index{cmds@{cmds}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{cmds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cmds} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{Idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec12\+\_\+0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec12\+\_\+1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec12\+\_\+2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec12\+\_\+3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+4}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+5}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec14\+\_\+6}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec16\+\_\+0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec16\+\_\+1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec16\+\_\+2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{dec16\+\_\+3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classdecompress_1_1arch_a3126bbfc902f7e0699949e87b5b6ef9b}
+
+
+Definition at line {\bf 54} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!data\+\_\+in\+\_\+reg@{data\+\_\+in\+\_\+reg}}
+\index{data\+\_\+in\+\_\+reg@{data\+\_\+in\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{data\+\_\+in\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+in\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a5853c84682ee419f1b9a73ba0c3619be}
+
+
+Definition at line {\bf 49} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!data\+\_\+in\+\_\+valid\+\_\+reg@{data\+\_\+in\+\_\+valid\+\_\+reg}}
+\index{data\+\_\+in\+\_\+valid\+\_\+reg@{data\+\_\+in\+\_\+valid\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{data\+\_\+in\+\_\+valid\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+in\+\_\+valid\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a5d988ee58b56f726e1d9ccdec85af101}
+
+
+Definition at line {\bf 51} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!dec\+\_\+fifo\+\_\+wr@{dec\+\_\+fifo\+\_\+wr}}
+\index{dec\+\_\+fifo\+\_\+wr@{dec\+\_\+fifo\+\_\+wr}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{dec\+\_\+fifo\+\_\+wr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dec\+\_\+fifo\+\_\+wr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a21e19dd26b69618864738b0c93191a7e}
+
+
+Definition at line {\bf 65} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo@{fifo}}
+\index{fifo@{fifo}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo} {\bfseries \textcolor{vhdlchar}{fifo\+\_\+inst}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classdecompress_1_1arch_a576cc2b7670fbb1753a2eb96fe3c0d1d}
+
+
+Definition at line {\bf 262} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d@{fifo\+\_\+d}}
+\index{fifo\+\_\+d@{fifo\+\_\+d}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{127} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a69c692b25915daef47f4f7d01d975778}
+
+
+Definition at line {\bf 64} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d0@{fifo\+\_\+d0}}
+\index{fifo\+\_\+d0@{fifo\+\_\+d0}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d0} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a437aa2111723d3aef6d3e1018e8e95fc}
+
+
+Definition at line {\bf 60} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d0\+\_\+reg@{fifo\+\_\+d0\+\_\+reg}}
+\index{fifo\+\_\+d0\+\_\+reg@{fifo\+\_\+d0\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d0\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d0\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a2b4b92abe87f48f1de9c3f3f71a77fd6}
+
+
+Definition at line {\bf 61} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d1@{fifo\+\_\+d1}}
+\index{fifo\+\_\+d1@{fifo\+\_\+d1}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d1} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_ae3c93f9646626e7d8c20490a0918a1f1}
+
+
+Definition at line {\bf 60} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d1\+\_\+reg@{fifo\+\_\+d1\+\_\+reg}}
+\index{fifo\+\_\+d1\+\_\+reg@{fifo\+\_\+d1\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d1\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d1\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a6738c6c50b20af96445558231bcd76f9}
+
+
+Definition at line {\bf 61} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d2@{fifo\+\_\+d2}}
+\index{fifo\+\_\+d2@{fifo\+\_\+d2}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d2} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a60c1970102ad82f8d7b8421062d939dd}
+
+
+Definition at line {\bf 60} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d2\+\_\+reg@{fifo\+\_\+d2\+\_\+reg}}
+\index{fifo\+\_\+d2\+\_\+reg@{fifo\+\_\+d2\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d2\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d2\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a89093176c0e2a75fdaf155a6745ade4d}
+
+
+Definition at line {\bf 61} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d3@{fifo\+\_\+d3}}
+\index{fifo\+\_\+d3@{fifo\+\_\+d3}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d3} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_abddd41da7388a73864b45990585a445e}
+
+
+Definition at line {\bf 60} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d3\+\_\+reg@{fifo\+\_\+d3\+\_\+reg}}
+\index{fifo\+\_\+d3\+\_\+reg@{fifo\+\_\+d3\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d3\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d3\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a4f5c91d483085d2d594d6f641a394974}
+
+
+Definition at line {\bf 61} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d4@{fifo\+\_\+d4}}
+\index{fifo\+\_\+d4@{fifo\+\_\+d4}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d4}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d4} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a421c2372124c366ae90dea3f2bc99901}
+
+
+Definition at line {\bf 62} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d4\+\_\+reg@{fifo\+\_\+d4\+\_\+reg}}
+\index{fifo\+\_\+d4\+\_\+reg@{fifo\+\_\+d4\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d4\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d4\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a0a5a981770724c101262c3c90e4e73e5}
+
+
+Definition at line {\bf 63} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d5@{fifo\+\_\+d5}}
+\index{fifo\+\_\+d5@{fifo\+\_\+d5}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d5}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d5} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a1cf5526b265a0dc1c1294f4b2151b20c}
+
+
+Definition at line {\bf 62} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d5\+\_\+reg@{fifo\+\_\+d5\+\_\+reg}}
+\index{fifo\+\_\+d5\+\_\+reg@{fifo\+\_\+d5\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d5\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d5\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a9606272c9b6a0e67950c72bb51125d27}
+
+
+Definition at line {\bf 63} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d6@{fifo\+\_\+d6}}
+\index{fifo\+\_\+d6@{fifo\+\_\+d6}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d6}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d6} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a2d3e06190d9f9087e157dbabc4ea3c3c}
+
+
+Definition at line {\bf 62} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d6\+\_\+reg@{fifo\+\_\+d6\+\_\+reg}}
+\index{fifo\+\_\+d6\+\_\+reg@{fifo\+\_\+d6\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d6\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d6\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a78e10c216b1e7aa3bce05e62e331ae6a}
+
+
+Definition at line {\bf 63} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d7@{fifo\+\_\+d7}}
+\index{fifo\+\_\+d7@{fifo\+\_\+d7}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d7}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d7} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a0b6707733a4481ab4628718170b6a383}
+
+
+Definition at line {\bf 62} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+d7\+\_\+reg@{fifo\+\_\+d7\+\_\+reg}}
+\index{fifo\+\_\+d7\+\_\+reg@{fifo\+\_\+d7\+\_\+reg}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+d7\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+d7\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a97df2b2b72213840a6efc451c62f1f0b}
+
+
+Definition at line {\bf 63} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+inst@{fifo\+\_\+inst}}
+\index{fifo\+\_\+inst@{fifo\+\_\+inst}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+inst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+inst} {\bfseries \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Component]}}\label{classdecompress_1_1arch_ad96bb2323ad696436bccbd33dd3a05ed}
+
+
+Definition at line {\bf 70} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+rdempty@{fifo\+\_\+rdempty}}
+\index{fifo\+\_\+rdempty@{fifo\+\_\+rdempty}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+rdempty}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+rdempty} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a81c05c3d98ef2b085265b234938226a7}
+
+
+Definition at line {\bf 67} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!fifo\+\_\+rdreq@{fifo\+\_\+rdreq}}
+\index{fifo\+\_\+rdreq@{fifo\+\_\+rdreq}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{fifo\+\_\+rdreq}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+rdreq} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_ab7757f3da31e0baed8ec3d67b396bdb9}
+
+
+Definition at line {\bf 66} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!next\+\_\+state@{next\+\_\+state}}
+\index{next\+\_\+state@{next\+\_\+state}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{next\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf next\+\_\+state} {\bfseries {\bfseries {\bf cmds}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a75ed7f428d9cda9765f427847ccef510}
+
+
+Definition at line {\bf 57} of file {\bf decompress.\+vhd}.
+
+\index{decompress\+::arch@{decompress\+::arch}!state@{state}}
+\index{state@{state}!decompress\+::arch@{decompress\+::arch}}
+\paragraph[{state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state} {\bfseries {\bfseries {\bf cmds}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdecompress_1_1arch_a3ba2a6f12197fca86884a6c4c7096f57}
+
+
+Definition at line {\bf 57} of file {\bf decompress.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/data\+\_\+manipulation/{\bf decompress.\+vhd}\end{DoxyCompactItemize}

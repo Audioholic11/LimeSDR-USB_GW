@@ -52,7 +52,9 @@ entity packets2data is
       
       smpl_buff_full    : in std_logic;
       smpl_buff_q       : out std_logic_vector(out_pct_data_w-1 downto 0);
-      smpl_buff_valid   : out std_logic
+      smpl_buff_valid   : out std_logic;
+		
+		chirp_sync_en		: in std_logic
       
         );
 end packets2data;
@@ -182,7 +184,11 @@ begin
    if reset_n = '0' then 
       pct_size_only_data <= (others=>'1');
    elsif (rclk'event AND rclk='1') then 
-      pct_size_only_data <= unsigned(pct_size)-4;
+		if (chirp_sync_en='1') then
+			pct_size_only_data <= unsigned(pct_size)-8;
+		else
+			pct_size_only_data <= unsigned(pct_size)-4;
+		end if;
    end if;
 end process;
 
@@ -400,7 +406,8 @@ p2d_rd_fsm_inst3 : entity work.p2d_rd_fsm
 
       pct_buff_rdy         => isnt2_pct_buff_rd_en,
       rd_fsm_rdy           => open,
-      rd_fsm_rd_hold       => inst3_rd_fsm_rd_hold
+      rd_fsm_rd_hold       => inst3_rd_fsm_rd_hold,
+		chirp_sync_en			=> chirp_sync_en
       
         );
         

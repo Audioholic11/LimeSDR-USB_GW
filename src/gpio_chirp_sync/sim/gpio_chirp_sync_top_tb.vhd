@@ -35,28 +35,33 @@ architecture arch of gpio_chirp_sync_top_tb is
 	signal w_sync_period		: std_logic_vector(63 downto 0);
 	signal w_chirp_trig		: std_logic;
 	
+	signal w_testout			: std_logic;
+	
 	signal r_sample_width	: std_logic_vector(1 downto 0) := "10";
 	signal r_mode				: std_logic := '0';
 	signal r_trxiqpulse		: std_logic := '0';
 	signal r_ddr_en			: std_logic := '0';
-	signal r_mimo_en			: std_logic := '1';
+	signal r_mimo_en			: std_logic := '0';
 	signal r_ch_en				: std_logic_vector(1 downto 0) := "10";
 	signal r_chirp_sync_en	: std_logic := '1';
 
 
 	component gpio_chirp_sync_top is
 	generic (
-	chirp_sync_width 		: integer := 64; --bus width in bits 
+	chirp_sync_width 		: integer := 64 --bus width in bits 
 	);
 
 	port (
 		clk               	: in std_logic;
+		counter_clk				: in std_logic;
 		reset_n           	: in std_logic;
 
 		-- Chirp Sync I/Os
 		chirp_sig				: in std_logic;
 		sync_period				: out std_logic_vector(63 downto 0);
 		chirp_trig				: out std_logic;
+	
+		TESTOUT					: out std_logic;
 			
 		--Mode settings
 		sample_width         : in std_logic_vector(1 downto 0); --"10"-12bit, "01"-14bit, "00"-16bit;
@@ -88,12 +93,15 @@ end process res;
 gpio_chirp_sync_top_INST : gpio_chirp_sync_top
 	port map (
 		clk               	=> r_clk,
+		counter_clk				=> r_clk,
 		reset_n           	=> r_reset_n,
 
 		-- Chirp Sync I/Os
 		chirp_sig				=> r_chirp_sig,
 		sync_period				=> w_sync_period,
 		chirp_trig				=> w_chirp_trig,
+		
+		TESTOUT					=> w_testout,
 			
 		--Mode settings
 		sample_width         => r_sample_width,

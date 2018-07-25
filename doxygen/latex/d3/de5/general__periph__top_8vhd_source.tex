@@ -1,0 +1,222 @@
+\subsection{general\+\_\+periph\+\_\+top.\+vhd}
+\label{general__periph__top_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general\+\_\+periph/synth/general\+\_\+periph\+\_\+top.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general\+\_\+periph/synth/general\+\_\+periph\+\_\+top.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00002 \textcolor{keyword}{-- FILE:          general\_periph\_top.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION:   Top wrapper file for general periphery components}
+00004 \textcolor{keyword}{-- DATE:          3:39 PM Monday, May 7, 2018}
+00005 \textcolor{keyword}{-- AUTHOR(s):     Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 
+00009 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00010 \textcolor{keyword}{--NOTES:}
+00011 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00012 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00013 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00014 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00015 \textcolor{vhdlkeyword}{use }work.periphcfg_pkg.\textcolor{keywordflow}{all};
+00016 
+00017 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00018 \textcolor{keyword}{-- Entity declaration}
+00019 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00020 \textcolor{keywordflow}{entity }general_periph_top \textcolor{keywordflow}{is}
+00021    \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(}
+00022       \textcolor{vhdlchar}{DEV_FAMILY}  \textcolor{vhdlchar}{:} \textcolor{comment}{string} \textcolor{vhdlchar}{:=} \textcolor{keyword}{"CYCLONE IV E"};
+00023       \textcolor{vhdlchar}{N_GPIO}      \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}
+00024    \textcolor{vhdlchar}{)};
+00025    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00026 \textcolor{keyword}{      -- General ports}
+00027       \textcolor{vhdlchar}{clk}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- Free running clock}
+00028       \textcolor{vhdlchar}{reset_n}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- Asynchronous, active low reset}
+00029       
+00030       \textcolor{vhdlchar}{to_periphcfg}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}    \textcolor{vhdlchar}{t_TO_PERIPHCFG};
+00031       \textcolor{vhdlchar}{from_periphcfg}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{vhdlchar}{t_FROM_PERIPHCFG};
+00032       
+00033 \textcolor{keyword}{      -- Dual colour LEDs}
+00034 \textcolor{keyword}{      -- LED1 (Clock and PLL lock status)}
+00035       \textcolor{vhdlchar}{led1_pll1_locked}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};
+00036       \textcolor{vhdlchar}{led1_pll2_locked}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};
+00037       \textcolor{vhdlchar}{led1_ctrl}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00038       \textcolor{vhdlchar}{led1_g}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}    \textcolor{comment}{std\_logic};
+00039       \textcolor{vhdlchar}{led1_r}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}    \textcolor{comment}{std\_logic};
+00040       
+00041 \textcolor{keyword}{      --LED2 (TCXO control status)}
+00042       \textcolor{vhdlchar}{led2_clk}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};
+00043       \textcolor{vhdlchar}{led2_adf_muxout}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};
+00044       \textcolor{vhdlchar}{led2_dac_ss}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};
+00045       \textcolor{vhdlchar}{led2_adf_ss}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};
+00046       \textcolor{vhdlchar}{led2_ctrl}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00047       \textcolor{vhdlchar}{led2_g}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}    \textcolor{comment}{std\_logic};
+00048       \textcolor{vhdlchar}{led2_r}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}    \textcolor{comment}{std\_logic};
+00049       
+00050 \textcolor{keyword}{      --LED3 (FX3 and NIOS CPU busy)}
+00051       \textcolor{vhdlchar}{led3_g_in}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};
+00052       \textcolor{vhdlchar}{led3_r_in}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};
+00053       \textcolor{vhdlchar}{led3_ctrl}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00054       \textcolor{vhdlchar}{led3_hw_ver}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00055       \textcolor{vhdlchar}{led3_g}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}    \textcolor{comment}{std\_logic};
+00056       \textcolor{vhdlchar}{led3_r}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}    \textcolor{comment}{std\_logic};
+00057       
+00058 \textcolor{keyword}{      --GPIO}
+00059       \textcolor{vhdlchar}{gpio_dir}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00060       \textcolor{vhdlchar}{gpio_out_val}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00061       \textcolor{vhdlchar}{gpio_rd_val}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}    \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00062       \textcolor{vhdlchar}{gpio}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{inout}  \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- to FPGA pins}
+00063       
+00064 \textcolor{keyword}{      --Fan control}
+00065       \textcolor{vhdlchar}{fan_sens_in}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}     \textcolor{comment}{std\_logic};
+00066       \textcolor{vhdlchar}{fan_ctrl_out}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out}    \textcolor{comment}{std\_logic}
+00067 
+00068    \textcolor{vhdlchar}{)};
+00069 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{general\_periph\_top};
+00070 
+00071 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00072 \textcolor{keyword}{-- Architecture}
+00073 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00074 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} general_periph_top is
+00075 \textcolor{keyword}{--declare signals,  components here}
+00076 \textcolor{keyword}{--inst0}
+00077 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_beat} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00078 
+00079 \textcolor{keyword}{--inst1 }
+00080 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_board_gpio_ovrd}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00081 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_board_gpio_rd}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00082 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_board_gpio_dir}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00083 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_board_gpio_val}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00084 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_periph_input_rd_0}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00085 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_periph_input_rd_1}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00086 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_periph_output_ovrd_0}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00087 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_periph_output_val_0}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00088 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_periph_output_ovrd_1}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00089 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_periph_output_val_1}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00090 
+00091 \textcolor{keyword}{--inst5}
+00092 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst5_gpio_in}                \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00093 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst5_mux_sel}                \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00094 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst5_dir_0}                  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00095 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst5_dir_1}                  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00096 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst5_out_val_0}              \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00097 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst5_out_val_1}              \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00098 
+00099 \textcolor{vhdlkeyword}{begin}
+00100    
+00101 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00102 \textcolor{keyword}{-- Alive instance}
+00103 \textcolor{keyword}{-- Simple counter to toggle output}
+00104 \textcolor{keyword}{-- ----------------------------------------------------------------------------   }
+00105    alive\_inst0 : \textcolor{keywordflow}{entity} work.alive
+00106    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00107       clk      => clk,
+00108       reset\_n  => reset_n,
+00109       beat     => inst0_beat
+00110    \textcolor{vhdlchar}{)};
+00111 
+00112    \textcolor{keywordflow}{process}(inst5_gpio_in)
+00113 \textcolor{vhdlkeyword}{   begin }
+00114       inst1\_board\_gpio\_rd <= (others=>'0');
+00115       inst1\_board\_gpio\_rd(N\_GPIO-1 \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0}) <= inst5\_gpio\_in;
+00116    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00117    
+00118    inst1\_periph\_input\_rd\_0 <= (others=>'0');
+00119    inst1\_periph\_input\_rd\_1 <= (others=>'0');
+00120    
+00121 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00122 \textcolor{keyword}{-- FPGA\_LED1\_cntrl instance}
+00123 \textcolor{keyword}{-- Blinking indicates presence of TCXO clock.}
+00124 \textcolor{keyword}{-- Colour indicates status of FPGA PLLs that are used for LMS digital interface clocking: }
+00125 \textcolor{keyword}{-- Green - both PLLs are locked; Red/Green - at least one -- PLL is not locked.}
+00126 \textcolor{keyword}{-- ----------------------------------------------------------------------------    }
+00127    FPGA\_LED1\_cntrl\_inst2 : \textcolor{keywordflow}{entity} work.FPGA_LED1_cntrl
+00128    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00129       pll1_locked    => led1_pll1_locked,
+00130       pll2_locked    => led1_pll2_locked,
+00131       alive          => inst0_beat,
+00132       led_ctrl       => led1_ctrl,
+00133       led_g          => led1_g,
+00134       led_r          => led1_r
+00135    \textcolor{vhdlchar}{)};
+00136 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00137 \textcolor{keyword}{-- FPGA\_LED2\_ctrl instance}
+00138 \textcolor{keyword}{-- No light - TCXO is controlled from DAC}
+00139 \textcolor{keyword}{-- Red - TCXO is controlled from phase detector and is not locked to external reference clock,}
+00140 \textcolor{keyword}{-- Green - TCXO is controlled from phase detector and is -- locked to external reference clock}
+00141 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00142    FPGA\_LED2\_ctrl\_inst3 : \textcolor{keywordflow}{entity} work.FPGA_LED2_ctrl
+00143       \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00144          clk            => led2_clk,
+00145          reset_n        => reset_n,
+00146          adf_muxout     => led2_adf_muxout,
+00147          dac_ss         => led2_dac_ss,
+00148          adf_ss         => led2_adf_ss,
+00149          led_ctrl       => led2_ctrl,
+00150          led_g          => led2_g,
+00151          led_r          => led2_r
+00152       \textcolor{vhdlchar}{)};
+00153 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00154 \textcolor{keyword}{-- FX3\_LED\_ctrl instance}
+00155 \textcolor{keyword}{-- USB3.0 (FX3) controller, slave FIFO (GPIF) interface module and NIOS CPU activity indication:}
+00156 \textcolor{keyword}{-- Green - idle, Red - busy.}
+00157 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00158    FX3\_LED\_ctrl\_inst4 : \textcolor{keywordflow}{entity} work.FX3_LED_ctrl
+00159       \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00160          ctrl_led_g     => led3_g_in,
+00161          ctrl_led_r     => led3_r_in,
+00162          HW_VER         => led3_hw_ver,
+00163          led_ctrl       => led3_ctrl,
+00164          led_g          => led3_g,
+00165          led_r          => led3_r
+00166       \textcolor{vhdlchar}{)};
+00167 
+00168 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00169 \textcolor{keyword}{-- gpio\_ctrl\_top instance}
+00170 \textcolor{keyword}{-- ----------------------------------------------------------------------------      }
+00171    gpio\_ctrl\_top\_inst5 : \textcolor{keywordflow}{entity} work.gpio_ctrl_top
+00172    \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map}(
+00173       bus_width   => N_GPIO
+00174    \textcolor{vhdlchar}{)}
+00175    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00176       gpio        => gpio,
+00177       gpio_in     => inst5_gpio_in,
+00178       mux_sel     => inst5_mux_sel,
+00179       dir_0       => gpio_dir,
+00180       dir_1       => inst5_dir_1,
+00181       out_val_0   => gpio_out_val,
+00182       out_val_1   => inst5_out_val_1
+00183 
+00184    \textcolor{vhdlchar}{)};
+00185    
+00186    
+00187    inst5\_mux\_sel   <= from\_periphcfg.BOARD\_GPIO\_OVRD(N\_GPIO-1 \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0});
+00188    inst5\_dir\_1     <= from\_periphcfg.BOARD\_GPIO\_DIR(N\_GPIO-1 \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0});
+00189    inst5\_out\_val\_1 <= from\_periphcfg.BOARD\_GPIO\_VAL(N\_GPIO-1 \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{0});
+00190    
+00191 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00192 \textcolor{keyword}{-- Output ports}
+00193 \textcolor{keyword}{-- ----------------------------------------------------------------------------      }
+00194       
+00195    \textcolor{vhdlchar}{fan_ctrl_out}   \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fan_sens_in} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{from_periphcfg}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{PERIPH_OUTPUT_OVRD_0}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} 
+00196                      \textcolor{vhdlchar}{from_periphcfg}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{PERIPH_OUTPUT_VAL_0}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00197                      
+00198    \textcolor{vhdlchar}{gpio_rd_val}    \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst5_gpio_in};
+00199    
+00200    \textcolor{keywordflow}{process}(inst5_gpio_in)
+00201 \textcolor{vhdlkeyword}{   begin }
+00202       \textcolor{vhdlchar}{to_periphcfg}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{BOARD_GPIO_RD} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00203       \textcolor{vhdlchar}{to_periphcfg}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{BOARD_GPIO_RD}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N_GPIO}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst5_gpio_in};
+00204    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00205    
+00206    \textcolor{keywordflow}{process}(fan_sens_in)
+00207 \textcolor{vhdlkeyword}{   begin }
+00208       \textcolor{vhdlchar}{to_periphcfg}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{PERIPH_INPUT_RD_0} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00209       \textcolor{vhdlchar}{to_periphcfg}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{PERIPH_INPUT_RD_0}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fan_sens_in};
+00210    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00211    
+00212    \textcolor{vhdlchar}{to_periphcfg}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{PERIPH_INPUT_RD_1} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00213                      
+00214       
+00215 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00216 
+00217 
+\end{DoxyCode}

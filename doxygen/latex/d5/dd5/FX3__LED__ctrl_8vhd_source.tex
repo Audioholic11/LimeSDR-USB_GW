@@ -1,0 +1,62 @@
+\subsection{F\+X3\+\_\+\+L\+E\+D\+\_\+ctrl.\+vhd}
+\label{FX3__LED__ctrl_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/\+F\+X3\+\_\+\+L\+E\+D\+\_\+ctrl.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/\+F\+X3\+\_\+\+L\+E\+D\+\_\+ctrl.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    FX3\_LED\_ctrl.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: to be compatible with older revisions}
+00004 \textcolor{keyword}{-- DATE:    Aug 17, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }FX3_LED_ctrl \textcolor{keywordflow}{is}
+00016   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00017 \textcolor{keyword}{        --input ports }
+00018         \textcolor{vhdlchar}{ctrl_led_g}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00019         \textcolor{vhdlchar}{ctrl_led_r}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020           \textcolor{vhdlchar}{HW_VER}                \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00021           \textcolor{vhdlchar}{led_ctrl}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00022 \textcolor{keyword}{        --output ports }
+00023         \textcolor{vhdlchar}{led_g}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00024         \textcolor{vhdlchar}{led_r}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00025         \textcolor{vhdlchar}{)};
+00026 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{FX3\_LED\_ctrl};
+00027 
+00028 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00029 \textcolor{keyword}{-- Architecture}
+00030 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00031 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} FX3_LED_ctrl is
+00032 \textcolor{keyword}{--declare signals,  components here}
+00033 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{led_g_def}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00034 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{led_r_def}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00035 
+00036 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{led_g_ovr}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00037 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{led_r_ovr}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00038 
+00039 
+00040   
+00041 \textcolor{vhdlkeyword}{begin}
+00042 
+00043 \textcolor{vhdlchar}{led_g_ovr}\textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{led_ctrl}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{led_ctrl}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00044 \textcolor{vhdlchar}{led_r_ovr}\textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{led_ctrl}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{led_ctrl}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00045 
+00046 \textcolor{vhdlchar}{led_g_def}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{ctrl_led_g} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{led_ctrl}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{led_g_ovr};
+00047 \textcolor{vhdlchar}{led_r_def}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{ctrl_led_r} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{led_ctrl}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{led_r_ovr};
+00048 
+00049 \textcolor{vhdlchar}{led_g} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{led_g_def} \textcolor{keywordflow}{when} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{HW_VER}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{>=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{and} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{HW_VER}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00050 \textcolor{vhdlchar}{led_r} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{led_r_def} \textcolor{keywordflow}{when} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{HW_VER}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{>=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{and} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{HW_VER}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00051   
+00052 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};
+00053 
+00054 
+00055 
+00056 
+00057 
+\end{DoxyCode}

@@ -1,0 +1,75 @@
+\subsection{alt\+\_\+dcache\+\_\+flush.\+c}
+\label{alt__dcache__flush_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dcache\+\_\+flush.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dcache\+\_\+flush.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2003-2005 Altera Corporation, San Jose, California, USA.      *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{******************************************************************************/}
+00030 
+00031 \textcolor{preprocessor}{#include "nios2.h"}
+00032 \textcolor{preprocessor}{#include "system.h"}
+00033 
+00034 \textcolor{preprocessor}{#include "alt_types.h"}
+00035 \textcolor{preprocessor}{#include "sys/alt_cache.h"} 
+00036 
+00037 \textcolor{preprocessor}{#define ALT\_FLUSH\_DATA(i) \_\_asm\_\_ volatile ("flushda (%0)" :: "r" (i));}
+00038 
+00039 \textcolor{comment}{/*}
+00040 \textcolor{comment}{ * alt\_dcache\_flush() is called to flush the data cache for a memory}
+00041 \textcolor{comment}{ * region of length "len" bytes, starting at address "start".}
+00042 \textcolor{comment}{ *}
+00043 \textcolor{comment}{ * Any dirty lines in the data cache are written back to memory.}
+00044 \textcolor{comment}{ */}
+00045 
+00046 \textcolor{keywordtype}{void} alt_dcache_flush (\textcolor{keywordtype}{void}* start, alt_u32 len)
+00047 \{
+00048 \textcolor{preprocessor}{#if NIOS2\_DCACHE\_SIZE > 0}
+00049 
+00050   \textcolor{keywordtype}{char}* i;
+00051   \textcolor{keywordtype}{char}* end = ((\textcolor{keywordtype}{char}*) start) + len; 
+00052 
+00053   \textcolor{keywordflow}{for} (i = start; i < end; i+= NIOS2_DCACHE_LINE_SIZE)
+00054   \{ 
+00055     ALT_FLUSH_DATA(i); 
+00056   \}
+00057 
+00058   \textcolor{comment}{/* }
+00059 \textcolor{comment}{   * For an unaligned flush request, we've got one more line left.}
+00060 \textcolor{comment}{   * Note that this is dependent on NIOS2\_DCACHE\_LINE\_SIZE to be a }
+00061 \textcolor{comment}{   * multiple of 2 (which it always is).}
+00062 \textcolor{comment}{   */}
+00063 
+00064   \textcolor{keywordflow}{if} (((alt_u32) start) & (NIOS2_DCACHE_LINE_SIZE - 1))
+00065   \{
+00066     ALT_FLUSH_DATA(i);
+00067   \}
+00068 
+00069 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* NIOS2\_DCACHE\_SIZE > 0 */}\textcolor{preprocessor}{}
+00070 \}
+\end{DoxyCode}

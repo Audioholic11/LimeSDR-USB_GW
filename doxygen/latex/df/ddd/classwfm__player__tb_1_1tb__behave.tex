@@ -1,0 +1,298 @@
+\subsection{tb\+\_\+behave Architecture Reference}
+\label{classwfm__player__tb_1_1tb__behave}\index{tb\+\_\+behave@{tb\+\_\+behave}}
+
+
+Collaboration diagram for tb\+\_\+behave\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{d9/d53/classwfm__player__tb_1_1tb__behave__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clock0}{\bfseries  (  )}
+\item 
+{\bf clock1}{\bfseries  (  )}
+\item 
+{\bf clock2}{\bfseries  (  )}
+\item 
+{\bf res}{\bfseries  (  )}
+\item 
+{\bf load}{\bfseries  (  )}
+\item 
+{\bf play\+\_\+stop}{\bfseries  (  )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+597}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk1}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Constants}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clk0\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{6} \textcolor{vhdlchar}{.} \textcolor{vhdldigit}{25} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf clk1\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf clk2\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{.} \textcolor{vhdldigit}{5} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clk0} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf clk1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf clk2} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reset\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+wr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+wr\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+payload\+\_\+valid} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+payload\+\_\+data} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+fifo\+\_\+rdreq} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+fifo\+\_\+rdempty} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+fifo\+\_\+rdusedw} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{8} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+load} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+play\+\_\+stop} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+pct\+\_\+gen\+\_\+data} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfm\+\_\+pct\+\_\+gen\+\_\+wr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Instantiations}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf payload\+\_\+extract\+\_\+inst}  {\bfseries entity pct\+\_\+payload\+\_\+extrct}   
+\item 
+{\bf wfm\+\_\+player\+\_\+top\+\_\+inst}  {\bfseries entity wfm\+\_\+player\+\_\+top}   
+\item 
+{\bf wfm\+\_\+pct\+\_\+gen\+\_\+inst}  {\bfseries entity wfm\+\_\+pct\+\_\+gen}   
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 22} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!clock0@{clock0}}
+\index{clock0@{clock0}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clock0}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} clock0 ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__player__tb_1_1tb__behave_a0ffcf9b3fa89917ed2b73a96f170b7ae}
+
+
+Definition at line {\bf 52} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!clock1@{clock1}}
+\index{clock1@{clock1}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clock1}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} clock1 ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__player__tb_1_1tb__behave_ab9061dd72cae28c259dd084ee861d0cc}
+
+
+Definition at line {\bf 58} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!clock2@{clock2}}
+\index{clock2@{clock2}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clock2}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} clock2 ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__player__tb_1_1tb__behave_a46ea531876de9d1da551c5e56b5d7197}
+
+
+Definition at line {\bf 64} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!load@{load}}
+\index{load@{load}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{load}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} load ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__player__tb_1_1tb__behave_adaadec1ef48bb32b80ea5572e7d12ca6}
+
+
+Definition at line {\bf 76} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!play\+\_\+stop@{play\+\_\+stop}}
+\index{play\+\_\+stop@{play\+\_\+stop}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{play\+\_\+stop}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} play\+\_\+stop ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__player__tb_1_1tb__behave_aab7700d55eb093ffa70efdac39fe0f93}
+
+
+Definition at line {\bf 83} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!P\+R\+O\+C\+E\+S\+S\+\_\+597@{P\+R\+O\+C\+E\+S\+S\+\_\+597}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+597@{P\+R\+O\+C\+E\+S\+S\+\_\+597}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+597reset\+\_\+n,clk1}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+597(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk1}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__player__tb_1_1tb__behave_a59dda006800207a782473ab6a5f7d0f3}
+
+
+Definition at line {\bf 92} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!res@{res}}
+\index{res@{res}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{res}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} res ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classwfm__player__tb_1_1tb__behave_ab0bd7560790c13b656fd58e17e35143e}
+
+
+Definition at line {\bf 70} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!clk0@{clk0}}
+\index{clk0@{clk0}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk0} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_a693d72741b9413130fe2d67511b642be}
+
+
+Definition at line {\bf 27} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!clk0\+\_\+period@{clk0\+\_\+period}}
+\index{clk0\+\_\+period@{clk0\+\_\+period}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk0\+\_\+period}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk0\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{6} \textcolor{vhdlchar}{.} \textcolor{vhdldigit}{25} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classwfm__player__tb_1_1tb__behave_aeff8690ce469b1a2355a25018cf547fb}
+
+
+Definition at line {\bf 23} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!clk1@{clk1}}
+\index{clk1@{clk1}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_ade95921e47b0e4d2d11e496794648550}
+
+
+Definition at line {\bf 27} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!clk1\+\_\+period@{clk1\+\_\+period}}
+\index{clk1\+\_\+period@{clk1\+\_\+period}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk1\+\_\+period}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk1\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classwfm__player__tb_1_1tb__behave_aed19b0dc48aba325370146bf0b89ab44}
+
+
+Definition at line {\bf 24} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!clk2@{clk2}}
+\index{clk2@{clk2}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk2} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_a0b48daa67cfa50e3cc715424a8dd208d}
+
+
+Definition at line {\bf 27} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!clk2\+\_\+period@{clk2\+\_\+period}}
+\index{clk2\+\_\+period@{clk2\+\_\+period}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk2\+\_\+period}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk2\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{.} \textcolor{vhdldigit}{5} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classwfm__player__tb_1_1tb__behave_a5f1cf10c7e309c10dd45ddb086afdfcd}
+
+
+Definition at line {\bf 25} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!data\+\_\+fifo\+\_\+rdempty@{data\+\_\+fifo\+\_\+rdempty}}
+\index{data\+\_\+fifo\+\_\+rdempty@{data\+\_\+fifo\+\_\+rdempty}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{data\+\_\+fifo\+\_\+rdempty}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+fifo\+\_\+rdempty} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_af53aeda3985be831d0b71d4daab34210}
+
+
+Definition at line {\bf 38} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!data\+\_\+fifo\+\_\+rdreq@{data\+\_\+fifo\+\_\+rdreq}}
+\index{data\+\_\+fifo\+\_\+rdreq@{data\+\_\+fifo\+\_\+rdreq}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{data\+\_\+fifo\+\_\+rdreq}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+fifo\+\_\+rdreq} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_a8524edc441ae0ddf208d38cbf8e21e8d}
+
+
+Definition at line {\bf 37} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!data\+\_\+fifo\+\_\+rdusedw@{data\+\_\+fifo\+\_\+rdusedw}}
+\index{data\+\_\+fifo\+\_\+rdusedw@{data\+\_\+fifo\+\_\+rdusedw}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{data\+\_\+fifo\+\_\+rdusedw}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+fifo\+\_\+rdusedw} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{8} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_af9d3b92af1b931540b407d96737fb2d0}
+
+
+Definition at line {\bf 39} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!payload\+\_\+extract\+\_\+inst@{payload\+\_\+extract\+\_\+inst}}
+\index{payload\+\_\+extract\+\_\+inst@{payload\+\_\+extract\+\_\+inst}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{payload\+\_\+extract\+\_\+inst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf payload\+\_\+extract\+\_\+inst} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{pct\+\_\+payload\+\_\+extrct}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classwfm__player__tb_1_1tb__behave_a9eea3595e7da664c4b28d217422da309}
+
+
+Definition at line {\bf 116} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!pct\+\_\+payload\+\_\+data@{pct\+\_\+payload\+\_\+data}}
+\index{pct\+\_\+payload\+\_\+data@{pct\+\_\+payload\+\_\+data}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{pct\+\_\+payload\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+payload\+\_\+data} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_a83c7e87979f4ed059c8febaa10e419b6}
+
+
+Definition at line {\bf 35} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!pct\+\_\+payload\+\_\+valid@{pct\+\_\+payload\+\_\+valid}}
+\index{pct\+\_\+payload\+\_\+valid@{pct\+\_\+payload\+\_\+valid}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{pct\+\_\+payload\+\_\+valid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+payload\+\_\+valid} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_aed0d145c9cf3d9507af91d94ab5205c9}
+
+
+Definition at line {\bf 34} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!pct\+\_\+wr@{pct\+\_\+wr}}
+\index{pct\+\_\+wr@{pct\+\_\+wr}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{pct\+\_\+wr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+wr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_a10f726b3d8a4b36ab81e1b7e490f293a}
+
+
+Definition at line {\bf 30} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!pct\+\_\+wr\+\_\+cnt@{pct\+\_\+wr\+\_\+cnt}}
+\index{pct\+\_\+wr\+\_\+cnt@{pct\+\_\+wr\+\_\+cnt}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{pct\+\_\+wr\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+wr\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_a718567e38aaf1faebbbd3f2c67058771}
+
+
+Definition at line {\bf 31} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!reset\+\_\+n@{reset\+\_\+n}}
+\index{reset\+\_\+n@{reset\+\_\+n}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reset\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_a1f070fd63a3a7fa45c907335ea870c5b}
+
+
+Definition at line {\bf 28} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!wfm\+\_\+load@{wfm\+\_\+load}}
+\index{wfm\+\_\+load@{wfm\+\_\+load}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{wfm\+\_\+load}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+load} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_a8b7989a0d84edcea2673e5e719a405fb}
+
+
+Definition at line {\bf 41} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!wfm\+\_\+pct\+\_\+gen\+\_\+data@{wfm\+\_\+pct\+\_\+gen\+\_\+data}}
+\index{wfm\+\_\+pct\+\_\+gen\+\_\+data@{wfm\+\_\+pct\+\_\+gen\+\_\+data}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{wfm\+\_\+pct\+\_\+gen\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+pct\+\_\+gen\+\_\+data} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_ac7e8eae5f2495bbf3bf1456eba2427bd}
+
+
+Definition at line {\bf 43} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!wfm\+\_\+pct\+\_\+gen\+\_\+inst@{wfm\+\_\+pct\+\_\+gen\+\_\+inst}}
+\index{wfm\+\_\+pct\+\_\+gen\+\_\+inst@{wfm\+\_\+pct\+\_\+gen\+\_\+inst}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{wfm\+\_\+pct\+\_\+gen\+\_\+inst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+pct\+\_\+gen\+\_\+inst} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wfm\+\_\+pct\+\_\+gen}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classwfm__player__tb_1_1tb__behave_adda8b6b8bde5fc960f54c2a79b267425}
+
+
+Definition at line {\bf 192} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!wfm\+\_\+pct\+\_\+gen\+\_\+wr@{wfm\+\_\+pct\+\_\+gen\+\_\+wr}}
+\index{wfm\+\_\+pct\+\_\+gen\+\_\+wr@{wfm\+\_\+pct\+\_\+gen\+\_\+wr}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{wfm\+\_\+pct\+\_\+gen\+\_\+wr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+pct\+\_\+gen\+\_\+wr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_a0bc5990139525cb695daaf60560adf64}
+
+
+Definition at line {\bf 44} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!wfm\+\_\+play\+\_\+stop@{wfm\+\_\+play\+\_\+stop}}
+\index{wfm\+\_\+play\+\_\+stop@{wfm\+\_\+play\+\_\+stop}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{wfm\+\_\+play\+\_\+stop}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+play\+\_\+stop} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwfm__player__tb_1_1tb__behave_aea4aabe9ff8ea75e4c87412648390d14}
+
+
+Definition at line {\bf 42} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+\index{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}!wfm\+\_\+player\+\_\+top\+\_\+inst@{wfm\+\_\+player\+\_\+top\+\_\+inst}}
+\index{wfm\+\_\+player\+\_\+top\+\_\+inst@{wfm\+\_\+player\+\_\+top\+\_\+inst}!wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave@{wfm\+\_\+player\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{wfm\+\_\+player\+\_\+top\+\_\+inst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfm\+\_\+player\+\_\+top\+\_\+inst} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wfm\+\_\+player\+\_\+top}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classwfm__player__tb_1_1tb__behave_a9bdba80f01b27f6486bb3b8df3b1fa29}
+
+
+Definition at line {\bf 171} of file {\bf wfm\+\_\+player\+\_\+tb.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/wfm\+\_\+ram\+\_\+buffer/{\bf wfm\+\_\+player\+\_\+tb.\+vhd}\end{DoxyCompactItemize}

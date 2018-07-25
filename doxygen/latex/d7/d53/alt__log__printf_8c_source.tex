@@ -1,0 +1,484 @@
+\subsection{alt\+\_\+log\+\_\+printf.\+c}
+\label{alt__log__printf_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+log\+\_\+printf.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+log\+\_\+printf.\+c}}
+
+\begin{DoxyCode}
+00001 
+00002 \textcolor{comment}{/* alt\_log\_printf.c}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ * This file implements the various C functions used for the }
+00005 \textcolor{comment}{ * alt\_log logging/debugging print functions.  The functions}
+00006 \textcolor{comment}{ * sit as is here - the job of hiding them from the compiler}
+00007 \textcolor{comment}{ * if logging is disabled is accomplished in the .h file. }
+00008 \textcolor{comment}{ *}
+00009 \textcolor{comment}{ * All the global variables for alt\_log are defined here.  }
+00010 \textcolor{comment}{ * These include the various flags that turn on additional }
+00011 \textcolor{comment}{ * logging options; the strings for assembly printing; and}
+00012 \textcolor{comment}{ * other globals needed by different logging options. }
+00013 \textcolor{comment}{ *}
+00014 \textcolor{comment}{ * There are 4 functions that handle the actual printing: }
+00015 \textcolor{comment}{ * alt\_log\_txchar: Actual function that puts 1 char to UART/JTAG UART.}
+00016 \textcolor{comment}{ * alt\_log\_repchar: Calls alt\_log\_txchar 'n' times - used by}
+00017 \textcolor{comment}{ *            alt\_log\_private\_printf for formatting.}
+00018 \textcolor{comment}{ * alt\_log\_private\_printf:}
+00019 \textcolor{comment}{ *     Stripped down implementation of printf - no floats.}
+00020 \textcolor{comment}{ * alt\_log\_printf\_proc:}
+00021 \textcolor{comment}{ *     Wrapper function for private\_printf.}
+00022 \textcolor{comment}{ * }
+00023 \textcolor{comment}{ * The rest of the functions are called by the macros which}
+00024 \textcolor{comment}{ * were called by code in the other components.  Each function}
+00025 \textcolor{comment}{ * is preceded by a comment, about which file it gets called}
+00026 \textcolor{comment}{ * in, and what its purpose is.}
+00027 \textcolor{comment}{ *}
+00028 \textcolor{comment}{ * author: gkwan}
+00029 \textcolor{comment}{ */}
+00030 
+00031 \textcolor{comment}{/* skip all code if enable is off */}
+00032 \textcolor{preprocessor}{#ifdef ALT\_LOG\_ENABLE}
+00033 
+00034 \textcolor{preprocessor}{#include <system.h>}
+00035 \textcolor{preprocessor}{#include <stdarg.h>}
+00036 \textcolor{preprocessor}{#include <string.h>}
+00037 \textcolor{preprocessor}{#ifdef \_\_ALTERA\_AVALON\_JTAG\_UART}
+00038 \textcolor{preprocessor}{   #include "altera\_avalon\_jtag\_uart.h"}
+00039 \textcolor{preprocessor}{   #include <altera\_avalon\_jtag\_uart\_regs.h>}
+00040 \textcolor{preprocessor}{#endif}
+00041 \textcolor{preprocessor}{#include "sys/alt_log_printf.h"}
+00042 
+00043 \textcolor{comment}{/* strings for assembly puts */}
+00044 \textcolor{keywordtype}{char} alt\_log\_msg\_bss[] = \textcolor{stringliteral}{"[crt0.S] Clearing BSS \(\backslash\)r\(\backslash\)n"};;
+00045 \textcolor{keywordtype}{char} alt\_log\_msg\_alt\_main[] = \textcolor{stringliteral}{"[crt0.S] Calling alt\_main.\(\backslash\)r\(\backslash\)n"};
+00046 \textcolor{keywordtype}{char} alt\_log\_msg\_stackpointer[] \(\backslash\)
+00047     = \textcolor{stringliteral}{"[crt0.S] Setting up stack and global pointers.\(\backslash\)r\(\backslash\)n"};
+00048 \textcolor{keywordtype}{char} alt\_log\_msg\_cache[] = \textcolor{stringliteral}{"[crt0.S] Inst & Data Cache Initialized.\(\backslash\)r\(\backslash\)n"};
+00049 \textcolor{comment}{/* char array allocation for alt\_write */}
+00050 \textcolor{keywordtype}{char} alt\_log\_write\_buf[ALT\_LOG\_WRITE\_ECHO\_LEN+2];
+00051 
+00052 \textcolor{comment}{/* global variables for all 'on' flags */}
+00053 
+00054 \textcolor{comment}{/* }
+00055 \textcolor{comment}{ * The boot message flag is linked into the data (rwdata) section}
+00056 \textcolor{comment}{ * because if it is zero, it would otherwise be placed in the bss section.}
+00057 \textcolor{comment}{ * alt\_log examines this variable before the BSS is cleared in the boot-up}
+00058 \textcolor{comment}{ * process.}
+00059 \textcolor{comment}{ */}
+00060 \textcolor{keyword}{volatile} alt_u32 alt_log_boot_on_flag \
+00061   __attribute__ ((section (\textcolor{stringliteral}{".data"}))) = ALT\_LOG\_BOOT\_ON\_FLAG\_SETTING;
+00062 
+00063 \textcolor{keyword}{volatile} alt_u8 alt\_log\_write\_on\_flag = ALT\_LOG\_WRITE\_ON\_FLAG\_SETTING;
+00064 
+00065 \textcolor{keyword}{volatile} alt_u8 alt\_log\_sys\_clk\_on\_flag = ALT\_LOG\_SYS\_CLK\_ON\_FLAG\_SETTING;
+00066 
+00067 \textcolor{keyword}{volatile} alt_u8 alt\_log\_jtag\_uart\_alarm\_on\_flag = \(\backslash\)
+00068   ALT\_LOG\_JTAG\_UART\_ALARM\_ON\_FLAG\_SETTING;
+00069 
+00070 \textcolor{keyword}{volatile} alt_u8 alt\_log\_jtag\_uart\_isr\_on\_flag = \(\backslash\)
+00071   ALT\_LOG\_JTAG\_UART\_ISR\_ON\_FLAG\_SETTING;
+00072 
+00073 \textcolor{keyword}{volatile} alt_u8 alt\_log\_jtag\_uart\_startup\_info\_on\_flag = \(\backslash\)
+00074   ALT\_LOG\_JTAG\_UART\_STARTUP\_INFO\_ON\_FLAG\_SETTING;
+00075 
+00076 \textcolor{comment}{/* Global alarm object for recurrent JTAG UART status printing */}
+00077 alt_alarm alt\_log\_jtag\_uart\_alarm\_1;
+00078 
+00079 \textcolor{comment}{/* Global ints for system clock printing and count */}
+00080 \textcolor{keyword}{volatile} \textcolor{keywordtype}{int} alt\_log\_sys\_clk\_count;
+00081 \textcolor{keyword}{volatile} \textcolor{keywordtype}{int} alt\_system\_clock\_in\_sec;
+00082 
+00083 \textcolor{comment}{/* enum used by alt\_log\_private\_printf */}
+00084 \textcolor{keyword}{enum}
+00085 \{
+00086   pfState\_chars,
+00087   pfState\_firstFmtChar,
+00088   pfState\_otherFmtChar
+00089 \};
+00090 
+00091 
+00092 
+00093 
+00094 \textcolor{comment}{/* Function to put one char onto the UART/JTAG UART txdata register. */}
+00095 \textcolor{keywordtype}{void} alt\_log\_txchar(\textcolor{keywordtype}{int} c,\textcolor{keywordtype}{char} *base)
+00096 \{
+00097   \textcolor{comment}{/* Wait until the device is ready for a character */}
+00098   \textcolor{keywordflow}{while}((ALT\_LOG\_PRINT\_REG\_RD(base) & ALT\_LOG\_PRINT\_MSK) == 0)
+00099     ;
+00100   \textcolor{comment}{/* And pop the character into the register */}
+00101   ALT\_LOG\_PRINT\_TXDATA\_WR(base,c);
+00102 \}
+00103 
+00104 
+00105 \textcolor{comment}{/* Called by alt\_log\_private\_printf to print out characters repeatedly */}
+00106 \textcolor{keywordtype}{void} alt\_log\_repchar(\textcolor{keywordtype}{char} c,\textcolor{keywordtype}{int} r,\textcolor{keywordtype}{int} base)
+00107 \{
+00108   \textcolor{keywordflow}{while}(r-- > 0)
+00109     alt\_log\_txchar(c,(\textcolor{keywordtype}{char}*) base);
+00110 \}
+00111 
+00112 
+00113 \textcolor{comment}{/* Stripped down printf function */}
+00114 \textcolor{keywordtype}{void} alt\_log\_private\_printf(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt,\textcolor{keywordtype}{int} base,va\_list args)
+00115   \{
+00116   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *w;
+00117   \textcolor{keywordtype}{char} c;
+00118   \textcolor{keywordtype}{int} state;
+00119   \textcolor{keywordtype}{int} fmtLeadingZero = 0; \textcolor{comment}{/* init these all to 0 for -W warnings. */}
+00120   \textcolor{keywordtype}{int} fmtLong = 0;
+00121   \textcolor{keywordtype}{int} fmtBeforeDecimal = 0;
+00122   \textcolor{keywordtype}{int} fmtAfterDecimal = 0;
+00123   \textcolor{keywordtype}{int} fmtBase = 0;
+00124   \textcolor{keywordtype}{int} fmtSigned = 0;
+00125   \textcolor{keywordtype}{int} fmtCase = 0; \textcolor{comment}{/* For hex format, if 1, A-F, else a-f. */}
+00126 
+00127   w = fmt;
+00128   state = pfState\_chars;
+00129 
+00130   \textcolor{keywordflow}{while}(0 != (c = *w++))
+00131     \{
+00132     \textcolor{keywordflow}{switch}(state)
+00133       \{
+00134       \textcolor{keywordflow}{case} pfState\_chars:
+00135         \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'%'})
+00136         \{
+00137           fmtLeadingZero = 0;
+00138           fmtLong = 0;
+00139           fmtBase = 10;
+00140           fmtSigned = 1;
+00141           fmtCase = 0; \textcolor{comment}{/* Only %X sets this. */}
+00142           fmtBeforeDecimal = -1;
+00143           fmtAfterDecimal = -1;
+00144           state = pfState\_firstFmtChar;
+00145         \}
+00146         \textcolor{keywordflow}{else}
+00147         \{
+00148           alt\_log\_txchar(c,(\textcolor{keywordtype}{char}*)base);
+00149         \}
+00150         \textcolor{keywordflow}{break};
+00151 
+00152       \textcolor{keywordflow}{case} pfState\_firstFmtChar:
+00153         \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'0'})
+00154         \{
+00155           fmtLeadingZero = 1;
+00156           state = pfState\_otherFmtChar;
+00157         \}
+00158         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'%'})
+00159         \{
+00160           alt\_log\_txchar(c,(\textcolor{keywordtype}{char}*)base);
+00161           state = pfState\_chars;
+00162         \}
+00163         \textcolor{keywordflow}{else}
+00164         \{
+00165           state = pfState\_otherFmtChar;
+00166           \textcolor{keywordflow}{goto} otherFmtChar;
+00167         \}
+00168         \textcolor{keywordflow}{break};
+00169 
+00170       \textcolor{keywordflow}{case} pfState\_otherFmtChar:
+00171 otherFmtChar:
+00172         \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'.'})
+00173         \{
+00174           fmtAfterDecimal = 0;
+00175         \}
+00176         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\textcolor{charliteral}{'0'} <= c && c <= \textcolor{charliteral}{'9'})
+00177         \{
+00178           c -= \textcolor{charliteral}{'0'};
+00179           \textcolor{keywordflow}{if}(fmtAfterDecimal < 0)     \textcolor{comment}{/* still before decimal */}
+00180           \{
+00181             \textcolor{keywordflow}{if}(fmtBeforeDecimal < 0)
+00182             \{
+00183               fmtBeforeDecimal = 0;
+00184             \}
+00185             \textcolor{keywordflow}{else}
+00186             \{
+00187               fmtBeforeDecimal *= 10;
+00188             \}
+00189             fmtBeforeDecimal += c;
+00190           \}
+00191           \textcolor{keywordflow}{else}
+00192           \{
+00193             fmtAfterDecimal = (fmtAfterDecimal * 10) + c;
+00194           \}
+00195         \}
+00196         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'l'})
+00197         \{
+00198           fmtLong = 1;
+00199         \}
+00200         \textcolor{keywordflow}{else}                  \textcolor{comment}{/* we're up to the letter which determines type */}
+00201         \{
+00202           \textcolor{keywordflow}{switch}(c)
+00203           \{
+00204             \textcolor{keywordflow}{case} \textcolor{charliteral}{'d'}:
+00205             \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:
+00206 doIntegerPrint:
+00207                 \{
+00208                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} v;
+00209                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} p;  \textcolor{comment}{/* biggest power of fmtBase */}
+00210                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} vShrink;  \textcolor{comment}{/* used to count digits */}
+00211                 \textcolor{keywordtype}{int} sign;
+00212                 \textcolor{keywordtype}{int} digitCount;
+00213 
+00214                 \textcolor{comment}{/* Get the value */}
+00215                 \textcolor{keywordflow}{if}(fmtLong)
+00216                 \{
+00217                   \textcolor{keywordflow}{if} (fmtSigned)
+00218                   \{
+00219                     v = va\_arg(args,\textcolor{keywordtype}{long});
+00220                   \}
+00221                   \textcolor{keywordflow}{else}
+00222                   \{
+00223                     v = va\_arg(args,\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long});
+00224                   \}
+00225                 \}
+00226                 \textcolor{keywordflow}{else}
+00227                 \{
+00228                   \textcolor{keywordflow}{if} (fmtSigned)
+00229                   \{
+00230                     v = va\_arg(args,\textcolor{keywordtype}{int});
+00231                   \}
+00232                   \textcolor{keywordflow}{else}
+00233                   \{
+00234                     v = va\_arg(args,\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int});
+00235                   \}
+00236                 \}
+00237 
+00238                 \textcolor{comment}{/* Strip sign */}
+00239                 sign = 0;
+00240                   \textcolor{comment}{/* (assumes sign bit is #31) */}
+00241                 \textcolor{keywordflow}{if}( fmtSigned && (v & (0x80000000)) )
+00242                   \{
+00243                   v = ~v + 1;
+00244                   sign = 1;
+00245                   \}
+00246 
+00247                 \textcolor{comment}{/* Count digits, and get largest place value */}
+00248                 vShrink = v;
+00249                 p = 1;
+00250                 digitCount = 1;
+00251                 \textcolor{keywordflow}{while}( (vShrink = vShrink / fmtBase) > 0 )
+00252                   \{
+00253                   digitCount++;
+00254                   p *= fmtBase;
+00255                   \}
+00256 
+00257                 \textcolor{comment}{/* Print leading characters & sign */}
+00258                 fmtBeforeDecimal -= digitCount;
+00259                 \textcolor{keywordflow}{if}(fmtLeadingZero)
+00260                   \{
+00261                   \textcolor{keywordflow}{if}(sign)
+00262                     \{
+00263                     alt\_log\_txchar(\textcolor{charliteral}{'-'},(\textcolor{keywordtype}{char}*)base);
+00264                     fmtBeforeDecimal--;
+00265                     \}
+00266                   alt\_log\_repchar(\textcolor{charliteral}{'0'},fmtBeforeDecimal,base);
+00267                   \}
+00268                 \textcolor{keywordflow}{else}
+00269                   \{
+00270                     \textcolor{keywordflow}{if}(sign)
+00271                     \{
+00272                       fmtBeforeDecimal--;
+00273                     \}
+00274                     alt\_log\_repchar(\textcolor{charliteral}{' '},fmtBeforeDecimal,base);
+00275                     \textcolor{keywordflow}{if}(sign)
+00276                     \{
+00277                       alt\_log\_txchar(\textcolor{charliteral}{'-'},(\textcolor{keywordtype}{char}*)base);
+00278                     \}
+00279                   \}
+00280 
+00281                 \textcolor{comment}{/* Print numbery parts */}
+00282                 \textcolor{keywordflow}{while}(p)
+00283                   \{
+00284                   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} d;
+00285 
+00286                   d = v / p;
+00287                   d += \textcolor{charliteral}{'0'};
+00288                   \textcolor{keywordflow}{if}(d > \textcolor{charliteral}{'9'})
+00289                   \{
+00290                     d += (fmtCase ? \textcolor{charliteral}{'A'} : \textcolor{charliteral}{'a'}) - \textcolor{charliteral}{'0'} - 10;
+00291                   \}
+00292                   alt\_log\_txchar(d,(\textcolor{keywordtype}{char}*)base);
+00293 
+00294                   v = v % p;
+00295                   p = p / fmtBase;
+00296                   \}
+00297                 \}
+00298 
+00299               state = pfState\_chars;
+00300               \textcolor{keywordflow}{break};
+00301 
+00302             \textcolor{keywordflow}{case} \textcolor{charliteral}{'u'}:
+00303               fmtSigned = 0;
+00304               \textcolor{keywordflow}{goto} doIntegerPrint;
+00305             \textcolor{keywordflow}{case} \textcolor{charliteral}{'o'}:
+00306               fmtSigned = 0;
+00307               fmtBase = 8;
+00308               \textcolor{keywordflow}{goto} doIntegerPrint;
+00309             \textcolor{keywordflow}{case} \textcolor{charliteral}{'x'}:
+00310               fmtSigned = 0;
+00311               fmtBase = 16;
+00312               \textcolor{keywordflow}{goto} doIntegerPrint;
+00313             \textcolor{keywordflow}{case} \textcolor{charliteral}{'X'}:
+00314               fmtSigned = 0;
+00315               fmtBase = 16;
+00316               fmtCase = 1;
+00317               \textcolor{keywordflow}{goto} doIntegerPrint;
+00318 
+00319             \textcolor{keywordflow}{case} \textcolor{charliteral}{'c'}:
+00320               alt\_log\_repchar(\textcolor{charliteral}{' '},fmtBeforeDecimal-1,base);
+00321               alt\_log\_txchar(va\_arg(args,\textcolor{keywordtype}{int}),(\textcolor{keywordtype}{char}*)base);
+00322               \textcolor{keywordflow}{break};
+00323 
+00324             \textcolor{keywordflow}{case} \textcolor{charliteral}{'s'}:
+00325                 \{
+00326                 \textcolor{keywordtype}{char} *s;
+00327 
+00328                 s = va\_arg(args,\textcolor{keywordtype}{char} *);
+00329                 alt\_log\_repchar(\textcolor{charliteral}{' '},fmtBeforeDecimal-strlen(s),base);
+00330 
+00331                 \textcolor{keywordflow}{while}(*s)
+00332                   alt\_log\_txchar(*s++,(\textcolor{keywordtype}{char}*)base);
+00333                 \}
+00334               \textcolor{keywordflow}{break};
+00335             \} \textcolor{comment}{/* switch last letter of fmt */}
+00336           state=pfState\_chars;
+00337           \}
+00338         \textcolor{keywordflow}{break};
+00339       \} \textcolor{comment}{/* switch */}
+00340     \} \textcolor{comment}{/* while chars left */}
+00341   \} \textcolor{comment}{/* printf */}
+00342 
+00343 \textcolor{comment}{/* Main logging printf function */}
+00344 \textcolor{keywordtype}{int} alt\_log\_printf\_proc(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, ... )
+00345 \{
+00346     va\_list args;
+00347 
+00348     va\_start (args, fmt);
+00349     alt\_log\_private\_printf(fmt,ALT_LOG_PORT_BASE,args);
+00350     \textcolor{keywordflow}{return} (0);
+00351 \}
+00352 
+00353 \textcolor{comment}{/* Below are the functions called by different macros in various components. */}
+00354 
+00355 \textcolor{comment}{/* If the system has a JTAG\_UART, include JTAG\_UART debugging functions */}
+00356 \textcolor{preprocessor}{#ifdef \_\_ALTERA\_AVALON\_JTAG\_UART}
+00357 
+00358 \textcolor{comment}{/* The alarm function in altera\_avalon\_jtag\_uart.c.}
+00359 \textcolor{comment}{ * This function, when turned on, prints out the status}
+00360 \textcolor{comment}{ * of the JTAG UART Control register, every ALT\_LOG\_JTAG\_UART\_TICKS.}
+00361 \textcolor{comment}{ * If the flag is off, the alarm should never be registered, and this}
+00362 \textcolor{comment}{ * function should never run */}
+00363 alt_u32 altera\_avalon\_jtag\_uart\_report\_log(\textcolor{keywordtype}{void} * context)
+00364 \{
+00365     \textcolor{keywordflow}{if} (alt\_log\_jtag\_uart\_alarm\_on\_flag) \{
+00366     altera\_avalon\_jtag\_uart\_state* dev = (altera\_avalon\_jtag\_uart\_state*) context;
+00367         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* header=\textcolor{stringliteral}{"JTAG Alarm:"};
+00368         alt\_log\_jtag\_uart\_print\_control\_reg(dev, dev->base, header);
+00369         \textcolor{keywordflow}{return} ALT\_LOG\_JTAG\_UART\_TICKS;
+00370     \}
+00371     \textcolor{keywordflow}{else} 
+00372     \{  
+00373         \textcolor{comment}{/* If flag is not on, return 0 to disable future alarms.}
+00374 \textcolor{comment}{        * Should never be here, alarm should not be enabled at all. */}
+00375         \textcolor{keywordflow}{return} 0;
+00376     \}
+00377 \}
+00378 
+00379 \textcolor{keywordtype}{void} alt\_log\_jtag\_uart\_print\_control\_reg(altera\_avalon\_jtag\_uart\_state* dev, \textcolor{keywordtype}{int} base, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* header)
+00380 \{
+00381      \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} control, space, ac, wi, ri, we, re;
+00382      control = IORD\_ALTERA\_AVALON\_JTAG\_UART\_CONTROL(base);
+00383      space = (control & ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_WSPACE\_MSK) >>
+00384              ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_WSPACE\_OFST;
+00385      we= (control & ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_WE\_MSK) >>
+00386          ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_WE\_OFST;
+00387      re= (control & ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_RE\_MSK) >>
+00388          ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_RE\_OFST;
+00389      ri= (control & ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_RI\_MSK) >>
+00390          ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_RI\_OFST;
+00391      wi= (control & ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_WI\_MSK) >>
+00392          ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_WI\_OFST;
+00393      ac= (control & ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_AC\_MSK) >>
+00394          ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_AC\_OFST;
+00395          
+00396 \textcolor{preprocessor}{#ifdef ALTERA\_AVALON\_JTAG\_UART\_SMALL}
+00397     ALT_LOG_PRINTF(
+00398      \textcolor{stringliteral}{"%s HW FIFO wspace=%d AC=%d WI=%d RI=%d WE=%d RE=%d\(\backslash\)r\(\backslash\)n"},
+00399          header,space,ac,wi,ri,we,re);
+00400 \textcolor{preprocessor}{#else}
+00401     ALT_LOG_PRINTF(
+00402      \textcolor{stringliteral}{"%s SW CirBuf = %d, HW FIFO wspace=%d AC=%d WI=%d RI=%d WE=%d RE=%d\(\backslash\)r\(\backslash\)n"},
+00403          header,(dev->tx\_out-dev->tx\_in),space,ac,wi,ri,we,re);
+00404 \textcolor{preprocessor}{#endif   }
+00405          
+00406      \textcolor{keywordflow}{return};
+00407 
+00408 \}
+00409 
+00410 \textcolor{comment}{/* In altera\_avalon\_jtag\_uart.c}
+00411 \textcolor{comment}{ * Same output as the alarm function above, but this is called in the driver}
+00412 \textcolor{comment}{ * init function.  Hence, it gives the status of the JTAG UART control register}
+00413 \textcolor{comment}{ * right at the initialization of the driver */} 
+00414 \textcolor{keywordtype}{void} alt\_log\_jtag\_uart\_startup\_info(altera\_avalon\_jtag\_uart\_state* dev, \textcolor{keywordtype}{int} base)
+00415 \{
+00416      \textcolor{keyword}{const} \textcolor{keywordtype}{char}* header=\textcolor{stringliteral}{"JTAG Startup Info:"};
+00417      alt\_log\_jtag\_uart\_print\_control\_reg(dev, base, header);
+00418      \textcolor{keywordflow}{return};
+00419 \}
+00420 
+00421 \textcolor{comment}{/* In altera\_avalon\_jtag\_uart.c}
+00422 \textcolor{comment}{ * When turned on, this function will print out the status of the jtag uart}
+00423 \textcolor{comment}{ * control register every time there is a jtag uart "almost-empty" interrupt. */}
+00424 \textcolor{keywordtype}{void} alt\_log\_jtag\_uart\_isr\_proc(\textcolor{keywordtype}{int} base, altera\_avalon\_jtag\_uart\_state* dev) 
+00425 \{
+00426     \textcolor{keywordflow}{if} (alt\_log\_jtag\_uart\_isr\_on\_flag) \{
+00427         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* header=\textcolor{stringliteral}{"JTAG IRQ:"};
+00428         alt\_log\_jtag\_uart\_print\_control\_reg(dev, base, header);
+00429     \}
+00430     \textcolor{keywordflow}{return};
+00431 \}
+00432 
+00433 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALTERA\_AVALON\_JTAG\_UART */}\textcolor{preprocessor}{ }
+00434 
+00435 \textcolor{comment}{/* In alt\_write.c}
+00436 \textcolor{comment}{ * When the alt\_log\_write\_on\_flag is turned on, this function gets called}
+00437 \textcolor{comment}{ * every time alt\_write gets called.  The first }
+00438 \textcolor{comment}{ * ALT\_LOG\_WRITE\_ECHO\_LEN characters of every printf command (or any command}
+00439 \textcolor{comment}{ * that eventually calls write()) gets echoed to the alt\_log output. */}
+00440 \textcolor{keywordtype}{void} alt\_log\_write(\textcolor{keyword}{const} \textcolor{keywordtype}{void} *ptr, \textcolor{keywordtype}{size\_t} len)
+00441 \{
+00442     \textcolor{keywordflow}{if} (alt\_log\_write\_on\_flag) \{
+00443     \textcolor{keywordtype}{int} temp\_cnt;
+00444         \textcolor{keywordtype}{int} length=(ALT\_LOG\_WRITE\_ECHO\_LEN>len) ? len : ALT\_LOG\_WRITE\_ECHO\_LEN;
+00445 
+00446         \textcolor{keywordflow}{if} (length < 2) \textcolor{keywordflow}{return};
+00447 
+00448         strncpy (alt\_log\_write\_buf,ptr,length);
+00449     alt\_log\_write\_buf[length-1]=\textcolor{charliteral}{'\(\backslash\)n'};
+00450     alt\_log\_write\_buf[length]=\textcolor{charliteral}{'\(\backslash\)r'};
+00451     alt\_log\_write\_buf[length+1]=\textcolor{charliteral}{'\(\backslash\)0'};
+00452 
+00453     \textcolor{comment}{/* Escape Ctrl-D's. If the Ctrl-D gets sent it might kill the terminal}
+00454 \textcolor{comment}{         * connection of alt\_log. It will get replaced by 'D'. */}
+00455         \textcolor{keywordflow}{for} (temp\_cnt=0;temp\_cnt < length; temp\_cnt++) \{
+00456         \textcolor{keywordflow}{if} (alt\_log\_write\_buf[temp\_cnt]== 0x4) \{
+00457             alt\_log\_write\_buf[temp\_cnt]=\textcolor{charliteral}{'D'};
+00458         \}
+00459     \}
+00460         ALT_LOG_PRINTF(\textcolor{stringliteral}{"Write Echo: %s"},alt\_log\_write\_buf);
+00461     \}
+00462 \}
+00463 
+00464 \textcolor{comment}{/* In altera\_avalon\_timer\_sc}
+00465 \textcolor{comment}{ * This function prints out a system clock is alive message}
+00466 \textcolor{comment}{ * every ALT\_LOG\_SYS\_CLK\_INTERVAL (in ticks).  */}
+00467 \textcolor{keywordtype}{void} alt\_log\_system\_clock()
+00468 \{
+00469     \textcolor{keywordflow}{if} (alt\_log\_sys\_clk\_on\_flag) \{
+00470     alt\_log\_sys\_clk\_count++;
+00471         \textcolor{keywordflow}{if} (alt\_log\_sys\_clk\_count > ALT\_LOG\_SYS\_CLK\_INTERVAL) \{
+00472             alt\_log\_sys\_clk\_count = 0;
+00473             ALT_LOG_PRINTF(\textcolor{stringliteral}{"System Clock On %u\(\backslash\)r\(\backslash\)n"},alt\_system\_clock\_in\_sec++);
+00474         \}
+00475     \}
+00476 \}
+00477 
+00478 
+00479 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

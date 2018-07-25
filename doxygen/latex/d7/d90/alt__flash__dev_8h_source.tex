@@ -1,0 +1,106 @@
+\subsection{alt\+\_\+flash\+\_\+dev.\+h}
+\label{alt__flash__dev_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+flash\+\_\+dev.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+flash\+\_\+dev.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_ALT\_FLASH\_DEV\_H\_\_}
+00002 \textcolor{comment}{/******************************************************************************}
+00003 \textcolor{comment}{*                                                                             *}
+00004 \textcolor{comment}{* License Agreement                                                           *}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* Copyright (c) 2015 Altera Corporation, San Jose, California, USA.           *}
+00007 \textcolor{comment}{* All rights reserved.                                                        *}
+00008 \textcolor{comment}{*                                                                             *}
+00009 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00010 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00011 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00012 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00013 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00014 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00015 \textcolor{comment}{*                                                                             *}
+00016 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00017 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00018 \textcolor{comment}{*                                                                             *}
+00019 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00020 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00021 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00022 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00023 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00024 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00025 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00026 \textcolor{comment}{*                                                                             *}
+00027 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00028 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00029 \textcolor{comment}{*                                                                             *}
+00030 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00031 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00032 \textcolor{comment}{******************************************************************************/}
+00033 
+00034 \textcolor{comment}{/******************************************************************************}
+00035 \textcolor{comment}{*                                                                             *}
+00036 \textcolor{comment}{* THIS IS A LIBRARY READ-ONLY SOURCE FILE. DO NOT EDIT.                       *}
+00037 \textcolor{comment}{*                                                                             *}
+00038 \textcolor{comment}{******************************************************************************/}
+00039 
+00040 \textcolor{comment}{/******************************************************************************}
+00041 \textcolor{comment}{*                                                                             *}
+00042 \textcolor{comment}{* Alt\_flash\_dev.h - Generic Flash device interfaces                           *}
+00043 \textcolor{comment}{*                                                                             *}
+00044 \textcolor{comment}{* Author PRR                                                                  *}
+00045 \textcolor{comment}{*                                                                             *}
+00046 \textcolor{comment}{******************************************************************************/}
+00047 \textcolor{preprocessor}{#define \_\_ALT\_FLASH\_DEV\_H\_\_}
+00048 
+00049 \textcolor{preprocessor}{#include "alt_flash_types.h"}
+00050 \textcolor{preprocessor}{#include "sys/alt_llist.h"}
+00051 \textcolor{preprocessor}{#include "priv/alt_dev_llist.h"}
+00052 
+00053 \textcolor{preprocessor}{#include "alt_types.h"}
+00054 
+00055 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }alt_flash_dev alt_flash_dev; 
+00056 \textcolor{keyword}{typedef} alt_flash_dev alt_flash_fd;
+00057 
+00058 \textcolor{keyword}{static} ALT_INLINE \textcolor{keywordtype}{int} alt_flash_device_register( alt_flash_fd* fd)
+00059 \{
+00060   \textcolor{keyword}{extern} alt_llist alt\_flash\_dev\_list;
+00061 
+00062   \textcolor{keywordflow}{return} alt_dev_llist_insert ((alt_dev_llist*) fd, &alt\_flash\_dev\_list);
+00063 \}
+00064 
+00065 \textcolor{keyword}{typedef} alt_flash_dev* (*alt\_flash\_open)(alt_flash_dev* flash, 
+00066                                          \textcolor{keyword}{const} \textcolor{keywordtype}{char}* name );
+00067 \textcolor{keyword}{typedef} int (*alt_flash_close)(alt_flash_dev* flash\_info);
+00068 
+00069 \textcolor{keyword}{typedef} int (*alt_flash_write)( alt_flash_dev* flash, \textcolor{keywordtype}{int} offset, 
+00070                                 \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src_addr, \textcolor{keywordtype}{int} length );
+00071 
+00072 \textcolor{keyword}{typedef} int (*alt_flash_get_flash_info)( alt_flash_dev* flash, flash_region** 
+      info, 
+00073                                           \textcolor{keywordtype}{int}* number_of_regions);
+00074 \textcolor{keyword}{typedef} int (*alt_flash_write_block)( alt_flash_dev* flash, \textcolor{keywordtype}{int} block_offset, 
+00075                                       \textcolor{keywordtype}{int} data_offset, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* data, 
+00076                                       \textcolor{keywordtype}{int} length);
+00077 \textcolor{keyword}{typedef} int (*alt_flash_erase_block)( alt_flash_dev* flash, \textcolor{keywordtype}{int} offset);
+00078 \textcolor{keyword}{typedef} int (*alt_flash_read)(alt_flash_dev* flash, \textcolor{keywordtype}{int} offset, 
+00079                               \textcolor{keywordtype}{void}* dest_addr, \textcolor{keywordtype}{int} length );
+00080 \textcolor{keyword}{typedef} int (*alt_flash_lock)(alt_flash_dev* flash, alt_u32 sectors_to_lock);                         
+00081 
+00082 \textcolor{keyword}{struct }alt_flash_dev
+00083 \{
+00084   alt_llist                 llist;
+00085   \textcolor{keyword}{const} \textcolor{keywordtype}{char}*               name;
+00086   alt_flash_open            open;
+00087   alt_flash_close           close;
+00088   alt_flash_write           write;
+00089   alt_flash_read            read;
+00090   alt_flash_get_flash_info  get_info;
+00091   alt_flash_erase_block     erase_block;
+00092   alt_flash_write_block     write_block;
+00093   \textcolor{keywordtype}{void}*                     base_addr;
+00094   \textcolor{keywordtype}{int}                       length;
+00095   \textcolor{keywordtype}{int}                       number_of_regions;
+00096   flash_region              region_info[ALT_MAX_NUMBER_OF_FLASH_REGIONS]; 
+00097   alt_flash_lock            lock;
+00098 \};
+00099 
+00100 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_FLASH\_DEV\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

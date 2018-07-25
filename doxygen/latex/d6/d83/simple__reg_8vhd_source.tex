@@ -1,0 +1,56 @@
+\subsection{simple\+\_\+reg.\+vhd}
+\label{simple__reg_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/reg\+\_\+phase\+\_\+shift/simple\+\_\+reg.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/reg\+\_\+phase\+\_\+shift/simple\+\_\+reg.\+vhd}}
+
+\begin{DoxyCode}
+00001 
+00002 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00003 \textcolor{keyword}{-- FILE:    simple\_reg.vhd}
+00004 \textcolor{keyword}{-- DESCRIPTION: describe}
+00005 \textcolor{keyword}{-- DATE:    Feb 13, 2014}
+00006 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00007 \textcolor{keyword}{-- REVISIONS:}
+00008 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00009 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00010 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00011 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00012 
+00013 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00014 \textcolor{keyword}{-- Entity declaration}
+00015 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00016 \textcolor{keywordflow}{entity }simple_reg \textcolor{keywordflow}{is}
+00017   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00018 \textcolor{keyword}{        --input ports }
+00019             \textcolor{vhdlchar}{clk}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020             \textcolor{vhdlchar}{reset_n}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00021             \textcolor{vhdlchar}{d}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00022             \textcolor{vhdlchar}{q}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00023 
+00024 \textcolor{keyword}{        --output ports }
+00025         
+00026         \textcolor{vhdlchar}{)};
+00027 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{simple\_reg};
+00028 
+00029 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00030 \textcolor{keyword}{-- Architecture}
+00031 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00032 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} simple_reg is
+00033 \textcolor{keyword}{--declare signals,  components here}
+00034 
+00035   
+00036 \textcolor{vhdlkeyword}{begin}
+00037 
+00038   \textcolor{keywordflow}{process}(reset_n, clk)
+00039 \textcolor{vhdlkeyword}{    begin}
+00040       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00041         \textcolor{vhdlchar}{q}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};  
+00042         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00043           \textcolor{vhdlchar}{q}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{d};
+00044         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00045     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00046   
+00047 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00048 
+00049 
+00050 
+00051 
+\end{DoxyCode}

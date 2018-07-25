@@ -1,0 +1,63 @@
+\subsection{debounce.\+vhd}
+\label{debounce_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/debounce.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/debounce.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{--------------------------------------------------------------------------------}
+00002 \textcolor{keyword}{--}
+00003 \textcolor{keyword}{--   FileName:         debounce.vhd}
+00004 \textcolor{keyword}{--   Dependencies:     none}
+00005 \textcolor{keyword}{--   Design Software:  Quartus II 32-bit Version 11.1 Build 173 SJ Full Version}
+00006 \textcolor{keyword}{--}
+00007 \textcolor{keyword}{--   HDL CODE IS PROVIDED "AS IS."  DIGI-KEY EXPRESSLY DISCLAIMS ANY}
+00008 \textcolor{keyword}{--   WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT}
+00009 \textcolor{keyword}{--   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A}
+00010 \textcolor{keyword}{--   PARTICULAR PURPOSE, OR NON-INFRINGEMENT. IN NO EVENT SHALL DIGI-KEY}
+00011 \textcolor{keyword}{--   BE LIABLE FOR ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENTIAL}
+00012 \textcolor{keyword}{--   DAMAGES, LOST PROFITS OR LOST DATA, HARM TO YOUR EQUIPMENT, COST OF}
+00013 \textcolor{keyword}{--   PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY OR SERVICES, ANY CLAIMS}
+00014 \textcolor{keyword}{--   BY THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF),}
+00015 \textcolor{keyword}{--   ANY CLAIMS FOR INDEMNITY OR CONTRIBUTION, OR OTHER SIMILAR COSTS.}
+00016 \textcolor{keyword}{--}
+00017 \textcolor{keyword}{--   Version History}
+00018 \textcolor{keyword}{--   Version 1.0 3/26/2012 Scott Larson}
+00019 \textcolor{keyword}{--     Initial Public Release}
+00020 \textcolor{keyword}{--}
+00021 \textcolor{keyword}{--------------------------------------------------------------------------------}
+00022 
+00023 \textcolor{vhdlkeyword}{LIBRARY }\textcolor{keywordflow}{ieee};
+00024 \textcolor{vhdlkeyword}{USE }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00025 \textcolor{vhdlkeyword}{USE }ieee.std\_logic\_unsigned.\textcolor{keywordflow}{all};
+00026 
+00027 \textcolor{keywordflow}{ENTITY }debounce \textcolor{keywordflow}{IS}
+00028   \textcolor{keywordflow}{GENERIC}\textcolor{vhdlchar}{(}
+00029     \textcolor{vhdlchar}{counter_size}  \textcolor{vhdlchar}{:}  \textcolor{comment}{INTEGER} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{19}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --counter size (19 bits gives 10.5ms with 50MHz clock)}
+00030   \textcolor{keywordflow}{PORT}\textcolor{vhdlchar}{(}
+00031     \textcolor{vhdlchar}{clk}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{IN}  \textcolor{comment}{STD\_LOGIC};\textcolor{keyword}{  --input clock}
+00032     \textcolor{vhdlchar}{button}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{IN}  \textcolor{comment}{STD\_LOGIC};\textcolor{keyword}{  --input signal to be debounced}
+00033     \textcolor{vhdlchar}{result}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{OUT} \textcolor{comment}{STD\_LOGIC}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --debounced signal}
+00034 \textcolor{keywordflow}{END} \textcolor{vhdlchar}{debounce};
+00035 
+00036 \textcolor{keywordflow}{ARCHITECTURE} logic \textcolor{keywordflow}{OF} debounce IS
+00037   \textcolor{keywordflow}{SIGNAL} \textcolor{vhdlchar}{flipflops}   \textcolor{vhdlchar}{:} \textcolor{comment}{STD\_LOGIC\_VECTOR}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --input flip flops}
+00038   \textcolor{keywordflow}{SIGNAL} \textcolor{vhdlchar}{counter_set} \textcolor{vhdlchar}{:} \textcolor{comment}{STD\_LOGIC};\textcolor{keyword}{                    --sync reset to zero}
+00039   \textcolor{keywordflow}{SIGNAL} \textcolor{vhdlchar}{counter_out} \textcolor{vhdlchar}{:} \textcolor{comment}{STD\_LOGIC\_VECTOR}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{counter_size} \textcolor{keywordflow}{DOWNTO} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{:=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{OTHERS} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --counter output}
+00040 \textcolor{vhdlkeyword}{BEGIN}
+00041 
+00042   \textcolor{vhdlchar}{counter_set} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{flipflops}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{xor} \textcolor{vhdlchar}{flipflops}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};\textcolor{keyword}{   --determine when to start/reset counter}
+00043   
+00044   \textcolor{keywordflow}{PROCESS}(clk)
+00045 \textcolor{vhdlkeyword}{  BEGIN}
+00046     \textcolor{keywordflow}{IF}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{EVENT} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{THEN}
+00047       \textcolor{vhdlchar}{flipflops}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{button};
+00048       \textcolor{vhdlchar}{flipflops}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{flipflops}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00049       \textcolor{keywordflow}{If}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{counter_set} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{THEN}\textcolor{keyword}{                  --reset counter because input is changing}
+00050         \textcolor{vhdlchar}{counter_out} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{OTHERS} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00051       \textcolor{keywordflow}{ELSIF}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{counter_out}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{counter_size}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{THEN}\textcolor{keyword}{ --stable input time is not yet met}
+00052         \textcolor{vhdlchar}{counter_out} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{counter_out} \textcolor{vhdlchar}{+} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00053       \textcolor{keywordflow}{ELSE}\textcolor{keyword}{                                        --stable input time is met}
+00054         \textcolor{vhdlchar}{result} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{flipflops}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{)};
+00055       \textcolor{keywordflow}{END} \textcolor{keywordflow}{IF};    
+00056     \textcolor{keywordflow}{END} \textcolor{keywordflow}{IF};
+00057   \textcolor{keywordflow}{END} \textcolor{keywordflow}{PROCESS};
+00058 \textcolor{keywordflow}{END} \textcolor{vhdlchar}{logic};
+\end{DoxyCode}

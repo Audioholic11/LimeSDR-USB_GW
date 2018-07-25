@@ -1,0 +1,71 @@
+\subsection{alt\+\_\+stdio.\+h}
+\label{alt__stdio_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+stdio.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+stdio.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_ALT\_STDIO\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_ALT\_STDIO\_H\_\_}
+00003 
+00004 \textcolor{comment}{/******************************************************************************}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* License Agreement                                                           *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Copyright (c) 2015 Altera Corporation, San Jose, California, USA.           *}
+00009 \textcolor{comment}{* All rights reserved.                                                        *}
+00010 \textcolor{comment}{*                                                                             *}
+00011 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00012 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00013 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00014 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00015 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00016 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00019 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00020 \textcolor{comment}{*                                                                             *}
+00021 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00022 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00023 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00024 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00025 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00026 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00027 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00030 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00031 \textcolor{comment}{*                                                                             *}
+00032 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00033 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00034 \textcolor{comment}{******************************************************************************/}
+00035 
+00036 \textcolor{comment}{/******************************************************************************}
+00037 \textcolor{comment}{*                                                                             *}
+00038 \textcolor{comment}{* THIS IS A LIBRARY READ-ONLY SOURCE FILE. DO NOT EDIT.                       *}
+00039 \textcolor{comment}{*                                                                             *}
+00040 \textcolor{comment}{******************************************************************************/}
+00041 
+00042 \textcolor{comment}{/*}
+00043 \textcolor{comment}{ * Definitions for ALT stdio routines.}
+00044 \textcolor{comment}{ */}
+00045 
+00046 \textcolor{preprocessor}{#include <stdarg.h>}
+00047 
+00048 
+00049 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00050 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \{
+00051 \textcolor{preprocessor}{#endif}
+00052 
+00053 \textcolor{keywordtype}{int} alt_getchar();
+00054 \textcolor{keywordtype}{int} alt_putchar(\textcolor{keywordtype}{int} c);
+00055 \textcolor{keywordtype}{int} alt_putstr(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* str);
+00056 \textcolor{keywordtype}{void} alt_printf(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, ...);
+00057 \textcolor{preprocessor}{#ifdef ALT\_SEMIHOSTING}
+00058 \textcolor{keywordtype}{int} alt\_putcharbuf(\textcolor{keywordtype}{int} c);
+00059 \textcolor{keywordtype}{int} alt\_putstrbuf(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* str);
+00060 \textcolor{keywordtype}{int} alt\_putbufflush();
+00061 \textcolor{preprocessor}{#endif}
+00062 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00063 \}
+00064 \textcolor{preprocessor}{#endif}
+00065 
+00066 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_STDIO\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

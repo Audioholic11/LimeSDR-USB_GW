@@ -1,0 +1,36 @@
+\subsection{i2c\+\_\+opencores.\+h}
+\label{ip_2i2c__opencores__v13_2HAL_2inc_2i2c__opencores_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/i2c\+\_\+opencores\+\_\+v13/\+H\+A\+L/inc/i2c\+\_\+opencores.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/i2c\+\_\+opencores\+\_\+v13/\+H\+A\+L/inc/i2c\+\_\+opencores.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_I2C\_OPENCORES\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_I2C\_OPENCORES\_H\_\_}
+00003 
+00004 
+00005 \textcolor{preprocessor}{#include "alt_types.h"}
+00006 
+00007 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00008 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"}
+00009 \{
+00010 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00011 
+00012 
+00013 
+00014 
+00015 \textcolor{keywordtype}{void} I2C_init(alt_u32 base,alt_u32 clk,alt_u32 speed);
+00016 \textcolor{keywordtype}{int} I2C_start(alt_u32 base, alt_u32 add, alt_u32 read);
+00017 alt_u32 I2C_read(alt_u32 base,alt_u32 last);
+00018 alt_u32 I2C_write(alt_u32 base,alt_u8 data, alt_u32 last);
+00019 \textcolor{preprocessor}{#define I2C\_OK (0)}
+00020 \textcolor{preprocessor}{#define I2C\_ACK (0)}
+00021 \textcolor{preprocessor}{#define I2C\_NOACK (1)}
+00022 \textcolor{preprocessor}{#define I2C\_ABITRATION\_LOST (2)}
+00023 
+00024 \textcolor{preprocessor}{#define I2C\_OPENCORES\_INSTANCE(name, dev) extern int alt\_no\_storage}
+00025 \textcolor{preprocessor}{#define I2C\_OPENCORES\_INIT(name, dev) while (0)}
+00026 
+00027 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00028 \}
+00029 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00030 
+00031 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_I2C\_OPENCORES\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

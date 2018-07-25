@@ -1,0 +1,181 @@
+\subsection{arch Architecture Reference}
+\label{classsl__ctrl_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{dd/d64/classsl__ctrl_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf reg\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf rstn}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf ctrl\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf r\+\_\+edge}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf wrusedw}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf s\+\_\+r}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf stream\+\_\+load}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf data}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf wrreq}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Constants}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf data\+\_\+const} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{x}\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} 8000 \char`\"{}}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf state\+\_\+type}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf f\+\_\+r} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf f\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf s\+\_\+r} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf s\+\_\+n} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf sl\+\_\+r} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf sl\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf r\+\_\+edge} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf edge} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf delay\+\_\+r} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf delay\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 28} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!ctrl\+\_\+proc@{ctrl\+\_\+proc}}
+\index{ctrl\+\_\+proc@{ctrl\+\_\+proc}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{ctrl\+\_\+procr\+\_\+edge,wrusedw,s\+\_\+r,stream\+\_\+load,data,wrreq}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} ctrl\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf r\+\_\+edge}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf wrusedw}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf s\+\_\+r}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf stream\+\_\+load}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf data}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf wrreq}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsl__ctrl_1_1arch_a172fcd52fdc6cb6b2adbc557a2aa46f5}
+
+
+Definition at line {\bf 62} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!reg\+\_\+proc@{reg\+\_\+proc}}
+\index{reg\+\_\+proc@{reg\+\_\+proc}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{reg\+\_\+procclk,rstn}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} reg\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf rstn}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classsl__ctrl_1_1arch_a039db1c3b9b30f0b8d70d562df32fdb1}
+
+
+Definition at line {\bf 39} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!data\+\_\+const@{data\+\_\+const}}
+\index{data\+\_\+const@{data\+\_\+const}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{data\+\_\+const}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+const} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{x}\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} 8000 \char`\"{}}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classsl__ctrl_1_1arch_abf5e14fcf02cf9baed54fd55e2f99d09}
+
+
+Definition at line {\bf 29} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!delay\+\_\+n@{delay\+\_\+n}}
+\index{delay\+\_\+n@{delay\+\_\+n}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{delay\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf delay\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_a5f69ed812500205dc0d5e0bb4c916c87}
+
+
+Definition at line {\bf 37} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!delay\+\_\+r@{delay\+\_\+r}}
+\index{delay\+\_\+r@{delay\+\_\+r}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{delay\+\_\+r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf delay\+\_\+r} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_a20170e57ef90083aa90762a787f6c9f9}
+
+
+Definition at line {\bf 37} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!edge@{edge}}
+\index{edge@{edge}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{edge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf edge} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_a93e4ec2a91a452e5457e8fdbdf0b9dca}
+
+
+Definition at line {\bf 36} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!f\+\_\+n@{f\+\_\+n}}
+\index{f\+\_\+n@{f\+\_\+n}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{f\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf f\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_a0a3ba19031f896ec08135f37c9754be5}
+
+
+Definition at line {\bf 33} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!f\+\_\+r@{f\+\_\+r}}
+\index{f\+\_\+r@{f\+\_\+r}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{f\+\_\+r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf f\+\_\+r} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_a705c14365a7a3c53cd7ab4b2d2dfd3d5}
+
+
+Definition at line {\bf 33} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!r\+\_\+edge@{r\+\_\+edge}}
+\index{r\+\_\+edge@{r\+\_\+edge}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{r\+\_\+edge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf r\+\_\+edge} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_a8b3166ee8b7c7256a97f30a5d2925ce5}
+
+
+Definition at line {\bf 36} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!s\+\_\+n@{s\+\_\+n}}
+\index{s\+\_\+n@{s\+\_\+n}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{s\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf s\+\_\+n} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_a254ab3a3c5a1eb074f79a2f515a5b1d0}
+
+
+Definition at line {\bf 34} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!s\+\_\+r@{s\+\_\+r}}
+\index{s\+\_\+r@{s\+\_\+r}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{s\+\_\+r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf s\+\_\+r} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_ab442f9d0c1edb71d6e879725f0efec8f}
+
+
+Definition at line {\bf 34} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!sl\+\_\+n@{sl\+\_\+n}}
+\index{sl\+\_\+n@{sl\+\_\+n}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{sl\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sl\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_a92185ddb026a11387c5336dfff58e61d}
+
+
+Definition at line {\bf 35} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!sl\+\_\+r@{sl\+\_\+r}}
+\index{sl\+\_\+r@{sl\+\_\+r}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{sl\+\_\+r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sl\+\_\+r} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classsl__ctrl_1_1arch_a76d32c0e5a82e2c84e67a036f75d6c5b}
+
+
+Definition at line {\bf 35} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+\index{sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}!state\+\_\+type@{state\+\_\+type}}
+\index{state\+\_\+type@{state\+\_\+type}!sl\+\_\+ctrl\+::arch@{sl\+\_\+ctrl\+::arch}}
+\paragraph[{state\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state\+\_\+type} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classsl__ctrl_1_1arch_a5439e3e20ec99b6eb5428e2edd18d3ca}
+
+
+Definition at line {\bf 31} of file {\bf sl\+\_\+ctrl.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/wfm\+\_\+ram\+\_\+buffer/{\bf sl\+\_\+ctrl.\+vhd}\end{DoxyCompactItemize}

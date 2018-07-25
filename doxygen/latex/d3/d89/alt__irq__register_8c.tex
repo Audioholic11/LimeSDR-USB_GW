@@ -1,0 +1,71 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+irq\+\_\+register.c File Reference}
+\label{alt__irq__register_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+irq\+\_\+register.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+irq\+\_\+register.\+c}}
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}priv/alt\+\_\+legacy\+\_\+irq.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}os/alt\+\_\+hooks.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq\+\_\+entry.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}priv/alt\+\_\+irq\+\_\+table.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+irq\+\_\+register.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/d64/alt__irq__register_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf alt\+\_\+irq\+\_\+register} ({\bf alt\+\_\+u32} id, void $\ast$context, {\bf alt\+\_\+isr\+\_\+func} handler)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+irq\+\_\+register.\+c@{alt\+\_\+irq\+\_\+register.\+c}!alt\+\_\+irq\+\_\+register@{alt\+\_\+irq\+\_\+register}}
+\index{alt\+\_\+irq\+\_\+register@{alt\+\_\+irq\+\_\+register}!alt\+\_\+irq\+\_\+register.\+c@{alt\+\_\+irq\+\_\+register.\+c}}
+\paragraph[{alt\+\_\+irq\+\_\+register(alt\+\_\+u32 id, void $\ast$context, alt\+\_\+isr\+\_\+func handler)}]{\setlength{\rightskip}{0pt plus 5cm}int alt\+\_\+irq\+\_\+register (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{id, }
+\item[{void $\ast$}]{context, }
+\item[{{\bf alt\+\_\+isr\+\_\+func}}]{handler}
+\end{DoxyParamCaption}
+)}\label{alt__irq__register_8c_a4c1559221c7978160da19c389d055f90}
+
+
+Definition at line {\bf 75} of file {\bf alt\+\_\+irq\+\_\+register.\+c}.
+
+
+
+References {\bf alt\+\_\+irq}, {\bf alt\+\_\+irq\+\_\+disable()}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf A\+L\+T\+\_\+\+N\+I\+RQ}, {\bf A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+H\+A\+N\+D\+L\+E\+R\+::context}, and {\bf A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+H\+A\+N\+D\+L\+E\+R\+::handler}.
+
+
+
+Referenced by {\bf altera\+\_\+avalon\+\_\+uart\+\_\+init()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d89/alt__irq__register_8c_a4c1559221c7978160da19c389d055f90_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{d3/d89/alt__irq__register_8c_a4c1559221c7978160da19c389d055f90_icgraph}
+\end{center}
+\end{figure}
+
+

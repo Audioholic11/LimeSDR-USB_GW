@@ -1,0 +1,333 @@
+\subsection{ddr2\+\_\+pin\+\_\+assignments.\+tcl}
+\label{ddr2__pin__assignments_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+pin\+\_\+assignments.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+pin\+\_\+assignments.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{# -------------------------------------------------------------------------}
+00002 \textcolor{comment}{}\textcolor{comment}{#}
+00003 \textcolor{comment}{}\textcolor{comment}{# ALTMEMPHY v15.1 DDR2 SDRAM pin constraints script for ddr2}
+00004 \textcolor{comment}{}\textcolor{comment}{#}
+00005 \textcolor{comment}{}\textcolor{comment}{# Please run this script before compiling your design}
+00006 \textcolor{comment}{}\textcolor{comment}{#}
+00007 \textcolor{comment}{}\textcolor{comment}{# Directions: If your top level pin names do not match the default names, }
+00008 \textcolor{comment}{}\textcolor{comment}{#             you should change the variables below to make the constraints }
+00009 \textcolor{comment}{}\textcolor{comment}{#             match the specific pin names in your top level design.}
+00010 \textcolor{comment}{}\textcolor{comment}{#}
+00011 \textcolor{comment}{}\textcolor{comment}{#}
+00012 \textcolor{comment}{}\textcolor{comment}{# Make your changes below this line}
+00013 \textcolor{comment}{}\textcolor{comment}{# --------------------------------------------------------------------------}
+00014 \textcolor{comment}{}
+00015 \textcolor{comment}{# Change sopc\_mode value from NO to YES to create assignments that match the}
+00016 \textcolor{comment}{}\textcolor{comment}{# SOPC Builder top level pin names}
+00017 \textcolor{comment}{}\textcolor{keyword}{if} \{![info exists sopc\_mode]\} \{\textcolor{keyword}{set} sopc\_mode NO\}\textcolor{comment}{}
+00018 \textcolor{comment}{}
+00019 \textcolor{comment}{# This is the name of your controller instance}
+00020 \textcolor{comment}{}\textcolor{keyword}{set} instance\_name ""\textcolor{comment}{}
+00021 \textcolor{comment}{}
+00022 \textcolor{comment}{# This is the prefix for all pin names. Change it if you wish to choose}
+00023 \textcolor{comment}{}\textcolor{comment}{# a prefix other than mem\_}
+00024 \textcolor{comment}{}\textcolor{keyword}{if} \{![info exists pin\_prefix]\} \{\textcolor{keyword}{set} pin\_prefix "mem\_"\}\textcolor{comment}{}
+00025 \textcolor{comment}{}
+00026 
+00027 \textcolor{comment}{# In SOPC builder, the pin names will be expanded as follow:}
+00028 \textcolor{comment}{}\textcolor{comment}{#    Example: mem\_cs\_n\_from\_the\_<your instance name>}
+00029 \textcolor{comment}{}\textcolor{comment}{#}
+00030 \textcolor{comment}{}\textcolor{comment}{# In standalone mode, the pin names will be expanded as follow:}
+00031 \textcolor{comment}{}\textcolor{comment}{#    Example: mem\_cs\_n[0]}
+00032 \textcolor{comment}{}
+00033 \textcolor{keyword}{set} mem\_odt\_pin\_name $\{pin\_prefix\}odt\textcolor{comment}{}
+00034 \textcolor{comment}{}\textcolor{keyword}{set} mem\_odt\_CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT"\textcolor{comment}{}
+00035 \textcolor{comment}{}\textcolor{keyword}{set} mem\_odt\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00036 \textcolor{comment}{}
+00037 \textcolor{keyword}{set} mem\_clk\_pin\_name $\{pin\_prefix\}clk\textcolor{comment}{}
+00038 \textcolor{comment}{}\textcolor{keyword}{set} mem\_clk\_CURRENT\_STRENGTH\_NEW "12MA"\textcolor{comment}{}
+00039 \textcolor{comment}{}\textcolor{keyword}{set} mem\_clk\_PAD\_TO\_CORE\_DELAY "0"\textcolor{comment}{}
+00040 \textcolor{comment}{}\textcolor{keyword}{set} mem\_clk\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00041 \textcolor{comment}{}
+00042 \textcolor{keyword}{set} mem\_clk\_n\_pin\_name $\{pin\_prefix\}clk\_n\textcolor{comment}{}
+00043 \textcolor{comment}{}\textcolor{keyword}{set} mem\_clk\_n\_CURRENT\_STRENGTH\_NEW "12MA"\textcolor{comment}{}
+00044 \textcolor{comment}{}\textcolor{keyword}{set} mem\_clk\_n\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00045 \textcolor{comment}{}
+00046 \textcolor{keyword}{set} mem\_cs\_n\_pin\_name $\{pin\_prefix\}cs\_n\textcolor{comment}{}
+00047 \textcolor{comment}{}\textcolor{keyword}{set} mem\_cs\_n\_CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT"\textcolor{comment}{}
+00048 \textcolor{comment}{}\textcolor{keyword}{set} mem\_cs\_n\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00049 \textcolor{comment}{}
+00050 \textcolor{keyword}{set} mem\_cke\_pin\_name $\{pin\_prefix\}cke\textcolor{comment}{}
+00051 \textcolor{comment}{}\textcolor{keyword}{set} mem\_cke\_CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT"\textcolor{comment}{}
+00052 \textcolor{comment}{}\textcolor{keyword}{set} mem\_cke\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00053 \textcolor{comment}{}
+00054 \textcolor{keyword}{set} mem\_addr\_pin\_name $\{pin\_prefix\}addr\textcolor{comment}{}
+00055 \textcolor{comment}{}\textcolor{keyword}{set} mem\_addr\_CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT"\textcolor{comment}{}
+00056 \textcolor{comment}{}\textcolor{keyword}{set} mem\_addr\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00057 \textcolor{comment}{}
+00058 \textcolor{keyword}{set} mem\_ba\_pin\_name $\{pin\_prefix\}ba\textcolor{comment}{}
+00059 \textcolor{comment}{}\textcolor{keyword}{set} mem\_ba\_CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT"\textcolor{comment}{}
+00060 \textcolor{comment}{}\textcolor{keyword}{set} mem\_ba\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00061 \textcolor{comment}{}
+00062 \textcolor{keyword}{set} mem\_ras\_n\_pin\_name $\{pin\_prefix\}ras\_n\textcolor{comment}{}
+00063 \textcolor{comment}{}\textcolor{keyword}{set} mem\_ras\_n\_CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT"\textcolor{comment}{}
+00064 \textcolor{comment}{}\textcolor{keyword}{set} mem\_ras\_n\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00065 \textcolor{comment}{}
+00066 \textcolor{keyword}{set} mem\_cas\_n\_pin\_name $\{pin\_prefix\}cas\_n\textcolor{comment}{}
+00067 \textcolor{comment}{}\textcolor{keyword}{set} mem\_cas\_n\_CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT"\textcolor{comment}{}
+00068 \textcolor{comment}{}\textcolor{keyword}{set} mem\_cas\_n\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00069 \textcolor{comment}{}
+00070 \textcolor{keyword}{set} mem\_we\_n\_pin\_name $\{pin\_prefix\}we\_n\textcolor{comment}{}
+00071 \textcolor{comment}{}\textcolor{keyword}{set} mem\_we\_n\_CURRENT\_STRENGTH\_NEW "MAXIMUM CURRENT"\textcolor{comment}{}
+00072 \textcolor{comment}{}\textcolor{keyword}{set} mem\_we\_n\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00073 \textcolor{comment}{}
+00074 \textcolor{keyword}{set} mem\_dq\_pin\_name $\{pin\_prefix\}dq\textcolor{comment}{}
+00075 \textcolor{comment}{}\textcolor{keyword}{set} mem\_dq\_CURRENT\_STRENGTH\_NEW "12MA"\textcolor{comment}{}
+00076 \textcolor{comment}{}\textcolor{keyword}{set} mem\_dq\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00077 \textcolor{comment}{}
+00078 \textcolor{keyword}{set} mem\_dqs\_pin\_name $\{pin\_prefix\}dqs\textcolor{comment}{}
+00079 \textcolor{comment}{}\textcolor{keyword}{set} mem\_dqs\_CURRENT\_STRENGTH\_NEW "12MA"\textcolor{comment}{}
+00080 \textcolor{comment}{}\textcolor{keyword}{set} mem\_dqs\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00081 \textcolor{comment}{}
+00082 \textcolor{keyword}{set} mem\_dm\_pin\_name $\{pin\_prefix\}dm\textcolor{comment}{}
+00083 \textcolor{comment}{}\textcolor{keyword}{set} mem\_dm\_CURRENT\_STRENGTH\_NEW "12MA"\textcolor{comment}{}
+00084 \textcolor{comment}{}\textcolor{keyword}{set} mem\_dm\_IO\_STANDARD "SSTL-18 CLASS I"\textcolor{comment}{}
+00085 \textcolor{comment}{}
+00086 
+00087 \textcolor{comment}{# Do not make any changes after this line}
+00088 \textcolor{comment}{}\textcolor{comment}{# ------------------------------------------------}
+00089 \textcolor{comment}{}
+00090 \textcolor{comment}{# This single\_bit variable is to define whether a [0] index will be added at the end of a single-bit
+       bus pin name}
+00091 \textcolor{comment}{}\textcolor{comment}{# To not have indexing, replace [0] by "".}
+00092 \textcolor{comment}{}\textcolor{keyword}{set} single\_bit \{[0]\}\textcolor{comment}{}
+00093 \textcolor{comment}{}
+00094 \textcolor{keyword}{switch}  $sopc\_mode \{
+00095   YES \{
+00096     \textcolor{keyword}{set} output\_suffix \_from\_the\_$\{instance\_name\}\textcolor{comment}{}
+00097 \textcolor{comment}{}    \textcolor{keyword}{set} bidir\_suffix \_to\_and\_from\_the\_$\{instance\_name\}\textcolor{comment}{}
+00098 \textcolor{comment}{}    \textcolor{keyword}{set} input\_suffix \_to\_the\_$\{instance\_name\}\textcolor{comment}{}
+00099 \textcolor{comment}{}  \}
+00100   default \{
+00101     \textcolor{keyword}{set} output\_suffix ""\textcolor{comment}{}
+00102 \textcolor{comment}{}    \textcolor{keyword}{set} bidir\_suffix ""\textcolor{comment}{}
+00103 \textcolor{comment}{}    \textcolor{keyword}{set} input\_suffix ""\textcolor{comment}{}
+00104 \textcolor{comment}{}  \}
+00105 \}\textcolor{comment}{}
+00106 \textcolor{comment}{}
+00107 \textcolor{keyword}{set} delay\_chain\_config "Flexible\_timing"\textcolor{comment}{}
+00108 \textcolor{comment}{}
+00109 \textcolor{keyword}{if} \{![info exists ::ppl\_instance\_name]\} \{\textcolor{keyword}{set} ::ppl\_instance\_name \{\}\}\textcolor{comment}{}
+00110 \textcolor{comment}{}
+00111 \textcolor{keyword}{set} mem\_odt\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_odt\_pin\_name\}$\{output\_suffix\}\textcolor{comment}{}
+00112 \textcolor{comment}{}\textcolor{keyword}{set} mem\_clk\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_clk\_pin\_name\}$\{bidir\_suffix\}\textcolor{comment}{}
+00113 \textcolor{comment}{}\textcolor{keyword}{set} mem\_clk\_n\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_clk\_n\_pin\_name\}$\{bidir\_suffix\}\textcolor{comment}{}
+00114 \textcolor{comment}{}\textcolor{keyword}{set} mem\_cs\_n\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_cs\_n\_pin\_name\}$\{output\_suffix\}\textcolor{comment}{}
+00115 \textcolor{comment}{}\textcolor{keyword}{set} mem\_cke\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_cke\_pin\_name\}$\{output\_suffix\}\textcolor{comment}{}
+00116 \textcolor{comment}{}\textcolor{keyword}{set} mem\_addr\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_addr\_pin\_name\}$\{output\_suffix\}\textcolor{comment}{}
+00117 \textcolor{comment}{}\textcolor{keyword}{set} mem\_ba\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_ba\_pin\_name\}$\{output\_suffix\}\textcolor{comment}{}
+00118 \textcolor{comment}{}\textcolor{keyword}{set} mem\_ras\_n\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_ras\_n\_pin\_name\}$\{output\_suffix\}\textcolor{comment}{}
+00119 \textcolor{comment}{}\textcolor{keyword}{set} mem\_cas\_n\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_cas\_n\_pin\_name\}$\{output\_suffix\}\textcolor{comment}{}
+00120 \textcolor{comment}{}\textcolor{keyword}{set} mem\_we\_n\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_we\_n\_pin\_name\}$\{output\_suffix\}\textcolor{comment}{}
+00121 \textcolor{comment}{}\textcolor{keyword}{set} mem\_dq\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_dq\_pin\_name\}$\{bidir\_suffix\}\textcolor{comment}{}
+00122 \textcolor{comment}{}\textcolor{keyword}{set} mem\_dqs\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_dqs\_pin\_name\}$\{bidir\_suffix\}\textcolor{comment}{}
+00123 \textcolor{comment}{}\textcolor{keyword}{set} mem\_dm\_pin\_name $\{::ppl\_instance\_name\}$\{mem\_dm\_pin\_name\}$\{output\_suffix\}\textcolor{comment}{}
+00124 \textcolor{comment}{}
+00125 set\_instance\_assignment -name IO\_STANDARD "$\{mem\_odt\_IO\_STANDARD\}" -to 
+      $\{mem\_odt\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00126 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_odt\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_odt\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00127 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_clk\_IO\_STANDARD\}" -to 
+      $\{mem\_clk\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00128 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_clk\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_clk\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00129 \textcolor{comment}{}set\_instance\_assignment -name PAD\_TO\_CORE\_DELAY "$\{mem\_clk\_PAD\_TO\_CORE\_DELAY\}" -to 
+      $\{mem\_clk\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00130 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_clk\_n\_IO\_STANDARD\}" -to 
+      $\{mem\_clk\_n\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00131 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_clk\_n\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_clk\_n\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00132 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_cs\_n\_IO\_STANDARD\}" -to 
+      $\{mem\_cs\_n\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00133 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_cs\_n\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_cs\_n\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00134 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_cke\_IO\_STANDARD\}" -to 
+      $\{mem\_cke\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00135 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_cke\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_cke\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00136 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[0]\textcolor{comment}{}
+00137 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[0]\textcolor{comment}{}
+00138 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[1]\textcolor{comment}{}
+00139 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[1]\textcolor{comment}{}
+00140 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[2]\textcolor{comment}{}
+00141 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[2]\textcolor{comment}{}
+00142 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[3]\textcolor{comment}{}
+00143 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[3]\textcolor{comment}{}
+00144 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[4]\textcolor{comment}{}
+00145 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[4]\textcolor{comment}{}
+00146 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[5]\textcolor{comment}{}
+00147 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[5]\textcolor{comment}{}
+00148 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[6]\textcolor{comment}{}
+00149 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[6]\textcolor{comment}{}
+00150 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[7]\textcolor{comment}{}
+00151 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[7]\textcolor{comment}{}
+00152 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[8]\textcolor{comment}{}
+00153 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[8]\textcolor{comment}{}
+00154 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[9]\textcolor{comment}{}
+00155 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[9]\textcolor{comment}{}
+00156 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[10]\textcolor{comment}{}
+00157 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[10]\textcolor{comment}{}
+00158 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[11]\textcolor{comment}{}
+00159 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[11]\textcolor{comment}{}
+00160 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_addr\_IO\_STANDARD\}" -to $\{mem\_addr\_pin\_name\}[12]\textcolor{comment}{}
+00161 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_addr\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_addr\_pin\_name\}[12]\textcolor{comment}{}
+00162 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_ba\_IO\_STANDARD\}" -to $\{mem\_ba\_pin\_name\}[0]\textcolor{comment}{}
+00163 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_ba\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_ba\_pin\_name\}[0]\textcolor{comment}{}
+00164 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_ba\_IO\_STANDARD\}" -to $\{mem\_ba\_pin\_name\}[1]\textcolor{comment}{}
+00165 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_ba\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_ba\_pin\_name\}[1]\textcolor{comment}{}
+00166 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_ba\_IO\_STANDARD\}" -to $\{mem\_ba\_pin\_name\}[2]\textcolor{comment}{}
+00167 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_ba\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_ba\_pin\_name\}[2]\textcolor{comment}{}
+00168 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_ras\_n\_IO\_STANDARD\}" -to $\{mem\_ras\_n\_pin\_name\}\textcolor{comment}{}
+00169 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_ras\_n\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_ras\_n\_pin\_name\}\textcolor{comment}{}
+00170 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_cas\_n\_IO\_STANDARD\}" -to $\{mem\_cas\_n\_pin\_name\}\textcolor{comment}{}
+00171 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_cas\_n\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_cas\_n\_pin\_name\}\textcolor{comment}{}
+00172 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_we\_n\_IO\_STANDARD\}" -to $\{mem\_we\_n\_pin\_name\}\textcolor{comment}{}
+00173 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_we\_n\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_we\_n\_pin\_name\}\textcolor{comment}{}
+00174 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[0]\textcolor{comment}{}
+00175 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[0]\textcolor{comment}{}
+00176 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[1]\textcolor{comment}{}
+00177 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[1]\textcolor{comment}{}
+00178 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[2]\textcolor{comment}{}
+00179 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[2]\textcolor{comment}{}
+00180 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[3]\textcolor{comment}{}
+00181 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[3]\textcolor{comment}{}
+00182 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[4]\textcolor{comment}{}
+00183 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[4]\textcolor{comment}{}
+00184 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[5]\textcolor{comment}{}
+00185 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[5]\textcolor{comment}{}
+00186 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[6]\textcolor{comment}{}
+00187 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[6]\textcolor{comment}{}
+00188 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[7]\textcolor{comment}{}
+00189 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[7]\textcolor{comment}{}
+00190 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[8]\textcolor{comment}{}
+00191 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[8]\textcolor{comment}{}
+00192 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[9]\textcolor{comment}{}
+00193 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[9]\textcolor{comment}{}
+00194 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[10]\textcolor{comment}{}
+00195 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[10]\textcolor{comment}{}
+00196 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[11]\textcolor{comment}{}
+00197 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[11]\textcolor{comment}{}
+00198 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[12]\textcolor{comment}{}
+00199 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[12]\textcolor{comment}{}
+00200 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[13]\textcolor{comment}{}
+00201 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[13]\textcolor{comment}{}
+00202 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[14]\textcolor{comment}{}
+00203 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[14]\textcolor{comment}{}
+00204 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dq\_IO\_STANDARD\}" -to $\{mem\_dq\_pin\_name\}[15]\textcolor{comment}{}
+00205 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dq\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dq\_pin\_name\}[15]\textcolor{comment}{}
+00206 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dqs\_IO\_STANDARD\}" -to $\{mem\_dqs\_pin\_name\}[0]\textcolor{comment}{}
+00207 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dqs\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dqs\_pin\_name\}[0]\textcolor{comment}{}
+00208 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dqs\_IO\_STANDARD\}" -to $\{mem\_dqs\_pin\_name\}[1]\textcolor{comment}{}
+00209 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dqs\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dqs\_pin\_name\}[1]\textcolor{comment}{}
+00210 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dm\_IO\_STANDARD\}" -to $\{mem\_dm\_pin\_name\}[0]\textcolor{comment}{}
+00211 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dm\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dm\_pin\_name\}[0]\textcolor{comment}{}
+00212 \textcolor{comment}{}set\_instance\_assignment -name IO\_STANDARD "$\{mem\_dm\_IO\_STANDARD\}" -to $\{mem\_dm\_pin\_name\}[1]\textcolor{comment}{}
+00213 \textcolor{comment}{}set\_instance\_assignment -name CURRENT\_STRENGTH\_NEW "$\{mem\_dm\_CURRENT\_STRENGTH\_NEW\}" -to 
+      $\{mem\_dm\_pin\_name\}[1]\textcolor{comment}{}
+00214 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[0]\textcolor{comment}{}
+00215 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[1]\textcolor{comment}{}
+00216 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[2]\textcolor{comment}{}
+00217 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[3]\textcolor{comment}{}
+00218 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[4]\textcolor{comment}{}
+00219 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[5]\textcolor{comment}{}
+00220 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[6]\textcolor{comment}{}
+00221 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[7]\textcolor{comment}{}
+00222 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[8]\textcolor{comment}{}
+00223 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[9]\textcolor{comment}{}
+00224 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[10]\textcolor{comment}{}
+00225 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[11]\textcolor{comment}{}
+00226 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[12]\textcolor{comment}{}
+00227 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[13]\textcolor{comment}{}
+00228 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[14]\textcolor{comment}{}
+00229 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dq\_pin\_name\}[15]\textcolor{comment}{}
+00230 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[0]\textcolor{comment}{}
+00231 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[1]\textcolor{comment}{}
+00232 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[2]\textcolor{comment}{}
+00233 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[3]\textcolor{comment}{}
+00234 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[4]\textcolor{comment}{}
+00235 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[5]\textcolor{comment}{}
+00236 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[6]\textcolor{comment}{}
+00237 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[7]\textcolor{comment}{}
+00238 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[8]\textcolor{comment}{}
+00239 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[9]\textcolor{comment}{}
+00240 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[10]\textcolor{comment}{}
+00241 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[11]\textcolor{comment}{}
+00242 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[12]\textcolor{comment}{}
+00243 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[13]\textcolor{comment}{}
+00244 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[14]\textcolor{comment}{}
+00245 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dq\_pin\_name\}[15]\textcolor{comment}{}
+00246 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dqs\_pin\_name\}[0]\textcolor{comment}{}
+00247 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dqs\_pin\_name\}[1]\textcolor{comment}{}
+00248 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dqs\_pin\_name\}[0]\textcolor{comment}{}
+00249 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dqs\_pin\_name\}[1]\textcolor{comment}{}
+00250 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dm\_pin\_name\}[0]\textcolor{comment}{}
+00251 \textcolor{comment}{}set\_instance\_assignment -name MEM\_INTERFACE\_DELAY\_CHAIN\_CONFIG "$\{delay\_chain\_config\}" -to 
+      $\{mem\_dm\_pin\_name\}[1]\textcolor{comment}{}
+00252 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dm\_pin\_name\}[0]\textcolor{comment}{}
+00253 \textcolor{comment}{}set\_instance\_assignment -name OUTPUT\_ENABLE\_GROUP "3078784" -to $\{mem\_dm\_pin\_name\}[1]\textcolor{comment}{}
+00254 \textcolor{comment}{}set\_instance\_assignment -name CKN\_CK\_PAIR ON -from $\{mem\_clk\_n\_pin\_name\}$\{single\_bit\} -to 
+      $\{mem\_clk\_pin\_name\}$\{single\_bit\}\textcolor{comment}{}
+00255 \textcolor{comment}{}
+00256 unset pin\_prefix
+\end{DoxyCode}

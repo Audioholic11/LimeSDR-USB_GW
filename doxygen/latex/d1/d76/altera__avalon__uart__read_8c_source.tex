@@ -1,0 +1,245 @@
+\subsection{altera\+\_\+avalon\+\_\+uart\+\_\+read.\+c}
+\label{altera__avalon__uart__read_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+read.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+read.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2006 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{******************************************************************************/}
+00030 
+00031 \textcolor{preprocessor}{#include <fcntl.h>}
+00032 
+00033 \textcolor{preprocessor}{#include "sys/alt_irq.h"}
+00034 \textcolor{preprocessor}{#include "sys/ioctl.h"}
+00035 \textcolor{preprocessor}{#include "sys/alt_errno.h"}
+00036 
+00037 \textcolor{preprocessor}{#include "altera_avalon_uart.h"}
+00038 \textcolor{preprocessor}{#include "altera_avalon_uart_regs.h"}
+00039 
+00040 \textcolor{preprocessor}{#if defined(ALT\_USE\_SMALL\_DRIVERS) || defined(ALTERA\_AVALON\_UART\_SMALL)}
+00041 
+00042 \textcolor{comment}{/* ----------------------------------------------------------- */}
+00043 \textcolor{comment}{/* ----------------------- SMALL DRIVER ---------------------- */}
+00044 \textcolor{comment}{/* ----------------------------------------------------------- */}
+00045 
+00046 \textcolor{comment}{/*}
+00047 \textcolor{comment}{ * altera\_avalon\_uart\_read() is called by the system read() function in order to}
+00048 \textcolor{comment}{ * read a block of data from the UART. "len" is the maximum length of the data}
+00049 \textcolor{comment}{ * to read, and "ptr" indicates the destination address. "fd" is the file}
+00050 \textcolor{comment}{ * descriptor for the device to be read from.}
+00051 \textcolor{comment}{ *}
+00052 \textcolor{comment}{ * Permission checks are made before the call to altera\_avalon\_uart\_read(), so}
+00053 \textcolor{comment}{ * we know that the file descriptor has been opened with the correct permissions}
+00054 \textcolor{comment}{ * for this operation.}
+00055 \textcolor{comment}{ *}
+00056 \textcolor{comment}{ * The return value is the number of bytes actually read.}
+00057 \textcolor{comment}{ *}
+00058 \textcolor{comment}{ * This implementation polls the device waiting for characters. At most it can}
+00059 \textcolor{comment}{ * only return one character, regardless of how many are requested. If the }
+00060 \textcolor{comment}{ * device is being accessed in non-blocking mode then it is possible for this}
+00061 \textcolor{comment}{ * function to return without reading any characters. In this case errno is}
+00062 \textcolor{comment}{ * set to EWOULDBLOCK.}
+00063 \textcolor{comment}{ */}
+00064 
+00065 \textcolor{keywordtype}{int} 
+00066 altera_avalon_uart_read(altera_avalon_uart_state* sp, \textcolor{keywordtype}{char}* ptr, \textcolor{keywordtype}{int} len,
+00067   \textcolor{keywordtype}{int} flags)
+00068 \{
+00069   \textcolor{keywordtype}{int} block;
+00070   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} status;
+00071 
+00072   block = !(flags & O\_NONBLOCK);
+00073 
+00074   \textcolor{keywordflow}{do}
+00075   \{
+00076     status = IORD_ALTERA_AVALON_UART_STATUS(sp->base);
+00077 
+00078     \textcolor{comment}{/* clear any error flags */}
+00079 
+00080     IOWR_ALTERA_AVALON_UART_STATUS(sp->base, 0);
+00081 
+00082     \textcolor{keywordflow}{if} (status & ALTERA_AVALON_UART_CONTROL_RRDY_MSK)
+00083     \{
+00084       ptr[0] = IORD_ALTERA_AVALON_UART_RXDATA(sp->base);
+00085 
+00086       \textcolor{keywordflow}{if} (!(status & (ALTERA_AVALON_UART_STATUS_PE_MSK | 
+00087       ALTERA_AVALON_UART_STATUS_FE_MSK)))
+00088       \{
+00089         \textcolor{keywordflow}{return} 1;
+00090       \}
+00091     \}
+00092   \}
+00093   \textcolor{keywordflow}{while} (block);
+00094 
+00095   ALT_ERRNO = EWOULDBLOCK;
+00096  
+00097   \textcolor{keywordflow}{return} 0;
+00098 \}
+00099 
+00100 \textcolor{preprocessor}{#else}
+00101 
+00102 \textcolor{comment}{/* ----------------------------------------------------------- */}
+00103 \textcolor{comment}{/* ----------------------- FAST DRIVER ----------------------- */}
+00104 \textcolor{comment}{/* ----------------------------------------------------------- */}
+00105 
+00106 \textcolor{comment}{/*}
+00107 \textcolor{comment}{ * altera\_avalon\_uart\_read() is called by the system read() function in order to}
+00108 \textcolor{comment}{ * read a block of data from the UART. "len" is the maximum length of the data}
+00109 \textcolor{comment}{ * to read, and "ptr" indicates the destination address. "sp" is the state}
+00110 \textcolor{comment}{ * pointer for the device to be read from.}
+00111 \textcolor{comment}{ *}
+00112 \textcolor{comment}{ * Permission checks are made before the call to altera\_avalon\_uart\_read(), so}
+00113 \textcolor{comment}{ * we know that the file descriptor has been opened with the correct permissions}
+00114 \textcolor{comment}{ * for this operation.}
+00115 \textcolor{comment}{ *}
+00116 \textcolor{comment}{ * The return value is the number of bytes actually read.}
+00117 \textcolor{comment}{ *}
+00118 \textcolor{comment}{ * This function does not communicate with the device directly. Instead data is}
+00119 \textcolor{comment}{ * transfered from a circular buffer. The interrupt handler is then responsible}
+00120 \textcolor{comment}{ * for copying data from the device into this buffer.}
+00121 \textcolor{comment}{ */}
+00122 
+00123 \textcolor{keywordtype}{int} 
+00124 altera_avalon_uart_read(altera_avalon_uart_state* sp, \textcolor{keywordtype}{char}* ptr, \textcolor{keywordtype}{int} len,
+00125   \textcolor{keywordtype}{int} flags)
+00126 \{
+00127   alt_irq_context context;
+00128   \textcolor{keywordtype}{int}             block;
+00129   alt_u8          read\_would\_block = 0;
+00130   \textcolor{keywordtype}{int}             count = 0;
+00131 
+00132   \textcolor{comment}{/* }
+00133 \textcolor{comment}{   * Construct a flag to indicate whether the device is being accessed in}
+00134 \textcolor{comment}{   * blocking or non-blocking mode.}
+00135 \textcolor{comment}{   */}
+00136 
+00137   block = !(flags & O\_NONBLOCK);
+00138 
+00139   \textcolor{comment}{/*}
+00140 \textcolor{comment}{   * When running in a multi threaded environment, obtain the "read\_lock"}
+00141 \textcolor{comment}{   * semaphore. This ensures that reading from the device is thread-safe.}
+00142 \textcolor{comment}{   */}
+00143 
+00144   ALT_SEM_PEND (sp->read\_lock, 0);
+00145 
+00146   \textcolor{comment}{/*}
+00147 \textcolor{comment}{   * Loop, copying data from the circular buffer to the destination address}
+00148 \textcolor{comment}{   * supplied in "ptr". This loop is terminated when the required number of}
+00149 \textcolor{comment}{   * bytes have been read. If the circular buffer is empty, and no data has}
+00150 \textcolor{comment}{   * been read, then the loop will block (when in blocking mode).}
+00151 \textcolor{comment}{   *}
+00152 \textcolor{comment}{   * If the circular buffer is empty, and some data has already been }
+00153 \textcolor{comment}{   * transferred, or the device is being accessed in non-blocking mode, then}
+00154 \textcolor{comment}{   * the loop terminates without necessarily reading all the requested data.}
+00155 \textcolor{comment}{   */}
+00156 
+00157   \textcolor{keywordflow}{do}
+00158   \{
+00159     \textcolor{comment}{/*}
+00160 \textcolor{comment}{     * Read the required amount of data, until the circular buffer runs}
+00161 \textcolor{comment}{     * empty}
+00162 \textcolor{comment}{     */}
+00163 
+00164     \textcolor{keywordflow}{while} ((count < len) && (sp->rx_start != sp->rx_end))
+00165     \{
+00166       count++;
+00167       *ptr++ = sp->rx\_buf[sp->rx_start];
+00168       
+00169       sp->rx_start = (sp->rx_start+1) & ALT_AVALON_UART_BUF_MSK;
+00170     \}
+00171 
+00172     \textcolor{comment}{/*}
+00173 \textcolor{comment}{     * If no data has been transferred, the circular buffer is empty, and}
+00174 \textcolor{comment}{     * this is not a non-blocking access, block waiting for data to arrive.}
+00175 \textcolor{comment}{     */}
+00176 
+00177     \textcolor{keywordflow}{if} (!count && (sp->rx_start == sp->rx_end))
+00178     \{
+00179       \textcolor{keywordflow}{if} (!block)
+00180       \{
+00181         \textcolor{comment}{/* Set errno to indicate the reason we're not returning any data */}
+00182 
+00183         ALT_ERRNO = EWOULDBLOCK;
+00184         read\_would\_block = 1;
+00185         \textcolor{keywordflow}{break};
+00186       \}
+00187       \textcolor{keywordflow}{else}
+00188       \{
+00189        \textcolor{comment}{/* Block waiting for some data to arrive */}
+00190 
+00191        \textcolor{comment}{/* First, ensure read interrupts are enabled to avoid deadlock */}
+00192 
+00193        context = alt_irq_disable_all ();
+00194        sp->ctrl |= ALTERA_AVALON_UART_CONTROL_RRDY_MSK;
+00195        IOWR_ALTERA_AVALON_UART_CONTROL(sp->base, sp->ctrl);
+00196        alt_irq_enable_all (context);
+00197 
+00198        \textcolor{comment}{/*}
+00199 \textcolor{comment}{        * When running in a multi-threaded mode, we pend on the read event }
+00200 \textcolor{comment}{        * flag set in the interrupt service routine. This avoids wasting CPU}
+00201 \textcolor{comment}{        * cycles waiting in this thread, when we could be doing something more }
+00202 \textcolor{comment}{        * profitable elsewhere.}
+00203 \textcolor{comment}{        */}
+00204 
+00205        ALT_FLAG_PEND (sp->events, 
+00206                       ALT_UART_READ_RDY,
+00207                       OS\_FLAG\_WAIT\_SET\_ANY + OS\_FLAG\_CONSUME,
+00208                       0);
+00209       \}
+00210     \}
+00211   \}
+00212   \textcolor{keywordflow}{while} (!count && len);
+00213 
+00214   \textcolor{comment}{/*}
+00215 \textcolor{comment}{   * Now that access to the circular buffer is complete, release the read}
+00216 \textcolor{comment}{   * semaphore so that other threads can access the buffer.}
+00217 \textcolor{comment}{   */}
+00218 
+00219   ALT_SEM_POST (sp->read\_lock);
+00220 
+00221   \textcolor{comment}{/*}
+00222 \textcolor{comment}{   * Ensure that interrupts are enabled, so that the circular buffer can}
+00223 \textcolor{comment}{   * re-fill.}
+00224 \textcolor{comment}{   */}
+00225 
+00226   context = alt_irq_disable_all ();
+00227   sp->ctrl |= ALTERA_AVALON_UART_CONTROL_RRDY_MSK;
+00228   IOWR_ALTERA_AVALON_UART_CONTROL(sp->base, sp->ctrl);
+00229   alt_irq_enable_all (context);
+00230 
+00231   \textcolor{comment}{/* Return the number of bytes read */}
+00232   \textcolor{keywordflow}{if}(read\_would\_block) \{
+00233     \textcolor{keywordflow}{return} -EWOULDBLOCK;
+00234   \}
+00235   \textcolor{keywordflow}{else} \{
+00236     \textcolor{keywordflow}{return} count;
+00237   \}
+00238 \}
+00239 
+00240 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* fast driver */}\textcolor{preprocessor}{}
+\end{DoxyCode}

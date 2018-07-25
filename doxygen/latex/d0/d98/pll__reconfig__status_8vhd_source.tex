@@ -1,0 +1,144 @@
+\subsection{pll\+\_\+reconfig\+\_\+status.\+vhd}
+\label{pll__reconfig__status_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/pll\+\_\+reconfig\+\_\+ctrl/pll\+\_\+reconfig\+\_\+status.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/pll\+\_\+reconfig\+\_\+ctrl/pll\+\_\+reconfig\+\_\+status.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    pll\_reconfig\_status.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: Shows when pll reconfiguration has been completed}
+00004 \textcolor{keyword}{-- DATE:    Mar 29, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }pll_reconfig_status \textcolor{keywordflow}{is}
+00016   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00017 \textcolor{keyword}{        --input ports }
+00018         \textcolor{vhdlchar}{clk}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00019         \textcolor{vhdlchar}{reset_n}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020           \textcolor{vhdlchar}{reconfig_en}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00021           \textcolor{vhdlchar}{scandone}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00022           \textcolor{vhdlchar}{exclude_ps_status} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00023           \textcolor{vhdlchar}{ps_en}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00024           \textcolor{vhdlchar}{ps_status}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00025 \textcolor{keyword}{        --output ports        }
+00026           \textcolor{vhdlchar}{rcfig_complete}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00027           
+00028         \textcolor{vhdlchar}{)};
+00029 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{pll\_reconfig\_status};
+00030 
+00031 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00032 \textcolor{keyword}{-- Architecture}
+00033 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00034 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} pll_reconfig_status is
+00035 \textcolor{keyword}{--declare signals,  components here}
+00036 \textcolor{keywordflow}{type} \textcolor{vhdlchar}{state_type} \textcolor{keywordflow}{is} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{reconfig\_begin}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wait\_ps\_begin}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{ps\_begin}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{reconfig\_complete}\textcolor{vhdlchar}{)};
+00037 
+00038 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{current_state}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{next_state} \textcolor{vhdlchar}{:} \textcolor{vhdlchar}{state_type};
+00039 
+00040 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{scandone_reg0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{scandone_reg1} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00041 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{scandone_fall}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00042 \textcolor{keyword}{--signal ps\_en\_reg0, ps\_en\_reg1 : std\_logic;}
+00043 \textcolor{keyword}{--signal ps\_en\_rising   : std\_logic;}
+00044 
+00045 
+00046   
+00047 \textcolor{vhdlkeyword}{begin}
+00048 
+00049 \textcolor{keywordflow}{process}(current_state) \textcolor{keywordflow}{begin}
+00050     \textcolor{keywordflow}{if}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{current_state} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{reconfig\_complete} \textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00051         \textcolor{vhdlchar}{rcfig_complete}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00052     \textcolor{keywordflow}{else}
+00053         \textcolor{vhdlchar}{rcfig_complete}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00054     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00055 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00056 
+00057 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00058 \textcolor{keyword}{--state machine}
+00059 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00060 
+00061 fsm\_f : \textcolor{keywordflow}{process}(clk, reset_n)\textcolor{keywordflow}{begin}
+00062     \textcolor{keywordflow}{if}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+00063         \textcolor{vhdlchar}{current_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{idle};
+00064     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00065         \textcolor{vhdlchar}{current_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{next_state};
+00066     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00067 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00068 
+00069 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00070 \textcolor{keyword}{--state machine combo}
+00071 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00072 fsm : \textcolor{keywordflow}{process}(current_state, reconfig_en, scandone_fall, ps_status, 
+      exclude_ps_status) \textcolor{keywordflow}{begin}
+00073     \textcolor{vhdlchar}{next_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{current_state};
+00074     \textcolor{keywordflow}{case} \textcolor{vhdlchar}{current_state} \textcolor{keywordflow}{is}
+00075       
+00076         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{idle} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{ --idle state, wait for reconfiguration enable}
+00077             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reconfig_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00078                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{reconfig\_begin};
+00079             \textcolor{keywordflow}{else} 
+00080                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00081             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00082         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{reconfig\_begin}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{ --wait for reconfiguration complete}
+00083             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{scandone_fall}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00084                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{exclude_ps_status}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00085                     \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wait\_ps\_begin};
+00086                 \textcolor{keywordflow}{else} 
+00087                     \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{reconfig\_complete};
+00088                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00089             \textcolor{keywordflow}{else} 
+00090                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{reconfig\_begin};
+00091             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00092         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{wait\_ps\_begin} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{ --wait for phase shift enable}
+00093             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{ps_status}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00094                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{ps\_begin};
+00095             \textcolor{keywordflow}{else}
+00096                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wait\_ps\_begin};
+00097             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00098         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{ps\_begin} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{        --wait for phase shift complete}
+00099             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{ps_status}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00100                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{reconfig\_complete};
+00101             \textcolor{keywordflow}{else} 
+00102                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{ps\_begin};
+00103             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00104         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{reconfig\_complete} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{ --reconfig complete, wait for another reconfiguration}
+00105             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reconfig_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00106                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00107             \textcolor{keywordflow}{else} 
+00108                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{reconfig\_complete};
+00109             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00110         \textcolor{keywordflow}{when} \textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} 
+00111             \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00112     \textcolor{keywordflow}{end} \textcolor{keywordflow}{case};
+00113 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00114 
+00115 \textcolor{keywordflow}{process}(reset_n, clk)
+00116 \textcolor{vhdlkeyword}{    begin}
+00117       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00118         \textcolor{vhdlchar}{scandone_reg0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00119           \textcolor{vhdlchar}{scandone_reg1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00120 \textcolor{keyword}{          --ps\_en\_reg0<='0';}
+00121 \textcolor{keyword}{          --ps\_en\_reg1<='0';}
+00122         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00123          \textcolor{vhdlchar}{scandone_reg0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{scandone};
+00124           \textcolor{vhdlchar}{scandone_reg1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{scandone_reg0};
+00125 \textcolor{keyword}{          --ps\_en\_reg0<=ps\_en;}
+00126 \textcolor{keyword}{          --ps\_en\_reg1<=ps\_en\_reg0;}
+00127         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00128     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00129      
+00130      
+00131 \textcolor{vhdlchar}{scandone_fall}   \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{scandone_reg0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{scandone_reg1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00132 \textcolor{keyword}{--ps\_en\_rising  <= '1' when ps\_en\_reg0='1' and ps\_en\_reg1='0' else '0';}
+00133   
+00134 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};
+00135 
+00136 
+00137 
+00138 
+\end{DoxyCode}

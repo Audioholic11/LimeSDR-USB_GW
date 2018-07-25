@@ -1,0 +1,84 @@
+\subsection{F\+I\+F\+O\+\_\+\+P\+A\+C\+K.\+vhd}
+\label{FIFO__PACK_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/packages/synth/\+F\+I\+F\+O\+\_\+\+P\+A\+C\+K.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/packages/synth/\+F\+I\+F\+O\+\_\+\+P\+A\+C\+K.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    FIFO\_PACK.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: Package for functions related to altera FIFO}
+00004 \textcolor{keyword}{-- DATE:    June 8, 2017}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 
+00009 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00010 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00011 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00012 \textcolor{vhdlkeyword}{use }ieee.math\_real.\textcolor{keywordflow}{all};
+00013 
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keyword}{-- Package declaration}
+00016 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00017 \textcolor{keywordflow}{package }FIFO_PACK \textcolor{keywordflow}{is}
+00018 
+00019    \textcolor{keywordflow}{function} FIFORD_SIZE (wr\_width : \textcolor{comment}{integer}; rd\_width : \textcolor{comment}{integer}; wr\_size : \textcolor{comment}{integer})
+00020       \textcolor{keywordflow}{return} \textcolor{comment}{integer};
+00021       
+00022    \textcolor{keywordflow}{function} FIFOWR_SIZE (wr\_width : \textcolor{comment}{integer}; rd\_width : \textcolor{comment}{integer}; rd\_size : \textcolor{comment}{integer})
+00023       \textcolor{keywordflow}{return} \textcolor{comment}{integer};
+00024       
+00025    \textcolor{keywordflow}{function} FIFO_WORDS_TO_Nbits (n\_words : \textcolor{comment}{integer}; add\_msb : \textcolor{comment}{boolean})
+00026       \textcolor{keywordflow}{return} \textcolor{comment}{integer};
+00027       
+00028 \textcolor{keywordflow}{end}  \textcolor{vhdlchar}{FIFO\_PACK};
+00029 
+00030 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00031 \textcolor{keyword}{-- Package body}
+00032 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00033 \textcolor{keywordflow}{package} \textcolor{keywordflow}{body} FIFO_PACK \textcolor{keywordflow}{is}
+00034 
+00035 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00036 \textcolor{keyword}{-- Return FIFO rdusedw size, up to 4 times difference in port width}
+00037 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00038    \textcolor{keywordflow}{function} FIFORD_SIZE (wr\_width : \textcolor{comment}{integer}; rd\_width : \textcolor{comment}{integer}; wr\_size : \textcolor{comment}{integer})  
+00039       \textcolor{keywordflow}{return} \textcolor{comment}{integer} \textcolor{keywordflow}{is}     
+00040    \textcolor{keywordflow}{begin}  
+00041       \textcolor{keywordflow}{if} wr\_width > rd\_width \textcolor{keywordflow}{then} 
+00042          \textcolor{keywordflow}{return} wr\_size+\textcolor{vhdlchar}{(}wr\_width/rd\_width\textcolor{vhdlchar}{)}/\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00043       \textcolor{keywordflow}{elsif} wr\_width < rd\_width \textcolor{keywordflow}{then} 
+00044          \textcolor{keywordflow}{return} wr\_size-\textcolor{vhdlchar}{(}rd\_width/wr\_width\textcolor{vhdlchar}{)}/\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00045       \textcolor{keywordflow}{else} 
+00046          \textcolor{keywordflow}{return} wr\_size;
+00047       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};     
+00048    \textcolor{keywordflow}{end} FIFORD\_SIZE;
+00049    
+00050 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00051 \textcolor{keyword}{-- Return FIFO wrusedw size, up to 4 times difference in port width}
+00052 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00053    \textcolor{keywordflow}{function} FIFOWR_SIZE (wr\_width : \textcolor{comment}{integer}; rd\_width : \textcolor{comment}{integer}; rd\_size : \textcolor{comment}{integer})  
+00054       \textcolor{keywordflow}{return} \textcolor{comment}{integer} \textcolor{keywordflow}{is}     
+00055    \textcolor{keywordflow}{begin}  
+00056       \textcolor{keywordflow}{if} rd\_width > wr\_width \textcolor{keywordflow}{then} 
+00057          \textcolor{keywordflow}{return} rd\_size+\textcolor{vhdlchar}{(}rd\_width/wr\_width\textcolor{vhdlchar}{)}/\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00058       \textcolor{keywordflow}{elsif} rd\_width < wr\_width \textcolor{keywordflow}{then} 
+00059          \textcolor{keywordflow}{return} rd\_size-\textcolor{vhdlchar}{(}wr\_width/rd\_width\textcolor{vhdlchar}{)}/\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2};
+00060       \textcolor{keywordflow}{else} 
+00061          \textcolor{keywordflow}{return} rd\_size;
+00062       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};     
+00063    \textcolor{keywordflow}{end} FIFOWR\_SIZE;
+00064    
+00065 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00066 \textcolor{keyword}{-- Return FIFO required bits to represent number of words}
+00067 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00068    \textcolor{keywordflow}{function} FIFO_WORDS_TO_Nbits (n\_words : \textcolor{comment}{integer}; add\_msb : \textcolor{comment}{boolean})  
+00069       \textcolor{keywordflow}{return} \textcolor{comment}{integer} \textcolor{keywordflow}{is}     
+00070    \textcolor{keywordflow}{begin} 
+00071       \textcolor{keywordflow}{if} add\_msb \textcolor{keywordflow}{then} 
+00072          \textcolor{keywordflow}{return} \textcolor{comment}{integer}\textcolor{vhdlchar}{(}ceil\textcolor{vhdlchar}{(}log2\textcolor{vhdlchar}{(}\textcolor{comment}{real}\textcolor{vhdlchar}{(}n\_words\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}+\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00073       \textcolor{keywordflow}{else} 
+00074          \textcolor{keywordflow}{return} \textcolor{comment}{integer}\textcolor{vhdlchar}{(}ceil\textcolor{vhdlchar}{(}log2\textcolor{vhdlchar}{(}\textcolor{comment}{real}\textcolor{vhdlchar}{(}n\_words\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{)};
+00075       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00076    \textcolor{keywordflow}{end} FIFO\_WORDS\_TO\_Nbits;
+00077 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{FIFO\_PACK};
+00078       
+00079       
+\end{DoxyCode}

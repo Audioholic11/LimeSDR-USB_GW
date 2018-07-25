@@ -1,0 +1,204 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.c File Reference}
+\label{spi__flash__lib_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.\+c}}
+{\ttfamily \#include \char`\"{}spi\+\_\+flash\+\_\+lib.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$altera\+\_\+avalon\+\_\+spi.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sodera\+\_\+pcie\+\_\+brd\+\_\+v1r0.\+h\char`\"{}}\\*
+Include dependency graph for spi\+\_\+flash\+\_\+lib.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d84/spi__flash__lib_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t {\bf Reverse\+Bit\+Order} (uint8\+\_\+t {\bf data})
+\begin{DoxyCompactList}\small\item\em Reverses bit order. \end{DoxyCompactList}\item 
+void {\bf Flash\+Spi\+Fast\+Read} ({\bf Cy\+Bool\+\_\+t} v)
+\item 
+uint8\+\_\+t {\bf Flash\+Spi\+Transfer} ({\bf alt\+\_\+u32} S\+P\+I\+Base, {\bf alt\+\_\+u32} S\+P\+I\+Slave, uint32\+\_\+t page\+Address, uint16\+\_\+t byte\+Count, uint8\+\_\+t $\ast$buffer, {\bf Cy\+Bool\+\_\+t} is\+Read)
+\item 
+uint8\+\_\+t {\bf Cy\+Fx\+Spi\+Wait\+For\+Status} ({\bf alt\+\_\+u32} S\+P\+I\+Base, {\bf alt\+\_\+u32} S\+P\+I\+Slave)
+\item 
+uint8\+\_\+t {\bf Flash\+Spi\+Erase\+Sector} ({\bf alt\+\_\+u32} S\+P\+I\+Base, {\bf alt\+\_\+u32} S\+P\+I\+Slave, uint8\+\_\+t is\+Erase, uint8\+\_\+t sector)
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char {\bf spi\+Fast\+Read} = 0
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}!Cy\+Fx\+Spi\+Wait\+For\+Status@{Cy\+Fx\+Spi\+Wait\+For\+Status}}
+\index{Cy\+Fx\+Spi\+Wait\+For\+Status@{Cy\+Fx\+Spi\+Wait\+For\+Status}!spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}}
+\paragraph[{Cy\+Fx\+Spi\+Wait\+For\+Status(alt\+\_\+u32 S\+P\+I\+Base, alt\+\_\+u32 S\+P\+I\+Slave)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Cy\+Fx\+Spi\+Wait\+For\+Status (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Base, }
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Slave}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8c_a1251c6f01b01518d34b337415cdbba45}
+
+
+Definition at line {\bf 134} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+References {\bf alt\+\_\+avalon\+\_\+spi\+\_\+command()}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+R\+E\+A\+D\+ST}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+W\+R\+I\+T\+E\+EN}, and {\bf S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+ES}.
+
+
+
+Referenced by {\bf Flash\+Spi\+Transfer()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/d9a/spi__flash__lib_8c_a1251c6f01b01518d34b337415cdbba45_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{dc/d9a/spi__flash__lib_8c_a1251c6f01b01518d34b337415cdbba45_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}!Flash\+Spi\+Erase\+Sector@{Flash\+Spi\+Erase\+Sector}}
+\index{Flash\+Spi\+Erase\+Sector@{Flash\+Spi\+Erase\+Sector}!spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}}
+\paragraph[{Flash\+Spi\+Erase\+Sector(alt\+\_\+u32 S\+P\+I\+Base, alt\+\_\+u32 S\+P\+I\+Slave, uint8\+\_\+t is\+Erase, uint8\+\_\+t sector)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Flash\+Spi\+Erase\+Sector (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Base, }
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Slave, }
+\item[{uint8\+\_\+t}]{is\+Erase, }
+\item[{uint8\+\_\+t}]{sector}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8c_ab0cc7f3ae2d118d7ea4cb49f6b78f619}
+
+
+Definition at line {\bf 184} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+References {\bf alt\+\_\+avalon\+\_\+spi\+\_\+command()}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+R\+E\+A\+D\+ST}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+W\+R\+I\+T\+E\+EN}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+S\+E\+C\+T\+O\+R\+\_\+\+E\+R\+A\+SE}, {\bf F\+L\+A\+S\+H\+\_\+\+S\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE}, {\bf Reverse\+Bit\+Order()}, and {\bf S\+T\+A\+T\+U\+S\+\_\+\+R\+E\+T\+R\+I\+E\+S\+\_\+\+E\+R\+A\+SE}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/d9a/spi__flash__lib_8c_ab0cc7f3ae2d118d7ea4cb49f6b78f619_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}!Flash\+Spi\+Fast\+Read@{Flash\+Spi\+Fast\+Read}}
+\index{Flash\+Spi\+Fast\+Read@{Flash\+Spi\+Fast\+Read}!spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}}
+\paragraph[{Flash\+Spi\+Fast\+Read(\+Cy\+Bool\+\_\+t v)}]{\setlength{\rightskip}{0pt plus 5cm}void Flash\+Spi\+Fast\+Read (
+\begin{DoxyParamCaption}
+\item[{{\bf Cy\+Bool\+\_\+t}}]{v}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8c_a8d04a555acfc79cebf2e37057ed74359}
+
+
+Definition at line {\bf 26} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+References {\bf spi\+Fast\+Read}.
+
+\index{spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}!Flash\+Spi\+Transfer@{Flash\+Spi\+Transfer}}
+\index{Flash\+Spi\+Transfer@{Flash\+Spi\+Transfer}!spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}}
+\paragraph[{Flash\+Spi\+Transfer(alt\+\_\+u32 S\+P\+I\+Base, alt\+\_\+u32 S\+P\+I\+Slave, uint32\+\_\+t page\+Address, uint16\+\_\+t byte\+Count, uint8\+\_\+t $\ast$buffer, Cy\+Bool\+\_\+t is\+Read)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Flash\+Spi\+Transfer (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Base, }
+\item[{{\bf alt\+\_\+u32}}]{S\+P\+I\+Slave, }
+\item[{uint32\+\_\+t}]{page\+Address, }
+\item[{uint16\+\_\+t}]{byte\+Count, }
+\item[{uint8\+\_\+t $\ast$}]{buffer, }
+\item[{{\bf Cy\+Bool\+\_\+t}}]{is\+Read}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8c_aa56f37b96af0a95d13ced2db1b814352}
+
+
+Definition at line {\bf 31} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+References {\bf alt\+\_\+avalon\+\_\+spi\+\_\+command()}, {\bf A\+L\+T\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+S\+P\+I\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+M\+E\+R\+GE}, {\bf Cy\+Fx\+Spi\+Wait\+For\+Status()}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+R\+E\+AD}, {\bf F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+P\+A\+G\+E\+\_\+\+W\+R\+I\+TE}, {\bf F\+L\+A\+S\+H\+\_\+\+P\+A\+G\+E\+\_\+\+S\+I\+ZE}, {\bf Reverse\+Bit\+Order()}, and {\bf spi\+Fast\+Read}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/d9a/spi__flash__lib_8c_aa56f37b96af0a95d13ced2db1b814352_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}!Reverse\+Bit\+Order@{Reverse\+Bit\+Order}}
+\index{Reverse\+Bit\+Order@{Reverse\+Bit\+Order}!spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}}
+\paragraph[{Reverse\+Bit\+Order(uint8\+\_\+t data)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Reverse\+Bit\+Order (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{data}
+\end{DoxyParamCaption}
+)}\label{spi__flash__lib_8c_aeee713216278f8150b70acddaf73af3b}
+
+
+Reverses bit order. 
+
+
+
+Definition at line {\bf 16} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+References {\bf data}.
+
+
+
+Referenced by {\bf Flash\+Spi\+Erase\+Sector()}, and {\bf Flash\+Spi\+Transfer()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{dc/d9a/spi__flash__lib_8c_aeee713216278f8150b70acddaf73af3b_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Variable Documentation}
+\index{spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}!spi\+Fast\+Read@{spi\+Fast\+Read}}
+\index{spi\+Fast\+Read@{spi\+Fast\+Read}!spi\+\_\+flash\+\_\+lib.\+c@{spi\+\_\+flash\+\_\+lib.\+c}}
+\paragraph[{spi\+Fast\+Read}]{\setlength{\rightskip}{0pt plus 5cm}char spi\+Fast\+Read = 0}\label{spi__flash__lib_8c_a11c686f3ba671af8e58d00cbb325767e}
+
+
+Definition at line {\bf 25} of file {\bf spi\+\_\+flash\+\_\+lib.\+c}.
+
+
+
+Referenced by {\bf Flash\+Spi\+Fast\+Read()}, and {\bf Flash\+Spi\+Transfer()}.
+

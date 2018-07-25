@@ -1,0 +1,173 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+flash\+\_\+dev.h File Reference}
+\label{alt__flash__dev_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+flash\+\_\+dev.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+flash\+\_\+dev.\+h}}
+{\ttfamily \#include \char`\"{}alt\+\_\+flash\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+llist.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}priv/alt\+\_\+dev\+\_\+llist.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+flash\+\_\+dev.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/db8/alt__flash__dev_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d55/alt__flash__dev_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf alt\+\_\+flash\+\_\+dev}
+\end{DoxyCompactItemize}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf \+\_\+\+\_\+\+A\+L\+T\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+E\+V\+\_\+\+H\+\_\+\+\_\+}
+\end{DoxyCompactItemize}
+\subsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct {\bf alt\+\_\+flash\+\_\+dev} {\bf alt\+\_\+flash\+\_\+dev}
+\item 
+typedef {\bf alt\+\_\+flash\+\_\+dev} {\bf alt\+\_\+flash\+\_\+fd}
+\item 
+typedef {\bf alt\+\_\+flash\+\_\+dev} $\ast$($\ast$ {\bf alt\+\_\+flash\+\_\+open}) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, const char $\ast$name)
+\item 
+typedef int($\ast$ {\bf alt\+\_\+flash\+\_\+close}) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash\+\_\+info)
+\item 
+typedef int($\ast$ {\bf alt\+\_\+flash\+\_\+write}) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, int {\bf offset}, const void $\ast${\bf src\+\_\+addr}, int {\bf length})
+\item 
+typedef int($\ast$ {\bf alt\+\_\+flash\+\_\+get\+\_\+flash\+\_\+info}) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, {\bf flash\+\_\+region} $\ast$$\ast${\bf info}, int $\ast${\bf number\+\_\+of\+\_\+regions})
+\item 
+typedef int($\ast$ {\bf alt\+\_\+flash\+\_\+write\+\_\+block}) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, int {\bf block\+\_\+offset}, int {\bf data\+\_\+offset}, const void $\ast${\bf data}, int {\bf length})
+\item 
+typedef int($\ast$ {\bf alt\+\_\+flash\+\_\+erase\+\_\+block}) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, int {\bf offset})
+\item 
+typedef int($\ast$ {\bf alt\+\_\+flash\+\_\+read}) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, int {\bf offset}, void $\ast${\bf dest\+\_\+addr}, int {\bf length})
+\item 
+typedef int($\ast$ {\bf alt\+\_\+flash\+\_\+lock}) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, {\bf alt\+\_\+u32} {\bf sectors\+\_\+to\+\_\+lock})
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf alt\+\_\+flash\+\_\+device\+\_\+register} ({\bf alt\+\_\+flash\+\_\+fd} $\ast$fd)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!\+\_\+\+\_\+\+A\+L\+T\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+E\+V\+\_\+\+H\+\_\+\+\_\+@{\+\_\+\+\_\+\+A\+L\+T\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+E\+V\+\_\+\+H\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+\+A\+L\+T\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+E\+V\+\_\+\+H\+\_\+\+\_\+@{\+\_\+\+\_\+\+A\+L\+T\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+E\+V\+\_\+\+H\+\_\+\+\_\+}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{\+\_\+\+\_\+\+A\+L\+T\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+E\+V\+\_\+\+H\+\_\+\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}\#define \+\_\+\+\_\+\+A\+L\+T\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+E\+V\+\_\+\+H\+\_\+\+\_\+}\label{alt__flash__dev_8h_a8b538ea271c5533393766b6bf0f2708a}
+
+
+Definition at line {\bf 47} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+
+
+\subsubsection{Typedef Documentation}
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+close@{alt\+\_\+flash\+\_\+close}}
+\index{alt\+\_\+flash\+\_\+close@{alt\+\_\+flash\+\_\+close}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+close}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ alt\+\_\+flash\+\_\+close) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash\+\_\+info)}\label{alt__flash__dev_8h_aebcdcef40b9a66cecc76ca4e42cdf8ce}
+
+
+Definition at line {\bf 67} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+dev@{alt\+\_\+flash\+\_\+dev}}
+\index{alt\+\_\+flash\+\_\+dev@{alt\+\_\+flash\+\_\+dev}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+dev}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf alt\+\_\+flash\+\_\+dev} {\bf alt\+\_\+flash\+\_\+dev}}\label{alt__flash__dev_8h_afa8ec23498ac9c9c1dfbbaffd17627ea}
+
+
+Definition at line {\bf 55} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+erase\+\_\+block@{alt\+\_\+flash\+\_\+erase\+\_\+block}}
+\index{alt\+\_\+flash\+\_\+erase\+\_\+block@{alt\+\_\+flash\+\_\+erase\+\_\+block}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+erase\+\_\+block}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ alt\+\_\+flash\+\_\+erase\+\_\+block) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, int {\bf offset})}\label{alt__flash__dev_8h_a54ece28cccc5dc5d949e0a0a55814d2c}
+
+
+Definition at line {\bf 77} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+fd@{alt\+\_\+flash\+\_\+fd}}
+\index{alt\+\_\+flash\+\_\+fd@{alt\+\_\+flash\+\_\+fd}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+fd}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf alt\+\_\+flash\+\_\+dev} {\bf alt\+\_\+flash\+\_\+fd}}\label{alt__flash__dev_8h_a09461be545fcdd2a047cc00d471db06f}
+
+
+Definition at line {\bf 56} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+get\+\_\+flash\+\_\+info@{alt\+\_\+flash\+\_\+get\+\_\+flash\+\_\+info}}
+\index{alt\+\_\+flash\+\_\+get\+\_\+flash\+\_\+info@{alt\+\_\+flash\+\_\+get\+\_\+flash\+\_\+info}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+get\+\_\+flash\+\_\+info}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ alt\+\_\+flash\+\_\+get\+\_\+flash\+\_\+info) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, {\bf flash\+\_\+region} $\ast$$\ast${\bf info}, int $\ast${\bf number\+\_\+of\+\_\+regions})}\label{alt__flash__dev_8h_a5af4e9d86cd834714a5d2f6d822207ea}
+
+
+Definition at line {\bf 72} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+lock@{alt\+\_\+flash\+\_\+lock}}
+\index{alt\+\_\+flash\+\_\+lock@{alt\+\_\+flash\+\_\+lock}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+lock}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ alt\+\_\+flash\+\_\+lock) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, {\bf alt\+\_\+u32} {\bf sectors\+\_\+to\+\_\+lock})}\label{alt__flash__dev_8h_a3dfe414ca745b71d1e2e56303d4130e2}
+
+
+Definition at line {\bf 80} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+open@{alt\+\_\+flash\+\_\+open}}
+\index{alt\+\_\+flash\+\_\+open@{alt\+\_\+flash\+\_\+open}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+open}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf alt\+\_\+flash\+\_\+dev}$\ast$($\ast$ alt\+\_\+flash\+\_\+open) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, const char $\ast$name)}\label{alt__flash__dev_8h_a95a48bdab3b357e4f8a92543b649e4e6}
+
+
+Definition at line {\bf 65} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+read@{alt\+\_\+flash\+\_\+read}}
+\index{alt\+\_\+flash\+\_\+read@{alt\+\_\+flash\+\_\+read}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+read}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ alt\+\_\+flash\+\_\+read) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, int {\bf offset}, void $\ast${\bf dest\+\_\+addr}, int {\bf length})}\label{alt__flash__dev_8h_a546a8ac47343a95c809858fc7a5e9058}
+
+
+Definition at line {\bf 78} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+write@{alt\+\_\+flash\+\_\+write}}
+\index{alt\+\_\+flash\+\_\+write@{alt\+\_\+flash\+\_\+write}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+write}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ alt\+\_\+flash\+\_\+write) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, int {\bf offset}, const void $\ast${\bf src\+\_\+addr}, int {\bf length})}\label{alt__flash__dev_8h_abdde8acfd4ee82ae56248ad6e2a74711}
+
+
+Definition at line {\bf 69} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+write\+\_\+block@{alt\+\_\+flash\+\_\+write\+\_\+block}}
+\index{alt\+\_\+flash\+\_\+write\+\_\+block@{alt\+\_\+flash\+\_\+write\+\_\+block}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+write\+\_\+block}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ alt\+\_\+flash\+\_\+write\+\_\+block) ({\bf alt\+\_\+flash\+\_\+dev} $\ast$flash, int {\bf block\+\_\+offset}, int {\bf data\+\_\+offset}, const void $\ast${\bf data}, int {\bf length})}\label{alt__flash__dev_8h_a1239549d35a8dc81a3755f8362b03475}
+
+
+Definition at line {\bf 74} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}!alt\+\_\+flash\+\_\+device\+\_\+register@{alt\+\_\+flash\+\_\+device\+\_\+register}}
+\index{alt\+\_\+flash\+\_\+device\+\_\+register@{alt\+\_\+flash\+\_\+device\+\_\+register}!alt\+\_\+flash\+\_\+dev.\+h@{alt\+\_\+flash\+\_\+dev.\+h}}
+\paragraph[{alt\+\_\+flash\+\_\+device\+\_\+register(alt\+\_\+flash\+\_\+fd $\ast$fd)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int alt\+\_\+flash\+\_\+device\+\_\+register (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+flash\+\_\+fd} $\ast$}]{fd}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__flash__dev_8h_a334a719bd15ea7069db9dfdf0a56fe8b}
+
+
+Definition at line {\bf 58} of file {\bf alt\+\_\+flash\+\_\+dev.\+h}.
+
+
+
+References {\bf alt\+\_\+dev\+\_\+llist\+\_\+insert()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d90/alt__flash__dev_8h_a334a719bd15ea7069db9dfdf0a56fe8b_cgraph}
+\end{center}
+\end{figure}
+
+

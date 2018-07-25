@@ -1,0 +1,117 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+io\+\_\+redirect.c File Reference}
+\label{alt__io__redirect_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+io\+\_\+redirect.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+io\+\_\+redirect.\+c}}
+{\ttfamily \#include $<$stddef.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$fcntl.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+dev.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}priv/alt\+\_\+file.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+io\+\_\+redirect.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d4d/alt__io__redirect_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf alt\+\_\+open\+\_\+fd} ({\bf alt\+\_\+fd} $\ast$fd, const char $\ast$name, int flags, int mode)
+\item 
+void {\bf alt\+\_\+io\+\_\+redirect} (const char $\ast$stdout\+\_\+dev, const char $\ast$stdin\+\_\+dev, const char $\ast$stderr\+\_\+dev)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+io\+\_\+redirect.\+c@{alt\+\_\+io\+\_\+redirect.\+c}!alt\+\_\+io\+\_\+redirect@{alt\+\_\+io\+\_\+redirect}}
+\index{alt\+\_\+io\+\_\+redirect@{alt\+\_\+io\+\_\+redirect}!alt\+\_\+io\+\_\+redirect.\+c@{alt\+\_\+io\+\_\+redirect.\+c}}
+\paragraph[{alt\+\_\+io\+\_\+redirect(const char $\ast$stdout\+\_\+dev, const char $\ast$stdin\+\_\+dev, const char $\ast$stderr\+\_\+dev)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+io\+\_\+redirect (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{stdout\+\_\+dev, }
+\item[{const char $\ast$}]{stdin\+\_\+dev, }
+\item[{const char $\ast$}]{stderr\+\_\+dev}
+\end{DoxyParamCaption}
+)}\label{alt__io__redirect_8c_a825bb530fea653ed149df14bbc62f9a2}
+
+
+Definition at line {\bf 85} of file {\bf alt\+\_\+io\+\_\+redirect.\+c}.
+
+
+
+References {\bf alt\+\_\+fd\+\_\+list}, and {\bf alt\+\_\+open\+\_\+fd()}.
+
+
+
+Referenced by {\bf alt\+\_\+main()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d21/alt__io__redirect_8c_a825bb530fea653ed149df14bbc62f9a2_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{d0/d21/alt__io__redirect_8c_a825bb530fea653ed149df14bbc62f9a2_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+io\+\_\+redirect.\+c@{alt\+\_\+io\+\_\+redirect.\+c}!alt\+\_\+open\+\_\+fd@{alt\+\_\+open\+\_\+fd}}
+\index{alt\+\_\+open\+\_\+fd@{alt\+\_\+open\+\_\+fd}!alt\+\_\+io\+\_\+redirect.\+c@{alt\+\_\+io\+\_\+redirect.\+c}}
+\paragraph[{alt\+\_\+open\+\_\+fd(alt\+\_\+fd $\ast$fd, const char $\ast$name, int flags, int mode)}]{\setlength{\rightskip}{0pt plus 5cm}static void alt\+\_\+open\+\_\+fd (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+fd} $\ast$}]{fd, }
+\item[{const char $\ast$}]{name, }
+\item[{int}]{flags, }
+\item[{int}]{mode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__io__redirect_8c_a96d43563c7bde0f38cc458d1f758e1ba}
+
+
+Definition at line {\bf 58} of file {\bf alt\+\_\+io\+\_\+redirect.\+c}.
+
+
+
+References {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+release\+\_\+fd()}, {\bf alt\+\_\+fd\+\_\+s\+::dev}, {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}, and {\bf alt\+\_\+fd\+\_\+s\+::priv}.
+
+
+
+Referenced by {\bf alt\+\_\+io\+\_\+redirect()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{d0/d21/alt__io__redirect_8c_a96d43563c7bde0f38cc458d1f758e1ba_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{d0/d21/alt__io__redirect_8c_a96d43563c7bde0f38cc458d1f758e1ba_icgraph}
+\end{center}
+\end{figure}
+
+

@@ -1,0 +1,250 @@
+\subsection{pll\+\_\+ctrl Entity Reference}
+\label{classpll__ctrl}\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+
+
+Collaboration diagram for pll\+\_\+ctrl\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{d8/de1/classpll__ctrl__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Entities}
+\begin{DoxyCompactItemize}
+\item 
+{\bf arch} architecture
+\end{DoxyCompactItemize}
+\subsubsection*{Libraries}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf ieee} 
+\end{DoxyCompactItemize}
+\subsubsection*{Use Clauses}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf std\+\_\+logic\+\_\+1164}   
+\item 
+{\bf numeric\+\_\+std}   
+\item 
+{\bf pllcfg\+\_\+pkg}   
+\end{DoxyCompactItemize}
+\subsubsection*{Generics}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf N\+\_\+\+P\+LL} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }}}
+\end{DoxyCompactItemize}
+\subsubsection*{Ports}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf to\+\_\+pllcfg}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries {\bfseries {\bf t\+\_\+\+T\+O\+\_\+\+P\+L\+L\+C\+FG}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf from\+\_\+pllcfg}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries {\bfseries {\bf t\+\_\+\+F\+R\+O\+M\+\_\+\+P\+L\+L\+C\+FG}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf pllcfg\+\_\+busy}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pllcfg\+\_\+done}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pll\+\_\+lock}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf phcfg\+\_\+mode}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf phcfg\+\_\+tst}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf phcfg\+\_\+start}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pllcfg\+\_\+start}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pllrst\+\_\+start}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf phcfg\+\_\+updn}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf cnt\+\_\+ind}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{4} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf cnt\+\_\+phase}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pllcfg\+\_\+data}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{143} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf auto\+\_\+phcfg\+\_\+done}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf auto\+\_\+phcfg\+\_\+err}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf auto\+\_\+phcfg\+\_\+smpls}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf auto\+\_\+phcfg\+\_\+step}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 20} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!auto\+\_\+phcfg\+\_\+done@{auto\+\_\+phcfg\+\_\+done}}
+\index{auto\+\_\+phcfg\+\_\+done@{auto\+\_\+phcfg\+\_\+done}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{auto\+\_\+phcfg\+\_\+done}]{\setlength{\rightskip}{0pt plus 5cm}{\bf auto\+\_\+phcfg\+\_\+done} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a629751d34531aad3c92724199e14ead2}
+
+
+Definition at line {\bf 42} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!auto\+\_\+phcfg\+\_\+err@{auto\+\_\+phcfg\+\_\+err}}
+\index{auto\+\_\+phcfg\+\_\+err@{auto\+\_\+phcfg\+\_\+err}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{auto\+\_\+phcfg\+\_\+err}]{\setlength{\rightskip}{0pt plus 5cm}{\bf auto\+\_\+phcfg\+\_\+err} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_ad0f7a231bc2ed418b7f0b4012a389d1b}
+
+
+Definition at line {\bf 43} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!auto\+\_\+phcfg\+\_\+smpls@{auto\+\_\+phcfg\+\_\+smpls}}
+\index{auto\+\_\+phcfg\+\_\+smpls@{auto\+\_\+phcfg\+\_\+smpls}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{auto\+\_\+phcfg\+\_\+smpls}]{\setlength{\rightskip}{0pt plus 5cm}{\bf auto\+\_\+phcfg\+\_\+smpls} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a6c6d954e1dcc63a9c67984f97e771ecb}
+
+
+Definition at line {\bf 44} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!auto\+\_\+phcfg\+\_\+step@{auto\+\_\+phcfg\+\_\+step}}
+\index{auto\+\_\+phcfg\+\_\+step@{auto\+\_\+phcfg\+\_\+step}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{auto\+\_\+phcfg\+\_\+step}]{\setlength{\rightskip}{0pt plus 5cm}{\bf auto\+\_\+phcfg\+\_\+step} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a5db4cbdfb9865bf4133850f93374979e}
+
+
+Definition at line {\bf 47} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!cnt\+\_\+ind@{cnt\+\_\+ind}}
+\index{cnt\+\_\+ind@{cnt\+\_\+ind}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{cnt\+\_\+ind}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cnt\+\_\+ind} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{4} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a6825139333a8eb75ec82318e6db23336}
+
+
+Definition at line {\bf 39} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!cnt\+\_\+phase@{cnt\+\_\+phase}}
+\index{cnt\+\_\+phase@{cnt\+\_\+phase}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{cnt\+\_\+phase}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cnt\+\_\+phase} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a864be2399d6ac688f34f38e8638f8f4b}
+
+
+Definition at line {\bf 40} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!from\+\_\+pllcfg@{from\+\_\+pllcfg}}
+\index{from\+\_\+pllcfg@{from\+\_\+pllcfg}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{from\+\_\+pllcfg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf from\+\_\+pllcfg} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries {\bfseries {\bf t\+\_\+\+F\+R\+O\+M\+\_\+\+P\+L\+L\+C\+FG}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a517e6f778d08d8d5396e8aa76d5b1c36}
+
+
+Definition at line {\bf 26} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!ieee@{ieee}}
+\index{ieee@{ieee}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{ieee}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ieee}\hspace{0.3cm}{\ttfamily [Library]}}\label{classpll__ctrl_a0a6af6eef40212dbaf130d57ce711256}
+
+
+Definition at line {\bf 12} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!N\+\_\+\+P\+LL@{N\+\_\+\+P\+LL}}
+\index{N\+\_\+\+P\+LL@{N\+\_\+\+P\+LL}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{N\+\_\+\+P\+LL}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\+\_\+\+P\+LL} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classpll__ctrl_ae44a5b8658d932f6b7c6260758512cf5}
+
+
+Definition at line {\bf 23} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!numeric\+\_\+std@{numeric\+\_\+std}}
+\index{numeric\+\_\+std@{numeric\+\_\+std}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{numeric\+\_\+std}]{\setlength{\rightskip}{0pt plus 5cm}{\bf numeric\+\_\+std}\hspace{0.3cm}{\ttfamily [Package]}}\label{classpll__ctrl_a2edc34402b573437d5f25fa90ba4013e}
+
+
+Definition at line {\bf 14} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!phcfg\+\_\+mode@{phcfg\+\_\+mode}}
+\index{phcfg\+\_\+mode@{phcfg\+\_\+mode}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{phcfg\+\_\+mode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf phcfg\+\_\+mode} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_afd7b55f414ed28c4644690c3fdcc37cc}
+
+
+Definition at line {\bf 33} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!phcfg\+\_\+start@{phcfg\+\_\+start}}
+\index{phcfg\+\_\+start@{phcfg\+\_\+start}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{phcfg\+\_\+start}]{\setlength{\rightskip}{0pt plus 5cm}{\bf phcfg\+\_\+start} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_ae201052c92181190b496795f7358bc79}
+
+
+Definition at line {\bf 35} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!phcfg\+\_\+tst@{phcfg\+\_\+tst}}
+\index{phcfg\+\_\+tst@{phcfg\+\_\+tst}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{phcfg\+\_\+tst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf phcfg\+\_\+tst} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_ab5f5d4e9c2405fb83741eedaf2c45f92}
+
+
+Definition at line {\bf 34} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!phcfg\+\_\+updn@{phcfg\+\_\+updn}}
+\index{phcfg\+\_\+updn@{phcfg\+\_\+updn}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{phcfg\+\_\+updn}]{\setlength{\rightskip}{0pt plus 5cm}{\bf phcfg\+\_\+updn} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a10148149d3d95f09e47cc7f7f11761b5}
+
+
+Definition at line {\bf 38} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!pll\+\_\+lock@{pll\+\_\+lock}}
+\index{pll\+\_\+lock@{pll\+\_\+lock}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{pll\+\_\+lock}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pll\+\_\+lock} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a635da34da757922eff93d5407c0857c9}
+
+
+Definition at line {\bf 31} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!pllcfg\+\_\+busy@{pllcfg\+\_\+busy}}
+\index{pllcfg\+\_\+busy@{pllcfg\+\_\+busy}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{pllcfg\+\_\+busy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pllcfg\+\_\+busy} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a8b6d553e8bb5511c8deecf5f18d79a5a}
+
+
+Definition at line {\bf 28} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!pllcfg\+\_\+data@{pllcfg\+\_\+data}}
+\index{pllcfg\+\_\+data@{pllcfg\+\_\+data}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{pllcfg\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pllcfg\+\_\+data} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{143} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a5f94312438849db642d8cb94f6968d70}
+
+
+Definition at line {\bf 41} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!pllcfg\+\_\+done@{pllcfg\+\_\+done}}
+\index{pllcfg\+\_\+done@{pllcfg\+\_\+done}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{pllcfg\+\_\+done}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pllcfg\+\_\+done} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_aac403179c5ab3c13e48877e21c565012}
+
+
+Definition at line {\bf 29} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!pllcfg\+\_\+pkg@{pllcfg\+\_\+pkg}}
+\index{pllcfg\+\_\+pkg@{pllcfg\+\_\+pkg}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{pllcfg\+\_\+pkg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pllcfg\+\_\+pkg}\hspace{0.3cm}{\ttfamily [Package]}}\label{classpll__ctrl_ac6392d8ff125da8aa77508120b6ec006}
+
+
+Definition at line {\bf 15} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!pllcfg\+\_\+start@{pllcfg\+\_\+start}}
+\index{pllcfg\+\_\+start@{pllcfg\+\_\+start}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{pllcfg\+\_\+start}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pllcfg\+\_\+start} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a7f5977685b34965860dbc47d6f0d697e}
+
+
+Definition at line {\bf 36} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!pllrst\+\_\+start@{pllrst\+\_\+start}}
+\index{pllrst\+\_\+start@{pllrst\+\_\+start}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{pllrst\+\_\+start}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pllrst\+\_\+start} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf N\+\_\+\+P\+LL}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a0e41ea0c3ae555d1309baf62f344448b}
+
+
+Definition at line {\bf 37} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}}
+\index{std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{std\+\_\+logic\+\_\+1164}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+\_\+logic\+\_\+1164}\hspace{0.3cm}{\ttfamily [Package]}}\label{classpll__ctrl_acd03516902501cd1c7296a98e22c6fcb}
+
+
+Definition at line {\bf 13} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+\index{pll\+\_\+ctrl@{pll\+\_\+ctrl}!to\+\_\+pllcfg@{to\+\_\+pllcfg}}
+\index{to\+\_\+pllcfg@{to\+\_\+pllcfg}!pll\+\_\+ctrl@{pll\+\_\+ctrl}}
+\paragraph[{to\+\_\+pllcfg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf to\+\_\+pllcfg} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries {\bfseries {\bf t\+\_\+\+T\+O\+\_\+\+P\+L\+L\+C\+FG}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classpll__ctrl_a5f98029acb201482f838a56670d3030c}
+
+
+Definition at line {\bf 25} of file {\bf pll\+\_\+ctrl.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/{\bf pll\+\_\+ctrl.\+vhd}\end{DoxyCompactItemize}

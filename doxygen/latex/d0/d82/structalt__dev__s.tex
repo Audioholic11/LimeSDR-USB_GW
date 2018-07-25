@@ -1,0 +1,151 @@
+\subsection{alt\+\_\+dev\+\_\+s Struct Reference}
+\label{structalt__dev__s}\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+
+
+{\ttfamily \#include $<$alt\+\_\+dev.\+h$>$}
+
+
+
+Collaboration diagram for alt\+\_\+dev\+\_\+s\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{de/d6c/structalt__dev__s__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf alt\+\_\+llist} {\bf llist}
+\item 
+const char $\ast$ {\bf name}
+\item 
+int($\ast$ {\bf open} )({\bf alt\+\_\+fd} $\ast$fd, const char $\ast${\bf name}, int flags, int mode)
+\item 
+int($\ast$ {\bf close} )({\bf alt\+\_\+fd} $\ast$fd)
+\item 
+int($\ast$ {\bf read} )({\bf alt\+\_\+fd} $\ast$fd, char $\ast$ptr, int len)
+\item 
+int($\ast$ {\bf write} )({\bf alt\+\_\+fd} $\ast$fd, const char $\ast$ptr, int len)
+\item 
+int($\ast$ {\bf lseek} )({\bf alt\+\_\+fd} $\ast$fd, int ptr, int dir)
+\item 
+int($\ast$ {\bf fstat} )({\bf alt\+\_\+fd} $\ast$fd, struct stat $\ast$buf)
+\item 
+int($\ast$ {\bf ioctl} )({\bf alt\+\_\+fd} $\ast$fd, int req, void $\ast$arg)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 77} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}!close@{close}}
+\index{close@{close}!alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+\paragraph[{close}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ alt\+\_\+dev\+\_\+s\+::close) ({\bf alt\+\_\+fd} $\ast$fd)}\label{structalt__dev__s_a66e8627cb39b60dcb9623fa288c2284d}
+
+
+Definition at line {\bf 81} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+C\+L\+O\+S\+E()}.
+
+\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}!fstat@{fstat}}
+\index{fstat@{fstat}!alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+\paragraph[{fstat}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ alt\+\_\+dev\+\_\+s\+::fstat) ({\bf alt\+\_\+fd} $\ast$fd, struct stat $\ast$buf)}\label{structalt__dev__s_ad7600cd6f6a1288d7cba7e70e2b527cd}
+
+
+Definition at line {\bf 85} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+F\+S\+T\+A\+T()}.
+
+\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}!ioctl@{ioctl}}
+\index{ioctl@{ioctl}!alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+\paragraph[{ioctl}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ alt\+\_\+dev\+\_\+s\+::ioctl) ({\bf alt\+\_\+fd} $\ast$fd, int req, void $\ast$arg)}\label{structalt__dev__s_a4e4ed24845ef851676aac4ab7ca6da69}
+
+
+Definition at line {\bf 86} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+I\+O\+C\+T\+L()}.
+
+\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}!llist@{llist}}
+\index{llist@{llist}!alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+\paragraph[{llist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+llist} alt\+\_\+dev\+\_\+s\+::llist}\label{structalt__dev__s_af1d577bc711b31f5269ae035a1d0a8eb}
+
+
+Definition at line {\bf 78} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+find\+\_\+dev()}, {\bf alt\+\_\+find\+\_\+file()}, and {\bf alt\+\_\+fs\+\_\+reg()}.
+
+\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}!lseek@{lseek}}
+\index{lseek@{lseek}!alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+\paragraph[{lseek}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ alt\+\_\+dev\+\_\+s\+::lseek) ({\bf alt\+\_\+fd} $\ast$fd, int ptr, int dir)}\label{structalt__dev__s_a0f7548fcb369e8a5c66178de99272d48}
+
+
+Definition at line {\bf 84} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+L\+S\+E\+E\+K()}.
+
+\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}!name@{name}}
+\index{name@{name}!alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+\paragraph[{name}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ alt\+\_\+dev\+\_\+s\+::name}\label{structalt__dev__s_a9ad12f8269203b5d5a843e14e123d5f3}
+
+
+Definition at line {\bf 79} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+find\+\_\+dev()}, {\bf alt\+\_\+find\+\_\+file()}, and {\bf alt\+\_\+fs\+\_\+reg()}.
+
+\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}!open@{open}}
+\index{open@{open}!alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+\paragraph[{open}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ alt\+\_\+dev\+\_\+s\+::open) ({\bf alt\+\_\+fd} $\ast$fd, const char $\ast${\bf name}, int flags, int mode)}\label{structalt__dev__s_a3d89f3d036af33d0309a6dfccd3e4d55}
+
+
+Definition at line {\bf 80} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+O\+P\+E\+N()}.
+
+\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}!read@{read}}
+\index{read@{read}!alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+\paragraph[{read}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ alt\+\_\+dev\+\_\+s\+::read) ({\bf alt\+\_\+fd} $\ast$fd, char $\ast$ptr, int len)}\label{structalt__dev__s_a56cb7704ff47c9dace02b388cbb4cbf5}
+
+
+Definition at line {\bf 82} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+R\+E\+A\+D()}.
+
+\index{alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}!write@{write}}
+\index{write@{write}!alt\+\_\+dev\+\_\+s@{alt\+\_\+dev\+\_\+s}}
+\paragraph[{write}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ alt\+\_\+dev\+\_\+s\+::write) ({\bf alt\+\_\+fd} $\ast$fd, const char $\ast$ptr, int len)}\label{structalt__dev__s_ac4ccf0e981dac6f02b01994cf331c17c}
+
+
+Definition at line {\bf 83} of file {\bf alt\+\_\+dev.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+W\+R\+I\+T\+E()}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/{\bf alt\+\_\+dev.\+h}\end{DoxyCompactItemize}

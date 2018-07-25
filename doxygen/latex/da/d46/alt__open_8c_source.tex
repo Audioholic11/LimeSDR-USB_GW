@@ -1,0 +1,178 @@
+\subsection{alt\+\_\+open.\+c}
+\label{alt__open_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+open.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+open.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2004 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include "sys/alt_errno.h"}
+00034 \textcolor{preprocessor}{#include "sys/alt_warning.h"}
+00035 \textcolor{preprocessor}{#include "priv/alt_file.h"}
+00036 \textcolor{preprocessor}{#include "alt_types.h"}
+00037 \textcolor{preprocessor}{#include "os/alt_syscall.h"}
+00038 
+00039 \textcolor{preprocessor}{#ifdef ALT\_USE\_DIRECT\_DRIVERS}
+00040 
+00041 \textcolor{keywordtype}{int} ALT_OPEN (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* file, \textcolor{keywordtype}{int} flags, \textcolor{keywordtype}{int} mode)
+00042 \{
+00043   \textcolor{comment}{/* Generate a link time warning, should this function ever be called. */}
+00044   
+00045   ALT_STUB_WARNING(open);
+00046   
+00047   \textcolor{comment}{/* Indicate an error */}
+00048   
+00049   ALT_ERRNO = ENOSYS;
+00050   \textcolor{keywordflow}{return} -1;
+00051 \}
+00052 
+00053 \textcolor{preprocessor}{#else }\textcolor{comment}{/* !ALT\_USE\_DIRECT\_DRIVERS */}\textcolor{preprocessor}{}
+00054 
+00055 \textcolor{keyword}{extern} alt_llist alt_dev_list;
+00056 
+00057 \textcolor{comment}{/*}
+00058 \textcolor{comment}{ * alt\_file\_locked() is used by open() to ensure that a device has not been}
+00059 \textcolor{comment}{ * previously locked for exclusive access using ioctl(). This test is only}
+00060 \textcolor{comment}{ * performed for devices. Filesystems are required to handle the ioctl() call}
+00061 \textcolor{comment}{ * themselves, and report the error from the filesystems open() function. }
+00062 \textcolor{comment}{ */} 
+00063 
+00064 \textcolor{keyword}{static} \textcolor{keywordtype}{int} alt_file_locked (alt_fd* fd)
+00065 \{
+00066   alt_u32 i;
+00067 
+00068   \textcolor{comment}{/*}
+00069 \textcolor{comment}{   * Mark the file descriptor as belonging to a device.}
+00070 \textcolor{comment}{   */}
+00071 
+00072   fd->fd_flags |= ALT_FD_DEV;
+00073 
+00074   \textcolor{comment}{/*}
+00075 \textcolor{comment}{   * Loop through all current file descriptors searching for one that's locked}
+00076 \textcolor{comment}{   * for exclusive access. If a match is found, generate an error.}
+00077 \textcolor{comment}{   */}
+00078 
+00079   \textcolor{keywordflow}{for} (i = 0; i <= alt_max_fd; i++)
+00080   \{
+00081     \textcolor{keywordflow}{if} ((alt_fd_list[i].dev == fd->dev) &&
+00082         (alt_fd_list[i].fd_flags & ALT_FD_EXCL) &&
+00083         (&alt_fd_list[i] != fd))
+00084     \{
+00085       \textcolor{keywordflow}{return} -EACCES;
+00086     \}
+00087   \}
+00088   
+00089   \textcolor{comment}{/* The device is not locked */}
+00090  
+00091   \textcolor{keywordflow}{return} 0;
+00092 \}
+00093 
+00094 \textcolor{comment}{/*}
+00095 \textcolor{comment}{ * open() is called in order to get a file descriptor that reference the file}
+00096 \textcolor{comment}{ * or device named "name". This descriptor can then be used to manipulate the}
+00097 \textcolor{comment}{ * file/device using the standard system calls, e.g. write(), read(), ioctl()}
+00098 \textcolor{comment}{ * etc.}
+00099 \textcolor{comment}{ *}
+00100 \textcolor{comment}{ * This is equivalent to the standard open() system call.}
+00101 \textcolor{comment}{ *}
+00102 \textcolor{comment}{ * ALT\_OPEN is mapped onto the open() system call in alt\_syscall.h}
+00103 \textcolor{comment}{ */}
+00104  
+00105 \textcolor{keywordtype}{int} ALT_OPEN (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* file, \textcolor{keywordtype}{int} flags, \textcolor{keywordtype}{int} mode)
+00106 \{ 
+00107   alt_dev* dev;
+00108   alt_fd*  fd;
+00109   \textcolor{keywordtype}{int} index  = -1;
+00110   \textcolor{keywordtype}{int} status = -ENODEV;
+00111   \textcolor{keywordtype}{int} isafs = 0;
+00112 
+00113   \textcolor{comment}{/* }
+00114 \textcolor{comment}{   * Check the device list, to see if a device with a matching name is }
+00115 \textcolor{comment}{   * registered.}
+00116 \textcolor{comment}{   */}
+00117   
+00118   \textcolor{keywordflow}{if} (!(dev = alt_find_dev (file, &alt\_dev\_list)))
+00119   \{
+00120     \textcolor{comment}{/* No matching device, so try the filesystem list */}
+00121 
+00122     dev   = alt_find_file (file);
+00123     isafs = 1;
+00124   \}
+00125 
+00126   \textcolor{comment}{/* }
+00127 \textcolor{comment}{   * If a matching device or filesystem is found, allocate a file descriptor. }
+00128 \textcolor{comment}{   */}
+00129 
+00130   \textcolor{keywordflow}{if} (dev)
+00131   \{
+00132     \textcolor{keywordflow}{if} ((index = alt_get_fd (dev)) < 0)
+00133     \{
+00134       status = index;
+00135     \}
+00136     \textcolor{keywordflow}{else}
+00137     \{
+00138       fd = &alt_fd_list[index];
+00139       fd->fd_flags = (flags & ~ALT_FD_FLAGS_MASK);
+00140       
+00141       \textcolor{comment}{/* If this is a device, ensure it isn't already locked */}
+00142 
+00143       \textcolor{keywordflow}{if} (isafs || ((status = alt_file_locked (fd)) >= 0))
+00144       \{
+00145         \textcolor{comment}{/* }
+00146 \textcolor{comment}{         * If the device or filesystem provides an open() callback function,}
+00147 \textcolor{comment}{         * call it now to perform any device/filesystem specific operations.}
+00148 \textcolor{comment}{         */}
+00149     
+00150         status = (dev->open) ? dev->open(fd, file, flags, mode): 0;
+00151       \}
+00152     \}
+00153   \}
+00154   \textcolor{keywordflow}{else}
+00155   \{
+00156     status = -ENODEV;
+00157   \}
+00158 
+00159   \textcolor{comment}{/* Allocation failed, so clean up and return an error */} 
+00160 
+00161   \textcolor{keywordflow}{if} (status < 0)
+00162   \{
+00163     alt_release_fd (index);  
+00164     ALT_ERRNO = -status;
+00165     \textcolor{keywordflow}{return} -1;
+00166   \}
+00167   
+00168   \textcolor{comment}{/* return the reference upon success */}
+00169 
+00170   \textcolor{keywordflow}{return} index;
+00171 \}
+00172 
+00173 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_USE\_DIRECT\_DRIVERS */}\textcolor{preprocessor}{}
+\end{DoxyCode}

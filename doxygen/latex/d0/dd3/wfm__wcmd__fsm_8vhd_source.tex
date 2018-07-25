@@ -1,0 +1,221 @@
+\subsection{wfm\+\_\+wcmd\+\_\+fsm.\+vhd}
+\label{wfm__wcmd__fsm_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/wfm\+\_\+ram\+\_\+buffer/wfm\+\_\+wcmd\+\_\+fsm.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/wfm\+\_\+ram\+\_\+buffer/wfm\+\_\+wcmd\+\_\+fsm.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    wfm\_wcmd\_fsm.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: FSM for write commands}
+00004 \textcolor{keyword}{-- DATE:    June 20, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }wfm_wcmd_fsm \textcolor{keywordflow}{is}
+00016     \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(}
+00017             \textcolor{vhdlchar}{dev_family}          \textcolor{vhdlchar}{:} \textcolor{comment}{string}  \textcolor{vhdlchar}{:=} \textcolor{keyword}{"Cyclone IV E"}; 
+00018             \textcolor{vhdlchar}{wfm_infifo_size} \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{11};
+00019             \textcolor{vhdlchar}{addr_size}           \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{24};
+00020             \textcolor{vhdlchar}{lcl_burst_length}    \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{2}
+00021 \textcolor{vhdlchar}{)};
+00022     \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00023         \textcolor{vhdlchar}{wcmd_clk}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00024         \textcolor{vhdlchar}{wcmd_reset_n}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00025         \textcolor{vhdlchar}{wcmd_rdy}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00026         \textcolor{vhdlchar}{wcmd_addr}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{addr_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00027         \textcolor{vhdlchar}{wcmd_wr}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00028         \textcolor{vhdlchar}{wcmd_brst_en}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --1- writes in burst, 0- single write}
+00029         \textcolor{vhdlchar}{wcmd_last_addr}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{addr_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00030 
+00031         \textcolor{vhdlchar}{wfm_load}                    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00032         \textcolor{vhdlchar}{wfm_load_ext}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00033         \textcolor{vhdlchar}{wfm_play_stop}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- 1- play, 0- stop}
+00034 
+00035         \textcolor{vhdlchar}{wfm_infifo_rd}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00036         \textcolor{vhdlchar}{wfm_infifo_rdusedw}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wfm_infifo_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}
+00037         
+00038         \textcolor{vhdlchar}{)};
+00039 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{wfm\_wcmd\_fsm};
+00040 
+00041 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00042 \textcolor{keyword}{-- Architecture}
+00043 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00044 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} wfm_wcmd_fsm is
+00045 \textcolor{keyword}{--declare signals,  components here}
+00046 \textcolor{keywordflow}{type} \textcolor{vhdlchar}{state_type} \textcolor{keywordflow}{is} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{check\_burst}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{burst\_wr}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{check\_wr}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wr}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{burst\_rd}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rd}\textcolor{vhdlchar}{)};
+00047 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{current_state}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{next_state} \textcolor{vhdlchar}{:} \textcolor{vhdlchar}{state_type};
+00048 
+00049 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wrburst_cnt}          \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00050 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wr_address}               \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{addr_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00051 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wr_address_latch}     \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{addr_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00052 
+00053 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wfm_load_reg0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wfm_load_reg1} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00054   
+00055 \textcolor{vhdlkeyword}{begin}
+00056 
+00057 \textcolor{vhdlchar}{wfm_load_ext}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wfm_load_reg1};
+00058 
+00059 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00060 \textcolor{keyword}{--write burst counter}
+00061 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00062 \textcolor{keywordflow}{process}(wcmd_clk, wcmd_reset_n)\textcolor{keywordflow}{begin}
+00063     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wcmd_reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+00064         \textcolor{vhdlchar}{wr_address_latch}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00065     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wcmd_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wcmd_clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00066         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wfm_load_reg0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wfm_load_reg1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}\textcolor{keyword}{ --latch on falling edge}
+00067             \textcolor{vhdlchar}{wr_address_latch}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wr_address};
+00068         \textcolor{keywordflow}{else} 
+00069             \textcolor{vhdlchar}{wr_address_latch}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wr_address_latch};
+00070         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00071     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00072 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00073 
+00074 \textcolor{vhdlchar}{wcmd_last_addr}\textcolor{vhdlchar}{<=}\textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wr_address_latch}\textcolor{vhdlchar}{)};
+00075 
+00076 
+00077 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00078 \textcolor{keyword}{-- command write signal and infifo read signal formation}
+00079 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00080 \textcolor{keywordflow}{process}(current_state)
+00081 \textcolor{vhdlkeyword}{begin }
+00082     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{current_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{burst\_wr} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{current_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{wr} \textcolor{keywordflow}{then} 
+00083         \textcolor{vhdlchar}{wcmd_wr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00084         \textcolor{vhdlchar}{wfm_infifo_rd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; 
+00085     \textcolor{keywordflow}{else} 
+00086         \textcolor{vhdlchar}{wcmd_wr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00087         \textcolor{vhdlchar}{wfm_infifo_rd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00088     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00089 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00090 
+00091 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00092 \textcolor{keyword}{-- command burst write signal formation}
+00093 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00094 \textcolor{keywordflow}{process}(current_state)
+00095 \textcolor{vhdlkeyword}{begin }
+00096     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{current_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{burst\_wr} \textcolor{keywordflow}{then} 
+00097         \textcolor{vhdlchar}{wcmd_brst_en}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00098     \textcolor{keywordflow}{else}
+00099         \textcolor{vhdlchar}{wcmd_brst_en}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; 
+00100     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00101 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00102 
+00103 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00104 \textcolor{keyword}{--write burst counter}
+00105 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00106 \textcolor{keywordflow}{process}(wcmd_clk, wcmd_reset_n)\textcolor{keywordflow}{begin}
+00107     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wcmd_reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+00108         \textcolor{vhdlchar}{wrburst_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00109     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wcmd_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wcmd_clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00110         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{current_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{burst\_wr} \textcolor{keywordflow}{then}
+00111             \textcolor{keywordflow}{if}  \textcolor{vhdlchar}{wrburst_cnt}\textcolor{vhdlchar}{<}\textcolor{vhdlchar}{lcl_burst_length}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{then} 
+00112                 \textcolor{vhdlchar}{wrburst_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wrburst_cnt}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00113             \textcolor{keywordflow}{else} 
+00114                 \textcolor{vhdlchar}{wrburst_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00115             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00116         \textcolor{keywordflow}{else} 
+00117             \textcolor{vhdlchar}{wrburst_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00118         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00119 
+00120     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00121 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00122 
+00123 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00124 \textcolor{keyword}{-- write address counter}
+00125 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00126 \textcolor{keywordflow}{process}(wcmd_clk, wcmd_reset_n)\textcolor{keywordflow}{begin}
+00127     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wcmd_reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+00128         \textcolor{vhdlchar}{wr_address}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00129     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wcmd_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wcmd_clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00130         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wfm_load_reg0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wfm_load_reg1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00131             \textcolor{vhdlchar}{wr_address}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00132         \textcolor{keywordflow}{else}
+00133             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{current_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{burst\_wr} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{current_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{wr} \textcolor{keywordflow}{then}
+00134                 \textcolor{vhdlchar}{wr_address}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wr_address}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00135             \textcolor{keywordflow}{else} 
+00136                 \textcolor{vhdlchar}{wr_address}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wr_address};
+00137             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00138         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00139     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00140 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00141 
+00142 \textcolor{vhdlchar}{wcmd_addr}\textcolor{vhdlchar}{<=}\textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wr_address}\textcolor{vhdlchar}{)};
+00143 
+00144 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00145 \textcolor{keyword}{--state machine}
+00146 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00147 
+00148 fsm\_f : \textcolor{keywordflow}{process}(wcmd_clk, wcmd_reset_n) \textcolor{keywordflow}{begin}
+00149     \textcolor{keywordflow}{if}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wcmd_reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+00150         \textcolor{vhdlchar}{current_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{idle};
+00151         \textcolor{vhdlchar}{wfm_load_reg0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00152         \textcolor{vhdlchar}{wfm_load_reg1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00153     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wcmd_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wcmd_clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00154         \textcolor{vhdlchar}{current_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{next_state};
+00155         \textcolor{vhdlchar}{wfm_load_reg0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wfm_load};
+00156         \textcolor{vhdlchar}{wfm_load_reg1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wfm_load_reg0};
+00157     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00158 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00159 
+00160 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00161 \textcolor{keyword}{--state machine combo}
+00162 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00163 fsm : \textcolor{keywordflow}{process}(current_state, wfm_load, wfm_infifo_rdusedw, wrburst_cnt, wcmd_rdy) \textcolor{keywordflow}{begin}
+00164     \textcolor{vhdlchar}{next_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{current_state};
+00165     \textcolor{keywordflow}{case} \textcolor{vhdlchar}{current_state} \textcolor{keywordflow}{is}
+00166       
+00167         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{idle} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{ --idle state wait for enable signal}
+00168             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wfm_load}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00169                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check\_burst};
+00170             \textcolor{keywordflow}{else}    
+00171                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00172             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00173 
+00174         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{check\_burst} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{     --wait for incomming data}
+00175             \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wfm_infifo_rdusedw}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{>=}\textcolor{vhdlchar}{lcl_burst_length} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wcmd_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00176                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{burst\_wr};
+00177             \textcolor{keywordflow}{elsif} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wfm_infifo_rdusedw}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{lcl_burst_length}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wcmd_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00178                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check\_wr};
+00179             \textcolor{keywordflow}{else} 
+00180                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00181             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00182 
+00183         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{check\_wr}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} 
+00184             \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wfm_infifo_rdusedw}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{lcl_burst_length}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wcmd_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00185                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wr};
+00186             \textcolor{keywordflow}{else} 
+00187                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00188             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00189 
+00190         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{burst\_wr}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{     --burst write command}
+00191             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrburst_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{lcl_burst_length}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{then} 
+00192                 \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wfm_infifo_rdusedw}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{lcl_burst_length}\textcolor{vhdlchar}{*}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wcmd_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00193                     \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{burst\_wr};
+00194                 \textcolor{keywordflow}{else} 
+00195                     \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00196                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00197             \textcolor{keywordflow}{else} 
+00198                 \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{burst\_wr};
+00199             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00200 
+00201         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{wr}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{       --read command}
+00202             \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00203 
+00204         \textcolor{keywordflow}{when} \textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} 
+00205             \textcolor{vhdlchar}{next_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00206     \textcolor{keywordflow}{end} \textcolor{keywordflow}{case};
+00207 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00208 
+00209 
+00210   
+00211 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00212 
+00213 
+00214 
+00215 
+00216 
+\end{DoxyCode}

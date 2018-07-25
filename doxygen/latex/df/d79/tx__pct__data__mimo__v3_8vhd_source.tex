@@ -1,0 +1,1174 @@
+\subsection{tx\+\_\+pct\+\_\+data\+\_\+mimo\+\_\+v3.\+vhd}
+\label{tx__pct__data__mimo__v3_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+packets/tx\+\_\+pct\+\_\+data\+\_\+mimo\+\_\+v3.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+packets/tx\+\_\+pct\+\_\+data\+\_\+mimo\+\_\+v3.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    tx\_pct\_data\_mimo\_v3.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: reads packets from 4 fifo}
+00004 \textcolor{keyword}{-- DATE:    Feb 25, 2015}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{vhdlkeyword}{LIBRARY }\textcolor{keywordflow}{altera\_mf};
+00013 \textcolor{vhdlkeyword}{USE }\textcolor{keywordflow}{altera\_mf.all};
+00014 
+00015 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00016 \textcolor{keyword}{-- Entity declaration}
+00017 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00018 \textcolor{keywordflow}{entity }tx_pct_data_mimo_v3 \textcolor{keywordflow}{is}
+00019   \textcolor{keywordflow}{generic} \textcolor{vhdlchar}{(} \textcolor{vhdlchar}{dev_family}  \textcolor{vhdlchar}{:} \textcolor{comment}{string}  \textcolor{vhdlchar}{:=} \textcolor{keyword}{"Cyclone IV E"};
+00020                 \textcolor{vhdlchar}{num_of_fifo} \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{3};
+00021             \textcolor{vhdlchar}{fifo_size}   \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10};
+00022             \textcolor{vhdlchar}{pct_size}    \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1024};
+00023             \textcolor{vhdlchar}{dcmpr_fifo}  \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10};
+00024             \textcolor{vhdlchar}{smpl_width}  \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}  
+00025           \textcolor{vhdlchar}{)};
+00026   
+00027   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00028 \textcolor{keyword}{        --input ports }
+00029         \textcolor{vhdlchar}{clk}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00030         \textcolor{vhdlchar}{reset_n}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00031           \textcolor{vhdlchar}{reset_n_fifo_wclk} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00032         \textcolor{vhdlchar}{pct_samplenr}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00033         \textcolor{vhdlchar}{fifo_wclk}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00034         \textcolor{vhdlchar}{fifo_wrreq}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00035           \textcolor{vhdlchar}{fifo_data}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00036         \textcolor{vhdlchar}{fifo_rclk}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00037 \textcolor{keyword}{        --output ports }
+00038         \textcolor{vhdlchar}{tx_outfifo_rdy}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00039         \textcolor{vhdlchar}{sample_width}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- "00"-16bit, "01"-14bit, "10"-12bit}
+00040         \textcolor{vhdlchar}{tx_en}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00041           \textcolor{vhdlchar}{tst_aclr_ext}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00042           \textcolor{vhdlchar}{lte_synch_dis}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00043           \textcolor{vhdlchar}{mimo_en}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00044           \textcolor{vhdlchar}{dd_data_h}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{smpl_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00045           \textcolor{vhdlchar}{dd_data_l}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{smpl_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00046           \textcolor{vhdlchar}{fr_start}          \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00047           \textcolor{vhdlchar}{ch_en}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}
+00048         \textcolor{vhdlchar}{)};
+00049 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{tx\_pct\_data\_mimo\_v3};
+00050 
+00051 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00052 \textcolor{keyword}{-- Architecture}
+00053 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00054 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} tx_pct_data_mimo_v3 is
+00055   
+00056   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{aclr0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{aclr1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{aclr2}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{aclr3}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00057   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{rdreq0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rdreq1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rdreq2}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rdreq3}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo_read_en}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00058   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wrreq0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wrreq1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wrreq2}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wrreq3}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00059   
+00060   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wrempty0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wrempty1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wrempty2}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wrempty3} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00061 
+00062   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{q0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{q1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{q2}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{q3}             \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00063   
+00064   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo_rdreq} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00065   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wrreq_cnt}  \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00066   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wreq_en}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00067   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{aclr}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00068   
+00069   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo0_samplenr}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo1_samplenr}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo2_samplenr}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo3_samplenr}                   \textcolor{vhdlchar}{:} \textcolor{comment}{
+      std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00070   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo0_samplenr_d0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo1_samplenr_d0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo2_samplenr_d0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{
+      fifo3_samplenr_d0}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00071   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo0_samplenr_d1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo1_samplenr_d1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo2_samplenr_d1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{
+      fifo3_samplenr_d1}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00072   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{rdusedw0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rdusedw1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rdusedw2}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rdusedw3}                                                  \textcolor{vhdlchar}{:} \textcolor{comment}{
+      std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{10} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00073   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo0_pctrsvd}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo1_pctrsvd}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo2_pctrsvd}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo3_pctrsvd}                     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{
+      63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00074   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo0_pctrsvd_d0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo1_pctrsvd_d0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo2_pctrsvd_d0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo3_pctrsvd_d0}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{
+      downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00075   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo0_pctrsvd_d1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo1_pctrsvd_d1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo2_pctrsvd_d1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo3_pctrsvd_d1}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{
+      downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00076   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{rdusedw_mux} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{10} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00077   
+00078   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{rdusedw0_reg}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rdusedw1_reg}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rdusedw2_reg}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rdusedw3_reg}             \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{10} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}
+      ;
+00079   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo0_data_rdy}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo1_data_rdy}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo2_data_rdy}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{fifo3_data_rdy} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00080   
+00081   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{tx_mux_sel}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00082   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{tx_mux_sel_d}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}; 
+00083   
+00084   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{wr_status}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00085   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{diq_ready}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00086   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo_rd_cnt}    \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00087   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{pct_samplenr_d0}\textcolor{vhdlchar}{,}  \textcolor{vhdlchar}{pct_samplenr_d1} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00088   
+00089   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{decompr_wr}                     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00090   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{decompr_dataout_valid}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00091   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{decompr_data}           \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}; 
+00092   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{decompr_fifo_empty}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00093   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dec_wr0}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00094   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dec_wr1}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00095   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dec_wr2}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00096   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dec_wr3}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00097   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{decopr_min} \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00098   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{rd_en_cnt}  \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00099   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{decompr_wusedw} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{dcmpr_fifo}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00100   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{iq_sel}             \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00101   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{iq_sel_sig}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00102   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{rd_cnt}         \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00103   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{test_cnt0}      \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00104   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{test_cnt1}      \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00105   
+00106   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{compressed_data}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00107   
+00108  
+00109   \textcolor{keywordflow}{type} \textcolor{vhdlchar}{fifo_state} \textcolor{keywordflow}{is} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{check0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{check1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{check2}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{check3}\textcolor{vhdlchar}{)};
+00110   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{nex_fifo_st} \textcolor{vhdlchar}{:}  \textcolor{vhdlchar}{fifo_state};
+00111   
+00112   \textcolor{keywordflow}{type} \textcolor{vhdlchar}{mux_state} \textcolor{keywordflow}{is} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{mux0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{mux1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{mux2}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{mux3}\textcolor{vhdlchar}{)};
+00113   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{current_mux_state}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{next_mux_state} \textcolor{vhdlchar}{:}  \textcolor{vhdlchar}{mux_state}; 
+00114   
+00115   \textcolor{keywordflow}{type} \textcolor{vhdlchar}{read_state} \textcolor{keywordflow}{is} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{read0}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{read1}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{read2}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{read3}\textcolor{vhdlchar}{)};
+00116   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{current_read_state}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{next_read_state} \textcolor{vhdlchar}{:}  \textcolor{vhdlchar}{read_state}; 
+00117   
+00118   \textcolor{keywordflow}{type} \textcolor{vhdlchar}{readen_state} \textcolor{keywordflow}{is} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{wait\_rd}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{rd\_en}\textcolor{vhdlchar}{)};
+00119   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{current_readen_state}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{next_readen_state} \textcolor{vhdlchar}{:}  \textcolor{vhdlchar}{readen_state}; 
+00120   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{valid_en_limit}      \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{11} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00121   
+00122   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo_rdempty}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00123   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo_rreq}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00124   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo_q}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00125   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{diq_h}              \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00126   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{diq_l}              \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00127   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo_wrreq_reg}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00128   
+00129   \textcolor{keywordflow}{type} \textcolor{vhdlchar}{smpl_state} \textcolor{keywordflow}{is} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{tx\_i}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{tx\_q}\textcolor{vhdlchar}{)};
+00130   \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{current_smpl_state}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{next_smpl_state} \textcolor{vhdlchar}{:}  \textcolor{vhdlchar}{smpl_state}; 
+00131 
+00132 
+00133 \textcolor{keywordflow}{component} fifo_inst \textcolor{keywordflow}{is}
+00134   \textcolor{keywordflow}{generic}(dev_family         : \textcolor{comment}{string}  := \textcolor{keyword}{"Cyclone IV E"};
+00135           wrwidth         : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{24};
+00136           wrusedw_witdth  : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}; \textcolor{keyword}{--12=2048 words }
+00137           rdwidth         : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{48};
+00138           rdusedw_width   : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{11};
+00139           show_ahead      : \textcolor{comment}{string}  := \textcolor{keyword}{"ON"}
+00140   );  
+00141 
+00142   \textcolor{keywordflow}{port} (
+00143 \textcolor{keyword}{      --input ports }
+00144       reset_n       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00145       wrclk         : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00146       wrreq         : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00147       data          : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(wrwidth\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00148       wrfull        : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00149         wrempty       : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00150       wrusedw       : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(wrusedw_witdth\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00151       rdclk          : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00152       rdreq         : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00153       q             : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(rdwidth\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00154       rdempty       : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00155       rdusedw       : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(rdusedw_width\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0})     
+00156         
+00157         );
+00158 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00159 
+00160 
+00161 \textcolor{keywordflow}{component} decompress \textcolor{keywordflow}{is}
+00162   \textcolor{keywordflow}{generic} (
+00163             dev_family      : \textcolor{comment}{string}  := \textcolor{keyword}{"Cyclone IV E"};
+00164             data_width      : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{31};
+00165             fifo_rsize      : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{9} ;
+00166             fifo_wsize      : \textcolor{comment}{integer} := \textcolor{vhdllogic}{}\textcolor{vhdllogic}{10}
+00167             );
+00168   \textcolor{keywordflow}{port} (
+00169 \textcolor{keyword}{        --input ports }
+00170             wclk          : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00171             rclk          : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00172             reset_n       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00173             data_in       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(data_width\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00174             data_in_valid : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic}; \textcolor{keyword}{-- data\_in leading signal which indicates valid incomong data}
+00175             sample_width  : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}); \textcolor{keyword}{-- "00"-16bit, "01"-14bit, "10"-12bit}
+00176             rdreq         : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00177             rdempty       : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00178             rdusedw       : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(fifo_rsize\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00179             wfull         : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00180             wusedw        : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(fifo_wsize\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00181             dataout_valid : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00182             decmpr_data   : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0})    
+00183         );
+00184 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00185 
+00186 \textcolor{keywordflow}{component} rd_tx_fifo \textcolor{keywordflow}{is}
+00187   \textcolor{keywordflow}{generic}(sampl_width : \textcolor{comment}{integer}:=\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12});
+00188   \textcolor{keywordflow}{port} (
+00189 \textcolor{keyword}{        --input ports }
+00190       clk           : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00191       reset_n       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00192       fr_start      : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00193       ch_en         : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00194       mimo_en       : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00195       fifo_empty    : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00196       fifo_data : \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00197 \textcolor{keyword}{        --output ports }
+00198       fifo_read : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00199       diq_h         : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0});
+00200       diq_l         : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}(\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0})
+00201         );
+00202 \textcolor{keywordflow}{end} \textcolor{keywordflow}{component};
+00203 
+00204 
+00205   
+00206 \textcolor{vhdlkeyword}{begin}
+00207   
+00208   
+00209 \textcolor{keyword}{-- valid\_en\_limit<= x"7F5" when sample\_width="01" else}
+00210 \textcolor{keyword}{--                  x"7F8";}
+00211 
+00212                                 
+00213   \textcolor{vhdlchar}{valid_en_limit}\textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{x}\textcolor{vhdllogic}{"3F7"} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{sample_width}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"01"} \textcolor{keywordflow}{else}
+00214                    \textcolor{vhdlchar}{x}\textcolor{vhdllogic}{"3FC"};
+00215  
+00216 \textcolor{keyword}{--  decopr\_min<="011" when sample\_width="10" else }
+00217 \textcolor{keyword}{--              "111" when sample\_width="01" else}
+00218 \textcolor{keyword}{--              "000";}
+00219   
+00220   \textcolor{vhdlchar}{decopr_min}\textcolor{vhdlchar}{<=}\textcolor{vhdllogic}{"011"} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{sample_width}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"10"} \textcolor{keywordflow}{else} 
+00221               \textcolor{vhdllogic}{"111"} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{sample_width}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"01"} \textcolor{keywordflow}{else}
+00222               \textcolor{vhdllogic}{"100"};
+00223 
+00224 \textcolor{vhdlchar}{fifo_rdreq}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rdreq0} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{rdreq1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{rdreq2} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{rdreq3};
+00225 \textcolor{keyword}{--diq\_ready<=fifo0\_data\_rdy or fifo1\_data\_rdy or fifo2\_data\_rdy or fifo3\_data\_rdy;}
+00226 
+00227 
+00228 
+00229 \textcolor{keyword}{-------------------------------------------------------------------------------         }
+00230 \textcolor{keyword}{-- fifo rdreq signal}
+00231 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00232 
+00233 \textcolor{keyword}{--fifo0}
+00234 \textcolor{keywordflow}{process}(current_read_state, fifo_read_en) \textcolor{keywordflow}{begin}
+00235     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{current_read_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{read0} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_read_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00236             \textcolor{vhdlchar}{rdreq0} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; 
+00237     \textcolor{keywordflow}{else}
+00238           \textcolor{vhdlchar}{rdreq0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00239     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00240 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process}; 
+00241 
+00242 \textcolor{keyword}{--fifo1}
+00243 \textcolor{keywordflow}{process}(current_read_state, fifo_read_en) \textcolor{keywordflow}{begin}
+00244     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{current_read_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{read1} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_read_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00245             \textcolor{vhdlchar}{rdreq1} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; 
+00246     \textcolor{keywordflow}{else}
+00247           \textcolor{vhdlchar}{rdreq1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00248     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00249 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00250  
+00251 \textcolor{keyword}{--fifo2}
+00252 \textcolor{keywordflow}{process}(current_read_state, fifo_read_en) \textcolor{keywordflow}{begin}
+00253     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{current_read_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{read2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_read_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00254             \textcolor{vhdlchar}{rdreq2} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; 
+00255     \textcolor{keywordflow}{else}
+00256           \textcolor{vhdlchar}{rdreq2}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00257     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00258 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process}; 
+00259 
+00260 \textcolor{keyword}{--fifo3}
+00261 \textcolor{keywordflow}{process}(current_read_state, fifo_read_en) \textcolor{keywordflow}{begin}
+00262     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{current_read_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{read3} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_read_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00263             \textcolor{vhdlchar}{rdreq3} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; 
+00264     \textcolor{keywordflow}{else}
+00265           \textcolor{vhdlchar}{rdreq3}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00266     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00267 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00268 
+00269 \textcolor{keyword}{--read enable}
+00270 
+00271 \textcolor{keywordflow}{process}(current_readen_state)\textcolor{keywordflow}{begin}
+00272     \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{current_readen_state}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{rd\_en}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00273             \textcolor{vhdlchar}{fifo_read_en}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}; 
+00274     \textcolor{keywordflow}{else}
+00275           \textcolor{vhdlchar}{fifo_read_en}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00276     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00277 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00278 
+00279 
+00280 \textcolor{keyword}{--rd\_en\_cnt}
+00281 
+00282 \textcolor{keywordflow}{process}(fifo_rclk, reset_n) \textcolor{keywordflow}{begin}
+00283     \textcolor{keywordflow}{if}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+00284         \textcolor{vhdlchar}{rd_en_cnt} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00285     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_rclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_rclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00286         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rdreq}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{<}\textcolor{vhdlchar}{valid_en_limit} \textcolor{keywordflow}{then} 
+00287           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{rd_en_cnt}\textcolor{vhdlchar}{<}\textcolor{vhdlchar}{decopr_min}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{then} 
+00288              \textcolor{vhdlchar}{rd_en_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rd_en_cnt}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00289           \textcolor{keywordflow}{else} 
+00290             \textcolor{vhdlchar}{rd_en_cnt} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00291           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00292         \textcolor{keywordflow}{else} 
+00293           \textcolor{vhdlchar}{rd_en_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rd_en_cnt};
+00294         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00295     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00296 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00297 
+00298 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00299 \textcolor{keyword}{--read en state machine}
+00300 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00301 readen\_fsm\_f : \textcolor{keywordflow}{process}(fifo_rclk, reset_n) \textcolor{keywordflow}{begin}
+00302     \textcolor{keywordflow}{if}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+00303         \textcolor{vhdlchar}{current_readen_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{rd\_en};
+00304     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_rclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_rclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00305         \textcolor{vhdlchar}{current_readen_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{next_readen_state};
+00306     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00307 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00308 
+00309 readen\_fsm : \textcolor{keywordflow}{process}(current_readen_state, decompr_wusedw, rd_en_cnt, decopr_min)
+00310 \textcolor{vhdlkeyword}{begin}
+00311   
+00312     \textcolor{vhdlchar}{next_readen_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{current_readen_state};
+00313     
+00314     \textcolor{keywordflow}{case} \textcolor{vhdlchar}{current_readen_state} \textcolor{keywordflow}{is}
+00315 
+00316       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{rd\_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}
+00317 \textcolor{keyword}{        --if rd\_en\_cnt=decopr\_min-1 and unsigned(decompr\_wusedw)>=254 then}
+00318         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{rd_en_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{decopr_min}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{and} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{decompr_wusedw}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{>=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{498} \textcolor{keywordflow}{then}\textcolor{keyword}{ --249 }
+00319             \textcolor{vhdlchar}{next_readen_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wait\_rd};
+00320         \textcolor{keywordflow}{else}
+00321             \textcolor{vhdlchar}{next_readen_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rd\_en}; 
+00322         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00323       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{wait\_rd}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}
+00324 \textcolor{keyword}{                --if  unsigned(decompr\_wusedw)<254 then}
+00325                 \textcolor{keywordflow}{if}  \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{decompr_wusedw}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{498} \textcolor{keywordflow}{then}  
+00326                     \textcolor{vhdlchar}{next_readen_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rd\_en};    
+00327                 \textcolor{keywordflow}{else}
+00328                     \textcolor{vhdlchar}{next_readen_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wait\_rd};
+00329                 \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};  
+00330       \textcolor{keywordflow}{when} \textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} 
+00331       \textcolor{keywordflow}{end} \textcolor{keywordflow}{case};
+00332 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process}; 
+00333 
+00334 
+00335 
+00336 
+00337 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00338 \textcolor{keyword}{--fifo read state machine}
+00339 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00340 read\_fsm\_f : \textcolor{keywordflow}{process}(fifo_rclk, reset_n) \textcolor{keywordflow}{begin}
+00341     \textcolor{keywordflow}{if}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+00342         \textcolor{vhdlchar}{current_read_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{idle};
+00343     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_rclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_rclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00344         \textcolor{vhdlchar}{current_read_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{next_read_state};
+00345     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00346 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00347 
+00348 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00349 \textcolor{keyword}{--fifo read machine combo}
+00350 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00351 read\_fsm : \textcolor{keywordflow}{process}(current_read_state, fifo0_data_rdy, fifo1_data_rdy, 
+      fifo2_data_rdy, fifo3_data_rdy,
+00352                             fifo_rd_cnt, pct_samplenr, fifo0_samplenr_d1, 
+      fifo1_samplenr_d1, fifo2_samplenr_d1, fifo3_samplenr_d1, lte_synch_dis,
+00353                             fifo0_pctrsvd_d1(\textcolor{vhdllogic}{4}), fifo1_pctrsvd_d1(\textcolor{vhdllogic}{4}), 
+      fifo2_pctrsvd_d1(\textcolor{vhdllogic}{4}), fifo3_pctrsvd_d1(\textcolor{vhdllogic}{4})) 
+00354 \textcolor{vhdlkeyword}{begin}
+00355     \textcolor{vhdlchar}{next_read_state} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{current_read_state};
+00356     
+00357     \textcolor{keywordflow}{case} \textcolor{vhdlchar}{current_read_state} \textcolor{keywordflow}{is}
+00358       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{idle} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}
+00359         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo0_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}  \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo0_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo0_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00360             \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read0};
+00361         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo1_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}  \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo1_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo1_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00362             \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read1};
+00363         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo2_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}  \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo2_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo2_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00364             \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read2}; 
+00365          \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo3_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}  \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo3_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo3_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00366             \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read3};             
+00367         \textcolor{keywordflow}{else}
+00368             \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00369         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00370         
+00371       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{read0} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} 
+00372 \textcolor{keyword}{           --if fifo\_rd\_cnt=pct\_size-9 then --??}
+00373            \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}\textcolor{keyword}{ --??}
+00374               \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo1_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo1_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo1_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00375                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read1};
+00376               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo2_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo2_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo2_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00377                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read2};
+00378                  \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo3_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo3_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo3_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00379                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read3};
+00380               \textcolor{keywordflow}{else}
+00381                \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00382               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};     
+00383            \textcolor{keywordflow}{else} 
+00384               \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read0};
+00385           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00386           
+00387       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{read1} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}   
+00388 \textcolor{keyword}{          --if fifo\_rd\_cnt=pct\_size-9 then --??}
+00389           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}\textcolor{keyword}{ --??}
+00390               \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo2_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo2_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo2_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00391                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read2};
+00392                   \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo3_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo3_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo3_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00393                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read3}; 
+00394               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo0_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}  \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo0_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo0_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00395                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read0};
+00396               \textcolor{keywordflow}{else}
+00397                \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00398               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};   
+00399           \textcolor{keywordflow}{else} 
+00400               \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read1};
+00401           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00402              
+00403       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{read2} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}   
+00404 \textcolor{keyword}{          --if fifo\_rd\_cnt=pct\_size-9 then --??}
+00405           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}\textcolor{keyword}{ --??}
+00406                   \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo3_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo3_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo3_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00407                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read3};
+00408               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo0_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo0_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo0_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00409                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read0};
+00410               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo1_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo1_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo1_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00411                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read1};
+00412               \textcolor{keywordflow}{else}
+00413                \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00414               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};   
+00415           \textcolor{keywordflow}{else} 
+00416               \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read2};
+00417           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00418              
+00419         \textcolor{keywordflow}{when} \textcolor{vhdlchar}{read3} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}   
+00420 \textcolor{keyword}{          --if fifo\_rd\_cnt=pct\_size-9 then --??}
+00421           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}\textcolor{keyword}{ --??}
+00422               \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo0_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo0_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo0_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00423                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read0};
+00424               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo1_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo1_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo1_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00425                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read1};
+00426                   \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{fifo2_data_rdy}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{(}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo2_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{fifo2_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00427                 \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read2}; 
+00428               \textcolor{keywordflow}{else}
+00429                \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00430               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};   
+00431           \textcolor{keywordflow}{else} 
+00432               \textcolor{vhdlchar}{next_read_state}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{read3};
+00433           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00434              
+00435       \textcolor{keywordflow}{when} \textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} 
+00436       \textcolor{keywordflow}{end} \textcolor{keywordflow}{case};
+00437 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00438 
+00439 
+00440 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00441 \textcolor{keyword}{--fifo select state machine}
+00442 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00443 fifo\_fsm\_f : \textcolor{keywordflow}{process}(fifo_wclk, reset_n_fifo_wclk) \textcolor{keywordflow}{begin}
+00444     \textcolor{keywordflow}{if}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{reset_n_fifo_wclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+00445         \textcolor{vhdlchar}{current_fifo_st} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{idle};
+00446     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_wclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_wclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then} 
+00447         \textcolor{vhdlchar}{current_fifo_st} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{nex_fifo_st};
+00448     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00449 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00450 
+00451 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00452 \textcolor{keyword}{--fifo state machine combo}
+00453 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00454 fifo\_fsm : \textcolor{keywordflow}{process}(current_fifo_st, wrempty0, wrempty1, wrempty2, wrempty3, 
+      wrreq_cnt) 
+00455 \textcolor{vhdlkeyword}{begin}
+00456     \textcolor{vhdlchar}{nex_fifo_st} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{current_fifo_st};
+00457     
+00458     \textcolor{keywordflow}{case} \textcolor{vhdlchar}{current_fifo_st} \textcolor{keywordflow}{is}
+00459       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{idle} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}
+00460             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrempty0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00461               \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check0};
+00462             \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00463               \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check1};
+00464             \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00465                \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check2};
+00466             \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty3}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00467                \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check3};                     
+00468             \textcolor{keywordflow}{else} 
+00469               \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00470             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00471             
+00472       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{check0} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{ -- select fifo0 for writting}
+00473 \textcolor{keyword}{                --if wrreq\_cnt=pct\_size-1  then}
+00474             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1}  \textcolor{keywordflow}{then} 
+00475               \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrempty1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00476                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check1};
+00477               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00478                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check2};
+00479                   \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty3}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00480                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check3};
+00481               \textcolor{keywordflow}{else}
+00482                  \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00483               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};  
+00484             \textcolor{keywordflow}{else}
+00485               \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check0};
+00486              \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00487               
+00488       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{check1} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{ -- select fifo1 for writting}
+00489 \textcolor{keyword}{            --if wrreq\_cnt=pct\_size-1 then }
+00490                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1} \textcolor{keywordflow}{then}
+00491               \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrempty2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00492                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check2};
+00493                   \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty3}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00494                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check3};  
+00495               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00496                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check0};
+00497               \textcolor{keywordflow}{else}
+00498                  \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00499               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00500             \textcolor{keywordflow}{else}
+00501               \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check1};
+00502              \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00503              
+00504       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{check2} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{ -- select fifo2 for writting}
+00505 \textcolor{keyword}{            --if wrreq\_cnt=pct\_size-1 then}
+00506                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1} \textcolor{keywordflow}{then}
+00507                  \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrempty3}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00508                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check3};  
+00509               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00510                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check0};
+00511               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00512                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check1};
+00513               \textcolor{keywordflow}{else}
+00514                  \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00515               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00516             \textcolor{keywordflow}{else}
+00517               \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check2};
+00518             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00519 
+00520 
+00521       \textcolor{keywordflow}{when} \textcolor{vhdlchar}{check3} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{keyword}{ -- select fifo3 for writting}
+00522 \textcolor{keyword}{            --if wrreq\_cnt=pct\_size-1 then}
+00523                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1} \textcolor{keywordflow}{then}
+00524               \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrempty0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00525                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check0};
+00526               \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00527                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check1};
+00528                   \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{wrempty2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00529                   \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check2};      
+00530               \textcolor{keywordflow}{else}
+00531                  \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{idle};
+00532               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};             
+00533             \textcolor{keywordflow}{else}
+00534               \textcolor{vhdlchar}{nex_fifo_st}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{check3};
+00535             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};                  
+00536         
+00537      \textcolor{keywordflow}{when} \textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}
+00538      \textcolor{keywordflow}{end} \textcolor{keywordflow}{case};
+00539   \textcolor{keywordflow}{end} \textcolor{keywordflow}{process}; 
+00540   
+00541 \textcolor{keyword}{-------------------------------------------------------------------------------    }
+00542 \textcolor{keyword}{ --wrreq counter}
+00543 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00544   \textcolor{keywordflow}{process}(reset_n_fifo_wclk, fifo_wclk)
+00545 \textcolor{vhdlkeyword}{    begin}
+00546       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n_fifo_wclk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00547         \textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}; 
+00548         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_wclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_wclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00549           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_wrreq}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00550 \textcolor{keyword}{              --if wrreq\_cnt<pct\_size-1 then }
+00551                 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{<}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1} \textcolor{keywordflow}{then} 
+00552                   \textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00553               \textcolor{keywordflow}{else} 
+00554                   \textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00555               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00556           \textcolor{keywordflow}{else} 
+00557               \textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{wrreq_cnt};
+00558           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00559         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00560     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00561     
+00562     
+00563 \textcolor{keyword}{-------------------------------------------------------------------------------    }
+00564 \textcolor{keyword}{ --rdreq counter}
+00565 \textcolor{keyword}{------------------------------------------------------------------------------- }
+00566   \textcolor{keywordflow}{process}(reset_n, fifo_rclk)
+00567 \textcolor{vhdlkeyword}{    begin}
+00568       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00569         \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}; 
+00570 \textcolor{keyword}{          --pct\_samplenr\_d0<=(others=>'0');}
+00571 \textcolor{keyword}{          --pct\_samplenr\_d1<=(others=>'0');}
+00572           
+00573            \textcolor{vhdlchar}{fifo0_samplenr_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00574             \textcolor{vhdlchar}{fifo1_samplenr_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00575             \textcolor{vhdlchar}{fifo2_samplenr_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00576             \textcolor{vhdlchar}{fifo3_samplenr_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00577             
+00578             
+00579             \textcolor{vhdlchar}{fifo0_samplenr_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00580             \textcolor{vhdlchar}{fifo1_samplenr_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00581             \textcolor{vhdlchar}{fifo2_samplenr_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00582             \textcolor{vhdlchar}{fifo3_samplenr_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00583             
+00584             \textcolor{vhdlchar}{fifo0_pctrsvd_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00585             \textcolor{vhdlchar}{fifo1_pctrsvd_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00586             \textcolor{vhdlchar}{fifo2_pctrsvd_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00587             \textcolor{vhdlchar}{fifo3_pctrsvd_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00588             
+00589             \textcolor{vhdlchar}{fifo0_pctrsvd_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00590             \textcolor{vhdlchar}{fifo1_pctrsvd_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00591             \textcolor{vhdlchar}{fifo2_pctrsvd_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00592             \textcolor{vhdlchar}{fifo3_pctrsvd_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00593             
+00594         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_rclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_rclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00595 \textcolor{keyword}{            --synchronize pct\_samplenr to fifo\_rclk}
+00596 \textcolor{keyword}{           --pct\_samplenr\_d0<=pct\_samplenr;}
+00597 \textcolor{keyword}{            --pct\_samplenr\_d1<=pct\_samplenr\_d0;}
+00598 \textcolor{keyword}{            --synchronize fifox\_samplenr to fifo\_rclk}
+00599             \textcolor{vhdlchar}{fifo0_samplenr_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo0_samplenr};
+00600             \textcolor{vhdlchar}{fifo1_samplenr_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo1_samplenr};
+00601             \textcolor{vhdlchar}{fifo2_samplenr_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo2_samplenr};
+00602             \textcolor{vhdlchar}{fifo3_samplenr_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo3_samplenr};
+00603             
+00604             \textcolor{vhdlchar}{fifo0_samplenr_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo0_samplenr_d0};
+00605             \textcolor{vhdlchar}{fifo1_samplenr_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo1_samplenr_d0};
+00606             \textcolor{vhdlchar}{fifo2_samplenr_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo2_samplenr_d0};
+00607             \textcolor{vhdlchar}{fifo3_samplenr_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo3_samplenr_d0};
+00608             
+00609             \textcolor{vhdlchar}{fifo0_pctrsvd_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo0_pctrsvd};
+00610             \textcolor{vhdlchar}{fifo1_pctrsvd_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo1_pctrsvd};
+00611             \textcolor{vhdlchar}{fifo2_pctrsvd_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo2_pctrsvd};
+00612             \textcolor{vhdlchar}{fifo3_pctrsvd_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo3_pctrsvd};
+00613             
+00614             \textcolor{vhdlchar}{fifo0_pctrsvd_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo0_pctrsvd_d0};
+00615             \textcolor{vhdlchar}{fifo1_pctrsvd_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo1_pctrsvd_d0};
+00616             \textcolor{vhdlchar}{fifo2_pctrsvd_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo2_pctrsvd_d0};
+00617             \textcolor{vhdlchar}{fifo3_pctrsvd_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo3_pctrsvd_d0};
+00618             
+00619           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rdreq}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00620 \textcolor{keyword}{              --if fifo\_rd\_cnt<pct\_size-9 then }
+00621               \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{<}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{2-1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00622                   \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00623               \textcolor{keywordflow}{else} 
+00624                   \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00625               \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00626           \textcolor{keywordflow}{else} 
+00627               \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo_rd_cnt};
+00628           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00629         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00630     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00631     
+00632     
+00633     
+00634 \textcolor{keyword}{-------------------------------------------------------------------------------    }
+00635 \textcolor{keyword}{--to store sample nr}
+00636 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00637   \textcolor{keywordflow}{process}(reset_n_fifo_wclk, fifo_wclk)
+00638 \textcolor{vhdlkeyword}{    begin}
+00639       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n_fifo_wclk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00640         \textcolor{vhdlchar}{fifo0_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00641         \textcolor{vhdlchar}{fifo1_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00642         \textcolor{vhdlchar}{fifo2_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00643           \textcolor{vhdlchar}{fifo3_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00644         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_wclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_wclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00645          
+00646 \textcolor{keyword}{          --fifo0}
+00647 \textcolor{keyword}{--        if (wrreq\_cnt=4 and current\_fifo\_st=check0) then }
+00648 \textcolor{keyword}{--          fifo0\_samplenr(15 downto 0) <= fifo\_data;}
+00649 \textcolor{keyword}{--        elsif (wrreq\_cnt=5 and current\_fifo\_st=check0) then}
+00650 \textcolor{keyword}{--          fifo0\_samplenr(31 downto 16) <= fifo\_data;}
+00651 \textcolor{keyword}{--        elsif (wrreq\_cnt=6 and current\_fifo\_st=check0) then}
+00652 \textcolor{keyword}{--          fifo0\_samplenr(47 downto 32) <= fifo\_data; }
+00653 \textcolor{keyword}{--        elsif (wrreq\_cnt=7 and current\_fifo\_st=check0) then}
+00654 \textcolor{keyword}{--          fifo0\_samplenr(63 downto 48) <= fifo\_data;    }
+00655 \textcolor{keyword}{--        else}
+00656           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check0}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00657             \textcolor{vhdlchar}{fifo0_samplenr}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};
+00658           \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check0}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00659             \textcolor{vhdlchar}{fifo0_samplenr}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};    
+00660           \textcolor{keywordflow}{else}
+00661             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{aclr0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00662               \textcolor{vhdlchar}{fifo0_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00663             \textcolor{keywordflow}{else}  
+00664               \textcolor{vhdlchar}{fifo0_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo0_samplenr};
+00665             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00666           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00667             
+00668 \textcolor{keyword}{          --fifo1                 }
+00669 \textcolor{keyword}{--        if (wrreq\_cnt=4 and current\_fifo\_st=check1) then }
+00670 \textcolor{keyword}{--          fifo1\_samplenr(15 downto 0) <= fifo\_data;}
+00671 \textcolor{keyword}{--        elsif (wrreq\_cnt=5 and current\_fifo\_st=check1) then}
+00672 \textcolor{keyword}{--          fifo1\_samplenr(31 downto 16) <= fifo\_data;}
+00673 \textcolor{keyword}{--        elsif (wrreq\_cnt=6 and current\_fifo\_st=check1) then}
+00674 \textcolor{keyword}{--          fifo1\_samplenr(47 downto 32) <= fifo\_data; }
+00675 \textcolor{keyword}{--        elsif (wrreq\_cnt=7 and current\_fifo\_st=check1) then}
+00676 \textcolor{keyword}{--          fifo1\_samplenr(63 downto 48) <= fifo\_data; }
+00677 \textcolor{keyword}{--        else }
+00678           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00679             \textcolor{vhdlchar}{fifo1_samplenr}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};
+00680           \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00681             \textcolor{vhdlchar}{fifo1_samplenr}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data}; 
+00682           \textcolor{keywordflow}{else} 
+00683             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{aclr1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00684               \textcolor{vhdlchar}{fifo1_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00685             \textcolor{keywordflow}{else} 
+00686               \textcolor{vhdlchar}{fifo1_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo1_samplenr};
+00687             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00688           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00689           
+00690 \textcolor{keyword}{          --fifo2           }
+00691 \textcolor{keyword}{--        if (wrreq\_cnt=4 and current\_fifo\_st=check2) then }
+00692 \textcolor{keyword}{--          fifo2\_samplenr(15 downto 0) <= fifo\_data;}
+00693 \textcolor{keyword}{--        elsif (wrreq\_cnt=5 and current\_fifo\_st=check2) then}
+00694 \textcolor{keyword}{--          fifo2\_samplenr(31 downto 16) <= fifo\_data;}
+00695 \textcolor{keyword}{--        elsif (wrreq\_cnt=6 and current\_fifo\_st=check2) then}
+00696 \textcolor{keyword}{--          fifo2\_samplenr(47 downto 32) <= fifo\_data; }
+00697 \textcolor{keyword}{--        elsif (wrreq\_cnt=7 and current\_fifo\_st=check2) then}
+00698 \textcolor{keyword}{--          fifo2\_samplenr(63 downto 48) <= fifo\_data; }
+00699 \textcolor{keyword}{--        else}
+00700           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check2}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00701             \textcolor{vhdlchar}{fifo2_samplenr}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};
+00702           \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check2}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00703             \textcolor{vhdlchar}{fifo2_samplenr}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data}; 
+00704           \textcolor{keywordflow}{else}
+00705             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{aclr2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00706               \textcolor{vhdlchar}{fifo2_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00707             \textcolor{keywordflow}{else}  
+00708               \textcolor{vhdlchar}{fifo2_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo2_samplenr};
+00709             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00710           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00711             
+00712 \textcolor{keyword}{          --fifo3                       }
+00713 \textcolor{keyword}{--        if (wrreq\_cnt=4 and current\_fifo\_st=check3) then }
+00714 \textcolor{keyword}{--          fifo3\_samplenr(15 downto 0) <= fifo\_data;}
+00715 \textcolor{keyword}{--        elsif (wrreq\_cnt=5 and current\_fifo\_st=check3) then}
+00716 \textcolor{keyword}{--          fifo3\_samplenr(31 downto 16) <= fifo\_data;}
+00717 \textcolor{keyword}{--        elsif (wrreq\_cnt=6 and current\_fifo\_st=check3) then}
+00718 \textcolor{keyword}{--          fifo3\_samplenr(47 downto 32) <= fifo\_data; }
+00719 \textcolor{keyword}{--        elsif (wrreq\_cnt=7 and current\_fifo\_st=check3) then}
+00720 \textcolor{keyword}{--          fifo3\_samplenr(63 downto 48) <= fifo\_data; }
+00721 \textcolor{keyword}{--        else}
+00722           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check3}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00723             \textcolor{vhdlchar}{fifo3_samplenr}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};
+00724           \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{3} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check3}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00725             \textcolor{vhdlchar}{fifo3_samplenr}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data}; 
+00726           \textcolor{keywordflow}{else}
+00727             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{aclr3}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00728               \textcolor{vhdlchar}{fifo3_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00729             \textcolor{keywordflow}{else}  
+00730               \textcolor{vhdlchar}{fifo3_samplenr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo3_samplenr};
+00731             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00732           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};           
+00733 
+00734         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00735     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00736      
+00737       
+00738       
+00739 \textcolor{keyword}{-------------------------------------------------------------------------------    }
+00740 \textcolor{keyword}{--to store pct reserved bits}
+00741 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00742   \textcolor{keywordflow}{process}(reset_n_fifo_wclk, fifo_wclk)
+00743 \textcolor{vhdlkeyword}{    begin}
+00744       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n_fifo_wclk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00745         \textcolor{vhdlchar}{fifo0_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00746         \textcolor{vhdlchar}{fifo1_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00747         \textcolor{vhdlchar}{fifo2_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00748           \textcolor{vhdlchar}{fifo3_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00749         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_wclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_wclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00750          
+00751           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check0}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00752             \textcolor{vhdlchar}{fifo0_pctrsvd}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};
+00753           \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check0}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00754             \textcolor{vhdlchar}{fifo0_pctrsvd}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};    
+00755           \textcolor{keywordflow}{else}
+00756             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{aclr0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00757               \textcolor{vhdlchar}{fifo0_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00758             \textcolor{keywordflow}{else}  
+00759               \textcolor{vhdlchar}{fifo0_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo0_pctrsvd};
+00760             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00761           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00762             
+00763           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00764             \textcolor{vhdlchar}{fifo1_pctrsvd}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};
+00765           \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check1}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00766             \textcolor{vhdlchar}{fifo1_pctrsvd}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data}; 
+00767           \textcolor{keywordflow}{else} 
+00768             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{aclr1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00769               \textcolor{vhdlchar}{fifo1_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00770             \textcolor{keywordflow}{else} 
+00771               \textcolor{vhdlchar}{fifo1_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo1_pctrsvd};
+00772             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00773           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00774           
+00775           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check2}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00776             \textcolor{vhdlchar}{fifo2_pctrsvd}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};
+00777           \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check2}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00778             \textcolor{vhdlchar}{fifo2_pctrsvd}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data}; 
+00779           \textcolor{keywordflow}{else}
+00780             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{aclr2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00781               \textcolor{vhdlchar}{fifo2_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00782             \textcolor{keywordflow}{else}  
+00783               \textcolor{vhdlchar}{fifo2_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo2_pctrsvd};
+00784             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00785           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00786             
+00787           \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check3}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00788             \textcolor{vhdlchar}{fifo3_pctrsvd}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data};
+00789           \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check3}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00790             \textcolor{vhdlchar}{fifo3_pctrsvd}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{63} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_data}; 
+00791           \textcolor{keywordflow}{else}
+00792             \textcolor{keywordflow}{if} \textcolor{vhdlchar}{aclr3}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00793               \textcolor{vhdlchar}{fifo3_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00794             \textcolor{keywordflow}{else}  
+00795               \textcolor{vhdlchar}{fifo3_pctrsvd}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo3_pctrsvd};
+00796             \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00797           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};           
+00798 
+00799         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00800     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};      
+00801 
+00802   
+00803 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00804 \textcolor{keyword}{--FIFO buffers for packets}
+00805 \textcolor{keyword}{------------------------------------------------------------------------------  }
+00806   fifo0 :  fifo_inst 
+00807   \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (
+00808             dev_family      => dev_family, 
+00809             wrwidth         => \textcolor{vhdllogic}{32}, 
+00810             wrusedw_witdth  => \textcolor{vhdllogic}{11}, 
+00811             rdwidth         => \textcolor{vhdllogic}{32}, 
+00812             rdusedw_width   => \textcolor{vhdllogic}{11},
+00813             show_ahead      => \textcolor{keyword}{"OFF"}
+00814   \textcolor{vhdlchar}{)}  
+00815   \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00816 \textcolor{keyword}{      --input ports }
+00817       reset_n       => \textcolor{keywordflow}{not} aclr0 , 
+00818       wrclk         => fifo_wclk,
+00819       wrreq         => wrreq0,
+00820       data          => fifo_data, 
+00821       wrfull        => \textcolor{keywordflow}{open},
+00822         wrempty       => wrempty0, 
+00823       wrusedw       => \textcolor{keywordflow}{open},
+00824       rdclk          => fifo_rclk,
+00825       rdreq         => rdreq0,
+00826       q             => q0,
+00827       rdempty       => \textcolor{keywordflow}{open},
+00828       rdusedw       => rdusedw0     
+00829         \textcolor{vhdlchar}{)};
+00830   
+00831     fifo1 :  fifo_inst 
+00832   \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (
+00833             dev_family      => dev_family, 
+00834             wrwidth         => \textcolor{vhdllogic}{32}, 
+00835             wrusedw_witdth  => \textcolor{vhdllogic}{11}, 
+00836             rdwidth         => \textcolor{vhdllogic}{32}, 
+00837             rdusedw_width   => \textcolor{vhdllogic}{11},
+00838             show_ahead      => \textcolor{keyword}{"OFF"}
+00839   \textcolor{vhdlchar}{)}  
+00840   \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00841 \textcolor{keyword}{      --input ports }
+00842       reset_n       => \textcolor{keywordflow}{not} aclr1 , 
+00843       wrclk         => fifo_wclk,
+00844       wrreq         => wrreq1,
+00845       data          => fifo_data, 
+00846       wrfull        => \textcolor{keywordflow}{open},
+00847         wrempty       => wrempty1, 
+00848       wrusedw       => \textcolor{keywordflow}{open},
+00849       rdclk          => fifo_rclk,
+00850       rdreq         => rdreq1,
+00851       q             => q1,
+00852       rdempty       => \textcolor{keywordflow}{open},
+00853       rdusedw       => rdusedw1     
+00854         \textcolor{vhdlchar}{)};
+00855   
+00856   
+00857   
+00858       fifo2 :  fifo_inst 
+00859   \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (
+00860             dev_family      => dev_family, 
+00861             wrwidth         => \textcolor{vhdllogic}{32}, 
+00862             wrusedw_witdth  => \textcolor{vhdllogic}{11}, 
+00863             rdwidth         => \textcolor{vhdllogic}{32}, 
+00864             rdusedw_width   => \textcolor{vhdllogic}{11},
+00865             show_ahead      => \textcolor{keyword}{"OFF"}
+00866   \textcolor{vhdlchar}{)}  
+00867   \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00868 \textcolor{keyword}{      --input ports }
+00869       reset_n       => \textcolor{keywordflow}{not} aclr2 , 
+00870       wrclk         => fifo_wclk,
+00871       wrreq         => wrreq2,
+00872       data          => fifo_data, 
+00873       wrfull        => \textcolor{keywordflow}{open},
+00874         wrempty       => wrempty2, 
+00875       wrusedw       => \textcolor{keywordflow}{open},
+00876       rdclk          => fifo_rclk,
+00877       rdreq         => rdreq2,
+00878       q             => q2,
+00879       rdempty       => \textcolor{keywordflow}{open},
+00880       rdusedw       => rdusedw2     
+00881         \textcolor{vhdlchar}{)};
+00882 
+00883 
+00884     fifo3 :  fifo_inst 
+00885   \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (
+00886             dev_family      => dev_family, 
+00887             wrwidth         => \textcolor{vhdllogic}{32}, 
+00888             wrusedw_witdth  => \textcolor{vhdllogic}{11}, 
+00889             rdwidth         => \textcolor{vhdllogic}{32}, 
+00890             rdusedw_width   => \textcolor{vhdllogic}{11},
+00891             show_ahead      => \textcolor{keyword}{"OFF"}
+00892   \textcolor{vhdlchar}{)}  
+00893   \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00894 \textcolor{keyword}{      --input ports }
+00895       reset_n       => \textcolor{keywordflow}{not} aclr3 , 
+00896       wrclk         => fifo_wclk,
+00897       wrreq         => wrreq3,
+00898       data          => fifo_data, 
+00899       wrfull        => \textcolor{keywordflow}{open},
+00900         wrempty       => wrempty3, 
+00901       wrusedw       => \textcolor{keywordflow}{open},
+00902       rdclk          => fifo_rclk,
+00903       rdreq         => rdreq3,
+00904       q             => q3,
+00905       rdempty       => \textcolor{keywordflow}{open},
+00906       rdusedw       => rdusedw3     
+00907         \textcolor{vhdlchar}{)};
+00908   
+00909 \textcolor{keyword}{--   rdusedw\_mux<=rdusedw0 when current\_read\_state=read0 else }
+00910 \textcolor{keyword}{--                rdusedw1 when current\_read\_state=read1 else }
+00911 \textcolor{keyword}{--                rdusedw2 when current\_read\_state=read2 else }
+00912 \textcolor{keyword}{--                rdusedw3;}
+00913 
+00914 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00915 \textcolor{keyword}{--misc combinational signals}
+00916 \textcolor{keyword}{------------------------------------------------------------------------------   }
+00917 \textcolor{vhdlchar}{tx_outfifo_rdy}  \textcolor{vhdlchar}{<=}  \textcolor{vhdlchar}{wrempty0} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{wrempty1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{wrempty2} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{wrempty3} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{wr_status};
+00918 \textcolor{vhdlchar}{wr_status}       \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{when} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{>}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00919 \textcolor{keyword}{--wreq\_en           <= '1' when  (wrreq\_cnt>=8) else '0'; }
+00920 \textcolor{vhdlchar}{wreq_en}         \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{when}  \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{wrreq_cnt}\textcolor{vhdlchar}{>=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}; 
+00921     
+00922 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00923 \textcolor{keyword}{--FIFO wrreq demux}
+00924 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00925 \textcolor{vhdlchar}{wrreq0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_wrreq} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wreq_en}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check0} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00926 \textcolor{vhdlchar}{wrreq1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_wrreq} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wreq_en}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check1} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00927 \textcolor{vhdlchar}{wrreq2}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_wrreq} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wreq_en}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check2} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00928 \textcolor{vhdlchar}{wrreq3}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_wrreq} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{wreq_en}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{current_fifo_st}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{check3} \textcolor{keywordflow}{else} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00929 
+00930 
+00931   \textcolor{keywordflow}{process}(reset_n, fifo_rclk)
+00932 \textcolor{vhdlkeyword}{    begin}
+00933       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00934         \textcolor{vhdlchar}{decompr_wr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00935       \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_rclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_rclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00936         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rd_cnt}\textcolor{vhdlchar}{<}\textcolor{vhdlchar}{valid_en_limit} \textcolor{keywordflow}{then}         
+00937           \textcolor{vhdlchar}{decompr_wr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{fifo_rdreq};
+00938         \textcolor{keywordflow}{else} 
+00939           \textcolor{vhdlchar}{decompr_wr}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00940         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00941       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+00942    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00943 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00944 \textcolor{keyword}{--FIFO aclr}
+00945 \textcolor{keyword}{-------------------------------------------------------------------------------}
+00946   \textcolor{keywordflow}{process}(reset_n, fifo_rclk)
+00947 \textcolor{vhdlkeyword}{    begin}
+00948       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00949         \textcolor{vhdlchar}{aclr0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00950         \textcolor{vhdlchar}{aclr1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00951         \textcolor{vhdlchar}{aclr2}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00952           \textcolor{vhdlchar}{aclr3}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00953         \textcolor{vhdlchar}{rdusedw0_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00954         \textcolor{vhdlchar}{rdusedw1_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}; 
+00955         \textcolor{vhdlchar}{rdusedw2_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}; 
+00956           \textcolor{vhdlchar}{rdusedw3_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00957         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_rclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_rclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00958 
+00959          \textcolor{vhdlchar}{rdusedw0_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rdusedw0};
+00960         \textcolor{vhdlchar}{rdusedw1_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rdusedw1};
+00961         \textcolor{vhdlchar}{rdusedw2_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rdusedw2};
+00962           \textcolor{vhdlchar}{rdusedw3_reg}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rdusedw3};
+00963          
+00964 \textcolor{keyword}{            --fifo0}
+00965 \textcolor{keyword}{          --if unsigned(rdusedw0)=pct\_size-8 and unsigned(fifo0\_samplenr\_d1)<unsigned(pct\_samplenr) and
+       rdreq0='0' and lte\_synch\_dis='0' then }
+00966            \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdusedw0}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo0_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{rdreq0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo0_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}   
+00967               \textcolor{vhdlchar}{aclr0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00968           \textcolor{keywordflow}{else} 
+00969               \textcolor{vhdlchar}{aclr0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00970           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00971           
+00972 \textcolor{keyword}{            --fifo1}
+00973 \textcolor{keyword}{          --if unsigned(rdusedw1)=pct\_size-8 and unsigned(fifo1\_samplenr\_d1)<unsigned(pct\_samplenr) and
+       rdreq1='0' and lte\_synch\_dis='0' then }
+00974             \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdusedw1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo1_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{rdreq1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo1_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}   
+00975               \textcolor{vhdlchar}{aclr1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00976           \textcolor{keywordflow}{else} 
+00977               \textcolor{vhdlchar}{aclr1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00978           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00979           
+00980 \textcolor{keyword}{            --fifo2}
+00981 \textcolor{keyword}{          --if unsigned(rdusedw2)=pct\_size-8 and unsigned(fifo2\_samplenr\_d1)<unsigned(pct\_samplenr) and
+       rdreq2='0' and lte\_synch\_dis='0' then }
+00982             \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdusedw2}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo2_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{rdreq2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo2_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}   
+00983               \textcolor{vhdlchar}{aclr2}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00984           \textcolor{keywordflow}{else} 
+00985               \textcolor{vhdlchar}{aclr2}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00986           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00987             
+00988 \textcolor{keyword}{            --fifo3}
+00989 \textcolor{keyword}{            --if unsigned(rdusedw3)=pct\_size-8 and unsigned(fifo3\_samplenr\_d1)<unsigned(pct\_samplenr) and
+       rdreq3='0' and lte\_synch\_dis='0' then }
+00990           \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdusedw3}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo3_samplenr_d1}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{<}\textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{
+      pct_samplenr}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{rdreq3}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{lte_synch_dis}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo3_pctrsvd_d1}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}     
+00991               \textcolor{vhdlchar}{aclr3}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00992           \textcolor{keywordflow}{else} 
+00993               \textcolor{vhdlchar}{aclr3}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00994           \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00995           
+00996         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00997     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00998     
+00999 \textcolor{keyword}{-------------------------------------------------------------------------------}
+01000 \textcolor{keyword}{--FIFO read ready}
+01001 \textcolor{keyword}{-------------------------------------------------------------------------------    }
+01002     
+01003   \textcolor{keywordflow}{process}(reset_n, fifo_rclk)
+01004 \textcolor{vhdlkeyword}{    begin}
+01005       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+01006 
+01007         \textcolor{vhdlchar}{fifo0_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+01008         \textcolor{vhdlchar}{fifo1_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+01009         \textcolor{vhdlchar}{fifo2_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+01010           \textcolor{vhdlchar}{fifo3_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+01011         \textcolor{vhdlchar}{tx_mux_sel_d}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+01012         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_rclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_rclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+01013         \textcolor{vhdlchar}{tx_mux_sel_d}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{tx_mux_sel};
+01014           
+01015 \textcolor{keyword}{          --fifo0}
+01016 \textcolor{keyword}{        --if unsigned(rdusedw0\_reg)=pct\_size-8 and aclr0='0' then }
+01017         \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdusedw0_reg}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{aclr0}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+01018             \textcolor{vhdlchar}{fifo0_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+01019         \textcolor{keywordflow}{else} 
+01020             \textcolor{vhdlchar}{fifo0_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+01021         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+01022         
+01023 \textcolor{keyword}{          --fifo1}
+01024 \textcolor{keyword}{        --if unsigned(rdusedw1\_reg)=pct\_size-8 and aclr1='0' then}
+01025         \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdusedw1_reg}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{aclr1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+01026             \textcolor{vhdlchar}{fifo1_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+01027         \textcolor{keywordflow}{else} 
+01028             \textcolor{vhdlchar}{fifo1_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+01029         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+01030           
+01031 \textcolor{keyword}{        --fifo2}
+01032 \textcolor{keyword}{        --if unsigned(rdusedw2\_reg)=pct\_size-8 and aclr2='0' then}
+01033         \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdusedw2_reg}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{aclr2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+01034             \textcolor{vhdlchar}{fifo2_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+01035         \textcolor{keywordflow}{else} 
+01036             \textcolor{vhdlchar}{fifo2_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+01037         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+01038           
+01039 \textcolor{keyword}{          --fifo3}
+01040 \textcolor{keyword}{          --if unsigned(rdusedw3\_reg)=pct\_size-8 and aclr3='0' then}
+01041           \textcolor{keywordflow}{if} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdusedw3_reg}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{pct_size}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{8}\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{/}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{aclr3}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+01042             \textcolor{vhdlchar}{fifo3_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+01043         \textcolor{keywordflow}{else} 
+01044             \textcolor{vhdlchar}{fifo3_data_rdy}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+01045         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+01046           
+01047         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+01048     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+01049      
+01050 \textcolor{keyword}{-------------------------------------------------------------------------------}
+01051 \textcolor{keyword}{--TX mux and mux sel signal}
+01052 \textcolor{keyword}{-------------------------------------------------------------------------------  }
+01053    \textcolor{vhdlchar}{tx_mux_sel}\textcolor{vhdlchar}{<=}\textcolor{vhdllogic}{"11"} \textcolor{keywordflow}{when}   \textcolor{vhdlchar}{rdreq3}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else}
+01054                     \textcolor{vhdllogic}{"10"} \textcolor{keywordflow}{when}   \textcolor{vhdlchar}{rdreq2}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else}                         
+01055                \textcolor{vhdllogic}{"01"} \textcolor{keywordflow}{when}    \textcolor{vhdlchar}{rdreq1}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else}
+01056                \textcolor{vhdllogic}{"00"};
+01057               
+01058     \textcolor{vhdlchar}{compressed_data}\textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{q0} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{tx_mux_sel_d}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"00"} \textcolor{keywordflow}{else}
+01059                 \textcolor{vhdlchar}{q1} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{tx_mux_sel_d}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"01"} \textcolor{keywordflow}{else}
+01060                 \textcolor{vhdlchar}{q2} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{tx_mux_sel_d}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"10"} \textcolor{keywordflow}{else}
+01061                 \textcolor{vhdlchar}{q3};
+01062                       
+01063                   
+01064 \textcolor{vhdlchar}{aclr}\textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{aclr0} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{aclr1} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{aclr2} \textcolor{keywordflow}{or} \textcolor{vhdlchar}{aclr3};
+01065 \textcolor{vhdlchar}{tst_aclr_ext}\textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{aclr};
+01066 
+01067 
+01068 dcmpr :  decompress 
+01069   \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map}  (
+01070                     dev_family => dev_family,
+01071                     data_width => \textcolor{vhdllogic}{32},
+01072                fifo_rsize => dcmpr\_fifo+2,
+01073                     fifo_wsize => dcmpr_fifo
+01074                     \textcolor{vhdlchar}{)}
+01075   \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+01076 \textcolor{keyword}{        --input ports }
+01077         wclk          => fifo_rclk,  
+01078         rclk          => fifo_rclk, 
+01079         reset_n       => reset_n, 
+01080         data_in       => compressed_data, 
+01081         data_in_valid => decompr_wr, 
+01082         sample_width  => sample_width,
+01083         rdreq         => fifo_rreq,
+01084         rdempty       => fifo_rdempty,
+01085         rdusedw       => \textcolor{keywordflow}{open}, 
+01086         wfull         => \textcolor{keywordflow}{open}, 
+01087         wusedw        => decompr_wusedw,
+01088         dataout_valid => \textcolor{keywordflow}{open},  
+01089         decmpr_data   => fifo_q     
+01090         \textcolor{vhdlchar}{)};
+01091  
+01092         
+01093         
+01094 \textcolor{keyword}{-------------------------------------------------------------------------------}
+01095 \textcolor{keyword}{--sample counter}
+01096 \textcolor{keyword}{-------------------------------------------------------------------------------}
+01097 \textcolor{keywordflow}{process}(fifo_rclk, reset_n) \textcolor{keywordflow}{begin}
+01098     \textcolor{keywordflow}{if}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+01099         \textcolor{vhdlchar}{rd_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+01100     \textcolor{keywordflow}{elsif}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{fifo_rclk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{fifo_rclk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}\textcolor{keywordflow}{then}
+01101         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rreq}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}       
+01102             \textcolor{vhdlchar}{rd_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rd_cnt}\textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+01103             \textcolor{keywordflow}{else} 
+01104             \textcolor{vhdlchar}{rd_cnt}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rd_cnt};
+01105         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+01106     \textcolor{keywordflow}{end} \textcolor{keywordflow}{if}; 
+01107 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+01108 
+01109 
+01110 rd_fifo : rd_tx_fifo 
+01111   \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map} (sampl_width =>\textcolor{vhdllogic}{12}\textcolor{vhdlchar}{)}
+01112   \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+01113       clk           => fifo_rclk,
+01114       reset_n       => reset_n, 
+01115       fr_start      => fr_start, 
+01116       ch_en         => ch_en,
+01117       mimo_en       => mimo_en,
+01118       fifo_empty    => fifo_rdempty,
+01119       fifo_data => fifo_q, 
+01120       fifo_read => fifo_rreq, 
+01121       diq_h         => diq_h, 
+01122       diq_l         => diq_l
+01123         \textcolor{vhdlchar}{)};
+01124 
+01125 \textcolor{vhdlchar}{dd_data_h}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{diq_l}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{smpl_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+01126 \textcolor{vhdlchar}{dd_data_l}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{diq_h}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{smpl_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+01127 
+01128         
+01129 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+01130 
+01131 
+01132 
+01133 
+\end{DoxyCode}

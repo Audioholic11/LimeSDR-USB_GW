@@ -1,0 +1,186 @@
+\subsection{arch Architecture Reference}
+\label{classgpio__chirp__sync__FSM_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{da/d43/classgpio__chirp__sync__FSM_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf enable\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf load\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf trig\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf u\+\_\+d\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm\+\_\+f}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf sig}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf state\+\_\+type}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{A}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{B}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{C}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{D}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf enable\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf load\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf trig\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf u\+\_\+d\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 35} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!enable\+\_\+proc@{enable\+\_\+proc}}
+\index{enable\+\_\+proc@{enable\+\_\+proc}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{enable\+\_\+procclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} enable\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classgpio__chirp__sync__FSM_1_1arch_abb71a83e9fd46eac6a77f651e3e04607}
+
+
+Definition at line {\bf 52} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!fsm@{fsm}}
+\index{fsm@{fsm}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{fsmcurrent\+\_\+state,sig,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf sig}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classgpio__chirp__sync__FSM_1_1arch_a7537bd2aaf292a584051925ddac43031}
+
+
+Definition at line {\bf 132} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!fsm\+\_\+f@{fsm\+\_\+f}}
+\index{fsm\+\_\+f@{fsm\+\_\+f}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{fsm\+\_\+fclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm\+\_\+f(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classgpio__chirp__sync__FSM_1_1arch_a856d95a9c7e9538caf6d13ffdaa470a3}
+
+
+Definition at line {\bf 121} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!load\+\_\+proc@{load\+\_\+proc}}
+\index{load\+\_\+proc@{load\+\_\+proc}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{load\+\_\+procclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} load\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classgpio__chirp__sync__FSM_1_1arch_a8a5921cbde5c7b45c91deef8d5d44332}
+
+
+Definition at line {\bf 70} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!trig\+\_\+proc@{trig\+\_\+proc}}
+\index{trig\+\_\+proc@{trig\+\_\+proc}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{trig\+\_\+procclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} trig\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classgpio__chirp__sync__FSM_1_1arch_a0b3c5dd41b252f9ab6ec176e0dab0aa9}
+
+
+Definition at line {\bf 89} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!u\+\_\+d\+\_\+proc@{u\+\_\+d\+\_\+proc}}
+\index{u\+\_\+d\+\_\+proc@{u\+\_\+d\+\_\+proc}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{u\+\_\+d\+\_\+procclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} u\+\_\+d\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classgpio__chirp__sync__FSM_1_1arch_a9140af0251e2dff514acb7050fe0cfaf}
+
+
+Definition at line {\bf 107} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!current\+\_\+state@{current\+\_\+state}}
+\index{current\+\_\+state@{current\+\_\+state}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classgpio__chirp__sync__FSM_1_1arch_a7ede5b91aac1f3d1b2a884a5e191d554}
+
+
+Definition at line {\bf 39} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!enable\+\_\+sig@{enable\+\_\+sig}}
+\index{enable\+\_\+sig@{enable\+\_\+sig}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{enable\+\_\+sig}]{\setlength{\rightskip}{0pt plus 5cm}{\bf enable\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classgpio__chirp__sync__FSM_1_1arch_a4d718296be32e27ebfff51b1d77498f2}
+
+
+Definition at line {\bf 41} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!load\+\_\+sig@{load\+\_\+sig}}
+\index{load\+\_\+sig@{load\+\_\+sig}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{load\+\_\+sig}]{\setlength{\rightskip}{0pt plus 5cm}{\bf load\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classgpio__chirp__sync__FSM_1_1arch_a7bcdc4390777418db38e6edfd11bd992}
+
+
+Definition at line {\bf 42} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!next\+\_\+state@{next\+\_\+state}}
+\index{next\+\_\+state@{next\+\_\+state}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{next\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classgpio__chirp__sync__FSM_1_1arch_a7b92f98d060e763f3dd6fa727ddb03d8}
+
+
+Definition at line {\bf 39} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!state\+\_\+type@{state\+\_\+type}}
+\index{state\+\_\+type@{state\+\_\+type}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{state\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state\+\_\+type} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{A}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{B}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{C}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{D}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classgpio__chirp__sync__FSM_1_1arch_a8d5b4e16e4a38e00b3e2bb7f0ddeb150}
+
+
+Definition at line {\bf 38} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!trig\+\_\+sig@{trig\+\_\+sig}}
+\index{trig\+\_\+sig@{trig\+\_\+sig}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{trig\+\_\+sig}]{\setlength{\rightskip}{0pt plus 5cm}{\bf trig\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classgpio__chirp__sync__FSM_1_1arch_a116c94bab96431fc5828f4702c69a068}
+
+
+Definition at line {\bf 43} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+\index{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}!u\+\_\+d\+\_\+sig@{u\+\_\+d\+\_\+sig}}
+\index{u\+\_\+d\+\_\+sig@{u\+\_\+d\+\_\+sig}!gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch@{gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M\+::arch}}
+\paragraph[{u\+\_\+d\+\_\+sig}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u\+\_\+d\+\_\+sig} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classgpio__chirp__sync__FSM_1_1arch_afe6e163cf2fa2001428f51ffb4f4c706}
+
+
+Definition at line {\bf 44} of file {\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/gpio\+\_\+chirp\+\_\+sync/{\bf gpio\+\_\+chirp\+\_\+sync\+\_\+\+F\+S\+M.\+vhd}\end{DoxyCompactItemize}

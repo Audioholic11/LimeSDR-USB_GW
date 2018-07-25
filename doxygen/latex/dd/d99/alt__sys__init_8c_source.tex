@@ -1,0 +1,108 @@
+\subsection{alt\+\_\+sys\+\_\+init.\+c}
+\label{alt__sys__init_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/alt\+\_\+sys\+\_\+init.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/alt\+\_\+sys\+\_\+init.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * alt\_sys\_init.c - HAL initialization source}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ * Machine generated for CPU 'nios2\_cpu' in SOPC Builder design 'lms\_ctr'}
+00005 \textcolor{comment}{ * SOPC Builder design path: ../../lms\_ctr.sopcinfo}
+00006 \textcolor{comment}{ *}
+00007 \textcolor{comment}{ * Generated: Thu Mar 30 14:57:08 EEST 2017}
+00008 \textcolor{comment}{ */}
+00009 
+00010 \textcolor{comment}{/*}
+00011 \textcolor{comment}{ * DO NOT MODIFY THIS FILE}
+00012 \textcolor{comment}{ *}
+00013 \textcolor{comment}{ * Changing this file will have subtle consequences}
+00014 \textcolor{comment}{ * which will almost certainly lead to a nonfunctioning}
+00015 \textcolor{comment}{ * system. If you do modify this file, be aware that your}
+00016 \textcolor{comment}{ * changes will be overwritten and lost when this file}
+00017 \textcolor{comment}{ * is generated again.}
+00018 \textcolor{comment}{ *}
+00019 \textcolor{comment}{ * DO NOT MODIFY THIS FILE}
+00020 \textcolor{comment}{ */}
+00021 
+00022 \textcolor{comment}{/*}
+00023 \textcolor{comment}{ * License Agreement}
+00024 \textcolor{comment}{ *}
+00025 \textcolor{comment}{ * Copyright (c) 2008}
+00026 \textcolor{comment}{ * Altera Corporation, San Jose, California, USA.}
+00027 \textcolor{comment}{ * All rights reserved.}
+00028 \textcolor{comment}{ *}
+00029 \textcolor{comment}{ * Permission is hereby granted, free of charge, to any person obtaining a}
+00030 \textcolor{comment}{ * copy of this software and associated documentation files (the "Software"),}
+00031 \textcolor{comment}{ * to deal in the Software without restriction, including without limitation}
+00032 \textcolor{comment}{ * the rights to use, copy, modify, merge, publish, distribute, sublicense,}
+00033 \textcolor{comment}{ * and/or sell copies of the Software, and to permit persons to whom the}
+00034 \textcolor{comment}{ * Software is furnished to do so, subject to the following conditions:}
+00035 \textcolor{comment}{ *}
+00036 \textcolor{comment}{ * The above copyright notice and this permission notice shall be included in}
+00037 \textcolor{comment}{ * all copies or substantial portions of the Software.}
+00038 \textcolor{comment}{ *}
+00039 \textcolor{comment}{ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}
+00040 \textcolor{comment}{ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}
+00041 \textcolor{comment}{ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE}
+00042 \textcolor{comment}{ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}
+00043 \textcolor{comment}{ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING}
+00044 \textcolor{comment}{ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER}
+00045 \textcolor{comment}{ * DEALINGS IN THE SOFTWARE.}
+00046 \textcolor{comment}{ *}
+00047 \textcolor{comment}{ * This agreement shall be governed in all respects by the laws of the State}
+00048 \textcolor{comment}{ * of California and by the laws of the United States of America.}
+00049 \textcolor{comment}{ */}
+00050 
+00051 \textcolor{preprocessor}{#include "system.h"}
+00052 \textcolor{preprocessor}{#include "sys/alt_irq.h"}
+00053 \textcolor{preprocessor}{#include "sys/alt_sys_init.h"}
+00054 
+00055 \textcolor{preprocessor}{#include <stddef.h>}
+00056 
+00057 \textcolor{comment}{/*}
+00058 \textcolor{comment}{ * Device headers}
+00059 \textcolor{comment}{ */}
+00060 
+00061 \textcolor{preprocessor}{#include "altera_nios2_gen2_irq.h"}
+00062 \textcolor{preprocessor}{#include "altera_avalon_spi.h"}
+00063 \textcolor{preprocessor}{#include "altera_avalon_sysid_qsys.h"}
+00064 \textcolor{preprocessor}{#include "i2c\_opencores.h"}
+00065 
+00066 \textcolor{comment}{/*}
+00067 \textcolor{comment}{ * Allocate the device storage}
+00068 \textcolor{comment}{ */}
+00069 
+00070 ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( NIOS2\_CPU, nios2\_cpu);
+00071 ALTERA_AVALON_SPI_INSTANCE ( SPI\_1\_ADF, spi\_1\_ADF);
+00072 ALTERA_AVALON_SPI_INSTANCE ( SPI\_1\_DAC, spi\_1\_DAC);
+00073 ALTERA_AVALON_SPI_INSTANCE ( SPI\_LMS, spi\_lms);
+00074 ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID\_QSYS\_0, sysid\_qsys\_0);
+00075 I2C_OPENCORES_INSTANCE ( I2C\_OPENCORES\_0, i2c\_opencores\_0);
+00076 
+00077 \textcolor{comment}{/*}
+00078 \textcolor{comment}{ * Initialize the interrupt controller devices}
+00079 \textcolor{comment}{ * and then enable interrupts in the CPU.}
+00080 \textcolor{comment}{ * Called before alt\_sys\_init().}
+00081 \textcolor{comment}{ * The "base" parameter is ignored and only}
+00082 \textcolor{comment}{ * present for backwards-compatibility.}
+00083 \textcolor{comment}{ */}
+00084 
+00085 \textcolor{keywordtype}{void} alt_irq_init ( \textcolor{keyword}{const} \textcolor{keywordtype}{void}* base )
+00086 \{
+00087     ALTERA_NIOS2_GEN2_IRQ_INIT ( NIOS2\_CPU, nios2\_cpu);
+00088     alt_irq_cpu_enable_interrupts();
+00089 \}
+00090 
+00091 \textcolor{comment}{/*}
+00092 \textcolor{comment}{ * Initialize the non-interrupt controller devices.}
+00093 \textcolor{comment}{ * Called after alt\_irq\_init().}
+00094 \textcolor{comment}{ */}
+00095 
+00096 \textcolor{keywordtype}{void} alt_sys_init( \textcolor{keywordtype}{void} )
+00097 \{
+00098     ALTERA_AVALON_SPI_INIT ( SPI\_1\_ADF, spi\_1\_ADF);
+00099     ALTERA_AVALON_SPI_INIT ( SPI\_1\_DAC, spi\_1\_DAC);
+00100     ALTERA_AVALON_SPI_INIT ( SPI\_LMS, spi\_lms);
+00101     ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID\_QSYS\_0, sysid\_qsys\_0);
+00102     I2C_OPENCORES_INIT ( I2C\_OPENCORES\_0, i2c\_opencores\_0);
+00103 \}
+\end{DoxyCode}

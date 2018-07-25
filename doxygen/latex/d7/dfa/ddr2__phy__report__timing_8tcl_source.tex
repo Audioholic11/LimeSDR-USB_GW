@@ -1,0 +1,537 @@
+\subsection{ddr2\+\_\+phy\+\_\+report\+\_\+timing.\+tcl}
+\label{ddr2__phy__report__timing_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+phy\+\_\+report\+\_\+timing.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+phy\+\_\+report\+\_\+timing.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{##}
+00002 \textcolor{comment}{}\textcolor{comment}{##Legal Notice: (C)2007 Altera Corporation. All rights reserved. Your}
+00003 \textcolor{comment}{}\textcolor{comment}{##use of Altera Corporation's design tools, logic functions and other}
+00004 \textcolor{comment}{}\textcolor{comment}{##software and tools, and its AMPP partner logic functions, and any}
+00005 \textcolor{comment}{}\textcolor{comment}{##output files any of the foregoing (including device programming or}
+00006 \textcolor{comment}{}\textcolor{comment}{##simulation files), and any associated documentation or information are}
+00007 \textcolor{comment}{}\textcolor{comment}{##expressly subject to the terms and conditions of the Altera Program}
+00008 \textcolor{comment}{}\textcolor{comment}{##License Subscription Agreement or other applicable license agreement,}
+00009 \textcolor{comment}{}\textcolor{comment}{##including, without limitation, that your use is for the sole purpose}
+00010 \textcolor{comment}{}\textcolor{comment}{##of programming logic devices manufactured by Altera and sold by Altera}
+00011 \textcolor{comment}{}\textcolor{comment}{##or its authorized distributors. Please refer to the applicable}
+00012 \textcolor{comment}{}\textcolor{comment}{##agreement for further details.}
+00013 \textcolor{comment}{}
+00014 \textcolor{comment}{##############################################################}
+00015 \textcolor{comment}{}\textcolor{comment}{## This report\_timing script performs the timing analysis for}
+00016 \textcolor{comment}{}\textcolor{comment}{## all memory interfaces in the design.  In particular, this}
+00017 \textcolor{comment}{}\textcolor{comment}{## script will loop over all memory interface cores and}
+00018 \textcolor{comment}{}\textcolor{comment}{## instances and will timing analyze a range of paths that}
+00019 \textcolor{comment}{}\textcolor{comment}{## are applicable for each instance.  These include the}
+00020 \textcolor{comment}{}\textcolor{comment}{## timing analysis for the read capture, write, PHY}
+00021 \textcolor{comment}{}\textcolor{comment}{## address/command, and resynchronization paths among others.}
+00022 \textcolor{comment}{}\textcolor{comment}{##}
+00023 \textcolor{comment}{}\textcolor{comment}{## In performing the above timing analysis, the script}
+00024 \textcolor{comment}{}\textcolor{comment}{## calls procedures that are found in a separate file (report\_timing\_core.tcl)}
+00025 \textcolor{comment}{}\textcolor{comment}{## that has all the details of the timing analysis, and this}
+00026 \textcolor{comment}{}\textcolor{comment}{## file only serves as the top-level timing analysis flow.}
+00027 \textcolor{comment}{}\textcolor{comment}{##}
+00028 \textcolor{comment}{}\textcolor{comment}{## To reduce data lookups in all the procuedures that perform}
+00029 \textcolor{comment}{}\textcolor{comment}{## the individual timing analysis, data that is needed for}
+00030 \textcolor{comment}{}\textcolor{comment}{## multiple procedures is lookup up in this file and passed}
+00031 \textcolor{comment}{}\textcolor{comment}{## to the various parameters.  These data include both values}
+00032 \textcolor{comment}{}\textcolor{comment}{## that are applicable over all operating conditions, and those}
+00033 \textcolor{comment}{}\textcolor{comment}{## that are applicable to only one operating condition.}
+00034 \textcolor{comment}{}\textcolor{comment}{##}
+00035 \textcolor{comment}{}\textcolor{comment}{## In addition to the data that is looked up, the script}
+00036 \textcolor{comment}{}\textcolor{comment}{## and the underlying procedures use various other data}
+00037 \textcolor{comment}{}\textcolor{comment}{## that are stored in TCL sets and include the following:}
+00038 \textcolor{comment}{}\textcolor{comment}{##}
+00039 \textcolor{comment}{}\textcolor{comment}{##   t(.)     : Holds the memory timing parameters}
+00040 \textcolor{comment}{}\textcolor{comment}{##   board(.) : Holds the board skews and propagation delays}
+00041 \textcolor{comment}{}\textcolor{comment}{##   SSN(.)   : Holds the SSN pushout and pullin delays}
+00042 \textcolor{comment}{}\textcolor{comment}{##   IP(.)    : Holds the configuration of the memory interface}
+00043 \textcolor{comment}{}\textcolor{comment}{##              that was generated}
+00044 \textcolor{comment}{}\textcolor{comment}{##   ISI(.)   : Holds any intersymbol interference when the}
+00045 \textcolor{comment}{}\textcolor{comment}{##              memory interface is generated in a multirank}
+00046 \textcolor{comment}{}\textcolor{comment}{##              topology}
+00047 \textcolor{comment}{}\textcolor{comment}{##   MP(.)    : Holds some process variation data for the memory}
+00048 \textcolor{comment}{}\textcolor{comment}{##              See below for more information}
+00049 \textcolor{comment}{}\textcolor{comment}{##   pins(.)  : Holds the pin names for the memory interface}
+00050 \textcolor{comment}{}\textcolor{comment}{##}
+00051 \textcolor{comment}{}\textcolor{comment}{##############################################################}
+00052 \textcolor{comment}{}
+00053 \textcolor{keyword}{set} corename "ddr2\_phy"\textcolor{comment}{}
+00054 \textcolor{comment}{}
+00055 \textcolor{comment}{##############################################################}
+00056 \textcolor{comment}{}\textcolor{comment}{## Some useful functions}
+00057 \textcolor{comment}{}\textcolor{comment}{##############################################################}
+00058 \textcolor{comment}{}source "[list [\textcolor{keyword}{file} join [\textcolor{keyword}{file} dirname [info script]] $\{corename\}\_ddr\_timing.tcl]]"\textcolor{comment}{}
+00059 \textcolor{comment}{}source "[list [\textcolor{keyword}{file} join [\textcolor{keyword}{file} dirname [info script]] $\{corename\}\_ddr\_pins.tcl]]"\textcolor{comment}{}
+00060 \textcolor{comment}{}source "[list [\textcolor{keyword}{file} join [\textcolor{keyword}{file} dirname [info script]] $\{corename\}\_report\_timing\_core.tcl]]"\textcolor{comment}{}
+00061 \textcolor{comment}{}
+00062 \textcolor{comment}{################################################################################}
+00063 \textcolor{comment}{}\textcolor{comment}{## When the ALTMEMPHY is targeted for the HardCopy device family, additional}
+00064 \textcolor{comment}{}\textcolor{comment}{## clock uncertainties need to be added. These uncertainties will be provided by}
+00065 \textcolor{comment}{}\textcolor{comment}{## the HardCopy Design Centre in a file called <variation name>\_cu.tcl. They are}
+00066 \textcolor{comment}{}\textcolor{comment}{## not needed for the FPGA device families, and are set to zero in that case.}
+00067 \textcolor{comment}{}\textcolor{comment}{################################################################################}
+00068 \textcolor{comment}{}
+00069 \textcolor{keyword}{set} ::fpga\_tREAD\_CAPTURE\_SETUP\_ERROR 0\textcolor{comment}{}
+00070 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_tREAD\_CAPTURE\_HOLD\_ERROR 0\textcolor{comment}{}
+00071 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_RESYNC\_SETUP\_ERROR 0\textcolor{comment}{}
+00072 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_RESYNC\_HOLD\_ERROR 0\textcolor{comment}{}
+00073 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_PA\_DQS\_SETUP\_ERROR 0\textcolor{comment}{}
+00074 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_PA\_DQS\_HOLD\_ERROR 0\textcolor{comment}{}
+00075 \textcolor{comment}{}\textcolor{keyword}{set} ::WR\_DQS\_DQ\_SETUP\_ERROR 0\textcolor{comment}{}
+00076 \textcolor{comment}{}\textcolor{keyword}{set} ::WR\_DQS\_DQ\_HOLD\_ERROR 0\textcolor{comment}{}
+00077 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_tCK\_ADDR\_CTRL\_SETUP\_ERROR 0\textcolor{comment}{}
+00078 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_tCK\_ADDR\_CTRL\_HOLD\_ERROR 0\textcolor{comment}{}
+00079 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_tDQSS\_SETUP\_ERROR 0\textcolor{comment}{}
+00080 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_tDQSS\_HOLD\_ERROR 0\textcolor{comment}{}
+00081 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_tDSSH\_SETUP\_ERROR 0\textcolor{comment}{}
+00082 \textcolor{comment}{}\textcolor{keyword}{set} ::fpga\_tDSSH\_HOLD\_ERROR 0\textcolor{comment}{}
+00083 \textcolor{comment}{}
+00084 \textcolor{comment}{##############################################################}
+00085 \textcolor{comment}{}\textcolor{comment}{## IP Calibration options}
+00086 \textcolor{comment}{}\textcolor{comment}{##############################################################}
+00087 \textcolor{comment}{}
+00088 \textcolor{comment}{# Can be either dynamic or static}
+00089 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(write\_deskew\_mode) "none"\textcolor{comment}{}
+00090 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(read\_deskew\_mode) "none"\textcolor{comment}{}
+00091 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(write\_dcc) "static"\textcolor{comment}{}
+00092 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(write\_deskew\_t10) 0\textcolor{comment}{}
+00093 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(write\_deskew\_t9i) 0\textcolor{comment}{}
+00094 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(write\_deskew\_t9ni) 0\textcolor{comment}{}
+00095 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(write\_deskew\_range) 0\textcolor{comment}{}
+00096 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(read\_deskew\_range) 0\textcolor{comment}{}
+00097 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(mem\_if\_memtype) "DDR2 SDRAM"\textcolor{comment}{}
+00098 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(mp\_calibration) 1\textcolor{comment}{}
+00099 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(quantization\_T9) 0.050\textcolor{comment}{}
+00100 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(quantization\_T1) 0.050\textcolor{comment}{}
+00101 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(quantization\_DCC) 0.050\textcolor{comment}{}
+00102 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(quantization\_T7) 0.050\textcolor{comment}{}
+00103 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(discrete\_device) 1\textcolor{comment}{}
+00104 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(num\_ranks) 1\textcolor{comment}{}
+00105 \textcolor{comment}{}\textcolor{keyword}{set} ::IP(speedgrade) SG\_8\textcolor{comment}{}
+00106 \textcolor{comment}{}
+00107 \textcolor{comment}{##############################################################}
+00108 \textcolor{comment}{}\textcolor{comment}{## Memory Specification Process Variation Information}
+00109 \textcolor{comment}{}\textcolor{comment}{##############################################################}
+00110 \textcolor{comment}{}
+00111 \textcolor{comment}{## The percentage of the JEDEC specification that is due}
+00112 \textcolor{comment}{}\textcolor{comment}{## to process variation }
+00113 \textcolor{comment}{}
+00114 \textcolor{keyword}{set} ::MP(DSS) 0.60\textcolor{comment}{}
+00115 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(DSH) 0.60\textcolor{comment}{}
+00116 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(DQSS) 0.50\textcolor{comment}{}
+00117 \textcolor{comment}{}
+00118 \textcolor{keyword}{set} ::MP(QH) 0.50\textcolor{comment}{}
+00119 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(QHS) 0.50\textcolor{comment}{}
+00120 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(DS) 0.60\textcolor{comment}{}
+00121 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(DH) 0.50\textcolor{comment}{}
+00122 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(IS) 0.70\textcolor{comment}{}
+00123 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(IH) 0.60\textcolor{comment}{}
+00124 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(WLH) 0.60\textcolor{comment}{}
+00125 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(WLS) 0.70\textcolor{comment}{}
+00126 \textcolor{comment}{}
+00127 \textcolor{keyword}{set} ::MP(DQSQ) 0.65\textcolor{comment}{}
+00128 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(DQSCK) 0.50\textcolor{comment}{}
+00129 \textcolor{comment}{}\textcolor{keyword}{set} ::MP(AC) 0.40\textcolor{comment}{}
+00130 \textcolor{comment}{}
+00131 \textcolor{comment}{##############################################################}
+00132 \textcolor{comment}{}\textcolor{comment}{## Load packages}
+00133 \textcolor{comment}{}\textcolor{comment}{##############################################################}
+00134 \textcolor{comment}{}\textcolor{keyword}{package} require ::quartus::ddr\_timing\_model\textcolor{comment}{}
+00135 \textcolor{comment}{}load\_package atoms\textcolor{comment}{}
+00136 \textcolor{comment}{}load\_package report\textcolor{comment}{}
+00137 \textcolor{comment}{}
+00138 \textcolor{comment}{##############################################################}
+00139 \textcolor{comment}{}\textcolor{comment}{## Initialize the runtime environment}
+00140 \textcolor{comment}{}\textcolor{comment}{##############################################################}
+00141 \textcolor{comment}{}
+00142 \textcolor{keyword}{set} scriptname [info script]\textcolor{comment}{}
+00143 \textcolor{comment}{}\textcolor{keyword}{if} \{ ! [regexp (.*)\_report\_timing.tcl $scriptname \_ corename] \} \{
+00144    error "Couldn't determine corename from $scriptname"\textcolor{comment}{}
+00145 \textcolor{comment}{}\}\textcolor{comment}{}
+00146 \textcolor{comment}{}
+00147 \textcolor{keyword}{if} \{[\textcolor{keyword}{namespace} which -variable ::argv] != "" && [\textcolor{keyword}{lindex} $::argv 0] == "batch" \} \{
+00148    post\_message -type info "Running in batch mode"\textcolor{comment}{}
+00149 \textcolor{comment}{}
+00150    \textcolor{keyword}{set} batch\_mode\_en 1\textcolor{comment}{}
+00151 \textcolor{comment}{}   \textcolor{keyword}{set} proj\_name [glob *.qpf]\textcolor{comment}{}
+00152 \textcolor{comment}{}   \textcolor{keyword}{if} \{ ! [is\_project\_open] \} \{
+00153        project\_open -revision [get\_current\_revision $proj\_name] $proj\_name\textcolor{comment}{}
+00154 \textcolor{comment}{}   \}\textcolor{comment}{}
+00155 \textcolor{comment}{}
+00156    \textcolor{keyword}{catch} \{delete\_timing\_netlist\}\textcolor{comment}{}
+00157 \textcolor{comment}{}   create\_timing\_netlist\textcolor{comment}{}
+00158 \textcolor{comment}{}   read\_sdc\textcolor{comment}{}
+00159 \textcolor{comment}{}
+00160    \textcolor{keyword}{set} opcs [list]\textcolor{comment}{}
+00161 \textcolor{comment}{}   foreach\_in\_collection op [get\_available\_operating\_conditions] \{
+00162        lappend opcs $op
+00163    \}\textcolor{comment}{}
+00164 \textcolor{comment}{}
+00165    update\_timing\_netlist\textcolor{comment}{}
+00166 \textcolor{comment}{}\} \textcolor{keyword}{else} \{
+00167    \textcolor{keyword}{set} batch\_mode\_en 0\textcolor{comment}{}
+00168 \textcolor{comment}{}   \textcolor{keyword}{set} opcs [list ""]\textcolor{comment}{}
+00169 \textcolor{comment}{}\}\textcolor{comment}{}
+00170 \textcolor{comment}{}
+00171 \textcolor{comment}{##############################################################}
+00172 \textcolor{comment}{}\textcolor{comment}{## Load the timing netlist}
+00173 \textcolor{comment}{}\textcolor{comment}{##############################################################}
+00174 \textcolor{comment}{}
+00175 read\_atom\_netlist\textcolor{comment}{}
+00176 \textcolor{comment}{}load\_report\textcolor{comment}{}
+00177 \textcolor{comment}{}\textcolor{keyword}{set} old\_active\_clocks [get\_active\_clocks]\textcolor{comment}{}
+00178 \textcolor{comment}{}set\_active\_clocks [all\_clocks]\textcolor{comment}{}
+00179 \textcolor{comment}{}
+00180 \textcolor{keyword}{if} \{ ! [timing\_netlist\_exist] \} \{
+00181    post\_message -type error "Timing Netlist has not been created. Run the 'Update Timing Netlist' task
+       first."\textcolor{comment}{}
+00182 \textcolor{comment}{}   \textcolor{keyword}{return}\textcolor{comment}{}
+00183 \textcolor{comment}{}\}\textcolor{comment}{}
+00184 \textcolor{comment}{}
+00185 \textcolor{comment}{##############################################################}
+00186 \textcolor{comment}{}\textcolor{comment}{## This is the main timing analysis function}
+00187 \textcolor{comment}{}\textcolor{comment}{##   It performs the timing analysis over all of the}
+00188 \textcolor{comment}{}\textcolor{comment}{##   various Memory Interface instances and timing corners}
+00189 \textcolor{comment}{}\textcolor{comment}{##############################################################}
+00190 \textcolor{comment}{}
+00191 \textcolor{keyword}{set} corename [\textcolor{keyword}{file} tail $corename]\textcolor{comment}{}
+00192 \textcolor{comment}{}\textcolor{keyword}{set} instance\_names [get_core_full_instance_list $corename]\textcolor{comment}{}
+00193 \textcolor{comment}{}\textcolor{keyword}{set} ::family [get\_family\_string]\textcolor{comment}{}
+00194 \textcolor{comment}{}\textcolor{keyword}{set} ::family [\textcolor{keyword}{string} tolower $::family]\textcolor{comment}{}
+00195 \textcolor{comment}{}\textcolor{keyword}{if} \{$::family == "arria ii gx"\} \{
+00196    \textcolor{keyword}{set} ::family "arria ii"\textcolor{comment}{}
+00197 \textcolor{comment}{}\}\textcolor{comment}{}
+00198 \textcolor{comment}{}\textcolor{keyword}{if} \{$::family == "stratix iv gx"\} \{
+00199    \textcolor{keyword}{set} ::family "stratix iv"\textcolor{comment}{}
+00200 \textcolor{comment}{}\}\textcolor{comment}{}
+00201 \textcolor{comment}{}\textcolor{keyword}{if} \{$::family == "hardcopy iv gx"\} \{
+00202    \textcolor{keyword}{set} ::family "hardcopy iv"\textcolor{comment}{}
+00203 \textcolor{comment}{}\}\textcolor{comment}{}
+00204 \textcolor{comment}{}\textcolor{keyword}{if} \{$::family == "cyclone iv gx"\} \{
+00205    \textcolor{keyword}{set} ::family "cyclone iv"\textcolor{comment}{}
+00206 \textcolor{comment}{}\}\textcolor{comment}{}
+00207 \textcolor{comment}{}\textcolor{keyword}{if} \{$::family == "cyclone iv e"\} \{
+00208    \textcolor{keyword}{set} ::family "cyclone iv"\textcolor{comment}{}
+00209 \textcolor{comment}{}\}\textcolor{comment}{}
+00210 \textcolor{comment}{}
+00211 \textcolor{comment}{########################################}
+00212 \textcolor{comment}{}\textcolor{comment}{## Hardcopy support and generation checks}
+00213 \textcolor{comment}{}\textcolor{keyword}{if} \{ ([ \textcolor{keyword}{string} match -nocase "HARDCOPY*" $::family]) && ($::IP(speedgrade) != "SG\_3") \} \{
+00214    post\_message -type error "ALTMEMPHY IP that will be used on Hardcopy devices must be generated
+       using a speedgrade of 3."\textcolor{comment}{}
+00215 \textcolor{comment}{}   \textcolor{keyword}{return}\textcolor{comment}{}
+00216 \textcolor{comment}{}\} \textcolor{keyword}{else} \{
+00217    \textcolor{keyword}{set} current\_speedgrade [get\_speedgrade\_string]\textcolor{comment}{}
+00218 \textcolor{comment}{}   \textcolor{keyword}{if} \{[regexp -nocase "SG\_(.+)" $::IP(speedgrade) match generated\_speedgrade] > 0\} \{
+00219        \textcolor{keyword}{if} \{[regexp -nocase (.)*X $current\_speedgrade match number] > 0\} \{
+00220            \textcolor{keyword}{set} current\_speedgrade $number\textcolor{comment}{}
+00221 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{$current\_speedgrade == "4L"\} \{
+00222            \textcolor{keyword}{set} current\_speedgrade "4"\textcolor{comment}{}
+00223 \textcolor{comment}{}       \}\textcolor{comment}{}
+00224 \textcolor{comment}{}       \textcolor{keyword}{if} \{$generated\_speedgrade != $current\_speedgrade\} \{
+00225            post\_message -type critical\_warning "ALTMEMPHY IP was generated using a speedgrade of
+       $generated\_speedgrade, but is being compiled for a speedgrade of $current\_speedgrade.  Timing analysis may not be
+       valid due to violated timing model assumptions."\textcolor{comment}{}
+00226 \textcolor{comment}{}       \}\textcolor{comment}{}
+00227 \textcolor{comment}{}   \}\textcolor{comment}{}
+00228 \textcolor{comment}{}\}\textcolor{comment}{}
+00229 \textcolor{comment}{}
+00230 \textcolor{keyword}{set} companion\_revision [get\_global\_assignment -name companion\_revision\_name]\textcolor{comment}{}
+00231 \textcolor{comment}{}\textcolor{keyword}{if} \{$companion\_revision != ""\} \{
+00232    \textcolor{keyword}{set} device\_technology\_migration\_list [get\_global\_assignment -name device\_technology\_migration\_list]\textcolor{comment}{}
+00233 \textcolor{comment}{}   \textcolor{keyword}{if} \{([\textcolor{keyword}{string} match -nocase "HC3*" $device\_technology\_migration\_list] || [\textcolor{keyword}{string} match -nocase 
+      "HC4*" $device\_technology\_migration\_list])\} \{
+00234        \textcolor{keyword}{if} \{$::IP(speedgrade) != "SG\_3"\} \{
+00235            post\_message -type error "ALTMEMPHY IP that will be migrated to Hardcopy devices must be
+       generated using a speedgrade of 3."\textcolor{comment}{}
+00236 \textcolor{comment}{}           \textcolor{keyword}{return}\textcolor{comment}{}
+00237 \textcolor{comment}{}       \}\textcolor{comment}{}
+00238 \textcolor{comment}{}   \}\textcolor{comment}{}
+00239 \textcolor{comment}{}\}\textcolor{comment}{}
+00240 \textcolor{comment}{}
+00241 \textcolor{comment}{########################################}
+00242 \textcolor{comment}{}\textcolor{comment}{## Check Memory Interface support}
+00243 \textcolor{comment}{}\textcolor{keyword}{if} \{!(($::IP(mem\_if\_memtype) == "DDR SDRAM") || ($::IP(mem\_if\_memtype) == "DDR2 SDRAM") ||
+       ($::IP(mem\_if\_memtype) == "DDR3 SDRAM"))\} \{
+00244    \textcolor{keyword}{puts} "The report\_timing script does not support the $::IP(mem\_if\_memtype) memory interfaces."\textcolor{comment}{}
+00245 \textcolor{comment}{}   \textcolor{keyword}{return}\textcolor{comment}{}
+00246 \textcolor{comment}{}\}\textcolor{comment}{}
+00247 \textcolor{comment}{}
+00248 \textcolor{comment}{################################################}
+00249 \textcolor{comment}{}\textcolor{comment}{# Go over the various Memory Interface instances}
+00250 \textcolor{comment}{}\textcolor{keyword}{for} \{\textcolor{keyword}{set} inst\_index 0\} \{$inst\_index != [\textcolor{keyword}{llength} $instance\_names]\} \{\textcolor{keyword}{incr} inst\_index\} \{
+00251 
+00252    \textcolor{comment}{# Get the instance name}
+00253 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::full\_instance\_name [\textcolor{keyword}{lindex} $instance\_names $inst\_index]\textcolor{comment}{}
+00254 \textcolor{comment}{}   \textcolor{keyword}{set} ::instance\_name [get_timequest_name $::full\_instance\_name]\textcolor{comment}{}
+00255 \textcolor{comment}{}   \textcolor{keyword}{set} ::instname "$\{::instance\_name\}|$\{corename\}"\textcolor{comment}{}
+00256 \textcolor{comment}{}
+00257    \textcolor{comment}{# Copy the use\_flexible\_timing value for this instance into a more generic name}
+00258 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} use\_flexible\_timing [\textcolor{keyword}{set} $\{corename\}\_use\_flexible\_timing]\textcolor{comment}{}
+00259 \textcolor{comment}{}
+00260    \textcolor{comment}{# Find all the pins associated with this instance}
+00261 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} pins(ck\_p) [list]\textcolor{comment}{}
+00262 \textcolor{comment}{}   \textcolor{keyword}{set} pins(ck\_n) [list]\textcolor{comment}{}
+00263 \textcolor{comment}{}   \textcolor{keyword}{set} pins(addrcmd) [list]\textcolor{comment}{}
+00264 \textcolor{comment}{}   \textcolor{keyword}{set} pins(addrcmd\_2t) [list]\textcolor{comment}{}
+00265 \textcolor{comment}{}   \textcolor{keyword}{set} pins(dqsgroup) [list]\textcolor{comment}{}
+00266 \textcolor{comment}{}   \textcolor{keyword}{set} pins(dgroup) [list]\textcolor{comment}{}
+00267 \textcolor{comment}{}
+00268    \textcolor{keyword}{global} pins\_cache\textcolor{comment}{}
+00269 \textcolor{comment}{}   \textcolor{keyword}{if} \{ [\textcolor{keyword}{array} exists pins\_cache] &&  [info exists pins\_cache($corename-$::instance\_name)] \} \{
+00270        \textcolor{keyword}{array} set pins $pins\_cache($corename-$::instance\_name)\textcolor{comment}{}
+00271 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00272        get_ddr_pins $instname pins $corename\textcolor{comment}{}
+00273 \textcolor{comment}{}       \textcolor{keyword}{set} pins\_cache($corename-$::instance\_name) [\textcolor{keyword}{array} get pins]\textcolor{comment}{}
+00274 \textcolor{comment}{}   \}\textcolor{comment}{}
+00275 \textcolor{comment}{}
+00276    \textcolor{comment}{# Find all the DQ pins}
+00277 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::alldqpins [list]\textcolor{comment}{}
+00278 \textcolor{comment}{}   \textcolor{keyword}{set} ::alldqdmpins [list]\textcolor{comment}{}
+00279 \textcolor{comment}{}   \textcolor{keyword}{set} ::alldqspins [list]\textcolor{comment}{}
+00280 \textcolor{comment}{}   \textcolor{keyword}{foreach} dqsgroup $pins(dqsgroup) \{
+00281        \textcolor{keyword}{set} ::alldqpins [\textcolor{keyword}{concat} $::alldqpins [\textcolor{keyword}{lindex} $dqsgroup 2]]\textcolor{comment}{}
+00282 \textcolor{comment}{}       \textcolor{keyword}{set} ::alldqdmpins [\textcolor{keyword}{concat} $::alldqdmpins [\textcolor{keyword}{lindex} $dqsgroup 2] [\textcolor{keyword}{lindex} $dqsgroup 1]]\textcolor{comment}{}
+00283 \textcolor{comment}{}       \textcolor{keyword}{lappend} ::alldqspins [\textcolor{keyword}{lindex} $dqsgroup 0]\textcolor{comment}{}
+00284 \textcolor{comment}{}   \}\textcolor{comment}{}
+00285 \textcolor{comment}{}   \textcolor{keyword}{set} all\_read\_dqs\_list [get_all_dqs_pins $pins(dqsgroup)]\textcolor{comment}{}
+00286 \textcolor{comment}{}   \textcolor{keyword}{set} all\_write\_dqs\_list $all\_read\_dqs\_list\textcolor{comment}{}
+00287 \textcolor{comment}{}   \textcolor{keyword}{set} all\_d\_list [get_all_dq_pins $pins(dqsgroup)]\textcolor{comment}{}
+00288 \textcolor{comment}{}
+00289    \textcolor{comment}{##################################################################################}
+00290 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{# Find some design values and parameters that will used during the timing analysis}
+00291 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{# that do not change accross the operating conditions}
+00292 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::period $::t(period)\textcolor{comment}{}
+00293 \textcolor{comment}{}
+00294    \textcolor{comment}{# Get the number of PLL steps}
+00295 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} clk\_to\_write\_d [traverse_to_ddio_out_pll_clock [\textcolor{keyword}{lindex} $all\_d\_list 0] msg\_list $::family]\textcolor{comment}{}
+00296 \textcolor{comment}{}   \textcolor{keyword}{set} ::pll\_steps [\textcolor{keyword}{expr} \{int([get\_vco\_freq -clk $clk\_to\_write\_d ]*8.0*$::period/1000.0)\}]\textcolor{comment}{}
+00297 \textcolor{comment}{}
+00298    \textcolor{comment}{# Package skew}
+00299 \textcolor{comment}{}\textcolor{comment}{   }[\textcolor{keyword}{catch} \{get\_max\_package\_skew\} ::max\_package\_skew]\textcolor{comment}{}
+00300 \textcolor{comment}{}   \textcolor{keyword}{if} \{ (($::max\_package\_skew != 0) || ($::max\_package\_skew == "")) \} \{
+00301        \textcolor{keyword}{set} ::max\_package\_skew 0\textcolor{comment}{}
+00302 \textcolor{comment}{}   \}\textcolor{comment}{}
+00303 \textcolor{comment}{}
+00304    \textcolor{comment}{# DLL/DQS unsupported}
+00305 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::dll\_length 0\textcolor{comment}{}
+00306 \textcolor{comment}{}   \textcolor{keyword}{set} ::dqs\_phase\_setting 0\textcolor{comment}{}
+00307 \textcolor{comment}{}   \textcolor{keyword}{set} ::dqs\_phase 0\textcolor{comment}{}
+00308 \textcolor{comment}{}   \textcolor{comment}{# Get the interface type (HPAD or VPAD)}
+00309 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::interface\_type [get_io_interface_type $all\_read\_dqs\_list]\textcolor{comment}{}
+00310 \textcolor{comment}{}
+00311    \textcolor{comment}{# Treat the VHPAD interface as the same as a HPAD interface}
+00312 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{($::interface\_type == "VHPAD") || ($::interface\_type == "HYBRID")\} \{
+00313        \textcolor{keyword}{set} ::interface\_type "HPAD"\textcolor{comment}{}
+00314 \textcolor{comment}{}   \}\textcolor{comment}{}
+00315 \textcolor{comment}{}
+00316    \textcolor{comment}{# Get the IO standard which helps us determine the Memory type}
+00317 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::io\_std [get_io_standard [\textcolor{keyword}{lindex} $all\_read\_dqs\_list 0]]\textcolor{comment}{}
+00318 \textcolor{comment}{}
+00319    \textcolor{keyword}{if} \{$::interface\_type == "" || $::interface\_type == "UNKNOWN" || $::io\_std == "" || $::io\_std ==
+       "UNKNOWN"\} \{
+00320        \textcolor{keyword}{set} result 0\textcolor{comment}{}
+00321 \textcolor{comment}{}   \}\textcolor{comment}{}
+00322 \textcolor{comment}{}
+00323    \textcolor{comment}{# Get some of the FPGA jitter and DCD specs}
+00324 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{# When not specified all jitter values are peak-to-peak jitters in ns}
+00325 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::tJITper [\textcolor{keyword}{expr} [get\_io\_standard\_node\_delay -dst MEM\_CK\_PERIOD\_JITTER -io\_standard $::io\_std 
+      -parameters [list IO $::interface\_type] -period $::period]/1000.0]\textcolor{comment}{}
+00326 \textcolor{comment}{}   \textcolor{keyword}{set} ::tJITdty [\textcolor{keyword}{expr} [get\_io\_standard\_node\_delay -dst MEM\_CK\_DC\_JITTER -io\_standard $::io\_std 
+      -parameters [list IO $::interface\_type]]/1000.0]\textcolor{comment}{}
+00327 \textcolor{comment}{}   \textcolor{comment}{# DCD value that is looked up is in %, and thus needs to be divided by 100}
+00328 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::tDCD [\textcolor{keyword}{expr} [get\_io\_standard\_node\_delay -dst MEM\_CK\_DCD -io\_standard $::io\_std -parameters [
+      list IO $::interface\_type]]/100.0]\textcolor{comment}{}
+00329 \textcolor{comment}{}   \textcolor{comment}{# This is the peak-to-peak jitter on the whole DQ-DQS read capture path}
+00330 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::DQSpathjitter [\textcolor{keyword}{expr} [get\_io\_standard\_node\_delay -dst DQDQS\_JITTER -io\_standard $::io\_std 
+      -parameters [list IO $::interface\_type]]/1000.0]\textcolor{comment}{}
+00331 \textcolor{comment}{}   \textcolor{comment}{# This is the proportion of the DQ-DQS read capture path jitter that applies to setup (looed up
+       value is in %, and thus needs to be divided by 100)}
+00332 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} ::DQSpathjitter\_setup\_prop [\textcolor{keyword}{expr} [get\_io\_standard\_node\_delay -dst DQDQS\_JITTER\_DIVISION 
+      -io\_standard $::io\_std -parameters [list IO $::interface\_type]]/100.0]\textcolor{comment}{}
+00333 \textcolor{comment}{}
+00334    \textcolor{keyword}{global} assumptions\_cache\textcolor{comment}{}
+00335 \textcolor{comment}{}   \textcolor{keyword}{set} in\_gui [regexp "TimeQuest Timing Analyzer GUI" [get\_current\_timequest\_report\_folder]]\textcolor{comment}{}
+00336 \textcolor{comment}{}   \textcolor{keyword}{if} \{!$in\_gui && [\textcolor{keyword}{array} exists assumptions\_cache] &&  [info exists 
+      assumptions\_cache($corename-$::instance\_name)] \} \{
+00337        \textcolor{keyword}{set} assumptions\_valid $assumptions\_cache($corename-$::instance\_name)\textcolor{comment}{}
+00338 \textcolor{comment}{}       \textcolor{keyword}{if} \{!$assumptions\_valid\} \{
+00339            post\_message -type critical\_warning "Read Capture and Write timing analyses may not be
+       valid due to violated timing model assumptions"\textcolor{comment}{}
+00340 \textcolor{comment}{}           post\_message -type critical\_warning "See violated timing model assumptions in previous
+       timing analysis above"\textcolor{comment}{}
+00341 \textcolor{comment}{}       \}\textcolor{comment}{}
+00342 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00343        \textcolor{keyword}{if} \{($::IP(mem\_if\_memtype) == "DDR2 SDRAM") || ($::IP(mem\_if\_memtype) == "DDR SDRAM")\} \{
+00344            \textcolor{keyword}{set} assumptions\_valid [
+      verify_high_performance_timing_assumptions_ddr2 $::instname pins $::IP(write\_deskew\_t10) 
+      $use\_flexible\_timing $::family $::IP(mem\_if\_memtype)]\textcolor{comment}{}
+00345 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{$::IP(mem\_if\_memtype) == "DDR3 SDRAM"\} \{
+00346            \textcolor{keyword}{set} assumptions\_valid [
+      verify_high_performance_timing_assumptions $::instname pins $::IP(write\_deskew\_t10) $::IP(discrete\_device) 
+      $use\_flexible\_timing $::family]\textcolor{comment}{}
+00347 \textcolor{comment}{}       \}\textcolor{comment}{}
+00348 \textcolor{comment}{}       \textcolor{keyword}{set} assumptions\_cache($corename-$::instance\_name) $assumptions\_valid\textcolor{comment}{}
+00349 \textcolor{comment}{}   \}\textcolor{comment}{}
+00350 \textcolor{comment}{}
+00351    \textcolor{comment}{##################################################################################}
+00352 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{# Now loop the timing analysis over the various operating conditions}
+00353 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} summary [list]\textcolor{comment}{}
+00354 \textcolor{comment}{}   \textcolor{keyword}{foreach} opc $opcs \{
+00355        \textcolor{keyword}{if} \{$opc != "" \} \{
+00356            set\_operating\_conditions $opc\textcolor{comment}{}
+00357 \textcolor{comment}{}           update\_timing\_netlist\textcolor{comment}{}
+00358 \textcolor{comment}{}       \}\textcolor{comment}{}
+00359 \textcolor{comment}{}
+00360        \textcolor{keyword}{set} opcname [get\_operating\_conditions\_info [get\_operating\_conditions] -display\_name]\textcolor{comment}{}
+00361 \textcolor{comment}{}       \textcolor{keyword}{set} opcname [\textcolor{keyword}{string} trim $opcname]\textcolor{comment}{}
+00362 \textcolor{comment}{}
+00363        \textcolor{comment}{########################################}
+00364 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{comment}{## Determine parameters and values that are valid only for this operating condition}
+00365 \textcolor{comment}{}
+00366        \textcolor{comment}{# Min/Max scaling factor}
+00367 \textcolor{comment}{}\textcolor{comment}{       }[\textcolor{keyword}{catch} \{get\_float\_table\_node\_delay -src \{SCALE\_FACTOR\} -dst \{MEM\_INTERFACE\_SCALE\_FACTOR\} 
+      -parameters \{IO\}\} DQS\_max\_scale\_factor]\textcolor{comment}{}
+00368 \textcolor{comment}{}       [\textcolor{keyword}{catch} \{get\_float\_table\_node\_delay -src \{SCALE\_FACTOR\} -dst \{MEM\_INTERFACE\_SCALE\_FACTOR\} 
+      -parameters \{IO MIN\}\} DQS\_min\_scale\_factor]\textcolor{comment}{}
+00369 \textcolor{comment}{}       \textcolor{keyword}{if} \{  (($DQS\_max\_scale\_factor != 0) || ($DQS\_max\_scale\_factor == "")) &&
+       (($DQS\_min\_scale\_factor != 0) || ($DQS\_min\_scale\_factor == "")) \} \{
+00370            \textcolor{keyword}{set} ::DQS\_min\_max [\textcolor{keyword}{expr} $DQS\_max\_scale\_factor - $DQS\_min\_scale\_factor]\textcolor{comment}{}
+00371 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00372            \textcolor{keyword}{set} ::DQS\_min\_max 0\textcolor{comment}{}
+00373 \textcolor{comment}{}       \}\textcolor{comment}{}
+00374 \textcolor{comment}{}
+00375        \textcolor{comment}{########################################}
+00376 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{comment}{## Write Analysis}
+00377 \textcolor{comment}{}
+00378        \textcolor{keyword}{if} \{$use\_flexible\_timing\} \{
+00379            perform_flexible_write_launch_timing_analysis $opcs $opcname pins t summary MP IP\textcolor{comment}{}
+00380 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00381            perform_macro_write_launch_timing_analysis $opcs $opcname pins t summary IP ISI\textcolor{comment}{}
+00382 \textcolor{comment}{}       \}\textcolor{comment}{}
+00383 \textcolor{comment}{}
+00384        \textcolor{comment}{########################################}
+00385 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{comment}{## PHY and Address/command Analyses}
+00386 \textcolor{comment}{}
+00387        perform_phy_analyses $opcs $opcname pins t summary IP\textcolor{comment}{}
+00388 \textcolor{comment}{}       perform_ac_analyses  $opcs $opcname pins t summary IP\textcolor{comment}{}
+00389 \textcolor{comment}{}
+00390        \textcolor{comment}{########################################}
+00391 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{comment}{## Read Analysis}
+00392 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{keyword}{if} \{$use\_flexible\_timing\} \{
+00393            perform_flexible_read_capture_non_dqs_timing_analysis $opcs $opcname pins t summary MP IP 
+      board\textcolor{comment}{}
+00394 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00395            perform_macro_read_capture_timing_analysis $opcs $opcname pins t summary IP\textcolor{comment}{}
+00396 \textcolor{comment}{}       \}\textcolor{comment}{}
+00397 \textcolor{comment}{}
+00398    \}\textcolor{comment}{}
+00399 \textcolor{comment}{}
+00400    \textcolor{comment}{##################################################}
+00401 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{# Now perform analysis of some of the calibrated paths that consider}
+00402 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{# Worst-case conditions}
+00403 \textcolor{comment}{}
+00404    \textcolor{keyword}{set} opcname "All Conditions"\textcolor{comment}{}
+00405 \textcolor{comment}{}
+00406    \textcolor{comment}{########################################}
+00407 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{## Resynchronization Analysis (For non Cyclone device families)}
+00408 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{$::family != "cyclone iv"\} \{
+00409        \textcolor{keyword}{if} \{$use\_flexible\_timing\} \{
+00410            perform_flexible_resync_timing_analysis $opcs $opcname pins t summary MP IP SSN board\textcolor{comment}{}
+00411 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00412            perform_macro_resync_timing_analysis $opcs $opcname pins t summary MP IP board\textcolor{comment}{}
+00413 \textcolor{comment}{}       \}\textcolor{comment}{}
+00414 \textcolor{comment}{}   \}\textcolor{comment}{}
+00415 \textcolor{comment}{}
+00416    \textcolor{comment}{########################################}
+00417 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{## Write Levelling Analysis (For DDR3 only)}
+00418 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{($::IP(mem\_if\_memtype) == "DDR3 SDRAM") && ($::IP(discrete\_device) == 0)\} \{
+00419        \textcolor{keyword}{if} \{$use\_flexible\_timing\} \{
+00420            perform_flexible_write_levelling_timing_analysis $opcs $opcname pins t summary MP IP SSN 
+      board ISI\textcolor{comment}{}
+00421 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00422            perform_macro_write_levelling_timing_analysis $opcs $opcname pins t summary MP IP board ISI\textcolor{comment}{}
+00423 \textcolor{comment}{}       \}\textcolor{comment}{}
+00424 \textcolor{comment}{}   \}\textcolor{comment}{}
+00425 \textcolor{comment}{}
+00426    \textcolor{comment}{########################################}
+00427 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{## Print out the Summary Panel for this instance}
+00428 \textcolor{comment}{}
+00429    \textcolor{keyword}{set} summary [lsort -command sort\_proc $summary]\textcolor{comment}{}
+00430 \textcolor{comment}{}   \textcolor{keyword}{set} fname ""\textcolor{comment}{}
+00431 \textcolor{comment}{}   \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $instance\_names] <= 1\} \{
+00432        \textcolor{keyword}{set} fname "$\{corename\}\_summary.csv"\textcolor{comment}{}
+00433 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00434        \textcolor{keyword}{set} fname "$\{corename\}$\{inst\_index\}\_summary.csv"\textcolor{comment}{}
+00435 \textcolor{comment}{}   \}\textcolor{comment}{}
+00436 \textcolor{comment}{}
+00437    \textcolor{keyword}{set} f -1\textcolor{comment}{}
+00438 \textcolor{comment}{}   \textcolor{keyword}{if} \{ [get_operating_conditions_number] == 0 \} \{
+00439        \textcolor{keyword}{set} f [open $fname w]\textcolor{comment}{}
+00440 \textcolor{comment}{}       \textcolor{keyword}{puts} $f "#Core: $\{corename\} - Instance: $::instance\_name"\textcolor{comment}{}
+00441 \textcolor{comment}{}       \textcolor{keyword}{puts} $f "#Path, Setup Margin, Hold Margin"\textcolor{comment}{}
+00442 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00443        \textcolor{keyword}{set} f [open $fname a]\textcolor{comment}{}
+00444 \textcolor{comment}{}       \textcolor{keyword}{puts} $f " "\textcolor{comment}{}
+00445 \textcolor{comment}{}   \}\textcolor{comment}{}
+00446 \textcolor{comment}{}
+00447    post\_message -type info "                                                         setup  hold"\textcolor{comment}{}
+00448 \textcolor{comment}{}   \textcolor{keyword}{set} panel\_name "$::instname"\textcolor{comment}{}
+00449 \textcolor{comment}{}   \textcolor{keyword}{set} root\_folder\_name [get\_current\_timequest\_report\_folder]\textcolor{comment}{}
+00450 \textcolor{comment}{}   \textcolor{keyword}{if} \{ ! [\textcolor{keyword}{string} match "$\{root\_folder\_name\}*" $panel\_name] \} \{
+00451        \textcolor{keyword}{set} panel\_name "$\{root\_folder\_name\}||$panel\_name"\textcolor{comment}{}
+00452 \textcolor{comment}{}   \}\textcolor{comment}{}
+00453 \textcolor{comment}{}   \textcolor{comment}{# Create the root if it doesn't yet exist}
+00454 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{[get\_report\_panel\_id $root\_folder\_name] == -1\} \{
+00455        \textcolor{keyword}{set} panel\_id [create\_report\_panel -folder $root\_folder\_name]\textcolor{comment}{}
+00456 \textcolor{comment}{}   \}\textcolor{comment}{}
+00457 \textcolor{comment}{}
+00458    \textcolor{comment}{# Delete any pre-existing summary panel}
+00459 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} panel\_id [get\_report\_panel\_id $panel\_name]\textcolor{comment}{}
+00460 \textcolor{comment}{}   \textcolor{keyword}{if} \{$panel\_id != -1\} \{
+00461        delete\_report\_panel -id $panel\_id\textcolor{comment}{}
+00462 \textcolor{comment}{}   \}\textcolor{comment}{}
+00463 \textcolor{comment}{}
+00464    \textcolor{comment}{# Create summary panel}
+00465 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} panel\_id [create\_report\_panel -table $panel\_name]\textcolor{comment}{}
+00466 \textcolor{comment}{}   add\_row\_to\_table -id $panel\_id [list "Path" "Operating Condition" "Setup Slack" "Hold Slack"]\textcolor{comment}{ }
+00467 \textcolor{comment}{}   \textcolor{keyword}{set} total\_failures 0\textcolor{comment}{}
+00468 \textcolor{comment}{}   \textcolor{keyword}{foreach} summary\_line $summary \{
+00469        \textcolor{keyword}{foreach} \{corner order path su hold\} $summary\_line \{ \}\textcolor{comment}{}
+00470 \textcolor{comment}{}       \textcolor{keyword}{if} \{ $su < 0 || ($hold!="" && $hold < 0) \} \{
+00471            \textcolor{keyword}{set} type warning\textcolor{comment}{}
+00472 \textcolor{comment}{}           \textcolor{keyword}{set} offset 50\textcolor{comment}{}
+00473 \textcolor{comment}{}           \textcolor{keyword}{incr} total\_failures\textcolor{comment}{}
+00474 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00475            \textcolor{keyword}{set} type info\textcolor{comment}{}
+00476 \textcolor{comment}{}           \textcolor{keyword}{set} offset 53\textcolor{comment}{}
+00477 \textcolor{comment}{}       \}\textcolor{comment}{}
+00478 \textcolor{comment}{}       \textcolor{keyword}{set} su [\textcolor{keyword}{format} %.3f $su]\textcolor{comment}{}
+00479 \textcolor{comment}{}       \textcolor{keyword}{if} \{$hold != ""\} \{
+00480            \textcolor{keyword}{set} hold [\textcolor{keyword}{format} %.3f $hold]\textcolor{comment}{}
+00481 \textcolor{comment}{}       \}\textcolor{comment}{}
+00482 \textcolor{comment}{}       post\_message -type $type [\textcolor{keyword}{format} "%-$\{offset\}s | %6s %6s" $path $su $hold]\textcolor{comment}{}
+00483 \textcolor{comment}{}       \textcolor{keyword}{puts} $f [\textcolor{keyword}{format} "\(\backslash\)"%s\(\backslash\)",%s,%s" $path $su $hold]\textcolor{comment}{}
+00484 \textcolor{comment}{}       \textcolor{keyword}{set} fg\_colours [list black black]\textcolor{comment}{}
+00485 \textcolor{comment}{}       \textcolor{keyword}{if} \{ $su < 0 \} \{
+00486            \textcolor{keyword}{lappend} fg\_colours red\textcolor{comment}{}
+00487 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00488            \textcolor{keyword}{lappend} fg\_colours black\textcolor{comment}{}
+00489 \textcolor{comment}{}       \}\textcolor{comment}{}
+00490 \textcolor{comment}{}       \textcolor{keyword}{if} \{ $hold != "" && $hold < 0 \} \{
+00491            \textcolor{keyword}{lappend} fg\_colours red\textcolor{comment}{}
+00492 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00493            \textcolor{keyword}{lappend} fg\_colours black\textcolor{comment}{}
+00494 \textcolor{comment}{}       \}\textcolor{comment}{}
+00495 \textcolor{comment}{}       add\_row\_to\_table -id $panel\_id -fcolors $fg\_colours [list $path $corner $su $hold]\textcolor{comment}{ }
+00496 \textcolor{comment}{}   \}\textcolor{comment}{}
+00497 \textcolor{comment}{}   \textcolor{keyword}{close} $f\textcolor{comment}{}
+00498 \textcolor{comment}{}   \textcolor{keyword}{if} \{$total\_failures > 0\} \{
+00499        post\_message -type critical\_warning "DDR Timing requirements not met"\textcolor{comment}{}
+00500 \textcolor{comment}{}   \}\textcolor{comment}{}
+00501 \textcolor{comment}{}\}\textcolor{comment}{}
+00502 \textcolor{comment}{}write\_timing\_report\textcolor{comment}{}
+00503 \textcolor{comment}{}set\_active\_clocks $old\_active\_clocks\textcolor{comment}{}
+00504 \textcolor{comment}{}\textcolor{keyword}{if} \{$batch\_mode\_en == 1\} \{
+00505    \textcolor{keyword}{catch} \{delete\_timing\_netlist\}\textcolor{comment}{}
+00506 \textcolor{comment}{}\}
+\end{DoxyCode}

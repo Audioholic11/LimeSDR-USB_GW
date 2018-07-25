@@ -1,0 +1,55 @@
+\subsection{my\+\_\+busmux.\+vhd}
+\label{my__busmux_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/my\+\_\+busmux.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/my\+\_\+busmux.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    my\_busmux.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: simple bus mux in VHDl}
+00004 \textcolor{keyword}{-- DATE:    Feb 13, 2014}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }my_busmux \textcolor{keywordflow}{is}
+00016     \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(}
+00017                 \textcolor{vhdlchar}{bus_witdh} \textcolor{vhdlchar}{:} \textcolor{comment}{integer}\textcolor{vhdlchar}{:=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{13}
+00018                 \textcolor{vhdlchar}{)};
+00019   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00020 \textcolor{keyword}{        --input ports }
+00021         \textcolor{vhdlchar}{dataa}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{bus_witdh}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00022         \textcolor{vhdlchar}{datab}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{bus_witdh}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00023           \textcolor{vhdlchar}{result}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{bus_witdh}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00024           \textcolor{vhdlchar}{sel}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic}
+00025 
+00026 \textcolor{keyword}{        --output ports }
+00027         
+00028         \textcolor{vhdlchar}{)};
+00029 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{my\_busmux};
+00030 
+00031 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00032 \textcolor{keyword}{-- Architecture}
+00033 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00034 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} my_busmux is
+00035 \textcolor{keyword}{--declare signals,  components here}
+00036 
+00037 
+00038   
+00039 \textcolor{vhdlkeyword}{begin}
+00040 
+00041 \textcolor{vhdlchar}{result}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{dataa} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{sel}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{else} 
+00042         \textcolor{vhdlchar}{datab};
+00043      
+00044      
+00045   
+00046 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00047 
+00048 
+00049 
+00050 
+\end{DoxyCode}

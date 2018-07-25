@@ -93,7 +93,9 @@ entity fpgacfg is
 		sync_pulse_period : out std_logic_vector(31 downto 0);
 		sync_size			: out std_logic_vector(15 downto 0);
 		txant_pre			: out std_logic_vector(15 downto 0);
-		txant_post			: out std_logic_vector(15 downto 0)
+		txant_post			: out std_logic_vector(15 downto 0);
+		
+		chirp_sync_en		: out std_logic
 		
 		
 
@@ -262,7 +264,7 @@ begin
 			mem(26)	<= "0000000000000000"; --  0 free, Reserved[15:8],FPGA_LED2_G,FPGA_LED2_R,FPGA_LED2_OVRD,Reserved,FPGA_LED1_G,FPGA_LED1_R,FPGA_LED1_OVRD
 			mem(27)	<= "0000000000000000"; --  0 free, Reserved[15:0]
 			mem(28)	<= "0000000000000000"; --  0 free, Reserved[15:4],FX3_LED_G,FX3_LED_R,FX3_LED_OVRD
-			mem(29)	<= "0000000000000001"; --  0 free, FCLK_ENA[1:0]
+			mem(29)	<= "0000000000000101"; --  0 free, chirp_sync_en, FCLK_ENA[1:0]
 			mem(30)	<= x"0003"; 			  -- 	sync_pulse_period MSb 
 			mem(31)  <= x"D090"; 			  -- sync_pulse_period LSb
 			
@@ -340,6 +342,7 @@ begin
 		FX3_LED_CTRL		<= mem(28)(2 downto 0);
 		FCLK_ENA				<= mem(29)(1 downto 0);
 		sync_pulse_period <= mem(30) (15 downto 0) & mem(31) (15 downto 0);
+		chirp_sync_en 		<= mem(29)(2);
 
 
 end fpgacfg_arch;

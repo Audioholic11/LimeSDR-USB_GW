@@ -1,0 +1,397 @@
+\subsection{arch Architecture Reference}
+\label{classdata2packets_1_1arch}\index{arch@{arch}}
+
+
+Collaboration diagram for arch\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{d0/d4c/classdata2packets_1_1arch__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf pct\+\_\+end\+\_\+cnt\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf reg\+\_\+stage\+\_\+0}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf reg\+\_\+stage\+\_\+1}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf reg\+\_\+stage\+\_\+2}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm\+\_\+f}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf fsm}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf pct\+\_\+data\+\_\+wrreq}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf pct\+\_\+data\+\_\+wr\+\_\+cnt}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf pct\+\_\+end\+\_\+cnt}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf pct\+\_\+wrreq\+\_\+int\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+333}{\bfseries  ( {\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf pct\+\_\+data\+\_\+wrreq}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf state\+\_\+type}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf reg\+\_\+0} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+1} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+2} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+0\+\_\+ld} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+0\+\_\+ld\+\_\+f} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+1\+\_\+ld} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+1\+\_\+ld\+\_\+f} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+2\+\_\+ld} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+2\+\_\+ld\+\_\+f} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+ld} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+ld\+\_\+ftr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+0\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+1\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+2\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reg\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf pct\+\_\+size\+\_\+w}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf pct\+\_\+size\+\_\+w}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+clr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+end\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+wrreq\+\_\+int} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 52} of file {\bf data2packets.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{data2packets\+::arch@{data2packets\+::arch}!fsm@{fsm}}
+\index{fsm@{fsm}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{fsmcurrent\+\_\+state,pct\+\_\+data\+\_\+wrreq,pct\+\_\+data\+\_\+wr\+\_\+cnt,pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max,pct\+\_\+end\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf pct\+\_\+data\+\_\+wrreq}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf pct\+\_\+data\+\_\+wr\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf pct\+\_\+end\+\_\+cnt}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_a645aef85154cc3add4d2f7c279bd9145}
+
+
+Definition at line {\bf 237} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!fsm\+\_\+f@{fsm\+\_\+f}}
+\index{fsm\+\_\+f@{fsm\+\_\+f}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{fsm\+\_\+fclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} fsm\+\_\+f(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_a856d95a9c7e9538caf6d13ffdaa470a3}
+
+
+Definition at line {\bf 226} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max\+\_\+proc@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max\+\_\+proc}}
+\index{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max\+\_\+proc@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max\+\_\+proc}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max\+\_\+procreset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_aa8c0c026ab2ee9ed5d189a2b0894f639}
+
+
+Definition at line {\bf 93} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+proc@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+proc}}
+\index{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+proc@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+proc}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+procreset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_a2cc007731be5fa72537dbc56ecce4a25}
+
+
+Definition at line {\bf 129} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+end\+\_\+cnt\+\_\+proc@{pct\+\_\+end\+\_\+cnt\+\_\+proc}}
+\index{pct\+\_\+end\+\_\+cnt\+\_\+proc@{pct\+\_\+end\+\_\+cnt\+\_\+proc}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+end\+\_\+cnt\+\_\+procreset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} pct\+\_\+end\+\_\+cnt\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_a9f42ace66a284fd30200211d6e0b9978}
+
+
+Definition at line {\bf 109} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+wrreq\+\_\+int\+\_\+proc@{pct\+\_\+wrreq\+\_\+int\+\_\+proc}}
+\index{pct\+\_\+wrreq\+\_\+int\+\_\+proc@{pct\+\_\+wrreq\+\_\+int\+\_\+proc}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+wrreq\+\_\+int\+\_\+procclk,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} pct\+\_\+wrreq\+\_\+int\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_adb00bd18dbd62a1c2742dad2a58da236}
+
+
+Definition at line {\bf 274} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!P\+R\+O\+C\+E\+S\+S\+\_\+333@{P\+R\+O\+C\+E\+S\+S\+\_\+333}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+333@{P\+R\+O\+C\+E\+S\+S\+\_\+333}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+333current\+\_\+state,pct\+\_\+data\+\_\+wrreq}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+333(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf current\+\_\+state}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf pct\+\_\+data\+\_\+wrreq}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_ada1037f6d95df2c3062c396ee79209de}
+
+
+Definition at line {\bf 289} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+stage\+\_\+0@{reg\+\_\+stage\+\_\+0}}
+\index{reg\+\_\+stage\+\_\+0@{reg\+\_\+stage\+\_\+0}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+stage\+\_\+0reset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} reg\+\_\+stage\+\_\+0(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_a33e3a2d62d66ecc0995010b187bb77b4}
+
+
+Definition at line {\bf 156} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+stage\+\_\+1@{reg\+\_\+stage\+\_\+1}}
+\index{reg\+\_\+stage\+\_\+1@{reg\+\_\+stage\+\_\+1}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+stage\+\_\+1reset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} reg\+\_\+stage\+\_\+1(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_a86c9ab05c8c0a35540c106c5cb11f317}
+
+
+Definition at line {\bf 181} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+stage\+\_\+2@{reg\+\_\+stage\+\_\+2}}
+\index{reg\+\_\+stage\+\_\+2@{reg\+\_\+stage\+\_\+2}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+stage\+\_\+2reset\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} reg\+\_\+stage\+\_\+2(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classdata2packets_1_1arch_a15af5c974e6ba4eeb3feb8d4479a40ca}
+
+
+Definition at line {\bf 206} of file {\bf data2packets.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{data2packets\+::arch@{data2packets\+::arch}!current\+\_\+state@{current\+\_\+state}}
+\index{current\+\_\+state@{current\+\_\+state}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{current\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf current\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a7ede5b91aac1f3d1b2a884a5e191d554}
+
+
+Definition at line {\bf 73} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!next\+\_\+state@{next\+\_\+state}}
+\index{next\+\_\+state@{next\+\_\+state}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{next\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf next\+\_\+state} {\bfseries {\bfseries {\bf state\+\_\+type}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a7b92f98d060e763f3dd6fa727ddb03d8}
+
+
+Definition at line {\bf 73} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+data\+\_\+wr\+\_\+cnt@{pct\+\_\+data\+\_\+wr\+\_\+cnt}}
+\index{pct\+\_\+data\+\_\+wr\+\_\+cnt@{pct\+\_\+data\+\_\+wr\+\_\+cnt}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+data\+\_\+wr\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf pct\+\_\+size\+\_\+w}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a9e1d366c6226a896e2dd29ebacb66c31}
+
+
+Definition at line {\bf 75} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+clr@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+clr}}
+\index{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+clr@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+clr}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+clr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+clr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_aa32d741dca6cb0f784964ece76d26390}
+
+
+Definition at line {\bf 78} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+en@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+en}}
+\index{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+en@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+en}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a67915a86a1448d980b6ec9473abe3d81}
+
+
+Definition at line {\bf 77} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max}}
+\index{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max@{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+data\+\_\+wr\+\_\+cnt\+\_\+max} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf pct\+\_\+size\+\_\+w}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a9773d7817f46f6635a65ea5618b56f5d}
+
+
+Definition at line {\bf 76} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+end\+\_\+cnt@{pct\+\_\+end\+\_\+cnt}}
+\index{pct\+\_\+end\+\_\+cnt@{pct\+\_\+end\+\_\+cnt}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+end\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+end\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{7} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_aabf96c27f05e83a67c2f14cdea7762a0}
+
+
+Definition at line {\bf 79} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!pct\+\_\+wrreq\+\_\+int@{pct\+\_\+wrreq\+\_\+int}}
+\index{pct\+\_\+wrreq\+\_\+int@{pct\+\_\+wrreq\+\_\+int}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{pct\+\_\+wrreq\+\_\+int}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+wrreq\+\_\+int} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a3f59bfc9b8f30eeec79dc160b52e7b0a}
+
+
+Definition at line {\bf 81} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+0@{reg\+\_\+0}}
+\index{reg\+\_\+0@{reg\+\_\+0}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+0} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a65841dd4cc404cc10835f16a3b48bb17}
+
+
+Definition at line {\bf 54} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+0\+\_\+en@{reg\+\_\+0\+\_\+en}}
+\index{reg\+\_\+0\+\_\+en@{reg\+\_\+0\+\_\+en}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+0\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+0\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a4b888ce19a89fcc5ff1ff04df72513f3}
+
+
+Definition at line {\bf 67} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+0\+\_\+ld@{reg\+\_\+0\+\_\+ld}}
+\index{reg\+\_\+0\+\_\+ld@{reg\+\_\+0\+\_\+ld}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+0\+\_\+ld}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+0\+\_\+ld} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a78ad995b4f0f63241150dc1ab696352a}
+
+
+Definition at line {\bf 58} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+0\+\_\+ld\+\_\+f@{reg\+\_\+0\+\_\+ld\+\_\+f}}
+\index{reg\+\_\+0\+\_\+ld\+\_\+f@{reg\+\_\+0\+\_\+ld\+\_\+f}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+0\+\_\+ld\+\_\+f}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+0\+\_\+ld\+\_\+f} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_ad84af16ee805c33e82c650ac1f1aeb59}
+
+
+Definition at line {\bf 59} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+1@{reg\+\_\+1}}
+\index{reg\+\_\+1@{reg\+\_\+1}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+1} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_ab96f5c7fbe5b4ce94da5d11a5d74210c}
+
+
+Definition at line {\bf 55} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+1\+\_\+en@{reg\+\_\+1\+\_\+en}}
+\index{reg\+\_\+1\+\_\+en@{reg\+\_\+1\+\_\+en}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+1\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+1\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a9505b8f368f950bae2c083f260666d45}
+
+
+Definition at line {\bf 68} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+1\+\_\+ld@{reg\+\_\+1\+\_\+ld}}
+\index{reg\+\_\+1\+\_\+ld@{reg\+\_\+1\+\_\+ld}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+1\+\_\+ld}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+1\+\_\+ld} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_adc60f070216586ca2a08bc3ce5e564cb}
+
+
+Definition at line {\bf 60} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+1\+\_\+ld\+\_\+f@{reg\+\_\+1\+\_\+ld\+\_\+f}}
+\index{reg\+\_\+1\+\_\+ld\+\_\+f@{reg\+\_\+1\+\_\+ld\+\_\+f}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+1\+\_\+ld\+\_\+f}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+1\+\_\+ld\+\_\+f} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a0ed1755762d4ff7c81c93e1f4e47f658}
+
+
+Definition at line {\bf 61} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+2@{reg\+\_\+2}}
+\index{reg\+\_\+2@{reg\+\_\+2}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+2} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a1552c71bcf94c0ddc78751a2c813a2ca}
+
+
+Definition at line {\bf 56} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+2\+\_\+en@{reg\+\_\+2\+\_\+en}}
+\index{reg\+\_\+2\+\_\+en@{reg\+\_\+2\+\_\+en}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+2\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+2\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_ae23f0011851ca350143d08ddf2ffbac8}
+
+
+Definition at line {\bf 69} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+2\+\_\+ld@{reg\+\_\+2\+\_\+ld}}
+\index{reg\+\_\+2\+\_\+ld@{reg\+\_\+2\+\_\+ld}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+2\+\_\+ld}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+2\+\_\+ld} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_ad71ff2ede6c23cd32848182d28bd3514}
+
+
+Definition at line {\bf 62} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+2\+\_\+ld\+\_\+f@{reg\+\_\+2\+\_\+ld\+\_\+f}}
+\index{reg\+\_\+2\+\_\+ld\+\_\+f@{reg\+\_\+2\+\_\+ld\+\_\+f}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+2\+\_\+ld\+\_\+f}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+2\+\_\+ld\+\_\+f} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a160fde81f661480237d66ff24638f0da}
+
+
+Definition at line {\bf 63} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+en@{reg\+\_\+en}}
+\index{reg\+\_\+en@{reg\+\_\+en}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_add10177ef873d88e1613854f2c3517b7}
+
+
+Definition at line {\bf 70} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+ld@{reg\+\_\+ld}}
+\index{reg\+\_\+ld@{reg\+\_\+ld}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+ld}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+ld} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a58f4a181ed9e956173fd95030beb3441}
+
+
+Definition at line {\bf 64} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!reg\+\_\+ld\+\_\+ftr@{reg\+\_\+ld\+\_\+ftr}}
+\index{reg\+\_\+ld\+\_\+ftr@{reg\+\_\+ld\+\_\+ftr}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{reg\+\_\+ld\+\_\+ftr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reg\+\_\+ld\+\_\+ftr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classdata2packets_1_1arch_a22c059cd39e7f53d9ad040cc97fcab43}
+
+
+Definition at line {\bf 65} of file {\bf data2packets.\+vhd}.
+
+\index{data2packets\+::arch@{data2packets\+::arch}!state\+\_\+type@{state\+\_\+type}}
+\index{state\+\_\+type@{state\+\_\+type}!data2packets\+::arch@{data2packets\+::arch}}
+\paragraph[{state\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state\+\_\+type} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s0}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s1}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s2}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s3}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classdata2packets_1_1arch_abd32ac8eb968f27ea5afe3a1121025c9}
+
+
+Definition at line {\bf 72} of file {\bf data2packets.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/data2packets/synth/{\bf data2packets.\+vhd}\end{DoxyCompactItemize}

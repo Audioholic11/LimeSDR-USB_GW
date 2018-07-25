@@ -1,0 +1,154 @@
+\subsection{alt\+\_\+dev.\+c}
+\label{alt__dev_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dev.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+dev.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2004 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include <stddef.h>}
+00034 \textcolor{preprocessor}{#include <stdio.h>}
+00035 \textcolor{preprocessor}{#include <unistd.h>}
+00036 \textcolor{preprocessor}{#include <fcntl.h>}
+00037 \textcolor{preprocessor}{#include <errno.h>}
+00038 
+00039 \textcolor{preprocessor}{#include "sys/alt_dev.h"}
+00040 \textcolor{preprocessor}{#include "priv/alt_file.h"}
+00041 
+00042 \textcolor{preprocessor}{#include "alt_types.h"}
+00043 
+00044 \textcolor{preprocessor}{#include "system.h"}
+00045 
+00046 \textcolor{comment}{/*}
+00047 \textcolor{comment}{ * This file contains the data constructs used to control access to device and}
+00048 \textcolor{comment}{ * filesytems.}
+00049 \textcolor{comment}{ */}
+00050 
+00051 \textcolor{comment}{/*}
+00052 \textcolor{comment}{ * "alt\_fs\_list" is the head of a linked list of registered filesystems. It is }
+00053 \textcolor{comment}{ * initialised as an empty list. New entries can be added using the }
+00054 \textcolor{comment}{ * alt\_fs\_reg() function.  }
+00055 \textcolor{comment}{ */}
+00056 
+00057 ALT_LLIST_HEAD(alt_fs_list);
+00058 
+00059 
+00060 \textcolor{comment}{/*}
+00061 \textcolor{comment}{ * "alt\_dev\_list" is the head of a linked list of registered devices. It is}
+00062 \textcolor{comment}{ * configured at startup to include a single device, "alt\_dev\_null". This}
+00063 \textcolor{comment}{ * device is discussed below.}
+00064 \textcolor{comment}{ */}
+00065 
+00066 \textcolor{keyword}{extern} alt_dev alt_dev_null; \textcolor{comment}{/* forward declaration */}
+00067 
+00068 alt_llist alt_dev_list = \{&alt\_dev\_null.llist, &alt\_dev\_null.llist\};
+00069 
+00070 \textcolor{comment}{/*}
+00071 \textcolor{comment}{ * alt\_dev\_null\_write() is the implementation of the write() function used}
+00072 \textcolor{comment}{ * by the alt\_dev\_null device. It simple discards all data passed to it, and}
+00073 \textcolor{comment}{ * indicates that the data has been successfully transmitted.}
+00074 \textcolor{comment}{ */}
+00075 
+00076 \textcolor{keyword}{static} \textcolor{keywordtype}{int} alt_dev_null_write (alt_fd* fd, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* ptr, \textcolor{keywordtype}{int} len)
+00077 \{
+00078   \textcolor{keywordflow}{return} len;
+00079 \}
+00080 
+00081 \textcolor{comment}{/*}
+00082 \textcolor{comment}{ * "alt\_dev\_null" is used to allow output to be redirected to nowhere. It is}
+00083 \textcolor{comment}{ * the only device registered before the call to alt\_sys\_init(). At startup }
+00084 \textcolor{comment}{ * stin, stdout & stderr are all directed towards this device so that library }
+00085 \textcolor{comment}{ * calls like printf() will be safe but inefectual.  }
+00086 \textcolor{comment}{ */}
+00087 
+00088 alt_dev alt\_dev\_null = \{
+00089    \{
+00090      &alt_dev_list,
+00091      &alt\_dev\_list
+00092    \},
+00093    \textcolor{stringliteral}{"/dev/null"},
+00094    NULL,               \textcolor{comment}{/* open */}
+00095    NULL,               \textcolor{comment}{/* close */}
+00096    NULL,               \textcolor{comment}{/* write */}
+00097    alt_dev_null_write, \textcolor{comment}{/* write */}
+00098    NULL,               \textcolor{comment}{/* lseek */}   
+00099    NULL,               \textcolor{comment}{/* fstat */} 
+00100    NULL                \textcolor{comment}{/* ioctl */}
+00101  \};
+00102 
+00103 \textcolor{comment}{/*}
+00104 \textcolor{comment}{ * "alt\_fd\_list\_lock" is a semaphore used to control access to the file}
+00105 \textcolor{comment}{ * descriptor list. This is used to ensure that access to the list is thread}
+00106 \textcolor{comment}{ * safe.  }
+00107 \textcolor{comment}{ */}
+00108 
+00109 ALT_SEM(alt\_fd\_list\_lock)
+00110 
+00111 \textcolor{comment}{/*}
+00112 \textcolor{comment}{ * "alt\_max\_fd" is used to make access to the file descriptor list more }
+00113 \textcolor{comment}{ * efficent. It is set to be the value of the highest allocated file }
+00114 \textcolor{comment}{ * descriptor. This saves having to search the entire pool of unallocated}
+00115 \textcolor{comment}{ * file descriptors when looking for a match.}
+00116 \textcolor{comment}{ */}
+00117 
+00118 alt_32 alt_max_fd = -1;
+00119 
+00120 \textcolor{comment}{/*}
+00121 \textcolor{comment}{ * "alt\_fd\_list" is the file descriptor pool. The first three entries in the}
+00122 \textcolor{comment}{ * array are configured as standard in, standard out, and standard error. These}
+00123 \textcolor{comment}{ * are all initialised so that accesses are directed to the alt\_dev\_null }
+00124 \textcolor{comment}{ * device. The remaining file descriptors are initialised as unallocated.}
+00125 \textcolor{comment}{ *}
+00126 \textcolor{comment}{ * The maximum number of file descriptors within the system is specified by the}
+00127 \textcolor{comment}{ * user defined macro "ALT\_MAX\_FD". This is defined in "system.h", which is }
+00128 \textcolor{comment}{ * auto-genereated using the projects PTF and STF files.}
+00129 \textcolor{comment}{ */}
+00130 
+00131 alt_fd alt_fd_list[ALT_MAX_FD] = 
+00132   \{
+00133     \{
+00134       &alt_dev_null, \textcolor{comment}{/* standard in */}
+00135       0,
+00136       0
+00137     \},
+00138     \{
+00139       &alt_dev_null, \textcolor{comment}{/* standard out */}
+00140       0,
+00141       0
+00142     \},
+00143     \{
+00144       &alt_dev_null, \textcolor{comment}{/* standard error */}
+00145       0,
+00146       0
+00147     \}
+00148     \textcolor{comment}{/* all other elements are set to zero */}
+00149   \};
+\end{DoxyCode}

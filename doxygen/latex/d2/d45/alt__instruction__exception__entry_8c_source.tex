@@ -1,0 +1,211 @@
+\subsection{alt\+\_\+instruction\+\_\+exception\+\_\+entry.\+c}
+\label{alt__instruction__exception__entry_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+instruction\+\_\+exception\+\_\+entry.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+instruction\+\_\+exception\+\_\+entry.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2008 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 \textcolor{preprocessor}{#include "sys/alt_exceptions.h"}
+00033 \textcolor{preprocessor}{#include "nios2.h"}
+00034 \textcolor{preprocessor}{#include "alt_types.h"}
+00035 \textcolor{preprocessor}{#include "system.h"}
+00036 
+00037 \textcolor{comment}{/*}
+00038 \textcolor{comment}{ * This file implements support for calling user-registered handlers for}
+00039 \textcolor{comment}{ * instruction-generated exceptions. This handler could also be reached}
+00040 \textcolor{comment}{ * in the event of a spurious interrupt.}
+00041 \textcolor{comment}{ *}
+00042 \textcolor{comment}{ * The handler code is optionally enabled through the "Enable}
+00043 \textcolor{comment}{ * Instruction-related Exception API" HAL BSP setting, which will}
+00044 \textcolor{comment}{ * define the macro below.}
+00045 \textcolor{comment}{ */}
+00046 \textcolor{preprocessor}{#ifdef ALT\_INCLUDE\_INSTRUCTION\_RELATED\_EXCEPTION\_API}
+00047 
+00048 \textcolor{comment}{/* Function pointer to exception callback routine */}
+00049 alt_exception_result (*alt_instruction_exception_handler)
+00050   (alt_exception_cause, alt_u32, alt_u32) = 0x0;
+00051 
+00052 \textcolor{comment}{/* Link entry routine to .exceptions section */}
+00053 \textcolor{keywordtype}{int} alt\_instruction\_exception\_entry (alt_u32 exception\_pc)
+00054   __attribute__ ((section (\textcolor{stringliteral}{".exceptions"})));
+00055 
+00056 \textcolor{comment}{/*}
+00057 \textcolor{comment}{ * This is the entry point for instruction-generated exceptions handling.}
+00058 \textcolor{comment}{ * This routine will be called by alt\_exceptions\_entry.S, after it determines}
+00059 \textcolor{comment}{ * that an exception could not be handled by handlers that preceed that}
+00060 \textcolor{comment}{ * of instruction-generated exceptions (such as interrupts).}
+00061 \textcolor{comment}{ *}
+00062 \textcolor{comment}{ * For this to function properly, you must register an exception handler}
+00063 \textcolor{comment}{ * using alt\_instruction\_exception\_register(). This routine will call}
+00064 \textcolor{comment}{ * that handler if it has been registered. Absent a handler, it will}
+00065 \textcolor{comment}{ * break break or hang as discussed below.}
+00066 \textcolor{comment}{ */}
+00067 \textcolor{keywordtype}{int} 
+00068 alt\_instruction\_exception\_entry (alt_u32 exception\_pc)
+00069 \{
+00070   alt_u32 cause, badaddr;
+00071 
+00072 \textcolor{comment}{/*}
+00073 \textcolor{comment}{ * If the processor hardware has the optional EXCEPTIONS & BADADDR registers,}
+00074 \textcolor{comment}{ * read them and pass their content to the user handler. These are always}
+00075 \textcolor{comment}{ * present if the MMU or MPU is enabled, and optionally for other advanced}
+00076 \textcolor{comment}{ * exception types via the "Extra exceptions information" setting in the}
+00077 \textcolor{comment}{ * processor (hardware) configuration.}
+00078 \textcolor{comment}{ *}
+00079 \textcolor{comment}{ * If these registers are not present, the cause field will be set to}
+00080 \textcolor{comment}{ * NIOS2\_EXCEPTION\_CAUSE\_NOT\_PRESENT. Your handling routine should}
+00081 \textcolor{comment}{ * check the validity of the cause argument before proceeding.}
+00082 \textcolor{comment}{ */}
+00083 \textcolor{preprocessor}{#ifdef NIOS2\_HAS\_EXTRA\_EXCEPTION\_INFO}
+00084   \textcolor{comment}{/* Get exception cause & "badaddr" */}
+00085   NIOS2_READ_EXCEPTION(cause);
+00086   cause = ( (cause & NIOS2_EXCEPTION_REG_CAUSE_MASK) >>
+00087               NIOS2_EXCEPTION_REG_CAUSE_OFST );
+00088 
+00089   NIOS2_READ_BADADDR(badaddr);
+00090 \textcolor{preprocessor}{#else}
+00091   cause = NIOS2_EXCEPTION_CAUSE_NOT_PRESENT;
+00092   badaddr = 0;
+00093 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* NIOS2\_HAS\_EXTRA\_EXCEPTION\_INFO */}\textcolor{preprocessor}{}
+00094 
+00095   \textcolor{keywordflow}{if}(alt_instruction_exception_handler) \{
+00096     \textcolor{comment}{/*}
+00097 \textcolor{comment}{     * Call handler. Its return value indicates whether the exception-causing}
+00098 \textcolor{comment}{     * instruction should be re-issued. The code that called us,}
+00099 \textcolor{comment}{     * alt\_eceptions\_entry.S, will look at this value and adjust the ea}
+00100 \textcolor{comment}{     * register as necessary}
+00101 \textcolor{comment}{     */}
+00102     \textcolor{keywordflow}{return} alt_instruction_exception_handler(cause, exception\_pc, badaddr);
+00103   \}
+00104   \textcolor{comment}{/*}
+00105 \textcolor{comment}{   * We got here because an instruction-generated exception occured, but no}
+00106 \textcolor{comment}{   * handler is present. We do not presume to know how to handle it. If the}
+00107 \textcolor{comment}{   * debugger is present, break, otherwise hang.}
+00108 \textcolor{comment}{   *}
+00109 \textcolor{comment}{   * If you've reached here in the debugger, consider examining the}
+00110 \textcolor{comment}{   * EXCEPTIONS register cause bit-field, which was read into the 'cause'}
+00111 \textcolor{comment}{   * variable above, and compare it against the exceptions-type enumeration}
+00112 \textcolor{comment}{   * in alt\_exceptions.h. This register is availabe if the MMU or MPU is}
+00113 \textcolor{comment}{   * present, or if the "Extra exceptions information" hardware option is}
+00114 \textcolor{comment}{   * selected.}
+00115 \textcolor{comment}{   *}
+00116 \textcolor{comment}{   *  If you get here then one of the following could have happened:}
+00117 \textcolor{comment}{   *}
+00118 \textcolor{comment}{   *  - An instruction-generated exception occured, and the processor}
+00119 \textcolor{comment}{   *    does not have the extra exceptions feature enabled, or you}
+00120 \textcolor{comment}{   *    have not registered a handler using}
+00121 \textcolor{comment}{   *    alt\_instruction\_exception\_register()}
+00122 \textcolor{comment}{   *}
+00123 \textcolor{comment}{   *  Some examples of instruction-generated exceptions and why they}
+00124 \textcolor{comment}{   *  might occur:}
+00125 \textcolor{comment}{   *}
+00126 \textcolor{comment}{   *  - Your program could have been compiled for a full-featured}
+00127 \textcolor{comment}{   *    Nios II core, but it is running on a smaller core, and}
+00128 \textcolor{comment}{   *    instruction emulation has been disabled by defining}
+00129 \textcolor{comment}{   *    ALT\_NO\_INSTRUCTION\_EMULATION.}
+00130 \textcolor{comment}{   *}
+00131 \textcolor{comment}{   *    You can work around the problem by re-enabling instruction}
+00132 \textcolor{comment}{   *    emulation, or you can figure out why your program is being}
+00133 \textcolor{comment}{   *    compiled for a system other than the one that it is running on.}
+00134 \textcolor{comment}{   *}
+00135 \textcolor{comment}{   *  - Your program has executed a trap instruction, but has not}
+00136 \textcolor{comment}{   *    implemented a handler for this instruction.}
+00137 \textcolor{comment}{   *}
+00138 \textcolor{comment}{   *  - Your program has executed an illegal instruction (one which is}
+00139 \textcolor{comment}{   *    not defined in the instruction set).}
+00140 \textcolor{comment}{   *}
+00141 \textcolor{comment}{   *  - Your processor includes an MMU or MPU, and you have enabled it}
+00142 \textcolor{comment}{   *    before registering an exception handler to service exceptions it}
+00143 \textcolor{comment}{   *    generates.}
+00144 \textcolor{comment}{   *}
+00145 \textcolor{comment}{   * The problem could also be hardware related:}
+00146 \textcolor{comment}{   *  - If your hardware is broken and is generating spurious interrupts}
+00147 \textcolor{comment}{   *    (a peripheral which negates its interrupt output before its}
+00148 \textcolor{comment}{   *    interrupt handler has been executed will cause spurious interrupts)}
+00149 \textcolor{comment}{   */}
+00150   \textcolor{keywordflow}{else} \{
+00151 \textcolor{preprocessor}{#ifdef NIOS2\_HAS\_DEBUG\_STUB}
+00152     NIOS2_BREAK();
+00153 \textcolor{preprocessor}{#else}
+00154     \textcolor{keywordflow}{while}(1)
+00155       ;
+00156 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* NIOS2\_HAS\_DEBUG\_STUB */}\textcolor{preprocessor}{}
+00157   \}
+00158 
+00159   \textcolor{comment}{/* We should not get here. Remove compiler warning. */}
+00160   \textcolor{keywordflow}{return} NIOS2_EXCEPTION_RETURN_REISSUE_INST;
+00161 \}
+00162 
+00163 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_INCLUDE\_INSTRUCTION\_RELATED\_EXCEPTION\_API */}\textcolor{preprocessor}{}
+00164 
+00165 \textcolor{comment}{/*}
+00166 \textcolor{comment}{ * This routine indicates whether a particular exception cause will have}
+00167 \textcolor{comment}{ * set a valid address into the BADADDR register, which is included}
+00168 \textcolor{comment}{ * in the arguments to a user-registered instruction-generated exception}
+00169 \textcolor{comment}{ * handler. Many exception types do not set valid contents in BADADDR;}
+00170 \textcolor{comment}{ * this is a convenience routine to easily test the validity of that}
+00171 \textcolor{comment}{ * argument in your handler.}
+00172 \textcolor{comment}{ *}
+00173 \textcolor{comment}{ * Note that this routine will return false (0) for causes }
+00174 \textcolor{comment}{ * NIOS2\_EXCEPTION\_TLB\_MISS and NIOS2\_EXCEPTION\_ECC\_TLB\_ERR.}
+00175 \textcolor{comment}{ * You must read the TLBMISC.D field to determine if BADADDR}
+00176 \textcolor{comment}{ * is valid for these (valid if TLBMISC.D = 1).}
+00177 \textcolor{comment}{ *}
+00178 \textcolor{comment}{ * Arguments:}
+00179 \textcolor{comment}{ * cause:  The 5-bit exception cause field of the EXCEPTIONS register,}
+00180 \textcolor{comment}{ *         shifted to the LSB position. You may pass the 'cause' argument}
+00181 \textcolor{comment}{ *         in a handler you registered directy to this routine.}
+00182 \textcolor{comment}{ *}
+00183 \textcolor{comment}{ * Return: 1: BADADDR (bad\_addr argument to handler) is valid}
+00184 \textcolor{comment}{ *         0: BADADDR is not valid}
+00185 \textcolor{comment}{ */}
+00186 \textcolor{keywordtype}{int} 
+00187 alt_exception_cause_generated_bad_addr(alt_exception_cause cause)
+00188 \{
+00189   \textcolor{keywordflow}{switch} (cause) \{
+00190   \textcolor{keywordflow}{case} NIOS2_EXCEPTION_SUPERVISOR_ONLY_DATA_ADDR:
+00191   \textcolor{keywordflow}{case} NIOS2_EXCEPTION_MISALIGNED_DATA_ADDR:
+00192   \textcolor{keywordflow}{case} NIOS2_EXCEPTION_MISALIGNED_TARGET_PC:
+00193   \textcolor{keywordflow}{case} NIOS2_EXCEPTION_TLB_READ_PERM_VIOLATION:
+00194   \textcolor{keywordflow}{case} NIOS2_EXCEPTION_TLB_WRITE_PERM_VIOLATION:
+00195   \textcolor{keywordflow}{case} NIOS2_EXCEPTION_MPU_DATA_REGION_VIOLATION:
+00196   \textcolor{keywordflow}{case} NIOS2_EXCEPTION_ECC_DATA_ERR:
+00197     \textcolor{keywordflow}{return} 1;
+00198 
+00199   \textcolor{keywordflow}{case} NIOS2_EXCEPTION_TLB_MISS:
+00200   \textcolor{keywordflow}{case} NIOS2_EXCEPTION_ECC_TLB_ERR:
+00201     \textcolor{keywordflow}{return} 0;
+00202 
+00203   \textcolor{keywordflow}{default}:
+00204     \textcolor{keywordflow}{return} 0;
+00205   \}
+00206 \}
+\end{DoxyCode}

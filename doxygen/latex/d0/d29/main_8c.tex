@@ -1,0 +1,788 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/main.c File Reference}
+\label{main_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/main.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/main.\+c}}
+{\ttfamily \#include \char`\"{}io.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$altera\+\_\+avalon\+\_\+spi.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}L\+M\+S64\+C\+\_\+protocol.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sodera\+\_\+pcie\+\_\+brd\+\_\+v1r0.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}i2c\+\_\+opencores.\+h\char`\"{}}\\*
+Include dependency graph for main.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/d10/main_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf sbi}(p,  n)~((p) $\vert$= (1\+U\+L $<$$<$ (n)))
+\item 
+\#define {\bf cbi}(p,  n)~((p) \&= $\sim$(1 $<$$<$ (n)))
+\item 
+\#define {\bf F\+W\+\_\+\+V\+ER}~4
+\item 
+\#define {\bf S\+P\+I\+\_\+\+N\+R\+\_\+\+L\+M\+S7002M}~0
+\item 
+\#define {\bf S\+P\+I\+\_\+\+N\+R\+\_\+\+B\+RD}~1
+\item 
+\#define {\bf S\+P\+I\+\_\+\+N\+R\+\_\+\+D\+AC}~0
+\item 
+\#define {\bf S\+P\+I\+\_\+\+N\+R\+\_\+\+A\+D\+F4002}~0
+\item 
+\#define {\bf P\+R\+O\+G\+\_\+\+E\+E\+P\+R\+OM}~1
+\item 
+\#define {\bf P\+R\+O\+G\+\_\+\+S\+R\+AM}~2
+\item 
+\#define {\bf B\+O\+O\+T\+\_\+\+M\+CU}~3
+\item 
+\#define {\bf M\+C\+U\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+EG}~0x02
+\begin{DoxyCompactList}\small\item\em C\+M\+D\+\_\+\+P\+R\+O\+G\+\_\+\+M\+CU. \end{DoxyCompactList}\item 
+\#define {\bf M\+C\+U\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+EG}~0x03
+\item 
+\#define {\bf M\+C\+U\+\_\+\+F\+I\+F\+O\+\_\+\+W\+R\+\_\+\+R\+EG}~0x04
+\item 
+\#define {\bf M\+A\+X\+\_\+\+M\+C\+U\+\_\+\+R\+E\+T\+R\+I\+ES}~30
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned char {\bf Check\+\_\+many\+\_\+blocks} (unsigned char block\+\_\+size)
+\begin{DoxyCompactList}\small\item\em This function checks if all blocks could fit in data field. \end{DoxyCompactList}\item 
+void {\bf get\+Fifo\+Data} (uint8\+\_\+t $\ast$buf, uint8\+\_\+t k)
+\begin{DoxyCompactList}\small\item\em Gets 64 bytes packet from F\+I\+FO. \end{DoxyCompactList}\item 
+void {\bf set\+\_\+led} (unsigned char led\+\_\+pattern)
+\begin{DoxyCompactList}\small\item\em Gets led\+\_\+pattern as parameter in order to write to the register. \end{DoxyCompactList}\item 
+void {\bf Configure\+\_\+\+L\+M75} (void)
+\begin{DoxyCompactList}\small\item\em Configures L\+M75. \end{DoxyCompactList}\item 
+void {\bf Control\+\_\+\+T\+C\+X\+O\+\_\+\+D\+AC} (unsigned char oe, unsigned char $\ast${\bf data})
+\begin{DoxyCompactList}\small\item\em Function to control D\+AC for T\+C\+XO frequency control. \end{DoxyCompactList}\item 
+void {\bf Control\+\_\+\+T\+C\+X\+O\+\_\+\+A\+DF} (unsigned char oe, unsigned char $\ast${\bf data})
+\begin{DoxyCompactList}\small\item\em Function to control A\+DF for T\+C\+XO frequency control. \end{DoxyCompactList}\item 
+int {\bf main} ()
+\begin{DoxyCompactList}\small\item\em Main, what else? Gets L\+E\+Ds pattern from switchers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t {\bf M\+C\+U\+\_\+retries}
+\item 
+uint8\+\_\+t {\bf test}
+\item 
+uint8\+\_\+t {\bf block}
+\item 
+uint8\+\_\+t {\bf cmd\+\_\+errors}
+\item 
+uint8\+\_\+t {\bf gl\+Ep0\+Buffer\+\_\+\+Rx} [64]
+\item 
+uint8\+\_\+t {\bf gl\+Ep0\+Buffer\+\_\+\+Tx} [64]
+\item 
+{\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet} $\ast$ {\bf L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Tx} = ({\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet}$\ast$){\bf gl\+Ep0\+Buffer\+\_\+\+Tx}
+\item 
+{\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet} $\ast$ {\bf L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Rx} = ({\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet}$\ast$){\bf gl\+Ep0\+Buffer\+\_\+\+Rx}
+\item 
+unsigned char {\bf dac\+\_\+val} = 134
+\item 
+unsigned char {\bf dac\+\_\+data} [2]
+\item 
+signed short int {\bf converted\+\_\+val} = 300
+\item 
+int {\bf flash\+\_\+page} = 0
+\item 
+int {\bf flash\+\_\+page\+\_\+data\+\_\+cnt} = 0
+\item 
+int {\bf flash\+\_\+data\+\_\+cnt\+\_\+free} = 0
+\item 
+int {\bf flash\+\_\+data\+\_\+counter\+\_\+to\+\_\+copy} = 0
+\item 
+unsigned long int {\bf last\+\_\+portion}
+\item 
+unsigned long int {\bf current\+\_\+portion}
+\item 
+unsigned long int {\bf fpga\+\_\+data}
+\item 
+unsigned char {\bf data\+\_\+cnt}
+\item 
+unsigned char {\bf sc\+\_\+brdg\+\_\+data} [4]
+\item 
+unsigned char {\bf flash\+\_\+page\+\_\+data} [0x100]
+\item 
+{\bf t\+Board\+\_\+\+Config\+\_\+\+F\+P\+GA} $\ast$ {\bf Board\+\_\+\+Config\+\_\+\+F\+P\+GA} = ({\bf t\+Board\+\_\+\+Config\+\_\+\+F\+P\+GA}$\ast$) {\bf flash\+\_\+page\+\_\+data}
+\item 
+unsigned long int {\bf fpga\+\_\+byte}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{main.\+c@{main.\+c}!B\+O\+O\+T\+\_\+\+M\+CU@{B\+O\+O\+T\+\_\+\+M\+CU}}
+\index{B\+O\+O\+T\+\_\+\+M\+CU@{B\+O\+O\+T\+\_\+\+M\+CU}!main.\+c@{main.\+c}}
+\paragraph[{B\+O\+O\+T\+\_\+\+M\+CU}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+O\+T\+\_\+\+M\+CU~3}\label{main_8c_a2b24aa8962c3b49e5b57b469ccf16027}
+
+
+Definition at line {\bf 40} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!cbi@{cbi}}
+\index{cbi@{cbi}!main.\+c@{main.\+c}}
+\paragraph[{cbi}]{\setlength{\rightskip}{0pt plus 5cm}\#define cbi(
+\begin{DoxyParamCaption}
+\item[{}]{p, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~((p) \&= $\sim$(1 $<$$<$ (n)))}\label{main_8c_a52de1fcb96f13888296ab315ac025aaa}
+
+
+Definition at line {\bf 23} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!F\+W\+\_\+\+V\+ER@{F\+W\+\_\+\+V\+ER}}
+\index{F\+W\+\_\+\+V\+ER@{F\+W\+\_\+\+V\+ER}!main.\+c@{main.\+c}}
+\paragraph[{F\+W\+\_\+\+V\+ER}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+W\+\_\+\+V\+ER~4}\label{main_8c_a996613d37b1d133d051a5e7ddcac3294}
+
+
+Definition at line {\bf 28} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!M\+A\+X\+\_\+\+M\+C\+U\+\_\+\+R\+E\+T\+R\+I\+ES@{M\+A\+X\+\_\+\+M\+C\+U\+\_\+\+R\+E\+T\+R\+I\+ES}}
+\index{M\+A\+X\+\_\+\+M\+C\+U\+\_\+\+R\+E\+T\+R\+I\+ES@{M\+A\+X\+\_\+\+M\+C\+U\+\_\+\+R\+E\+T\+R\+I\+ES}!main.\+c@{main.\+c}}
+\paragraph[{M\+A\+X\+\_\+\+M\+C\+U\+\_\+\+R\+E\+T\+R\+I\+ES}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+M\+C\+U\+\_\+\+R\+E\+T\+R\+I\+ES~30}\label{main_8c_a5c96620df56aa2e7c6a3d620153f1f22}
+
+
+Definition at line {\bf 47} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!M\+C\+U\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+EG@{M\+C\+U\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+EG}}
+\index{M\+C\+U\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+EG@{M\+C\+U\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+EG}!main.\+c@{main.\+c}}
+\paragraph[{M\+C\+U\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+EG}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+C\+U\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+EG~0x02}\label{main_8c_af2ade4881394bc279fc5b7eb636c7391}
+
+
+C\+M\+D\+\_\+\+P\+R\+O\+G\+\_\+\+M\+CU. 
+
+
+
+Definition at line {\bf 43} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!M\+C\+U\+\_\+\+F\+I\+F\+O\+\_\+\+W\+R\+\_\+\+R\+EG@{M\+C\+U\+\_\+\+F\+I\+F\+O\+\_\+\+W\+R\+\_\+\+R\+EG}}
+\index{M\+C\+U\+\_\+\+F\+I\+F\+O\+\_\+\+W\+R\+\_\+\+R\+EG@{M\+C\+U\+\_\+\+F\+I\+F\+O\+\_\+\+W\+R\+\_\+\+R\+EG}!main.\+c@{main.\+c}}
+\paragraph[{M\+C\+U\+\_\+\+F\+I\+F\+O\+\_\+\+W\+R\+\_\+\+R\+EG}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+C\+U\+\_\+\+F\+I\+F\+O\+\_\+\+W\+R\+\_\+\+R\+EG~0x04}\label{main_8c_ab2d2a38e93e60c1c3d8e2adc90e0b015}
+
+
+Definition at line {\bf 45} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!M\+C\+U\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+EG@{M\+C\+U\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+EG}}
+\index{M\+C\+U\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+EG@{M\+C\+U\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+EG}!main.\+c@{main.\+c}}
+\paragraph[{M\+C\+U\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+EG}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+C\+U\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+EG~0x03}\label{main_8c_ae769ebb7e944258a72113a4139d1c9b3}
+
+
+Definition at line {\bf 44} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!P\+R\+O\+G\+\_\+\+E\+E\+P\+R\+OM@{P\+R\+O\+G\+\_\+\+E\+E\+P\+R\+OM}}
+\index{P\+R\+O\+G\+\_\+\+E\+E\+P\+R\+OM@{P\+R\+O\+G\+\_\+\+E\+E\+P\+R\+OM}!main.\+c@{main.\+c}}
+\paragraph[{P\+R\+O\+G\+\_\+\+E\+E\+P\+R\+OM}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+R\+O\+G\+\_\+\+E\+E\+P\+R\+OM~1}\label{main_8c_aa81ebf373f4b28bce1bd1b16a521f8a7}
+
+
+Definition at line {\bf 38} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!P\+R\+O\+G\+\_\+\+S\+R\+AM@{P\+R\+O\+G\+\_\+\+S\+R\+AM}}
+\index{P\+R\+O\+G\+\_\+\+S\+R\+AM@{P\+R\+O\+G\+\_\+\+S\+R\+AM}!main.\+c@{main.\+c}}
+\paragraph[{P\+R\+O\+G\+\_\+\+S\+R\+AM}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+R\+O\+G\+\_\+\+S\+R\+AM~2}\label{main_8c_ae25c33144f634f187670da8926f9d59e}
+
+
+Definition at line {\bf 39} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!sbi@{sbi}}
+\index{sbi@{sbi}!main.\+c@{main.\+c}}
+\paragraph[{sbi}]{\setlength{\rightskip}{0pt plus 5cm}\#define sbi(
+\begin{DoxyParamCaption}
+\item[{}]{p, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~((p) $\vert$= (1\+U\+L $<$$<$ (n)))}\label{main_8c_ab9925e74f46b86eadea5a1dcdc5e7565}
+
+
+Definition at line {\bf 22} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!S\+P\+I\+\_\+\+N\+R\+\_\+\+A\+D\+F4002@{S\+P\+I\+\_\+\+N\+R\+\_\+\+A\+D\+F4002}}
+\index{S\+P\+I\+\_\+\+N\+R\+\_\+\+A\+D\+F4002@{S\+P\+I\+\_\+\+N\+R\+\_\+\+A\+D\+F4002}!main.\+c@{main.\+c}}
+\paragraph[{S\+P\+I\+\_\+\+N\+R\+\_\+\+A\+D\+F4002}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+P\+I\+\_\+\+N\+R\+\_\+\+A\+D\+F4002~0}\label{main_8c_ade5b2d5349fa2d082dc34355c0b56cf6}
+
+
+Definition at line {\bf 34} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf Control\+\_\+\+T\+C\+X\+O\+\_\+\+A\+D\+F()}.
+
+\index{main.\+c@{main.\+c}!S\+P\+I\+\_\+\+N\+R\+\_\+\+B\+RD@{S\+P\+I\+\_\+\+N\+R\+\_\+\+B\+RD}}
+\index{S\+P\+I\+\_\+\+N\+R\+\_\+\+B\+RD@{S\+P\+I\+\_\+\+N\+R\+\_\+\+B\+RD}!main.\+c@{main.\+c}}
+\paragraph[{S\+P\+I\+\_\+\+N\+R\+\_\+\+B\+RD}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+P\+I\+\_\+\+N\+R\+\_\+\+B\+RD~1}\label{main_8c_a0c4f25c401a2d9dcc4aac11bd4ac7ff2}
+
+
+Definition at line {\bf 32} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!S\+P\+I\+\_\+\+N\+R\+\_\+\+D\+AC@{S\+P\+I\+\_\+\+N\+R\+\_\+\+D\+AC}}
+\index{S\+P\+I\+\_\+\+N\+R\+\_\+\+D\+AC@{S\+P\+I\+\_\+\+N\+R\+\_\+\+D\+AC}!main.\+c@{main.\+c}}
+\paragraph[{S\+P\+I\+\_\+\+N\+R\+\_\+\+D\+AC}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+P\+I\+\_\+\+N\+R\+\_\+\+D\+AC~0}\label{main_8c_a604fd38961021cbd3b71587615ac369d}
+
+
+Definition at line {\bf 33} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf Control\+\_\+\+T\+C\+X\+O\+\_\+\+D\+A\+C()}.
+
+\index{main.\+c@{main.\+c}!S\+P\+I\+\_\+\+N\+R\+\_\+\+L\+M\+S7002M@{S\+P\+I\+\_\+\+N\+R\+\_\+\+L\+M\+S7002M}}
+\index{S\+P\+I\+\_\+\+N\+R\+\_\+\+L\+M\+S7002M@{S\+P\+I\+\_\+\+N\+R\+\_\+\+L\+M\+S7002M}!main.\+c@{main.\+c}}
+\paragraph[{S\+P\+I\+\_\+\+N\+R\+\_\+\+L\+M\+S7002M}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+P\+I\+\_\+\+N\+R\+\_\+\+L\+M\+S7002M~0}\label{main_8c_ab774ea313379207208c1b5d1fef637e5}
+
+
+Definition at line {\bf 31} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+
+
+\subsubsection{Function Documentation}
+\index{main.\+c@{main.\+c}!Check\+\_\+many\+\_\+blocks@{Check\+\_\+many\+\_\+blocks}}
+\index{Check\+\_\+many\+\_\+blocks@{Check\+\_\+many\+\_\+blocks}!main.\+c@{main.\+c}}
+\paragraph[{Check\+\_\+many\+\_\+blocks(unsigned char block\+\_\+size)}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char Check\+\_\+many\+\_\+blocks (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{block\+\_\+size}
+\end{DoxyParamCaption}
+)}\label{main_8c_a7440304615792f7224535ad9be4da3bb}
+
+
+This function checks if all blocks could fit in data field. 
+
+If blocks will not fit, function returns T\+R\+UE. 
+
+Definition at line {\bf 72} of file {\bf main.\+c}.
+
+
+
+References {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Header\+::\+Data\+\_\+blocks}, {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+::\+Data\+\_\+field}, {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+::\+Header}, {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Header\+::\+Status}, and {\bf S\+T\+A\+T\+U\+S\+\_\+\+B\+L\+O\+C\+K\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+MD}.
+
+
+
+Referenced by {\bf main()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{d0/d29/main_8c_a7440304615792f7224535ad9be4da3bb_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{main.\+c@{main.\+c}!Configure\+\_\+\+L\+M75@{Configure\+\_\+\+L\+M75}}
+\index{Configure\+\_\+\+L\+M75@{Configure\+\_\+\+L\+M75}!main.\+c@{main.\+c}}
+\paragraph[{Configure\+\_\+\+L\+M75(void)}]{\setlength{\rightskip}{0pt plus 5cm}void Configure\+\_\+\+L\+M75 (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{main_8c_ae276690725b49503909ef47341679160}
+
+
+Configures L\+M75. 
+
+
+
+Definition at line {\bf 110} of file {\bf main.\+c}.
+
+
+
+References {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+0\+\_\+\+B\+A\+SE}, {\bf I2\+C\+\_\+start()}, {\bf I2\+C\+\_\+write()}, and {\bf L\+M75\+\_\+\+I2\+C\+\_\+\+A\+D\+DR}.
+
+
+
+Referenced by {\bf main()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{d0/d29/main_8c_ae276690725b49503909ef47341679160_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{d0/d29/main_8c_ae276690725b49503909ef47341679160_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{main.\+c@{main.\+c}!Control\+\_\+\+T\+C\+X\+O\+\_\+\+A\+DF@{Control\+\_\+\+T\+C\+X\+O\+\_\+\+A\+DF}}
+\index{Control\+\_\+\+T\+C\+X\+O\+\_\+\+A\+DF@{Control\+\_\+\+T\+C\+X\+O\+\_\+\+A\+DF}!main.\+c@{main.\+c}}
+\paragraph[{Control\+\_\+\+T\+C\+X\+O\+\_\+\+A\+D\+F(unsigned char oe, unsigned char $\ast$data)}]{\setlength{\rightskip}{0pt plus 5cm}void Control\+\_\+\+T\+C\+X\+O\+\_\+\+A\+DF (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{oe, }
+\item[{unsigned char $\ast$}]{data}
+\end{DoxyParamCaption}
+)}\label{main_8c_a3ce9cc1482c5f333e223666752b33f16}
+
+
+Function to control A\+DF for T\+C\+XO frequency control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oe} & output enable control\+: 0 -\/ output disabled, 1 -\/ output enabled \\
+\hline
+{\em data} & pointer to A\+DF data block (3 bytes) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line {\bf 194} of file {\bf main.\+c}.
+
+
+
+References {\bf alt\+\_\+avalon\+\_\+spi\+\_\+command()}, {\bf S\+P\+I\+\_\+1\+\_\+\+A\+D\+F\+\_\+\+B\+A\+SE}, and {\bf S\+P\+I\+\_\+\+N\+R\+\_\+\+A\+D\+F4002}.
+
+
+
+Referenced by {\bf main()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d29/main_8c_a3ce9cc1482c5f333e223666752b33f16_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{d0/d29/main_8c_a3ce9cc1482c5f333e223666752b33f16_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{main.\+c@{main.\+c}!Control\+\_\+\+T\+C\+X\+O\+\_\+\+D\+AC@{Control\+\_\+\+T\+C\+X\+O\+\_\+\+D\+AC}}
+\index{Control\+\_\+\+T\+C\+X\+O\+\_\+\+D\+AC@{Control\+\_\+\+T\+C\+X\+O\+\_\+\+D\+AC}!main.\+c@{main.\+c}}
+\paragraph[{Control\+\_\+\+T\+C\+X\+O\+\_\+\+D\+A\+C(unsigned char oe, unsigned char $\ast$data)}]{\setlength{\rightskip}{0pt plus 5cm}void Control\+\_\+\+T\+C\+X\+O\+\_\+\+D\+AC (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{oe, }
+\item[{unsigned char $\ast$}]{data}
+\end{DoxyParamCaption}
+)}\label{main_8c_a2d5333226b30b5094a668450e8769689}
+
+
+Function to control D\+AC for T\+C\+XO frequency control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oe} & output enable control\+: 0 -\/ output disabled, 1 -\/ output enabled \\
+\hline
+{\em data} & pointer to D\+AC value (1 byte) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line {\bf 168} of file {\bf main.\+c}.
+
+
+
+References {\bf alt\+\_\+avalon\+\_\+spi\+\_\+command()}, {\bf S\+P\+I\+\_\+1\+\_\+\+D\+A\+C\+\_\+\+B\+A\+SE}, and {\bf S\+P\+I\+\_\+\+N\+R\+\_\+\+D\+AC}.
+
+
+
+Referenced by {\bf main()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d29/main_8c_a2d5333226b30b5094a668450e8769689_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{d0/d29/main_8c_a2d5333226b30b5094a668450e8769689_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{main.\+c@{main.\+c}!get\+Fifo\+Data@{get\+Fifo\+Data}}
+\index{get\+Fifo\+Data@{get\+Fifo\+Data}!main.\+c@{main.\+c}}
+\paragraph[{get\+Fifo\+Data(uint8\+\_\+t $\ast$buf, uint8\+\_\+t k)}]{\setlength{\rightskip}{0pt plus 5cm}void get\+Fifo\+Data (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$}]{buf, }
+\item[{uint8\+\_\+t}]{k}
+\end{DoxyParamCaption}
+)}\label{main_8c_a20829b629741fa92757025c82ff203a4}
+
+
+Gets 64 bytes packet from F\+I\+FO. 
+
+
+
+Definition at line {\bf 86} of file {\bf main.\+c}.
+
+
+
+References {\bf A\+V\+\_\+\+F\+I\+F\+O\+\_\+\+I\+N\+T\+\_\+0\+\_\+\+B\+A\+SE}, and {\bf I\+O\+RD}.
+
+
+
+Referenced by {\bf main()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{d0/d29/main_8c_a20829b629741fa92757025c82ff203a4_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{main.\+c@{main.\+c}!main@{main}}
+\index{main@{main}!main.\+c@{main.\+c}}
+\paragraph[{main()}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+
+Main, what else? Gets L\+E\+Ds pattern from switchers. 
+
+Sets L\+E\+Ds register according to the pattern. 
+
+Definition at line {\bf 236} of file {\bf main.\+c}.
+
+
+
+References {\bf alt\+\_\+avalon\+\_\+spi\+\_\+command()}, {\bf A\+L\+T\+\_\+\+C\+P\+U\+\_\+\+F\+R\+EQ}, {\bf A\+V\+\_\+\+F\+I\+F\+O\+\_\+\+I\+N\+T\+\_\+0\+\_\+\+B\+A\+SE}, {\bf block}, {\bf B\+O\+O\+T\+\_\+\+M\+CU}, {\bf cbi}, {\bf Check\+\_\+many\+\_\+blocks()}, {\bf C\+M\+D\+\_\+\+A\+D\+F4002\+\_\+\+WR}, {\bf C\+M\+D\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+V\+A\+L\+\_\+\+RD}, {\bf C\+M\+D\+\_\+\+A\+N\+A\+L\+O\+G\+\_\+\+V\+A\+L\+\_\+\+WR}, {\bf C\+M\+D\+\_\+\+B\+R\+D\+S\+P\+I16\+\_\+\+RD}, {\bf C\+M\+D\+\_\+\+B\+R\+D\+S\+P\+I16\+\_\+\+WR}, {\bf cmd\+\_\+errors}, {\bf C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+FO}, {\bf C\+M\+D\+\_\+\+G\+P\+I\+O\+\_\+\+D\+I\+R\+\_\+\+RD}, {\bf C\+M\+D\+\_\+\+G\+P\+I\+O\+\_\+\+D\+I\+R\+\_\+\+WR}, {\bf C\+M\+D\+\_\+\+G\+P\+I\+O\+\_\+\+RD}, {\bf C\+M\+D\+\_\+\+G\+P\+I\+O\+\_\+\+WR}, {\bf C\+M\+D\+\_\+\+L\+M\+S7002\+\_\+\+RD}, {\bf C\+M\+D\+\_\+\+L\+M\+S7002\+\_\+\+WR}, {\bf C\+M\+D\+\_\+\+L\+M\+S\+\_\+\+M\+C\+U\+\_\+\+F\+W\+\_\+\+WR}, {\bf C\+M\+D\+\_\+\+L\+M\+S\+\_\+\+R\+ST}, {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Header\+::\+Command}, {\bf Configure\+\_\+\+L\+M75()}, {\bf Control\+\_\+\+T\+C\+X\+O\+\_\+\+A\+D\+F()}, {\bf Control\+\_\+\+T\+C\+X\+O\+\_\+\+D\+A\+C()}, {\bf converted\+\_\+val}, {\bf current\+\_\+portion}, {\bf dac\+\_\+val}, {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Header\+::\+Data\+\_\+blocks}, {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+::\+Data\+\_\+field}, {\bf D\+E\+V\+\_\+\+T\+Y\+PE}, {\bf E\+X\+P\+\_\+\+B\+O\+A\+RD}, {\bf F\+W\+\_\+\+V\+ER}, {\bf get\+Fifo\+Data()}, {\bf gl\+Ep0\+Buffer\+\_\+\+Rx}, {\bf gl\+Ep0\+Buffer\+\_\+\+Tx}, {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+::\+Header}, {\bf H\+W\+\_\+\+V\+ER}, {\bf I2\+C\+\_\+init()}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+0\+\_\+\+B\+A\+SE}, {\bf I2\+C\+\_\+read()}, {\bf I2\+C\+\_\+start()}, {\bf I2\+C\+\_\+write()}, {\bf I\+O\+RD}, {\bf I\+O\+WR}, {\bf last\+\_\+portion}, {\bf L\+E\+D\+S\+\_\+\+B\+A\+SE}, {\bf L\+M75\+\_\+\+I2\+C\+\_\+\+A\+D\+DR}, {\bf L\+M\+S\+\_\+\+C\+T\+R\+\_\+\+G\+P\+I\+O\+\_\+\+B\+A\+SE}, {\bf L\+M\+S\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+V\+ER}, {\bf L\+M\+S\+\_\+\+R\+S\+T\+\_\+\+A\+C\+T\+I\+V\+A\+TE}, {\bf L\+M\+S\+\_\+\+R\+S\+T\+\_\+\+D\+E\+A\+C\+T\+I\+V\+A\+TE}, {\bf L\+M\+S\+\_\+\+R\+S\+T\+\_\+\+P\+U\+L\+SE}, {\bf M\+A\+X\+\_\+\+M\+C\+U\+\_\+\+R\+E\+T\+R\+I\+ES}, {\bf M\+C\+U\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+EG}, {\bf M\+C\+U\+\_\+\+F\+I\+F\+O\+\_\+\+W\+R\+\_\+\+R\+EG}, {\bf M\+C\+U\+\_\+retries}, {\bf M\+C\+U\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+EG}, {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Header\+::\+Periph\+\_\+\+ID}, {\bf P\+R\+O\+G\+\_\+\+E\+E\+P\+R\+OM}, {\bf P\+R\+O\+G\+\_\+\+S\+R\+AM}, {\bf sbi}, {\bf sc\+\_\+brdg\+\_\+data}, {\bf set\+\_\+led()}, {\bf S\+P\+I\+\_\+\+L\+M\+S\+\_\+\+B\+A\+SE}, {\bf S\+P\+I\+\_\+\+N\+R\+\_\+\+B\+RD}, {\bf S\+P\+I\+\_\+\+N\+R\+\_\+\+L\+M\+S7002M}, {\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Header\+::\+Status}, {\bf S\+T\+A\+T\+U\+S\+\_\+\+B\+U\+S\+Y\+\_\+\+C\+MD}, {\bf S\+T\+A\+T\+U\+S\+\_\+\+C\+O\+M\+P\+L\+E\+T\+E\+D\+\_\+\+C\+MD}, {\bf S\+T\+A\+T\+U\+S\+\_\+\+E\+R\+R\+O\+R\+\_\+\+C\+MD}, {\bf S\+T\+A\+T\+U\+S\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+E\+R\+I\+P\+H\+\_\+\+I\+D\+\_\+\+C\+MD}, {\bf S\+T\+A\+T\+U\+S\+\_\+\+U\+N\+K\+N\+O\+W\+N\+\_\+\+C\+MD}, and {\bf S\+T\+A\+T\+U\+S\+\_\+\+W\+R\+O\+N\+G\+\_\+\+O\+R\+D\+E\+R\+\_\+\+C\+MD}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d29/main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{main.\+c@{main.\+c}!set\+\_\+led@{set\+\_\+led}}
+\index{set\+\_\+led@{set\+\_\+led}!main.\+c@{main.\+c}}
+\paragraph[{set\+\_\+led(unsigned char led\+\_\+pattern)}]{\setlength{\rightskip}{0pt plus 5cm}void set\+\_\+led (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{led\+\_\+pattern}
+\end{DoxyParamCaption}
+)}\label{main_8c_a1dc21bcdb3c128efef740a65212cae7b}
+
+
+Gets led\+\_\+pattern as parameter in order to write to the register. 
+
+
+
+Definition at line {\bf 100} of file {\bf main.\+c}.
+
+
+
+References {\bf I\+O\+WR}, and {\bf L\+E\+D\+S\+\_\+\+B\+A\+SE}.
+
+
+
+Referenced by {\bf main()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{d0/d29/main_8c_a1dc21bcdb3c128efef740a65212cae7b_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Variable Documentation}
+\index{main.\+c@{main.\+c}!block@{block}}
+\index{block@{block}!main.\+c@{main.\+c}}
+\paragraph[{block}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t block}\label{main_8c_a8b14b87ec66185f41f7b6590c0605e18}
+
+
+Definition at line {\bf 50} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf altera\+\_\+avalon\+\_\+uart\+\_\+read()}, and {\bf main()}.
+
+\index{main.\+c@{main.\+c}!Board\+\_\+\+Config\+\_\+\+F\+P\+GA@{Board\+\_\+\+Config\+\_\+\+F\+P\+GA}}
+\index{Board\+\_\+\+Config\+\_\+\+F\+P\+GA@{Board\+\_\+\+Config\+\_\+\+F\+P\+GA}!main.\+c@{main.\+c}}
+\paragraph[{Board\+\_\+\+Config\+\_\+\+F\+P\+GA}]{\setlength{\rightskip}{0pt plus 5cm}{\bf t\+Board\+\_\+\+Config\+\_\+\+F\+P\+GA}$\ast$ Board\+\_\+\+Config\+\_\+\+F\+P\+GA = ({\bf t\+Board\+\_\+\+Config\+\_\+\+F\+P\+GA}$\ast$) {\bf flash\+\_\+page\+\_\+data}}\label{main_8c_a64bbd4a80791498e01bee10c9e986362}
+
+
+Definition at line {\bf 65} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!cmd\+\_\+errors@{cmd\+\_\+errors}}
+\index{cmd\+\_\+errors@{cmd\+\_\+errors}!main.\+c@{main.\+c}}
+\paragraph[{cmd\+\_\+errors}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t cmd\+\_\+errors}\label{main_8c_ab8dfa5cb3f438a9167a95cdbfcbe12d6}
+
+
+Definition at line {\bf 50} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!converted\+\_\+val@{converted\+\_\+val}}
+\index{converted\+\_\+val@{converted\+\_\+val}!main.\+c@{main.\+c}}
+\paragraph[{converted\+\_\+val}]{\setlength{\rightskip}{0pt plus 5cm}signed short int converted\+\_\+val = 300}\label{main_8c_adb1193fb115d3bd26bb5baa555136a8f}
+
+
+Definition at line {\bf 57} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!current\+\_\+portion@{current\+\_\+portion}}
+\index{current\+\_\+portion@{current\+\_\+portion}!main.\+c@{main.\+c}}
+\paragraph[{current\+\_\+portion}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long int current\+\_\+portion}\label{main_8c_a825eb5ef25c9cbf94ee0afc8680c1861}
+
+
+Definition at line {\bf 61} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!dac\+\_\+data@{dac\+\_\+data}}
+\index{dac\+\_\+data@{dac\+\_\+data}!main.\+c@{main.\+c}}
+\paragraph[{dac\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char dac\+\_\+data[2]}\label{main_8c_a44b6911d4c6f214779c0ece901e958f4}
+
+
+Definition at line {\bf 55} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!dac\+\_\+val@{dac\+\_\+val}}
+\index{dac\+\_\+val@{dac\+\_\+val}!main.\+c@{main.\+c}}
+\paragraph[{dac\+\_\+val}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char dac\+\_\+val = 134}\label{main_8c_ae682bd806ef9ef41dbbe334d7ba0b617}
+
+
+Definition at line {\bf 54} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!data\+\_\+cnt@{data\+\_\+cnt}}
+\index{data\+\_\+cnt@{data\+\_\+cnt}!main.\+c@{main.\+c}}
+\paragraph[{data\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char data\+\_\+cnt}\label{main_8c_a2384b171c0e16ded907576dc11038582}
+
+
+Definition at line {\bf 62} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!flash\+\_\+data\+\_\+cnt\+\_\+free@{flash\+\_\+data\+\_\+cnt\+\_\+free}}
+\index{flash\+\_\+data\+\_\+cnt\+\_\+free@{flash\+\_\+data\+\_\+cnt\+\_\+free}!main.\+c@{main.\+c}}
+\paragraph[{flash\+\_\+data\+\_\+cnt\+\_\+free}]{\setlength{\rightskip}{0pt plus 5cm}int flash\+\_\+data\+\_\+cnt\+\_\+free = 0}\label{main_8c_a8c0d8c20fc3f6dadadb2e99b713deba4}
+
+
+Definition at line {\bf 59} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!flash\+\_\+data\+\_\+counter\+\_\+to\+\_\+copy@{flash\+\_\+data\+\_\+counter\+\_\+to\+\_\+copy}}
+\index{flash\+\_\+data\+\_\+counter\+\_\+to\+\_\+copy@{flash\+\_\+data\+\_\+counter\+\_\+to\+\_\+copy}!main.\+c@{main.\+c}}
+\paragraph[{flash\+\_\+data\+\_\+counter\+\_\+to\+\_\+copy}]{\setlength{\rightskip}{0pt plus 5cm}int flash\+\_\+data\+\_\+counter\+\_\+to\+\_\+copy = 0}\label{main_8c_ad48bbffff9389ce1cf66d6879ae99676}
+
+
+Definition at line {\bf 59} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!flash\+\_\+page@{flash\+\_\+page}}
+\index{flash\+\_\+page@{flash\+\_\+page}!main.\+c@{main.\+c}}
+\paragraph[{flash\+\_\+page}]{\setlength{\rightskip}{0pt plus 5cm}int flash\+\_\+page = 0}\label{main_8c_a94c92d0dbd9b5bc2eb94b54000c493a7}
+
+
+Definition at line {\bf 59} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!flash\+\_\+page\+\_\+data@{flash\+\_\+page\+\_\+data}}
+\index{flash\+\_\+page\+\_\+data@{flash\+\_\+page\+\_\+data}!main.\+c@{main.\+c}}
+\paragraph[{flash\+\_\+page\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char flash\+\_\+page\+\_\+data[0x100]}\label{main_8c_a422c160683776056d99052dcfb13205e}
+
+
+Definition at line {\bf 64} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!flash\+\_\+page\+\_\+data\+\_\+cnt@{flash\+\_\+page\+\_\+data\+\_\+cnt}}
+\index{flash\+\_\+page\+\_\+data\+\_\+cnt@{flash\+\_\+page\+\_\+data\+\_\+cnt}!main.\+c@{main.\+c}}
+\paragraph[{flash\+\_\+page\+\_\+data\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}int flash\+\_\+page\+\_\+data\+\_\+cnt = 0}\label{main_8c_a523ed049511d3ec1df08896a758a5cc8}
+
+
+Definition at line {\bf 59} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!fpga\+\_\+byte@{fpga\+\_\+byte}}
+\index{fpga\+\_\+byte@{fpga\+\_\+byte}!main.\+c@{main.\+c}}
+\paragraph[{fpga\+\_\+byte}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long int fpga\+\_\+byte}\label{main_8c_a9a91db67ced00c1c2e6e76035e134ed5}
+
+
+Definition at line {\bf 66} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!fpga\+\_\+data@{fpga\+\_\+data}}
+\index{fpga\+\_\+data@{fpga\+\_\+data}!main.\+c@{main.\+c}}
+\paragraph[{fpga\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long int fpga\+\_\+data}\label{main_8c_a04368317ea9ed61b83a391a0f93ae08a}
+
+
+Definition at line {\bf 61} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!gl\+Ep0\+Buffer\+\_\+\+Rx@{gl\+Ep0\+Buffer\+\_\+\+Rx}}
+\index{gl\+Ep0\+Buffer\+\_\+\+Rx@{gl\+Ep0\+Buffer\+\_\+\+Rx}!main.\+c@{main.\+c}}
+\paragraph[{gl\+Ep0\+Buffer\+\_\+\+Rx}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t gl\+Ep0\+Buffer\+\_\+\+Rx[64]}\label{main_8c_a4e808330155f53528aa1b36f7f41a38f}
+
+
+Definition at line {\bf 50} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!gl\+Ep0\+Buffer\+\_\+\+Tx@{gl\+Ep0\+Buffer\+\_\+\+Tx}}
+\index{gl\+Ep0\+Buffer\+\_\+\+Tx@{gl\+Ep0\+Buffer\+\_\+\+Tx}!main.\+c@{main.\+c}}
+\paragraph[{gl\+Ep0\+Buffer\+\_\+\+Tx}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t gl\+Ep0\+Buffer\+\_\+\+Tx[64]}\label{main_8c_a5438d8ff3d517cb618c6e233634b293a}
+
+
+Definition at line {\bf 50} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!last\+\_\+portion@{last\+\_\+portion}}
+\index{last\+\_\+portion@{last\+\_\+portion}!main.\+c@{main.\+c}}
+\paragraph[{last\+\_\+portion}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long int last\+\_\+portion}\label{main_8c_a39310ff22a3a6c8084300b507a873da6}
+
+
+Definition at line {\bf 61} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Rx@{L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Rx}}
+\index{L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Rx@{L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Rx}!main.\+c@{main.\+c}}
+\paragraph[{L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Rx}]{\setlength{\rightskip}{0pt plus 5cm}{\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet}$\ast$ L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Rx = ({\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet}$\ast$){\bf gl\+Ep0\+Buffer\+\_\+\+Rx}}\label{main_8c_a6cb68e7a115a8f98d573d317526671db}
+
+
+Definition at line {\bf 52} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Tx@{L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Tx}}
+\index{L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Tx@{L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Tx}!main.\+c@{main.\+c}}
+\paragraph[{L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Tx}]{\setlength{\rightskip}{0pt plus 5cm}{\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet}$\ast$ L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet\+\_\+\+Tx = ({\bf t\+L\+M\+S\+\_\+\+Ctrl\+\_\+\+Packet}$\ast$){\bf gl\+Ep0\+Buffer\+\_\+\+Tx}}\label{main_8c_aaeea1accd6e3e4ab638e9abe797fdfde}
+
+
+Definition at line {\bf 51} of file {\bf main.\+c}.
+
+\index{main.\+c@{main.\+c}!M\+C\+U\+\_\+retries@{M\+C\+U\+\_\+retries}}
+\index{M\+C\+U\+\_\+retries@{M\+C\+U\+\_\+retries}!main.\+c@{main.\+c}}
+\paragraph[{M\+C\+U\+\_\+retries}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t M\+C\+U\+\_\+retries}\label{main_8c_a77747b1defbe7055ca2c2339729b9e35}
+
+
+Definition at line {\bf 48} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!sc\+\_\+brdg\+\_\+data@{sc\+\_\+brdg\+\_\+data}}
+\index{sc\+\_\+brdg\+\_\+data@{sc\+\_\+brdg\+\_\+data}!main.\+c@{main.\+c}}
+\paragraph[{sc\+\_\+brdg\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char sc\+\_\+brdg\+\_\+data[4]}\label{main_8c_aac7bf3d0d5d1a344c1c43f2998d1ade4}
+
+
+Definition at line {\bf 63} of file {\bf main.\+c}.
+
+
+
+Referenced by {\bf main()}.
+
+\index{main.\+c@{main.\+c}!test@{test}}
+\index{test@{test}!main.\+c@{main.\+c}}
+\paragraph[{test}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t test}\label{main_8c_a9f66cfa89489c3be09541452b307d5cb}
+
+
+Definition at line {\bf 50} of file {\bf main.\+c}.
+

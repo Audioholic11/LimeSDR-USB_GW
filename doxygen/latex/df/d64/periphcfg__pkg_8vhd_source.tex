@@ -1,0 +1,50 @@
+\subsection{periphcfg\+\_\+pkg.\+vhd}
+\label{periphcfg__pkg_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/periphcfg\+\_\+pkg.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/periphcfg\+\_\+pkg.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00002 \textcolor{keyword}{-- FILE:          periphcfg\_pkg.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION:   Package for periphcfg module}
+00004 \textcolor{keyword}{-- DATE:          9:57 AM Monday, May 14, 2018}
+00005 \textcolor{keyword}{-- AUTHOR(s):     Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 
+00009 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00010 \textcolor{keyword}{--NOTES:}
+00011 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00012 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00013 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00014 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00015 
+00016 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00017 \textcolor{keyword}{-- Package declaration}
+00018 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00019 \textcolor{keywordflow}{package }periphcfg_pkg \textcolor{keywordflow}{is}
+00020    
+00021 \textcolor{keyword}{   -- Outputs from the }
+00022    \textcolor{keywordflow}{type} \textcolor{vhdlchar}{t_FROM_PERIPHCFG} \textcolor{keywordflow}{is} \textcolor{keywordflow}{record}
+00023       \textcolor{vhdlchar}{BOARD_GPIO_OVRD}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00024       \textcolor{vhdlchar}{BOARD_GPIO_DIR}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00025       \textcolor{vhdlchar}{BOARD_GPIO_VAL}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00026       \textcolor{vhdlchar}{PERIPH_OUTPUT_OVRD_0} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00027       \textcolor{vhdlchar}{PERIPH_OUTPUT_VAL_0}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00028       \textcolor{vhdlchar}{PERIPH_OUTPUT_OVRD_1} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00029       \textcolor{vhdlchar}{PERIPH_OUTPUT_VAL_1}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}; 
+00030    \textcolor{keywordflow}{end} \textcolor{keywordflow}{record} \textcolor{vhdlchar}{t_FROM_PERIPHCFG};
+00031   
+00032 \textcolor{keyword}{   -- Inputs to the .}
+00033    \textcolor{keywordflow}{type} \textcolor{vhdlchar}{t_TO_PERIPHCFG} \textcolor{keywordflow}{is} \textcolor{keywordflow}{record}
+00034       \textcolor{vhdlchar}{BOARD_GPIO_RD}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00035       \textcolor{vhdlchar}{PERIPH_INPUT_RD_0}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00036       \textcolor{vhdlchar}{PERIPH_INPUT_RD_1}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00037    \textcolor{keywordflow}{end} \textcolor{keywordflow}{record} \textcolor{vhdlchar}{t_TO_PERIPHCFG};
+00038    
+00039 
+00040 
+00041 
+00042    
+00043 
+00044       
+00045 \textcolor{keywordflow}{end} \textcolor{keywordflow}{package} \textcolor{vhdlchar}{periphcfg\_pkg};
+\end{DoxyCode}

@@ -1,0 +1,202 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+init.c File Reference}
+\label{altera__avalon__uart__init_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}}
+{\ttfamily \#include $<$fcntl.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+dev.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/ioctl.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+errno.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}altera\+\_\+avalon\+\_\+uart.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}altera\+\_\+avalon\+\_\+uart\+\_\+regs.\+h\char`\"{}}\\*
+Include dependency graph for altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d1f/altera__avalon__uart__init_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf altera\+\_\+avalon\+\_\+uart\+\_\+irq} (void $\ast$context, {\bf alt\+\_\+u32} id)
+\item 
+static void {\bf altera\+\_\+avalon\+\_\+uart\+\_\+rxirq} ({\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$sp, {\bf alt\+\_\+u32} status)
+\item 
+static void {\bf altera\+\_\+avalon\+\_\+uart\+\_\+txirq} ({\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$sp, {\bf alt\+\_\+u32} status)
+\item 
+void {\bf altera\+\_\+avalon\+\_\+uart\+\_\+init} ({\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$sp, {\bf alt\+\_\+u32} irq\+\_\+controller\+\_\+id, {\bf alt\+\_\+u32} irq)
+\item 
+int {\bf altera\+\_\+avalon\+\_\+uart\+\_\+close} ({\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$sp, int flags)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}!altera\+\_\+avalon\+\_\+uart\+\_\+close@{altera\+\_\+avalon\+\_\+uart\+\_\+close}}
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+close@{altera\+\_\+avalon\+\_\+uart\+\_\+close}!altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}}
+\paragraph[{altera\+\_\+avalon\+\_\+uart\+\_\+close(altera\+\_\+avalon\+\_\+uart\+\_\+state $\ast$sp, int flags)}]{\setlength{\rightskip}{0pt plus 5cm}int altera\+\_\+avalon\+\_\+uart\+\_\+close (
+\begin{DoxyParamCaption}
+\item[{{\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$}]{sp, }
+\item[{int}]{flags}
+\end{DoxyParamCaption}
+)}\label{altera__avalon__uart__init_8c_a9ebd32d15d14cfaa8673d12edeccc9e5}
+
+
+Definition at line {\bf 298} of file {\bf altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}.
+
+
+
+References {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::tx\+\_\+end}, and {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::tx\+\_\+start}.
+
+
+
+Referenced by {\bf altera\+\_\+avalon\+\_\+uart\+\_\+close\+\_\+fd()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{d8/ddb/altera__avalon__uart__init_8c_a9ebd32d15d14cfaa8673d12edeccc9e5_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}!altera\+\_\+avalon\+\_\+uart\+\_\+init@{altera\+\_\+avalon\+\_\+uart\+\_\+init}}
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+init@{altera\+\_\+avalon\+\_\+uart\+\_\+init}!altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}}
+\paragraph[{altera\+\_\+avalon\+\_\+uart\+\_\+init(altera\+\_\+avalon\+\_\+uart\+\_\+state $\ast$sp, alt\+\_\+u32 irq\+\_\+controller\+\_\+id, alt\+\_\+u32 irq)}]{\setlength{\rightskip}{0pt plus 5cm}void altera\+\_\+avalon\+\_\+uart\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{{\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$}]{sp, }
+\item[{{\bf alt\+\_\+u32}}]{irq\+\_\+controller\+\_\+id, }
+\item[{{\bf alt\+\_\+u32}}]{irq}
+\end{DoxyParamCaption}
+)}\label{altera__avalon__uart__init_8c_a7649053bcc37f15c419e9253973a0568}
+
+
+Definition at line {\bf 66} of file {\bf altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+F\+L\+A\+G\+\_\+\+C\+R\+E\+A\+TE}, {\bf alt\+\_\+irq\+\_\+register()}, {\bf A\+L\+T\+\_\+\+S\+E\+M\+\_\+\+C\+R\+E\+A\+TE}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+D\+C\+T\+S\+\_\+\+M\+SK}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+R\+D\+Y\+\_\+\+M\+SK}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+T\+S\+\_\+\+M\+SK}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+irq()}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::base}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::ctrl}, and {\bf I\+O\+W\+R\+\_\+\+A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+OL}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/ddb/altera__avalon__uart__init_8c_a7649053bcc37f15c419e9253973a0568_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}!altera\+\_\+avalon\+\_\+uart\+\_\+irq@{altera\+\_\+avalon\+\_\+uart\+\_\+irq}}
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+irq@{altera\+\_\+avalon\+\_\+uart\+\_\+irq}!altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}}
+\paragraph[{altera\+\_\+avalon\+\_\+uart\+\_\+irq(void $\ast$context, alt\+\_\+u32 id)}]{\setlength{\rightskip}{0pt plus 5cm}static void altera\+\_\+avalon\+\_\+uart\+\_\+irq (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{context, }
+\item[{{\bf alt\+\_\+u32}}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{altera__avalon__uart__init_8c_a6b6d97750e63cb70b674746361e8ed80}
+
+
+Definition at line {\bf 109} of file {\bf altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}.
+
+
+
+References {\bf altera\+\_\+avalon\+\_\+uart\+\_\+rxirq()}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+D\+C\+T\+S\+\_\+\+M\+SK}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+R\+R\+D\+Y\+\_\+\+M\+SK}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+T\+R\+D\+Y\+\_\+\+M\+SK}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+txirq()}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::base}, {\bf I\+O\+R\+D\+\_\+\+A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+S\+T\+A\+T\+US}, and {\bf I\+O\+W\+R\+\_\+\+A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+S\+T\+A\+T\+US}.
+
+
+
+Referenced by {\bf altera\+\_\+avalon\+\_\+uart\+\_\+init()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{d8/ddb/altera__avalon__uart__init_8c_a6b6d97750e63cb70b674746361e8ed80_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{d8/ddb/altera__avalon__uart__init_8c_a6b6d97750e63cb70b674746361e8ed80_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}!altera\+\_\+avalon\+\_\+uart\+\_\+rxirq@{altera\+\_\+avalon\+\_\+uart\+\_\+rxirq}}
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+rxirq@{altera\+\_\+avalon\+\_\+uart\+\_\+rxirq}!altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}}
+\paragraph[{altera\+\_\+avalon\+\_\+uart\+\_\+rxirq(altera\+\_\+avalon\+\_\+uart\+\_\+state $\ast$sp, alt\+\_\+u32 status)}]{\setlength{\rightskip}{0pt plus 5cm}static void altera\+\_\+avalon\+\_\+uart\+\_\+rxirq (
+\begin{DoxyParamCaption}
+\item[{{\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$}]{sp, }
+\item[{{\bf alt\+\_\+u32}}]{status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{altera__avalon__uart__init_8c_a1a8edc332e6466df99b3284e0d38839f}
+
+
+Definition at line {\bf 153} of file {\bf altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+B\+U\+F\+\_\+\+M\+SK}, {\bf A\+L\+T\+\_\+\+F\+L\+A\+G\+\_\+\+P\+O\+ST}, {\bf A\+L\+T\+\_\+\+U\+A\+R\+T\+\_\+\+R\+E\+A\+D\+\_\+\+R\+DY}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+R\+D\+Y\+\_\+\+M\+SK}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+F\+E\+\_\+\+M\+SK}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+P\+E\+\_\+\+M\+SK}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::base}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::ctrl}, {\bf I\+O\+R\+D\+\_\+\+A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+R\+X\+D\+A\+TA}, {\bf I\+O\+W\+R\+\_\+\+A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+OL}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::rx\+\_\+end}, and {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::rx\+\_\+start}.
+
+
+
+Referenced by {\bf altera\+\_\+avalon\+\_\+uart\+\_\+irq()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/ddb/altera__avalon__uart__init_8c_a1a8edc332e6466df99b3284e0d38839f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}!altera\+\_\+avalon\+\_\+uart\+\_\+txirq@{altera\+\_\+avalon\+\_\+uart\+\_\+txirq}}
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+txirq@{altera\+\_\+avalon\+\_\+uart\+\_\+txirq}!altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}}
+\paragraph[{altera\+\_\+avalon\+\_\+uart\+\_\+txirq(altera\+\_\+avalon\+\_\+uart\+\_\+state $\ast$sp, alt\+\_\+u32 status)}]{\setlength{\rightskip}{0pt plus 5cm}static void altera\+\_\+avalon\+\_\+uart\+\_\+txirq (
+\begin{DoxyParamCaption}
+\item[{{\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$}]{sp, }
+\item[{{\bf alt\+\_\+u32}}]{status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{altera__avalon__uart__init_8c_ad76c883fc9a29c4c38e5009ecebd1aa9}
+
+
+Definition at line {\bf 207} of file {\bf altera\+\_\+avalon\+\_\+uart\+\_\+init.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+B\+U\+F\+\_\+\+M\+SK}, {\bf A\+L\+T\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+FC}, {\bf A\+L\+T\+\_\+\+F\+L\+A\+G\+\_\+\+P\+O\+ST}, {\bf A\+L\+T\+\_\+\+U\+A\+R\+T\+\_\+\+W\+R\+I\+T\+E\+\_\+\+R\+DY}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+D\+C\+T\+S\+\_\+\+M\+SK}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+T\+R\+D\+Y\+\_\+\+M\+SK}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+T\+S\+\_\+\+M\+SK}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::base}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::ctrl}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::flags}, {\bf I\+O\+R\+D\+\_\+\+A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+S\+T\+A\+T\+US}, {\bf I\+O\+W\+R\+\_\+\+A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+OL}, {\bf I\+O\+W\+R\+\_\+\+A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+T\+X\+D\+A\+TA}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::tx\+\_\+buf}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::tx\+\_\+end}, and {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::tx\+\_\+start}.
+
+
+
+Referenced by {\bf altera\+\_\+avalon\+\_\+uart\+\_\+irq()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/ddb/altera__avalon__uart__init_8c_ad76c883fc9a29c4c38e5009ecebd1aa9_icgraph}
+\end{center}
+\end{figure}
+
+

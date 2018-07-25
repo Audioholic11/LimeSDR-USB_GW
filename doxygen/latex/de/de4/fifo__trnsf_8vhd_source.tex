@@ -1,0 +1,87 @@
+\subsection{fifo\+\_\+trnsf.\+vhd}
+\label{fifo__trnsf_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/fifo\+\_\+transfer/synth/fifo\+\_\+trnsf.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/fifo\+\_\+transfer/synth/fifo\+\_\+trnsf.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00002 \textcolor{keyword}{-- FILE:          fifo\_trnsf.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION:   Transfers data from one FIFO to another FIFO }
+00004 \textcolor{keyword}{-- DATE:          10:04 AM Tuesday, April 24, 2018}
+00005 \textcolor{keyword}{-- AUTHOR(s):     Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 
+00009 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00010 \textcolor{keyword}{--NOTES: Both FIFO has to be Same clock, same data width. }
+00011 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00012 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00013 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00014 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00015 
+00016 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00017 \textcolor{keyword}{-- Entity declaration}
+00018 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00019 \textcolor{keywordflow}{entity }fifo_trnsf \textcolor{keywordflow}{is}
+00020    \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(}
+00021       \textcolor{vhdlchar}{rdwidth} \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{64}
+00022       \textcolor{vhdlchar}{)};
+00023    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00024 
+00025       \textcolor{vhdlchar}{clk}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00026       \textcolor{vhdlchar}{areset_n}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00027 \textcolor{keyword}{      -- RD side  }
+00028       \textcolor{vhdlchar}{fifo_rdreq}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00029       \textcolor{vhdlchar}{fifo_q}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdwidth}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00030       \textcolor{vhdlchar}{fifo_rdempty}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic};
+00031 \textcolor{keyword}{      -- WR side  }
+00032       \textcolor{vhdlchar}{fifo_wrreq}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00033       \textcolor{vhdlchar}{fifo_data}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{rdwidth}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00034       \textcolor{vhdlchar}{fifo_wrfull}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic}
+00035    \textcolor{vhdlchar}{)};
+00036 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{fifo\_trnsf};
+00037 
+00038 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00039 \textcolor{keyword}{-- Architecture}
+00040 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00041 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} fifo_trnsf is
+00042 \textcolor{keyword}{--declare signals,  components here}
+00043 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{reset_n}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00044 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{my_sig_name}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{7} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}; 
+00045 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{cnt}              \textcolor{vhdlchar}{:} \textcolor{comment}{unsigned}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00046 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{fifo_rdreq_int}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00047 
+00048 \textcolor{keywordflow}{attribute} \textcolor{vhdlchar}{noprune} \textcolor{vhdlchar}{:} \textcolor{comment}{boolean};
+00049 \textcolor{keywordflow}{attribute} \textcolor{vhdlchar}{noprune} \textcolor{keywordflow}{of} \textcolor{vhdlchar}{cnt} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{signal} \textcolor{keywordflow}{is} \textcolor{vhdlchar}{true};
+00050 
+00051   
+00052 \textcolor{vhdlkeyword}{begin}
+00053    
+00054 \textcolor{keyword}{   -- Asynchronous reset to sync}
+00055    sync\_reg0 : \textcolor{keywordflow}{entity} work.sync_reg 
+00056    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(clk, areset_n, '1', reset_n\textcolor{vhdlchar}{)};
+00057    
+00058 \textcolor{keyword}{   -- FIFO read request signal}
+00059    \textcolor{vhdlchar}{fifo_rdreq_int} \textcolor{vhdlchar}{<=} \textcolor{keywordflow}{not} \textcolor{vhdlchar}{fifo_rdempty} \textcolor{keywordflow}{AND} \textcolor{keywordflow}{not} \textcolor{vhdlchar}{fifo_wrfull} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{reset_n};
+00060 
+00061 \textcolor{keyword}{   -- Counter for debugging}
+00062    \textcolor{keywordflow}{process}(reset_n, clk)
+00063 \textcolor{vhdlkeyword}{   begin}
+00064       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00065          \textcolor{vhdlchar}{cnt} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00066       \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00067          \textcolor{keywordflow}{if} \textcolor{vhdlchar}{fifo_rdreq_int} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00068             \textcolor{vhdlchar}{cnt} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{cnt} \textcolor{vhdlchar}{+}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00069          \textcolor{keywordflow}{else} 
+00070             \textcolor{vhdlchar}{cnt} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{cnt};
+00071          \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00072       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00073    \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00074     
+00075 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00076 \textcolor{keyword}{-- Output ports}
+00077 \textcolor{keyword}{-- ----------------------------------------------------------------------------    }
+00078    \textcolor{vhdlchar}{fifo_rdreq} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_rdreq_int};   
+00079    \textcolor{vhdlchar}{fifo_wrreq} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_rdreq_int};
+00080    \textcolor{vhdlchar}{fifo_data}  \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{fifo_q};
+00081   
+00082 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+\end{DoxyCode}

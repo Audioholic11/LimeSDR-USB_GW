@@ -1,0 +1,1737 @@
+\subsection{ddr2\+\_\+phy\+\_\+ddr\+\_\+pins.\+tcl}
+\label{ddr2__phy__ddr__pins_8tcl_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+phy\+\_\+ddr\+\_\+pins.\+tcl@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/ddr2\+\_\+phy\+\_\+ddr\+\_\+pins.\+tcl}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{# This is a library of useful functions to include at the top of an SDC file.}
+00002 \textcolor{comment}{}
+00003 \textcolor{keyword}{proc} traverse\_atom\_path \{atom\_id atom\_oport\_id path\} \{
+00004    \textcolor{comment}{# Return list of \{atom oterm\_id\} pairs by tracing the atom netlist starting from the given atom\_id
+       through the given path}
+00005 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{# Path consists of list of \{atom\_type fanin|fanout|end <port\_type> <-optional>\}}
+00006 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} result [list]\textcolor{comment}{}
+00007 \textcolor{comment}{}   \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $path] > 0\} \{
+00008        \textcolor{keyword}{set} path\_point [\textcolor{keyword}{lindex} $path 0]\textcolor{comment}{}
+00009 \textcolor{comment}{}       \textcolor{keyword}{set} atom\_type [\textcolor{keyword}{lindex} $path\_point 0]\textcolor{comment}{}
+00010 \textcolor{comment}{}       \textcolor{keyword}{set} next\_direction [\textcolor{keyword}{lindex} $path\_point 1]\textcolor{comment}{}
+00011 \textcolor{comment}{}       \textcolor{keyword}{set} port\_type [\textcolor{keyword}{lindex} $path\_point 2]\textcolor{comment}{}
+00012 \textcolor{comment}{}       \textcolor{keyword}{set} atom\_optional [\textcolor{keyword}{lindex} $path\_point 3]\textcolor{comment}{}
+00013 \textcolor{comment}{}       \textcolor{keyword}{if} \{[get\_atom\_node\_info -key type -node $atom\_id] == $atom\_type\} \{
+00014            \textcolor{keyword}{if} \{$next\_direction == "end"\} \{
+00015                \textcolor{keyword}{if} \{[get\_atom\_port\_info -key type -node $atom\_id -port\_id $atom\_oport\_id -type oport]
+       == $port\_type\} \{
+00016                    \textcolor{keyword}{lappend} result [list $atom\_id $atom\_oport\_id]\textcolor{comment}{}
+00017 \textcolor{comment}{}               \}\textcolor{comment}{}
+00018 \textcolor{comment}{}           \} \textcolor{keyword}{elseif} \{$next\_direction == "atom"\} \{
+00019                \textcolor{keyword}{lappend} result [list $atom\_id]\textcolor{comment}{}
+00020 \textcolor{comment}{}           \} \textcolor{keyword}{elseif} \{$next\_direction == "fanin"\} \{
+00021                \textcolor{keyword}{set} atom\_iport [get\_atom\_iport\_by\_type -node $atom\_id -type $port\_type]\textcolor{comment}{}
+00022 \textcolor{comment}{}               \textcolor{keyword}{if} \{$atom\_iport != -1\} \{
+00023                    \textcolor{keyword}{set} iport\_fanin [get\_atom\_port\_info -key fanin -node $atom\_id -port\_id $atom\_iport 
+      -type iport]\textcolor{comment}{}
+00024 \textcolor{comment}{}                   \textcolor{keyword}{set} source\_atom [\textcolor{keyword}{lindex} $iport\_fanin 0]\textcolor{comment}{}
+00025 \textcolor{comment}{}                   \textcolor{keyword}{set} source\_oterm [\textcolor{keyword}{lindex} $iport\_fanin 1]\textcolor{comment}{}
+00026 \textcolor{comment}{}                   \textcolor{keyword}{set} result [traverse_atom_path $source\_atom $source\_oterm [\textcolor{keyword}{lrange} $path 1 end]]\textcolor{comment}{}
+00027 \textcolor{comment}{}               \}\textcolor{comment}{}
+00028 \textcolor{comment}{}           \} \textcolor{keyword}{elseif} \{$next\_direction == "fanout"\} \{
+00029                \textcolor{keyword}{set} atom\_oport [get\_atom\_oport\_by\_type -node $atom\_id -type $port\_type]\textcolor{comment}{}
+00030 \textcolor{comment}{}               \textcolor{keyword}{if} \{$atom\_oport != -1\} \{
+00031                    \textcolor{keyword}{set} oport\_fanout [get\_atom\_port\_info -key fanout -node $atom\_id -port\_id 
+      $atom\_oport -type oport]\textcolor{comment}{}
+00032 \textcolor{comment}{}                   \textcolor{keyword}{foreach} dest $oport\_fanout \{
+00033                        \textcolor{keyword}{set} dest\_atom [\textcolor{keyword}{lindex} $dest 0]\textcolor{comment}{}
+00034 \textcolor{comment}{}                       \textcolor{keyword}{set} dest\_iterm [\textcolor{keyword}{lindex} $dest 1]\textcolor{comment}{}
+00035 \textcolor{comment}{}                       \textcolor{keyword}{set} fanout\_result\_list [traverse_atom_path $dest\_atom -1 [\textcolor{keyword}{lrange} $path 1 end]]\textcolor{comment}{}
+00036 \textcolor{comment}{}                       \textcolor{keyword}{foreach} fanout\_result $fanout\_result\_list \{
+00037                            \textcolor{keyword}{if} \{[lsearch $result $fanout\_result] == -1\} \{
+00038                                \textcolor{keyword}{lappend} result $fanout\_result\textcolor{comment}{}
+00039 \textcolor{comment}{}                           \}\textcolor{comment}{}
+00040 \textcolor{comment}{}                       \}\textcolor{comment}{}
+00041 \textcolor{comment}{}                   \}\textcolor{comment}{}
+00042 \textcolor{comment}{}               \}\textcolor{comment}{}
+00043 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+00044                error "Unexpected path"\textcolor{comment}{}
+00045 \textcolor{comment}{}           \}\textcolor{comment}{}
+00046 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{$atom\_optional == "-optional"\} \{
+00047            \textcolor{keyword}{set} result [traverse_atom_path $atom\_id $atom\_oport\_id [\textcolor{keyword}{lrange} $path 1 end]]\textcolor{comment}{}
+00048 \textcolor{comment}{}       \}\textcolor{comment}{}
+00049 \textcolor{comment}{}   \}\textcolor{comment}{}
+00050 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+00051 \textcolor{comment}{}\}\textcolor{comment}{}
+00052 \textcolor{comment}{}
+00053 \textcolor{keyword}{proc} traverse\_to\_dll\_id \{dqs\_pin msg\_list\_name\} \{
+00054    \textcolor{keyword}{upvar} 1 $msg\_list\_name msg\_list\textcolor{comment}{}
+00055 \textcolor{comment}{}   \textcolor{keyword}{set} dqs\_pin\_id [get\_atom\_node\_by\_name -name $dqs\_pin]\textcolor{comment}{}
+00056 \textcolor{comment}{}   \textcolor{keyword}{set} dqs\_to\_dll\_path [list \{IO\_PAD fanout PADOUT\} \{IO\_IBUF fanout O\} \{DQS\_DELAY\_CHAIN fanin
+       DELAYCTRLIN\} \{DLL end DELAYCTRLOUT\}]\textcolor{comment}{}
+00057 \textcolor{comment}{}   \textcolor{keyword}{set} dll\_id\_list [traverse_atom_path $dqs\_pin\_id -1 $dqs\_to\_dll\_path]\textcolor{comment}{}
+00058 \textcolor{comment}{}   \textcolor{keyword}{set} dll\_id -1\textcolor{comment}{}
+00059 \textcolor{comment}{}   \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $dll\_id\_list] == 1\} \{
+00060        \textcolor{keyword}{set} dll\_atom\_oterm\_pair [\textcolor{keyword}{lindex} $dll\_id\_list 0]\textcolor{comment}{}
+00061 \textcolor{comment}{}       \textcolor{keyword}{set} dll\_id [\textcolor{keyword}{lindex} $dll\_atom\_oterm\_pair 0]\textcolor{comment}{}
+00062 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{[\textcolor{keyword}{llength} $dll\_id\_list] > 1\} \{
+00063        \textcolor{keyword}{lappend} msg\_list "Error: Found more than 1 DLL"\textcolor{comment}{}
+00064 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00065        \textcolor{keyword}{lappend} msg\_list "Error: DLL not found"\textcolor{comment}{}
+00066 \textcolor{comment}{}   \}\textcolor{comment}{}
+00067 \textcolor{comment}{}   \textcolor{keyword}{return} $dll\_id\textcolor{comment}{}
+00068 \textcolor{comment}{}\}\textcolor{comment}{}
+00069 \textcolor{comment}{}
+00070 \textcolor{keyword}{proc} traverse\_to\_dll \{dqs\_pin msg\_list\_name\} \{
+00071    \textcolor{keyword}{upvar} 1 $msg\_list\_name msg\_list\textcolor{comment}{}
+00072 \textcolor{comment}{}   \textcolor{keyword}{set} dll\_id [traverse_to_dll_id $dqs\_pin msg\_list]\textcolor{comment}{}
+00073 \textcolor{comment}{}   \textcolor{keyword}{if} \{$dll\_id != -1\} \{
+00074        \textcolor{keyword}{set} result [get\_atom\_node\_info -key name -node $dll\_id]\textcolor{comment}{}
+00075 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00076        \textcolor{keyword}{set} result ""\textcolor{comment}{}
+00077 \textcolor{comment}{}   \}\textcolor{comment}{}
+00078 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+00079 \textcolor{comment}{}\}\textcolor{comment}{}
+00080 \textcolor{comment}{}
+00081 \textcolor{keyword}{proc} traverse\_to\_dqs\_delaychain\_id \{dqs\_pin msg\_list\_name\} \{
+00082    \textcolor{keyword}{upvar} 1 $msg\_list\_name msg\_list\textcolor{comment}{}
+00083 \textcolor{comment}{}   \textcolor{keyword}{set} dqs\_pin\_id [get\_atom\_node\_by\_name -name $dqs\_pin]\textcolor{comment}{}
+00084 \textcolor{comment}{}   \textcolor{keyword}{set} dqs\_to\_delaychain\_path [list \{IO\_PAD fanout PADOUT\} \{IO\_IBUF fanout O\} \{DQS\_DELAY\_CHAIN atom\}]\textcolor{comment}{}
+00085 \textcolor{comment}{}   \textcolor{keyword}{set} delaychain\_id\_list [traverse_atom_path $dqs\_pin\_id -1 $dqs\_to\_delaychain\_path]\textcolor{comment}{}
+00086 \textcolor{comment}{}   \textcolor{keyword}{set} delaychain\_id -1\textcolor{comment}{}
+00087 \textcolor{comment}{}   \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $delaychain\_id\_list] == 1\} \{
+00088        \textcolor{keyword}{set} delaychain\_atom\_oterm\_pair [\textcolor{keyword}{lindex} $delaychain\_id\_list 0]\textcolor{comment}{}
+00089 \textcolor{comment}{}       \textcolor{keyword}{set} delaychain\_id [\textcolor{keyword}{lindex} $delaychain\_atom\_oterm\_pair 0]\textcolor{comment}{}
+00090 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{[\textcolor{keyword}{llength} $delaychain\_id\_list] > 1\} \{
+00091        \textcolor{keyword}{lappend} msg\_list "Error: Found more than 1 DQS delaychain"\textcolor{comment}{}
+00092 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00093        \textcolor{keyword}{lappend} msg\_list "Error: DQS delaychain not found"\textcolor{comment}{}
+00094 \textcolor{comment}{}   \}\textcolor{comment}{}
+00095 \textcolor{comment}{}   \textcolor{keyword}{return} $delaychain\_id\textcolor{comment}{}
+00096 \textcolor{comment}{}\}\textcolor{comment}{}
+00097 \textcolor{comment}{}
+00098 \textcolor{comment}{# Get the fitter name of the PLL output driving the given pin}
+00099 \textcolor{comment}{}\textcolor{keyword}{proc} traverse\_to\_ddio\_out\_pll\_clock \{pin msg\_list\_name family\} \{
+00100    \textcolor{keyword}{upvar} 1 $msg\_list\_name msg\_list\textcolor{comment}{}
+00101 \textcolor{comment}{}   \textcolor{keyword}{set} result ""\textcolor{comment}{}
+00102 \textcolor{comment}{}   \textcolor{keyword}{if} \{$pin != ""\} \{
+00103        \textcolor{keyword}{set} pin\_id [get\_atom\_node\_by\_name -name $pin]\textcolor{comment}{}
+00104 \textcolor{comment}{}       \textcolor{keyword}{if} \{($family == "arria ii") || ($family == "cyclone iv")\} \{
+00105            \textcolor{keyword}{set} pin\_to\_pll\_path [list \{IO\_PAD fanin PADIN\} \{IO\_OBUF fanin I\} \{PSEUDO\_DIFF\_OUT fanin I
+       -optional\} \{DDIO\_OUT fanin CLKHI -optional\} \{CLKBUF fanin INCLK -optional\} \{PLL end CLK\}]\textcolor{comment}{}
+00106 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00107            \textcolor{keyword}{set} pin\_to\_pll\_path [list \{IO\_PAD fanin PADIN\} \{IO\_OBUF fanin I\} \{PSEUDO\_DIFF\_OUT fanin I
+       -optional\} \{DELAY\_CHAIN fanin DATAIN -optional\} \{DELAY\_CHAIN fanin DATAIN -optional\} \{DDIO\_OUT fanin CLKHI
+       -optional\} \{OUTPUT\_PHASE\_ALIGNMENT fanin CLK -optional\} \{CLKBUF fanin INCLK -optional\} \{PLL end CLK\}]\textcolor{comment}{}
+00108 \textcolor{comment}{}       \}\textcolor{comment}{}
+00109 \textcolor{comment}{}       \textcolor{keyword}{set} pll\_id\_list [traverse_atom_path $pin\_id -1 $pin\_to\_pll\_path]\textcolor{comment}{}
+00110 \textcolor{comment}{}       \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $pll\_id\_list] == 1\} \{
+00111            \textcolor{keyword}{set} atom\_oterm\_pair [\textcolor{keyword}{lindex} $pll\_id\_list 0]\textcolor{comment}{}
+00112 \textcolor{comment}{}           \textcolor{keyword}{set} result [get\_atom\_port\_info -key name -node [\textcolor{keyword}{lindex} $atom\_oterm\_pair 0] -port\_id [\textcolor{keyword}{lindex}
+       $atom\_oterm\_pair 1] -type oport]\textcolor{comment}{}
+00113 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00114            \textcolor{keyword}{lappend} msg\_list "Error: PLL clock not found for $pin"\textcolor{comment}{}
+00115 \textcolor{comment}{}       \}\textcolor{comment}{}
+00116 \textcolor{comment}{}   \}\textcolor{comment}{}
+00117 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+00118 \textcolor{comment}{}\}\textcolor{comment}{}
+00119 \textcolor{comment}{}
+00120 \textcolor{keyword}{proc} verify\_high\_performance\_timing\_assumptions \{instname pin\_array\_name write\_deskew\_t10
+       discrete\_device flexible\_timing family\} \{
+00121    \textcolor{keyword}{upvar} 1 $pin\_array\_name pins\textcolor{comment}{}
+00122 \textcolor{comment}{}   \textcolor{keyword}{set} num\_errors 0\textcolor{comment}{}
+00123 \textcolor{comment}{}   load\_package verify\_ddr\textcolor{comment}{}
+00124 \textcolor{comment}{}   \textcolor{keyword}{set} ck\_pins [lsort $pins(ck\_p)]\textcolor{comment}{}
+00125 \textcolor{comment}{}   \textcolor{keyword}{set} ckn\_pins [lsort $pins(ck\_n)]\textcolor{comment}{}
+00126 \textcolor{comment}{}   \textcolor{keyword}{set} ck\_ckn\_pairs [list]\textcolor{comment}{}
+00127 \textcolor{comment}{}   \textcolor{keyword}{set} failed\_assumptions [list]\textcolor{comment}{}
+00128 \textcolor{comment}{}
+00129    \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $ck\_pins] > 0 && [\textcolor{keyword}{llength} $ck\_pins] == [\textcolor{keyword}{llength} $ckn\_pins]\} \{
+00130        \textcolor{keyword}{for} \{\textcolor{keyword}{set} ck\_index 0\} \{$ck\_index != [\textcolor{keyword}{llength} $ck\_pins]\} \{\textcolor{keyword}{incr} ck\_index\} \{
+00131            \textcolor{keyword}{lappend} ck\_ckn\_pairs [list [\textcolor{keyword}{lindex} $ck\_pins $ck\_index] [\textcolor{keyword}{lindex} $ckn\_pins $ck\_index]]\textcolor{comment}{}
+00132 \textcolor{comment}{}       \}\textcolor{comment}{}
+00133 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00134        \textcolor{keyword}{incr} num\_errors\textcolor{comment}{}
+00135 \textcolor{comment}{}       \textcolor{keyword}{lappend} failed\_assumptions "Error: Could not locate same number of CK pins as CK# pins"\textcolor{comment}{}
+00136 \textcolor{comment}{}   \}\textcolor{comment}{}
+00137 \textcolor{comment}{}
+00138    \textcolor{keyword}{set} read\_pins\_list [list]\textcolor{comment}{}
+00139 \textcolor{comment}{}   \textcolor{keyword}{set} write\_pins\_list [list]\textcolor{comment}{}
+00140 \textcolor{comment}{}   \textcolor{keyword}{set} read\_clock\_pairs [list]\textcolor{comment}{}
+00141 \textcolor{comment}{}   \textcolor{keyword}{set} write\_clock\_pairs [list]\textcolor{comment}{}
+00142 \textcolor{comment}{}   \textcolor{keyword}{foreach} dqsgroup $pins(dqsgroup) \{
+00143        \textcolor{keyword}{set} dqs [\textcolor{keyword}{lindex} $dqsgroup 0]\textcolor{comment}{}
+00144 \textcolor{comment}{}       \textcolor{keyword}{set} dq\_list [\textcolor{keyword}{lindex} $dqsgroup 2]\textcolor{comment}{}
+00145 \textcolor{comment}{}       \textcolor{keyword}{lappend} read\_pins\_list [list $dqs $dq\_list]\textcolor{comment}{}
+00146 \textcolor{comment}{}       \textcolor{keyword}{set} dm\_list [\textcolor{keyword}{lindex} $dqsgroup 1]\textcolor{comment}{}
+00147 \textcolor{comment}{}       \textcolor{keyword}{lappend} write\_pins\_list [list $dqs [\textcolor{keyword}{concat} $dq\_list $dm\_list]]\textcolor{comment}{}
+00148 \textcolor{comment}{}       \textcolor{keyword}{set} dqsn [\textcolor{keyword}{lindex} $dqsgroup 3]\textcolor{comment}{}
+00149 \textcolor{comment}{}       \textcolor{keyword}{lappend} read\_clock\_pairs [list $dqs $dqsn]\textcolor{comment}{}
+00150 \textcolor{comment}{}   \}\textcolor{comment}{}
+00151 \textcolor{comment}{}   \textcolor{keyword}{set} write\_clock\_pairs $read\_clock\_pairs\textcolor{comment}{}
+00152 \textcolor{comment}{}   \textcolor{keyword}{set} all\_write\_dqs\_list [get_all_dqs_pins $pins(dqsgroup)]\textcolor{comment}{}
+00153 \textcolor{comment}{}   \textcolor{keyword}{set} all\_d\_list [get_all_dq_pins $pins(dqsgroup)]\textcolor{comment}{}
+00154 \textcolor{comment}{}   \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $pins(dqsgroup)] == 0\} \{
+00155        \textcolor{keyword}{incr} num\_errors\textcolor{comment}{}
+00156 \textcolor{comment}{}       \textcolor{keyword}{lappend} failed\_assumptions "Error: Could not locate DQS pins"\textcolor{comment}{}
+00157 \textcolor{comment}{}   \}\textcolor{comment}{}
+00158 \textcolor{comment}{}
+00159    \textcolor{keyword}{if} \{$num\_errors == 0\} \{
+00160        \textcolor{keyword}{set} msg\_list [list]\textcolor{comment}{}
+00161 \textcolor{comment}{}       \textcolor{keyword}{set} dll\_name [traverse_to_dll $dqs msg\_list]\textcolor{comment}{}
+00162 \textcolor{comment}{}       \textcolor{keyword}{set} clk\_to\_write\_d [traverse_to_ddio_out_pll_clock [\textcolor{keyword}{lindex} $all\_d\_list 0] msg\_list $family]\textcolor{comment}{}
+00163 \textcolor{comment}{}       \textcolor{keyword}{set} clk\_to\_write\_clock [traverse_to_ddio_out_pll_clock [\textcolor{keyword}{lindex} $all\_write\_dqs\_list 0] msg\_list 
+      $family]\textcolor{comment}{}
+00164 \textcolor{comment}{}       \textcolor{keyword}{set} clk\_to\_ck\_ckn [traverse_to_ddio_out_pll_clock [\textcolor{keyword}{lindex} $ck\_pins 0] msg\_list $family]\textcolor{comment}{}
+00165 \textcolor{comment}{}
+00166        \textcolor{keyword}{foreach} msg $msg\_list \{
+00167            \textcolor{keyword}{set} verify\_assumptions\_exception 1\textcolor{comment}{}
+00168 \textcolor{comment}{}           \textcolor{keyword}{incr} num\_errors\textcolor{comment}{}
+00169 \textcolor{comment}{}           \textcolor{keyword}{lappend} failed\_assumptions $msg\textcolor{comment}{}
+00170 \textcolor{comment}{}       \}\textcolor{comment}{}
+00171 \textcolor{comment}{}
+00172        \textcolor{keyword}{if} \{$num\_errors == 0\} \{
+00173            \textcolor{keyword}{if} \{$discrete\_device == 1\} \{
+00174                \textcolor{keyword}{set} mem\_var " \{write\_deskew\_t10 $write\_deskew\_t10\} \{leveled 0\}"\textcolor{comment}{}
+00175 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+00176                \textcolor{keyword}{set} mem\_var " \{write\_deskew\_t10 $write\_deskew\_t10\}"\textcolor{comment}{}
+00177 \textcolor{comment}{}           \}\textcolor{comment}{}
+00178 \textcolor{comment}{}           \textcolor{comment}{#puts "calling verify\_assumptions -memory\_type ddr3 -mem\_var $mem\_var -read\_pins\_list
+       $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs -clk\_to\_write\_d $clk\_to\_write\_d
+       -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin [lindex $ck\_pins 0] -dll
+       $dll\_name -read\_clock\_pairs $read\_clock\_pairs -write\_clock\_pairs $write\_clock\_pairs"}
+00179 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{keyword}{set} verify\_assumptions\_exception 0\textcolor{comment}{}
+00180 \textcolor{comment}{}           \textcolor{keyword}{set} verify\_assumptions\_result \{0\}\textcolor{comment}{}
+00181 \textcolor{comment}{}           \textcolor{keyword}{if} \{$flexible\_timing\} \{
+00182                \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type ddr3 -mem\_var 
+      $mem\_var -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin 
+      [\textcolor{keyword}{lindex} $ck\_pins 0] -dll $dll\_name -read\_clock\_pairs $read\_clock\_pairs -write\_clock\_pairs $write\_clock\_pairs
+       -flexible\} verify\_assumptions\_result]\textcolor{comment}{}
+00183 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+00184                \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type ddr3 -mem\_var 
+      $mem\_var -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin 
+      [\textcolor{keyword}{lindex} $ck\_pins 0] -dll $dll\_name -read\_clock\_pairs $read\_clock\_pairs -write\_clock\_pairs $write\_clock\_pairs
+      \} verify\_assumptions\_result]\textcolor{comment}{}
+00185 \textcolor{comment}{}           \}\textcolor{comment}{}
+00186 \textcolor{comment}{}           \textcolor{keyword}{if} \{$verify\_assumptions\_exception == 0\} \{
+00187                \textcolor{keyword}{incr} num\_errors [\textcolor{keyword}{lindex} $verify\_assumptions\_result 0]\textcolor{comment}{}
+00188 \textcolor{comment}{}               \textcolor{keyword}{set} failed\_assumptions [\textcolor{keyword}{concat} $failed\_assumptions [\textcolor{keyword}{lrange} $verify\_assumptions\_result 1
+       end]]\textcolor{comment}{}
+00189 \textcolor{comment}{}           \}\textcolor{comment}{}
+00190 \textcolor{comment}{}       \}\textcolor{comment}{}
+00191 \textcolor{comment}{}       \textcolor{keyword}{if} \{$verify\_assumptions\_exception != 0\} \{
+00192            \textcolor{keyword}{lappend} failed\_assumptions "Error: Timing assumptions could not be verified"\textcolor{comment}{}
+00193 \textcolor{comment}{}           \textcolor{keyword}{incr} num\_errors\textcolor{comment}{}
+00194 \textcolor{comment}{}       \}\textcolor{comment}{}
+00195 \textcolor{comment}{}   \}\textcolor{comment}{}
+00196 \textcolor{comment}{}
+00197    \textcolor{keyword}{if} \{$num\_errors != 0\} \{
+00198        \textcolor{keyword}{for} \{\textcolor{keyword}{set} i 0\} \{$i != [\textcolor{keyword}{llength} $failed\_assumptions]\} \{\textcolor{keyword}{incr} i\} \{
+00199            \textcolor{keyword}{set} raw\_msg [\textcolor{keyword}{lindex} $failed\_assumptions $i]\textcolor{comment}{}
+00200 \textcolor{comment}{}           \textcolor{keyword}{if} \{[regexp \{^\(\backslash\)W*(Info|Extra Info|Warning|Critical Warning|Error): (.*)$\} $raw\_msg -- 
+      msg\_type msg]\} \{
+00201                regsub " " $msg\_type \_ msg\_type\textcolor{comment}{}
+00202 \textcolor{comment}{}               \textcolor{keyword}{if} \{$msg\_type == "Error"\} \{
+00203                    \textcolor{keyword}{set} msg\_type "critical\_warning"\textcolor{comment}{}
+00204 \textcolor{comment}{}               \}\textcolor{comment}{}
+00205 \textcolor{comment}{}               post\_message -type $msg\_type $msg\textcolor{comment}{}
+00206 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+00207                post\_message -type info $raw\_msg\textcolor{comment}{}
+00208 \textcolor{comment}{}           \}\textcolor{comment}{}
+00209 \textcolor{comment}{}       \}\textcolor{comment}{}
+00210 \textcolor{comment}{}       post\_message -type critical\_warning "Read Capture and Write timing analyses may not be valid
+       due to violated timing model assumptions"\textcolor{comment}{}
+00211 \textcolor{comment}{}   \}\textcolor{comment}{}
+00212 \textcolor{comment}{}   \textcolor{keyword}{return} [\textcolor{keyword}{expr} $num\_errors == 0]\textcolor{comment}{}
+00213 \textcolor{comment}{}\}\textcolor{comment}{}
+00214 \textcolor{comment}{}
+00215 \textcolor{keyword}{proc} verify\_high\_performance\_timing\_assumptions\_ddr2 \{instname pin\_array\_name write\_deskew\_t10
+       flexible\_timing family mem\_if\_memtype\} \{
+00216    \textcolor{keyword}{upvar} 1 $pin\_array\_name pins\textcolor{comment}{}
+00217 \textcolor{comment}{}   \textcolor{keyword}{set} num\_errors 0\textcolor{comment}{}
+00218 \textcolor{comment}{}   load\_package verify\_ddr\textcolor{comment}{}
+00219 \textcolor{comment}{}   \textcolor{keyword}{set} ck\_pins [lsort $pins(ck\_p)]\textcolor{comment}{}
+00220 \textcolor{comment}{}   \textcolor{keyword}{set} ckn\_pins [lsort $pins(ck\_n)]\textcolor{comment}{}
+00221 \textcolor{comment}{}   \textcolor{keyword}{set} ck\_ckn\_pairs [list]\textcolor{comment}{}
+00222 \textcolor{comment}{}   \textcolor{keyword}{set} failed\_assumptions [list]\textcolor{comment}{}
+00223 \textcolor{comment}{}
+00224    \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $ck\_pins] > 0 && [\textcolor{keyword}{llength} $ck\_pins] == [\textcolor{keyword}{llength} $ckn\_pins]\} \{
+00225        \textcolor{keyword}{for} \{\textcolor{keyword}{set} ck\_index 0\} \{$ck\_index != [\textcolor{keyword}{llength} $ck\_pins]\} \{\textcolor{keyword}{incr} ck\_index\} \{
+00226            \textcolor{keyword}{lappend} ck\_ckn\_pairs [list [\textcolor{keyword}{lindex} $ck\_pins $ck\_index] [\textcolor{keyword}{lindex} $ckn\_pins $ck\_index]]\textcolor{comment}{}
+00227 \textcolor{comment}{}       \}\textcolor{comment}{}
+00228 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00229        \textcolor{keyword}{incr} num\_errors\textcolor{comment}{}
+00230 \textcolor{comment}{}       \textcolor{keyword}{lappend} failed\_assumptions "Error: Could not locate same number of CK pins as CK# pins"\textcolor{comment}{}
+00231 \textcolor{comment}{}   \}\textcolor{comment}{}
+00232 \textcolor{comment}{}
+00233    \textcolor{keyword}{set} has\_dqsn [\textcolor{keyword}{llength} [\textcolor{keyword}{lindex} [\textcolor{keyword}{lindex} $pins(dqsgroup) 0] 3]]\textcolor{comment}{}
+00234 \textcolor{comment}{}
+00235    \textcolor{keyword}{set} read\_pins\_list [list]\textcolor{comment}{}
+00236 \textcolor{comment}{}   \textcolor{keyword}{set} write\_pins\_list [list]\textcolor{comment}{}
+00237 \textcolor{comment}{}   \textcolor{keyword}{if} \{$has\_dqsn > 0\} \{
+00238        \textcolor{keyword}{set} read\_clock\_pairs [list]\textcolor{comment}{}
+00239 \textcolor{comment}{}       \textcolor{keyword}{set} write\_clock\_pairs [list]\textcolor{comment}{}
+00240 \textcolor{comment}{}   \}\textcolor{comment}{}
+00241 \textcolor{comment}{}   \textcolor{keyword}{foreach} dqsgroup $pins(dqsgroup) \{
+00242        \textcolor{keyword}{set} dqs [\textcolor{keyword}{lindex} $dqsgroup 0]\textcolor{comment}{}
+00243 \textcolor{comment}{}       \textcolor{keyword}{set} dq\_list [\textcolor{keyword}{lindex} $dqsgroup 2]\textcolor{comment}{}
+00244 \textcolor{comment}{}       \textcolor{keyword}{lappend} read\_pins\_list [list $dqs $dq\_list]\textcolor{comment}{}
+00245 \textcolor{comment}{}       \textcolor{keyword}{set} dm\_list [\textcolor{keyword}{lindex} $dqsgroup 1]\textcolor{comment}{}
+00246 \textcolor{comment}{}       \textcolor{keyword}{lappend} write\_pins\_list [list $dqs [\textcolor{keyword}{concat} $dq\_list $dm\_list]]\textcolor{comment}{}
+00247 \textcolor{comment}{}       \textcolor{keyword}{if} \{$has\_dqsn > 0\} \{
+00248            \textcolor{keyword}{set} dqsn [\textcolor{keyword}{lindex} $dqsgroup 3]\textcolor{comment}{}
+00249 \textcolor{comment}{}           \textcolor{keyword}{lappend} read\_clock\_pairs [list $dqs $dqsn]\textcolor{comment}{}
+00250 \textcolor{comment}{}       \}\textcolor{comment}{}
+00251 \textcolor{comment}{}   \}\textcolor{comment}{}
+00252 \textcolor{comment}{}   \textcolor{keyword}{if} \{$has\_dqsn > 0\} \{
+00253        \textcolor{keyword}{set} write\_clock\_pairs $read\_clock\_pairs\textcolor{comment}{}
+00254 \textcolor{comment}{}   \}\textcolor{comment}{}
+00255 \textcolor{comment}{}   \textcolor{keyword}{set} all\_write\_dqs\_list [get_all_dqs_pins $pins(dqsgroup)]\textcolor{comment}{}
+00256 \textcolor{comment}{}   \textcolor{keyword}{set} all\_d\_list [get_all_dq_pins $pins(dqsgroup)]\textcolor{comment}{}
+00257 \textcolor{comment}{}   \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $pins(dqsgroup)] == 0\} \{
+00258        \textcolor{keyword}{incr} num\_errors\textcolor{comment}{}
+00259 \textcolor{comment}{}       \textcolor{keyword}{lappend} failed\_assumptions "Error: Could not locate DQS pins"\textcolor{comment}{}
+00260 \textcolor{comment}{}   \}\textcolor{comment}{}
+00261 \textcolor{comment}{}
+00262    \textcolor{keyword}{if} \{$num\_errors == 0\} \{
+00263        \textcolor{keyword}{set} msg\_list [list]\textcolor{comment}{}
+00264 \textcolor{comment}{}       \textcolor{keyword}{if} \{$family == "cyclone iv"\} \{
+00265            \textcolor{keyword}{set} has\_dll 0\textcolor{comment}{}
+00266 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00267            \textcolor{keyword}{set} has\_dll 1\textcolor{comment}{}
+00268 \textcolor{comment}{}           \textcolor{keyword}{set} dll\_name [traverse_to_dll $dqs msg\_list]\textcolor{comment}{}
+00269 \textcolor{comment}{}       \}\textcolor{comment}{}
+00270 \textcolor{comment}{}       \textcolor{keyword}{set} clk\_to\_write\_d [traverse_to_ddio_out_pll_clock [\textcolor{keyword}{lindex} $all\_d\_list 0] msg\_list $family]\textcolor{comment}{}
+00271 \textcolor{comment}{}       \textcolor{keyword}{set} clk\_to\_write\_clock [traverse_to_ddio_out_pll_clock [\textcolor{keyword}{lindex} $all\_write\_dqs\_list 0] msg\_list 
+      $family]\textcolor{comment}{}
+00272 \textcolor{comment}{}       \textcolor{keyword}{set} clk\_to\_ck\_ckn [traverse_to_ddio_out_pll_clock [\textcolor{keyword}{lindex} $ck\_pins 0] msg\_list $family]\textcolor{comment}{}
+00273 \textcolor{comment}{}
+00274        \textcolor{keyword}{foreach} msg $msg\_list \{
+00275            \textcolor{keyword}{set} verify\_assumptions\_exception 1\textcolor{comment}{}
+00276 \textcolor{comment}{}           \textcolor{keyword}{incr} num\_errors\textcolor{comment}{}
+00277 \textcolor{comment}{}           \textcolor{keyword}{lappend} failed\_assumptions $msg\textcolor{comment}{}
+00278 \textcolor{comment}{}       \}\textcolor{comment}{}
+00279 \textcolor{comment}{}
+00280        \textcolor{keyword}{if} \{$num\_errors == 0\} \{
+00281            \textcolor{keyword}{set} verify\_assumptions\_exception 0\textcolor{comment}{}
+00282 \textcolor{comment}{}           \textcolor{keyword}{set} verify\_assumptions\_result \{0\}\textcolor{comment}{}
+00283 \textcolor{comment}{}           \textcolor{keyword}{if} \{$mem\_if\_memtype == "DDR2 SDRAM"\} \{
+00284                \textcolor{keyword}{set} mem\_type "ddr2"\textcolor{comment}{}
+00285 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+00286                \textcolor{keyword}{set} mem\_type "ddr"\textcolor{comment}{}
+00287 \textcolor{comment}{}           \}\textcolor{comment}{}
+00288 \textcolor{comment}{}           \textcolor{keyword}{if} \{$has\_dll\} \{
+00289                \textcolor{keyword}{if} \{$has\_dqsn > 0\} \{
+00290                    \textcolor{keyword}{if} \{$flexible\_timing\} \{
+00291                        \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type 
+      $mem\_type -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin [\textcolor{keyword}{
+      lindex} $ck\_pins 0] -dll $dll\_name -read\_clock\_pairs $read\_clock\_pairs -write\_clock\_pairs $write\_clock\_pairs 
+      -flexible\} verify\_assumptions\_result]\textcolor{comment}{}
+00292 \textcolor{comment}{}                   \} \textcolor{keyword}{else} \{
+00293                        \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type 
+      $mem\_type -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin [\textcolor{keyword}{
+      lindex} $ck\_pins 0] -dll $dll\_name -read\_clock\_pairs $read\_clock\_pairs -write\_clock\_pairs $write\_clock\_pairs\} 
+      verify\_assumptions\_result]\textcolor{comment}{}
+00294 \textcolor{comment}{}                   \}\textcolor{comment}{}
+00295 \textcolor{comment}{}               \} \textcolor{keyword}{else} \{
+00296                    \textcolor{keyword}{if} \{$flexible\_timing\} \{
+00297                        \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type 
+      $mem\_type -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin [\textcolor{keyword}{
+      lindex} $ck\_pins 0] -dll $dll\_name -flexible\} verify\_assumptions\_result]\textcolor{comment}{}
+00298 \textcolor{comment}{}                   \} \textcolor{keyword}{else} \{
+00299                        \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type 
+      $mem\_type -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin [\textcolor{keyword}{
+      lindex} $ck\_pins 0] -dll $dll\_name\} verify\_assumptions\_result]\textcolor{comment}{}
+00300 \textcolor{comment}{}                   \}\textcolor{comment}{}
+00301 \textcolor{comment}{}               \}\textcolor{comment}{}
+00302 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+00303                \textcolor{keyword}{if} \{$has\_dqsn > 0\} \{
+00304                    \textcolor{keyword}{if} \{$flexible\_timing\} \{
+00305                        \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type 
+      $mem\_type -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin [\textcolor{keyword}{
+      lindex} $ck\_pins 0] -read\_clock\_pairs $read\_clock\_pairs -write\_clock\_pairs $write\_clock\_pairs -flexible\} 
+      verify\_assumptions\_result]\textcolor{comment}{}
+00306 \textcolor{comment}{}                   \} \textcolor{keyword}{else} \{
+00307                        \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type 
+      $mem\_type -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin [\textcolor{keyword}{
+      lindex} $ck\_pins 0] -read\_clock\_pairs $read\_clock\_pairs -write\_clock\_pairs $write\_clock\_pairs\} 
+      verify\_assumptions\_result]\textcolor{comment}{}
+00308 \textcolor{comment}{}                   \}\textcolor{comment}{}
+00309 \textcolor{comment}{}               \} \textcolor{keyword}{else} \{
+00310                    \textcolor{keyword}{if} \{$flexible\_timing\} \{
+00311                        \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type 
+      $mem\_type -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin [\textcolor{keyword}{
+      lindex} $ck\_pins 0] -flexible\} verify\_assumptions\_result]\textcolor{comment}{}
+00312 \textcolor{comment}{}                   \} \textcolor{keyword}{else} \{
+00313                        \textcolor{keyword}{set} verify\_assumptions\_exception [\textcolor{keyword}{catch} \{verify\_assumptions -memory\_type 
+      $mem\_type -read\_pins\_list $read\_pins\_list -write\_pins\_list $write\_pins\_list -ck\_ckn\_pairs $ck\_ckn\_pairs 
+      -clk\_to\_write\_d $clk\_to\_write\_d -clk\_to\_write\_clock $clk\_to\_write\_clock -clk\_to\_ck\_ckn $clk\_to\_ck\_ckn -mimic\_pin [\textcolor{keyword}{
+      lindex} $ck\_pins 0]\} verify\_assumptions\_result]\textcolor{comment}{}
+00314 \textcolor{comment}{}                   \}\textcolor{comment}{}
+00315 \textcolor{comment}{}               \}\textcolor{comment}{}
+00316 \textcolor{comment}{}           \}\textcolor{comment}{}
+00317 \textcolor{comment}{}           \textcolor{keyword}{if} \{$verify\_assumptions\_exception == 0\} \{
+00318                \textcolor{keyword}{incr} num\_errors [\textcolor{keyword}{lindex} $verify\_assumptions\_result 0]\textcolor{comment}{}
+00319 \textcolor{comment}{}               \textcolor{keyword}{set} failed\_assumptions [\textcolor{keyword}{concat} $failed\_assumptions [\textcolor{keyword}{lrange} $verify\_assumptions\_result 1
+       end]]\textcolor{comment}{}
+00320 \textcolor{comment}{}           \}\textcolor{comment}{}
+00321 \textcolor{comment}{}       \}\textcolor{comment}{}
+00322 \textcolor{comment}{}       \textcolor{keyword}{if} \{$verify\_assumptions\_exception != 0\} \{
+00323            \textcolor{keyword}{lappend} failed\_assumptions "Error: Timing assumptions could not be verified"\textcolor{comment}{}
+00324 \textcolor{comment}{}           \textcolor{keyword}{incr} num\_errors\textcolor{comment}{}
+00325 \textcolor{comment}{}       \}\textcolor{comment}{}
+00326 \textcolor{comment}{}   \}\textcolor{comment}{}
+00327 \textcolor{comment}{}
+00328    \textcolor{keyword}{if} \{$num\_errors != 0\} \{
+00329        \textcolor{keyword}{for} \{\textcolor{keyword}{set} i 0\} \{$i != [\textcolor{keyword}{llength} $failed\_assumptions]\} \{\textcolor{keyword}{incr} i\} \{
+00330            \textcolor{keyword}{set} raw\_msg [\textcolor{keyword}{lindex} $failed\_assumptions $i]\textcolor{comment}{}
+00331 \textcolor{comment}{}           \textcolor{keyword}{if} \{[regexp \{^\(\backslash\)W*(Info|Extra Info|Warning|Critical Warning|Error): (.*)$\} $raw\_msg -- 
+      msg\_type msg]\} \{
+00332                regsub " " $msg\_type \_ msg\_type\textcolor{comment}{}
+00333 \textcolor{comment}{}               \textcolor{keyword}{if} \{$msg\_type == "Error"\} \{
+00334                    \textcolor{keyword}{set} msg\_type "critical\_warning"\textcolor{comment}{}
+00335 \textcolor{comment}{}               \}\textcolor{comment}{}
+00336 \textcolor{comment}{}               post\_message -type $msg\_type $msg\textcolor{comment}{}
+00337 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+00338                post\_message -type info $raw\_msg\textcolor{comment}{}
+00339 \textcolor{comment}{}           \}\textcolor{comment}{}
+00340 \textcolor{comment}{}       \}\textcolor{comment}{}
+00341 \textcolor{comment}{}       post\_message -type critical\_warning "Read Capture and Write timing analyses may not be valid
+       due to violated timing model assumptions"\textcolor{comment}{}
+00342 \textcolor{comment}{}   \}\textcolor{comment}{}
+00343 \textcolor{comment}{}   \textcolor{keyword}{return} [\textcolor{keyword}{expr} $num\_errors == 0]\textcolor{comment}{}
+00344 \textcolor{comment}{}\}\textcolor{comment}{}
+00345 \textcolor{comment}{}
+00346 \textcolor{keyword}{proc} ddr\_pin \{n pin pin\_array\_name\} \{
+00347    \textcolor{keyword}{upvar} 1 $pin\_array\_name pins\textcolor{comment}{}
+00348 \textcolor{comment}{}   \textcolor{keyword}{lappend} pins($n) $pin\textcolor{comment}{}
+00349 \textcolor{comment}{}\}\textcolor{comment}{}
+00350 \textcolor{comment}{}
+00351 \textcolor{keyword}{proc} walk\_to\_pin \{type mainnode \{depth 100\}\} \{
+00352    \textcolor{keyword}{if} \{ $type == "fanout" \} \{
+00353        \textcolor{keyword}{set} edgename "-fanout\_edges"\textcolor{comment}{}
+00354 \textcolor{comment}{}       \textcolor{keyword}{set} srcdst "-dst"\textcolor{comment}{}
+00355 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{ $type == "clock" \} \{
+00356        \textcolor{keyword}{set} edgename "-clock\_edges"\textcolor{comment}{}
+00357 \textcolor{comment}{}       \textcolor{keyword}{set} srcdst "-src"\textcolor{comment}{}
+00358 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{ $type == "fanin" \} \{
+00359        \textcolor{keyword}{set} edgename "-synch\_edges"\textcolor{comment}{}
+00360 \textcolor{comment}{}       \textcolor{keyword}{set} srcdst "-src"\textcolor{comment}{}
+00361 \textcolor{comment}{}   \}\textcolor{comment}{}
+00362 \textcolor{comment}{}   \textcolor{keyword}{set} fanout [get\_node\_info $edgename $mainnode]\textcolor{comment}{}
+00363 \textcolor{comment}{}   \textcolor{keyword}{foreach} edge $fanout \{
+00364        \textcolor{keyword}{set} node [get\_edge\_info $srcdst $edge]\textcolor{comment}{}
+00365 \textcolor{comment}{}       \textcolor{keyword}{if} \{ [get\_node\_info -type $node] == "port" \} \{
+00366            \textcolor{keyword}{return} $node\textcolor{comment}{}
+00367 \textcolor{comment}{}       \}\textcolor{comment}{}
+00368 \textcolor{comment}{}       \textcolor{keyword}{set} node\_type [get\_node\_info -type $node]\textcolor{comment}{}
+00369 \textcolor{comment}{}       \textcolor{keyword}{if} \{$depth > 0 && ($node\_type == "comb" || $node\_type == "pin")\} \{
+00370            \textcolor{comment}{#puts "walking down [get\_node\_info -name $node] [get\_node\_info -type $node]..."}
+00371 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{keyword}{set} res [walk_to_pin $type $node [\textcolor{keyword}{expr} \{$depth - 1\}]]\textcolor{comment}{}
+00372 \textcolor{comment}{}           \textcolor{keyword}{if} \{ $res != "" \} \{
+00373                \textcolor{keyword}{return} $res\textcolor{comment}{}
+00374 \textcolor{comment}{}           \}\textcolor{comment}{}
+00375 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00376            \textcolor{comment}{#puts "ignoring node [get\_node\_info -name $node] of type [get\_node\_info -type $node]"}
+00377 \textcolor{comment}{}\textcolor{comment}{       }\}\textcolor{comment}{}
+00378 \textcolor{comment}{}   \}\textcolor{comment}{}
+00379 \textcolor{comment}{}   \textcolor{keyword}{return} ""\textcolor{comment}{}
+00380 \textcolor{comment}{}\}\textcolor{comment}{}
+00381 \textcolor{comment}{}
+00382 \textcolor{comment}{# Like walk\_to\_pin, but searches out in a tree if the }
+00383 \textcolor{comment}{}\textcolor{comment}{# pin drives multiple ports}
+00384 \textcolor{comment}{}\textcolor{keyword}{proc} walk\_to\_all\_pins \{type collection \{depth 100\}\} \{
+00385    \textcolor{keyword}{if} \{ $type == "fanout" \} \{
+00386        \textcolor{keyword}{set} edgename "-fanout\_edges"\textcolor{comment}{}
+00387 \textcolor{comment}{}       \textcolor{keyword}{set} srcdst "-dst"\textcolor{comment}{}
+00388 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{ $type == "clock" \} \{
+00389        \textcolor{keyword}{set} edgename "-clock\_edges"\textcolor{comment}{}
+00390 \textcolor{comment}{}       \textcolor{keyword}{set} srcdst "-src"\textcolor{comment}{}
+00391 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{ $type == "fanin" \} \{
+00392        \textcolor{keyword}{set} edgename "-synch\_edges"\textcolor{comment}{}
+00393 \textcolor{comment}{}       \textcolor{keyword}{set} srcdst "-src"\textcolor{comment}{}
+00394 \textcolor{comment}{}   \}\textcolor{comment}{}
+00395 \textcolor{comment}{}   \textcolor{keyword}{set} res [list]\textcolor{comment}{}
+00396 \textcolor{comment}{}   foreach\_in\_collection mainnode $collection \{
+00397        set fanout [get\_node\_info $edgename $mainnode]
+00398        foreach edge $fanout \{
+00399            set node [get\_edge\_info $srcdst $edge]
+00400            if \{ [get\_node\_info -type $node] == "port" \} \{
+00401                lappend res $node
+00402            \}
+00403            set node\_type [get\_node\_info -type $node]
+00404            if \{$depth > 0 && ($node\_type == "comb" || $node\_type == "pin")\} \{
+00405                #puts "walking down [get\_node\_info -name $node] [get\_node\_info -type $node]..."
+00406                set r [walk\_to\_pin $type $node [expr \{$depth - 1\}]]
+00407                set res [concat $res $r] 
+00408            \} else \{
+00409                #puts "ignoring node [get\_node\_info -name $node] of type [get\_node\_info -type $node]"
+00410            \}
+00411        \}
+00412    \}\textcolor{comment}{}
+00413 \textcolor{comment}{}   \textcolor{keyword}{return} $res\textcolor{comment}{}
+00414 \textcolor{comment}{}\}\textcolor{comment}{}
+00415 \textcolor{comment}{}
+00416 
+00417 \textcolor{comment}{# (map walk\_to\_pin)}
+00418 \textcolor{comment}{}\textcolor{keyword}{proc} walk\_to\_pins \{ type collection \{depth 100\} \} \{
+00419    \textcolor{keyword}{set} res [list]\textcolor{comment}{}
+00420 \textcolor{comment}{}   foreach\_in\_collection c $collection \{
+00421        set i [walk\_to\_pin $type $c $depth]
+00422        if \{ $i == "" \} \{
+00423            #puts "Node [get\_node\_info -name $c] was a dead end"
+00424        \} else \{
+00425            #puts "Got port for node [get\_node\_info -name $c]"
+00426            lappend res $i
+00427        \}
+00428    \}\textcolor{comment}{}
+00429 \textcolor{comment}{}   \textcolor{comment}{#puts "walk\_to\_pins returning: $res"}
+00430 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{return} $res\textcolor{comment}{}
+00431 \textcolor{comment}{}\}\textcolor{comment}{}
+00432 \textcolor{comment}{}
+00433 \textcolor{comment}{# (map get\_node\_info -name)}
+00434 \textcolor{comment}{}\textcolor{keyword}{proc} map\_get\_node\_name \{nodes\} \{
+00435    \textcolor{keyword}{set} res [list]\textcolor{comment}{}
+00436 \textcolor{comment}{}   \textcolor{keyword}{foreach} n $nodes \{
+00437        \textcolor{keyword}{lappend} res [get\_node\_info -name $n]\textcolor{comment}{}
+00438 \textcolor{comment}{}   \}\textcolor{comment}{}
+00439 \textcolor{comment}{}   \textcolor{keyword}{return} $res\textcolor{comment}{}
+00440 \textcolor{comment}{}\}\textcolor{comment}{}
+00441 \textcolor{comment}{}
+00442 \textcolor{keyword}{proc} get\_all\_dqs\_pins \{ dqsgroups\} \{ 
+00443    \textcolor{keyword}{set} res [list]\textcolor{comment}{}
+00444 \textcolor{comment}{}   \textcolor{keyword}{foreach} dqsgroup $dqsgroups \{
+00445        \textcolor{keyword}{lappend} res [\textcolor{keyword}{lindex} $dqsgroup 0]\textcolor{comment}{}
+00446 \textcolor{comment}{}   \}\textcolor{comment}{}
+00447 \textcolor{comment}{}   \textcolor{keyword}{return} $res\textcolor{comment}{}
+00448 \textcolor{comment}{}\}\textcolor{comment}{}
+00449 \textcolor{comment}{}
+00450 \textcolor{keyword}{proc} get\_all\_dq\_pins \{ dqsgroups\} \{ 
+00451    \textcolor{keyword}{set} res [list]\textcolor{comment}{}
+00452 \textcolor{comment}{}   \textcolor{keyword}{foreach} dqsgroup $dqsgroups \{
+00453        \textcolor{keyword}{set} res [\textcolor{keyword}{concat} $res [\textcolor{keyword}{lindex} $dqsgroup 2]]\textcolor{comment}{}
+00454 \textcolor{comment}{}   \}\textcolor{comment}{}
+00455 \textcolor{comment}{}   \textcolor{keyword}{return} $res\textcolor{comment}{}
+00456 \textcolor{comment}{}\}\textcolor{comment}{}
+00457 \textcolor{comment}{}
+00458 \textcolor{keyword}{proc} get\_all\_dm\_pins \{ dqsgroups\} \{ 
+00459    \textcolor{keyword}{set} res [list]\textcolor{comment}{}
+00460 \textcolor{comment}{}   \textcolor{keyword}{foreach} dqsgroup $dqsgroups \{
+00461        \textcolor{keyword}{set} res [\textcolor{keyword}{concat} $res [\textcolor{keyword}{lindex} $dqsgroup 1]]\textcolor{comment}{}
+00462 \textcolor{comment}{}   \}\textcolor{comment}{}
+00463 \textcolor{comment}{}   \textcolor{keyword}{return} $res\textcolor{comment}{}
+00464 \textcolor{comment}{}\}\textcolor{comment}{}
+00465 \textcolor{comment}{}
+00466 
+00467 \textcolor{keyword}{proc} list\_collection \{ col \} \{
+00468    \textcolor{keyword}{set} res "("\textcolor{comment}{}
+00469 \textcolor{comment}{}   foreach\_in\_collection c $col \{
+00470        append res "[get\_node\_info -name $c]\(\backslash\)n"
+00471    \}\textcolor{comment}{}
+00472 \textcolor{comment}{}   \textcolor{keyword}{append} res ")"\textcolor{comment}{}
+00473 \textcolor{comment}{}   \textcolor{keyword}{return} $res\textcolor{comment}{}
+00474 \textcolor{comment}{}\}\textcolor{comment}{}
+00475 \textcolor{comment}{}
+00476 \textcolor{keyword}{proc} sett\_collection \{ vlist col \} \{
+00477    \textcolor{keyword}{set} i 0\textcolor{comment}{}
+00478 \textcolor{comment}{}   \textcolor{keyword}{set} len [\textcolor{keyword}{llength} $vlist]\textcolor{comment}{}
+00479 \textcolor{comment}{}   foreach\_in\_collection c $col \{
+00480        if \{ $i < $len \} \{
+00481            upvar 1 [lindex $vlist $i] x
+00482            set x $c
+00483            incr i
+00484        \} else \{
+00485            error "Too many items in collection ([expr \{$i+1\}]) for list $vlist"
+00486        \}
+00487    \}\textcolor{comment}{}
+00488 \textcolor{comment}{}   \textcolor{keyword}{if} \{ $i != $len \} \{
+00489        error "Too Few items in collection ($i) for list $vlist"\textcolor{comment}{}
+00490 \textcolor{comment}{}   \}\textcolor{comment}{}
+00491 \textcolor{comment}{}\}\textcolor{comment}{}
+00492 \textcolor{comment}{}
+00493 \textcolor{comment}{# For static deskew, get the frequency range of the given configuration}
+00494 \textcolor{comment}{}\textcolor{comment}{# Return triplet \{mode min\_freq max\_freq\}}
+00495 \textcolor{comment}{}\textcolor{keyword}{proc} get\_deskew\_freq\_range \{timing\_params period\} \{
+00496    \textcolor{keyword}{set} mode [list]\textcolor{comment}{}
+00497 \textcolor{comment}{}   \textcolor{comment}{# freq\_range list should be sorted from low to high}
+00498 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{[\textcolor{keyword}{lindex} $timing\_params 2] == "STATIC\_DESKEW\_8" || [\textcolor{keyword}{lindex} $timing\_params 2] ==
+       "STATIC\_DESKEW\_10"\}  \{
+00499        \textcolor{comment}{# These modes have more than 2 freq ranges}
+00500 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{keyword}{set} range\_list [list LOW HIGH]\textcolor{comment}{}
+00501 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00502        \textcolor{comment}{# Just 1 freq range}
+00503 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{keyword}{set} range\_list [list [list]]\textcolor{comment}{}
+00504 \textcolor{comment}{}   \}\textcolor{comment}{}
+00505 \textcolor{comment}{}   \textcolor{keyword}{set} freq\_mode [list]\textcolor{comment}{}
+00506 \textcolor{comment}{}   \textcolor{keyword}{foreach} freq\_range $range\_list \{
+00507        \textcolor{keyword}{if} \{[\textcolor{keyword}{catch} \{get\_micro\_node\_delay -micro MIN -parameters [\textcolor{keyword}{concat} $timing\_params $freq\_range]\} 
+      min\_freq] != 0 || $min\_freq == "" ||
+00508            [\textcolor{keyword}{catch} \{get\_micro\_node\_delay -micro MAX -parameters [\textcolor{keyword}{concat} $timing\_params $freq\_range]\} 
+      max\_freq] != 0 || $max\_freq == ""\} \{
+00509            \textcolor{comment}{# Invalid mode}
+00510 \textcolor{comment}{}\textcolor{comment}{       }\} \textcolor{keyword}{else} \{
+00511            \textcolor{keyword}{set} max\_freq\_period [\textcolor{keyword}{expr} 1000.0 / $min\_freq]\textcolor{comment}{}
+00512 \textcolor{comment}{}           \textcolor{keyword}{set} min\_freq\_period [\textcolor{keyword}{expr} 1000.0 / $max\_freq]\textcolor{comment}{}
+00513 \textcolor{comment}{}           \textcolor{keyword}{lappend} freq\_mode [list $freq\_range $min\_freq $max\_freq]\textcolor{comment}{}
+00514 \textcolor{comment}{}           \textcolor{keyword}{if} \{$period >= $min\_freq\_period && $period <= $max\_freq\_period\} \{
+00515                \textcolor{keyword}{set} mode [\textcolor{keyword}{lindex} $freq\_mode end]\textcolor{comment}{}
+00516 \textcolor{comment}{}               break\textcolor{comment}{}
+00517 \textcolor{comment}{}           \}\textcolor{comment}{}
+00518 \textcolor{comment}{}       \}\textcolor{comment}{}
+00519 \textcolor{comment}{}   \}\textcolor{comment}{}
+00520 \textcolor{comment}{}   \textcolor{keyword}{if} \{$mode == [list] && $freq\_mode != [list]\} \{
+00521        \textcolor{keyword}{if} \{$period < $min\_freq\_period\} \{
+00522            \textcolor{comment}{# Fastest mode}
+00523 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{keyword}{set} mode [\textcolor{keyword}{lindex} $freq\_mode end]\textcolor{comment}{}
+00524 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00525            \textcolor{comment}{# Slowest mode}
+00526 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{keyword}{set} mode [\textcolor{keyword}{lindex} $freq\_mode 0]\textcolor{comment}{}
+00527 \textcolor{comment}{}       \}\textcolor{comment}{}
+00528 \textcolor{comment}{}   \}\textcolor{comment}{}
+00529 \textcolor{comment}{}   \textcolor{keyword}{return} $mode\textcolor{comment}{}
+00530 \textcolor{comment}{}\}\textcolor{comment}{}
+00531 \textcolor{comment}{}\textcolor{comment}{# Return a tuple of the tCCS value for a given device}
+00532 \textcolor{comment}{}\textcolor{keyword}{proc} get\_tccs \{ mem\_if\_memtype dqs\_list period args\} \{
+00533    \textcolor{keyword}{global} TimeQuestInfo\textcolor{comment}{}
+00534 \textcolor{comment}{}   \textcolor{keyword}{array} set options [list "-write\_deskew" "none" "-dll\_length" 0 "-config\_period" 0 "-ddr3\_discrete" 
+      0]\textcolor{comment}{}
+00535 \textcolor{comment}{}   \textcolor{keyword}{foreach} \{option value\} $args \{
+00536        \textcolor{keyword}{if} \{[\textcolor{keyword}{array} names options -exact "$option"] != ""\} \{
+00537            \textcolor{keyword}{set} options($option) $value\textcolor{comment}{}
+00538 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00539            error "ERROR: Unknown get\_tccs option $option (with value $value; args are $args)"\textcolor{comment}{}
+00540 \textcolor{comment}{}       \}\textcolor{comment}{}
+00541 \textcolor{comment}{}   \}\textcolor{comment}{}
+00542 \textcolor{comment}{}
+00543    \textcolor{keyword}{set} interface\_type [get_io_interface_type $dqs\_list]\textcolor{comment}{}
+00544 \textcolor{comment}{}   \textcolor{comment}{# The tCCS for a VHPAD interface is the same as a HPAD interface}
+00545 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{$interface\_type == "VHPAD"\} \{
+00546        \textcolor{keyword}{set} interface\_type "HPAD"\textcolor{comment}{}
+00547 \textcolor{comment}{}   \}\textcolor{comment}{}
+00548 \textcolor{comment}{}   \textcolor{keyword}{set} io\_std [get_io_standard [\textcolor{keyword}{lindex} $dqs\_list 0]]\textcolor{comment}{}
+00549 \textcolor{comment}{}   \textcolor{keyword}{set} result [list 0 0]\textcolor{comment}{}
+00550 \textcolor{comment}{}   \textcolor{keyword}{if} \{$interface\_type != "" && $interface\_type != "UNKNOWN" && $io\_std != "" && $io\_std != "UNKNOWN"\}
+       \{
+00551        \textcolor{keyword}{package} require ::quartus::ddr\_timing\_model\textcolor{comment}{}
+00552 \textcolor{comment}{}
+00553        \textcolor{keyword}{set} tccs\_params [list IO $interface\_type]\textcolor{comment}{}
+00554 \textcolor{comment}{}       \textcolor{keyword}{if} \{($mem\_if\_memtype == "DDR3 SDRAM") && ($options(-ddr3\_discrete) == 1)\} \{
+00555            \textcolor{keyword}{lappend} tccs\_params NONLEVELED\textcolor{comment}{}
+00556 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{$options(-write\_deskew) == "static"\} \{
+00557            \textcolor{keyword}{if} \{$options(-dll\_length) != 0\} \{
+00558                \textcolor{keyword}{lappend} tccs\_params STATIC\_DESKEW\_$options(-dll\_length)\textcolor{comment}{}
+00559 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+00560                \textcolor{comment}{# No DLL length dependency}
+00561 \textcolor{comment}{}\textcolor{comment}{               }\textcolor{keyword}{lappend} tccs\_params STATIC\_DESKEW\textcolor{comment}{}
+00562 \textcolor{comment}{}           \}\textcolor{comment}{}
+00563 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{$options(-write\_deskew) == "dynamic"\} \{
+00564            \textcolor{keyword}{lappend} tccs\_params DYNAMIC\_DESKEW\textcolor{comment}{}
+00565 \textcolor{comment}{}       \}\textcolor{comment}{}
+00566 \textcolor{comment}{}       \textcolor{keyword}{if} \{$options(-ddr3\_discrete) == 0 && $options(-write\_deskew) != "none"\} \{
+00567            \textcolor{keyword}{set} mode [get_deskew_freq_range $tccs\_params $period]\textcolor{comment}{}
+00568 \textcolor{comment}{}           \textcolor{keyword}{set} expected\_mode [get_deskew_freq_range $tccs\_params $options(-config\_period)]\textcolor{comment}{}
+00569 \textcolor{comment}{}           \textcolor{keyword}{if} \{$mode == [list]\} \{
+00570                post\_message -type critical\_warning "Memory interface with period $period and write
+       $options(-write\_deskew) deskew does not fall in a supported frequency range"\textcolor{comment}{}
+00571 \textcolor{comment}{}           \} \textcolor{keyword}{elseif} \{$expected\_mode != $mode || $period < [\textcolor{keyword}{expr} 1000.0/[\textcolor{keyword}{lindex} $mode 2]] || $period >
+       [\textcolor{keyword}{expr} 1000.0/[\textcolor{keyword}{lindex} $mode 1]]\} \{
+00572                post\_message -type critical\_warning "Memory interface with clock frequency [\textcolor{keyword}{expr} 
+      1000.0/$period] MHz is operating outside the frequency range of the megafunction configuration (expected frequency
+       range is from [\textcolor{keyword}{lindex} $expected\_mode 1] MHz to [\textcolor{keyword}{lindex} $expected\_mode 2] MHz).  The timing analysis will
+       not be accurate."\textcolor{comment}{}
+00573 \textcolor{comment}{}           \} \textcolor{keyword}{elseif} \{[\textcolor{keyword}{lindex} $mode 0] != [list]\} \{
+00574                \textcolor{keyword}{lappend} tccs\_params [\textcolor{keyword}{lindex} $mode 0]\textcolor{comment}{}
+00575 \textcolor{comment}{}           \}\textcolor{comment}{}
+00576 \textcolor{comment}{}       \}\textcolor{comment}{}
+00577 \textcolor{comment}{}       \textcolor{keyword}{if} \{[\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TCCS\_LEAD -io\_standard $io\_std -parameters 
+      $tccs\_params\} tccs\_lead] != 0 || $tccs\_lead == "" || $tccs\_lead == 0 || \(\backslash\)
+00578                [\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TCCS\_LAG -io\_standard $io\_std -parameters 
+      $tccs\_params\} tccs\_lag] != 0 || $tccs\_lag == "" || $tccs\_lag == 0 \} \{
+00579            \textcolor{keyword}{set} family $TimeQuestInfo(family)\textcolor{comment}{}
+00580 \textcolor{comment}{}           error "Missing $family timing model for tCCS of $io\_std $tccs\_params"\textcolor{comment}{}
+00581 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00582            \textcolor{keyword}{return} [list $tccs\_lead $tccs\_lag]\textcolor{comment}{}
+00583 \textcolor{comment}{}       \}\textcolor{comment}{}
+00584 \textcolor{comment}{}   \}\textcolor{comment}{}
+00585 \textcolor{comment}{}\}\textcolor{comment}{}
+00586 \textcolor{comment}{}
+00587 \textcolor{comment}{# Return a tuple of setup,hold time for read capture}
+00588 \textcolor{comment}{}\textcolor{keyword}{proc} get\_tsw \{ mem\_if\_memtype dqs\_list period args\} \{
+00589    \textcolor{keyword}{global} TimeQuestInfo\textcolor{comment}{}
+00590 \textcolor{comment}{}   \textcolor{keyword}{array} set options [list "-read\_deskew" "none" "-dll\_length" 0 "-config\_period" 0 "-ddr3\_discrete" 0
+      ]\textcolor{comment}{}
+00591 \textcolor{comment}{}   \textcolor{keyword}{foreach} \{option value\} $args \{
+00592        \textcolor{keyword}{if} \{[\textcolor{keyword}{array} names options -exact "$option"] != ""\} \{
+00593            \textcolor{keyword}{set} options($option) $value\textcolor{comment}{}
+00594 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00595            error "ERROR: Unknown get\_tsw option $option (with value $value; args are $args)"\textcolor{comment}{}
+00596 \textcolor{comment}{}       \}\textcolor{comment}{}
+00597 \textcolor{comment}{}   \}\textcolor{comment}{}
+00598 \textcolor{comment}{}
+00599    \textcolor{keyword}{set} interface\_type [get_io_interface_type $dqs\_list]\textcolor{comment}{}
+00600 \textcolor{comment}{}   \textcolor{keyword}{if} \{$interface\_type == "VHPAD"\} \{
+00601        \textcolor{keyword}{set} interface\_type "HPAD"\textcolor{comment}{}
+00602 \textcolor{comment}{}   \}\textcolor{comment}{}
+00603 \textcolor{comment}{}   \textcolor{keyword}{set} io\_std [get_io_standard [\textcolor{keyword}{lindex} $dqs\_list 0]]\textcolor{comment}{}
+00604 \textcolor{comment}{}
+00605    \textcolor{keyword}{if} \{$interface\_type != "" && $interface\_type != "UNKNOWN" && $io\_std != "" && $io\_std != "UNKNOWN"\}
+       \{
+00606        \textcolor{keyword}{package} require ::quartus::ddr\_timing\_model\textcolor{comment}{}
+00607 \textcolor{comment}{}       \textcolor{keyword}{set} family $TimeQuestInfo(family)\textcolor{comment}{}
+00608 \textcolor{comment}{}       \textcolor{keyword}{set} tsw\_params [list IO $interface\_type]\textcolor{comment}{}
+00609 \textcolor{comment}{}       \textcolor{keyword}{if} \{$options(-ddr3\_discrete) == 1\} \{
+00610            \textcolor{keyword}{lappend} tsw\_params NONLEVELED\textcolor{comment}{}
+00611 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{$options(-read\_deskew) == "static"\} \{
+00612            \textcolor{keyword}{if} \{$options(-dll\_length) != 0\} \{
+00613                \textcolor{keyword}{lappend} tsw\_params STATIC\_DESKEW\_$options(-dll\_length)\textcolor{comment}{}
+00614 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+00615                \textcolor{comment}{# No DLL length dependency}
+00616 \textcolor{comment}{}\textcolor{comment}{               }\textcolor{keyword}{lappend} tsw\_params STATIC\_DESKEW\textcolor{comment}{}
+00617 \textcolor{comment}{}           \}\textcolor{comment}{}
+00618 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{$options(-read\_deskew) == "dynamic"\} \{
+00619            \textcolor{keyword}{lappend} tsw\_params DYNAMIC\_DESKEW\textcolor{comment}{}
+00620 \textcolor{comment}{}       \}\textcolor{comment}{}
+00621 \textcolor{comment}{}       \textcolor{keyword}{if} \{$options(-ddr3\_discrete) == 0 && $options(-read\_deskew) != "none"\} \{
+00622            \textcolor{keyword}{set} mode [get_deskew_freq_range $tsw\_params $period]\textcolor{comment}{}
+00623 \textcolor{comment}{}           \textcolor{keyword}{if} \{$mode == [list]\} \{
+00624                post\_message -type critical\_warning "Memory interface with period $period and read
+       $options(-read\_deskew) deskew does not fall in a supported frequency range"\textcolor{comment}{}
+00625 \textcolor{comment}{}           \} \textcolor{keyword}{elseif} \{[\textcolor{keyword}{lindex} $mode 0] != [list]\} \{
+00626                \textcolor{keyword}{lappend} tsw\_params [\textcolor{keyword}{lindex} $mode 0]\textcolor{comment}{}
+00627 \textcolor{comment}{}           \}\textcolor{comment}{}
+00628 \textcolor{comment}{}       \}\textcolor{comment}{}
+00629 \textcolor{comment}{}
+00630        \textcolor{keyword}{if} \{[\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TSU -io\_standard $io\_std -parameters $tsw\_params\} 
+      tsw\_setup] != 0 || $tsw\_setup == "" || $tsw\_setup == 0 || \(\backslash\)
+00631                [\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TH -io\_standard $io\_std -parameters $tsw\_params
+      \} tsw\_hold] != 0 || $tsw\_hold == "" || $tsw\_hold == 0 \} \{
+00632            error "Missing $family timing model for tSW of $io\_std $tsw\_params"\textcolor{comment}{}
+00633 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00634            \textcolor{comment}{# Derate tSW for DDR2 on VPAD in CIII Q240 parts}
+00635 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{comment}{# The tSW for HPADs and for other interface types on C8 devices}
+00636 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{comment}{# have a large guardband, so derating for them is not required}
+00637 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{keyword}{if} \{[get\_part\_info -package -pin\_count $TimeQuestInfo(part)] == "PQFP 240"\} \{
+00638                \textcolor{keyword}{if} \{[\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TSU -io\_standard $io\_std -parameters [list 
+      IO $interface\_type Q240\_DERATING]\} tsw\_setup\_derating] != 0 || $tsw\_setup\_derating == 0 || \(\backslash\)
+00639                        [\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TH -io\_standard $io\_std -parameters [
+      list IO $interface\_type Q240\_DERATING]\} tsw\_hold\_derating] != 0 || $tsw\_hold\_derating == 0\} \{
+00640                    \textcolor{keyword}{set} f "$io\_std/$interface\_type/$family"\textcolor{comment}{}
+00641 \textcolor{comment}{}                   \textcolor{keyword}{switch} -glob $f \{
+00642                        "SSTL\_18*/VPAD/Cyclone III"  \{
+00643                            \textcolor{keyword}{set} tsw\_setup\_derating 50\textcolor{comment}{}
+00644 \textcolor{comment}{}                           \textcolor{keyword}{set} tsw\_hold\_derating 135\textcolor{comment}{}
+00645 \textcolor{comment}{}                       \}
+00646                        "SSTL\_18*/VPAD/Cyclone IV E"  \{
+00647                            \textcolor{keyword}{set} tsw\_setup\_derating 50\textcolor{comment}{}
+00648 \textcolor{comment}{}                           \textcolor{keyword}{set} tsw\_hold\_derating 135\textcolor{comment}{}
+00649 \textcolor{comment}{}                       \}                       
+00650                        default \{
+00651                            \textcolor{keyword}{set} tsw\_setup\_derating 0\textcolor{comment}{}
+00652 \textcolor{comment}{}                           \textcolor{keyword}{set} tsw\_hold\_derating 0\textcolor{comment}{}
+00653 \textcolor{comment}{}                       \}
+00654                    \}\textcolor{comment}{}
+00655 \textcolor{comment}{}               \}\textcolor{comment}{}
+00656 \textcolor{comment}{}               \textcolor{keyword}{incr} tsw\_setup $tsw\_setup\_derating\textcolor{comment}{}
+00657 \textcolor{comment}{}               \textcolor{keyword}{incr} tsw\_hold $tsw\_hold\_derating\textcolor{comment}{}
+00658 \textcolor{comment}{}           \}\textcolor{comment}{}
+00659 \textcolor{comment}{}           \textcolor{keyword}{return} [list $tsw\_setup $tsw\_hold]\textcolor{comment}{}
+00660 \textcolor{comment}{}       \}\textcolor{comment}{}
+00661 \textcolor{comment}{}   \}\textcolor{comment}{}
+00662 \textcolor{comment}{}\}\textcolor{comment}{}
+00663 \textcolor{comment}{}
+00664 \textcolor{comment}{# Return a pseudo x36 derating tuple of setup,hold time for read capture}
+00665 \textcolor{comment}{}\textcolor{keyword}{proc} get\_qdr\_tsw\_derating \{ dqs\_list \} \{ 
+00666    \textcolor{keyword}{global} TimeQuestInfo\textcolor{comment}{}
+00667 \textcolor{comment}{}   \textcolor{keyword}{set} io\_std [get_io_standard [\textcolor{keyword}{lindex} $dqs\_list 0]]\textcolor{comment}{}
+00668 \textcolor{comment}{}   \textcolor{keyword}{set} interface\_type [get_io_interface_type [\textcolor{keyword}{lindex} $dqs\_list 0]]\textcolor{comment}{}
+00669 \textcolor{comment}{}
+00670    \textcolor{keyword}{if} \{[\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TSU -io\_standard $io\_std -parameters [list IO 
+      $interface\_type PSEUDOX36]\} tsw\_setup] != 0 || $tsw\_setup == "" || \(\backslash\)
+00671            [\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TH -io\_standard $io\_std -parameters [list IO 
+      $interface\_type PSEUDOX36]\} tsw\_hold] != 0 || $tsw\_hold == "" || $tsw\_hold == 0 \} \{
+00672        \textcolor{keyword}{set} family $TimeQuestInfo(family)\textcolor{comment}{}
+00673 \textcolor{comment}{}       error "Missing $family timing model for derated tSW of $io\_std $interface\_type"\textcolor{comment}{}
+00674 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00675        \textcolor{keyword}{set} result [list $tsw\_setup $tsw\_hold]\textcolor{comment}{}
+00676 \textcolor{comment}{}   \}\textcolor{comment}{}
+00677 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+00678 \textcolor{comment}{}\}\textcolor{comment}{}
+00679 \textcolor{comment}{}
+00680 \textcolor{comment}{# Return a pseudo x36 derating tuple of setup,hold time for write capture}
+00681 \textcolor{comment}{}\textcolor{keyword}{proc} get\_qdr\_tccs\_derating \{ dqs\_list \} \{ 
+00682    \textcolor{keyword}{set} io\_std [get_io_standard [\textcolor{keyword}{lindex} $dqs\_list 0]]\textcolor{comment}{}
+00683 \textcolor{comment}{}   \textcolor{keyword}{set} interface\_type [get_io_interface_type [\textcolor{keyword}{lindex} $dqs\_list 0]]\textcolor{comment}{}
+00684 \textcolor{comment}{}
+00685    \textcolor{keyword}{if} \{[\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TCCS\_LEAD -io\_standard $io\_std -parameters [list IO 
+      $interface\_type PSEUDOX36]\} tccs\_lead] != 0 || $tccs\_lead == "" || $tccs\_lead == 0 || \(\backslash\)
+00686            [\textcolor{keyword}{catch} \{get\_io\_standard\_node\_delay -dst TCCS\_LAG -io\_standard $io\_std -parameters [list IO 
+      $interface\_type PSEUDOX36]\} tccs\_lag] != 0 || $tccs\_lag == "" || $tccs\_lag == 0 \} \{
+00687        \textcolor{keyword}{set} family $TimeQuestInfo(family)\textcolor{comment}{}
+00688 \textcolor{comment}{}       error "Missing $family timing model for derated tCCS of $io\_std $interface\_type"\textcolor{comment}{}
+00689 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00690        \textcolor{keyword}{set} result [list $tccs\_lead $tccs\_lag]\textcolor{comment}{}
+00691 \textcolor{comment}{}   \}\textcolor{comment}{}
+00692 \textcolor{comment}{}
+00693    \textcolor{keyword}{return} $result\textcolor{comment}{}
+00694 \textcolor{comment}{}\}\textcolor{comment}{}
+00695 \textcolor{comment}{}
+00696 \textcolor{keyword}{proc} round\_3dp \{ x \} \{
+00697    \textcolor{keyword}{return} [\textcolor{keyword}{expr} \{ round($x * 1000) / 1000.0  \}]\textcolor{comment}{}
+00698 \textcolor{comment}{}\}\textcolor{comment}{}
+00699 \textcolor{comment}{}
+00700 \textcolor{keyword}{proc} format\_3dp \{ x \} \{
+00701    \textcolor{keyword}{return} [\textcolor{keyword}{format} %.3f $x]\textcolor{comment}{}
+00702 \textcolor{comment}{}\}\textcolor{comment}{}
+00703 \textcolor{comment}{}
+00704 \textcolor{keyword}{proc} get\_colours \{ x y \} \{
+00705 
+00706    \textcolor{keyword}{set} fcolour [list "black"]\textcolor{comment}{}
+00707 \textcolor{comment}{}   \textcolor{keyword}{if} \{$x < 0\} \{
+00708        \textcolor{keyword}{lappend} fcolour "red"\textcolor{comment}{}
+00709 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00710        \textcolor{keyword}{lappend} fcolour "blue"\textcolor{comment}{}
+00711 \textcolor{comment}{}   \}\textcolor{comment}{}
+00712 \textcolor{comment}{}   \textcolor{keyword}{if} \{$y < 0\} \{
+00713        \textcolor{keyword}{lappend} fcolour "red"\textcolor{comment}{}
+00714 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00715        \textcolor{keyword}{lappend} fcolour "blue"\textcolor{comment}{}
+00716 \textcolor{comment}{}   \}\textcolor{comment}{}
+00717 \textcolor{comment}{}   
+00718    \textcolor{keyword}{return} $fcolour\textcolor{comment}{}
+00719 \textcolor{comment}{}\}\textcolor{comment}{}
+00720 \textcolor{comment}{}
+00721 \textcolor{keyword}{proc} min \{ a b \} \{
+00722    \textcolor{keyword}{if} \{ $a == "" \} \{ 
+00723        \textcolor{keyword}{return} $b\textcolor{comment}{}
+00724 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{ $a < $b \} \{
+00725        \textcolor{keyword}{return} $a\textcolor{comment}{}
+00726 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00727        \textcolor{keyword}{return} $b\textcolor{comment}{}
+00728 \textcolor{comment}{}   \}\textcolor{comment}{}
+00729 \textcolor{comment}{}\}\textcolor{comment}{}
+00730 \textcolor{comment}{}
+00731 \textcolor{keyword}{proc} max \{ a b \} \{
+00732    \textcolor{keyword}{if} \{ $a == "" \} \{ 
+00733        \textcolor{keyword}{return} $b\textcolor{comment}{}
+00734 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{ $a > $b \} \{
+00735        \textcolor{keyword}{return} $a\textcolor{comment}{}
+00736 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00737        \textcolor{keyword}{return} $b\textcolor{comment}{}
+00738 \textcolor{comment}{}   \}\textcolor{comment}{}
+00739 \textcolor{comment}{}\}\textcolor{comment}{}
+00740 \textcolor{comment}{}
+00741 \textcolor{keyword}{proc} max\_in\_collection \{ col attribute \} \{
+00742    \textcolor{keyword}{set} i 0\textcolor{comment}{}
+00743 \textcolor{comment}{}   \textcolor{keyword}{set} max 0\textcolor{comment}{}
+00744 \textcolor{comment}{}   foreach\_in\_collection path $col \{
+00745        if \{$i == 0\} \{
+00746            set max [get\_path\_info $path -$\{attribute\}]
+00747        \} else \{
+00748            set temp [get\_path\_info $path -$\{attribute\}]
+00749            if \{$temp > $max\} \{
+00750                set max $temp
+00751            \} 
+00752        \}
+00753        set i [expr $i + 1]
+00754    \}\textcolor{comment}{}
+00755 \textcolor{comment}{}   \textcolor{keyword}{return} $max\textcolor{comment}{}
+00756 \textcolor{comment}{}\}\textcolor{comment}{}
+00757 \textcolor{comment}{}
+00758 \textcolor{keyword}{proc} min\_in\_collection \{ col attribute \} \{
+00759    \textcolor{keyword}{set} i 0\textcolor{comment}{}
+00760 \textcolor{comment}{}   \textcolor{keyword}{set} min 0\textcolor{comment}{}
+00761 \textcolor{comment}{}   foreach\_in\_collection path $col \{
+00762        if \{$i == 0\} \{
+00763            set min [get\_path\_info $path -$\{attribute\}]
+00764        \} else \{
+00765            set temp [get\_path\_info $path -$\{attribute\}]
+00766            if \{$temp < $min\} \{
+00767                set min $temp
+00768            \} 
+00769        \}
+00770        set i [expr $i + 1]
+00771    \}\textcolor{comment}{}
+00772 \textcolor{comment}{}   \textcolor{keyword}{return} $min\textcolor{comment}{}
+00773 \textcolor{comment}{}\}\textcolor{comment}{}
+00774 \textcolor{comment}{}
+00775 \textcolor{keyword}{proc} min\_in\_collection\_to\_name \{ col attribute name \} \{
+00776    \textcolor{keyword}{set} i 0\textcolor{comment}{}
+00777 \textcolor{comment}{}   \textcolor{keyword}{set} min 0\textcolor{comment}{}
+00778 \textcolor{comment}{}   foreach\_in\_collection path $col \{
+00779        if \{[get\_node\_info -name [get\_path\_info $path -to]] == $name\} \{
+00780            if \{$i == 0\} \{
+00781                set min [get\_path\_info $path -$\{attribute\}]
+00782            \} else \{
+00783                set temp [get\_path\_info $path -$\{attribute\}]
+00784                if \{$temp < $min\} \{
+00785                    set min $temp
+00786                \} 
+00787            \}
+00788            set i [expr $i + 1]
+00789        \}
+00790    \}\textcolor{comment}{}
+00791 \textcolor{comment}{}   \textcolor{keyword}{return} $min\textcolor{comment}{}
+00792 \textcolor{comment}{}\}\textcolor{comment}{}
+00793 \textcolor{comment}{}
+00794 \textcolor{keyword}{proc} min\_in\_collection\_from\_name \{ col attribute name \} \{
+00795    \textcolor{keyword}{set} i 0\textcolor{comment}{}
+00796 \textcolor{comment}{}   \textcolor{keyword}{set} min 0\textcolor{comment}{}
+00797 \textcolor{comment}{}   foreach\_in\_collection path $col \{
+00798        if \{[get\_node\_info -name [get\_path\_info $path -from]] == $name\} \{
+00799            if \{$i == 0\} \{
+00800                set min [get\_path\_info $path -$\{attribute\}]
+00801            \} else \{
+00802                set temp [get\_path\_info $path -$\{attribute\}]
+00803                if \{$temp < $min\} \{
+00804                    set min $temp
+00805                \} 
+00806            \}
+00807            set i [expr $i + 1]
+00808        \}
+00809    \}\textcolor{comment}{}
+00810 \textcolor{comment}{}   \textcolor{keyword}{return} $min\textcolor{comment}{}
+00811 \textcolor{comment}{}\}\textcolor{comment}{}
+00812 \textcolor{comment}{}
+00813 \textcolor{keyword}{proc} wrap\_to\_period \{period t\} \{
+00814    \textcolor{keyword}{return} [\textcolor{keyword}{expr} \{fmod(fmod($t,$period) + $period,$period)\}]\textcolor{comment}{}
+00815 \textcolor{comment}{}\}\textcolor{comment}{}
+00816 \textcolor{comment}{}
+00817 \textcolor{keyword}{proc} get\_clock\_latency \{period clockname risefall \} \{
+00818    \textcolor{keyword}{set} countclocks 0\textcolor{comment}{}
+00819 \textcolor{comment}{}   \textcolor{keyword}{if} \{ $risefall != "rise" && $risefall != "fall" \} \{
+00820        error "Internal error: get\_clock\_latency risefall was $risefall expected \(\backslash\)"rise\(\backslash\)" or \(\backslash\)"fall\(\backslash\)""\textcolor{comment}{}
+00821 \textcolor{comment}{}   \}\textcolor{comment}{}
+00822 \textcolor{comment}{}   foreach\_in\_collection c [get\_clocks $clockname] \{ 
+00823        set clock $c
+00824        incr countclocks
+00825    \}\textcolor{comment}{}
+00826 \textcolor{comment}{}   \textcolor{keyword}{if} \{ $countclocks == 1 \} \{
+00827        \textcolor{keyword}{if} \{ $risefall == "rise" \} \{
+00828            \textcolor{keyword}{set} edge\_index 0\textcolor{comment}{}
+00829 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{ $risefall == "fall" \} \{
+00830            \textcolor{keyword}{set} edge\_index 1\textcolor{comment}{}
+00831 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00832            error "Unreachable in get\_clock\_latency"\textcolor{comment}{}
+00833 \textcolor{comment}{}       \}\textcolor{comment}{}
+00834 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00835        error "Internal error: Found $countclocks matching $clockname. Expected 1 in get\_clock\_latency"\textcolor{comment}{}
+00836 \textcolor{comment}{}   \}\textcolor{comment}{}
+00837 \textcolor{comment}{}   \textcolor{keyword}{set} waveform [get\_clock\_info -waveform $clock]\textcolor{comment}{}
+00838 \textcolor{comment}{}   \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $waveform] != 2 \} \{
+00839        error "Internal error: Waveform for clock $clockname is \(\backslash\)"$waveform\(\backslash\)""\textcolor{comment}{}
+00840 \textcolor{comment}{}   \}\textcolor{comment}{}
+00841 \textcolor{comment}{}   \textcolor{keyword}{set} latency [\textcolor{keyword}{lindex} $waveform $edge\_index]\textcolor{comment}{}
+00842 \textcolor{comment}{}   \textcolor{keyword}{set} res [wrap_to_period $period $latency]\textcolor{comment}{}
+00843 \textcolor{comment}{}   \textcolor{keyword}{return} $res\textcolor{comment}{}
+00844 \textcolor{comment}{}\}\textcolor{comment}{}
+00845 \textcolor{comment}{}
+00846 \textcolor{comment}{# Same as get\_clock\_latency, but returns the clock phase (0<=x<360) normalised instead}
+00847 \textcolor{comment}{}\textcolor{keyword}{proc} get\_clock\_phase \{period clockname risefall \} \{
+00848    \textcolor{keyword}{set} countclocks 0\textcolor{comment}{}
+00849 \textcolor{comment}{}   \textcolor{keyword}{if} \{ $risefall != "rise" && $risefall != "fall" \} \{
+00850        error "Internal error: get\_clock\_phase risefall was $risefall expected \(\backslash\)"rise\(\backslash\)" or \(\backslash\)"fall\(\backslash\)""\textcolor{comment}{}
+00851 \textcolor{comment}{}   \}\textcolor{comment}{}
+00852 \textcolor{comment}{}   foreach\_in\_collection c [get\_clocks $clockname] \{ 
+00853        set clock $c
+00854        incr countclocks
+00855    \}\textcolor{comment}{}
+00856 \textcolor{comment}{}   \textcolor{keyword}{if} \{ $countclocks == 1 \} \{
+00857        \textcolor{keyword}{if} \{ $risefall == "rise" \} \{
+00858            \textcolor{keyword}{set} offset 0\textcolor{comment}{}
+00859 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{ $risefall == "fall" \} \{
+00860            \textcolor{keyword}{set} offset 180\textcolor{comment}{}
+00861 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00862            error "Unreachable in get\_clock\_phase"\textcolor{comment}{}
+00863 \textcolor{comment}{}       \}\textcolor{comment}{}
+00864 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+00865        error "Internal error: Found $countclocks matching $clockname. Expected 1 in get\_clock\_phase"\textcolor{comment}{}
+00866 \textcolor{comment}{}   \}\textcolor{comment}{}
+00867 \textcolor{comment}{}   \textcolor{keyword}{set} phase [get\_clock\_info -phase $clock]\textcolor{comment}{}
+00868 \textcolor{comment}{}   \textcolor{keyword}{set} res [\textcolor{keyword}{expr} \{fmod(($phase+$offset+360),360)\}]\textcolor{comment}{}
+00869 \textcolor{comment}{}   \textcolor{keyword}{return} $res\textcolor{comment}{}
+00870 \textcolor{comment}{}\}\textcolor{comment}{}
+00871 \textcolor{comment}{}
+00872 
+00873 \textcolor{keyword}{proc} expr\_debug \{ exp \} \{
+00874    \textcolor{keyword}{upvar} expr\_debug\_e expr\_debug\_e\textcolor{comment}{}
+00875 \textcolor{comment}{}   \textcolor{keyword}{set} expr\_debug\_e $exp\textcolor{comment}{}
+00876 \textcolor{comment}{}   uplevel \{
+00877    puts "-----------------"
+00878    puts "[regsub -all \{[\(\backslash\)n \(\backslash\)t]+\} $expr\_debug\_e " "]"
+00879    puts "-----------------"
+00880    puts [regsub -all \{[\(\backslash\)n \(\backslash\)t]+\} [subst $expr\_debug\_e] " "]
+00881    puts "-----------------"
+00882    set expr\_debug\_temp [expr $expr\_debug\_e]
+00883    puts "=$expr\_debug\_temp" 
+00884    puts "-----------------"
+00885    return $expr\_debug\_temp
+00886    \}\textcolor{comment}{}
+00887 \textcolor{comment}{}\}\textcolor{comment}{}
+00888 \textcolor{comment}{}
+00889 \textcolor{comment}{# Return all the ck output clocks in the current design of a given type and }
+00890 \textcolor{comment}{}\textcolor{comment}{# inversion}
+00891 \textcolor{comment}{}\textcolor{comment}{# type - either tDSS/tDQSS/ac\_rise/ac\_fall}
+00892 \textcolor{comment}{}\textcolor{comment}{# pn - either p/n}
+00893 \textcolor{comment}{}\textcolor{keyword}{proc} get\_output\_clocks \{type pn\} \{
+00894    \textcolor{keyword}{global} ck\_output\_clocks\textcolor{comment}{}
+00895 \textcolor{comment}{}   \textcolor{keyword}{return} $ck\_output\_clocks($\{type\}-$\{pn\})\textcolor{comment}{}
+00896 \textcolor{comment}{}\}\textcolor{comment}{}
+00897 \textcolor{comment}{}
+00898 \textcolor{keyword}{proc} add\_output\_clock \{type pn clockname\} \{
+00899    \textcolor{keyword}{global} ck\_output\_clocks\textcolor{comment}{}
+00900 \textcolor{comment}{}   \textcolor{keyword}{if} \{ ! [info exists ck\_output\_clocks($\{type\}-$\{pn\})] \} \{
+00901        \textcolor{keyword}{set} ck\_output\_clocks($\{type\}-$\{pn\}) [list]\textcolor{comment}{}
+00902 \textcolor{comment}{}   \}\textcolor{comment}{ }
+00903 \textcolor{comment}{}   \textcolor{keyword}{lappend} ck\_output\_clocks($\{type\}-$\{pn\}) $clockname\textcolor{comment}{}
+00904 \textcolor{comment}{}\}\textcolor{comment}{}
+00905 \textcolor{comment}{}
+00906 \textcolor{comment}{# ----------------------------------------------------------------}
+00907 \textcolor{comment}{}\textcolor{comment}{#}
+00908 \textcolor{comment}{}\textcolor{keyword}{proc} get\_timequest\_name \{hier\_name\} \{
+00909 \textcolor{comment}{#}
+00910 \textcolor{comment}{}\textcolor{comment}{# Description:  Convert the full hierarchy name into a TimeQuest name}
+00911 \textcolor{comment}{}\textcolor{comment}{#}
+00912 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+00913 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} sta\_name ""\textcolor{comment}{}
+00914 \textcolor{comment}{}   \textcolor{keyword}{for} \{\textcolor{keyword}{set} inst\_start [\textcolor{keyword}{string} first ":" $hier\_name]\} \{$inst\_start != -1\} \{\} \{
+00915        \textcolor{keyword}{incr} inst\_start\textcolor{comment}{}
+00916 \textcolor{comment}{}       \textcolor{keyword}{set} inst\_end [\textcolor{keyword}{string} first "|" $hier\_name $inst\_start]\textcolor{comment}{}
+00917 \textcolor{comment}{}       \textcolor{keyword}{if} \{$inst\_end == -1\} \{
+00918            \textcolor{keyword}{append} sta\_name [\textcolor{keyword}{string} range $hier\_name $inst\_start end]\textcolor{comment}{}
+00919 \textcolor{comment}{}           \textcolor{keyword}{set} inst\_start -1\textcolor{comment}{}
+00920 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+00921            \textcolor{keyword}{append} sta\_name [\textcolor{keyword}{string} range $hier\_name $inst\_start $inst\_end]\textcolor{comment}{}
+00922 \textcolor{comment}{}           \textcolor{keyword}{set} inst\_start [\textcolor{keyword}{string} first ":" $hier\_name $inst\_end]\textcolor{comment}{}
+00923 \textcolor{comment}{}       \}\textcolor{comment}{}
+00924 \textcolor{comment}{}   \}\textcolor{comment}{}
+00925 \textcolor{comment}{}   \textcolor{keyword}{return} $sta\_name\textcolor{comment}{}
+00926 \textcolor{comment}{}\}\textcolor{comment}{}
+00927 \textcolor{comment}{}
+00928 \textcolor{comment}{# ----------------------------------------------------------------}
+00929 \textcolor{comment}{}\textcolor{comment}{#}
+00930 \textcolor{comment}{}\textcolor{keyword}{proc} get\_core\_instance\_list \{corename\} \{
+00931 \textcolor{comment}{#}
+00932 \textcolor{comment}{}\textcolor{comment}{# Description:  Get a list of all ALTMEMPHY instances in TimeQuest}
+00933 \textcolor{comment}{}\textcolor{comment}{#}
+00934 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+00935 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} full\_instance\_list [get_core_full_instance_list $corename]\textcolor{comment}{}
+00936 \textcolor{comment}{}   \textcolor{keyword}{set} instance\_list [list]\textcolor{comment}{}
+00937 \textcolor{comment}{}
+00938    \textcolor{keyword}{foreach} inst $full\_instance\_list \{
+00939        \textcolor{keyword}{set} sta\_name [get_timequest_name $inst]\textcolor{comment}{}
+00940 \textcolor{comment}{}       \textcolor{keyword}{if} \{[lsearch $instance\_list [escape\_brackets $sta\_name]] == -1\} \{
+00941            \textcolor{keyword}{lappend} instance\_list $sta\_name\textcolor{comment}{}
+00942 \textcolor{comment}{}       \}\textcolor{comment}{}
+00943 \textcolor{comment}{}   \}\textcolor{comment}{}
+00944 \textcolor{comment}{}   \textcolor{keyword}{return} $instance\_list\textcolor{comment}{}
+00945 \textcolor{comment}{}\}\textcolor{comment}{}
+00946 \textcolor{comment}{}
+00947 \textcolor{comment}{# ----------------------------------------------------------------}
+00948 \textcolor{comment}{}\textcolor{comment}{#}
+00949 \textcolor{comment}{}\textcolor{keyword}{proc} get\_core\_full\_instance\_list \{corename\} \{
+00950 \textcolor{comment}{#}
+00951 \textcolor{comment}{}\textcolor{comment}{# Description:  Get a list of all ALTMEMPHY instances (full hierarchy names)}
+00952 \textcolor{comment}{}\textcolor{comment}{#               in TimeQuest}
+00953 \textcolor{comment}{}\textcolor{comment}{#}
+00954 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+00955 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} instance\_list [list]\textcolor{comment}{}
+00956 \textcolor{comment}{}
+00957    \textcolor{comment}{# Look for a keeper (register) name}
+00958 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{# Try mem\_clk[0] to determine core instances}
+00959 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} search\_list [list "*"]\textcolor{comment}{}
+00960 \textcolor{comment}{}   \textcolor{keyword}{set} found 0\textcolor{comment}{}
+00961 \textcolor{comment}{}   \textcolor{keyword}{for} \{\textcolor{keyword}{set} i 0\} \{$found == 0 && $i != [\textcolor{keyword}{llength} $search\_list]\} \{\textcolor{keyword}{incr} i\} \{
+00962        \textcolor{keyword}{set} pattern [\textcolor{keyword}{lindex} $search\_list $i]\textcolor{comment}{}
+00963 \textcolor{comment}{}       \textcolor{keyword}{set} instance\_collection [get\_keepers -nowarn "*|$\{corename\}:*|$pattern"]\textcolor{comment}{}
+00964 \textcolor{comment}{}       \textcolor{keyword}{if} \{[get\_collection\_size $instance\_collection] == 0\} \{
+00965            \textcolor{keyword}{set} instance\_collection [get\_keepers "$\{corename\}:*|$pattern"]\textcolor{comment}{}
+00966 \textcolor{comment}{}       \}\textcolor{comment}{}
+00967 \textcolor{comment}{}       \textcolor{keyword}{if} \{[get\_collection\_size $instance\_collection] > 0\} \{
+00968            \textcolor{keyword}{set} found 1\textcolor{comment}{}
+00969 \textcolor{comment}{}       \}\textcolor{comment}{}
+00970 \textcolor{comment}{}   \}\textcolor{comment}{}
+00971 \textcolor{comment}{}   \textcolor{comment}{# regexp to extract the full hierarchy path of an instance name}
+00972 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} inst\_regexp \{(^.*\}\textcolor{comment}{}
+00973 \textcolor{comment}{}   \textcolor{keyword}{append} inst\_regexp "\(\backslash\)\(\backslash\)\(\backslash\)|$\{corename\}"\textcolor{comment}{}
+00974 \textcolor{comment}{}   \textcolor{keyword}{append} inst\_regexp \{:[A-Za-z0-9\(\backslash\).\(\backslash\)\(\backslash\)\_\(\backslash\)[\(\backslash\)]\(\backslash\)-\(\backslash\)$():]+)\(\backslash\)|\}\textcolor{comment}{}
+00975 \textcolor{comment}{}   foreach\_in\_collection inst $instance\_collection \{
+00976        set name [get\_node\_info -name $inst]
+00977        if \{[regexp -- $inst\_regexp $name -> hier\_name] == 1\} \{
+00978            if \{[lsearch $instance\_list [escape\_brackets $hier\_name]] == -1\} \{
+00979                lappend instance\_list $hier\_name
+00980            \}
+00981        \}
+00982    \}\textcolor{comment}{}
+00983 \textcolor{comment}{}   \textcolor{comment}{#Try again if the above search was unsuccessfull}
+00984 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{$instance\_list == ""\} \{
+00985        \textcolor{keyword}{set} inst\_regexp \{(^.*\}\textcolor{comment}{}
+00986 \textcolor{comment}{}       \textcolor{keyword}{append} inst\_regexp "$\{corename\}"\textcolor{comment}{    }
+00987 \textcolor{comment}{}       \textcolor{keyword}{append} inst\_regexp \{:[A-Za-z0-9\(\backslash\).\(\backslash\)\(\backslash\)\_\(\backslash\)[\(\backslash\)]\(\backslash\)-\(\backslash\)$():]+)\(\backslash\)|\}\textcolor{comment}{}
+00988 \textcolor{comment}{}       foreach\_in\_collection inst $instance\_collection \{
+00989            set name [get\_node\_info -name $inst]
+00990            if \{[regexp -- $inst\_regexp $name -> hier\_name] == 1\} \{
+00991                if \{[lsearch $instance\_list [escape\_brackets $hier\_name]] == -1\} \{
+00992                    lappend instance\_list $hier\_name
+00993                \}
+00994            \}
+00995        \}\textcolor{comment}{}
+00996 \textcolor{comment}{}   \}\textcolor{comment}{}
+00997 \textcolor{comment}{}   \textcolor{keyword}{return} $instance\_list\textcolor{comment}{}
+00998 \textcolor{comment}{}\}\textcolor{comment}{}
+00999 \textcolor{comment}{}
+01000 \textcolor{comment}{# ----------------------------------------------------------------}
+01001 \textcolor{comment}{}\textcolor{comment}{#}
+01002 \textcolor{comment}{}\textcolor{keyword}{proc} traverse\_fanin\_up\_to\_depth \{ node\_id match\_command edge\_type results\_array\_name depth\} \{
+01003 \textcolor{comment}{#}
+01004 \textcolor{comment}{}\textcolor{comment}{# Description: Recurses through the timing netlist starting from the given}
+01005 \textcolor{comment}{}\textcolor{comment}{#              node\_id through edges of type edge\_type to find nodes}
+01006 \textcolor{comment}{}\textcolor{comment}{#              satisfying match\_command.}
+01007 \textcolor{comment}{}\textcolor{comment}{#              Recursion depth is bound to the specified depth.}
+01008 \textcolor{comment}{}\textcolor{comment}{#              Adds the resulting TDB node ids to the results\_array.}
+01009 \textcolor{comment}{}\textcolor{comment}{#}
+01010 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01011 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{upvar} 1 $results\_array\_name results\textcolor{comment}{}
+01012 \textcolor{comment}{}
+01013    \textcolor{keyword}{if} \{$depth < 0\} \{
+01014        error "Internal error: Bad timing netlist search depth"\textcolor{comment}{}
+01015 \textcolor{comment}{}   \}\textcolor{comment}{}
+01016 \textcolor{comment}{}   \textcolor{keyword}{set} fanin\_edges [get\_node\_info -$\{edge\_type\}\_edges $node\_id]\textcolor{comment}{}
+01017 \textcolor{comment}{}   \textcolor{keyword}{set} number\_of\_fanin\_edges [\textcolor{keyword}{llength} $fanin\_edges]\textcolor{comment}{}
+01018 \textcolor{comment}{}   \textcolor{keyword}{for} \{\textcolor{keyword}{set} i 0\} \{$i != $number\_of\_fanin\_edges\} \{\textcolor{keyword}{incr} i\} \{
+01019        \textcolor{keyword}{set} fanin\_edge [\textcolor{keyword}{lindex} $fanin\_edges $i]\textcolor{comment}{}
+01020 \textcolor{comment}{}       \textcolor{keyword}{set} fanin\_id [get\_edge\_info -src $fanin\_edge]\textcolor{comment}{}
+01021 \textcolor{comment}{}       \textcolor{keyword}{if} \{$match\_command == "" || [\textcolor{keyword}{eval} $match\_command $fanin\_id] != 0\} \{
+01022            \textcolor{keyword}{set} results($fanin\_id) 1\textcolor{comment}{}
+01023 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{$depth == 0\} \{
+01024            \textcolor{comment}{# Max recursion depth}
+01025 \textcolor{comment}{}\textcolor{comment}{       }\} \textcolor{keyword}{else} \{
+01026            traverse_fanin_up_to_depth $fanin\_id $match\_command $edge\_type results [\textcolor{keyword}{expr} "$depth - 1"]\textcolor{comment}{}
+01027 \textcolor{comment}{}       \}\textcolor{comment}{}
+01028 \textcolor{comment}{}   \}\textcolor{comment}{}
+01029 \textcolor{comment}{}\}\textcolor{comment}{}
+01030 \textcolor{comment}{}
+01031 \textcolor{comment}{# ----------------------------------------------------------------}
+01032 \textcolor{comment}{}\textcolor{comment}{#}
+01033 \textcolor{comment}{}\textcolor{keyword}{proc} is\_node\_type\_pll\_inclk \{ node\_id \} \{
+01034 \textcolor{comment}{#}
+01035 \textcolor{comment}{}\textcolor{comment}{# Description: Given a node, tells whether or not it is a PLL clk}
+01036 \textcolor{comment}{}\textcolor{comment}{#}
+01037 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01038 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} cell\_id [get\_node\_info -cell $node\_id]\textcolor{comment}{}
+01039 \textcolor{comment}{}   \textcolor{keyword}{set} atom\_type [get\_cell\_info -atom\_type $cell\_id]\textcolor{comment}{}
+01040 \textcolor{comment}{}   \textcolor{keyword}{if} \{$atom\_type == "PLL"\} \{
+01041        \textcolor{keyword}{set} node\_name [get\_node\_info -name $node\_id]\textcolor{comment}{}
+01042 \textcolor{comment}{}       \textcolor{keyword}{set} fanin\_edges [get\_node\_info -clock\_edges $node\_id]\textcolor{comment}{}
+01043 \textcolor{comment}{}       \textcolor{comment}{# The inclk input should have a |inclk or |inclk[0] suffix}
+01044 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{keyword}{if} \{([\textcolor{keyword}{string} match "*|inclk" $node\_name] || [\textcolor{keyword}{string} match "*|inclk\(\backslash\)\(\backslash\)\(\backslash\)[0\(\backslash\)\(\backslash\)\(\backslash\)]" $node\_name]) && [\textcolor{keyword}{
+      llength} $fanin\_edges] > 0\} \{
+01045            \textcolor{keyword}{set} result 1\textcolor{comment}{}
+01046 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+01047            \textcolor{keyword}{set} result 0\textcolor{comment}{}
+01048 \textcolor{comment}{}       \}\textcolor{comment}{}
+01049 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01050        \textcolor{keyword}{set} result 0\textcolor{comment}{}
+01051 \textcolor{comment}{}   \}\textcolor{comment}{}
+01052 \textcolor{comment}{}
+01053    \textcolor{keyword}{return} $result\textcolor{comment}{}
+01054 \textcolor{comment}{}\}\textcolor{comment}{}
+01055 \textcolor{comment}{}
+01056 \textcolor{comment}{# ----------------------------------------------------------------}
+01057 \textcolor{comment}{}\textcolor{comment}{#}
+01058 \textcolor{comment}{}\textcolor{keyword}{proc} is\_node\_type\_pin \{ node\_id \} \{
+01059 \textcolor{comment}{#}
+01060 \textcolor{comment}{}\textcolor{comment}{# Description: Given a node, tells whether or not it is a reg}
+01061 \textcolor{comment}{}\textcolor{comment}{#}
+01062 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01063 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} node\_type [get\_node\_info -type $node\_id]\textcolor{comment}{}
+01064 \textcolor{comment}{}   \textcolor{keyword}{if} \{$node\_type == "port"\} \{
+01065        \textcolor{keyword}{set} result 1\textcolor{comment}{}
+01066 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01067        \textcolor{keyword}{set} result 0\textcolor{comment}{}
+01068 \textcolor{comment}{}   \}\textcolor{comment}{}
+01069 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+01070 \textcolor{comment}{}\}\textcolor{comment}{}
+01071 \textcolor{comment}{}
+01072 \textcolor{comment}{# ----------------------------------------------------------------}
+01073 \textcolor{comment}{}\textcolor{comment}{#}
+01074 \textcolor{comment}{}\textcolor{keyword}{proc} get\_input\_clk\_id \{ pll\_output\_node\_id \} \{
+01075 \textcolor{comment}{#}
+01076 \textcolor{comment}{}\textcolor{comment}{# Description: Given a PLL clock output node, gets the PLL clock input node}
+01077 \textcolor{comment}{}\textcolor{comment}{#}
+01078 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01079 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{[is_node_type_pll_clk $pll\_output\_node\_id]\} \{
+01080        \textcolor{keyword}{array} set results\_array [list]\textcolor{comment}{}
+01081 \textcolor{comment}{}       traverse_fanin_up_to_depth $pll\_output\_node\_id is\_node\_type\_pll\_inclk clock results\_array 1\textcolor{comment}{}
+01082 \textcolor{comment}{}       \textcolor{keyword}{if} \{[\textcolor{keyword}{array} size results\_array] == 1\} \{
+01083            \textcolor{comment}{# Found PLL inclk, now find the input pin}
+01084 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{keyword}{set} pll\_inclk\_id [\textcolor{keyword}{lindex} [\textcolor{keyword}{array} names results\_array] 0]\textcolor{comment}{}
+01085 \textcolor{comment}{}           \textcolor{keyword}{array} unset results\_array\textcolor{comment}{}
+01086 \textcolor{comment}{}           \textcolor{comment}{# If fed by a pin, it should be fed by a dedicated input pin,}
+01087 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{comment}{# and not a global clock network.  Limit the search depth to}
+01088 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{comment}{# prevent finding pins fed by global clock (only allow io\_ibuf pins)}
+01089 \textcolor{comment}{}\textcolor{comment}{           }traverse_fanin_up_to_depth $pll\_inclk\_id is\_node\_type\_pin clock results\_array 3\textcolor{comment}{}
+01090 \textcolor{comment}{}           \textcolor{keyword}{if} \{[\textcolor{keyword}{array} size results\_array] == 1\} \{
+01091                \textcolor{comment}{# Fed by a dedicated input pin}
+01092 \textcolor{comment}{}\textcolor{comment}{               }\textcolor{keyword}{set} pin\_id [\textcolor{keyword}{lindex} [\textcolor{keyword}{array} names results\_array] 0]\textcolor{comment}{}
+01093 \textcolor{comment}{}               \textcolor{keyword}{set} result $pin\_id\textcolor{comment}{}
+01094 \textcolor{comment}{}           \} \textcolor{keyword}{else} \{
+01095                \textcolor{comment}{# Try looking for clocks fed by a pin but gone through}
+01096 \textcolor{comment}{}\textcolor{comment}{               }\textcolor{comment}{# the clock routing (possibly because the PLL is placed on a different side)}
+01097 \textcolor{comment}{}\textcolor{comment}{               }\textcolor{comment}{# If this is the case output a warning}
+01098 \textcolor{comment}{}\textcolor{comment}{               }traverse_fanin_up_to_depth $pll\_inclk\_id is\_node\_type\_pin clock results\_array 5\textcolor{comment}{}
+01099 \textcolor{comment}{}               \textcolor{keyword}{if} \{[\textcolor{keyword}{array} size results\_array] == 1\} \{
+01100                    \textcolor{comment}{# Fed by a dedicated input pin through the clock routing}
+01101 \textcolor{comment}{}\textcolor{comment}{                   }post\_message -type critical\_warning "PLL clock [get\_node\_info -name 
+      $pll\_output\_node\_id] driven through clock routing.  To ensure minimum jitter on memory interface clock outputs, the PLL
+       clock source should be a dedicated clock pin on the same side."\textcolor{comment}{}
+01102 \textcolor{comment}{}                   \textcolor{keyword}{set} pin\_id [\textcolor{keyword}{lindex} [\textcolor{keyword}{array} names results\_array] 0]\textcolor{comment}{}
+01103 \textcolor{comment}{}                   \textcolor{keyword}{set} result $pin\_id\textcolor{comment}{}
+01104 \textcolor{comment}{}               \} \textcolor{keyword}{else} \{
+01105                    traverse_fanin_up_to_depth $pll\_inclk\_id is\_node\_type\_pll\_clk clock 
+      pll\_clk\_results\_array 1\textcolor{comment}{}
+01106 \textcolor{comment}{}                   \textcolor{keyword}{if} \{[\textcolor{keyword}{array} size pll\_clk\_results\_array] == 1\} \{
+01107                        \textcolor{comment}{# Fed by a neighboring PLL via cascade path.}
+01108 \textcolor{comment}{}\textcolor{comment}{                       }\textcolor{comment}{# Should be okay as long as that PLL has its input clock}
+01109 \textcolor{comment}{}\textcolor{comment}{                       }\textcolor{comment}{# fed by a dedicated input.  If there isn't, TimeQuest will give its own
+       warning about undefined clocks.}
+01110 \textcolor{comment}{}\textcolor{comment}{                       }\textcolor{keyword}{set} source\_pll\_clk\_id [\textcolor{keyword}{lindex} [\textcolor{keyword}{array} names pll\_clk\_results\_array] 0]\textcolor{comment}{}
+01111 \textcolor{comment}{}                       \textcolor{keyword}{set} source\_pll\_clk [get\_node\_info -name $source\_pll\_clk\_id]\textcolor{comment}{}
+01112 \textcolor{comment}{}                       \textcolor{keyword}{if} \{[get_input_clk_id $source\_pll\_clk\_id] != -1\} \{
+01113                            post\_message -type info "Please ensure source clock is defined for PLL with
+       output $source\_pll\_clk"\textcolor{comment}{}
+01114 \textcolor{comment}{}                       \} \textcolor{keyword}{else} \{
+01115                            \textcolor{comment}{# Fed from core}
+01116 \textcolor{comment}{}\textcolor{comment}{                           }post\_message -type critical\_warning "PLL clock $source\_pll\_clk not driven
+       by a dedicated clock pin.  To ensure minimum jitter on memory interface clock outputs, the PLL clock source
+       should be a dedicated PLL input clock pin."\textcolor{comment}{}
+01117 \textcolor{comment}{}                       \}\textcolor{comment}{}
+01118 \textcolor{comment}{}                       \textcolor{keyword}{set} result -1\textcolor{comment}{}
+01119 \textcolor{comment}{}                   \} \textcolor{keyword}{else} \{
+01120                        \textcolor{comment}{# Fed from core}
+01121 \textcolor{comment}{}\textcolor{comment}{                       }post\_message -type critical\_warning "PLL clock [get\_node\_info -name 
+      $pll\_output\_node\_id] not driven by a dedicated clock pin or neighboring PLL source.  To ensure minimum jitter on memory
+       interface clock outputs, the PLL clock source should be a dedicated PLL input clock pin or an output of the
+       neighboring PLL."\textcolor{comment}{}
+01122 \textcolor{comment}{}                       \textcolor{keyword}{set} result -1\textcolor{comment}{}
+01123 \textcolor{comment}{}                   \}\textcolor{comment}{}
+01124 \textcolor{comment}{}               \}\textcolor{comment}{}
+01125 \textcolor{comment}{}           \}\textcolor{comment}{}
+01126 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+01127            post\_message -type critical\_warning "Could not find PLL clock for [get\_node\_info -name 
+      $pll\_output\_node\_id]"\textcolor{comment}{}
+01128 \textcolor{comment}{}           \textcolor{keyword}{set} result -1\textcolor{comment}{}
+01129 \textcolor{comment}{}       \}\textcolor{comment}{}
+01130 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01131        error "Internal error: get\_input\_clk\_id only works on PLL output clocks"\textcolor{comment}{}
+01132 \textcolor{comment}{}   \}\textcolor{comment}{}
+01133 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+01134 \textcolor{comment}{}\}\textcolor{comment}{}
+01135 \textcolor{comment}{}
+01136 \textcolor{comment}{# ----------------------------------------------------------------}
+01137 \textcolor{comment}{}\textcolor{comment}{#}
+01138 \textcolor{comment}{}\textcolor{keyword}{proc} is\_node\_type\_pll\_clk \{ node\_id \} \{
+01139 \textcolor{comment}{#}
+01140 \textcolor{comment}{}\textcolor{comment}{# Description: Given a node, tells whether or not it is a PLL clk}
+01141 \textcolor{comment}{}\textcolor{comment}{#}
+01142 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01143 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} cell\_id [get\_node\_info -cell $node\_id]\textcolor{comment}{}
+01144 \textcolor{comment}{}   \textcolor{keyword}{set} atom\_type [get\_cell\_info -atom\_type $cell\_id]\textcolor{comment}{}
+01145 \textcolor{comment}{}   \textcolor{keyword}{if} \{$atom\_type == "PLL"\} \{
+01146        \textcolor{keyword}{set} node\_name [get\_node\_info -name $node\_id]\textcolor{comment}{}
+01147 \textcolor{comment}{}       \textcolor{keyword}{if} \{[\textcolor{keyword}{string} match "*|clk\(\backslash\)\(\backslash\)\(\backslash\)[*\(\backslash\)\(\backslash\)\(\backslash\)]" $node\_name]\} \{
+01148            \textcolor{keyword}{set} result 1\textcolor{comment}{}
+01149 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+01150            \textcolor{keyword}{set} result 0\textcolor{comment}{}
+01151 \textcolor{comment}{}       \}\textcolor{comment}{}
+01152 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01153        \textcolor{keyword}{set} result 0\textcolor{comment}{}
+01154 \textcolor{comment}{}   \}\textcolor{comment}{}
+01155 \textcolor{comment}{}
+01156    \textcolor{keyword}{return} $result\textcolor{comment}{}
+01157 \textcolor{comment}{}\}\textcolor{comment}{}
+01158 \textcolor{comment}{}
+01159 \textcolor{comment}{# ----------------------------------------------------------------}
+01160 \textcolor{comment}{}\textcolor{comment}{#}
+01161 \textcolor{comment}{}\textcolor{keyword}{proc} get\_pll\_clock \{ dest\_id\_list node\_type clock\_id\_name search\_depth\} \{
+01162 \textcolor{comment}{#}
+01163 \textcolor{comment}{}\textcolor{comment}{# Description: Look for the PLL output clocking the given nodes}
+01164 \textcolor{comment}{}\textcolor{comment}{#}
+01165 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01166 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{$clock\_id\_name != ""\} \{
+01167        \textcolor{keyword}{upvar} 1 $clock\_id\_name clock\_id\textcolor{comment}{}
+01168 \textcolor{comment}{}   \}\textcolor{comment}{}
+01169 \textcolor{comment}{}   \textcolor{keyword}{set} clock\_id -1\textcolor{comment}{}
+01170 \textcolor{comment}{}
+01171    \textcolor{keyword}{array} set clk\_array [list]\textcolor{comment}{}
+01172 \textcolor{comment}{}   \textcolor{keyword}{foreach} node\_id $dest\_id\_list \{
+01173        traverse_fanin_up_to_depth $node\_id is\_node\_type\_pll\_clk clock clk\_array $search\_depth\textcolor{comment}{}
+01174 \textcolor{comment}{}   \}\textcolor{comment}{}
+01175 \textcolor{comment}{}   \textcolor{keyword}{if} \{[\textcolor{keyword}{array} size clk\_array] == 1\} \{
+01176        \textcolor{keyword}{set} clock\_id [\textcolor{keyword}{lindex} [\textcolor{keyword}{array} names clk\_array] 0]\textcolor{comment}{}
+01177 \textcolor{comment}{}       \textcolor{keyword}{set} clk [get\_node\_info -name $clock\_id]\textcolor{comment}{}
+01178 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{[\textcolor{keyword}{array} size clk\_array] > 1\} \{
+01179        \textcolor{keyword}{puts} "Found more than 1 clock driving the $node\_type"\textcolor{comment}{}
+01180 \textcolor{comment}{}       \textcolor{keyword}{set} clk ""\textcolor{comment}{}
+01181 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01182        \textcolor{keyword}{set} clk ""\textcolor{comment}{}
+01183 \textcolor{comment}{}       \textcolor{comment}{#puts "Could not find $node\_type clock"}
+01184 \textcolor{comment}{}\textcolor{comment}{   }\}\textcolor{comment}{}
+01185 \textcolor{comment}{}
+01186    \textcolor{keyword}{return} $clk\textcolor{comment}{}
+01187 \textcolor{comment}{}\}\textcolor{comment}{}
+01188 \textcolor{comment}{}
+01189 \textcolor{comment}{# ----------------------------------------------------------------}
+01190 \textcolor{comment}{}\textcolor{comment}{#}
+01191 \textcolor{comment}{}\textcolor{keyword}{proc} get\_output\_clock\_id \{ ddio\_output\_pin\_list pin\_type msg\_list\_name \{max\_search\_depth 13\} \} \{
+01192 \textcolor{comment}{#}
+01193 \textcolor{comment}{}\textcolor{comment}{# Description: Look for the PLL output clocks of the given pins}
+01194 \textcolor{comment}{}\textcolor{comment}{#}
+01195 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01196 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{upvar} 1 $msg\_list\_name msg\_list\textcolor{comment}{}
+01197 \textcolor{comment}{}   \textcolor{keyword}{set} output\_clock\_id -1\textcolor{comment}{}
+01198 \textcolor{comment}{}   
+01199    \textcolor{keyword}{set} output\_id\_list [list]\textcolor{comment}{}
+01200 \textcolor{comment}{}   \textcolor{keyword}{set} pin\_collection [get\_keepers $ddio\_output\_pin\_list]\textcolor{comment}{}
+01201 \textcolor{comment}{}   \textcolor{keyword}{if} \{[get\_collection\_size $pin\_collection] == [\textcolor{keyword}{llength} $ddio\_output\_pin\_list]\} \{
+01202        foreach\_in\_collection id $pin\_collection \{
+01203            lappend output\_id\_list $id
+01204        \}\textcolor{comment}{}
+01205 \textcolor{comment}{}   \} \textcolor{keyword}{elseif} \{[get\_collection\_size $pin\_collection] == 0\} \{
+01206        \textcolor{keyword}{lappend} msg\_list "warning" "Could not find any $pin\_type pins"\textcolor{comment}{}
+01207 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01208        \textcolor{keyword}{lappend} msg\_list "warning" "Could not find all $pin\_type pins"\textcolor{comment}{}
+01209 \textcolor{comment}{}   \}\textcolor{comment}{}
+01210 \textcolor{comment}{}   get_pll_clock $output\_id\_list $pin\_type output\_clock\_id $max\_search\_depth\textcolor{comment}{}
+01211 \textcolor{comment}{}   \textcolor{keyword}{return} $output\_clock\_id\textcolor{comment}{}
+01212 \textcolor{comment}{}\}\textcolor{comment}{}
+01213 \textcolor{comment}{}
+01214 \textcolor{comment}{# ----------------------------------------------------------------}
+01215 \textcolor{comment}{}\textcolor{comment}{#}
+01216 \textcolor{comment}{}\textcolor{keyword}{proc} is\_node\_type\_io\_clock\_divider\_clkout \{ node\_id \} \{
+01217 \textcolor{comment}{#}
+01218 \textcolor{comment}{}\textcolor{comment}{# Description: Given a node, tells whether or not it is a I/O clock divider clk}
+01219 \textcolor{comment}{}\textcolor{comment}{#}
+01220 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01221 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} cell\_id [get\_node\_info -cell $node\_id]\textcolor{comment}{}
+01222 \textcolor{comment}{}   \textcolor{keyword}{set} atom\_type [get\_cell\_info -atom\_type $cell\_id]\textcolor{comment}{}
+01223 \textcolor{comment}{}   \textcolor{keyword}{if} \{$atom\_type == "IO\_CLOCK\_DIVIDER"\} \{
+01224        \textcolor{keyword}{set} node\_name [get\_node\_info -name $node\_id]\textcolor{comment}{}
+01225 \textcolor{comment}{}       \textcolor{keyword}{set} fanout\_edges [get\_node\_info -fanout\_edges $node\_id]\textcolor{comment}{}
+01226 \textcolor{comment}{}       \textcolor{keyword}{if} \{[\textcolor{keyword}{string} match "*|clkout" $node\_name] && [\textcolor{keyword}{llength} $fanout\_edges] > 0\} \{
+01227            \textcolor{keyword}{set} result 1\textcolor{comment}{}
+01228 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+01229            \textcolor{keyword}{set} result 0\textcolor{comment}{}
+01230 \textcolor{comment}{}       \}\textcolor{comment}{}
+01231 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01232        \textcolor{keyword}{set} result 0\textcolor{comment}{}
+01233 \textcolor{comment}{}   \}\textcolor{comment}{}
+01234 \textcolor{comment}{}
+01235    \textcolor{keyword}{return} $result\textcolor{comment}{}
+01236 \textcolor{comment}{}\}\textcolor{comment}{}
+01237 \textcolor{comment}{}
+01238 \textcolor{comment}{# ----------------------------------------------------------------}
+01239 \textcolor{comment}{}\textcolor{comment}{#}
+01240 \textcolor{comment}{}\textcolor{keyword}{proc} post\_sdc\_message \{msg\_type msg\} \{
+01241 \textcolor{comment}{#}
+01242 \textcolor{comment}{}\textcolor{comment}{# Description: Posts a message in TimeQuest, but not in Fitter}
+01243 \textcolor{comment}{}\textcolor{comment}{#              The SDC is read mutliple times during compilation, so we'll wait}
+01244 \textcolor{comment}{}\textcolor{comment}{#              until final TimeQuest timing analysis to display messages}
+01245 \textcolor{comment}{}\textcolor{comment}{#}
+01246 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01247 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{ $::TimeQuestInfo(nameofexecutable) != "quartus\_fit"\} \{
+01248        post\_message -type $msg\_type $msg\textcolor{comment}{}
+01249 \textcolor{comment}{}   \}\textcolor{comment}{}
+01250 \textcolor{comment}{}\}\textcolor{comment}{}
+01251 \textcolor{comment}{}
+01252 \textcolor{comment}{# ----------------------------------------------------------------}
+01253 \textcolor{comment}{}\textcolor{comment}{#}
+01254 \textcolor{comment}{}\textcolor{keyword}{proc} get\_report\_column \{ report\_id str\} \{
+01255 \textcolor{comment}{#}
+01256 \textcolor{comment}{}\textcolor{comment}{# Description: Gets the report column index with the given header string}
+01257 \textcolor{comment}{}\textcolor{comment}{#}
+01258 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01259 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} target\_col [get\_report\_panel\_column\_index -id $report\_id $str]\textcolor{comment}{}
+01260 \textcolor{comment}{}   \textcolor{keyword}{if} \{$target\_col == -1\} \{
+01261        error "Cannot find $str column"\textcolor{comment}{}
+01262 \textcolor{comment}{}   \}\textcolor{comment}{}
+01263 \textcolor{comment}{}   \textcolor{keyword}{return} $target\_col\textcolor{comment}{}
+01264 \textcolor{comment}{}\}\textcolor{comment}{}
+01265 \textcolor{comment}{}
+01266 \textcolor{comment}{# ----------------------------------------------------------------}
+01267 \textcolor{comment}{}\textcolor{comment}{#}
+01268 \textcolor{comment}{}\textcolor{keyword}{proc} get\_fitter\_report\_pin\_info\_from\_report \{target\_pin info\_type pin\_report\_id\} \{
+01269 \textcolor{comment}{#}
+01270 \textcolor{comment}{}\textcolor{comment}{# Description: Gets the report field for the given pin in the given report}
+01271 \textcolor{comment}{}\textcolor{comment}{#}
+01272 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01273 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} pin\_name\_column [get_report_column $pin\_report\_id "Name"]\textcolor{comment}{}
+01274 \textcolor{comment}{}   \textcolor{keyword}{set} info\_column [get_report_column $pin\_report\_id $info\_type]\textcolor{comment}{}
+01275 \textcolor{comment}{}   \textcolor{keyword}{set} result ""\textcolor{comment}{}
+01276 \textcolor{comment}{}
+01277    \textcolor{keyword}{if} \{$pin\_name\_column == 0 && 0\} \{
+01278        \textcolor{keyword}{set} row\_index [get\_report\_panel\_row\_index -id $pin\_report\_id $target\_pin]\textcolor{comment}{}
+01279 \textcolor{comment}{}       \textcolor{keyword}{if} \{$row\_index != -1\} \{
+01280            \textcolor{keyword}{set} row [get\_report\_panel\_row -id $pin\_report\_id -row $row\_index]\textcolor{comment}{}
+01281 \textcolor{comment}{}           \textcolor{keyword}{set} result [\textcolor{keyword}{lindex} $row $info\_column]\textcolor{comment}{}
+01282 \textcolor{comment}{}       \}\textcolor{comment}{}
+01283 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01284        \textcolor{keyword}{set} report\_rows [get\_number\_of\_rows -id $pin\_report\_id]\textcolor{comment}{}
+01285 \textcolor{comment}{}       \textcolor{keyword}{for} \{\textcolor{keyword}{set} row\_index 1\} \{$row\_index < $report\_rows && $result == ""\} \{\textcolor{keyword}{incr} row\_index\} \{
+01286            \textcolor{keyword}{set} row [get\_report\_panel\_row -id $pin\_report\_id -row $row\_index]\textcolor{comment}{}
+01287 \textcolor{comment}{}           \textcolor{keyword}{set} pin [\textcolor{keyword}{lindex} $row $pin\_name\_column]\textcolor{comment}{}
+01288 \textcolor{comment}{}           \textcolor{keyword}{if} \{$pin == $target\_pin\} \{
+01289                \textcolor{keyword}{set} result [\textcolor{keyword}{lindex} $row $info\_column]\textcolor{comment}{}
+01290 \textcolor{comment}{}           \}\textcolor{comment}{}
+01291 \textcolor{comment}{}       \}\textcolor{comment}{}
+01292 \textcolor{comment}{}   \}\textcolor{comment}{}
+01293 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+01294 \textcolor{comment}{}\}\textcolor{comment}{}
+01295 \textcolor{comment}{}
+01296 \textcolor{comment}{# ----------------------------------------------------------------}
+01297 \textcolor{comment}{}\textcolor{comment}{#}
+01298 \textcolor{comment}{}\textcolor{keyword}{proc} get\_fitter\_report\_pin\_info \{target\_pin info\_type preferred\_report\_id \{found\_report\_id\_name ""\}\} \{
+01299 \textcolor{comment}{#}
+01300 \textcolor{comment}{}\textcolor{comment}{# Description: Gets the report field for the given pin by searching through the}
+01301 \textcolor{comment}{}\textcolor{comment}{#              input, output and bidir pin reports}
+01302 \textcolor{comment}{}\textcolor{comment}{#}
+01303 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01304 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{$found\_report\_id\_name != ""\} \{
+01305        \textcolor{keyword}{upvar} 1 $found\_report\_id\_name found\_report\_id\textcolor{comment}{}
+01306 \textcolor{comment}{}   \}\textcolor{comment}{}
+01307 \textcolor{comment}{}   \textcolor{keyword}{set} found\_report\_id -1\textcolor{comment}{}
+01308 \textcolor{comment}{}   \textcolor{keyword}{set} result ""\textcolor{comment}{}
+01309 \textcolor{comment}{}   \textcolor{keyword}{if} \{$preferred\_report\_id == -1\} \{
+01310        \textcolor{keyword}{set} pin\_report\_list [list "Fitter||Resource Section||Bidir Pins" "Fitter||Resource
+       Section||Input Pins" "Fitter||Resource Section||Output Pins"]\textcolor{comment}{}
+01311 \textcolor{comment}{}       \textcolor{keyword}{for} \{\textcolor{keyword}{set} pin\_report\_index 0\} \{$pin\_report\_index != [\textcolor{keyword}{llength} $pin\_report\_list] && $result == ""\}
+       \{\textcolor{keyword}{incr} pin\_report\_index\} \{
+01312            [\textcolor{keyword}{catch} \{get\_report\_panel\_id [\textcolor{keyword}{lindex} $pin\_report\_list $pin\_report\_index]\} pin\_report\_id]\textcolor{comment}{}
+01313 \textcolor{comment}{}           \textcolor{keyword}{if} \{($pin\_report\_id != -1) && !([\textcolor{keyword}{string} match -nocase "*invalid*" $pin\_report\_id] == 1) \} \{
+01314                \textcolor{keyword}{set} result [get_fitter_report_pin_info_from_report $target\_pin $info\_type 
+      $pin\_report\_id]\textcolor{comment}{}
+01315 \textcolor{comment}{}               \textcolor{keyword}{if} \{$result != ""\} \{
+01316                    \textcolor{keyword}{set} found\_report\_id $pin\_report\_id\textcolor{comment}{}
+01317 \textcolor{comment}{}               \}\textcolor{comment}{}
+01318 \textcolor{comment}{}           \}\textcolor{comment}{}
+01319 \textcolor{comment}{}       \}\textcolor{comment}{}
+01320 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01321        \textcolor{keyword}{set} result [get_fitter_report_pin_info_from_report $target\_pin $info\_type $preferred\_report\_id]\textcolor{comment}{}
+01322 \textcolor{comment}{}       \textcolor{keyword}{if} \{$result != ""\} \{
+01323            \textcolor{keyword}{set} found\_report\_id $preferred\_report\_id\textcolor{comment}{}
+01324 \textcolor{comment}{}       \}\textcolor{comment}{}
+01325 \textcolor{comment}{}   \}\textcolor{comment}{}
+01326 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+01327 \textcolor{comment}{}\}\textcolor{comment}{}
+01328 \textcolor{comment}{}
+01329 \textcolor{comment}{# ----------------------------------------------------------------}
+01330 \textcolor{comment}{}\textcolor{comment}{#}
+01331 \textcolor{comment}{}\textcolor{keyword}{proc} get\_io\_interface\_type \{pin\_list\} \{
+01332 \textcolor{comment}{#}
+01333 \textcolor{comment}{}\textcolor{comment}{# Description: Gets the type of pin that the given pins are placed on}
+01334 \textcolor{comment}{}\textcolor{comment}{#              either (HPAD, VPAD, VHPAD, "", or UNKNOWN).}
+01335 \textcolor{comment}{}\textcolor{comment}{#              "" is returned if pin\_list is empty}
+01336 \textcolor{comment}{}\textcolor{comment}{#              UNKNOWN is returned if an error was encountered}
+01337 \textcolor{comment}{}\textcolor{comment}{#              This function assumes the fitter has already completed and the}
+01338 \textcolor{comment}{}\textcolor{comment}{#              compiler report has been loaded.}
+01339 \textcolor{comment}{}\textcolor{comment}{#}
+01340 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01341 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} preferred\_report\_id -1\textcolor{comment}{}
+01342 \textcolor{comment}{}   \textcolor{keyword}{set} interface\_type ""\textcolor{comment}{}
+01343 \textcolor{comment}{}   
+01344    \textcolor{comment}{# First determine if the Fitter report has been loaded}
+01345 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} target\_pin [\textcolor{keyword}{lindex} $pin\_list 0]\textcolor{comment}{}
+01346 \textcolor{comment}{}   [\textcolor{keyword}{catch} \{get_fitter_report_pin_info $target\_pin "I/O Standard" -1\} io\_std]\textcolor{comment}{}
+01347 \textcolor{comment}{}   \textcolor{keyword}{if} \{($io\_std == "") || ([\textcolor{keyword}{string} match -nocase "*error*" $io\_std] == 1) || ([\textcolor{keyword}{string} match -nocase 
+      "*invalid*" $io\_std] == 1)\} \{
+01348        \textcolor{keyword}{set} fitter\_report\_available 0\textcolor{comment}{}
+01349 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01350        \textcolor{keyword}{set} fitter\_report\_available 1\textcolor{comment}{}
+01351 \textcolor{comment}{}   \}\textcolor{comment}{}
+01352 \textcolor{comment}{}   
+01353    \textcolor{keyword}{foreach} target\_pin $pin\_list \{
+01354        \textcolor{keyword}{set} pin\_interface\_type ""\textcolor{comment}{}
+01355 \textcolor{comment}{}       
+01356        \textcolor{comment}{# Find the IO Bank for one pin from the Fitter report and then convert that to an interface
+       type}
+01357 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{keyword}{if} \{$fitter\_report\_available == 1\} \{
+01358            \textcolor{keyword}{set} io\_bank [get_fitter_report_pin_info $target\_pin "I/O Bank" $preferred\_report\_id 
+      preferred\_report\_id]\textcolor{comment}{}
+01359 \textcolor{comment}{}           \textcolor{keyword}{if} \{[regexp -- \{^([0-9]+)[A-Z]*\} $io\_bank -> io\_bank\_number]\} \{
+01360                \textcolor{keyword}{if} \{$io\_bank\_number == 1 || $io\_bank\_number == 2 || $io\_bank\_number == 5 ||
+       $io\_bank\_number == 6\} \{
+01361                    \textcolor{comment}{# Row I/O}
+01362 \textcolor{comment}{}\textcolor{comment}{                   }\textcolor{keyword}{set} pin\_interface\_type "HPAD"\textcolor{comment}{}
+01363 \textcolor{comment}{}               \} \textcolor{keyword}{elseif} \{$io\_bank\_number == 3 || $io\_bank\_number == 4 || $io\_bank\_number == 7 ||
+       $io\_bank\_number == 8\} \{
+01364                    \textcolor{keyword}{set} pin\_interface\_type "VPAD"\textcolor{comment}{}
+01365 \textcolor{comment}{}               \} \textcolor{keyword}{else} \{
+01366                    post\_message -type critical\_warning "Unknown I/O bank $io\_bank for pin $target\_pin"\textcolor{comment}{}
+01367 \textcolor{comment}{}                   \textcolor{comment}{# Asuume worst case performance (mixed HPAD/VPAD interface)}
+01368 \textcolor{comment}{}\textcolor{comment}{                   }\textcolor{keyword}{set} pin\_interface\_type "VHPAD"\textcolor{comment}{}
+01369 \textcolor{comment}{}               \}\textcolor{comment}{}
+01370 \textcolor{comment}{}           \}\textcolor{comment}{}
+01371 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+01372            \textcolor{comment}{#Fitter report is not available, use the a worst-case assignment}
+01373 \textcolor{comment}{}\textcolor{comment}{           }\textcolor{keyword}{set} interface\_type "VHPAD"\textcolor{comment}{          }
+01374 \textcolor{comment}{}       \}\textcolor{comment}{}
+01375 \textcolor{comment}{}       
+01376        \textcolor{comment}{#Combine interface type for 1 pin with all pins}
+01377 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{keyword}{if} \{$interface\_type == ""\} \{
+01378            \textcolor{keyword}{set} interface\_type $pin\_interface\_type\textcolor{comment}{}
+01379 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{$pin\_interface\_type == "VHPAD"\} \{
+01380            \textcolor{keyword}{set} interface\_type $pin\_interface\_type\textcolor{comment}{}
+01381 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{($interface\_type == "VPAD") && ($pin\_interface\_type == "HPAD")\} \{
+01382            \textcolor{keyword}{set} interface\_type "VHPAD"\textcolor{comment}{}
+01383 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{($interface\_type == "HPAD") && ($pin\_interface\_type == "VPAD")\} \{
+01384            \textcolor{keyword}{set} interface\_type "VHPAD"\textcolor{comment}{}
+01385 \textcolor{comment}{}       \}\textcolor{comment}{ }
+01386 \textcolor{comment}{}   \}\textcolor{comment}{}
+01387 \textcolor{comment}{}       
+01388    \textcolor{keyword}{return} $interface\_type\textcolor{comment}{}
+01389 \textcolor{comment}{}\}\textcolor{comment}{}
+01390 \textcolor{comment}{}
+01391 \textcolor{comment}{# ----------------------------------------------------------------}
+01392 \textcolor{comment}{}\textcolor{comment}{#}
+01393 \textcolor{comment}{}\textcolor{keyword}{proc} get\_input\_oct\_termination \{target\_pin\} \{
+01394 \textcolor{comment}{#}
+01395 \textcolor{comment}{}\textcolor{comment}{# Description: Tells whether or not the given memory interface pin uses OCT}
+01396 \textcolor{comment}{}\textcolor{comment}{#              This function assumes the fitter has already completed and the}
+01397 \textcolor{comment}{}\textcolor{comment}{#              compiler report has been loaded.}
+01398 \textcolor{comment}{}\textcolor{comment}{#}
+01399 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01400 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{comment}{# Look through the pin reports}
+01401 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} pin\_report\_id [get\_report\_panel\_id "Fitter||Resource Section||Bidir Pins"]\textcolor{comment}{}
+01402 \textcolor{comment}{}   \textcolor{comment}{# Look through the output and bidir pin reports}
+01403 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{$pin\_report\_id == -1\} \{
+01404        \textcolor{keyword}{set} termination ""\textcolor{comment}{}
+01405 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01406        \textcolor{keyword}{set} termination [get_fitter_report_pin_info $target\_pin "Input Termination" $pin\_report\_id]\textcolor{comment}{}
+01407 \textcolor{comment}{}   \}\textcolor{comment}{}
+01408 \textcolor{comment}{}   \textcolor{keyword}{if} \{$termination == ""\} \{
+01409        \textcolor{keyword}{set} pin\_report\_id [get\_report\_panel\_id "Fitter||Resource Section||Input Pins"]\textcolor{comment}{}
+01410 \textcolor{comment}{}       \textcolor{keyword}{set} termination [get_fitter_report_pin_info $target\_pin "Termination" $pin\_report\_id]\textcolor{comment}{}
+01411 \textcolor{comment}{}       \textcolor{keyword}{if} \{$termination == ""\} \{
+01412            \textcolor{keyword}{return} "UNKNOWN"\textcolor{comment}{}
+01413 \textcolor{comment}{}       \}\textcolor{comment}{}
+01414 \textcolor{comment}{}   \}\textcolor{comment}{}
+01415 \textcolor{comment}{}   \textcolor{keyword}{set} result "OCT\_OFF"\textcolor{comment}{}
+01416 \textcolor{comment}{}   \textcolor{keyword}{switch} -exact -glob -- $termination \{
+01417        "Off" \{\textcolor{keyword}{set} result "OCT\_OFF"\}
+01418        "OCT*" \{\textcolor{keyword}{set} result "OCT\_ON"\}
+01419        "Parallel *" \{\textcolor{keyword}{set} result "OCT\_ON"\}
+01420        default \{
+01421            post\_message -type critical\_warning "Found unsupported memory pin input termination
+       $termination on pin $target\_pin"\textcolor{comment}{}
+01422 \textcolor{comment}{}           \textcolor{keyword}{set} result "UNKNOWN"\textcolor{comment}{}
+01423 \textcolor{comment}{}       \}
+01424    \}\textcolor{comment}{}
+01425 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+01426 \textcolor{comment}{}\}\textcolor{comment}{}
+01427 \textcolor{comment}{}
+01428 \textcolor{comment}{# ----------------------------------------------------------------}
+01429 \textcolor{comment}{}\textcolor{comment}{#}
+01430 \textcolor{comment}{}\textcolor{keyword}{proc} get\_output\_oct\_termination \{target\_pin\} \{
+01431 \textcolor{comment}{#}
+01432 \textcolor{comment}{}\textcolor{comment}{# Description: Tells whether or not the given memory interface pin uses OCT}
+01433 \textcolor{comment}{}\textcolor{comment}{#              This function assumes the fitter has already completed and the}
+01434 \textcolor{comment}{}\textcolor{comment}{#              compiler report has been loaded.}
+01435 \textcolor{comment}{}\textcolor{comment}{#}
+01436 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01437 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} pin\_report\_id [get\_report\_panel\_id "Fitter||Resource Section||Bidir Pins"]\textcolor{comment}{}
+01438 \textcolor{comment}{}   \textcolor{comment}{# Look through the output and bidir pin reports}
+01439 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{$pin\_report\_id == -1\} \{
+01440        \textcolor{keyword}{set} termination ""\textcolor{comment}{}
+01441 \textcolor{comment}{}   \} \textcolor{keyword}{else} \{
+01442        \textcolor{keyword}{set} termination [get_fitter_report_pin_info $target\_pin "Output Termination" $pin\_report\_id]\textcolor{comment}{}
+01443 \textcolor{comment}{}   \}\textcolor{comment}{}
+01444 \textcolor{comment}{}   \textcolor{keyword}{if} \{$termination == ""\} \{
+01445        \textcolor{keyword}{set} pin\_report\_id [get\_report\_panel\_id "Fitter||Resource Section||Output Pins"]\textcolor{comment}{}
+01446 \textcolor{comment}{}       \textcolor{keyword}{set} termination [get_fitter_report_pin_info $target\_pin "Termination" $pin\_report\_id]\textcolor{comment}{}
+01447 \textcolor{comment}{}       \textcolor{keyword}{if} \{$termination == ""\} \{
+01448            \textcolor{keyword}{return} "UNKNOWN"\textcolor{comment}{}
+01449 \textcolor{comment}{}       \}\textcolor{comment}{}
+01450 \textcolor{comment}{}   \}\textcolor{comment}{}
+01451 \textcolor{comment}{}   \textcolor{keyword}{set} result "OCT\_OFF"\textcolor{comment}{}
+01452 \textcolor{comment}{}   \textcolor{keyword}{switch} -exact -glob -- $termination \{
+01453        "Off" \{\textcolor{keyword}{set} result "OCT\_OFF"\}
+01454        "OCT*" \{\textcolor{keyword}{set} result "OCT\_ON"\}
+01455        "Series *" \{\textcolor{keyword}{set} result "OCT\_ON"\}
+01456        default \{
+01457            post\_message -type critical\_warning "Found unsupported memory pin output termination
+       $termination on pin $target\_pin"\textcolor{comment}{}
+01458 \textcolor{comment}{}           \textcolor{keyword}{set} result "UNKNOWN"\textcolor{comment}{}
+01459 \textcolor{comment}{}       \}
+01460    \}\textcolor{comment}{}
+01461 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+01462 \textcolor{comment}{}\}\textcolor{comment}{}
+01463 \textcolor{comment}{}
+01464 \textcolor{comment}{# ----------------------------------------------------------------}
+01465 \textcolor{comment}{}\textcolor{comment}{#}
+01466 \textcolor{comment}{}\textcolor{keyword}{proc} get\_operating\_conditions\_number \{\} \{
+01467 \textcolor{comment}{#}
+01468 \textcolor{comment}{}\textcolor{comment}{# Description: Returns the index of the operating condition that is }
+01469 \textcolor{comment}{}\textcolor{comment}{#              being timed currently in cases where more than one operating}
+01470 \textcolor{comment}{}\textcolor{comment}{#              condition is being timed in total.}
+01471 \textcolor{comment}{}\textcolor{comment}{#}
+01472 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01473 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{set} cur\_operating\_condition [get\_operating\_conditions]\textcolor{comment}{}
+01474 \textcolor{comment}{}   \textcolor{keyword}{set} counter 0\textcolor{comment}{}
+01475 \textcolor{comment}{}   foreach\_in\_collection op [get\_available\_operating\_conditions] \{
+01476        if \{[string compare $cur\_operating\_condition $op] == 0\} \{
+01477            return $counter
+01478        \}
+01479        incr counter
+01480    \}\textcolor{comment}{}
+01481 \textcolor{comment}{}   \textcolor{keyword}{return} $counter\textcolor{comment}{}
+01482 \textcolor{comment}{}\}\textcolor{comment}{}
+01483 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01484 \textcolor{comment}{}\textcolor{comment}{#}
+01485 \textcolor{comment}{}\textcolor{keyword}{proc} get\_io\_standard \{target\_pin\} \{
+01486 \textcolor{comment}{#}
+01487 \textcolor{comment}{}\textcolor{comment}{# Description: Gets the I/O standard of the given memory interface pin}
+01488 \textcolor{comment}{}\textcolor{comment}{#              This function assumes the fitter has already completed and the}
+01489 \textcolor{comment}{}\textcolor{comment}{#              compiler report has been loaded.}
+01490 \textcolor{comment}{}\textcolor{comment}{#}
+01491 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01492 \textcolor{comment}{}
+01493    \textcolor{comment}{# Look through the pin report}
+01494 \textcolor{comment}{}\textcolor{comment}{   }[\textcolor{keyword}{catch} \{get_fitter_report_pin_info $target\_pin "I/O Standard" -1\} io\_std]\textcolor{comment}{}
+01495 \textcolor{comment}{}
+01496    \textcolor{keyword}{if} \{($io\_std == "") || ([\textcolor{keyword}{string} match -nocase "*error*" $io\_std] == 1) || ([\textcolor{keyword}{string} match -nocase 
+      "*invalid*" $io\_std] == 1)\} \{
+01497        \textcolor{comment}{# The Fitter has not run, so read IP set assignment}
+01498 \textcolor{comment}{}\textcolor{comment}{       }\textcolor{keyword}{set} io\_std "Differential 1.8-V SSTL Class I"\textcolor{comment}{}
+01499 \textcolor{comment}{}       \textcolor{keyword}{set} io\_std "Differential 1.5-V SSTL Class I"\textcolor{comment}{}
+01500 \textcolor{comment}{}       \textcolor{keyword}{set} io\_std [get\_io\_standard\_from\_assignment -assignment $io\_std]\textcolor{comment}{}
+01501 \textcolor{comment}{}   \}\textcolor{comment}{}
+01502 \textcolor{comment}{}   \textcolor{comment}{#If at this point the IO standard is not obtained, then return UNKNOWN}
+01503 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{if} \{$io\_std == ""\} \{
+01504        \textcolor{keyword}{return} "UNKNOWN"\textcolor{comment}{}
+01505 \textcolor{comment}{}   \}\textcolor{comment}{}
+01506 \textcolor{comment}{}   \textcolor{keyword}{set} result ""\textcolor{comment}{}
+01507 \textcolor{comment}{}   \textcolor{keyword}{switch}  -exact -- $io\_std \{
+01508        "SSTL-2 Class I" \{\textcolor{keyword}{set} result "SSTL\_2\_I"\}
+01509        "Differential 2.5-V SSTL Class I" \{\textcolor{keyword}{set} result "DIFF\_SSTL\_2\_I"\}
+01510        "SSTL-2 Class II" \{\textcolor{keyword}{set} result "SSTL\_2\_II"\}
+01511        "Differential 2.5-V SSTL Class II" \{\textcolor{keyword}{set} result "DIFF\_SSTL\_2\_II"\}
+01512        "SSTL-18 Class I" \{\textcolor{keyword}{set} result "SSTL\_18\_I"\}
+01513        "Differential 1.8-V SSTL Class I" \{\textcolor{keyword}{set} result "DIFF\_SSTL\_18\_I"\}
+01514        "SSTL-18 Class II" \{\textcolor{keyword}{set} result "SSTL\_18\_II"\}
+01515        "Differential 1.8-V SSTL Class II" \{\textcolor{keyword}{set} result "DIFF\_SSTL\_18\_II"\}
+01516        "SSTL-15 Class I" \{\textcolor{keyword}{set} result "SSTL\_15\_I"\}
+01517        "Differential 1.5-V SSTL Class I" \{\textcolor{keyword}{set} result "DIFF\_SSTL\_15\_I"\}
+01518        "SSTL-15 Class II" \{\textcolor{keyword}{set} result "SSTL\_15\_II"\}
+01519        "Differential 1.5-V SSTL Class II" \{\textcolor{keyword}{set} result "DIFF\_SSTL\_15\_II"\}
+01520        "1.8-V HSTL Class I" \{\textcolor{keyword}{set} result "HSTL\_18\_I"\}
+01521        "Differential 1.8-V HSTL Class I" \{\textcolor{keyword}{set} result "DIFF\_HSTL\_18\_I"\}
+01522        "1.8-V HSTL Class II" \{\textcolor{keyword}{set} result "HSTL\_18\_II"\}
+01523        "Differential 1.8-V HSTL Class II" \{\textcolor{keyword}{set} result "DIFF\_HSTL\_18\_II"\}
+01524        "1.5-V HSTL Class I" \{\textcolor{keyword}{set} result "HSTL\_I"\}
+01525        "Differential 1.5-V HSTL Class I" \{\textcolor{keyword}{set} result "DIFF\_HSTL"\}
+01526        "1.5-V HSTL Class II" \{\textcolor{keyword}{set} result "HSTL\_II"\}
+01527        "Differential 1.5-V HSTL Class II" \{\textcolor{keyword}{set} result "DIFF\_HSTL\_II"\}
+01528        default \{
+01529            post\_message -type error "Found unsupported Memory I/O standard $io\_std on pin $target\_pin"\textcolor{comment}{}
+01530 \textcolor{comment}{}           \textcolor{keyword}{set} result "UNKNOWN"\textcolor{comment}{}
+01531 \textcolor{comment}{}       \}
+01532    \}\textcolor{comment}{}
+01533 \textcolor{comment}{}   \textcolor{keyword}{return} $result\textcolor{comment}{}
+01534 \textcolor{comment}{}\}\textcolor{comment}{}
+01535 \textcolor{comment}{}
+01536 
+01537 \textcolor{comment}{# ----------------------------------------------------------------}
+01538 \textcolor{comment}{}\textcolor{keyword}{proc} get\_ddr\_pins \{instname pins\_array\_name corename\} \{
+01539 \textcolor{comment}{#}
+01540 \textcolor{comment}{}\textcolor{comment}{# ----------------------------------------------------------------}
+01541 \textcolor{comment}{}\textcolor{comment}{   }\textcolor{keyword}{upvar} 1 $pins\_array\_name pins\textcolor{comment}{}
+01542 \textcolor{comment}{}   \textcolor{keyword}{array} unset pins\_t\textcolor{comment}{}
+01543 \textcolor{comment}{}
+01544    \textcolor{keyword}{set} dqsgroups 2\textcolor{comment}{}
+01545 \textcolor{comment}{}
+01546    \textcolor{keyword}{for} \{\textcolor{keyword}{set} i 0\} \{$i < $dqsgroups\} \{\textcolor{keyword}{incr} i\} \{
+01547        \textcolor{keyword}{set} dqs $\{instname\}\_alt\_mem\_phy\_inst|dpio|dqs\(\backslash\)[$i\(\backslash\)].dqs\_ddio\_out|dataout\textcolor{comment}{}
+01548 \textcolor{comment}{}       \textcolor{keyword}{set} dq  $\{instname\}\_alt\_mem\_phy\_inst|dpio|dqs\_group\(\backslash\)[$i\(\backslash\)].dq\(\backslash\)[*\(\backslash\)].dq\_ddio\_out|dataout\textcolor{comment}{}
+01549 \textcolor{comment}{}       \textcolor{keyword}{set} dm  $\{instname\}\_alt\_mem\_phy\_inst|dpio|dm\(\backslash\)[$i\(\backslash\)].dm\_ddio\_out|dataout\textcolor{comment}{}
+01550 \textcolor{comment}{}
+01551        \textcolor{keyword}{set} dqs\_p [map_get_node_name [walk_to_pins fanout [get\_pins -compatibility\_mode $dqs]]]\textcolor{comment}{}
+01552 \textcolor{comment}{}       \textcolor{keyword}{if} \{ [\textcolor{keyword}{llength} $dqs\_p] != 1\} \{ post_sdc_message critical\_warning "Could not find DQS pin number
+       $i"\}\textcolor{comment}{ }
+01553 \textcolor{comment}{}
+01554        \textcolor{keyword}{set} dqsn\_p [list]\textcolor{comment}{}
+01555 \textcolor{comment}{}
+01556        \textcolor{keyword}{set} dm\_p  [map_get_node_name [walk_to_pins fanout [get\_pins -compatibility\_mode $dm]]]\textcolor{comment}{}
+01557 \textcolor{comment}{}       \textcolor{keyword}{if} \{ [\textcolor{keyword}{llength} $dm\_p] != 1\} \{ post_sdc_message critical\_warning "Could not find DM pin for DQS
+       pin number $i"\}\textcolor{comment}{ }
+01558 \textcolor{comment}{}
+01559        \textcolor{keyword}{set} dq\_p  [map_get_node_name [walk_to_pins fanout [get\_pins -compatibility\_mode $dq]]]\textcolor{comment}{}
+01560 \textcolor{comment}{}       \textcolor{keyword}{if} \{ [\textcolor{keyword}{llength} $dq\_p] != 8\} \{ post_sdc_message critical\_warning "Could not find correct number
+       of DQ pins for DQS pin $i. Found [\textcolor{keyword}{llength} $dq\_p] pins. Expecting 8."\}\textcolor{comment}{ }
+01561 \textcolor{comment}{}
+01562        \textcolor{keyword}{set} dqsgroup [list [\textcolor{keyword}{lindex} $dqs\_p 0] $dm\_p [lsort $dq\_p] [\textcolor{keyword}{lindex} $dqsn\_p 0]]\textcolor{comment}{}
+01563 \textcolor{comment}{}       \textcolor{keyword}{lappend} pins\_t(dqsgroup) $dqsgroup\textcolor{comment}{}
+01564 \textcolor{comment}{}   \}\textcolor{comment}{}
+01565 \textcolor{comment}{}
+01566    \textcolor{keyword}{set} patterns [list]\textcolor{comment}{}
+01567 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns addrcmd 
+      $\{instname\}\_alt\_mem\_phy\_inst|*adc*|addr\(\backslash\)[*\(\backslash\)].addr\_struct|full\_rate.addr\_pin|auto\_generated|ddio\_outa\(\backslash\)[*\(\backslash\)]|dataout\textcolor{comment}{}
+01568 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns addrcmd 
+      $\{instname\}\_alt\_mem\_phy\_inst|*adc*|ba\(\backslash\)[*\(\backslash\)].ba\_struct|full\_rate.addr\_pin|auto\_generated|ddio\_outa\(\backslash\)[*\(\backslash\)]|dataout\textcolor{comment}{}
+01569 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns addrcmd 
+      $\{instname\}\_alt\_mem\_phy\_inst|*adc*|cas\_n\_struct|full\_rate.addr\_pin|auto\_generated|ddio\_outa\(\backslash\)[*\(\backslash\)]|dataout\textcolor{comment}{}
+01570 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns addrcmd 
+      $\{instname\}\_alt\_mem\_phy\_inst|*adc*|ras\_n\_struct|full\_rate.addr\_pin|auto\_generated|ddio\_outa\(\backslash\)[*\(\backslash\)]|dataout\textcolor{comment}{}
+01571 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns addrcmd 
+      $\{instname\}\_alt\_mem\_phy\_inst|*adc*|we\_n\_struct|full\_rate.addr\_pin|auto\_generated|ddio\_outa\(\backslash\)[*\(\backslash\)]|dataout\textcolor{comment}{}
+01572 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns addrcmd    
+      $\{instname\}\_alt\_mem\_phy\_inst|*adc*|cke\(\backslash\)[*\(\backslash\)].cke\_struct|full\_rate.addr\_pin|auto\_generated|ddio\_outa\(\backslash\)[0\(\backslash\)]|dataout\textcolor{comment}{}
+01573 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns addrcmd    
+      $\{instname\}\_alt\_mem\_phy\_inst|*adc*|gen\_odt.odt\(\backslash\)[*\(\backslash\)].odt\_struct|full\_rate.addr\_pin|auto\_generated|ddio\_outa\(\backslash\)[0\(\backslash\)]|dataout\textcolor{comment}{}
+01574 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns addrcmd    
+      $\{instname\}\_alt\_mem\_phy\_inst|*adc*|cs\_n\(\backslash\)[*\(\backslash\)].cs\_n\_struct|full\_rate.addr\_pin|auto\_generated|ddio\_outa\(\backslash\)[0\(\backslash\)]|dataout\textcolor{comment}{}
+01575 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns ck\_p 
+      $\{instname\}\_alt\_mem\_phy\_inst|clk|DDR\_CLK\_OUT\(\backslash\)[*\(\backslash\)].ddr\_clk\_out\_p|auto\_generated|ddio\_outa\(\backslash\)[*\(\backslash\)]|dataout\textcolor{comment}{}
+01576 \textcolor{comment}{}\textcolor{keyword}{lappend} patterns ck\_n 
+      $\{instname\}\_alt\_mem\_phy\_inst|clk|DDR\_CLK\_OUT\(\backslash\)[*\(\backslash\)].ddr\_clk\_out\_n|auto\_generated|ddio\_outa\(\backslash\)[*\(\backslash\)]|dataout\textcolor{comment}{}
+01577 \textcolor{comment}{}
+01578    \textcolor{keyword}{foreach} \{pin\_type pattern\} $patterns \{ 
+01579        \textcolor{keyword}{set} ports [map_get_node_name [walk_to_pins fanout [get\_pins -compatibility\_mode $pattern]]]\textcolor{comment}{}
+01580 \textcolor{comment}{}       \textcolor{keyword}{if} \{[\textcolor{keyword}{llength} $ports] == 0\} \{
+01581            post\_message -type critical\_warning "Could not find pin of type $pin\_type from pattern
+       $pattern"\textcolor{comment}{}
+01582 \textcolor{comment}{}       \} \textcolor{keyword}{else} \{
+01583            \textcolor{keyword}{foreach} port [lsort -unique $ports] \{
+01584                \textcolor{keyword}{lappend} pins\_t($pin\_type) $port\textcolor{comment}{}
+01585 \textcolor{comment}{}           \}\textcolor{comment}{}
+01586 \textcolor{comment}{}       \}\textcolor{comment}{}
+01587 \textcolor{comment}{}   \}\textcolor{comment}{}
+01588 \textcolor{comment}{}
+01589    \textcolor{keyword}{set} outputFileName "$\{corename\}\_autodetectedpins.tcl"\textcolor{comment}{}
+01590 \textcolor{comment}{}   \textcolor{keyword}{set} f [open $outputFileName w]\textcolor{comment}{}
+01591 \textcolor{comment}{}
+01592    \textcolor{keyword}{foreach} \{k v\} [\textcolor{keyword}{array} get pins\_t] \{
+01593        \textcolor{keyword}{foreach} vi $v \{
+01594            ddr_pin $k  $vi pins\textcolor{comment}{}
+01595 \textcolor{comment}{}           \textcolor{keyword}{puts} $f "ddr\_pin [list $k] [list $vi] pins"\textcolor{comment}{}
+01596 \textcolor{comment}{}       \}\textcolor{comment}{}
+01597 \textcolor{comment}{}   \}\textcolor{comment}{}
+01598 \textcolor{comment}{}   \textcolor{keyword}{close} $f\textcolor{comment}{}
+01599 \textcolor{comment}{}\}\textcolor{comment}{}
+01600 \textcolor{comment}{}
+01601 \textcolor{keyword}{proc} sort\_proc \{a b\} \{
+01602    \textcolor{keyword}{set} idxs [list 1 2 0]\textcolor{comment}{}
+01603 \textcolor{comment}{}   \textcolor{keyword}{foreach} i $idxs \{
+01604        \textcolor{keyword}{set} ai [\textcolor{keyword}{lindex} $a $i]\textcolor{comment}{}
+01605 \textcolor{comment}{}       \textcolor{keyword}{set} bi [\textcolor{keyword}{lindex} $b $i]\textcolor{comment}{}
+01606 \textcolor{comment}{}       \textcolor{keyword}{if} \{$ai > $bi\} \{
+01607            \textcolor{keyword}{return} 1\textcolor{comment}{}
+01608 \textcolor{comment}{}       \} \textcolor{keyword}{elseif} \{ $ai < $bi \} \{
+01609            \textcolor{keyword}{return} -1\textcolor{comment}{}
+01610 \textcolor{comment}{}       \}\textcolor{comment}{}
+01611 \textcolor{comment}{}   \}\textcolor{comment}{}
+01612 \textcolor{comment}{}   \textcolor{keyword}{return} 0\textcolor{comment}{}
+01613 \textcolor{comment}{}\}\textcolor{comment}{}
+01614 \textcolor{comment}{}
+\end{DoxyCode}

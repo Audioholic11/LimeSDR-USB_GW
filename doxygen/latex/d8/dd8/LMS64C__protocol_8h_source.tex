@@ -1,0 +1,143 @@
+\subsection{L\+M\+S64\+C\+\_\+protocol.\+h}
+\label{LMS64C__protocol_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/\+L\+M\+S64\+C\+\_\+protocol.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/\+L\+M\+S64\+C\+\_\+protocol.\+h}}
+
+\begin{DoxyCode}
+00001 
+00012 \textcolor{preprocessor}{#ifndef \_LMS64C\_PROTOCOL\_H\_}
+00013 \textcolor{preprocessor}{#define \_LMS64C\_PROTOCOL\_H\_}
+00014 
+00015 \textcolor{keyword}{enum} eLMS_DEV \{
+00016     LMS_DEV_UNKNOWN, 
+00017     LMS_DEV_EVB6,
+00018     LMS_DEV_DIGIGREEN, 
+00019     LMS_DEV_DIGIRED, \textcolor{comment}{//2x LMS6002, USB3}
+00020     LMS_DEV_EVB7, 
+00021     LMS_DEV_ZIPPER, \textcolor{comment}{//MyRiad bridge to FMC, HSMC bridge}
+00022     LMS_DEV_SOCKETBOARD, 
+00023     LMS_DEV_EVB7V2, 
+00024     LMS_DEV_STREAM, \textcolor{comment}{//Altera Cyclone IV, USB3, 2x 128 MB RAM, RFDIO, FMC}
+00025     LMS_DEV_NOVENA, \textcolor{comment}{//Freescale iMX6 CPU}
+00026     LMS_DEV_DATASPARK, \textcolor{comment}{//Altera Cyclone V, 2x 256 MB RAM, 2x FMC (HPC, LPC), USB3}
+00027     LMS_DEV_RFSPARK, \textcolor{comment}{//LMS7002}
+00028     LMS_DEV_LMS6002USB, \textcolor{comment}{//LM6002-USB (USB stick: FX3, FPGA, LMS6002, RaspberryPi con)}
+00029     LMS_DEV_RFESPARK,
+00030     LMS_DEV_SODERA,     \textcolor{comment}{//LMS7002M SoDeRa-USB board}
+00031     LMS_DEV_SODERAPCIE, \textcolor{comment}{//LMS7002M SoDeRa-PCIe board}
+00032 
+00033     \};
+00034 
+00035 \textcolor{keyword}{enum} eEXP_BOARD \{
+00036     EXP_BOARD_UNKNOWN, \textcolor{comment}{//undefined}
+00037     EXP_BOARD_UNSUPPORTED, \textcolor{comment}{//exp board not supported}
+00038     EXP_BOARD_NO, \textcolor{comment}{//device does not supoort any exp boards}
+00039     EXP_BOARD_MYRIAD1, \textcolor{comment}{//myriad1 LMS6002}
+00040     EXP_BOARD_MYRIAD2, \textcolor{comment}{//myriad2 LMS6002, longer board, with PA, MIPI}
+00041     EXP_BOARD_MYRIAD_NOVENA, \textcolor{comment}{//Novena myriad}
+00042     EXP_BOARD_HPM1000, \textcolor{comment}{//myriad with MCU, PA, MPI}
+00043     EXP_BOARD_MYRIAD7, \textcolor{comment}{//Myriad with LMS7002}
+00044     EXP_BOARD_HPM7, \textcolor{comment}{//Myriad long with LMS7002, 2x PA}
+00045     \};
+00046 
+00047 \textcolor{preprocessor}{#define LMS\_PROTOCOL\_VER        1}
+00048 \textcolor{preprocessor}{#define LMS\_CTRL\_PACKET\_SIZE    64}
+00049 
+00050 \textcolor{comment}{//commands}
+00051 \textcolor{preprocessor}{#define CMD\_GET\_INFO        0x00 //Returns some info about board and firmware}
+00052 
+00053 \textcolor{comment}{//i2c peripherals control}
+00054 \textcolor{preprocessor}{#define CMD\_SI5356\_WR       0x11}
+00055 \textcolor{preprocessor}{#define CMD\_SI5356\_RD       0x12}
+00056 \textcolor{preprocessor}{#define CMD\_SI5351\_WR       0x13 //Writes data to SI5351 (clock generator) via I2C}
+00057 \textcolor{preprocessor}{#define CMD\_SI5351\_RD       0x14 //Reads data from SI5351 (clock generator) via I2C}
+00058 \textcolor{preprocessor}{#define CMD\_TFP410\_WR       0x15 //PanelBus DVI (HDMI) Transmitter control}
+00059 \textcolor{preprocessor}{#define CMD\_TFP410\_RD       0x16 //PanelBus DVI (HDMI) Transmitter control}
+00060 
+00061 \textcolor{preprocessor}{#define CMD\_LMS\_RST         0x20 //CMD\_LMS\_RST}
+00062 \textcolor{preprocessor}{#define CMD\_LMS7002\_WR      0x21 //Writes data to LMS7002 chip via SPI (16 bits word)}
+00063 \textcolor{preprocessor}{#define CMD\_LMS7002\_RD      0x22 //Reads data from LMS7002 chip via SPI (16 bits word)}
+00064 \textcolor{preprocessor}{#define CMD\_LMS6002\_WR      0x23 //Writes data to LMS6002 chip via SPI (8 bits word)}
+00065 \textcolor{preprocessor}{#define CMD\_LMS6002\_RD      0x24 //Reads data from LMS6002 chip via SPI (8 bits word)}
+00066 
+00067 \textcolor{preprocessor}{#define CMD\_LMS\_LNA         0x2A}
+00068 \textcolor{preprocessor}{#define CMD\_LMS\_PA          0x2B}
+00069 \textcolor{preprocessor}{#define CMD\_LMS\_MCU\_FW\_WR   0x2C //LMS7 MCU FW write}
+00070 \textcolor{preprocessor}{#define CMD\_WR\_MCU          0x2D //testing}
+00071 \textcolor{preprocessor}{#define CMD\_RD\_MCU          0x2E //testing}
+00072 
+00073 \textcolor{comment}{//ADF4002}
+00074 \textcolor{preprocessor}{#define CMD\_ADF4002\_WR      0x31 //Writes data to ADF4002 (phase detector/frequency synthesizer) via SPI}
+00075 
+00076 \textcolor{preprocessor}{#define CMD\_FX2             0x40 //FX2 Configuration, resets endpoints (DigiGreen)}
+00077 
+00078 \textcolor{preprocessor}{#define CMD\_PE636040\_WR     0x41 //Writes data to PE636040 tuner}
+00079 \textcolor{preprocessor}{#define CMD\_PE636040\_RD     0x42 //Reads data from PE636040 tuner}
+00080 
+00081 
+00082 
+00083 \textcolor{preprocessor}{#define CMD\_GPIO\_DIR\_WR     0x4F //Set GPIOs direction}
+00084 \textcolor{preprocessor}{#define CMD\_GPIO\_DIR\_RD     0x50 //Reads GPIOs direction}
+00085 \textcolor{preprocessor}{#define CMD\_GPIO\_WR         0x51 //Controls board's GPIOs}
+00086 \textcolor{preprocessor}{#define CMD\_GPIO\_RD         0x52 //Reads board's GPIOs states}
+00087 \textcolor{preprocessor}{#define CMD\_ALTERA\_FPGA\_GW\_WR       0x53}
+00088 \textcolor{preprocessor}{#define CMD\_ALTERA\_FPGA\_GW\_RD       0x54}
+00089 
+00090 \textcolor{comment}{//spi peripherals control}
+00091 \textcolor{preprocessor}{#define CMD\_BRDSPI16\_WR     0x55 //16 + 16 bit spi for stream, dataspark control}
+00092 \textcolor{preprocessor}{#define CMD\_BRDSPI16\_RD     0x56 //16 + 16 bit spi for stream, dataspark control}
+00093 \textcolor{preprocessor}{#define CMD\_BRDSPI8\_WR      0x57 //8 + 8 bit spi for stream, dataspark control}
+00094 \textcolor{preprocessor}{#define CMD\_BRDSPI8\_RD      0x58 //8 + 8 bit spi for stream, dataspark control}
+00095 
+00096 \textcolor{preprocessor}{#define CMD\_BRDCONF\_WR      0x5D //write config data to board}
+00097 \textcolor{preprocessor}{#define CMD\_BRDCONF\_RD      0x5E //read config data from board}
+00098 
+00099 \textcolor{preprocessor}{#define CMD\_ANALOG\_VAL\_WR   0x61 //write analog value}
+00100 \textcolor{preprocessor}{#define CMD\_ANALOG\_VAL\_RD   0x62 //read analog value}
+00101 \textcolor{comment}{//read reference??? ofset? min? max?}
+00102 
+00103 \textcolor{comment}{//0x6x free?}
+00104 \textcolor{comment}{//0x7x free?}
+00105 \textcolor{comment}{/*}
+00106 \textcolor{comment}{#define 8bit spi wr, rd}
+00107 \textcolor{comment}{#define 16bit spi wr, rd}
+00108 \textcolor{comment}{#define 8bit i2c}
+00109 \textcolor{comment}{#*/}
+00110 
+00111 \textcolor{preprocessor}{#define CMD\_MYRIAD\_RST      0x80}
+00112 \textcolor{preprocessor}{#define CMD\_MYRIAD\_WR       0x81}
+00113 \textcolor{preprocessor}{#define CMD\_MYRIAD\_RD       0x82}
+00114 \textcolor{preprocessor}{#define CMD\_MYRIAD\_FW\_WR    0x8C //Writes FW to MyRiad board via SPI}
+00115 \textcolor{preprocessor}{#define CMD\_MYRIAD\_FW\_RD    0x8D //Reads FW from MyRiad board via SPI}
+00116 
+00117 \textcolor{comment}{//status}
+00118 \textcolor{preprocessor}{#define STATUS\_COMPLETED\_CMD        1 //Command successfully executed}
+00119 \textcolor{preprocessor}{#define STATUS\_UNKNOWN\_CMD          2 //Unknown command}
+00120 \textcolor{preprocessor}{#define STATUS\_BUSY\_CMD             3 //Command execution not finished}
+00121 \textcolor{preprocessor}{#define STATUS\_BLOCKS\_ERROR\_CMD     4 //Too many blocks}
+00122 \textcolor{preprocessor}{#define STATUS\_ERROR\_CMD            5 //Error occurred during command execution}
+00123 \textcolor{preprocessor}{#define STATUS\_WRONG\_ORDER\_CMD      6 //Broken packets sequence}
+00124 \textcolor{preprocessor}{#define STATUS\_RESOURCE\_DENIED\_CMD  7 //Board resource denied}
+00125 \textcolor{preprocessor}{#define STATUS\_INVALID\_PERIPH\_ID\_CMD    8 //}
+00126 
+00127 \textcolor{keyword}{enum} STATUS_BRD \{STATUS_BRD_UNKNOWN, STATUS_BRD_READY, STATUS_BRD_BUSY, 
+      STATUS_BRD_ERROR\};
+00128 
+00129 \textcolor{comment}{//CMD\_LMS\_RST}
+00130 \textcolor{preprocessor}{#define LMS\_RST\_DEACTIVATE  0}
+00131 \textcolor{preprocessor}{#define LMS\_RST\_ACTIVATE    1}
+00132 \textcolor{preprocessor}{#define LMS\_RST\_PULSE       2}
+00133 
+00134 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}\{
+00135     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} Command;
+00136     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} Status;
+00137     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} Data_blocks;
+00138     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} Periph_ID;
+00139     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} reserved[4];
+00140 \}tLMS_Ctrl_Header;
+00141 
+00142 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}\{
+00143     tLMS_Ctrl_Header Header;
+00144     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} Data\_field[LMS_CTRL_PACKET_SIZE - \textcolor{keyword}{sizeof}(tLMS_Ctrl_Header)];
+00145 \}tLMS_Ctrl_Packet;
+00146 
+00147 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

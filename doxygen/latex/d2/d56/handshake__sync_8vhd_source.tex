@@ -1,0 +1,143 @@
+\subsection{handshake\+\_\+sync.\+vhd}
+\label{handshake__sync_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/handshake\+\_\+sync/synth/handshake\+\_\+sync.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/handshake\+\_\+sync/synth/handshake\+\_\+sync.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    handshake\_sync.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: }
+00004 \textcolor{keyword}{-- DATE:    April 13, 2017}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }handshake_sync \textcolor{keywordflow}{is}
+00016    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00017       \textcolor{vhdlchar}{src_clk}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00018       \textcolor{vhdlchar}{src_reset_n}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00019       \textcolor{vhdlchar}{src_in}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020       \textcolor{vhdlchar}{src_busy}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00021       
+00022       \textcolor{vhdlchar}{dst_clk}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00023       \textcolor{vhdlchar}{dst_reset_n}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00024       \textcolor{vhdlchar}{dst_out}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}     
+00025         \textcolor{vhdlchar}{)};
+00026 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{handshake\_sync};
+00027 
+00028 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00029 \textcolor{keyword}{-- Architecture}
+00030 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00031 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} handshake_sync is
+00032 \textcolor{keyword}{--declare signals,  components here}
+00033 
+00034 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{src_sync_req}              \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00035 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dst_sync_ack}              \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00036 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dst_sync_ack_reg}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00037 
+00038 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{src_sync_req_sync_to_dest} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00039 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dst_sync_ack_sync_to_src}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00040 
+00041 
+00042 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{src_in_reg}                \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00043 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{src_in_hold}               \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00044 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{src_in_hold_sync_to_dest}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00045 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{src_busy_sync_to_dest}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00046 
+00047 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dest_ack}                  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00048 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{dest_ack_sync_to_src}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00049 
+00050   
+00051 \textcolor{vhdlkeyword}{begin}
+00052 
+00053 \textcolor{keywordflow}{process}(src_clk)
+00054 \textcolor{vhdlkeyword}{begin }
+00055 \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{src_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{src_clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00056    \textcolor{vhdlchar}{src_in_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{src_in};
+00057 \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00058 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00059 
+00060 \textcolor{keywordflow}{process}(src_clk, src_reset_n)
+00061 \textcolor{vhdlkeyword}{begin}
+00062    \textcolor{keywordflow}{if} \textcolor{vhdlchar}{src_reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00063       \textcolor{vhdlchar}{src_in_hold} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00064    \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{src_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{src_clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00065       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{src_sync_req} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00066          \textcolor{vhdlchar}{src_in_hold} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{src_in};
+00067       \textcolor{keywordflow}{else}
+00068          \textcolor{vhdlchar}{src_in_hold} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{src_in_hold};
+00069       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00070    \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00071 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00072 
+00073 \textcolor{vhdlchar}{src_busy} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{src_sync_req} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{dst_sync_ack_sync_to_src};
+00074 
+00075 
+00076 
+00077 
+00078 
+00079 src\_sync\_reg0 : \textcolor{keywordflow}{entity} work.sync_reg 
+00080 \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(src_clk, src_reset_n, dst_sync_ack, dst_sync_ack_sync_to_src\textcolor{vhdlchar}{)};
+00081 
+00082 \textcolor{keywordflow}{process}(src_clk, src_reset_n)
+00083 \textcolor{vhdlkeyword}{begin}
+00084    \textcolor{keywordflow}{if} \textcolor{vhdlchar}{src_reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00085       \textcolor{vhdlchar}{src_sync_req} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00086    \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{src_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{src_clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00087       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{src_in} \textcolor{keywordflow}{XOR} \textcolor{vhdlchar}{src_in_reg}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00088          \textcolor{vhdlchar}{src_sync_req} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00089       \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{dst_sync_ack_sync_to_src} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00090          \textcolor{vhdlchar}{src_sync_req} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00091       \textcolor{keywordflow}{else}
+00092          \textcolor{vhdlchar}{src_sync_req} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{src_sync_req};
+00093       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00094    \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00095 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00096 
+00097 dst\_sync\_reg0 : \textcolor{keywordflow}{entity} work.sync_reg 
+00098 \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(dst_clk, dst_reset_n, src_sync_req, src_sync_req_sync_to_dest\textcolor{vhdlchar}{)};
+00099 
+00100 dst\_sync\_reg1 : \textcolor{keywordflow}{entity} work.sync_reg 
+00101 \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(dst_clk, dst_reset_n, src_in_hold, src_in_hold_sync_to_dest\textcolor{vhdlchar}{)};
+00102 
+00103 \textcolor{keywordflow}{process}(dst_clk, dst_reset_n)
+00104 \textcolor{vhdlkeyword}{begin}
+00105    \textcolor{keywordflow}{if} \textcolor{vhdlchar}{dst_reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00106       \textcolor{vhdlchar}{dst_sync_ack}      \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00107       \textcolor{vhdlchar}{dst_sync_ack_reg}  \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00108    \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{dst_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{dst_clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00109       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{src_sync_req_sync_to_dest} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00110          \textcolor{vhdlchar}{dst_sync_ack} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00111       \textcolor{keywordflow}{else} 
+00112          \textcolor{vhdlchar}{dst_sync_ack} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00113       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00114       \textcolor{vhdlchar}{dst_sync_ack_reg} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{dst_sync_ack};
+00115    \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00116 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00117 
+00118 
+00119 \textcolor{keywordflow}{process}(dst_clk, dst_reset_n)
+00120 \textcolor{vhdlkeyword}{begin}
+00121    \textcolor{keywordflow}{if} \textcolor{vhdlchar}{dst_reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00122       \textcolor{vhdlchar}{dst_out} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00123    \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{dst_clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{dst_clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00124       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{dst_sync_ack_reg} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{dst_sync_ack} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00125          \textcolor{vhdlchar}{dst_out} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'};
+00126       \textcolor{keywordflow}{else} 
+00127          \textcolor{vhdlchar}{dst_out} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00128       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00129    \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00130 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00131 
+00132 
+00133 
+00134 
+00135 
+00136 
+00137   
+00138 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};
+\end{DoxyCode}

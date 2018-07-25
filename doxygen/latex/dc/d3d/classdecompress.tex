@@ -1,0 +1,250 @@
+\subsection{decompress Entity Reference}
+\label{classdecompress}\index{decompress@{decompress}}
+
+
+Inheritance diagram for decompress\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/de7/classdecompress__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for decompress\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{d6/d1b/classdecompress__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Entities}
+\begin{DoxyCompactItemize}
+\item 
+{\bf arch} architecture
+\end{DoxyCompactItemize}
+\subsubsection*{Libraries}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf ieee} 
+\item 
+{\bf altera\+\_\+mf} 
+\end{DoxyCompactItemize}
+\subsubsection*{Use Clauses}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf std\+\_\+logic\+\_\+1164}   
+\item 
+{\bf numeric\+\_\+std}   
+\item 
+{\bf  all }   
+\end{DoxyCompactItemize}
+\subsubsection*{Generics}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf dev\+\_\+family} {\bfseries {\bfseries \textcolor{comment}{string}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} Cyclone I\+V E \char`\"{}}\textcolor{vhdlchar}{ }}}
+\item 
+{\bf data\+\_\+width} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }}}
+\item 
+{\bf fifo\+\_\+rsize} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }}}
+\item 
+{\bf fifo\+\_\+wsize} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }}}
+\end{DoxyCompactItemize}
+\subsubsection*{Ports}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf wclk}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rclk}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reset\+\_\+n}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+in}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+in\+\_\+valid}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf sample\+\_\+width}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rdreq}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rdempty}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rdusedw}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf fifo\+\_\+rsize}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wfull}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf wusedw}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf fifo\+\_\+wsize}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dataout\+\_\+valid}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf decmpr\+\_\+data}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 17} of file {\bf decompress.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{decompress@{decompress}! all @{ all }}
+\index{ all @{ all }!decompress@{decompress}}
+\paragraph[{ all }]{\setlength{\rightskip}{0pt plus 5cm}{\bf  all }\hspace{0.3cm}{\ttfamily [Package]}}\label{classdecompress_a470a86ce8776f637b0483eabf2d92ad2}
+
+
+Definition at line {\bf 12} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!altera\+\_\+mf@{altera\+\_\+mf}}
+\index{altera\+\_\+mf@{altera\+\_\+mf}!decompress@{decompress}}
+\paragraph[{altera\+\_\+mf}]{\setlength{\rightskip}{0pt plus 5cm}{\bf altera\+\_\+mf}\hspace{0.3cm}{\ttfamily [Library]}}\label{classdecompress_ad57cd8d31a38ff87ac163fb47757ffbf}
+
+
+Definition at line {\bf 11} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!data\+\_\+in@{data\+\_\+in}}
+\index{data\+\_\+in@{data\+\_\+in}!decompress@{decompress}}
+\paragraph[{data\+\_\+in}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+in} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+width}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_ae8970283125be754ef38cafeb364ecd9}
+
+
+Definition at line {\bf 28} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!data\+\_\+in\+\_\+valid@{data\+\_\+in\+\_\+valid}}
+\index{data\+\_\+in\+\_\+valid@{data\+\_\+in\+\_\+valid}!decompress@{decompress}}
+\paragraph[{data\+\_\+in\+\_\+valid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+in\+\_\+valid} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_a9fe0a9f38dccdb91d670106b4bbac6fd}
+
+
+Definition at line {\bf 29} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!data\+\_\+width@{data\+\_\+width}}
+\index{data\+\_\+width@{data\+\_\+width}!decompress@{decompress}}
+\paragraph[{data\+\_\+width}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+width} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classdecompress_a23ac9aef60d90928b86060b4a3adc556}
+
+
+Definition at line {\bf 20} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!dataout\+\_\+valid@{dataout\+\_\+valid}}
+\index{dataout\+\_\+valid@{dataout\+\_\+valid}!decompress@{decompress}}
+\paragraph[{dataout\+\_\+valid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dataout\+\_\+valid} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_a5cee77342830d1ebe6ac168342ca3e5b}
+
+
+Definition at line {\bf 37} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!decmpr\+\_\+data@{decmpr\+\_\+data}}
+\index{decmpr\+\_\+data@{decmpr\+\_\+data}!decompress@{decompress}}
+\paragraph[{decmpr\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf decmpr\+\_\+data} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_a0f72a774bb02e679293c611c5a5e97c6}
+
+
+Definition at line {\bf 41} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!dev\+\_\+family@{dev\+\_\+family}}
+\index{dev\+\_\+family@{dev\+\_\+family}!decompress@{decompress}}
+\paragraph[{dev\+\_\+family}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dev\+\_\+family} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{string}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} Cyclone I\+V E \char`\"{}}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classdecompress_a1314572919959082d23e5f98e64a0ce2}
+
+
+Definition at line {\bf 19} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!fifo\+\_\+rsize@{fifo\+\_\+rsize}}
+\index{fifo\+\_\+rsize@{fifo\+\_\+rsize}!decompress@{decompress}}
+\paragraph[{fifo\+\_\+rsize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+rsize} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{9} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classdecompress_a383be79458e7ff4ef9731eca04e49999}
+
+
+Definition at line {\bf 21} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!fifo\+\_\+wsize@{fifo\+\_\+wsize}}
+\index{fifo\+\_\+wsize@{fifo\+\_\+wsize}!decompress@{decompress}}
+\paragraph[{fifo\+\_\+wsize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+wsize} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classdecompress_aadac127949cda84fbd6d343f25cff703}
+
+
+Definition at line {\bf 22} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!ieee@{ieee}}
+\index{ieee@{ieee}!decompress@{decompress}}
+\paragraph[{ieee}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ieee}\hspace{0.3cm}{\ttfamily [Library]}}\label{classdecompress_a0a6af6eef40212dbaf130d57ce711256}
+
+
+Definition at line {\bf 8} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!numeric\+\_\+std@{numeric\+\_\+std}}
+\index{numeric\+\_\+std@{numeric\+\_\+std}!decompress@{decompress}}
+\paragraph[{numeric\+\_\+std}]{\setlength{\rightskip}{0pt plus 5cm}{\bf numeric\+\_\+std}\hspace{0.3cm}{\ttfamily [Package]}}\label{classdecompress_a2edc34402b573437d5f25fa90ba4013e}
+
+
+Definition at line {\bf 10} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!rclk@{rclk}}
+\index{rclk@{rclk}!decompress@{decompress}}
+\paragraph[{rclk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rclk} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_adc5af5020d304d578fa740a33045fec7}
+
+
+Definition at line {\bf 26} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!rdempty@{rdempty}}
+\index{rdempty@{rdempty}!decompress@{decompress}}
+\paragraph[{rdempty}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rdempty} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_a9de411b2245efc9c1d528023e62102de}
+
+
+Definition at line {\bf 33} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!rdreq@{rdreq}}
+\index{rdreq@{rdreq}!decompress@{decompress}}
+\paragraph[{rdreq}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rdreq} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_a664672374cb02f8b68a5ff0a74918b73}
+
+
+Definition at line {\bf 31} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!rdusedw@{rdusedw}}
+\index{rdusedw@{rdusedw}!decompress@{decompress}}
+\paragraph[{rdusedw}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rdusedw} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf fifo\+\_\+rsize}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_a096d384434cae690bb7355ab3cd05eaa}
+
+
+Definition at line {\bf 34} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!reset\+\_\+n@{reset\+\_\+n}}
+\index{reset\+\_\+n@{reset\+\_\+n}!decompress@{decompress}}
+\paragraph[{reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reset\+\_\+n} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_a446ea52ed8c4a84181a47d9165ce41a5}
+
+
+Definition at line {\bf 27} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!sample\+\_\+width@{sample\+\_\+width}}
+\index{sample\+\_\+width@{sample\+\_\+width}!decompress@{decompress}}
+\paragraph[{sample\+\_\+width}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sample\+\_\+width} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_aa4357f9a7d7e21fa49f9ce61eec07e23}
+
+
+Definition at line {\bf 30} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}}
+\index{std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}!decompress@{decompress}}
+\paragraph[{std\+\_\+logic\+\_\+1164}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+\_\+logic\+\_\+1164}\hspace{0.3cm}{\ttfamily [Package]}}\label{classdecompress_acd03516902501cd1c7296a98e22c6fcb}
+
+
+Definition at line {\bf 9} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!wclk@{wclk}}
+\index{wclk@{wclk}!decompress@{decompress}}
+\paragraph[{wclk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wclk} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_adc5d3b386b1979488fb85997e33fbd78}
+
+
+Definition at line {\bf 25} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!wfull@{wfull}}
+\index{wfull@{wfull}!decompress@{decompress}}
+\paragraph[{wfull}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wfull} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_aee76d1b947eae4b96a162ce08a32e4c2}
+
+
+Definition at line {\bf 35} of file {\bf decompress.\+vhd}.
+
+\index{decompress@{decompress}!wusedw@{wusedw}}
+\index{wusedw@{wusedw}!decompress@{decompress}}
+\paragraph[{wusedw}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wusedw} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf fifo\+\_\+wsize}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classdecompress_af04525979ea92725a1aa58fb1a1a3579}
+
+
+Definition at line {\bf 36} of file {\bf decompress.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/data\+\_\+manipulation/{\bf decompress.\+vhd}\end{DoxyCompactItemize}

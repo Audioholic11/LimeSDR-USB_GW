@@ -1,0 +1,133 @@
+\subsection{spi\+\_\+flash\+\_\+lib.\+h}
+\label{spi__flash__lib_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/spi\+\_\+flash\+\_\+lib.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * spi\_flash\_lib.h}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Feb 3, 2016}
+00005 \textcolor{comment}{ *      Author: zydrunas}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#ifndef SPI\_FLASH\_LIB\_H\_}
+00009 \textcolor{preprocessor}{#define SPI\_FLASH\_LIB\_H\_}
+00010 
+00011 \textcolor{preprocessor}{#include "io.h"}
+00012 \textcolor{preprocessor}{#include "system.h"}
+00013 \textcolor{preprocessor}{#include <stdint.h>}
+00014 \textcolor{preprocessor}{#include <string.h>}
+00015 \textcolor{preprocessor}{#include <altera_avalon_spi.h>}
+00016 \textcolor{preprocessor}{#include "alt_types.h"}
+00017 
+00026 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} CyU3PErrorCode_t
+00027 \{
+00028     CY_U3P_SUCCESS = 0,                 
+00030     CY_U3P_ERROR_DELETED,               
+00031     CY_U3P_ERROR_BAD_POOL,              
+00032     CY_U3P_ERROR_BAD_POINTER,           
+00033     CY_U3P_ERROR_INVALID_WAIT,          
+00034     CY_U3P_ERROR_BAD_SIZE,              
+00035     CY_U3P_ERROR_BAD_EVENT_GRP,         
+00036     CY_U3P_ERROR_NO_EVENTS,             
+00037     CY_U3P_ERROR_BAD_OPTION,            
+00038     CY_U3P_ERROR_BAD_QUEUE,             
+00039     CY_U3P_ERROR_QUEUE_EMPTY,           
+00040     CY_U3P_ERROR_QUEUE_FULL,            
+00041     CY_U3P_ERROR_BAD_SEMAPHORE,         
+00042     CY_U3P_ERROR_SEMGET_FAILED,         
+00043     CY_U3P_ERROR_BAD_THREAD,            
+00044     CY_U3P_ERROR_BAD_PRIORITY,          
+00045     CY_U3P_ERROR_MEMORY_ERROR,          
+00046     CY_U3P_ERROR_DELETE_FAILED,         
+00047     CY_U3P_ERROR_RESUME_FAILED,         
+00048     CY_U3P_ERROR_INVALID_CALLER,        
+00049     CY_U3P_ERROR_SUSPEND_FAILED,        
+00050     CY_U3P_ERROR_BAD_TIMER,             
+00051     CY_U3P_ERROR_BAD_TICK,              
+00052     CY_U3P_ERROR_ACTIVATE_FAILED,       
+00053     CY_U3P_ERROR_BAD_THRESHOLD,         
+00054     CY_U3P_ERROR_SUSPEND_LIFTED,        
+00055     CY_U3P_ERROR_WAIT_ABORTED,          
+00056     CY_U3P_ERROR_WAIT_ABORT_FAILED,     
+00057     CY_U3P_ERROR_BAD_MUTEX,             
+00058     CY_U3P_ERROR_MUTEX_FAILURE,         
+00059     CY_U3P_ERROR_MUTEX_PUT_FAILED,      
+00060     CY_U3P_ERROR_INHERIT_FAILED,        
+00061     CY_U3P_ERROR_NOT_IDLE,              
+00063     CY_U3P_ERROR_BAD_ARGUMENT = 0x40,   
+00064     CY_U3P_ERROR_NULL_POINTER,          
+00065     CY_U3P_ERROR_NOT_STARTED,           
+00066     CY_U3P_ERROR_ALREADY_STARTED,       
+00067     CY_U3P_ERROR_NOT_CONFIGURED,        
+00068     CY_U3P_ERROR_TIMEOUT,               
+00069     CY_U3P_ERROR_NOT_SUPPORTED,         
+00070     CY_U3P_ERROR_INVALID_SEQUENCE,      
+00071     CY_U3P_ERROR_ABORTED,               
+00072     CY_U3P_ERROR_DMA_FAILURE,           
+00073     CY_U3P_ERROR_FAILURE,               
+00074     CY_U3P_ERROR_BAD_INDEX,             
+00075     CY_U3P_ERROR_BAD_ENUM_METHOD,       
+00076     CY_U3P_ERROR_INVALID_CONFIGURATION, 
+00077     CY_U3P_ERROR_CHANNEL_CREATE_FAILED, 
+00078     CY_U3P_ERROR_CHANNEL_DESTROY_FAILED,
+00079     CY_U3P_ERROR_BAD_DESCRIPTOR_TYPE,   
+00080     CY_U3P_ERROR_XFER_CANCELLED,        
+00081     CY_U3P_ERROR_FEATURE_NOT_ENABLED,   
+00082     CY_U3P_ERROR_STALLED,               
+00083     CY_U3P_ERROR_BLOCK_FAILURE,         
+00084     CY_U3P_ERROR_LOST_ARBITRATION,      
+00085     CY_U3P_ERROR_STANDBY_FAILED,        
+00088     CY_U3P_ERROR_INVALID_VOLTAGE_RANGE = 0x60,  
+00089     CY_U3P_ERROR_CARD_WRONG_RESPONSE,           
+00090     CY_U3P_ERROR_UNSUPPORTED_CARD,              
+00091     CY_U3P_ERROR_CARD_WRONG_STATE,              
+00092     CY_U3P_ERROR_CMD_NOT_SUPPORTED,             
+00093     CY_U3P_ERROR_CRC,                           
+00094     CY_U3P_ERROR_INVALID_ADDR,                  
+00095     CY_U3P_ERROR_INVALID_UNIT,                  
+00096     CY_U3P_ERROR_INVALID_DEV,                   
+00097     CY_U3P_ERROR_ALREADY_PARTITIONED,           
+00098     CY_U3P_ERROR_NOT_PARTITIONED,               
+00099     CY_U3P_ERROR_BAD_PARTITION,                 
+00100     CY_U3P_ERROR_READ_WRITE_ABORTED,            
+00101     CY_U3P_ERROR_WRITE_PROTECTED,               
+00102     CY_U3P_ERROR_SIB_INIT,                      
+00103     CY_U3P_ERROR_CARD_LOCKED,                   
+00104     CY_U3P_ERROR_CARD_LOCK_FAILURE,             
+00105     CY_U3P_ERROR_CARD_FORCE_ERASE,              
+00106     CY_U3P_ERROR_INVALID_BLOCKSIZE,             
+00107     CY_U3P_ERROR_INVALID_FUNCTION,              
+00108     CY_U3P_ERROR_TUPLE_NOT_FOUND,               
+00109     CY_U3P_ERROR_IO_ABORTED,                    
+00110     CY_U3P_ERROR_IO_SUSPENDED,              
+00111     CY_U3P_ERROR_ILLEGAL_CMD,                   
+00112     CY_U3P_ERROR_SDIO_UNKNOWN,                  
+00113     CY_U3P_ERROR_BAD_CMD_ARG,                   
+00114     CY_U3P_ERROR_UNINITIALIZED_FUNCTION,        
+00115     CY_U3P_ERROR_CARD_NOT_ACTIVE,               
+00116     CY_U3P_ERROR_DEVICE_BUSY,                   
+00117     CY_U3P_ERROR_NO_METADATA,           
+00118     CY_U3P_ERROR_CARD_UNHEALTHY,        
+00119     CY_U3P_ERROR_MEDIA_FAILURE,         
+00121     CY_U3P_ERROR_NO_REENUM_REQUIRED = 0xFE, 
+00127     CY_U3P_ERROR_OPERN_DISABLED = 0xFF      
+00129 \} CyU3PErrorCode_t;
+00130 
+00131 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} CyU3PReturnStatus_t;
+00132 
+00133 \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} CyBool_t;                           
+00134 \textcolor{preprocessor}{#define CyTrue                  (1)             }
+00135 \textcolor{preprocessor}{#define CyFalse                 (0)             }
+00136 \textcolor{preprocessor}{#define STATUS\_RETRIES          10000}
+00137 \textcolor{preprocessor}{#define STATUS\_RETRIES\_ERASE    3000000}
+00138 
+00139 \textcolor{keywordtype}{void} CyFxSpiFastRead(CyBool_t v);
+00140 uint8\_t ReverseBitOrder (uint8\_t data);
+00141 uint8\_t FlashSpiEraseSector(alt_u32 SPIBase, alt_u32 SPISlave, uint8\_t isErase, uint8\_t sector);
+00142 uint8\_t CyFxSpiWaitForStatus(alt_u32 SPIBase, alt_u32 SPISlave);
+00143 uint8\_t FlashSpiTransfer(alt_u32 SPIBase, alt_u32 SPISlave, uint32\_t pageAddress, uint16\_t byteCount, 
+      uint8\_t *buffer, CyBool_t isRead);
+00144 
+00145 
+00146 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* SPI\_FLASH\_LIB\_H\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

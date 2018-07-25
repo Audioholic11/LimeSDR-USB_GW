@@ -30,6 +30,8 @@ entity gpio_chirp_sync_top is
 		chirp_sig				: in std_logic;
 		sync_period				: out std_logic_vector(chirp_sync_width-1 downto 0);
 		chirp_trig				: out std_logic;
+		
+		TESTOUT					: out std_logic;
       
 		--Mode settings
       sample_width         : in std_logic_vector(1 downto 0); --"10"-12bit, "01"-14bit, "00"-16bit;
@@ -95,38 +97,47 @@ end component;
 
 
 begin
--- ----------------------------------------------------------------------------
--- sync registers
--- ----------------------------------------------------------------------------
-sync_reg0 : entity work.sync_reg 
-port map(clk, '1', reset_n, reset_n_sync);
-
-sync_reg1 : entity work.sync_reg 
-port map(clk, '1', mode, mode_sync);
-
-sync_reg2 : entity work.sync_reg 
-port map(clk, '1', trxiqpulse, trxiqpulse_sync);
-
-sync_reg3 : entity work.sync_reg 
-port map(clk, '1', ddr_en, ddr_en_sync);
-
-sync_reg4 : entity work.sync_reg 
-port map(clk, '1', mimo_en, mimo_en_sync);
-
-
-bus_sync_reg0 : entity work.bus_sync_reg
-generic map (2)
-port map(clk, '1', ch_en, ch_en_sync);
-
 -- Default sld and data (only use sclr)
 
 --sld_counter <= '0';
 sclr_counter <= '0';
 data_counter <= std_logic_vector(to_unsigned(1, data_counter'length));
-counter_enable <= inst0_enable_counter and counter_clk;
+--counter_enable <= inst0_enable_counter and counter_clk;
+counter_enable <= inst0_enable_counter;
 
+inst0_chirp_signal <= chirp_sig;
+
+ -- --------------------------------------------------------------------------		  
+-- gpio_sync_FSM(RSET,CLK,SIG,CLK_1,E,L,U_D,TRIG);
+-- ---------------------------------------------------------------------------
+
+--gpio_sync_FMS_inst0 : gpio_sync_FSM port map(
+--		reset_n_sync,
+--		clk,
+--		inst0_chirp_signal,
+--		inst0_enable_counter,
+--		inst0_load_counter
+--		inst0_U_D,
+--		inst0_chirp_trig
+--		);
+
+
+ -- --------------------------------------------------------------------------		  
+-- Instance of FSM 
+-- ---------------------------------------------------------------------------
+gpio_chirp_sync_FSM_inst0 : entity work.gpio_chirp_sync_FSM
+
+	port map(
+		clk               => clk,
+      reset_n           => reset_n_sync,
+      sig					=> inst0_chirp_signal,
+		enable				=> inst0_enable_counter,
+		load					=> inst0_load_counter,
+		u_d					=> inst0_U_D,
+		trig					=> inst0_chirp_trig
+		);
 -- ----------------------------------------------------------------------------
--- Instance for packing sample counter for packet forming
+-- Instance for packing sample counter
 -- ----------------------------------------------------------------------------        
 smpl_cnt_inst5 : entity work.smpl_cnt
    generic map(
@@ -164,24 +175,36 @@ end process trigger_hold;
 -- bus_sync_reg1 : entity work.bus_sync_reg
 --generic map (chirp_sync_width)
 --port map(inst0_chirp_trig, '1', inst5_q, q_hold);
+		
+-- ----------------------------------------------------------------------------
+-- sync registers
+-- ----------------------------------------------------------------------------
+sync_reg0 : entity work.sync_reg 
+port map(clk, '1', reset_n, reset_n_sync);
 
- -- ----------------------------------------------------------------------------		  
--- gpio_sync_FSM(RSET,CLK,SIG,CLK_1,E,L,U_D,TRIG);
--- ---------------------------------------------------------------------------
+sync_reg1 : entity work.sync_reg 
+port map(clk, '1', mode, mode_sync);
 
-gpio_sync_FMS_inst0 : gpio_sync_FSM port map(
-		reset_n_sync,
-		clk,
-		chirp_sig,
-		inst0_enable_counter,
-		inst0_load_counter,
-		inst0_U_D,
-		inst0_chirp_trig
-		);
-		  
-		  
+sync_reg2 : entity work.sync_reg 
+port map(clk, '1', trxiqpulse, trxiqpulse_sync);
+
+sync_reg3 : entity work.sync_reg 
+port map(clk, '1', ddr_en, ddr_en_sync);
+
+sync_reg4 : entity work.sync_reg 
+port map(clk, '1', mimo_en, mimo_en_sync);
+
+
+bus_sync_reg0 : entity work.bus_sync_reg
+generic map (2)
+port map(clk, '1', ch_en, ch_en_sync);
+		
+-- ----------------------------------------------------------------------------
 -- Outputs
+-- ----------------------------------------------------------------------------
 chirp_trig <= inst0_chirp_trig;
 sync_period <= q_hold;
+
+TESTOUT <= inst5_q(1);
 
 end arch;   

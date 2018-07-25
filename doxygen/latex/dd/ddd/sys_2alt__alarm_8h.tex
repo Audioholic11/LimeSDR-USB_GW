@@ -1,0 +1,275 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+alarm.h File Reference}
+\label{sys_2alt__alarm_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+alarm.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+alarm.\+h}}
+{\ttfamily \#include \char`\"{}alt\+\_\+llist.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}priv/alt\+\_\+alarm.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+alarm.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{de/dda/sys_2alt__alarm_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d9b/sys_2alt__alarm_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct {\bf alt\+\_\+alarm\+\_\+s} {\bf alt\+\_\+alarm}
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf alt\+\_\+alarm\+\_\+start} ({\bf alt\+\_\+alarm} $\ast$the\+\_\+alarm, {\bf alt\+\_\+u32} nticks, {\bf alt\+\_\+u32}($\ast$callback)(void $\ast$context), void $\ast$context)
+\item 
+void {\bf alt\+\_\+alarm\+\_\+stop} ({\bf alt\+\_\+alarm} $\ast$the\+\_\+alarm)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+ticks\+\_\+per\+\_\+second} (void)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+sysclk\+\_\+init} ({\bf alt\+\_\+u32} nticks)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+nticks} (void)
+\item 
+void {\bf alt\+\_\+tick} (void)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Typedef Documentation}
+\index{sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}!alt\+\_\+alarm@{alt\+\_\+alarm}}
+\index{alt\+\_\+alarm@{alt\+\_\+alarm}!sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}}
+\paragraph[{alt\+\_\+alarm}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf alt\+\_\+alarm\+\_\+s} {\bf alt\+\_\+alarm}}\label{sys_2alt__alarm_8h_a643f0fc2597a7a9b9a4b71fe23b5f607}
+
+
+Definition at line {\bf 59} of file {\bf alt\+\_\+alarm.\+h}.
+
+
+
+\subsubsection{Function Documentation}
+\index{sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}!alt\+\_\+alarm\+\_\+start@{alt\+\_\+alarm\+\_\+start}}
+\index{alt\+\_\+alarm\+\_\+start@{alt\+\_\+alarm\+\_\+start}!sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}}
+\paragraph[{alt\+\_\+alarm\+\_\+start(alt\+\_\+alarm $\ast$the\+\_\+alarm, alt\+\_\+u32 nticks, alt\+\_\+u32($\ast$callback)(void $\ast$context), void $\ast$context)}]{\setlength{\rightskip}{0pt plus 5cm}int alt\+\_\+alarm\+\_\+start (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+alarm} $\ast$}]{the\+\_\+alarm, }
+\item[{{\bf alt\+\_\+u32}}]{nticks, }
+\item[{{\bf alt\+\_\+u32}($\ast$)(void $\ast$context)}]{callback, }
+\item[{void $\ast$}]{context}
+\end{DoxyParamCaption}
+)}\label{sys_2alt__alarm_8h_aeb852aadb937fa68d9960e085e203674}
+
+
+Definition at line {\bf 64} of file {\bf alt\+\_\+alarm\+\_\+start.\+c}.
+
+
+
+References {\bf alt\+\_\+alarm\+\_\+list}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf alt\+\_\+llist\+\_\+insert()}, {\bf alt\+\_\+nticks()}, {\bf alt\+\_\+ticks\+\_\+per\+\_\+second()}, {\bf alt\+\_\+alarm\+\_\+s\+::callback}, {\bf alt\+\_\+alarm\+\_\+s\+::context}, {\bf alt\+\_\+alarm\+\_\+s\+::llist}, {\bf alt\+\_\+alarm\+\_\+s\+::rollover}, and {\bf alt\+\_\+alarm\+\_\+s\+::time}.
+
+
+
+Referenced by {\bf \+\_\+\+\_\+mcount\+\_\+record()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/ddd/sys_2alt__alarm_8h_aeb852aadb937fa68d9960e085e203674_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{dd/ddd/sys_2alt__alarm_8h_aeb852aadb937fa68d9960e085e203674_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}!alt\+\_\+alarm\+\_\+stop@{alt\+\_\+alarm\+\_\+stop}}
+\index{alt\+\_\+alarm\+\_\+stop@{alt\+\_\+alarm\+\_\+stop}!sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}}
+\paragraph[{alt\+\_\+alarm\+\_\+stop(alt\+\_\+alarm $\ast$the\+\_\+alarm)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+alarm\+\_\+stop (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+alarm} $\ast$}]{the\+\_\+alarm}
+\end{DoxyParamCaption}
+)}\label{sys_2alt__alarm_8h_aa948aee64974350df15de183a9d6204d}
+
+
+Definition at line {\bf 66} of file {\bf alt\+\_\+tick.\+c}.
+
+
+
+References {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf alt\+\_\+llist\+\_\+remove()}, and {\bf alt\+\_\+alarm\+\_\+s\+::llist}.
+
+
+
+Referenced by {\bf alt\+\_\+tick()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/ddd/sys_2alt__alarm_8h_aa948aee64974350df15de183a9d6204d_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/ddd/sys_2alt__alarm_8h_aa948aee64974350df15de183a9d6204d_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}!alt\+\_\+nticks@{alt\+\_\+nticks}}
+\index{alt\+\_\+nticks@{alt\+\_\+nticks}!sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}}
+\paragraph[{alt\+\_\+nticks(void)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+nticks (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{sys_2alt__alarm_8h_aa5fec895b5256ce373c33ca902040b88}
+
+
+Definition at line {\bf 110} of file {\bf alt\+\_\+alarm.\+h}.
+
+
+
+References {\bf \+\_\+alt\+\_\+nticks}, and {\bf alt\+\_\+tick()}.
+
+
+
+Referenced by {\bf alt\+\_\+alarm\+\_\+start()}, {\bf A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}, {\bf A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}, and {\bf A\+L\+T\+\_\+\+T\+I\+M\+E\+S()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/ddd/sys_2alt__alarm_8h_aa5fec895b5256ce373c33ca902040b88_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/ddd/sys_2alt__alarm_8h_aa5fec895b5256ce373c33ca902040b88_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}!alt\+\_\+sysclk\+\_\+init@{alt\+\_\+sysclk\+\_\+init}}
+\index{alt\+\_\+sysclk\+\_\+init@{alt\+\_\+sysclk\+\_\+init}!sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}}
+\paragraph[{alt\+\_\+sysclk\+\_\+init(alt\+\_\+u32 nticks)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+sysclk\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{nticks}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{sys_2alt__alarm_8h_a1ee1effb0390dec20303bb60372395a7}
+
+
+Definition at line {\bf 93} of file {\bf alt\+\_\+alarm.\+h}.
+
+
+
+References {\bf \+\_\+alt\+\_\+tick\+\_\+rate}.
+
+\index{sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}!alt\+\_\+tick@{alt\+\_\+tick}}
+\index{alt\+\_\+tick@{alt\+\_\+tick}!sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}}
+\paragraph[{alt\+\_\+tick(void)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+tick (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{sys_2alt__alarm_8h_a8717d54d19301f7004086a20324a16ff}
+
+
+Definition at line {\bf 87} of file {\bf alt\+\_\+tick.\+c}.
+
+
+
+References {\bf \+\_\+alt\+\_\+nticks}, {\bf alt\+\_\+alarm\+\_\+list}, {\bf alt\+\_\+alarm\+\_\+stop()}, {\bf A\+L\+T\+\_\+\+O\+S\+\_\+\+T\+I\+M\+E\+\_\+\+T\+I\+CK}, {\bf alt\+\_\+alarm\+\_\+s\+::callback}, {\bf alt\+\_\+alarm\+\_\+s\+::context}, {\bf if()}, {\bf alt\+\_\+alarm\+\_\+s\+::llist}, {\bf alt\+\_\+llist\+\_\+s\+::next}, {\bf alt\+\_\+alarm\+\_\+s\+::rollover}, and {\bf alt\+\_\+alarm\+\_\+s\+::time}.
+
+
+
+Referenced by {\bf alt\+\_\+nticks()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/ddd/sys_2alt__alarm_8h_a8717d54d19301f7004086a20324a16ff_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/ddd/sys_2alt__alarm_8h_a8717d54d19301f7004086a20324a16ff_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}!alt\+\_\+ticks\+\_\+per\+\_\+second@{alt\+\_\+ticks\+\_\+per\+\_\+second}}
+\index{alt\+\_\+ticks\+\_\+per\+\_\+second@{alt\+\_\+ticks\+\_\+per\+\_\+second}!sys/alt\+\_\+alarm.\+h@{sys/alt\+\_\+alarm.\+h}}
+\paragraph[{alt\+\_\+ticks\+\_\+per\+\_\+second(void)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+ticks\+\_\+per\+\_\+second (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{sys_2alt__alarm_8h_a1a94095d0a6bcabd2a87bd86399657b6}
+
+
+Definition at line {\bf 83} of file {\bf alt\+\_\+alarm.\+h}.
+
+
+
+References {\bf \+\_\+alt\+\_\+tick\+\_\+rate}.
+
+
+
+Referenced by {\bf \+\_\+\+\_\+mcount\+\_\+record()}, {\bf alt\+\_\+alarm\+\_\+start()}, {\bf A\+L\+T\+\_\+\+G\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}, {\bf A\+L\+T\+\_\+\+S\+E\+T\+T\+I\+M\+E\+O\+F\+D\+A\+Y()}, and {\bf A\+L\+T\+\_\+\+T\+I\+M\+E\+S()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/ddd/sys_2alt__alarm_8h_a1a94095d0a6bcabd2a87bd86399657b6_icgraph}
+\end{center}
+\end{figure}
+
+

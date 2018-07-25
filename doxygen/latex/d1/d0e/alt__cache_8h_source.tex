@@ -1,0 +1,122 @@
+\subsection{alt\+\_\+cache.\+h}
+\label{alt__cache_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+cache.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+cache.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_ALT\_CACHE\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_ALT\_CACHE\_H\_\_}
+00003 
+00004 \textcolor{comment}{/******************************************************************************}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* License Agreement                                                           *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Copyright (c) 2003, 2007 Altera Corporation, San Jose, California, USA.     *}
+00009 \textcolor{comment}{* All rights reserved.                                                        *}
+00010 \textcolor{comment}{*                                                                             *}
+00011 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00012 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00013 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00014 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00015 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00016 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00019 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00020 \textcolor{comment}{*                                                                             *}
+00021 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00022 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00023 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00024 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00025 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00026 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00027 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00030 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00031 \textcolor{comment}{*                                                                             *}
+00032 \textcolor{comment}{******************************************************************************/}
+00033 
+00034 \textcolor{preprocessor}{#include <stdlib.h>}
+00035 
+00036 \textcolor{preprocessor}{#include "alt_types.h"}
+00037 
+00038 \textcolor{comment}{/*}
+00039 \textcolor{comment}{ * alt\_cache.h defines the processor specific functions for manipulating the}
+00040 \textcolor{comment}{ * cache.}
+00041 \textcolor{comment}{ */}
+00042 
+00043 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00044 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"}
+00045 \{
+00046 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00047 
+00048 \textcolor{comment}{/*}
+00049 \textcolor{comment}{ * alt\_icache\_flush() is called to flush the instruction cache for a memory}
+00050 \textcolor{comment}{ * region of length "len" bytes, starting at address "start".}
+00051 \textcolor{comment}{ */}
+00052 
+00053 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} alt_icache_flush (\textcolor{keywordtype}{void}* start, alt_u32 len);
+00054 
+00055 \textcolor{comment}{/*}
+00056 \textcolor{comment}{ * alt\_dcache\_flush() is called to flush the data cache for a memory}
+00057 \textcolor{comment}{ * region of length "len" bytes, starting at address "start".}
+00058 \textcolor{comment}{ * Any dirty lines in the data cache are written back to memory.}
+00059 \textcolor{comment}{ */}
+00060 
+00061 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} alt_dcache_flush (\textcolor{keywordtype}{void}* start, alt_u32 len);
+00062 
+00063 \textcolor{comment}{/*}
+00064 \textcolor{comment}{ * alt\_dcache\_flush() is called to flush the data cache for a memory}
+00065 \textcolor{comment}{ * region of length "len" bytes, starting at address "start".}
+00066 \textcolor{comment}{ * Any dirty lines in the data cache are NOT written back to memory.}
+00067 \textcolor{comment}{ */}
+00068 
+00069 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} alt_dcache_flush_no_writeback (\textcolor{keywordtype}{void}* start, alt_u32 len);
+00070 
+00071 \textcolor{comment}{/*}
+00072 \textcolor{comment}{ * Flush the entire instruction cache.}
+00073 \textcolor{comment}{ */}
+00074 
+00075 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} alt_icache_flush_all (\textcolor{keywordtype}{void});
+00076 
+00077 \textcolor{comment}{/*}
+00078 \textcolor{comment}{ * Flush the entire data cache.}
+00079 \textcolor{comment}{ */}
+00080 
+00081 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} alt_dcache_flush_all (\textcolor{keywordtype}{void});
+00082 
+00083 \textcolor{comment}{/*}
+00084 \textcolor{comment}{ * Allocate a block of uncached memory.}
+00085 \textcolor{comment}{ */}
+00086 
+00087 \textcolor{keyword}{extern} \textcolor{keyword}{volatile} \textcolor{keywordtype}{void}* alt_uncached_malloc (\textcolor{keywordtype}{size\_t} size);
+00088 
+00089 \textcolor{comment}{/*}
+00090 \textcolor{comment}{ * Free a block of uncached memory.}
+00091 \textcolor{comment}{ */}
+00092 
+00093 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} alt_uncached_free (\textcolor{keyword}{volatile} \textcolor{keywordtype}{void}* ptr);
+00094 
+00095 \textcolor{comment}{/*}
+00096 \textcolor{comment}{ * Convert a pointer to a block of cached memory, into a block of}
+00097 \textcolor{comment}{ * uncached memory.}
+00098 \textcolor{comment}{ */}
+00099 
+00100 \textcolor{keyword}{extern} \textcolor{keyword}{volatile} \textcolor{keywordtype}{void}* alt_remap_uncached (\textcolor{keywordtype}{void}* ptr, alt_u32 len);
+00101 
+00102 \textcolor{comment}{/*}
+00103 \textcolor{comment}{ * Convert a pointer to a block of uncached memory, into a block of}
+00104 \textcolor{comment}{ * cached memory.}
+00105 \textcolor{comment}{ */}
+00106 
+00107 \textcolor{keyword}{extern} \textcolor{keywordtype}{void}* alt_remap_cached (\textcolor{keyword}{volatile} \textcolor{keywordtype}{void}* ptr, alt_u32 len);
+00108 
+00109 \textcolor{comment}{/*}
+00110 \textcolor{comment}{ *}
+00111 \textcolor{comment}{ */}
+00112 
+00113 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00114 \}
+00115 \textcolor{preprocessor}{#endif}
+00116   
+00117 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_CACHE\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

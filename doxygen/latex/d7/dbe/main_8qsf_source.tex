@@ -1,0 +1,493 @@
+\subsection{main.\+qsf}
+\label{main_8qsf_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/\+S\+D\+R\+\_\+\+S\+Y\+N\+C/main.\+qsf@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/\+S\+D\+R\+\_\+\+S\+Y\+N\+C/main.\+qsf}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{# -------------------------------------------------------------------------- #}
+00002 \textcolor{keyword}{#}
+00003 \textcolor{keyword}{# Copyright (C) 1991-2013 Altera Corporation}
+00004 \textcolor{keyword}{# Your use of Altera Corporation's design tools, logic functions }
+00005 \textcolor{keyword}{# and other software and tools, and its AMPP partner logic }
+00006 \textcolor{keyword}{# functions, and any output files from any of the foregoing }
+00007 \textcolor{keyword}{# (including device programming or simulation files), and any }
+00008 \textcolor{keyword}{# associated documentation or information are expressly subject }
+00009 \textcolor{keyword}{# to the terms and conditions of the Altera Program License }
+00010 \textcolor{keyword}{# Subscription Agreement, Altera MegaCore Function License }
+00011 \textcolor{keyword}{# Agreement, or other applicable license agreement, including, }
+00012 \textcolor{keyword}{# without limitation, that your use is for the sole purpose of }
+00013 \textcolor{keyword}{# programming logic devices manufactured by Altera and sold by }
+00014 \textcolor{keyword}{# Altera or its authorized distributors.  Please refer to the }
+00015 \textcolor{keyword}{# applicable agreement for further details.}
+00016 \textcolor{keyword}{#}
+00017 \textcolor{keyword}{# -------------------------------------------------------------------------- #}
+00018 \textcolor{keyword}{#}
+00019 \textcolor{keyword}{# Quartus II 64-Bit}
+00020 \textcolor{keyword}{# Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition}
+00021 \textcolor{keyword}{# Date created = 18:46:42  February 04, 2018}
+00022 \textcolor{keyword}{#}
+00023 \textcolor{keyword}{# -------------------------------------------------------------------------- #}
+00024 \textcolor{keyword}{#}
+00025 \textcolor{keyword}{# Notes:}
+00026 \textcolor{keyword}{#}
+00027 \textcolor{keyword}{# 1) The default values for assignments are stored in the file:}
+00028 \textcolor{keyword}{#       main\_assignment\_defaults.qdf}
+00029 \textcolor{keyword}{#    If this file doesn't exist, see file:}
+00030 \textcolor{keyword}{#       assignment\_defaults.qdf}
+00031 \textcolor{keyword}{#}
+00032 \textcolor{keyword}{# 2) Altera recommends that you do not modify this file. This}
+00033 \textcolor{keyword}{#    file is updated automatically by the Quartus II software}
+00034 \textcolor{keyword}{#    and any changes you make may be lost or overwritten.}
+00035 \textcolor{keyword}{#}
+00036 \textcolor{keyword}{# -------------------------------------------------------------------------- #}
+00037 
+00038 
+00039 set\_global\_assignment -name FAMILY "Cyclone IV E"
+00040 set\_global\_assignment -name DEVICE Auto
+00041 set\_global\_assignment -name TOP\_LEVEL\_ENTITY main
+00042 set\_global\_assignment -name ORIGINAL\_QUARTUS\_VERSION "13.\textcolor{vhdllogic}{0} SP1"
+00043 set\_global\_assignment -name PROJECT\_CREATION\_TIME\_DATE "18:\textcolor{vhdllogic}{46}:\textcolor{vhdllogic}{42}  FEBRUARY \textcolor{vhdllogic}{04}, 2018"
+00044 set\_global\_assignment -name LAST\_QUARTUS\_VERSION \textcolor{vhdllogic}{15}.\textcolor{vhdllogic}{1}.\textcolor{vhdllogic}{0}
+00045 set\_global\_assignment -name PROJECT\_OUTPUT\_DIRECTORY output\_files
+00046 set\_global\_assignment -name MIN\_CORE\_JUNCTION\_TEMP \textcolor{vhdllogic}{0}
+00047 set\_global\_assignment -name MAX\_CORE\_JUNCTION\_TEMP \textcolor{vhdllogic}{85}
+00048 set\_global\_assignment -name ERROR\_CHECK\_FREQUENCY\_DIVISOR \textcolor{vhdllogic}{1}
+00049 set\_global\_assignment -name STRATIX\_DEVICE\_IO\_STANDARD "3.3-V LVTTL"
+00050 set\_location\_assignment PIN\_N25 -to SW[0]
+00051 set\_location\_assignment PIN\_N26 -to SW[1]
+00052 set\_location\_assignment PIN\_P25 -to SW[2]
+00053 set\_location\_assignment PIN\_AE14 -to SW[3]
+00054 set\_location\_assignment PIN\_AF14 -to SW[4]
+00055 set\_location\_assignment PIN\_AD13 -to SW[5]
+00056 set\_location\_assignment PIN\_AC13 -to SW[6]
+00057 set\_location\_assignment PIN\_C13 -to SW[7]
+00058 set\_location\_assignment PIN\_B13 -to SW[8]
+00059 set\_location\_assignment PIN\_A13 -to SW[9]
+00060 set\_location\_assignment PIN\_N1 -to SW[10]
+00061 set\_location\_assignment PIN\_P1 -to SW[11]
+00062 set\_location\_assignment PIN\_P2 -to SW[12]
+00063 set\_location\_assignment PIN\_T7 -to SW[13]
+00064 set\_location\_assignment PIN\_U3 -to SW[14]
+00065 set\_location\_assignment PIN\_U4 -to SW[15]
+00066 set\_location\_assignment PIN\_V1 -to SW[16]
+00067 set\_location\_assignment PIN\_V2 -to SW[17]
+00068 set\_location\_assignment PIN\_T6 -to DRAM\_ADDR[0]
+00069 set\_location\_assignment PIN\_V4 -to DRAM\_ADDR[1]
+00070 set\_location\_assignment PIN\_V3 -to DRAM\_ADDR[2]
+00071 set\_location\_assignment PIN\_W2 -to DRAM\_ADDR[3]
+00072 set\_location\_assignment PIN\_W1 -to DRAM\_ADDR[4]
+00073 set\_location\_assignment PIN\_U6 -to DRAM\_ADDR[5]
+00074 set\_location\_assignment PIN\_U7 -to DRAM\_ADDR[6]
+00075 set\_location\_assignment PIN\_U5 -to DRAM\_ADDR[7]
+00076 set\_location\_assignment PIN\_W4 -to DRAM\_ADDR[8]
+00077 set\_location\_assignment PIN\_W3 -to DRAM\_ADDR[9]
+00078 set\_location\_assignment PIN\_Y1 -to DRAM\_ADDR[10]
+00079 set\_location\_assignment PIN\_V5 -to DRAM\_ADDR[11]
+00080 set\_location\_assignment PIN\_AE2 -to DRAM\_BA\_0
+00081 set\_location\_assignment PIN\_AE3 -to DRAM\_BA\_1
+00082 set\_location\_assignment PIN\_AB3 -to DRAM\_CAS\_N
+00083 set\_location\_assignment PIN\_AA6 -to DRAM\_CKE
+00084 set\_location\_assignment PIN\_AA7 -to DRAM\_CLK
+00085 set\_location\_assignment PIN\_AC3 -to DRAM\_CS\_N
+00086 set\_location\_assignment PIN\_V6 -to DRAM\_DQ[0]
+00087 set\_location\_assignment PIN\_AA2 -to DRAM\_DQ[1]
+00088 set\_location\_assignment PIN\_AA1 -to DRAM\_DQ[2]
+00089 set\_location\_assignment PIN\_Y3 -to DRAM\_DQ[3]
+00090 set\_location\_assignment PIN\_Y4 -to DRAM\_DQ[4]
+00091 set\_location\_assignment PIN\_R8 -to DRAM\_DQ[5]
+00092 set\_location\_assignment PIN\_T8 -to DRAM\_DQ[6]
+00093 set\_location\_assignment PIN\_V7 -to DRAM\_DQ[7]
+00094 set\_location\_assignment PIN\_W6 -to DRAM\_DQ[8]
+00095 set\_location\_assignment PIN\_AB2 -to DRAM\_DQ[9]
+00096 set\_location\_assignment PIN\_AB1 -to DRAM\_DQ[10]
+00097 set\_location\_assignment PIN\_AA4 -to DRAM\_DQ[11]
+00098 set\_location\_assignment PIN\_AA3 -to DRAM\_DQ[12]
+00099 set\_location\_assignment PIN\_AC2 -to DRAM\_DQ[13]
+00100 set\_location\_assignment PIN\_AC1 -to DRAM\_DQ[14]
+00101 set\_location\_assignment PIN\_AA5 -to DRAM\_DQ[15]
+00102 set\_location\_assignment PIN\_AD2 -to DRAM\_LDQM
+00103 set\_location\_assignment PIN\_Y5 -to DRAM\_UDQM
+00104 set\_location\_assignment PIN\_AB4 -to DRAM\_RAS\_N
+00105 set\_location\_assignment PIN\_AD3 -to DRAM\_WE\_N
+00106 set\_location\_assignment PIN\_AC18 -to FL\_ADDR[0]
+00107 set\_location\_assignment PIN\_AB18 -to FL\_ADDR[1]
+00108 set\_location\_assignment PIN\_AE19 -to FL\_ADDR[2]
+00109 set\_location\_assignment PIN\_AF19 -to FL\_ADDR[3]
+00110 set\_location\_assignment PIN\_AE18 -to FL\_ADDR[4]
+00111 set\_location\_assignment PIN\_AF18 -to FL\_ADDR[5]
+00112 set\_location\_assignment PIN\_Y16 -to FL\_ADDR[6]
+00113 set\_location\_assignment PIN\_AA16 -to FL\_ADDR[7]
+00114 set\_location\_assignment PIN\_AD17 -to FL\_ADDR[8]
+00115 set\_location\_assignment PIN\_AC17 -to FL\_ADDR[9]
+00116 set\_location\_assignment PIN\_AE17 -to FL\_ADDR[10]
+00117 set\_location\_assignment PIN\_AF17 -to FL\_ADDR[11]
+00118 set\_location\_assignment PIN\_W16 -to FL\_ADDR[12]
+00119 set\_location\_assignment PIN\_W15 -to FL\_ADDR[13]
+00120 set\_location\_assignment PIN\_AC16 -to FL\_ADDR[14]
+00121 set\_location\_assignment PIN\_AD16 -to FL\_ADDR[15]
+00122 set\_location\_assignment PIN\_AE16 -to FL\_ADDR[16]
+00123 set\_location\_assignment PIN\_AC15 -to FL\_ADDR[17]
+00124 set\_location\_assignment PIN\_AB15 -to FL\_ADDR[18]
+00125 set\_location\_assignment PIN\_AA15 -to FL\_ADDR[19]
+00126 set\_location\_assignment PIN\_Y15 -to FL\_ADDR[20]
+00127 set\_location\_assignment PIN\_Y14 -to FL\_ADDR[21]
+00128 set\_location\_assignment PIN\_V17 -to FL\_CE\_N
+00129 set\_location\_assignment PIN\_W17 -to FL\_OE\_N
+00130 set\_location\_assignment PIN\_AD19 -to FL\_DQ[0]
+00131 set\_location\_assignment PIN\_AC19 -to FL\_DQ[1]
+00132 set\_location\_assignment PIN\_AF20 -to FL\_DQ[2]
+00133 set\_location\_assignment PIN\_AE20 -to FL\_DQ[3]
+00134 set\_location\_assignment PIN\_AB20 -to FL\_DQ[4]
+00135 set\_location\_assignment PIN\_AC20 -to FL\_DQ[5]
+00136 set\_location\_assignment PIN\_AF21 -to FL\_DQ[6]
+00137 set\_location\_assignment PIN\_AE21 -to FL\_DQ[7]
+00138 set\_location\_assignment PIN\_AA18 -to FL\_RST\_N
+00139 set\_location\_assignment PIN\_AA17 -to FL\_WE\_N
+00140 set\_location\_assignment PIN\_AF10 -to HEX0[0]
+00141 set\_location\_assignment PIN\_AB12 -to HEX0[1]
+00142 set\_location\_assignment PIN\_AC12 -to HEX0[2]
+00143 set\_location\_assignment PIN\_AD11 -to HEX0[3]
+00144 set\_location\_assignment PIN\_AE11 -to HEX0[4]
+00145 set\_location\_assignment PIN\_V14 -to HEX0[5]
+00146 set\_location\_assignment PIN\_V13 -to HEX0[6]
+00147 set\_location\_assignment PIN\_V20 -to HEX1[0]
+00148 set\_location\_assignment PIN\_V21 -to HEX1[1]
+00149 set\_location\_assignment PIN\_W21 -to HEX1[2]
+00150 set\_location\_assignment PIN\_Y22 -to HEX1[3]
+00151 set\_location\_assignment PIN\_AA24 -to HEX1[4]
+00152 set\_location\_assignment PIN\_AA23 -to HEX1[5]
+00153 set\_location\_assignment PIN\_AB24 -to HEX1[6]
+00154 set\_location\_assignment PIN\_AB23 -to HEX2[0]
+00155 set\_location\_assignment PIN\_V22 -to HEX2[1]
+00156 set\_location\_assignment PIN\_AC25 -to HEX2[2]
+00157 set\_location\_assignment PIN\_AC26 -to HEX2[3]
+00158 set\_location\_assignment PIN\_AB26 -to HEX2[4]
+00159 set\_location\_assignment PIN\_AB25 -to HEX2[5]
+00160 set\_location\_assignment PIN\_Y24 -to HEX2[6]
+00161 set\_location\_assignment PIN\_Y23 -to HEX3[0]
+00162 set\_location\_assignment PIN\_AA25 -to HEX3[1]
+00163 set\_location\_assignment PIN\_AA26 -to HEX3[2]
+00164 set\_location\_assignment PIN\_Y26 -to HEX3[3]
+00165 set\_location\_assignment PIN\_Y25 -to HEX3[4]
+00166 set\_location\_assignment PIN\_U22 -to HEX3[5]
+00167 set\_location\_assignment PIN\_W24 -to HEX3[6]
+00168 set\_location\_assignment PIN\_U9 -to HEX4[0]
+00169 set\_location\_assignment PIN\_U1 -to HEX4[1]
+00170 set\_location\_assignment PIN\_U2 -to HEX4[2]
+00171 set\_location\_assignment PIN\_T4 -to HEX4[3]
+00172 set\_location\_assignment PIN\_R7 -to HEX4[4]
+00173 set\_location\_assignment PIN\_R6 -to HEX4[5]
+00174 set\_location\_assignment PIN\_T3 -to HEX4[6]
+00175 set\_location\_assignment PIN\_T2 -to HEX5[0]
+00176 set\_location\_assignment PIN\_P6 -to HEX5[1]
+00177 set\_location\_assignment PIN\_P7 -to HEX5[2]
+00178 set\_location\_assignment PIN\_T9 -to HEX5[3]
+00179 set\_location\_assignment PIN\_R5 -to HEX5[4]
+00180 set\_location\_assignment PIN\_R4 -to HEX5[5]
+00181 set\_location\_assignment PIN\_R3 -to HEX5[6]
+00182 set\_location\_assignment PIN\_R2 -to HEX6[0]
+00183 set\_location\_assignment PIN\_P4 -to HEX6[1]
+00184 set\_location\_assignment PIN\_P3 -to HEX6[2]
+00185 set\_location\_assignment PIN\_M2 -to HEX6[3]
+00186 set\_location\_assignment PIN\_M3 -to HEX6[4]
+00187 set\_location\_assignment PIN\_M5 -to HEX6[5]
+00188 set\_location\_assignment PIN\_M4 -to HEX6[6]
+00189 set\_location\_assignment PIN\_L3 -to HEX7[0]
+00190 set\_location\_assignment PIN\_L2 -to HEX7[1]
+00191 set\_location\_assignment PIN\_L9 -to HEX7[2]
+00192 set\_location\_assignment PIN\_L6 -to HEX7[3]
+00193 set\_location\_assignment PIN\_L7 -to HEX7[4]
+00194 set\_location\_assignment PIN\_P9 -to HEX7[5]
+00195 set\_location\_assignment PIN\_N9 -to HEX7[6]
+00196 set\_location\_assignment PIN\_G26 -to KEY[0]
+00197 set\_location\_assignment PIN\_N23 -to KEY[1]
+00198 set\_location\_assignment PIN\_P23 -to KEY[2]
+00199 set\_location\_assignment PIN\_W26 -to KEY[3]
+00200 set\_location\_assignment PIN\_AE23 -to LEDR[0]
+00201 set\_location\_assignment PIN\_AF23 -to LEDR[1]
+00202 set\_location\_assignment PIN\_AB21 -to LEDR[2]
+00203 set\_location\_assignment PIN\_AC22 -to LEDR[3]
+00204 set\_location\_assignment PIN\_AD22 -to LEDR[4]
+00205 set\_location\_assignment PIN\_AD23 -to LEDR[5]
+00206 set\_location\_assignment PIN\_AD21 -to LEDR[6]
+00207 set\_location\_assignment PIN\_AC21 -to LEDR[7]
+00208 set\_location\_assignment PIN\_AA14 -to LEDR[8]
+00209 set\_location\_assignment PIN\_Y13 -to LEDR[9]
+00210 set\_location\_assignment PIN\_AA13 -to LEDR[10]
+00211 set\_location\_assignment PIN\_AC14 -to LEDR[11]
+00212 set\_location\_assignment PIN\_AD15 -to LEDR[12]
+00213 set\_location\_assignment PIN\_AE15 -to LEDR[13]
+00214 set\_location\_assignment PIN\_AF13 -to LEDR[14]
+00215 set\_location\_assignment PIN\_AE13 -to LEDR[15]
+00216 set\_location\_assignment PIN\_AE12 -to LEDR[16]
+00217 set\_location\_assignment PIN\_AD12 -to LEDR[17]
+00218 set\_location\_assignment PIN\_AE22 -to LEDG[0]
+00219 set\_location\_assignment PIN\_AF22 -to LEDG[1]
+00220 set\_location\_assignment PIN\_W19 -to LEDG[2]
+00221 set\_location\_assignment PIN\_V18 -to LEDG[3]
+00222 set\_location\_assignment PIN\_U18 -to LEDG[4]
+00223 set\_location\_assignment PIN\_U17 -to LEDG[5]
+00224 set\_location\_assignment PIN\_AA20 -to LEDG[6]
+00225 set\_location\_assignment PIN\_Y18 -to LEDG[7]
+00226 set\_location\_assignment PIN\_Y12 -to LEDG[8]
+00227 set\_location\_assignment PIN\_D13 -to CLOCK\_27
+00228 set\_location\_assignment PIN\_N2 -to CLOCK\_50
+00229 set\_location\_assignment PIN\_P26 -to EXT\_CLOCK
+00230 set\_location\_assignment PIN\_D26 -to PS2\_CLK
+00231 set\_location\_assignment PIN\_C24 -to PS2\_DAT
+00232 set\_location\_assignment PIN\_C25 -to UART\_RXD
+00233 set\_location\_assignment PIN\_B25 -to UART\_TXD
+00234 set\_location\_assignment PIN\_K4 -to LCD\_RW
+00235 set\_location\_assignment PIN\_K3 -to LCD\_EN
+00236 set\_location\_assignment PIN\_K1 -to LCD\_RS
+00237 set\_location\_assignment PIN\_J1 -to LCD\_DATA[0]
+00238 set\_location\_assignment PIN\_J2 -to LCD\_DATA[1]
+00239 set\_location\_assignment PIN\_H1 -to LCD\_DATA[2]
+00240 set\_location\_assignment PIN\_H2 -to LCD\_DATA[3]
+00241 set\_location\_assignment PIN\_J4 -to LCD\_DATA[4]
+00242 set\_location\_assignment PIN\_J3 -to LCD\_DATA[5]
+00243 set\_location\_assignment PIN\_H4 -to LCD\_DATA[6]
+00244 set\_location\_assignment PIN\_H3 -to LCD\_DATA[7]
+00245 set\_location\_assignment PIN\_L4 -to LCD\_ON
+00246 set\_location\_assignment PIN\_K2 -to LCD\_BLON
+00247 set\_location\_assignment PIN\_AE4 -to SRAM\_ADDR[0]
+00248 set\_location\_assignment PIN\_AF4 -to SRAM\_ADDR[1]
+00249 set\_location\_assignment PIN\_AC5 -to SRAM\_ADDR[2]
+00250 set\_location\_assignment PIN\_AC6 -to SRAM\_ADDR[3]
+00251 set\_location\_assignment PIN\_AD4 -to SRAM\_ADDR[4]
+00252 set\_location\_assignment PIN\_AD5 -to SRAM\_ADDR[5]
+00253 set\_location\_assignment PIN\_AE5 -to SRAM\_ADDR[6]
+00254 set\_location\_assignment PIN\_AF5 -to SRAM\_ADDR[7]
+00255 set\_location\_assignment PIN\_AD6 -to SRAM\_ADDR[8]
+00256 set\_location\_assignment PIN\_AD7 -to SRAM\_ADDR[9]
+00257 set\_location\_assignment PIN\_V10 -to SRAM\_ADDR[10]
+00258 set\_location\_assignment PIN\_V9 -to SRAM\_ADDR[11]
+00259 set\_location\_assignment PIN\_AC7 -to SRAM\_ADDR[12]
+00260 set\_location\_assignment PIN\_W8 -to SRAM\_ADDR[13]
+00261 set\_location\_assignment PIN\_W10 -to SRAM\_ADDR[14]
+00262 set\_location\_assignment PIN\_Y10 -to SRAM\_ADDR[15]
+00263 set\_location\_assignment PIN\_AB8 -to SRAM\_ADDR[16]
+00264 set\_location\_assignment PIN\_AC8 -to SRAM\_ADDR[17]
+00265 set\_location\_assignment PIN\_AD8 -to SRAM\_DQ[0]
+00266 set\_location\_assignment PIN\_AE6 -to SRAM\_DQ[1]
+00267 set\_location\_assignment PIN\_AF6 -to SRAM\_DQ[2]
+00268 set\_location\_assignment PIN\_AA9 -to SRAM\_DQ[3]
+00269 set\_location\_assignment PIN\_AA10 -to SRAM\_DQ[4]
+00270 set\_location\_assignment PIN\_AB10 -to SRAM\_DQ[5]
+00271 set\_location\_assignment PIN\_AA11 -to SRAM\_DQ[6]
+00272 set\_location\_assignment PIN\_Y11 -to SRAM\_DQ[7]
+00273 set\_location\_assignment PIN\_AE7 -to SRAM\_DQ[8]
+00274 set\_location\_assignment PIN\_AF7 -to SRAM\_DQ[9]
+00275 set\_location\_assignment PIN\_AE8 -to SRAM\_DQ[10]
+00276 set\_location\_assignment PIN\_AF8 -to SRAM\_DQ[11]
+00277 set\_location\_assignment PIN\_W11 -to SRAM\_DQ[12]
+00278 set\_location\_assignment PIN\_W12 -to SRAM\_DQ[13]
+00279 set\_location\_assignment PIN\_AC9 -to SRAM\_DQ[14]
+00280 set\_location\_assignment PIN\_AC10 -to SRAM\_DQ[15]
+00281 set\_location\_assignment PIN\_AE10 -to SRAM\_WE\_N
+00282 set\_location\_assignment PIN\_AD10 -to SRAM\_OE\_N
+00283 set\_location\_assignment PIN\_AF9 -to SRAM\_UB\_N
+00284 set\_location\_assignment PIN\_AE9 -to SRAM\_LB\_N
+00285 set\_location\_assignment PIN\_AC11 -to SRAM\_CE\_N
+00286 set\_location\_assignment PIN\_K7 -to OTG\_ADDR[0]
+00287 set\_location\_assignment PIN\_F2 -to OTG\_ADDR[1]
+00288 set\_location\_assignment PIN\_F1 -to OTG\_CS\_N
+00289 set\_location\_assignment PIN\_G2 -to OTG\_RD\_N
+00290 set\_location\_assignment PIN\_G1 -to OTG\_WR\_N
+00291 set\_location\_assignment PIN\_G5 -to OTG\_RST\_N
+00292 set\_location\_assignment PIN\_F4 -to OTG\_DATA[0]
+00293 set\_location\_assignment PIN\_D2 -to OTG\_DATA[1]
+00294 set\_location\_assignment PIN\_D1 -to OTG\_DATA[2]
+00295 set\_location\_assignment PIN\_F7 -to OTG\_DATA[3]
+00296 set\_location\_assignment PIN\_J5 -to OTG\_DATA[4]
+00297 set\_location\_assignment PIN\_J8 -to OTG\_DATA[5]
+00298 set\_location\_assignment PIN\_J7 -to OTG\_DATA[6]
+00299 set\_location\_assignment PIN\_H6 -to OTG\_DATA[7]
+00300 set\_location\_assignment PIN\_E2 -to OTG\_DATA[8]
+00301 set\_location\_assignment PIN\_E1 -to OTG\_DATA[9]
+00302 set\_location\_assignment PIN\_K6 -to OTG\_DATA[10]
+00303 set\_location\_assignment PIN\_K5 -to OTG\_DATA[11]
+00304 set\_location\_assignment PIN\_G4 -to OTG\_DATA[12]
+00305 set\_location\_assignment PIN\_G3 -to OTG\_DATA[13]
+00306 set\_location\_assignment PIN\_J6 -to OTG\_DATA[14]
+00307 set\_location\_assignment PIN\_K8 -to OTG\_DATA[15]
+00308 set\_location\_assignment PIN\_B3 -to OTG\_INT0
+00309 set\_location\_assignment PIN\_C3 -to OTG\_INT1
+00310 set\_location\_assignment PIN\_C2 -to OTG\_DACK0\_N
+00311 set\_location\_assignment PIN\_B2 -to OTG\_DACK1\_N
+00312 set\_location\_assignment PIN\_F6 -to OTG\_DREQ0
+00313 set\_location\_assignment PIN\_E5 -to OTG\_DREQ1
+00314 set\_location\_assignment PIN\_F3 -to OTG\_FSPEED
+00315 set\_location\_assignment PIN\_G6 -to OTG\_LSPEED
+00316 set\_location\_assignment PIN\_B14 -to TDI
+00317 set\_location\_assignment PIN\_A14 -to TCS
+00318 set\_location\_assignment PIN\_D14 -to TCK
+00319 set\_location\_assignment PIN\_F14 -to TDO
+00320 set\_location\_assignment PIN\_C4 -to TD\_RESET
+00321 set\_location\_assignment PIN\_C8 -to VGA\_R[0]
+00322 set\_location\_assignment PIN\_F10 -to VGA\_R[1]
+00323 set\_location\_assignment PIN\_G10 -to VGA\_R[2]
+00324 set\_location\_assignment PIN\_D9 -to VGA\_R[3]
+00325 set\_location\_assignment PIN\_C9 -to VGA\_R[4]
+00326 set\_location\_assignment PIN\_A8 -to VGA\_R[5]
+00327 set\_location\_assignment PIN\_H11 -to VGA\_R[6]
+00328 set\_location\_assignment PIN\_H12 -to VGA\_R[7]
+00329 set\_location\_assignment PIN\_F11 -to VGA\_R[8]
+00330 set\_location\_assignment PIN\_E10 -to VGA\_R[9]
+00331 set\_location\_assignment PIN\_B9 -to VGA\_G[0]
+00332 set\_location\_assignment PIN\_A9 -to VGA\_G[1]
+00333 set\_location\_assignment PIN\_C10 -to VGA\_G[2]
+00334 set\_location\_assignment PIN\_D10 -to VGA\_G[3]
+00335 set\_location\_assignment PIN\_B10 -to VGA\_G[4]
+00336 set\_location\_assignment PIN\_A10 -to VGA\_G[5]
+00337 set\_location\_assignment PIN\_G11 -to VGA\_G[6]
+00338 set\_location\_assignment PIN\_D11 -to VGA\_G[7]
+00339 set\_location\_assignment PIN\_E12 -to VGA\_G[8]
+00340 set\_location\_assignment PIN\_D12 -to VGA\_G[9]
+00341 set\_location\_assignment PIN\_J13 -to VGA\_B[0]
+00342 set\_location\_assignment PIN\_J14 -to VGA\_B[1]
+00343 set\_location\_assignment PIN\_F12 -to VGA\_B[2]
+00344 set\_location\_assignment PIN\_G12 -to VGA\_B[3]
+00345 set\_location\_assignment PIN\_J10 -to VGA\_B[4]
+00346 set\_location\_assignment PIN\_J11 -to VGA\_B[5]
+00347 set\_location\_assignment PIN\_C11 -to VGA\_B[6]
+00348 set\_location\_assignment PIN\_B11 -to VGA\_B[7]
+00349 set\_location\_assignment PIN\_C12 -to VGA\_B[8]
+00350 set\_location\_assignment PIN\_B12 -to VGA\_B[9]
+00351 set\_location\_assignment PIN\_B8 -to VGA\_CLK
+00352 set\_location\_assignment PIN\_D6 -to VGA\_BLANK
+00353 set\_location\_assignment PIN\_A7 -to VGA\_HS
+00354 set\_location\_assignment PIN\_D8 -to VGA\_VS
+00355 set\_location\_assignment PIN\_B7 -to VGA\_SYNC
+00356 set\_location\_assignment PIN\_A6 -to I2C\_SCLK
+00357 set\_location\_assignment PIN\_B6 -to I2C\_SDAT
+00358 set\_location\_assignment PIN\_J9 -to TD\_DATA[0]
+00359 set\_location\_assignment PIN\_E8 -to TD\_DATA[1]
+00360 set\_location\_assignment PIN\_H8 -to TD\_DATA[2]
+00361 set\_location\_assignment PIN\_H10 -to TD\_DATA[3]
+00362 set\_location\_assignment PIN\_G9 -to TD\_DATA[4]
+00363 set\_location\_assignment PIN\_F9 -to TD\_DATA[5]
+00364 set\_location\_assignment PIN\_D7 -to TD\_DATA[6]
+00365 set\_location\_assignment PIN\_C7 -to TD\_DATA[7]
+00366 set\_location\_assignment PIN\_D5 -to TD\_HS
+00367 set\_location\_assignment PIN\_K9 -to TD\_VS
+00368 set\_location\_assignment PIN\_C5 -to AUD\_ADCLRCK
+00369 set\_location\_assignment PIN\_B5 -to AUD\_ADCDAT
+00370 set\_location\_assignment PIN\_C6 -to AUD\_DACLRCK
+00371 set\_location\_assignment PIN\_A4 -to AUD\_DACDAT
+00372 set\_location\_assignment PIN\_A5 -to AUD\_XCK
+00373 set\_location\_assignment PIN\_B4 -to AUD\_BCLK
+00374 set\_location\_assignment PIN\_D17 -to ENET\_DATA[0]
+00375 set\_location\_assignment PIN\_C17 -to ENET\_DATA[1]
+00376 set\_location\_assignment PIN\_B18 -to ENET\_DATA[2]
+00377 set\_location\_assignment PIN\_A18 -to ENET\_DATA[3]
+00378 set\_location\_assignment PIN\_B17 -to ENET\_DATA[4]
+00379 set\_location\_assignment PIN\_A17 -to ENET\_DATA[5]
+00380 set\_location\_assignment PIN\_B16 -to ENET\_DATA[6]
+00381 set\_location\_assignment PIN\_B15 -to ENET\_DATA[7]
+00382 set\_location\_assignment PIN\_B20 -to ENET\_DATA[8]
+00383 set\_location\_assignment PIN\_A20 -to ENET\_DATA[9]
+00384 set\_location\_assignment PIN\_C19 -to ENET\_DATA[10]
+00385 set\_location\_assignment PIN\_D19 -to ENET\_DATA[11]
+00386 set\_location\_assignment PIN\_B19 -to ENET\_DATA[12]
+00387 set\_location\_assignment PIN\_A19 -to ENET\_DATA[13]
+00388 set\_location\_assignment PIN\_E18 -to ENET\_DATA[14]
+00389 set\_location\_assignment PIN\_D18 -to ENET\_DATA[15]
+00390 set\_location\_assignment PIN\_B24 -to ENET\_CLK
+00391 set\_location\_assignment PIN\_A21 -to ENET\_CMD
+00392 set\_location\_assignment PIN\_A23 -to ENET\_CS\_N
+00393 set\_location\_assignment PIN\_B21 -to ENET\_INT
+00394 set\_location\_assignment PIN\_A22 -to ENET\_RD\_N
+00395 set\_location\_assignment PIN\_B22 -to ENET\_WR\_N
+00396 set\_location\_assignment PIN\_B23 -to ENET\_RST\_N
+00397 set\_location\_assignment PIN\_AE24 -to IRDA\_TXD
+00398 set\_location\_assignment PIN\_AE25 -to IRDA\_RXD
+00399 set\_location\_assignment PIN\_AD24 -to SD\_DAT
+00400 set\_location\_assignment PIN\_AC23 -to SD\_DAT3
+00401 set\_location\_assignment PIN\_Y21 -to SD\_CMD
+00402 set\_location\_assignment PIN\_AD25 -to SD\_CLK
+00403 set\_location\_assignment PIN\_D25 -to GPIO\_0[0]
+00404 set\_location\_assignment PIN\_J22 -to GPIO\_0[1]
+00405 set\_location\_assignment PIN\_E26 -to GPIO\_0[2]
+00406 set\_location\_assignment PIN\_E25 -to GPIO\_0[3]
+00407 set\_location\_assignment PIN\_F24 -to GPIO\_0[4]
+00408 set\_location\_assignment PIN\_F23 -to GPIO\_0[5]
+00409 set\_location\_assignment PIN\_J21 -to GPIO\_0[6]
+00410 set\_location\_assignment PIN\_J20 -to GPIO\_0[7]
+00411 set\_location\_assignment PIN\_F25 -to GPIO\_0[8]
+00412 set\_location\_assignment PIN\_F26 -to GPIO\_0[9]
+00413 set\_location\_assignment PIN\_N18 -to GPIO\_0[10]
+00414 set\_location\_assignment PIN\_P18 -to GPIO\_0[11]
+00415 set\_location\_assignment PIN\_G23 -to GPIO\_0[12]
+00416 set\_location\_assignment PIN\_G24 -to GPIO\_0[13]
+00417 set\_location\_assignment PIN\_K22 -to GPIO\_0[14]
+00418 set\_location\_assignment PIN\_G25 -to GPIO\_0[15]
+00419 set\_location\_assignment PIN\_H23 -to GPIO\_0[16]
+00420 set\_location\_assignment PIN\_H24 -to GPIO\_0[17]
+00421 set\_location\_assignment PIN\_J23 -to GPIO\_0[18]
+00422 set\_location\_assignment PIN\_J24 -to GPIO\_0[19]
+00423 set\_location\_assignment PIN\_H25 -to GPIO\_0[20]
+00424 set\_location\_assignment PIN\_H26 -to GPIO\_0[21]
+00425 set\_location\_assignment PIN\_H19 -to GPIO\_0[22]
+00426 set\_location\_assignment PIN\_K18 -to GPIO\_0[23]
+00427 set\_location\_assignment PIN\_K19 -to GPIO\_0[24]
+00428 set\_location\_assignment PIN\_K21 -to GPIO\_0[25]
+00429 set\_location\_assignment PIN\_K23 -to GPIO\_0[26]
+00430 set\_location\_assignment PIN\_K24 -to GPIO\_0[27]
+00431 set\_location\_assignment PIN\_L21 -to GPIO\_0[28]
+00432 set\_location\_assignment PIN\_L20 -to GPIO\_0[29]
+00433 set\_location\_assignment PIN\_J25 -to GPIO\_0[30]
+00434 set\_location\_assignment PIN\_J26 -to GPIO\_0[31]
+00435 set\_location\_assignment PIN\_L23 -to GPIO\_0[32]
+00436 set\_location\_assignment PIN\_L24 -to GPIO\_0[33]
+00437 set\_location\_assignment PIN\_L25 -to GPIO\_0[34]
+00438 set\_location\_assignment PIN\_L19 -to GPIO\_0[35]
+00439 set\_location\_assignment PIN\_K25 -to GPIO\_1[0]
+00440 set\_location\_assignment PIN\_K26 -to GPIO\_1[1]
+00441 set\_location\_assignment PIN\_M22 -to GPIO\_1[2]
+00442 set\_location\_assignment PIN\_M23 -to GPIO\_1[3]
+00443 set\_location\_assignment PIN\_M19 -to GPIO\_1[4]
+00444 set\_location\_assignment PIN\_M20 -to GPIO\_1[5]
+00445 set\_location\_assignment PIN\_N20 -to GPIO\_1[6]
+00446 set\_location\_assignment PIN\_M21 -to GPIO\_1[7]
+00447 set\_location\_assignment PIN\_M24 -to GPIO\_1[8]
+00448 set\_location\_assignment PIN\_M25 -to GPIO\_1[9]
+00449 set\_location\_assignment PIN\_N24 -to GPIO\_1[10]
+00450 set\_location\_assignment PIN\_P24 -to GPIO\_1[11]
+00451 set\_location\_assignment PIN\_R25 -to GPIO\_1[12]
+00452 set\_location\_assignment PIN\_R24 -to GPIO\_1[13]
+00453 set\_location\_assignment PIN\_R20 -to GPIO\_1[14]
+00454 set\_location\_assignment PIN\_T22 -to GPIO\_1[15]
+00455 set\_location\_assignment PIN\_T23 -to GPIO\_1[16]
+00456 set\_location\_assignment PIN\_T24 -to GPIO\_1[17]
+00457 set\_location\_assignment PIN\_T25 -to GPIO\_1[18]
+00458 set\_location\_assignment PIN\_T18 -to GPIO\_1[19]
+00459 set\_location\_assignment PIN\_T21 -to GPIO\_1[20]
+00460 set\_location\_assignment PIN\_T20 -to GPIO\_1[21]
+00461 set\_location\_assignment PIN\_U26 -to GPIO\_1[22]
+00462 set\_location\_assignment PIN\_U25 -to GPIO\_1[23]
+00463 set\_location\_assignment PIN\_U23 -to GPIO\_1[24]
+00464 set\_location\_assignment PIN\_U24 -to GPIO\_1[25]
+00465 set\_location\_assignment PIN\_R19 -to GPIO\_1[26]
+00466 set\_location\_assignment PIN\_T19 -to GPIO\_1[27]
+00467 set\_location\_assignment PIN\_U20 -to GPIO\_1[28]
+00468 set\_location\_assignment PIN\_U21 -to GPIO\_1[29]
+00469 set\_location\_assignment PIN\_V26 -to GPIO\_1[30]
+00470 set\_location\_assignment PIN\_V25 -to GPIO\_1[31]
+00471 set\_location\_assignment PIN\_V24 -to GPIO\_1[32]
+00472 set\_location\_assignment PIN\_V23 -to GPIO\_1[33]
+00473 set\_location\_assignment PIN\_W25 -to GPIO\_1[34]
+00474 set\_location\_assignment PIN\_W23 -to GPIO\_1[35]
+00475 set\_global\_assignment -name USE\_CONFIGURATION\_DEVICE \textcolor{keywordflow}{ON}
+00476 set\_global\_assignment -name RESERVE\_ALL\_UNUSED\_PINS "AS INPUT TRI-STATED"
+00477 set\_global\_assignment -name VERILOG\_FILE ../main.v
+00478 set\_global\_assignment -name PARTITION\_NETLIST\_TYPE SOURCE -section\_id Top
+00479 set\_global\_assignment -name PARTITION\_FITTER\_PRESERVATION\_LEVEL PLACEMENT\_AND\_ROUTING -section\_id Top
+00480 set\_global\_assignment -name PARTITION\_COLOR \textcolor{vhdllogic}{16764057} -section\_id Top
+00481 set\_global\_assignment -name VERILOG\_FILE output\_files/counter.v
+00482 set\_global\_assignment -name CDF\_FILE \textcolor{keywordflow}{default}.cdf
+00483 set\_global\_assignment -name SMF\_FILE output\_files/SM.smf
+00484 set\_global\_assignment -name VERILOG\_FILE SM.v
+00485 set\_global\_assignment -name RESERVE\_ALL\_UNUSED\_PINS\_NO\_OUTPUT\_GND "AS INPUT TRI-STATED"
+00486 set\_global\_assignment -name VERILOG\_FILE SM\_2.v
+00487 set\_global\_assignment -name VERILOG\_FILE Bin2BCD.v
+00488 set\_instance\_assignment -name PARTITION\_HIERARCHY root\_partition -to | -section\_id Top
+\end{DoxyCode}

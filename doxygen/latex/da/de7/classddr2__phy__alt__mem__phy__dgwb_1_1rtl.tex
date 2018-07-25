@@ -1,0 +1,277 @@
+\subsection{rtl Architecture Reference}
+\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl}\index{rtl@{rtl}}
+
+
+Collaboration diagram for rtl\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{d0/d0e/classddr2__phy__alt__mem__phy__dgwb_1_1rtl__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf dqs\+\_\+pattern}{\bfseries  ( }{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }}} {\bf set\+\_\+wlat\+\_\+dq\+\_\+rep\+\_\+width}{\bfseries  ( }{\bfseries  )} 
+\end{DoxyCompactItemize}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf current\+\_\+cs\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf rst\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf master\+\_\+dgwb\+\_\+state\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf rst\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf ac\+\_\+write\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf rst\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf ac\+\_\+handshake\+\_\+proc}{\bfseries  ( {\bfseries {\bfseries {\bf rst\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Libraries}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf work} 
+\end{DoxyCompactItemize}
+\subsubsection*{Use Clauses}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+constants\+\_\+pkg}   
+\end{DoxyCompactItemize}
+\subsubsection*{Constants}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf c\+\_\+seq\+\_\+addr\+\_\+cmd\+\_\+config} {\bfseries {\bfseries {\bf t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{set\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+A\+D\+D\+R\+\_\+\+W\+I\+D\+TH}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+B\+A\+N\+K\+A\+D\+D\+R\+\_\+\+W\+I\+D\+TH}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+N\+U\+M\+\_\+\+R\+A\+N\+KS}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf D\+W\+I\+D\+T\+H\+\_\+\+R\+A\+T\+IO}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+M\+E\+M\+T\+Y\+PE}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dgwb\+\_\+report\+\_\+prefix} {\bfseries \textcolor{comment}{string}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq ( dgwb )  \+:  \char`\"{}}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf C\+\_\+\+B\+U\+R\+S\+T\+\_\+T} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{C\+\_\+\+C\+A\+L\+\_\+\+B\+U\+R\+S\+T\+\_\+\+L\+EN}\textcolor{vhdlchar}{/}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf D\+W\+I\+D\+T\+H\+\_\+\+R\+A\+T\+IO}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf C\+\_\+\+M\+A\+X\+\_\+\+W\+L\+AT} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf A\+D\+V\+\_\+\+L\+A\+T\+\_\+\+W\+I\+D\+TH}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf C\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf C\+\_\+\+M\+A\+X\+\_\+\+W\+L\+AT}} \textcolor{vhdlchar}{+}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf C\+\_\+\+B\+U\+R\+S\+T\+\_\+T}} \textcolor{vhdlchar}{+}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{4} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf C\+\_\+\+W\+L\+A\+T\+\_\+\+D\+Q\+\_\+\+R\+E\+P\+\_\+\+W\+I\+D\+TH} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{set\+\_\+wlat\+\_\+dq\+\_\+rep\+\_\+width}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf t\+\_\+dgwb\+\_\+state}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+wait\+\_\+admin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+btp}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+ones}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+zeros}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+mtp}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+01\+\_\+pairs}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+1100\+\_\+step}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+0011\+\_\+step}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+wlat}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+release\+\_\+admin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf sig\+\_\+addr\+\_\+cmd} {\bfseries {\bfseries {\bf t\+\_\+addr\+\_\+cmd\+\_\+vector}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf D\+W\+I\+D\+T\+H\+\_\+\+R\+A\+T\+IO}} \textcolor{vhdlchar}{/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf sig\+\_\+dgwb\+\_\+state} {\bfseries {\bfseries {\bf t\+\_\+dgwb\+\_\+state}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf sig\+\_\+dgwb\+\_\+last\+\_\+state} {\bfseries {\bfseries {\bf t\+\_\+dgwb\+\_\+state}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf access\+\_\+complete} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf generate\+\_\+wdata} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf current\+\_\+cs} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+N\+U\+M\+\_\+\+R\+A\+N\+KS}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf sig\+\_\+ctrl\+\_\+dgwb} {\bfseries {\bfseries {\bf t\+\_\+ctrl\+\_\+command}} \textcolor{vhdlchar}{ }} 
+\item 
+{\bf sig\+\_\+count} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{8} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 10974} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!ac\+\_\+handshake\+\_\+proc@{ac\+\_\+handshake\+\_\+proc}}
+\index{ac\+\_\+handshake\+\_\+proc@{ac\+\_\+handshake\+\_\+proc}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{ac\+\_\+handshake\+\_\+procrst\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} ac\+\_\+handshake\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf rst\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a64043be683af25c1094d4d2c48a1dce7}
+
+
+Definition at line {\bf 11500} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!ac\+\_\+write\+\_\+proc@{ac\+\_\+write\+\_\+proc}}
+\index{ac\+\_\+write\+\_\+proc@{ac\+\_\+write\+\_\+proc}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{ac\+\_\+write\+\_\+procrst\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} ac\+\_\+write\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf rst\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a082daac8a888deec56c4dfcd8447aeac}
+
+
+Definition at line {\bf 11496} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!current\+\_\+cs\+\_\+proc@{current\+\_\+cs\+\_\+proc}}
+\index{current\+\_\+cs\+\_\+proc@{current\+\_\+cs\+\_\+proc}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{current\+\_\+cs\+\_\+procclk,rst\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} current\+\_\+cs\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf rst\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_ac0947be23d2175cd5a89be2f000940e9}
+
+
+Definition at line {\bf 11134} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!dqs\+\_\+pattern@{dqs\+\_\+pattern}}
+\index{dqs\+\_\+pattern@{dqs\+\_\+pattern}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{dqs\+\_\+pattern}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }} dqs\+\_\+pattern ( ) \hspace{0.3cm}{\ttfamily [Function]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_aa8ca70328dbfa10fa486ff093db69995}
+
+
+Definition at line {\bf 10998} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!master\+\_\+dgwb\+\_\+state\+\_\+proc@{master\+\_\+dgwb\+\_\+state\+\_\+proc}}
+\index{master\+\_\+dgwb\+\_\+state\+\_\+proc@{master\+\_\+dgwb\+\_\+state\+\_\+proc}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{master\+\_\+dgwb\+\_\+state\+\_\+procrst\+\_\+n,clk}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} master\+\_\+dgwb\+\_\+state\+\_\+proc(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf rst\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a08f0c0062b737c2a8446615f08f1cc1b}
+
+
+Definition at line {\bf 11134} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!set\+\_\+wlat\+\_\+dq\+\_\+rep\+\_\+width@{set\+\_\+wlat\+\_\+dq\+\_\+rep\+\_\+width}}
+\index{set\+\_\+wlat\+\_\+dq\+\_\+rep\+\_\+width@{set\+\_\+wlat\+\_\+dq\+\_\+rep\+\_\+width}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{set\+\_\+wlat\+\_\+dq\+\_\+rep\+\_\+width}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }} set\+\_\+wlat\+\_\+dq\+\_\+rep\+\_\+width ( ) \hspace{0.3cm}{\ttfamily [Function]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a05187fc4d2556da7709db5f7865bba30}
+
+
+Definition at line {\bf 11157} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!access\+\_\+complete@{access\+\_\+complete}}
+\index{access\+\_\+complete@{access\+\_\+complete}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{access\+\_\+complete}]{\setlength{\rightskip}{0pt plus 5cm}{\bf access\+\_\+complete} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a8564c989909b6cf14d351317bdd13cff}
+
+
+Definition at line {\bf 11015} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!C\+\_\+\+B\+U\+R\+S\+T\+\_\+T@{C\+\_\+\+B\+U\+R\+S\+T\+\_\+T}}
+\index{C\+\_\+\+B\+U\+R\+S\+T\+\_\+T@{C\+\_\+\+B\+U\+R\+S\+T\+\_\+T}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{C\+\_\+\+B\+U\+R\+S\+T\+\_\+T}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+\_\+\+B\+U\+R\+S\+T\+\_\+T} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{C\+\_\+\+C\+A\+L\+\_\+\+B\+U\+R\+S\+T\+\_\+\+L\+EN}\textcolor{vhdlchar}{/}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf D\+W\+I\+D\+T\+H\+\_\+\+R\+A\+T\+IO}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a3cdca75eda7bcfb37449ef1ee638c659}
+
+
+Definition at line {\bf 11159} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!C\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT@{C\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT}}
+\index{C\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT@{C\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{C\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf C\+\_\+\+M\+A\+X\+\_\+\+W\+L\+AT}} \textcolor{vhdlchar}{+}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf C\+\_\+\+B\+U\+R\+S\+T\+\_\+T}} \textcolor{vhdlchar}{+}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{4} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_aac145dce52a74b253090633aa82002c9}
+
+
+Definition at line {\bf 11159} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!C\+\_\+\+M\+A\+X\+\_\+\+W\+L\+AT@{C\+\_\+\+M\+A\+X\+\_\+\+W\+L\+AT}}
+\index{C\+\_\+\+M\+A\+X\+\_\+\+W\+L\+AT@{C\+\_\+\+M\+A\+X\+\_\+\+W\+L\+AT}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{C\+\_\+\+M\+A\+X\+\_\+\+W\+L\+AT}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+\_\+\+M\+A\+X\+\_\+\+W\+L\+AT} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf A\+D\+V\+\_\+\+L\+A\+T\+\_\+\+W\+I\+D\+TH}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a8bc763fcaf91be7afa4ac628fd8a8448}
+
+
+Definition at line {\bf 11159} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!c\+\_\+seq\+\_\+addr\+\_\+cmd\+\_\+config@{c\+\_\+seq\+\_\+addr\+\_\+cmd\+\_\+config}}
+\index{c\+\_\+seq\+\_\+addr\+\_\+cmd\+\_\+config@{c\+\_\+seq\+\_\+addr\+\_\+cmd\+\_\+config}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{c\+\_\+seq\+\_\+addr\+\_\+cmd\+\_\+config}]{\setlength{\rightskip}{0pt plus 5cm}{\bf c\+\_\+seq\+\_\+addr\+\_\+cmd\+\_\+config} {\bfseries {\bfseries {\bf t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{set\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+A\+D\+D\+R\+\_\+\+W\+I\+D\+TH}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+B\+A\+N\+K\+A\+D\+D\+R\+\_\+\+W\+I\+D\+TH}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+N\+U\+M\+\_\+\+R\+A\+N\+KS}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf D\+W\+I\+D\+T\+H\+\_\+\+R\+A\+T\+IO}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+M\+E\+M\+T\+Y\+PE}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a87e441041cc5383db33bb3ee070d0267}
+
+
+Definition at line {\bf 10992} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!C\+\_\+\+W\+L\+A\+T\+\_\+\+D\+Q\+\_\+\+R\+E\+P\+\_\+\+W\+I\+D\+TH@{C\+\_\+\+W\+L\+A\+T\+\_\+\+D\+Q\+\_\+\+R\+E\+P\+\_\+\+W\+I\+D\+TH}}
+\index{C\+\_\+\+W\+L\+A\+T\+\_\+\+D\+Q\+\_\+\+R\+E\+P\+\_\+\+W\+I\+D\+TH@{C\+\_\+\+W\+L\+A\+T\+\_\+\+D\+Q\+\_\+\+R\+E\+P\+\_\+\+W\+I\+D\+TH}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{C\+\_\+\+W\+L\+A\+T\+\_\+\+D\+Q\+\_\+\+R\+E\+P\+\_\+\+W\+I\+D\+TH}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+\_\+\+W\+L\+A\+T\+\_\+\+D\+Q\+\_\+\+R\+E\+P\+\_\+\+W\+I\+D\+TH} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{set\+\_\+wlat\+\_\+dq\+\_\+rep\+\_\+width}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_aad2d2217bc711f3f24ee202f906c85d3}
+
+
+Definition at line {\bf 11159} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!current\+\_\+cs@{current\+\_\+cs}}
+\index{current\+\_\+cs@{current\+\_\+cs}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{current\+\_\+cs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf current\+\_\+cs} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf M\+E\+M\+\_\+\+I\+F\+\_\+\+N\+U\+M\+\_\+\+R\+A\+N\+KS}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a56127b72eaf07bce2b4e32702bade670}
+
+
+Definition at line {\bf 11020} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+constants\+\_\+pkg@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+constants\+\_\+pkg}}
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+constants\+\_\+pkg@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+constants\+\_\+pkg}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+constants\+\_\+pkg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+constants\+\_\+pkg}\hspace{0.3cm}{\ttfamily [Package]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a6b61d934120b978b19fe9817c378c8c0}
+
+
+Definition at line {\bf 10971} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!dgwb\+\_\+report\+\_\+prefix@{dgwb\+\_\+report\+\_\+prefix}}
+\index{dgwb\+\_\+report\+\_\+prefix@{dgwb\+\_\+report\+\_\+prefix}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{dgwb\+\_\+report\+\_\+prefix}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dgwb\+\_\+report\+\_\+prefix} {\bfseries \textcolor{comment}{string}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq ( dgwb )  \+:  \char`\"{}}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a26e5b4344f09b9e57048841219d41084}
+
+
+Definition at line {\bf 10996} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!generate\+\_\+wdata@{generate\+\_\+wdata}}
+\index{generate\+\_\+wdata@{generate\+\_\+wdata}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{generate\+\_\+wdata}]{\setlength{\rightskip}{0pt plus 5cm}{\bf generate\+\_\+wdata} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_ae368767a7880e407bff14fb2bff74c6c}
+
+
+Definition at line {\bf 11017} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!sig\+\_\+addr\+\_\+cmd@{sig\+\_\+addr\+\_\+cmd}}
+\index{sig\+\_\+addr\+\_\+cmd@{sig\+\_\+addr\+\_\+cmd}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{sig\+\_\+addr\+\_\+cmd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sig\+\_\+addr\+\_\+cmd} {\bfseries {\bfseries {\bf t\+\_\+addr\+\_\+cmd\+\_\+vector}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf D\+W\+I\+D\+T\+H\+\_\+\+R\+A\+T\+IO}} \textcolor{vhdlchar}{/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_afdeb3c3b12f02d7b0d26a23a4f9a745b}
+
+
+Definition at line {\bf 11011} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!sig\+\_\+count@{sig\+\_\+count}}
+\index{sig\+\_\+count@{sig\+\_\+count}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{sig\+\_\+count}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sig\+\_\+count} {\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{8} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a8d2916e55c7ebf97f8fd4de3f4b3c614}
+
+
+Definition at line {\bf 11496} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!sig\+\_\+ctrl\+\_\+dgwb@{sig\+\_\+ctrl\+\_\+dgwb}}
+\index{sig\+\_\+ctrl\+\_\+dgwb@{sig\+\_\+ctrl\+\_\+dgwb}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{sig\+\_\+ctrl\+\_\+dgwb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sig\+\_\+ctrl\+\_\+dgwb} {\bfseries {\bfseries {\bf t\+\_\+ctrl\+\_\+command}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_aa3b8ead854f59137a1a06535672e0598}
+
+
+Definition at line {\bf 11134} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!sig\+\_\+dgwb\+\_\+last\+\_\+state@{sig\+\_\+dgwb\+\_\+last\+\_\+state}}
+\index{sig\+\_\+dgwb\+\_\+last\+\_\+state@{sig\+\_\+dgwb\+\_\+last\+\_\+state}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{sig\+\_\+dgwb\+\_\+last\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sig\+\_\+dgwb\+\_\+last\+\_\+state} {\bfseries {\bfseries {\bf t\+\_\+dgwb\+\_\+state}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a406c083ec6c515921341ea8870f1244a}
+
+
+Definition at line {\bf 11014} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!sig\+\_\+dgwb\+\_\+state@{sig\+\_\+dgwb\+\_\+state}}
+\index{sig\+\_\+dgwb\+\_\+state@{sig\+\_\+dgwb\+\_\+state}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{sig\+\_\+dgwb\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sig\+\_\+dgwb\+\_\+state} {\bfseries {\bfseries {\bf t\+\_\+dgwb\+\_\+state}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_addc7d7e827438fece0c4cce07d8e23ce}
+
+
+Definition at line {\bf 11013} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!t\+\_\+dgwb\+\_\+state@{t\+\_\+dgwb\+\_\+state}}
+\index{t\+\_\+dgwb\+\_\+state@{t\+\_\+dgwb\+\_\+state}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{t\+\_\+dgwb\+\_\+state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf t\+\_\+dgwb\+\_\+state} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+idle}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+wait\+\_\+admin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+btp}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+ones}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+zeros}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+mtp}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+01\+\_\+pairs}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+1100\+\_\+step}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+0011\+\_\+step}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+write\+\_\+wlat}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{s\+\_\+release\+\_\+admin}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_aff2c78ea2dc5deaa6369cb3e540d2120}
+
+
+Definition at line {\bf 10976} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}!work@{work}}
+\index{work@{work}!ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+dgwb\+::rtl}}
+\paragraph[{work}]{\setlength{\rightskip}{0pt plus 5cm}{\bf work}\hspace{0.3cm}{\ttfamily [Library]}}\label{classddr2__phy__alt__mem__phy__dgwb_1_1rtl_a9f49de6f5eed5b4488cba6c9cdd1c215}
+
+
+Definition at line {\bf 10965} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/{\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}\end{DoxyCompactItemize}

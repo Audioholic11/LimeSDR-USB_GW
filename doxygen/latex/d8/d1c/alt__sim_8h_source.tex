@@ -1,0 +1,97 @@
+\subsection{alt\+\_\+sim.\+h}
+\label{alt__sim_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sim.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sim.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_ALT\_SIM\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_ALT\_SIM\_H\_\_}
+00003 
+00004 \textcolor{comment}{/******************************************************************************}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* License Agreement                                                           *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Copyright (c) 2007      Altera Corporation, San Jose, California, USA.      *}
+00009 \textcolor{comment}{* All rights reserved.                                                        *}
+00010 \textcolor{comment}{*                                                                             *}
+00011 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00012 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00013 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00014 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00015 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00016 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00019 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00020 \textcolor{comment}{*                                                                             *}
+00021 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00022 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00023 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00024 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00025 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00026 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00027 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00030 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00031 \textcolor{comment}{*                                                                             *}
+00032 \textcolor{comment}{******************************************************************************/}
+00033 \textcolor{preprocessor}{#include "system.h"}
+00034 \textcolor{preprocessor}{#include "alt_types.h"}
+00035 
+00036 \textcolor{comment}{/* }
+00037 \textcolor{comment}{ * Instructions that might mean something special to a simulator. }
+00038 \textcolor{comment}{ * These have no special effect on real hardware (they are just nops).}
+00039 \textcolor{comment}{ */}
+00040 \textcolor{preprocessor}{#define ALT\_SIM\_FAIL() \(\backslash\)}
+00041 \textcolor{preprocessor}{    do \{ \_\_asm volatile ("cmpltui r0, r0, 0xabc1"); \} while (0)}
+00042 
+00043 \textcolor{preprocessor}{#define ALT\_SIM\_PASS() \(\backslash\)}
+00044 \textcolor{preprocessor}{    do \{ \_\_asm volatile ("cmpltui r0, r0, 0xabc2"); \} while (0)}
+00045 
+00046 \textcolor{preprocessor}{#define ALT\_SIM\_IN\_TOP\_OF\_HOT\_LOOP() \(\backslash\)}
+00047 \textcolor{preprocessor}{    do \{ \_\_asm volatile ("cmpltui r0, r0, 0xabc3"); \} while (0)}
+00048 
+00049 \textcolor{comment}{/*}
+00050 \textcolor{comment}{ * Routine called on exit.}
+00051 \textcolor{comment}{ */}
+00052 \textcolor{keyword}{static} ALT_INLINE ALT_ALWAYS_INLINE \textcolor{keywordtype}{void} alt_sim_halt(\textcolor{keywordtype}{int} exit\_code)
+00053 \{
+00054   \textcolor{keyword}{register} \textcolor{keywordtype}{int} r2 \textcolor{keyword}{asm} (\textcolor{stringliteral}{"r2"}) = exit\_code;
+00055 
+00056 \textcolor{preprocessor}{#if defined(NIOS2\_HAS\_DEBUG\_STUB) && (defined(ALT\_BREAK\_ON\_EXIT) || defined(ALT\_PROVIDE\_GMON))}
+00057 
+00058   \textcolor{keyword}{register} \textcolor{keywordtype}{int} r3 \textcolor{keyword}{asm} (\textcolor{stringliteral}{"r3"}) = (1 << 2);
+00059 
+00060 \textcolor{preprocessor}{#ifdef ALT\_PROVIDE\_GMON}
+00061   \textcolor{keyword}{extern} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} alt_gmon_data[];
+00062   \textcolor{keyword}{register} \textcolor{keywordtype}{int} r4 \textcolor{keyword}{asm} (\textcolor{stringliteral}{"r4"}) = (\textcolor{keywordtype}{int})alt_gmon_data;
+00063   r3 |= (1 << 4);
+00064 \textcolor{preprocessor}{#define ALT\_GMON\_DATA ,"r"(r4)}
+00065 \textcolor{preprocessor}{#else}
+00066 \textcolor{preprocessor}{#define ALT\_GMON\_DATA}
+00067 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_PROVIDE\_GMON */}\textcolor{preprocessor}{}
+00068 
+00069   \textcolor{keywordflow}{if} (r2) \{
+00070     ALT_SIM_FAIL();
+00071   \} \textcolor{keywordflow}{else} \{
+00072     ALT_SIM_PASS();
+00073   \}
+00074 
+00075   __asm__ \textcolor{keyword}{volatile} (\textcolor{stringliteral}{"\(\backslash\)n0:\(\backslash\)n\(\backslash\)taddi %0,%0, -1\(\backslash\)n\(\backslash\)tbgt %0,zero,0b"} : : \textcolor{stringliteral}{"r"} (
+      ALT_CPU_FREQ/100) ); \textcolor{comment}{/* Delay for >30ms */}
+00076 
+00077   __asm__ \textcolor{keyword}{volatile} (\textcolor{stringliteral}{"break 2"} : : \textcolor{stringliteral}{"r"}(r2), \textcolor{stringliteral}{"r"}(r3) ALT\_GMON\_DATA );
+00078 
+00079 \textcolor{preprocessor}{#else }\textcolor{comment}{/* !DEBUG\_STUB */}\textcolor{preprocessor}{}
+00080   \textcolor{keywordflow}{if} (r2) \{
+00081     ALT_SIM_FAIL();
+00082   \} \textcolor{keywordflow}{else} \{
+00083     ALT_SIM_PASS();
+00084   \}
+00085 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* DEBUG\_STUB */}\textcolor{preprocessor}{}
+00086 \}
+00087 
+00088 \textcolor{preprocessor}{#define ALT\_SIM\_HALT(exit\_code) \(\backslash\)}
+00089 \textcolor{preprocessor}{  alt\_sim\_halt(exit\_code)}
+00090 
+00091 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_SIM\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

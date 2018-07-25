@@ -1,0 +1,243 @@
+\subsection{tb\+\_\+behave Architecture Reference}
+\label{classpackets2data__tb_1_1tb__behave}\index{tb\+\_\+behave@{tb\+\_\+behave}}
+
+
+Collaboration diagram for tb\+\_\+behave\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=185pt]{d4/da0/classpackets2data__tb_1_1tb__behave__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clock0}{\bfseries  (  )}
+\item 
+{\bf clock}{\bfseries  (  )}
+\item 
+{\bf res}{\bfseries  (  )}
+\item 
+{\bf P\+R\+O\+C\+E\+S\+S\+\_\+520}{\bfseries  ( {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf clk0}} \textcolor{vhdlchar}{ }} )}
+\item 
+{\bf proc\+\_\+name}{\bfseries  ( {\bfseries {\bfseries {\bf clk0}} \textcolor{vhdlchar}{ }} , {\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} )}
+\end{DoxyCompactItemize}
+\subsubsection*{Constants}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clk0\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf clk1\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf smpl\+\_\+nr\+\_\+delay} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{13} \textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Types}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bf my\+\_\+array}{\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf smpl\+\_\+nr\+\_\+delay}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }}} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clk0} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf clk1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reset\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dut0\+\_\+pct\+\_\+size} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{x}\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} 000\+A \char`\"{}}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dut0\+\_\+pct\+\_\+data} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dut0\+\_\+in\+\_\+pct\+\_\+wrreq} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dut0\+\_\+in\+\_\+pct\+\_\+last} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf dut0\+\_\+sample\+\_\+nr} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf pct\+\_\+cnt\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf smpl\+\_\+nr\+\_\+array} {\bfseries {\bfseries {\bf my\+\_\+array}} \textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Instantiations}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf packets2data\+\_\+dut0}  {\bfseries entity packets2data}   
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 22} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!clock@{clock}}
+\index{clock@{clock}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clock}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} clock ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classpackets2data__tb_1_1tb__behave_af761a67e9d7ce9e23381088b6f2ae893}
+
+
+Definition at line {\bf 53} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!clock0@{clock0}}
+\index{clock0@{clock0}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clock0}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} clock0 ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classpackets2data__tb_1_1tb__behave_a0ffcf9b3fa89917ed2b73a96f170b7ae}
+
+
+Definition at line {\bf 47} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!proc\+\_\+name@{proc\+\_\+name}}
+\index{proc\+\_\+name@{proc\+\_\+name}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{proc\+\_\+nameclk0,reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} proc\+\_\+name(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf clk0}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpackets2data__tb_1_1tb__behave_a14035e1b698b9415302a1b978cd17c20}
+
+
+Definition at line {\bf 96} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!P\+R\+O\+C\+E\+S\+S\+\_\+520@{P\+R\+O\+C\+E\+S\+S\+\_\+520}}
+\index{P\+R\+O\+C\+E\+S\+S\+\_\+520@{P\+R\+O\+C\+E\+S\+S\+\_\+520}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{P\+R\+O\+C\+E\+S\+S\+\_\+520reset\+\_\+n,clk0}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} P\+R\+O\+C\+E\+S\+S\+\_\+520(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries {\bfseries {\bf reset\+\_\+n}} \textcolor{vhdlchar}{ }} {\em } , }
+\item[{}]{{\bfseries {\bfseries {\bf clk0}} \textcolor{vhdlchar}{ }} {\em }}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Process]}}\label{classpackets2data__tb_1_1tb__behave_abb06fe790caf3ec16d2b8ded81bbaed3}
+
+
+Definition at line {\bf 66} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!res@{res}}
+\index{res@{res}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{res}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} res ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classpackets2data__tb_1_1tb__behave_ab0bd7560790c13b656fd58e17e35143e}
+
+
+Definition at line {\bf 59} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!clk0@{clk0}}
+\index{clk0@{clk0}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk0} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_a693d72741b9413130fe2d67511b642be}
+
+
+Definition at line {\bf 28} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!clk0\+\_\+period@{clk0\+\_\+period}}
+\index{clk0\+\_\+period@{clk0\+\_\+period}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk0\+\_\+period}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk0\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classpackets2data__tb_1_1tb__behave_ad03d90619a1930e0f5daa16a616edd90}
+
+
+Definition at line {\bf 23} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!clk1@{clk1}}
+\index{clk1@{clk1}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_ade95921e47b0e4d2d11e496794648550}
+
+
+Definition at line {\bf 28} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!clk1\+\_\+period@{clk1\+\_\+period}}
+\index{clk1\+\_\+period@{clk1\+\_\+period}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{clk1\+\_\+period}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk1\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classpackets2data__tb_1_1tb__behave_aed19b0dc48aba325370146bf0b89ab44}
+
+
+Definition at line {\bf 24} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!dut0\+\_\+in\+\_\+pct\+\_\+last@{dut0\+\_\+in\+\_\+pct\+\_\+last}}
+\index{dut0\+\_\+in\+\_\+pct\+\_\+last@{dut0\+\_\+in\+\_\+pct\+\_\+last}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{dut0\+\_\+in\+\_\+pct\+\_\+last}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dut0\+\_\+in\+\_\+pct\+\_\+last} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_a45b4afe8a082239a06c9ee00113d6212}
+
+
+Definition at line {\bf 35} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!dut0\+\_\+in\+\_\+pct\+\_\+wrreq@{dut0\+\_\+in\+\_\+pct\+\_\+wrreq}}
+\index{dut0\+\_\+in\+\_\+pct\+\_\+wrreq@{dut0\+\_\+in\+\_\+pct\+\_\+wrreq}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{dut0\+\_\+in\+\_\+pct\+\_\+wrreq}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dut0\+\_\+in\+\_\+pct\+\_\+wrreq} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_ac50109aa091fc9868da89ee7dbdd9db2}
+
+
+Definition at line {\bf 34} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!dut0\+\_\+pct\+\_\+data@{dut0\+\_\+pct\+\_\+data}}
+\index{dut0\+\_\+pct\+\_\+data@{dut0\+\_\+pct\+\_\+data}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{dut0\+\_\+pct\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dut0\+\_\+pct\+\_\+data} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_acbcd1d2f2068233d0a67c2f4dbfeadbc}
+
+
+Definition at line {\bf 33} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!dut0\+\_\+pct\+\_\+size@{dut0\+\_\+pct\+\_\+size}}
+\index{dut0\+\_\+pct\+\_\+size@{dut0\+\_\+pct\+\_\+size}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{dut0\+\_\+pct\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dut0\+\_\+pct\+\_\+size} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{x}\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} 000\+A \char`\"{}}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_af65d1a7a4bddf5a456872847dd336976}
+
+
+Definition at line {\bf 32} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!dut0\+\_\+sample\+\_\+nr@{dut0\+\_\+sample\+\_\+nr}}
+\index{dut0\+\_\+sample\+\_\+nr@{dut0\+\_\+sample\+\_\+nr}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{dut0\+\_\+sample\+\_\+nr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dut0\+\_\+sample\+\_\+nr} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_ade2fbc4d4ffb6911caba997eb99743f4}
+
+
+Definition at line {\bf 36} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!my\+\_\+array@{my\+\_\+array}}
+\index{my\+\_\+array@{my\+\_\+array}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{my\+\_\+array}]{\setlength{\rightskip}{0pt plus 5cm}{\bf my\+\_\+array} {\bfseries \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf smpl\+\_\+nr\+\_\+delay}} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{63} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Type]}}\label{classpackets2data__tb_1_1tb__behave_abbf9dde3c0c9582f74a6648d8e300f25}
+
+
+Definition at line {\bf 40} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!packets2data\+\_\+dut0@{packets2data\+\_\+dut0}}
+\index{packets2data\+\_\+dut0@{packets2data\+\_\+dut0}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{packets2data\+\_\+dut0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf packets2data\+\_\+dut0} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{packets2data}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classpackets2data__tb_1_1tb__behave_ae22fa317148bd50259d074cba28b3eba}
+
+
+Definition at line {\bf 138} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!pct\+\_\+cnt@{pct\+\_\+cnt}}
+\index{pct\+\_\+cnt@{pct\+\_\+cnt}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{pct\+\_\+cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+cnt} {\bfseries \textcolor{comment}{unsigned}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_a65ca12a1b254f97997774729714ace78}
+
+
+Definition at line {\bf 37} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!pct\+\_\+cnt\+\_\+reg@{pct\+\_\+cnt\+\_\+reg}}
+\index{pct\+\_\+cnt\+\_\+reg@{pct\+\_\+cnt\+\_\+reg}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{pct\+\_\+cnt\+\_\+reg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pct\+\_\+cnt\+\_\+reg} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_a540ff9709224932338e06d71f057438c}
+
+
+Definition at line {\bf 38} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!reset\+\_\+n@{reset\+\_\+n}}
+\index{reset\+\_\+n@{reset\+\_\+n}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reset\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_a1f070fd63a3a7fa45c907335ea870c5b}
+
+
+Definition at line {\bf 29} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!smpl\+\_\+nr\+\_\+array@{smpl\+\_\+nr\+\_\+array}}
+\index{smpl\+\_\+nr\+\_\+array@{smpl\+\_\+nr\+\_\+array}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{smpl\+\_\+nr\+\_\+array}]{\setlength{\rightskip}{0pt plus 5cm}{\bf smpl\+\_\+nr\+\_\+array} {\bfseries {\bfseries {\bf my\+\_\+array}} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classpackets2data__tb_1_1tb__behave_a0e622cf025633cca28b05e19818305a6}
+
+
+Definition at line {\bf 42} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+\index{packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}!smpl\+\_\+nr\+\_\+delay@{smpl\+\_\+nr\+\_\+delay}}
+\index{smpl\+\_\+nr\+\_\+delay@{smpl\+\_\+nr\+\_\+delay}!packets2data\+\_\+tb\+::tb\+\_\+behave@{packets2data\+\_\+tb\+::tb\+\_\+behave}}
+\paragraph[{smpl\+\_\+nr\+\_\+delay}]{\setlength{\rightskip}{0pt plus 5cm}{\bf smpl\+\_\+nr\+\_\+delay} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{13} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classpackets2data__tb_1_1tb__behave_a3ad3bb7316b276692688d9baee9662b8}
+
+
+Definition at line {\bf 26} of file {\bf packets2data\+\_\+tb.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/packets2data/sim/{\bf packets2data\+\_\+tb.\+vhd}\end{DoxyCompactItemize}

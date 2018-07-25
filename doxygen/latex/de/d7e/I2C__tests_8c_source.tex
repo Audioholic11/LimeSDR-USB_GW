@@ -1,0 +1,104 @@
+\subsection{I2\+C\+\_\+tests.\+c}
+\label{I2C__tests_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/i2c\+\_\+opencores\+\_\+v13/\+Docs/\+I2\+C\+\_\+tests.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/i2c\+\_\+opencores\+\_\+v13/\+Docs/\+I2\+C\+\_\+tests.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/* these test were created to show how to use the opencores I2C along with a driver found in}
+00002 \textcolor{comment}{ * the I2C\_opencores component to talk to various components. }
+00003 \textcolor{comment}{ * This test example uses a littel daughter board from microtronix}
+00004 \textcolor{comment}{ * it has a I2c to parallel chip (PCA9554A) a EEPORM and real time clock. }
+00005 \textcolor{comment}{ * I chose not to impliment the real time clock. }
+00006 \textcolor{comment}{ * But you can see how the calls work}
+00007 \textcolor{comment}{ * There are only 4 functions associalted with the I2C driver}
+00008 \textcolor{comment}{ * I2C start  -  send start bit and address of the chip}
+00009 \textcolor{comment}{ * I2C\_read - read data}
+00010 \textcolor{comment}{ * I2C\_write. - write data}
+00011 \textcolor{comment}{ * how and when each of these get used is based on the device you}
+00012 \textcolor{comment}{ * are talking to. }
+00013 \textcolor{comment}{ * See the driver code for details of each function. }
+00014 \textcolor{comment}{ * */}
+00015 
+00016 \textcolor{preprocessor}{#include <stdio.h>}
+00017 \textcolor{preprocessor}{#include "system.h"}
+00018 \textcolor{preprocessor}{#include "i2c\_opencores.h"}
+00019 \textcolor{keywordtype}{int} main()
+00020 \{
+00021     \textcolor{keywordtype}{int} data;
+00022     \textcolor{keywordtype}{int} i;
+00023     \textcolor{comment}{// testing the PCA9554A paralle interface}
+00024     \textcolor{comment}{// this writes a 5 to the leds and read the position of the dip switches.}
+00025  printf(\textcolor{stringliteral}{" tesing the PCA9554A interface the\(\backslash\)n the LEDS should be at a 5 \(\backslash\)n"});  
+00026  \textcolor{comment}{// address 0x38 }
+00027  \textcolor{comment}{// set the fequesncy that you want to run at }
+00028  \textcolor{comment}{// most devices work at 100Khz  some faster}
+00029  I2C_init(I2CA\_BASE,ALT_CPU_FREQ,100000);
+00030  I2C_init(I2CA\_BASE,ALT_CPU_FREQ,100000);
+00031  \textcolor{comment}{// for the parallel io only the first 4 are output s}
+00032  
+00033  \textcolor{comment}{// the PCA9554A   uses a command word right after the chip address word ( the start work)}
+00034  I2C_start(I2CA\_BASE,0x38,0);\textcolor{comment}{// chip address in write mode}
+00035  I2C_write(I2CA\_BASE,3,0);  \textcolor{comment}{// write to register 3 command}
+00036  I2C_write(I2CA\_BASE,0xf0,1);  \textcolor{comment}{// set the bottom 4 bits to outputs for the LEDs set the stop}
+00037  
+00038  \textcolor{comment}{// now right to the leds}
+00039   I2C_start(I2CA\_BASE,0x38,0); \textcolor{comment}{// address the chip in write mode}
+00040  I2C_write(I2CA\_BASE,1,0);  \textcolor{comment}{// set command to the pca9554 to be output register}
+00041  I2C_write(I2CA\_BASE,5,1);  \textcolor{comment}{// write the data to the output register and set the stop}
+00042 
+00043 \textcolor{comment}{//now read the dip switches}
+00044 \textcolor{comment}{// first set the command to 0}
+00045  I2C_start(I2CA\_BASE,0x38,0); \textcolor{comment}{//address the chip in write mode}
+00046 data =  I2C_write(I2CA\_BASE,0,0);  \textcolor{comment}{// set command to read input register.}
+00047  I2C_start(I2CA\_BASE,0x38,1); \textcolor{comment}{//send start again but this time in read mode}
+00048 data =  I2C_read(I2CA\_BASE,1);  \textcolor{comment}{// read the input register and send stop}
+00049 data = 0xff & (data >>4);   
+00050 printf(\textcolor{stringliteral}{"dip switch 0x%x\(\backslash\)n"},data);
+00051 
+00052 printf(\textcolor{stringliteral}{"\(\backslash\)nNow writing and reading from the EEPROM\(\backslash\)n"});
+00053 \textcolor{comment}{//address 0x50-57}
+00054 I2C_start(I2CA\_BASE,0x50,0); \textcolor{comment}{// chip address in write mode}
+00055 I2C_write(I2CA\_BASE,0,0);  \textcolor{comment}{// write to starting address of 0}
+00056 \textcolor{comment}{// now write the data }
+00057 \textcolor{keywordflow}{for} (i=0;i<7;i++)           \textcolor{comment}{// can only write 8 bites at a time}
+00058 \{   
+00059  I2C_write(I2CA\_BASE,i,0);  \textcolor{comment}{// writ the data }
+00060 \}
+00061  I2C_write(I2CA\_BASE,i,1);  \textcolor{comment}{// write last one with last flag}
+00062  
+00063  \textcolor{keywordflow}{while} ( I2C_start(I2CA\_BASE,0x50,0)); \textcolor{comment}{// make sure the write is done be fore continuing.}
+00064  \textcolor{comment}{// can ony burst 8 at a time.}
+00065 
+00066 I2C_write(I2CA\_BASE,8,0);  \textcolor{comment}{// write to starting address of 8}
+00067 \textcolor{comment}{// now write the data }
+00068 \textcolor{keywordflow}{for} (i=0;i<7;i++)   \textcolor{comment}{// write the next 8 bytes}
+00069 \{
+00070  I2C_write(I2CA\_BASE,i+8,0);  \textcolor{comment}{// }
+00071 \}
+00072  I2C_write(I2CA\_BASE,i+8,1);  \textcolor{comment}{// write last one with last flag}
+00073  
+00074  \textcolor{keywordflow}{while} ( I2C_start(I2CA\_BASE,0x50,0)); \textcolor{comment}{// make sure the write is done be fore continuing.}
+00075  
+00076  \textcolor{comment}{//now read the values}
+00077 \textcolor{comment}{// first set the command to 0}
+00078  I2C_start(I2CA\_BASE,0x50,0); \textcolor{comment}{//set chip address and set to write/}
+00079  I2C_write(I2CA\_BASE,0,0);  \textcolor{comment}{// set address to 0.}
+00080 I2C_start(I2CA\_BASE,0x50,1); \textcolor{comment}{//set chip address in read mode}
+00081 \textcolor{keywordflow}{for} (i=0;i<15;i++)
+00082 \{
+00083  data =  I2C_read(I2CA\_BASE,0);  \textcolor{comment}{// memory array}
+00084  printf(\textcolor{stringliteral}{"\(\backslash\)tdata = 0x%x\(\backslash\)n"},data);
+00085 \}
+00086 
+00087 data =  I2C_read(I2CA\_BASE,1);  \textcolor{comment}{// last memory read}
+00088  printf(\textcolor{stringliteral}{"\(\backslash\)tdata = 0x%x\(\backslash\)n"},data);
+00089 
+00090 
+00091 
+00092 
+00093 
+00094 
+00095 
+00096   printf(\textcolor{stringliteral}{"Hello from Nios II!\(\backslash\)n"});
+00097 
+00098   \textcolor{keywordflow}{return} 0;
+00099 \}
+\end{DoxyCode}

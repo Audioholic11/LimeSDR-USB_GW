@@ -1,0 +1,209 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+driver.h File Reference}
+\label{alt__driver_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+driver.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+driver.\+h}}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+SS}(instance)~A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+S\+S\+\_\+ \#\# instance
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}(instance,  func)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E1}({\bf A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+SS}(instance), func)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E1}(module\+\_\+class,  func)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E2}(module\+\_\+class, func)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E2}(module\+\_\+class,  func)~module\+\_\+class \#\# \+\_\+ \#\# func
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+T\+R\+U\+CT}(instance)~struct {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}(instance, state\+\_\+s)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}(instance)~instance
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+X\+T\+E\+R\+NS}(instance)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+TE}(instance,  buffer,  len,  flags)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}(instance, write)(\&{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}(instance), buffer, len, flags)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+T\+E\+R\+NS}(instance)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+AD}(instance,  buffer,  len,  flags)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}(instance, read)(\&{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}(instance), buffer, len, flags)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+T\+L\+\_\+\+E\+X\+T\+E\+R\+NS}(instance)
+\item 
+\#define {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+TL}(instance,  req,  arg)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}(instance, {\bf ioctl})(\&{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}(instance), req, arg)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME(
+\begin{DoxyParamCaption}
+\item[{}]{instance, }
+\item[{}]{func}
+\end{DoxyParamCaption}
+)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E1}({\bf A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+SS}(instance), func)}\label{alt__driver_8h_a08bf0e7225f70b3951e27580aa07e8bd}
+
+
+Definition at line {\bf 71} of file {\bf alt\+\_\+driver.\+h}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E1@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E1}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E1@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E1}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E1}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E1(
+\begin{DoxyParamCaption}
+\item[{}]{module\+\_\+class, }
+\item[{}]{func}
+\end{DoxyParamCaption}
+)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E2}(module\+\_\+class, func)}\label{alt__driver_8h_abde8167ca5ae69fac79200f6898a810d}
+
+
+Definition at line {\bf 73} of file {\bf alt\+\_\+driver.\+h}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E2@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E2}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E2@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E2}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E2}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+M\+E2(
+\begin{DoxyParamCaption}
+\item[{}]{module\+\_\+class, }
+\item[{}]{func}
+\end{DoxyParamCaption}
+)~module\+\_\+class \#\# \+\_\+ \#\# func}\label{alt__driver_8h_a23bc314c69520412b6ad814abdc2d647}
+
+
+Definition at line {\bf 75} of file {\bf alt\+\_\+driver.\+h}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+TL@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+TL}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+TL@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+TL}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+TL}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+TL(
+\begin{DoxyParamCaption}
+\item[{}]{instance, }
+\item[{}]{req, }
+\item[{}]{arg}
+\end{DoxyParamCaption}
+)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}(instance, {\bf ioctl})(\&{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}(instance), req, arg)}\label{alt__driver_8h_a908abe0719326141662c52fd20404671}
+
+
+Definition at line {\bf 165} of file {\bf alt\+\_\+driver.\+h}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+T\+L\+\_\+\+E\+X\+T\+E\+R\+NS@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+T\+L\+\_\+\+E\+X\+T\+E\+R\+NS}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+T\+L\+\_\+\+E\+X\+T\+E\+R\+NS@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+T\+L\+\_\+\+E\+X\+T\+E\+R\+NS}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+T\+L\+\_\+\+E\+X\+T\+E\+R\+NS}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+I\+O\+C\+T\+L\+\_\+\+E\+X\+T\+E\+R\+NS(
+\begin{DoxyParamCaption}
+\item[{}]{instance}
+\end{DoxyParamCaption}
+)}\label{alt__driver_8h_a630cd533bebbdf03e271225b290faef6}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{extern} ALT_DRIVER_STATE_STRUCT(instance) ALT_DRIVER_STATE(instance);    \(\backslash\)
+    extern \textcolor{keywordtype}{int} ALT_DRIVER_FUNC_NAME(instance, ioctl)                        \(\backslash\)
+      (ALT_DRIVER_STATE_STRUCT(instance) *, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{void}*);
+\end{DoxyCode}
+
+
+Definition at line {\bf 160} of file {\bf alt\+\_\+driver.\+h}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+AD@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+AD}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+AD@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+AD}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+AD}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+AD(
+\begin{DoxyParamCaption}
+\item[{}]{instance, }
+\item[{}]{buffer, }
+\item[{}]{len, }
+\item[{}]{flags}
+\end{DoxyParamCaption}
+)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}(instance, read)(\&{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}(instance), buffer, len, flags)}\label{alt__driver_8h_a3c4f6aba74808640b9cf0a4006da6d0f}
+
+
+Definition at line {\bf 147} of file {\bf alt\+\_\+driver.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+getchar()}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+T\+E\+R\+NS@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+T\+E\+R\+NS}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+T\+E\+R\+NS@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+T\+E\+R\+NS}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+T\+E\+R\+NS}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+R\+E\+A\+D\+\_\+\+E\+X\+T\+E\+R\+NS(
+\begin{DoxyParamCaption}
+\item[{}]{instance}
+\end{DoxyParamCaption}
+)}\label{alt__driver_8h_a3ff4bf8c44579c24f47dc5052fc79b59}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{extern} ALT_DRIVER_STATE_STRUCT(instance) ALT_DRIVER_STATE(instance);    \(\backslash\)
+    extern \textcolor{keywordtype}{int} ALT_DRIVER_FUNC_NAME(instance, read)                         \(\backslash\)
+      (ALT_DRIVER_STATE_STRUCT(instance) *, const \textcolor{keywordtype}{char} *, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int});
+\end{DoxyCode}
+
+
+Definition at line {\bf 142} of file {\bf alt\+\_\+driver.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+getchar()}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE(
+\begin{DoxyParamCaption}
+\item[{}]{instance}
+\end{DoxyParamCaption}
+)~instance}\label{alt__driver_8h_a1d0ea4b3d61c2a5582087ac18bbe3ca0}
+
+
+Definition at line {\bf 109} of file {\bf alt\+\_\+driver.\+h}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+T\+R\+U\+CT@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+T\+R\+U\+CT}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+T\+R\+U\+CT@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+T\+R\+U\+CT}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+T\+R\+U\+CT}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+T\+R\+U\+CT(
+\begin{DoxyParamCaption}
+\item[{}]{instance}
+\end{DoxyParamCaption}
+)~struct {\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}(instance, state\+\_\+s)}\label{alt__driver_8h_a8f330f20ca304711fe9124db533624e0}
+
+
+Definition at line {\bf 94} of file {\bf alt\+\_\+driver.\+h}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+TE@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+TE}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+TE@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+TE}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+TE}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+TE(
+\begin{DoxyParamCaption}
+\item[{}]{instance, }
+\item[{}]{buffer, }
+\item[{}]{len, }
+\item[{}]{flags}
+\end{DoxyParamCaption}
+)~{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+F\+U\+N\+C\+\_\+\+N\+A\+ME}(instance, write)(\&{\bf A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+S\+T\+A\+TE}(instance), buffer, len, flags)}\label{alt__driver_8h_a15cdfc9d11cea909407d9fc2c9dd7ae4}
+
+
+Definition at line {\bf 127} of file {\bf alt\+\_\+driver.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+putchar()}, and {\bf alt\+\_\+putstr()}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+X\+T\+E\+R\+NS@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+X\+T\+E\+R\+NS}}
+\index{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+X\+T\+E\+R\+NS@{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+X\+T\+E\+R\+NS}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+X\+T\+E\+R\+NS}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+D\+R\+I\+V\+E\+R\+\_\+\+W\+R\+I\+T\+E\+\_\+\+E\+X\+T\+E\+R\+NS(
+\begin{DoxyParamCaption}
+\item[{}]{instance}
+\end{DoxyParamCaption}
+)}\label{alt__driver_8h_a1ac64897179df1d39f0408576356c40c}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{extern} ALT_DRIVER_STATE_STRUCT(instance) ALT_DRIVER_STATE(instance);    \(\backslash\)
+    extern \textcolor{keywordtype}{int} ALT_DRIVER_FUNC_NAME(instance, write)                        \(\backslash\)
+      (ALT_DRIVER_STATE_STRUCT(instance) *, const \textcolor{keywordtype}{char} *, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int});
+\end{DoxyCode}
+
+
+Definition at line {\bf 122} of file {\bf alt\+\_\+driver.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+putchar()}, and {\bf alt\+\_\+putstr()}.
+
+\index{alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}!A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+SS@{A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+SS}}
+\index{A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+SS@{A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+SS}!alt\+\_\+driver.\+h@{alt\+\_\+driver.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+SS}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+SS(
+\begin{DoxyParamCaption}
+\item[{}]{instance}
+\end{DoxyParamCaption}
+)~A\+L\+T\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+C\+L\+A\+S\+S\+\_\+ \#\# instance}\label{alt__driver_8h_aae3e8c26f35113fc5137004bc9b0ba8a}
+
+
+Definition at line {\bf 53} of file {\bf alt\+\_\+driver.\+h}.
+

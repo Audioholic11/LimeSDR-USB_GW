@@ -1,0 +1,253 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+dma.h File Reference}
+\label{alt__dma_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+dma.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+dma.\+h}}
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+dma\+\_\+dev.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+Include dependency graph for alt\+\_\+dma.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{dd/de3/alt__dma_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/dc6/alt__dma_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf alt\+\_\+dma\+\_\+txchan} {\bf alt\+\_\+dma\+\_\+txchan\+\_\+open} (const char $\ast$name)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf alt\+\_\+dma\+\_\+txchan\+\_\+close} ({\bf alt\+\_\+dma\+\_\+txchan} dma)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf alt\+\_\+dma\+\_\+txchan\+\_\+send} ({\bf alt\+\_\+dma\+\_\+txchan} dma, const void $\ast$from, {\bf alt\+\_\+u32} {\bf length}, {\bf alt\+\_\+txchan\+\_\+done} $\ast$done, void $\ast$handle)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf alt\+\_\+dma\+\_\+txchan\+\_\+space} ({\bf alt\+\_\+dma\+\_\+txchan} dma)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf alt\+\_\+dma\+\_\+txchan\+\_\+ioctl} ({\bf alt\+\_\+dma\+\_\+txchan} dma, int req, void $\ast$arg)
+\item 
+{\bf alt\+\_\+dma\+\_\+rxchan} {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+open} (const char $\ast$dev)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+close} ({\bf alt\+\_\+dma\+\_\+rxchan} dma)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+prepare} ({\bf alt\+\_\+dma\+\_\+rxchan} dma, void $\ast${\bf data}, {\bf alt\+\_\+u32} len, {\bf alt\+\_\+rxchan\+\_\+done} $\ast$done, void $\ast$handle)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+ioctl} ({\bf alt\+\_\+dma\+\_\+rxchan} dma, int req, void $\ast$arg)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+depth} ({\bf alt\+\_\+dma\+\_\+rxchan} dma)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+rxchan\+\_\+close@{alt\+\_\+dma\+\_\+rxchan\+\_\+close}}
+\index{alt\+\_\+dma\+\_\+rxchan\+\_\+close@{alt\+\_\+dma\+\_\+rxchan\+\_\+close}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+rxchan\+\_\+close(alt\+\_\+dma\+\_\+rxchan dma)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int alt\+\_\+dma\+\_\+rxchan\+\_\+close (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+dma\+\_\+rxchan}}]{dma}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__dma_8h_ad91ec80d024b33277314fc1ba931bdf0}
+
+
+Definition at line {\bf 157} of file {\bf alt\+\_\+dma.\+h}.
+
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+rxchan\+\_\+depth@{alt\+\_\+dma\+\_\+rxchan\+\_\+depth}}
+\index{alt\+\_\+dma\+\_\+rxchan\+\_\+depth@{alt\+\_\+dma\+\_\+rxchan\+\_\+depth}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+rxchan\+\_\+depth(alt\+\_\+dma\+\_\+rxchan dma)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} alt\+\_\+dma\+\_\+rxchan\+\_\+depth (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+dma\+\_\+rxchan}}]{dma}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__dma_8h_a14b30e3a92d1bb727d25356ea28d159f}
+
+
+Definition at line {\bf 213} of file {\bf alt\+\_\+dma.\+h}.
+
+
+
+References {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+dev\+\_\+s\+::depth}.
+
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+rxchan\+\_\+ioctl@{alt\+\_\+dma\+\_\+rxchan\+\_\+ioctl}}
+\index{alt\+\_\+dma\+\_\+rxchan\+\_\+ioctl@{alt\+\_\+dma\+\_\+rxchan\+\_\+ioctl}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+rxchan\+\_\+ioctl(alt\+\_\+dma\+\_\+rxchan dma, int req, void $\ast$arg)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int alt\+\_\+dma\+\_\+rxchan\+\_\+ioctl (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+dma\+\_\+rxchan}}]{dma, }
+\item[{int}]{req, }
+\item[{void $\ast$}]{arg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__dma_8h_a77e81d9f276fcb54d69653b33be95411}
+
+
+Definition at line {\bf 201} of file {\bf alt\+\_\+dma.\+h}.
+
+
+
+References {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+dev\+\_\+s\+::ioctl}.
+
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+rxchan\+\_\+open@{alt\+\_\+dma\+\_\+rxchan\+\_\+open}}
+\index{alt\+\_\+dma\+\_\+rxchan\+\_\+open@{alt\+\_\+dma\+\_\+rxchan\+\_\+open}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+rxchan\+\_\+open(const char $\ast$dev)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+dma\+\_\+rxchan} alt\+\_\+dma\+\_\+rxchan\+\_\+open (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{dev}
+\end{DoxyParamCaption}
+)}\label{alt__dma_8h_a2a1339ff4db271ab0591c1d800e05b9c}
+
+
+Definition at line {\bf 51} of file {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+open.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, and {\bf alt\+\_\+find\+\_\+dev()}.
+
+
+
+Referenced by {\bf alt\+\_\+dma\+\_\+txchan\+\_\+ioctl()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{da/dd6/alt__dma_8h_a2a1339ff4db271ab0591c1d800e05b9c_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{da/dd6/alt__dma_8h_a2a1339ff4db271ab0591c1d800e05b9c_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+rxchan\+\_\+prepare@{alt\+\_\+dma\+\_\+rxchan\+\_\+prepare}}
+\index{alt\+\_\+dma\+\_\+rxchan\+\_\+prepare@{alt\+\_\+dma\+\_\+rxchan\+\_\+prepare}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+rxchan\+\_\+prepare(alt\+\_\+dma\+\_\+rxchan dma, void $\ast$data, alt\+\_\+u32 len, alt\+\_\+rxchan\+\_\+done $\ast$done, void $\ast$handle)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int alt\+\_\+dma\+\_\+rxchan\+\_\+prepare (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+dma\+\_\+rxchan}}]{dma, }
+\item[{void $\ast$}]{data, }
+\item[{{\bf alt\+\_\+u32}}]{len, }
+\item[{{\bf alt\+\_\+rxchan\+\_\+done} $\ast$}]{done, }
+\item[{void $\ast$}]{handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__dma_8h_a68369e8197b3b096761d371679402612}
+
+
+Definition at line {\bf 182} of file {\bf alt\+\_\+dma.\+h}.
+
+
+
+References {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+dev\+\_\+s\+::prepare}.
+
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+txchan\+\_\+close@{alt\+\_\+dma\+\_\+txchan\+\_\+close}}
+\index{alt\+\_\+dma\+\_\+txchan\+\_\+close@{alt\+\_\+dma\+\_\+txchan\+\_\+close}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+txchan\+\_\+close(alt\+\_\+dma\+\_\+txchan dma)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int alt\+\_\+dma\+\_\+txchan\+\_\+close (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+dma\+\_\+txchan}}]{dma}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__dma_8h_abf3ce1ccf1af712268aa925677ee00eb}
+
+
+Definition at line {\bf 80} of file {\bf alt\+\_\+dma.\+h}.
+
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+txchan\+\_\+ioctl@{alt\+\_\+dma\+\_\+txchan\+\_\+ioctl}}
+\index{alt\+\_\+dma\+\_\+txchan\+\_\+ioctl@{alt\+\_\+dma\+\_\+txchan\+\_\+ioctl}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+txchan\+\_\+ioctl(alt\+\_\+dma\+\_\+txchan dma, int req, void $\ast$arg)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int alt\+\_\+dma\+\_\+txchan\+\_\+ioctl (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+dma\+\_\+txchan}}]{dma, }
+\item[{int}]{req, }
+\item[{void $\ast$}]{arg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__dma_8h_ae4fb1e24153dae330b6a76922515ef1c}
+
+
+Definition at line {\bf 134} of file {\bf alt\+\_\+dma.\+h}.
+
+
+
+References {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+open()}, and {\bf alt\+\_\+dma\+\_\+txchan\+\_\+dev\+\_\+s\+::ioctl}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/dd6/alt__dma_8h_ae4fb1e24153dae330b6a76922515ef1c_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+txchan\+\_\+open@{alt\+\_\+dma\+\_\+txchan\+\_\+open}}
+\index{alt\+\_\+dma\+\_\+txchan\+\_\+open@{alt\+\_\+dma\+\_\+txchan\+\_\+open}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+txchan\+\_\+open(const char $\ast$name)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+dma\+\_\+txchan} alt\+\_\+dma\+\_\+txchan\+\_\+open (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{alt__dma_8h_a455a51b52778b6e57a71815b008d2905}
+
+
+Definition at line {\bf 51} of file {\bf alt\+\_\+dma\+\_\+txchan\+\_\+open.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, and {\bf alt\+\_\+find\+\_\+dev()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{da/dd6/alt__dma_8h_a455a51b52778b6e57a71815b008d2905_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+txchan\+\_\+send@{alt\+\_\+dma\+\_\+txchan\+\_\+send}}
+\index{alt\+\_\+dma\+\_\+txchan\+\_\+send@{alt\+\_\+dma\+\_\+txchan\+\_\+send}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+txchan\+\_\+send(alt\+\_\+dma\+\_\+txchan dma, const void $\ast$from, alt\+\_\+u32 length, alt\+\_\+txchan\+\_\+done $\ast$done, void $\ast$handle)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int alt\+\_\+dma\+\_\+txchan\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+dma\+\_\+txchan}}]{dma, }
+\item[{const void $\ast$}]{from, }
+\item[{{\bf alt\+\_\+u32}}]{length, }
+\item[{{\bf alt\+\_\+txchan\+\_\+done} $\ast$}]{done, }
+\item[{void $\ast$}]{handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__dma_8h_a6eb6e03d11dc11bb9c7954764c923c43}
+
+
+Definition at line {\bf 99} of file {\bf alt\+\_\+dma.\+h}.
+
+
+
+References {\bf alt\+\_\+dma\+\_\+txchan\+\_\+dev\+\_\+s\+::dma\+\_\+send}.
+
+\index{alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}!alt\+\_\+dma\+\_\+txchan\+\_\+space@{alt\+\_\+dma\+\_\+txchan\+\_\+space}}
+\index{alt\+\_\+dma\+\_\+txchan\+\_\+space@{alt\+\_\+dma\+\_\+txchan\+\_\+space}!alt\+\_\+dma.\+h@{alt\+\_\+dma.\+h}}
+\paragraph[{alt\+\_\+dma\+\_\+txchan\+\_\+space(alt\+\_\+dma\+\_\+txchan dma)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int alt\+\_\+dma\+\_\+txchan\+\_\+space (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+dma\+\_\+txchan}}]{dma}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__dma_8h_a7e60e150fb0bddab8c3d6ebfbfb298fc}
+
+
+Definition at line {\bf 119} of file {\bf alt\+\_\+dma.\+h}.
+
+
+
+References {\bf alt\+\_\+dma\+\_\+txchan\+\_\+dev\+\_\+s\+::space}.
+

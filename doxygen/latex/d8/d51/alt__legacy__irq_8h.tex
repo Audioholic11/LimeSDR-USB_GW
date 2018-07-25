@@ -1,0 +1,200 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/priv/alt\+\_\+legacy\+\_\+irq.h File Reference}
+\label{alt__legacy__irq_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/priv/alt\+\_\+legacy\+\_\+irq.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/priv/alt\+\_\+legacy\+\_\+irq.\+h}}
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}system.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}nios2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+legacy\+\_\+irq.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d3b/alt__legacy__irq_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/d4e/alt__legacy__irq_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf alt\+\_\+irq\+\_\+register} ({\bf alt\+\_\+u32} id, void $\ast$context, {\bf alt\+\_\+isr\+\_\+func} handler)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+disable} ({\bf alt\+\_\+u32} id)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+enable} ({\bf alt\+\_\+u32} id)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+interruptible} ({\bf alt\+\_\+u32} priority)
+\item 
+static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} void {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+irq\+\_\+non\+\_\+interruptible} ({\bf alt\+\_\+u32} mask)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+disable@{alt\+\_\+irq\+\_\+disable}}
+\index{alt\+\_\+irq\+\_\+disable@{alt\+\_\+irq\+\_\+disable}!alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+disable(alt\+\_\+u32 id)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+irq\+\_\+disable (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__legacy__irq_8h_aa1f18667a35eccd6d7120bde35c90607}
+
+
+Definition at line {\bf 68} of file {\bf alt\+\_\+legacy\+\_\+irq.\+h}.
+
+
+
+References {\bf alt\+\_\+irq\+\_\+active}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, and {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+register()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d51/alt__legacy__irq_8h_aa1f18667a35eccd6d7120bde35c90607_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d51/alt__legacy__irq_8h_aa1f18667a35eccd6d7120bde35c90607_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+enable@{alt\+\_\+irq\+\_\+enable}}
+\index{alt\+\_\+irq\+\_\+enable@{alt\+\_\+irq\+\_\+enable}!alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+enable(alt\+\_\+u32 id)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} int {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+irq\+\_\+enable (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__legacy__irq_8h_a8f69db4e15b130fb0138f4ecc23c471e}
+
+
+Definition at line {\bf 86} of file {\bf alt\+\_\+legacy\+\_\+irq.\+h}.
+
+
+
+References {\bf alt\+\_\+irq\+\_\+active}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, and {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE}.
+
+
+
+Referenced by {\bf alt\+\_\+irq\+\_\+register()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d51/alt__legacy__irq_8h_a8f69db4e15b130fb0138f4ecc23c471e_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d51/alt__legacy__irq_8h_a8f69db4e15b130fb0138f4ecc23c471e_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+interruptible@{alt\+\_\+irq\+\_\+interruptible}}
+\index{alt\+\_\+irq\+\_\+interruptible@{alt\+\_\+irq\+\_\+interruptible}!alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+interruptible(alt\+\_\+u32 priority)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} {\bf alt\+\_\+u32} {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+irq\+\_\+interruptible (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{priority}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__legacy__irq_8h_a95467e761721811ddb0ae55ee544d747}
+
+
+Definition at line {\bf 118} of file {\bf alt\+\_\+legacy\+\_\+irq.\+h}.
+
+
+
+References {\bf alt\+\_\+irq\+\_\+active}, {\bf alt\+\_\+priority\+\_\+mask}, {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE}, and {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US}.
+
+\index{alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+non\+\_\+interruptible@{alt\+\_\+irq\+\_\+non\+\_\+interruptible}}
+\index{alt\+\_\+irq\+\_\+non\+\_\+interruptible@{alt\+\_\+irq\+\_\+non\+\_\+interruptible}!alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+non\+\_\+interruptible(alt\+\_\+u32 mask)}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf A\+L\+T\+\_\+\+I\+N\+L\+I\+NE} void {\bf A\+L\+T\+\_\+\+A\+L\+W\+A\+Y\+S\+\_\+\+I\+N\+L\+I\+NE} alt\+\_\+irq\+\_\+non\+\_\+interruptible (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{mask}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{alt__legacy__irq_8h_a00c26da2a14ff7e442c8b015f6123e46}
+
+
+Definition at line {\bf 139} of file {\bf alt\+\_\+legacy\+\_\+irq.\+h}.
+
+
+
+References {\bf alt\+\_\+irq\+\_\+active}, {\bf alt\+\_\+priority\+\_\+mask}, {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+I\+E\+N\+A\+B\+LE}, and {\bf N\+I\+O\+S2\+\_\+\+W\+R\+I\+T\+E\+\_\+\+S\+T\+A\+T\+US}.
+
+\index{alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}!alt\+\_\+irq\+\_\+register@{alt\+\_\+irq\+\_\+register}}
+\index{alt\+\_\+irq\+\_\+register@{alt\+\_\+irq\+\_\+register}!alt\+\_\+legacy\+\_\+irq.\+h@{alt\+\_\+legacy\+\_\+irq.\+h}}
+\paragraph[{alt\+\_\+irq\+\_\+register(alt\+\_\+u32 id, void $\ast$context, alt\+\_\+isr\+\_\+func handler)}]{\setlength{\rightskip}{0pt plus 5cm}int alt\+\_\+irq\+\_\+register (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{id, }
+\item[{void $\ast$}]{context, }
+\item[{{\bf alt\+\_\+isr\+\_\+func}}]{handler}
+\end{DoxyParamCaption}
+)}\label{alt__legacy__irq_8h_a4c1559221c7978160da19c389d055f90}
+
+
+Definition at line {\bf 75} of file {\bf alt\+\_\+irq\+\_\+register.\+c}.
+
+
+
+References {\bf alt\+\_\+irq}, {\bf alt\+\_\+irq\+\_\+disable()}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf A\+L\+T\+\_\+\+N\+I\+RQ}, {\bf A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+H\+A\+N\+D\+L\+E\+R\+::context}, and {\bf A\+L\+T\+\_\+\+I\+R\+Q\+\_\+\+H\+A\+N\+D\+L\+E\+R\+::handler}.
+
+
+
+Referenced by {\bf altera\+\_\+avalon\+\_\+uart\+\_\+init()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d51/alt__legacy__irq_8h_a4c1559221c7978160da19c389d055f90_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{d8/d51/alt__legacy__irq_8h_a4c1559221c7978160da19c389d055f90_icgraph}
+\end{center}
+\end{figure}
+
+

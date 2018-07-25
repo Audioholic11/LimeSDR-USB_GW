@@ -1,0 +1,138 @@
+\subsection{alt\+\_\+busy\+\_\+sleep.\+c}
+\label{alt__busy__sleep_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+busy\+\_\+sleep.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+busy\+\_\+sleep.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * Copyright (c) 2003-2004 Altera Corporation, San Jose, California, USA.  }
+00003 \textcolor{comment}{ * All rights reserved.}
+00004 \textcolor{comment}{ * }
+00005 \textcolor{comment}{ * Permission is hereby granted, free of charge, to any person obtaining a copy}
+00006 \textcolor{comment}{ * of this software and associated documentation files (the "Software"), to }
+00007 \textcolor{comment}{ * deal in the Software without restriction, including without limitation the }
+00008 \textcolor{comment}{ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or}
+00009 \textcolor{comment}{ * sell copies of the Software, and to permit persons to whom the Software is }
+00010 \textcolor{comment}{ * furnished to do so, subject to the following conditions:}
+00011 \textcolor{comment}{ *}
+00012 \textcolor{comment}{ * The above copyright notice and this permission notice shall be included in }
+00013 \textcolor{comment}{ * all copies or substantial portions of the Software.}
+00014 \textcolor{comment}{ * }
+00015 \textcolor{comment}{ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR }
+00016 \textcolor{comment}{ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, }
+00017 \textcolor{comment}{ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE}
+00018 \textcolor{comment}{ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER }
+00019 \textcolor{comment}{ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING }
+00020 \textcolor{comment}{ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER }
+00021 \textcolor{comment}{ * DEALINGS IN THE SOFTWARE.}
+00022 \textcolor{comment}{ * }
+00023 \textcolor{comment}{ * ------------}
+00024 \textcolor{comment}{ *}
+00025 \textcolor{comment}{ * Altera does not recommend, suggest or require that this reference design }
+00026 \textcolor{comment}{ * file be used in conjunction or combination with any other product.}
+00027 \textcolor{comment}{ *}
+00028 \textcolor{comment}{ * alt\_busy\_sleep.c - Microsecond delay routine which uses a calibrated busy}
+00029 \textcolor{comment}{ *                    loop to perform the delay. This is used to implement}
+00030 \textcolor{comment}{ *                    usleep for both uC/OS-II and the standalone HAL.  }
+00031 \textcolor{comment}{ *}
+00032 \textcolor{comment}{ * Author PRR}
+00033 \textcolor{comment}{ *}
+00034 \textcolor{comment}{ * Calibrated delay with no timer required}
+00035 \textcolor{comment}{ * }
+00036 \textcolor{comment}{ * The ASM instructions in the routine are equivalent to }
+00037 \textcolor{comment}{ *}
+00038 \textcolor{comment}{ * for (i=0;i<us*(ALT\_CPU\_FREQ/3);i++);}
+00039 \textcolor{comment}{ * }
+00040 \textcolor{comment}{ * and takes three cycles each time around the loop}
+00041 \textcolor{comment}{ *}
+00042 \textcolor{comment}{ */}
+00043 
+00044 \textcolor{preprocessor}{#include <limits.h>}
+00045 \textcolor{preprocessor}{#include <string.h>}
+00046 
+00047 \textcolor{preprocessor}{#include "system.h"}
+00048 \textcolor{preprocessor}{#include "alt_types.h"}
+00049 
+00050 \textcolor{preprocessor}{#include "priv/alt_busy_sleep.h"}
+00051 
+00052 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} alt_busy_sleep (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} us)
+00053 \{
+00054 \textcolor{comment}{/*}
+00055 \textcolor{comment}{ * Only delay if ALT\_SIM\_OPTIMIZE is not defined; i.e., if software}
+00056 \textcolor{comment}{ * is built targetting ModelSim RTL simulation, the delay will be}
+00057 \textcolor{comment}{ * skipped to speed up simulation.}
+00058 \textcolor{comment}{ */}
+00059 \textcolor{preprocessor}{#ifndef ALT\_SIM\_OPTIMIZE}
+00060   \textcolor{keywordtype}{int} i;
+00061   \textcolor{keywordtype}{int} big\_loops;
+00062   alt_u32 cycles\_per\_loop;
+00063   
+00064   \textcolor{keywordflow}{if} (!strcmp(NIOS2_CPU_IMPLEMENTATION,\textcolor{stringliteral}{"tiny"}))
+00065   \{
+00066     cycles\_per\_loop = 9;
+00067   \}
+00068   \textcolor{keywordflow}{else}  
+00069   \{
+00070     cycles\_per\_loop = 3;
+00071   \}
+00072   
+00073 
+00074   big\_loops = us / (INT\_MAX/
+00075   (ALT_CPU_FREQ/(cycles\_per\_loop * 1000000)));
+00076 
+00077   \textcolor{keywordflow}{if} (big\_loops)
+00078   \{
+00079     \textcolor{keywordflow}{for}(i=0;i<big\_loops;i++)
+00080     \{
+00081       \textcolor{comment}{/*}
+00082 \textcolor{comment}{      * Do NOT Try to single step the asm statement below }
+00083 \textcolor{comment}{      * (single step will never return)}
+00084 \textcolor{comment}{      * Step out of this function or set a breakpoint after the asm statements}
+00085 \textcolor{comment}{      */}
+00086       __asm__ \textcolor{keyword}{volatile} (
+00087         \textcolor{stringliteral}{"\(\backslash\)n0:"}
+00088         \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)taddi %0,%0, -1"}
+00089         \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)tbne %0,zero,0b"}
+00090         \textcolor{stringliteral}{"\(\backslash\)n1:"}
+00091         \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t.pushsection .debug\_alt\_sim\_info"}
+00092         \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t.int 4, 0, 0b, 1b"}
+00093         \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t.popsection"}
+00094         :: \textcolor{stringliteral}{"r"} (INT\_MAX));
+00095       us -= (INT\_MAX/(ALT_CPU_FREQ/
+00096       (cycles\_per\_loop * 1000000)));
+00097     \}
+00098 
+00099     \textcolor{comment}{/*}
+00100 \textcolor{comment}{    * Do NOT Try to single step the asm statement below }
+00101 \textcolor{comment}{    * (single step will never return)}
+00102 \textcolor{comment}{    * Step out of this function or set a breakpoint after the asm statements}
+00103 \textcolor{comment}{    */}
+00104     __asm__ \textcolor{keyword}{volatile} (
+00105       \textcolor{stringliteral}{"\(\backslash\)n0:"}
+00106       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)taddi %0,%0, -1"}
+00107       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)tbne %0,zero,0b"}
+00108       \textcolor{stringliteral}{"\(\backslash\)n1:"}
+00109       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t.pushsection .debug\_alt\_sim\_info"}
+00110       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t.int 4, 0, 0b, 1b"}
+00111       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t.popsection"}
+00112       :: \textcolor{stringliteral}{"r"} (us*(ALT_CPU_FREQ/(cycles\_per\_loop * 1000000))));
+00113   \}
+00114   \textcolor{keywordflow}{else}
+00115   \{
+00116     \textcolor{comment}{/*}
+00117 \textcolor{comment}{    * Do NOT Try to single step the asm statement below }
+00118 \textcolor{comment}{    * (single step will never return)}
+00119 \textcolor{comment}{    * Step out of this function or set a breakpoint after the asm statements}
+00120 \textcolor{comment}{    */}
+00121     __asm__ \textcolor{keyword}{volatile} (
+00122       \textcolor{stringliteral}{"\(\backslash\)n0:"}
+00123       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)taddi %0,%0, -1"}
+00124       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)tbgt %0,zero,0b"}
+00125       \textcolor{stringliteral}{"\(\backslash\)n1:"}
+00126       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t.pushsection .debug\_alt\_sim\_info"}
+00127       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t.int 4, 0, 0b, 1b"}
+00128       \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t.popsection"}
+00129       :: \textcolor{stringliteral}{"r"} (us*(ALT_CPU_FREQ/(cycles\_per\_loop * 1000000))));
+00130   \}
+00131 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* #ifndef ALT\_SIM\_OPTIMIZE */}\textcolor{preprocessor}{}
+00132   \textcolor{keywordflow}{return} 0;
+00133 \}
+\end{DoxyCode}

@@ -1,0 +1,61 @@
+\subsection{bus\+\_\+sync\+\_\+reg.\+vhd}
+\label{bus__sync__reg_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/bus\+\_\+sync\+\_\+reg.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/bus\+\_\+sync\+\_\+reg.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    bus\_sync\_reg.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: Synchronization with two register stages for bus signal}
+00004 \textcolor{keyword}{-- DATE:    Jan 13, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }bus_sync_reg \textcolor{keywordflow}{is}
+00016    \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(}
+00017       \textcolor{vhdlchar}{bus_width}   \textcolor{vhdlchar}{:} \textcolor{comment}{integer}\textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{7}
+00018    \textcolor{vhdlchar}{)};
+00019    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00020       \textcolor{vhdlchar}{clk}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00021       \textcolor{vhdlchar}{reset_n}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00022       \textcolor{vhdlchar}{async_in}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{bus_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00023       \textcolor{vhdlchar}{sync_out}    \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{bus_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}
+00024         \textcolor{vhdlchar}{)};
+00025 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{bus\_sync\_reg};
+00026 
+00027 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00028 \textcolor{keyword}{-- Architecture}
+00029 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00030 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} bus_sync_reg is
+00031 \textcolor{keyword}{--declare signals,  components here}
+00032 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{sync_reg0}\textcolor{vhdlchar}{,}\textcolor{vhdlchar}{sync_reg1} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{bus_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00033 
+00034   
+00035 \textcolor{vhdlkeyword}{begin}
+00036 
+00037  \textcolor{keywordflow}{process}(reset_n, clk)
+00038 \textcolor{vhdlkeyword}{    begin}
+00039       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00040          \textcolor{vhdlchar}{sync_reg0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)}; 
+00041          \textcolor{vhdlchar}{sync_reg1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{(}\textcolor{keywordflow}{others}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};          
+00042       \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00043          \textcolor{vhdlchar}{sync_reg0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{async_in};
+00044          \textcolor{vhdlchar}{sync_reg1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{sync_reg0};
+00045         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00046     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00047     
+00048 \textcolor{vhdlchar}{sync_out}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{sync_reg1};
+00049   
+00050 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00051 
+00052 
+00053 
+00054 
+00055 
+00056 
+\end{DoxyCode}

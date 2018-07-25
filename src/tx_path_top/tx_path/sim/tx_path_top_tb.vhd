@@ -22,23 +22,23 @@ end tx_path_top_tb;
 -- ----------------------------------------------------------------------------
 
 architecture tb_behave of tx_path_top_tb is
-   constant clk0_period    : time := 16 ns;   --RX clk, ~180MBs
+   constant clk0_period    : time := 50 ns;   --RX clk, ~180MBs
    constant clk1_period    : time := 10 ns;     --Transfer clk, 100MHz, 400MBs 
-   constant clk2_period    : time := 16 ns;   --TX clk, 
+   constant clk2_period    : time := 50 ns;   --TX clk, 
    --signals
    signal clk0,clk1,clk2   : std_logic;
    signal reset_n          : std_logic; 
    
    constant smpl_nr_delay  : integer := 1030;
    
-   signal sample_width     : std_logic_vector(1 downto 0) := "00"; 
+   signal sample_width     : std_logic_vector(1 downto 0) := "10"; 
    signal mode             : std_logic:='0'; -- JESD207: 1; TRXIQ: 0
    signal trxiqpulse       : std_logic:='0'; -- trxiqpulse on: 1; trxiqpulse off: 0
    signal ddr_en           : std_logic:='0'; -- DDR: 1; SDR: 0
    signal mimo_en          : std_logic:='0'; -- MIMO: 1; SISO: 0
-   signal ch_en            : std_logic_vector(1 downto 0):="11"; --"01" - Ch. A, "10" - Ch. B, "11" - Ch. A and Ch. B. 
+   signal ch_en            : std_logic_vector(1 downto 0):="10"; --"01" - Ch. A, "10" - Ch. B, "11" - Ch. A and Ch. B. 
    signal fidm             : std_logic:='0'; -- External Frame ID mode. Frame start at fsync = 0, when 0. Frame start at fsync = 1, when 1.
-   signal inst1_pct_sync_mode    : std_logic := '1'; --0 - timestamp, 1 - external pulse 
+   signal inst1_pct_sync_mode    : std_logic := '0'; --0 - timestamp, 1 - external pulse 
    signal inst1_pct_sync_size    : std_logic_vector(15 downto 0) := x"03FC"; -- valid in external pulse mode only
    signal txant_cyc_before_en    : std_logic_vector(15 downto 0) := x"0001";
    signal txant_cyc_after_en     : std_logic_vector(15 downto 0) := x"0001";
@@ -102,8 +102,8 @@ begin
    
       res: process is
    begin
-      reset_n <= '0'; wait for 20 ns;
-      report "reset_n released" severity failure ;     
+      reset_n <= '0'; wait for clk2_period*2;
+      --report "reset_n released" severity failure ;     
       reset_n <= '1'; wait;
    end process res;
    
@@ -113,12 +113,12 @@ begin
 -- ----------------------------------------------------------------------------
 -- RX sample Nr. generation
 -- ----------------------------------------------------------------------------    
-process(clk2, reset_n)
+process(clk0, reset_n)
 begin
    if reset_n = '0' then 
       rx_sample_nr_en <= '0';
       rx_sample_nr <= (others => '0');
-   elsif (clk2'event AND clk2='1') then 
+   elsif (clk0'event AND clk0='1') then 
       rx_sample_nr_en <= not rx_sample_nr_en;
       if rx_sample_nr_en = '1' then 
          rx_sample_nr <= std_logic_vector(unsigned(rx_sample_nr)+1);
@@ -129,11 +129,11 @@ begin
 end process;
 
 
-process(clk2, reset_n)
+process(clk0, reset_n)
    begin
       if reset_n = '0' then 
          smpl_nr_array <= (others=>(others=>'0'));
-      elsif (clk2'event AND clk2='1') then 
+      elsif (clk0'event AND clk0='1') then 
          for i in 0 to smpl_nr_delay-1 loop
             if i = 0 then 
                smpl_nr_array(0) <= rx_sample_nr;
@@ -145,12 +145,12 @@ process(clk2, reset_n)
    end process;
    
    
-process(clk0, reset_n)
+process(clk1, reset_n)
    begin
       if reset_n = '0' then 
          rd_pct         <= '0';
          inst0_fifo_wrreq <= '0';
-      elsif (clk0'event AND clk0='1') then
+      elsif (clk1'event AND clk1='1') then
          --if inst1_in_pct_full = '0' then
          if rd_pct_cnt < rd_pct_cnt_max-1 then 
             rd_pct <= '1';
@@ -162,11 +162,11 @@ process(clk0, reset_n)
       end if;
    end process;
    
-   process(clk0, reset_n)
+   process(clk1, reset_n)
    begin
       if reset_n = '0' then 
          rd_pct_cnt <= (others => '0');
-      elsif (clk0'event AND clk0='1') then 
+      elsif (clk1'event AND clk1='1') then 
          if rd_pct = '1' then 
             rd_pct_cnt <= rd_pct_cnt +1;
          end if;
@@ -180,9 +180,10 @@ process(clk0, reset_n)
 -- ----------------------------------------------------------------------------
 -- Read packet data
 -- ----------------------------------------------------------------------------   
-process(clk0, reset_n)
+process(clk1, reset_n)
    --select one of the three files depending on sample width
-   FILE in_file      : TEXT OPEN READ_MODE IS "sim/out_pct_6_12b";
+   --FILE in_file      : TEXT OPEN READ_MODE IS "sim/out_pct_6_12b";
+	FILE in_file      : TEXT OPEN READ_MODE IS "sim/out_pct_6_12b_chirp_sync_test";
    --FILE in_file      : TEXT OPEN READ_MODE IS "sim/out_pct_6_14b";
    --FILE in_file      : TEXT OPEN READ_MODE IS "sim/out_pct_6_16b";
    
@@ -191,7 +192,7 @@ process(clk0, reset_n)
 begin
    if reset_n = '0' then 
       pct_data <= (others=>'0');
-   elsif (clk0'event AND clk0='1') then 
+   elsif (clk1'event AND clk1='1') then 
       if rd_pct = '1' then 
          READLINE(in_file, in_line);
          HREAD(in_line, data);
@@ -219,7 +220,7 @@ fifo_inst_isnt0 : entity work.fifo_inst
       port map(
          --input ports 
          reset_n       => reset_n,
-         wrclk         => clk0,
+         wrclk         => clk1,
          wrreq         => inst0_fifo_wrreq,
          data          => pct_data,
          wrfull        => open,
@@ -262,7 +263,7 @@ tx_path_top_inst0 : entity work.tx_path_top
       reset_n              => reset_n,
       en                   => reset_n,
 
-      rx_sample_clk        => clk2,
+      rx_sample_clk        => clk0,
       rx_sample_nr         => rx_sample_nr,
 
       pct_sync_mode        => inst1_pct_sync_mode,
@@ -290,7 +291,9 @@ tx_path_top_inst0 : entity work.tx_path_top
 
       in_pct_wrreq         => inst1_in_pct_wrreq,
       in_pct_data          => inst1_in_pct_data,
-      in_pct_full          => inst1_in_pct_full
+      in_pct_full          => inst1_in_pct_full,
+		chirp_sync_en 			=> '1'
+		
         );
         
 pulse_gen_inst2 : entity work.pulse_gen
@@ -304,8 +307,4 @@ pulse_gen_inst2 : entity work.pulse_gen
 
 
 	end tb_behave;
-  
-  
-
-
   

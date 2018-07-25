@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['u0',['u0',['../dc/d57/LimeSDR-USB__lms7__trx_8lpc_8txt.html#a08d1793a05a12e2aaed8de00cedbe4a4',1,'LimeSDR-USB_lms7_trx.lpc.txt']]],
+  ['u_5fd',['u_d',['../db/d4c/classgpio__chirp__sync__FSM.html#a0131c6c5bfd494c8868dbc4b63856e73',1,'gpio_chirp_sync_FSM']]],
+  ['u_5fd_5fsig',['u_d_sig',['../dd/d76/classgpio__chirp__sync__FSM_1_1arch.html#afe6e163cf2fa2001428f51ffb4f4c706',1,'gpio_chirp_sync_FSM::arch']]],
+  ['uncompressor',['uncompressor',['../dc/d57/LimeSDR-USB__lms7__trx_8lpc_8txt.html#acd65b4763757b0456041e308293d6678',1,'LimeSDR-USB_lms7_trx.lpc.txt']]],
+  ['unpack_5f64_5fto_5f48_5finst0',['unpack_64_to_48_inst0',['../dc/d57/LimeSDR-USB__lms7__trx_8lpc_8txt.html#a997343d0eef0cfd304e32a59f11163dc',1,'LimeSDR-USB_lms7_trx.lpc.txt']]],
+  ['unpack_5f64_5fto_5f56_5finst1',['unpack_64_to_56_inst1',['../dc/d57/LimeSDR-USB__lms7__trx_8lpc_8txt.html#ae0e5de5b7056772b3e4987607b126107',1,'LimeSDR-USB_lms7_trx.lpc.txt']]],
+  ['unpack_5f64_5fto_5f64_5finst2',['unpack_64_to_64_inst2',['../dc/d57/LimeSDR-USB__lms7__trx_8lpc_8txt.html#a73cb67819f0a4cfadbf3588bd9939aae',1,'LimeSDR-USB_lms7_trx.lpc.txt']]],
+  ['up_5fdn_5f0',['up_dn_0',['../d5/d3b/classtxtspcfg.html#a41ecaff209bd4fde905406a58d670215',1,'txtspcfg']]],
+  ['up_5fdn_5f1',['up_dn_1',['../d5/d3b/classtxtspcfg.html#a97f89bbf2d6b55c947bc5ff28f10b0b9',1,'txtspcfg']]],
+  ['updown',['updown',['../dc/dc1/classpll__ps.html#a3ea4b39f7f6f9c37ee52d57bdb467b1a',1,'pll_ps']]],
+  ['updown_5freg',['updown_reg',['../da/d3c/classpll__ps_1_1arch.html#aa5bcf6253ca2eb39d5040938ac7feecc',1,'pll_ps::arch']]],
+  ['ureset_5fdriver_5fclk',['ureset_driver_clk',['../dc/d57/LimeSDR-USB__lms7__trx_8lpc_8txt.html#afcaaeec6b15f3baab8cd6b041f2810ae',1,'LimeSDR-USB_lms7_trx.lpc.txt']]],
+  ['usb2div',['USB2DIV',['../d4/de4/classslaveFIFO5b_1_1arch.html#a1d4d0a4fa831961f3d0e7d00ffa0ff76',1,'slaveFIFO5b::arch']]],
+  ['usb_5fspeed',['usb_speed',['../d4/d62/classFX3__slaveFIFO5b__top.html#a4f24827b8507b0c51581ac61ca8df605',1,'FX3_slaveFIFO5b_top.usb_speed()'],['../d8/d77/classslaveFIFO5b.html#a4f24827b8507b0c51581ac61ca8df605',1,'slaveFIFO5b.usb_speed()']]],
+  ['use_5fconfiguration_5fdevice_5f1332',['USE_CONFIGURATION_DEVICE_1332',['../d7/dbe/main_8qsf.html#a579756a7ace1859494db5c21d3cfb1ca',1,'main.qsf']]],
+  ['use_5fconfiguration_5fdevice_5f55',['USE_CONFIGURATION_DEVICE_55',['../d8/d33/LimeSDR-USB__lms7__trx_8qsf.html#a6221a8ddeaac35289f818e66d86407e7',1,'LimeSDR-USB_lms7_trx.qsf']]],
+  ['use_5fgeneric_5fmemory_5fmodel',['USE_GENERIC_MEMORY_MODEL',['../d8/d51/classddr2__example__top__tb.html#a9ae6d35e66382976c7ba220b9be4c6fc',1,'ddr2_example_top_tb']]],
+  ['use_5firam',['USE_IRAM',['../de/d06/classddr2__phy__alt__mem__phy__mmi.html#a4543d47d7a820e37c14d702521ad851b',1,'ddr2_phy_alt_mem_phy_mmi']]],
+  ['use_5fsignaltap_5ffile_5f176',['USE_SIGNALTAP_FILE_176',['../d8/d33/LimeSDR-USB__lms7__trx_8qsf.html#a29fb3bb0f20f5480bd1abcf6a3f53574',1,'LimeSDR-USB_lms7_trx.qsf']]],
+  ['usedw_5fcounter',['usedw_counter',['../dc/d57/LimeSDR-USB__lms7__trx_8lpc_8txt.html#a9348f66e5a754dd7296116fc2a3ce1ec',1,'LimeSDR-USB_lms7_trx.lpc.txt']]]
+];

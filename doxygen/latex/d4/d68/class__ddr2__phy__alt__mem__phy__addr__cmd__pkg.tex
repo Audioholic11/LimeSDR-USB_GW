@@ -1,0 +1,946 @@
+\subsection{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg Package Body Reference}
+\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg}\index{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+
+
+Collaboration diagram for ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{dc/dd5/class__ddr2__phy__alt__mem__phy__addr__cmd__pkg__coll__graph}
+\end{center}
+\end{figure}
+{\bfseries Package $>$$>$ }{\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}\\*
+\subsubsection*{Functions}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf defaults}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf reset}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf deselect}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  , \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf precharge\+\_\+all}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf precharge\+\_\+bank}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{bank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ba\+\_\+bits-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf activate}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}\\*
+{\bfseries \textcolor{vhdlchar}{bank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ba\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{row\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+addr\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf write}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}\\*
+{\bfseries \textcolor{vhdlchar}{bank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ba\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{col\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+addr\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{op\+\_\+length\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  1 to  8}}\\*
+{\bfseries \textcolor{vhdlchar}{auto\+\_\+prech\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in boolean}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf read}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}\\*
+{\bfseries \textcolor{vhdlchar}{bank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ba\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{col\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+addr\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{op\+\_\+length\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  1 to  8}}\\*
+{\bfseries \textcolor{vhdlchar}{auto\+\_\+prech\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in boolean}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf refresh}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf load\+\_\+mode}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{mode\+\_\+register\+\_\+num\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  3}}\\*
+{\bfseries \textcolor{vhdlchar}{mode\+\_\+reg\+\_\+value\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector(   c\+\_\+max\+\_\+mode\+\_\+reg\+\_\+bit downto  0)}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{remap\+\_\+addr\+\_\+and\+\_\+ba\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in boolean}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf maintain\+\_\+pd\+\_\+or\+\_\+sr}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf Z\+Q\+CS}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  , \textcolor{vhdlchar}{rank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf Z\+Q\+CL}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  , \textcolor{vhdlchar}{rank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf defaults}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf reset}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf int\+\_\+pup\+\_\+reset}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf deselect}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  , \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf precharge\+\_\+all}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf precharge\+\_\+bank}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{bank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ba\+\_\+bits-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf activate}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{bank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ba\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{row\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+addr\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf write}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{bank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ba\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{col\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+addr\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{op\+\_\+length\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  1 to  8}}\\*
+{\bfseries \textcolor{vhdlchar}{auto\+\_\+prech\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in boolean}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf read}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{bank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ba\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{col\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+addr\+\_\+bits-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{op\+\_\+length\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  1 to  8}}\\*
+{\bfseries \textcolor{vhdlchar}{auto\+\_\+prech\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in boolean}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf refresh}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf self\+\_\+refresh\+\_\+entry}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf exit\+\_\+sr\+\_\+pd\+\_\+mode}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf enter\+\_\+sr\+\_\+pd\+\_\+mode}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf load\+\_\+mode}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{mode\+\_\+register\+\_\+num\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  3}}\\*
+{\bfseries \textcolor{vhdlchar}{mode\+\_\+reg\+\_\+value\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector(   c\+\_\+max\+\_\+mode\+\_\+reg\+\_\+bit downto  0)}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{remap\+\_\+addr\+\_\+and\+\_\+ba\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in boolean}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf maintain\+\_\+pd\+\_\+or\+\_\+sr}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{previous\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf Z\+Q\+CL}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  , \textcolor{vhdlchar}{rank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf Z\+Q\+CS}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  , \textcolor{vhdlchar}{rank\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf all\+\_\+reversed\+\_\+ranks}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{record\+\_\+to\+\_\+mask\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}\\*
+{\bfseries \textcolor{vhdlchar}{mem\+\_\+ac\+\_\+swapped\+\_\+ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf all\+\_\+unreversed\+\_\+ranks}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{record\+\_\+to\+\_\+mask\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd}}\\*
+{\bfseries \textcolor{vhdlchar}{mem\+\_\+ac\+\_\+swapped\+\_\+ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf all\+\_\+unreversed\+\_\+ranks}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{record\+\_\+to\+\_\+mask\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{mem\+\_\+ac\+\_\+swapped\+\_\+ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf all\+\_\+reversed\+\_\+ranks}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{record\+\_\+to\+\_\+mask\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{mem\+\_\+ac\+\_\+swapped\+\_\+ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }}} {\bf program\+\_\+rdimm\+\_\+register}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{control\+\_\+word\+\_\+addr\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector( 3 downto  0)}}\\*
+{\bfseries \textcolor{vhdlchar}{control\+\_\+word\+\_\+data\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector( 3 downto  0)}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf program\+\_\+rdimm\+\_\+register}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{control\+\_\+word\+\_\+addr\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector( 3 downto  0)}}\\*
+{\bfseries \textcolor{vhdlchar}{control\+\_\+word\+\_\+data\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector( 3 downto  0)}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf precharge\+\_\+all}{\bfseries  ( }{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}{\bfseries  , \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf dll\+\_\+reset}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{mode\+\_\+reg\+\_\+val\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{rank\+\_\+num\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  0 to  2$\ast$$\ast$   c\+\_\+max\+\_\+ranks-\/ 1}}\\*
+{\bfseries \textcolor{vhdlchar}{reorder\+\_\+addr\+\_\+bits\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in boolean}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+odt\+\_\+array}\textcolor{vhdlchar}{ }}} {\bf set\+\_\+odt\+\_\+values}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+: }\textcolor{stringliteral}{in }{\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }}}\\*
+{\bfseries \textcolor{vhdlchar}{ranks\+\_\+per\+\_\+slot\+: }\textcolor{stringliteral}{in }{\bfseries \textcolor{comment}{natural}\textcolor{vhdlchar}{ }}}\\*
+{\bfseries \textcolor{vhdlchar}{mem\+\_\+type\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in string}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }}} {\bf set\+\_\+config\+\_\+rec}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{num\+\_\+addr\+\_\+bits\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural}}\\*
+{\bfseries \textcolor{vhdlchar}{num\+\_\+ba\+\_\+bits\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural}}\\*
+{\bfseries \textcolor{vhdlchar}{num\+\_\+cs\+\_\+bits\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural}}\\*
+{\bfseries \textcolor{vhdlchar}{num\+\_\+ranks\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural}}\\*
+{\bfseries \textcolor{vhdlchar}{dwidth\+\_\+ratio\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  1 to    c\+\_\+max\+\_\+cmds\+\_\+per\+\_\+clk}}\\*
+{\bfseries \textcolor{vhdlchar}{mem\+\_\+type\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in string}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }}} {\bf set\+\_\+config\+\_\+rec}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{num\+\_\+addr\+\_\+bits\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural}}\\*
+{\bfseries \textcolor{vhdlchar}{num\+\_\+ba\+\_\+bits\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural}}\\*
+{\bfseries \textcolor{vhdlchar}{num\+\_\+cs\+\_\+bits\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural}}\\*
+{\bfseries \textcolor{vhdlchar}{dwidth\+\_\+ratio\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural   range  1 to    c\+\_\+max\+\_\+cmds\+\_\+per\+\_\+clk}}\\*
+{\bfseries \textcolor{vhdlchar}{mem\+\_\+type\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in string}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf mask}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{signal\+\_\+name\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+signals}}\\*
+{\bfseries \textcolor{vhdlchar}{mask\+\_\+value\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic}}\\*
+{\bfseries  )} 
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}} {\bf mask}{\bfseries  ( }\\*
+{\bfseries \textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}}\\*
+{\bfseries \textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+vector}}\\*
+{\bfseries \textcolor{vhdlchar}{signal\+\_\+name\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in t\+\_\+addr\+\_\+cmd\+\_\+signals}}\\*
+{\bfseries \textcolor{vhdlchar}{mask\+\_\+value\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in std\+\_\+logic}}\\*
+{\bfseries \textcolor{vhdlchar}{mask\+\_\+bit\+: }\textcolor{stringliteral}{in }\textcolor{vhdlchar}{in natural}}\\*
+{\bfseries  )} 
+\end{DoxyCompactItemize}
+\subsubsection*{Procedures}
+ \begin{DoxyCompactItemize}
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{ }}} {\bf unpack\+\_\+addr\+\_\+cmd\+\_\+vector}( \\*
+{\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{addr\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ba\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{cas\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ras\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{we\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{cke\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{cs\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{odt\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{rst\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+   )
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{ }}} {\bf unpack\+\_\+addr\+\_\+cmd\+\_\+vector}( \\*
+{\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{addr\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{ba\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{cas\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{ras\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{we\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{cke\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{cs\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{odt\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{rst\+\_\+n\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+   )
+\item 
+{\bfseries {\bfseries \textcolor{vhdlchar}{ }}} {\bf mask}( \\*
+{\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{config\+\_\+rec\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{keywordflow}{signal }\textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{inout}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{signal\+\_\+name\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+signals}\textcolor{vhdlchar}{ }}}\\*
+  {\bfseries \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{mask\+\_\+value\+: }\textcolor{stringliteral}{} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }}}\\*
+   )
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 1984} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!activate@{activate}}
+\index{activate@{activate}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{activateconfig\+\_\+rec,previous,bank,row,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} activate(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{bank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{row}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+addr\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a7f66742ad3fa284d7c4b9d5b74f79baa}
+
+
+Definition at line {\bf 2116} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!activate@{activate}}
+\index{activate@{activate}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{activateconfig\+\_\+rec,previous,bank,row,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} activate(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{bank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{row}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+addr\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a7cc29c768d8adedb3c006c34e362d445}
+
+
+Definition at line {\bf 2555} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!all\+\_\+reversed\+\_\+ranks@{all\+\_\+reversed\+\_\+ranks}}
+\index{all\+\_\+reversed\+\_\+ranks@{all\+\_\+reversed\+\_\+ranks}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{all\+\_\+reversed\+\_\+ranksconfig\+\_\+rec,record\+\_\+to\+\_\+mask,mem\+\_\+ac\+\_\+swapped\+\_\+ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} all\+\_\+reversed\+\_\+ranks(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{record\+\_\+to\+\_\+mask}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mem\+\_\+ac\+\_\+swapped\+\_\+ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a4946bfcee8d44cee6d0589571c844057}
+
+
+Definition at line {\bf 2866} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!all\+\_\+reversed\+\_\+ranks@{all\+\_\+reversed\+\_\+ranks}}
+\index{all\+\_\+reversed\+\_\+ranks@{all\+\_\+reversed\+\_\+ranks}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{all\+\_\+reversed\+\_\+ranksconfig\+\_\+rec,record\+\_\+to\+\_\+mask,mem\+\_\+ac\+\_\+swapped\+\_\+ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} all\+\_\+reversed\+\_\+ranks(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{record\+\_\+to\+\_\+mask}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mem\+\_\+ac\+\_\+swapped\+\_\+ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_aeee13a83b930545341b04754afc2c554}
+
+
+Definition at line {\bf 2929} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!all\+\_\+unreversed\+\_\+ranks@{all\+\_\+unreversed\+\_\+ranks}}
+\index{all\+\_\+unreversed\+\_\+ranks@{all\+\_\+unreversed\+\_\+ranks}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{all\+\_\+unreversed\+\_\+ranksconfig\+\_\+rec,record\+\_\+to\+\_\+mask,mem\+\_\+ac\+\_\+swapped\+\_\+ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} all\+\_\+unreversed\+\_\+ranks(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{record\+\_\+to\+\_\+mask}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mem\+\_\+ac\+\_\+swapped\+\_\+ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a7a4463dce29592bde4ac9117839af549}
+
+
+Definition at line {\bf 2888} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!all\+\_\+unreversed\+\_\+ranks@{all\+\_\+unreversed\+\_\+ranks}}
+\index{all\+\_\+unreversed\+\_\+ranks@{all\+\_\+unreversed\+\_\+ranks}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{all\+\_\+unreversed\+\_\+ranksconfig\+\_\+rec,record\+\_\+to\+\_\+mask,mem\+\_\+ac\+\_\+swapped\+\_\+ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} all\+\_\+unreversed\+\_\+ranks(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{record\+\_\+to\+\_\+mask}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mem\+\_\+ac\+\_\+swapped\+\_\+ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a6e0e8eb910d321adb06ebd95965028f6}
+
+
+Definition at line {\bf 2910} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!defaults@{defaults}}
+\index{defaults@{defaults}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{defaultsconfig\+\_\+rec,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} defaults(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_acb3e1ee1c1607a68527062d752f2ce0d}
+
+
+Definition at line {\bf 1993} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!defaults@{defaults}}
+\index{defaults@{defaults}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{defaultsconfig\+\_\+rec,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} defaults(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a66378b0f8d911b320954e345e6b89e54}
+
+
+Definition at line {\bf 2438} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!deselect@{deselect}}
+\index{deselect@{deselect}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{deselectconfig\+\_\+rec,previous,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} deselect(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a7f4b7556d93d07e932a7e2d66338f25c}
+
+
+Definition at line {\bf 2034} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!deselect@{deselect}}
+\index{deselect@{deselect}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{deselectconfig\+\_\+rec,previous,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} deselect(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a949bd212053ef02d6c713ecc75f39e07}
+
+
+Definition at line {\bf 2481} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!dll\+\_\+reset@{dll\+\_\+reset}}
+\index{dll\+\_\+reset@{dll\+\_\+reset}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{dll\+\_\+resetconfig\+\_\+rec,mode\+\_\+reg\+\_\+val,rank\+\_\+num,reorder\+\_\+addr\+\_\+bits,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} dll\+\_\+reset(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mode\+\_\+reg\+\_\+val}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{rank\+\_\+num}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{reorder\+\_\+addr\+\_\+bits}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{boolean}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a1874577d1a62961e1bb755d7a5666bd0}
+
+
+Definition at line {\bf 3004} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!enter\+\_\+sr\+\_\+pd\+\_\+mode@{enter\+\_\+sr\+\_\+pd\+\_\+mode}}
+\index{enter\+\_\+sr\+\_\+pd\+\_\+mode@{enter\+\_\+sr\+\_\+pd\+\_\+mode}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{enter\+\_\+sr\+\_\+pd\+\_\+modeconfig\+\_\+rec,previous,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} enter\+\_\+sr\+\_\+pd\+\_\+mode(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_ad2e16a215c9f75be11721647cfbf50c7}
+
+
+Definition at line {\bf 2736} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!exit\+\_\+sr\+\_\+pd\+\_\+mode@{exit\+\_\+sr\+\_\+pd\+\_\+mode}}
+\index{exit\+\_\+sr\+\_\+pd\+\_\+mode@{exit\+\_\+sr\+\_\+pd\+\_\+mode}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{exit\+\_\+sr\+\_\+pd\+\_\+modeconfig\+\_\+rec,previous,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} exit\+\_\+sr\+\_\+pd\+\_\+mode(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_ad1820eb51a6969b5d4987d0dba39255c}
+
+
+Definition at line {\bf 2700} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!int\+\_\+pup\+\_\+reset@{int\+\_\+pup\+\_\+reset}}
+\index{int\+\_\+pup\+\_\+reset@{int\+\_\+pup\+\_\+reset}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{int\+\_\+pup\+\_\+resetconfig\+\_\+rec,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} int\+\_\+pup\+\_\+reset(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a4888329e8dc94b4f2cadfa63a7058a11}
+
+
+Definition at line {\bf 2465} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!load\+\_\+mode@{load\+\_\+mode}}
+\index{load\+\_\+mode@{load\+\_\+mode}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{load\+\_\+modeconfig\+\_\+rec,mode\+\_\+register\+\_\+num,mode\+\_\+reg\+\_\+value,ranks,remap\+\_\+addr\+\_\+and\+\_\+ba,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} load\+\_\+mode(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mode\+\_\+register\+\_\+num}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mode\+\_\+reg\+\_\+value}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+mode\+\_\+reg\+\_\+bit}\textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{remap\+\_\+addr\+\_\+and\+\_\+ba}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{boolean}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a1fa917153d49dd3b0e61b62aaaf3f79e}
+
+
+Definition at line {\bf 2312} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!load\+\_\+mode@{load\+\_\+mode}}
+\index{load\+\_\+mode@{load\+\_\+mode}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{load\+\_\+modeconfig\+\_\+rec,mode\+\_\+register\+\_\+num,mode\+\_\+reg\+\_\+value,ranks,remap\+\_\+addr\+\_\+and\+\_\+ba,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} load\+\_\+mode(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mode\+\_\+register\+\_\+num}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mode\+\_\+reg\+\_\+value}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+mode\+\_\+reg\+\_\+bit}\textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{remap\+\_\+addr\+\_\+and\+\_\+ba}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{boolean}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a4d8a3891debb0d65172d1973fe4e2d88}
+
+
+Definition at line {\bf 2772} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!maintain\+\_\+pd\+\_\+or\+\_\+sr@{maintain\+\_\+pd\+\_\+or\+\_\+sr}}
+\index{maintain\+\_\+pd\+\_\+or\+\_\+sr@{maintain\+\_\+pd\+\_\+or\+\_\+sr}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{maintain\+\_\+pd\+\_\+or\+\_\+srconfig\+\_\+rec,previous,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} maintain\+\_\+pd\+\_\+or\+\_\+sr(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_ad52ba9ec729e189fab66615e88bdfa39}
+
+
+Definition at line {\bf 2357} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!maintain\+\_\+pd\+\_\+or\+\_\+sr@{maintain\+\_\+pd\+\_\+or\+\_\+sr}}
+\index{maintain\+\_\+pd\+\_\+or\+\_\+sr@{maintain\+\_\+pd\+\_\+or\+\_\+sr}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{maintain\+\_\+pd\+\_\+or\+\_\+srconfig\+\_\+rec,previous,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} maintain\+\_\+pd\+\_\+or\+\_\+sr(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a35353d34fd0e5a73d0dcc91bcbd5b9b1}
+
+
+Definition at line {\bf 2799} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!mask@{mask}}
+\index{mask@{mask}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{maskconfig\+\_\+rec,addr\+\_\+cmd\+\_\+vector,signal\+\_\+name,mask\+\_\+value,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} mask(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{signal\+\_\+name}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+signals}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mask\+\_\+value}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_ae7dac0536a3dc970866b18be2e889ae7}
+
+
+Definition at line {\bf 3304} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!mask@{mask}}
+\index{mask@{mask}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{maskconfig\+\_\+rec,addr\+\_\+cmd\+\_\+vector,signal\+\_\+name,mask\+\_\+value,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} mask(
+\begin{DoxyParamCaption}
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{inout}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{signal\+\_\+name}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+signals}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{mask\+\_\+value}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Procedure]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_af7d40eff3a55782a8d27e27fa9b516b6}
+
+
+Definition at line {\bf 3343} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!mask@{mask}}
+\index{mask@{mask}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{maskconfig\+\_\+rec,addr\+\_\+cmd\+\_\+vector,signal\+\_\+name,mask\+\_\+value,mask\+\_\+bit,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} mask(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{signal\+\_\+name}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+signals}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mask\+\_\+value}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mask\+\_\+bit}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_acf4927a82254549d3fd6922c9ccfeea5}
+
+
+Definition at line {\bf 3378} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!precharge\+\_\+all@{precharge\+\_\+all}}
+\index{precharge\+\_\+all@{precharge\+\_\+all}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{precharge\+\_\+allconfig\+\_\+rec,previous,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} precharge\+\_\+all(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_adc7e9176ddc14e406b6febaed6e65d60}
+
+
+Definition at line {\bf 2054} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!precharge\+\_\+all@{precharge\+\_\+all}}
+\index{precharge\+\_\+all@{precharge\+\_\+all}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{precharge\+\_\+allconfig\+\_\+rec,previous,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} precharge\+\_\+all(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_addcd414e03150d83c409568ac122d2dc}
+
+
+Definition at line {\bf 2500} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!precharge\+\_\+all@{precharge\+\_\+all}}
+\index{precharge\+\_\+all@{precharge\+\_\+all}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{precharge\+\_\+allconfig\+\_\+rec,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} precharge\+\_\+all(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_ac738ce5763377ebb7ce8c24e8db8f3e4}
+
+
+Definition at line {\bf 2987} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!precharge\+\_\+bank@{precharge\+\_\+bank}}
+\index{precharge\+\_\+bank@{precharge\+\_\+bank}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{precharge\+\_\+bankconfig\+\_\+rec,previous,ranks,bank,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} precharge\+\_\+bank(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{bank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a9f88ca86dd982d1f9d6945130d5c6753}
+
+
+Definition at line {\bf 2083} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!precharge\+\_\+bank@{precharge\+\_\+bank}}
+\index{precharge\+\_\+bank@{precharge\+\_\+bank}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{precharge\+\_\+bankconfig\+\_\+rec,previous,ranks,bank,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} precharge\+\_\+bank(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{bank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a83458bdefe82e214611fab2967c3ea0d}
+
+
+Definition at line {\bf 2527} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!program\+\_\+rdimm\+\_\+register@{program\+\_\+rdimm\+\_\+register}}
+\index{program\+\_\+rdimm\+\_\+register@{program\+\_\+rdimm\+\_\+register}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{program\+\_\+rdimm\+\_\+registerconfig\+\_\+rec,control\+\_\+word\+\_\+addr,control\+\_\+word\+\_\+data,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} program\+\_\+rdimm\+\_\+register(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{control\+\_\+word\+\_\+addr}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{control\+\_\+word\+\_\+data}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a1596e3f56bac12e2a85a48b782836368}
+
+
+Definition at line {\bf 2951} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!program\+\_\+rdimm\+\_\+register@{program\+\_\+rdimm\+\_\+register}}
+\index{program\+\_\+rdimm\+\_\+register@{program\+\_\+rdimm\+\_\+register}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{program\+\_\+rdimm\+\_\+registerconfig\+\_\+rec,control\+\_\+word\+\_\+addr,control\+\_\+word\+\_\+data,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} program\+\_\+rdimm\+\_\+register(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{control\+\_\+word\+\_\+addr}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{control\+\_\+word\+\_\+data}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{3} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_aeb13bb55b67b71abbb27ac48f6dccbee}
+
+
+Definition at line {\bf 2970} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!read@{read}}
+\index{read@{read}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{readconfig\+\_\+rec,previous,bank,col,ranks,op\+\_\+length,auto\+\_\+prech,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} read(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{bank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{col}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+addr\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{op\+\_\+length}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{8} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{auto\+\_\+prech}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{boolean}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a4581caa3ecedf520ed11be28a4caad6e}
+
+
+Definition at line {\bf 2223} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!read@{read}}
+\index{read@{read}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{readconfig\+\_\+rec,previous,bank,col,ranks,op\+\_\+length,auto\+\_\+prech,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} read(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{bank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{col}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+addr\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{op\+\_\+length}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{8} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{auto\+\_\+prech}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{boolean}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_aa9735f89cd9a935bd598640693cb17e9}
+
+
+Definition at line {\bf 2629} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!refresh@{refresh}}
+\index{refresh@{refresh}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{refreshconfig\+\_\+rec,previous,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} refresh(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_aedabf68b38ef92276b92cb4e7a83e663}
+
+
+Definition at line {\bf 2284} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!refresh@{refresh}}
+\index{refresh@{refresh}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{refreshconfig\+\_\+rec,previous,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} refresh(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a5fcd997132c5862666fbfb6a29a90f62}
+
+
+Definition at line {\bf 2658} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!reset@{reset}}
+\index{reset@{reset}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{resetconfig\+\_\+rec,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} reset(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a61fbc7a6d001967a240a8f8a780393ba}
+
+
+Definition at line {\bf 2016} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!reset@{reset}}
+\index{reset@{reset}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{resetconfig\+\_\+rec,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} reset(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_af6294276f9ea51862af692388c0f1121}
+
+
+Definition at line {\bf 2453} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!self\+\_\+refresh\+\_\+entry@{self\+\_\+refresh\+\_\+entry}}
+\index{self\+\_\+refresh\+\_\+entry@{self\+\_\+refresh\+\_\+entry}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{self\+\_\+refresh\+\_\+entryconfig\+\_\+rec,previous,ranks,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} self\+\_\+refresh\+\_\+entry(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a091356382c5d59a63783c0595de0f684}
+
+
+Definition at line {\bf 2683} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!set\+\_\+config\+\_\+rec@{set\+\_\+config\+\_\+rec}}
+\index{set\+\_\+config\+\_\+rec@{set\+\_\+config\+\_\+rec}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{set\+\_\+config\+\_\+recnum\+\_\+addr\+\_\+bits,num\+\_\+ba\+\_\+bits,num\+\_\+cs\+\_\+bits,num\+\_\+ranks,dwidth\+\_\+ratio,mem\+\_\+type,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }} set\+\_\+config\+\_\+rec(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{num\+\_\+addr\+\_\+bits}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{num\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{num\+\_\+cs\+\_\+bits}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{num\+\_\+ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{dwidth\+\_\+ratio}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+cmds\+\_\+per\+\_\+clk}\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mem\+\_\+type}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{string}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a270db924f605139e684538afb8a6f4b9}
+
+
+Definition at line {\bf 3123} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!set\+\_\+config\+\_\+rec@{set\+\_\+config\+\_\+rec}}
+\index{set\+\_\+config\+\_\+rec@{set\+\_\+config\+\_\+rec}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{set\+\_\+config\+\_\+recnum\+\_\+addr\+\_\+bits,num\+\_\+ba\+\_\+bits,num\+\_\+cs\+\_\+bits,dwidth\+\_\+ratio,mem\+\_\+type,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }} set\+\_\+config\+\_\+rec(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{num\+\_\+addr\+\_\+bits}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{num\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{num\+\_\+cs\+\_\+bits}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{dwidth\+\_\+ratio}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+cmds\+\_\+per\+\_\+clk}\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mem\+\_\+type}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{string}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a93cbcdbe21be3ba82376edbd8d528783}
+
+
+Definition at line {\bf 3156} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!set\+\_\+odt\+\_\+values@{set\+\_\+odt\+\_\+values}}
+\index{set\+\_\+odt\+\_\+values@{set\+\_\+odt\+\_\+values}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{set\+\_\+odt\+\_\+valuesranks,ranks\+\_\+per\+\_\+slot,mem\+\_\+type,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+odt\+\_\+array}\textcolor{vhdlchar}{ }} set\+\_\+odt\+\_\+values(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks\+\_\+per\+\_\+slot}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{mem\+\_\+type}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{string}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_af5f043dfdfab32bde20c20d04dc039d9}
+
+
+Definition at line {\bf 3027} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!unpack\+\_\+addr\+\_\+cmd\+\_\+vector@{unpack\+\_\+addr\+\_\+cmd\+\_\+vector}}
+\index{unpack\+\_\+addr\+\_\+cmd\+\_\+vector@{unpack\+\_\+addr\+\_\+cmd\+\_\+vector}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{unpack\+\_\+addr\+\_\+cmd\+\_\+vectoraddr\+\_\+cmd\+\_\+vector,config\+\_\+rec,addr,ba,cas\+\_\+n,ras\+\_\+n,we\+\_\+n,cke,cs\+\_\+n,odt,rst\+\_\+n,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} unpack\+\_\+addr\+\_\+cmd\+\_\+vector(
+\begin{DoxyParamCaption}
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{addr}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{ba}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{cas\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{ras\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{we\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{cke}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{cs\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{odt}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{rst\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Procedure]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a838d2aea12bb482e39fa74d0d6a4b7d0}
+
+
+Definition at line {\bf 3176} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!unpack\+\_\+addr\+\_\+cmd\+\_\+vector@{unpack\+\_\+addr\+\_\+cmd\+\_\+vector}}
+\index{unpack\+\_\+addr\+\_\+cmd\+\_\+vector@{unpack\+\_\+addr\+\_\+cmd\+\_\+vector}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{unpack\+\_\+addr\+\_\+cmd\+\_\+vectorconfig\+\_\+rec,addr\+\_\+cmd\+\_\+vector,addr,ba,cas\+\_\+n,ras\+\_\+n,we\+\_\+n,cke,cs\+\_\+n,odt,rst\+\_\+n,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} unpack\+\_\+addr\+\_\+cmd\+\_\+vector(
+\begin{DoxyParamCaption}
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{ } }]{{\bfseries \textcolor{vhdlchar}{addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{addr}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{ba}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{cas\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{ras\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{we\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{cke}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{cs\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{odt}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{\textcolor{keywordtype}{signal } }]{{\bfseries \textcolor{vhdlchar}{rst\+\_\+n}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{} {\em {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }\textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Procedure]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a762ad6f3d76e3c01f0ef458e3dac73f6}
+
+
+Definition at line {\bf 3246} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!write@{write}}
+\index{write@{write}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{writeconfig\+\_\+rec,previous,bank,col,ranks,op\+\_\+length,auto\+\_\+prech,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} write(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{bank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{col}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+addr\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{op\+\_\+length}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{8} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{auto\+\_\+prech}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{boolean}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_ac984b5d53c98731299bcf10cc4d2a39d}
+
+
+Definition at line {\bf 2153} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!write@{write}}
+\index{write@{write}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{writeconfig\+\_\+rec,previous,bank,col,ranks,op\+\_\+length,auto\+\_\+prech,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} write(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{previous}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{bank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ba\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{col}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+addr\+\_\+bits}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{ranks}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{op\+\_\+length}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{8} \textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{auto\+\_\+prech}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{boolean}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a54ccdb29a605bdd215d0f966bca08f64}
+
+
+Definition at line {\bf 2592} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!Z\+Q\+CL@{Z\+Q\+CL}}
+\index{Z\+Q\+CL@{Z\+Q\+CL}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{Z\+Q\+C\+Lconfig\+\_\+rec,rank,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} Z\+Q\+CL(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{rank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_afbb74d9c60df9af8a94d6ca660c9fc5b}
+
+
+Definition at line {\bf 2404} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!Z\+Q\+CL@{Z\+Q\+CL}}
+\index{Z\+Q\+CL@{Z\+Q\+CL}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{Z\+Q\+C\+Lconfig\+\_\+rec,rank,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} Z\+Q\+CL(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{rank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_ae0309079645d693dc6e581fb78db7c08}
+
+
+Definition at line {\bf 2818} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!Z\+Q\+CS@{Z\+Q\+CS}}
+\index{Z\+Q\+CS@{Z\+Q\+CS}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{Z\+Q\+C\+Sconfig\+\_\+rec,rank,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd}\textcolor{vhdlchar}{ }} Z\+Q\+CS(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{rank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a6d4f3612d471518037a082ea1f1c3f9c}
+
+
+Definition at line {\bf 2375} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+\index{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}!Z\+Q\+CS@{Z\+Q\+CS}}
+\index{Z\+Q\+CS@{Z\+Q\+CS}!\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg@{\+\_\+ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+addr\+\_\+cmd\+\_\+pkg}}
+\paragraph[{Z\+Q\+C\+Sconfig\+\_\+rec,rank,}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+vector}\textcolor{vhdlchar}{ }} Z\+Q\+CS(
+\begin{DoxyParamCaption}
+\item[{}]{{\bfseries \textcolor{vhdlchar}{config\+\_\+rec}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{t\+\_\+addr\+\_\+cmd\+\_\+config\+\_\+rec}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }}} , }
+\item[{}]{{\bfseries \textcolor{vhdlchar}{rank}\textcolor{vhdlchar}{ }}\textcolor{stringliteral}{in} {\em {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }\textcolor{comment}{natural}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keywordflow}{range}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{to}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{2} \textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{$\ast$}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{c\+\_\+max\+\_\+ranks}\textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [Function]}}\label{class__ddr2__phy__alt__mem__phy__addr__cmd__pkg_a0baba73b21f15c286b650e9462f63baa}
+
+
+Definition at line {\bf 2840} of file {\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/ddr2/{\bf ddr2\+\_\+phy\+\_\+alt\+\_\+mem\+\_\+phy\+\_\+seq.\+vhd}\end{DoxyCompactItemize}

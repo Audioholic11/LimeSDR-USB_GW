@@ -1,0 +1,170 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.h File Reference}
+\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for i2c\+\_\+opencores.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{dc/d8b/software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/de0/software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf I2\+C\+\_\+\+OK}~(0)
+\item 
+\#define {\bf I2\+C\+\_\+\+A\+CK}~(0)
+\item 
+\#define {\bf I2\+C\+\_\+\+N\+O\+A\+CK}~(1)
+\item 
+\#define {\bf I2\+C\+\_\+\+A\+B\+I\+T\+R\+A\+T\+I\+O\+N\+\_\+\+L\+O\+ST}~(2)
+\item 
+\#define {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE}(name,  dev)~extern int alt\+\_\+no\+\_\+storage
+\item 
+\#define {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+IT}(name,  dev)~while (0)
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf I2\+C\+\_\+init} ({\bf alt\+\_\+u32} base, {\bf alt\+\_\+u32} clk, {\bf alt\+\_\+u32} speed)
+\item 
+int {\bf I2\+C\+\_\+start} ({\bf alt\+\_\+u32} base, {\bf alt\+\_\+u32} add, {\bf alt\+\_\+u32} read)
+\item 
+{\bf alt\+\_\+u32} {\bf I2\+C\+\_\+read} ({\bf alt\+\_\+u32} base, {\bf alt\+\_\+u32} last)
+\item 
+{\bf alt\+\_\+u32} {\bf I2\+C\+\_\+write} ({\bf alt\+\_\+u32} base, {\bf alt\+\_\+u8} {\bf data}, {\bf alt\+\_\+u32} last)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+\+A\+B\+I\+T\+R\+A\+T\+I\+O\+N\+\_\+\+L\+O\+ST@{I2\+C\+\_\+\+A\+B\+I\+T\+R\+A\+T\+I\+O\+N\+\_\+\+L\+O\+ST}}
+\index{I2\+C\+\_\+\+A\+B\+I\+T\+R\+A\+T\+I\+O\+N\+\_\+\+L\+O\+ST@{I2\+C\+\_\+\+A\+B\+I\+T\+R\+A\+T\+I\+O\+N\+\_\+\+L\+O\+ST}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+\+A\+B\+I\+T\+R\+A\+T\+I\+O\+N\+\_\+\+L\+O\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define I2\+C\+\_\+\+A\+B\+I\+T\+R\+A\+T\+I\+O\+N\+\_\+\+L\+O\+ST~(2)}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_ac9aa76712c8ca9bd480d08a5c31a9753}
+
+
+Definition at line {\bf 22} of file {\bf i2c\+\_\+opencores.\+h}.
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+\+A\+CK@{I2\+C\+\_\+\+A\+CK}}
+\index{I2\+C\+\_\+\+A\+CK@{I2\+C\+\_\+\+A\+CK}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+\+A\+CK}]{\setlength{\rightskip}{0pt plus 5cm}\#define I2\+C\+\_\+\+A\+CK~(0)}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_ad4e158b4c0d408e5d99a514c0db0d77b}
+
+
+Definition at line {\bf 20} of file {\bf i2c\+\_\+opencores.\+h}.
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+\+N\+O\+A\+CK@{I2\+C\+\_\+\+N\+O\+A\+CK}}
+\index{I2\+C\+\_\+\+N\+O\+A\+CK@{I2\+C\+\_\+\+N\+O\+A\+CK}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+\+N\+O\+A\+CK}]{\setlength{\rightskip}{0pt plus 5cm}\#define I2\+C\+\_\+\+N\+O\+A\+CK~(1)}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_af4acaece50b36194be7a1be7d8b07641}
+
+
+Definition at line {\bf 21} of file {\bf i2c\+\_\+opencores.\+h}.
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+\+OK@{I2\+C\+\_\+\+OK}}
+\index{I2\+C\+\_\+\+OK@{I2\+C\+\_\+\+OK}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+\+OK}]{\setlength{\rightskip}{0pt plus 5cm}\#define I2\+C\+\_\+\+OK~(0)}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_a57d0c95ccd7c129288743e9674a9e96d}
+
+
+Definition at line {\bf 19} of file {\bf i2c\+\_\+opencores.\+h}.
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+IT@{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+IT}}
+\index{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+IT@{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+IT}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+IT}]{\setlength{\rightskip}{0pt plus 5cm}\#define I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+IT(
+\begin{DoxyParamCaption}
+\item[{}]{name, }
+\item[{}]{dev}
+\end{DoxyParamCaption}
+)~while (0)}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_abe48ca9efc19a4e7a7d995ab85dc582f}
+
+
+Definition at line {\bf 25} of file {\bf i2c\+\_\+opencores.\+h}.
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE}}
+\index{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE}]{\setlength{\rightskip}{0pt plus 5cm}\#define I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+I\+N\+S\+T\+A\+N\+CE(
+\begin{DoxyParamCaption}
+\item[{}]{name, }
+\item[{}]{dev}
+\end{DoxyParamCaption}
+)~extern int alt\+\_\+no\+\_\+storage}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_a3437482e15ac6a6c363fad34f4eed4db}
+
+
+Definition at line {\bf 24} of file {\bf i2c\+\_\+opencores.\+h}.
+
+
+
+\subsubsection{Function Documentation}
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+init@{I2\+C\+\_\+init}}
+\index{I2\+C\+\_\+init@{I2\+C\+\_\+init}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+init(alt\+\_\+u32 base, alt\+\_\+u32 clk, alt\+\_\+u32 speed)}]{\setlength{\rightskip}{0pt plus 5cm}void I2\+C\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{base, }
+\item[{{\bf alt\+\_\+u32}}]{clk, }
+\item[{{\bf alt\+\_\+u32}}]{speed}
+\end{DoxyParamCaption}
+)}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_ada86d79d83b1d3fff34392a03cb07646}
+
+
+Definition at line {\bf 28} of file {\bf i2c\+\_\+opencores.\+c}.
+
+
+
+References {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+I\+A\+C\+K\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+T\+R\+\_\+\+E\+N\+\_\+\+M\+SK}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+CR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+TR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+P\+R\+E\+R\+HI}, and {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+P\+R\+E\+R\+LO}.
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+read@{I2\+C\+\_\+read}}
+\index{I2\+C\+\_\+read@{I2\+C\+\_\+read}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+read(alt\+\_\+u32 base, alt\+\_\+u32 last)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+u32} I2\+C\+\_\+read (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{base, }
+\item[{{\bf alt\+\_\+u32}}]{last}
+\end{DoxyParamCaption}
+)}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_a754cda16bfe38b030087c4c064948c5c}
+
+
+Definition at line {\bf 105} of file {\bf i2c\+\_\+opencores.\+c}.
+
+
+
+References {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+N\+A\+C\+K\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+R\+D\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+S\+T\+O\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+T\+I\+P\+\_\+\+M\+SK}, {\bf I\+O\+R\+D\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+R\+XR}, {\bf I\+O\+R\+D\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+SR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+CR}, and {\bf M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES}.
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+start@{I2\+C\+\_\+start}}
+\index{I2\+C\+\_\+start@{I2\+C\+\_\+start}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+start(alt\+\_\+u32 base, alt\+\_\+u32 add, alt\+\_\+u32 read)}]{\setlength{\rightskip}{0pt plus 5cm}int I2\+C\+\_\+start (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{base, }
+\item[{{\bf alt\+\_\+u32}}]{add, }
+\item[{{\bf alt\+\_\+u32}}]{read}
+\end{DoxyParamCaption}
+)}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_aa5555d01f96e84375ef649c121816ef8}
+
+
+Definition at line {\bf 59} of file {\bf i2c\+\_\+opencores.\+c}.
+
+
+
+References {\bf I2\+C\+\_\+\+A\+CK}, {\bf I2\+C\+\_\+\+N\+O\+A\+CK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+S\+T\+A\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+W\+R\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+R\+X\+N\+A\+C\+K\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+T\+I\+P\+\_\+\+M\+SK}, {\bf I\+O\+R\+D\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+SR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+CR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+T\+XR}, and {\bf M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES}.
+
+\index{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}!I2\+C\+\_\+write@{I2\+C\+\_\+write}}
+\index{I2\+C\+\_\+write@{I2\+C\+\_\+write}!software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h@{software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/i2c\+\_\+opencores.\+h}}
+\paragraph[{I2\+C\+\_\+write(alt\+\_\+u32 base, alt\+\_\+u8 data, alt\+\_\+u32 last)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+u32} I2\+C\+\_\+write (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+u32}}]{base, }
+\item[{{\bf alt\+\_\+u8}}]{data, }
+\item[{{\bf alt\+\_\+u32}}]{last}
+\end{DoxyParamCaption}
+)}\label{software_2lms__ctr__bsp_2drivers_2inc_2i2c__opencores_8h_ad7789475981fa199176d514e35daac08}
+
+
+Definition at line {\bf 145} of file {\bf i2c\+\_\+opencores.\+c}.
+
+
+
+References {\bf I2\+C\+\_\+\+A\+CK}, {\bf I2\+C\+\_\+\+N\+O\+A\+CK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+S\+T\+O\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+C\+R\+\_\+\+W\+R\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+R\+X\+N\+A\+C\+K\+\_\+\+M\+SK}, {\bf I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+S\+R\+\_\+\+T\+I\+P\+\_\+\+M\+SK}, {\bf I\+O\+R\+D\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+SR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+CR}, {\bf I\+O\+W\+R\+\_\+\+I2\+C\+\_\+\+O\+P\+E\+N\+C\+O\+R\+E\+S\+\_\+\+T\+XR}, and {\bf M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES}.
+

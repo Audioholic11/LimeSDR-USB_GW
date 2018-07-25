@@ -1,0 +1,180 @@
+\subsection{fifo2diq.\+vhd}
+\label{fifo2diq_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/fifo2diq/synth/fifo2diq.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+path\+\_\+top/fifo2diq/synth/fifo2diq.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    fifo2diq.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: Writes DIQ data to FIFO, FIFO word size = 4  DIQ samples }
+00004 \textcolor{keyword}{-- DATE:    Jan 13, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }fifo2diq \textcolor{keywordflow}{is}
+00016    \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(} 
+00017       \textcolor{vhdlchar}{dev_family}           \textcolor{vhdlchar}{:} \textcolor{comment}{string} \textcolor{vhdlchar}{:=} \textcolor{keyword}{"Cyclone IV E"};
+00018       \textcolor{vhdlchar}{iq_width}             \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{12}
+00019       \textcolor{vhdlchar}{)};
+00020    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00021       \textcolor{vhdlchar}{clk}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00022       \textcolor{vhdlchar}{reset_n}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00023 \textcolor{keyword}{      --Mode settings}
+00024       \textcolor{vhdlchar}{mode}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- JESD207: 1; TRXIQ: 0}
+00025       \textcolor{vhdlchar}{trxiqpulse}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- trxiqpulse on: 1; trxiqpulse off: 0}
+00026       \textcolor{vhdlchar}{ddr_en}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- DDR: 1; SDR: 0}
+00027       \textcolor{vhdlchar}{mimo_en}              \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- SISO: 1; MIMO: 0}
+00028       \textcolor{vhdlchar}{ch_en}                \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --"01" - Ch. A, "10" - Ch. B, "11" - Ch. A
+       and Ch. B. }
+00029       \textcolor{vhdlchar}{fidm}                 \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- External Frame ID mode. Frame start at fsync = 0, when 0.
+       Frame start at fsync = 1, when 1.}
+00030       \textcolor{vhdlchar}{pct_sync_mode}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- 0 - timestamp, 1 - external pulse }
+00031       \textcolor{vhdlchar}{pct_sync_pulse}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};\textcolor{keyword}{ -- external packet synchronisation pulse signal}
+00032       \textcolor{vhdlchar}{pct_sync_size}        \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- valid in external pulse mode only}
+00033       \textcolor{vhdlchar}{pct_buff_rdy}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00034 \textcolor{keyword}{      --txant}
+00035       \textcolor{vhdlchar}{txant_cyc_before_en}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- valid in external pulse sync mode only}
+00036       \textcolor{vhdlchar}{txant_cyc_after_en}   \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- valid in external pulse sync mode only }
+00037       \textcolor{vhdlchar}{txant_en}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};                 
+00038 \textcolor{keyword}{      --Tx interface data }
+00039       \textcolor{vhdlchar}{DIQ}                  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00040       \textcolor{vhdlchar}{fsync}                \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00041       \textcolor{vhdlchar}{DIQ_h}                \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00042       \textcolor{vhdlchar}{DIQ_l}                \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00043 \textcolor{keyword}{      --fifo ports }
+00044       \textcolor{vhdlchar}{fifo_rdempty}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00045       \textcolor{vhdlchar}{fifo_rdreq}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic};
+00046       \textcolor{vhdlchar}{fifo_q}               \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width}\textcolor{vhdlchar}{*}\textcolor{vhdllogic}{4-1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} 
+00047 
+00048         \textcolor{vhdlchar}{)};
+00049 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{fifo2diq};
+00050 
+00051 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00052 \textcolor{keyword}{-- Architecture}
+00053 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00054 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} fifo2diq is
+00055 \textcolor{keyword}{--declare signals,  components here}
+00056 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_DIQ_h}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}; 
+00057 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst0_DIQ_l}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00058 \textcolor{keyword}{--inst1 signals}
+00059 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_fifo_rdreq}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00060 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst1_txant_en}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00061 \textcolor{keyword}{--inst3 signals}
+00062 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst3_txiq_en}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00063 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst3_pct_sync_size} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00064 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{inst3_txant_en}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00065 
+00066 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{int_mode}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00067 
+00068 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{txant_en_mux}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00069   
+00070 \textcolor{vhdlkeyword}{begin}
+00071    
+00072 \textcolor{keyword}{   -- ----------------------------------------------------------------------------}
+00073 \textcolor{keyword}{--Internal mode selection for DIQ position}
+00074 \textcolor{keyword}{-- "00" - MIMO DDR both channels enabled, SISO DDR, TXIQ\_PULSE}
+00075 \textcolor{keyword}{-- "01" - MIMO DDR, TXIQ\_PULSE first channel enabled}
+00076 \textcolor{keyword}{-- "10" - MIMO DDR, TXIQ\_PULSE second channel enabled}
+00077 \textcolor{keyword}{-- "11" - SISO SDR }
+00078 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00079  \textcolor{vhdlchar}{int_mode} \textcolor{vhdlchar}{<=} \textcolor{vhdllogic}{"00"} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{mimo_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{ddr_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{mimo_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{
+      trxiqpulse} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{ch_en}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"11"}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{else} 
+00080              \textcolor{vhdllogic}{"01"} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{mimo_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{trxiqpulse} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{ch_en}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"01"}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{else}
+00081              \textcolor{vhdllogic}{"10"} \textcolor{keywordflow}{when} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{mimo_en}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{OR} \textcolor{vhdlchar}{trxiqpulse} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{ch_en}\textcolor{vhdlchar}{=}\textcolor{vhdllogic}{"10"}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{else}
+00082              \textcolor{vhdllogic}{"11"};
+00083 
+00084 \textcolor{keywordflow}{process}(clk, reset_n)
+00085 \textcolor{vhdlkeyword}{begin}
+00086    \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00087       inst3\_pct\_sync\_size <= (others=> '0');
+00088    \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00089       \textcolor{keywordflow}{if}  \textcolor{vhdlchar}{int_mode} \textcolor{vhdlchar}{=} \textcolor{vhdllogic}{"00"} \textcolor{keywordflow}{then} 
+00090          inst3\_pct\_sync\_size <= pct\_sync\_size;
+00091       \textcolor{keywordflow}{else} 
+00092          inst3\_pct\_sync\_size <= '0' & pct\_sync\_size(\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{1}); 
+00093       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00094    \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00095 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00096 
+00097         
+00098 inst0\_lms7002\_dout : \textcolor{keywordflow}{entity} work.lms7002_ddout
+00099    \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map}( 
+00100       dev_family  => dev_family,
+00101       iq_width    => iq_width
+00102    \textcolor{vhdlchar}{)}
+00103    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00104       clk         => clk,
+00105       reset_n     => reset_n,
+00106       data_in_h   => inst0_DIQ_h,
+00107       data_in_l   => inst0_DIQ_l,
+00108       txiq        => DIQ,
+00109       txiqsel     => fsync
+00110       \textcolor{vhdlchar}{)};
+00111         
+00112         
+00113  inst1\_txiq : \textcolor{keywordflow}{entity} work.txiq
+00114    \textcolor{keywordflow}{generic} \textcolor{keywordflow}{map}( 
+00115       dev_family     => dev_family,
+00116       iq_width       => iq_width
+00117    \textcolor{vhdlchar}{)}
+00118    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00119       clk            => clk,
+00120       reset_n        => reset_n,
+00121       en             => inst3_txiq_en,
+00122       trxiqpulse     => trxiqpulse,
+00123       ddr_en         => ddr_en,
+00124       mimo_en        => mimo_en,
+00125       ch_en          => ch_en, 
+00126       fidm           => fidm,
+00127       DIQ_h          => inst0_DIQ_h,
+00128       DIQ_l          => inst0_DIQ_l,
+00129       fifo_rdempty   => fifo_rdempty,
+00130       fifo_rdreq     => inst1_fifo_rdreq,
+00131       fifo_q         => fifo_q,
+00132       txant_en       => inst1_txant_en
+00133         \textcolor{vhdlchar}{)};
+00134         
+00135 txiq\_ctrl\_inst3 : \textcolor{keywordflow}{entity} work.txiq_ctrl
+00136    \textcolor{keywordflow}{port} \textcolor{keywordflow}{map}(
+00137       clk                  => clk,
+00138       reset_n              => reset_n,
+00139 \textcolor{keyword}{      --Mode settings}
+00140       pct_sync_mode        => pct_sync_mode,
+00141       pct_sync_pulse       => pct_sync_pulse,
+00142       pct_sync_size        => inst3_pct_sync_size,
+00143       pct_buff_rdy         => pct_buff_rdy,
+00144       txiq_rdreq_in        => inst1_fifo_rdreq,
+00145       txiq_en              => inst3_txiq_en,
+00146       txant_cyc_before_en  => txant_cyc_before_en,
+00147       txant_cyc_after_en   => txant_cyc_after_en,
+00148       txant_en             => inst3_txant_en
+00149         \textcolor{vhdlchar}{)};
+00150         
+00151 \textcolor{keywordflow}{process}(clk, reset_n)
+00152 \textcolor{vhdlkeyword}{begin}
+00153    \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00154       \textcolor{vhdlchar}{txant_en_mux} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00155    \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{AND} \textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then} 
+00156       \textcolor{keywordflow}{if}  \textcolor{vhdlchar}{pct_sync_mode} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then} 
+00157          \textcolor{vhdlchar}{txant_en_mux} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst1_txant_en};
+00158       \textcolor{keywordflow}{else} 
+00159          \textcolor{vhdlchar}{txant_en_mux} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst3_txant_en}; 
+00160       \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00161    \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00162 \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00163 
+00164 
+00165 
+00166 \textcolor{vhdlchar}{txant_en}    \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{txant_en_mux};
+00167 \textcolor{vhdlchar}{fifo_rdreq}  \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst1_fifo_rdreq};
+00168 \textcolor{vhdlchar}{DIQ_h}       \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst0_DIQ_h};
+00169 \textcolor{vhdlchar}{DIQ_l}       \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{inst0_DIQ_l};
+00170 
+00171   
+00172 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};
+\end{DoxyCode}

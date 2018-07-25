@@ -1,0 +1,63 @@
+\subsection{synchronizer.\+vhd}
+\label{synchronizer_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/synchronizer.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/synchronizer.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    synch.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: for signals in different clock domains}
+00004 \textcolor{keyword}{-- DATE:    June 23, 2015}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00013 \textcolor{keyword}{-- Entity declaration}
+00014 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00015 \textcolor{keywordflow}{entity }synchronizer \textcolor{keywordflow}{is}
+00016   \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00017 \textcolor{keyword}{        --input ports }
+00018         \textcolor{vhdlchar}{clk}             \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00019         \textcolor{vhdlchar}{reset_n}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00020           \textcolor{keywordflow}{signal}\textcolor{vhdlchar}{\_in}         \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00021           \textcolor{keywordflow}{signal}\textcolor{vhdlchar}{\_sinch}      \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00022 
+00023         
+00024         \textcolor{vhdlchar}{)};
+00025 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{synchronizer};
+00026 
+00027 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00028 \textcolor{keyword}{-- Architecture}
+00029 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00030 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} synchronizer is
+00031 \textcolor{keyword}{--declare signals,  components here}
+00032 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{signal_d0} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00033 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{signal_d1} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00034 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{signal_d2} \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic}; 
+00035 
+00036   
+00037 \textcolor{vhdlkeyword}{begin}
+00038 
+00039   \textcolor{keywordflow}{process}(reset_n, clk)
+00040 \textcolor{vhdlkeyword}{    begin}
+00041       \textcolor{keywordflow}{if} \textcolor{vhdlchar}{reset_n}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00042         \textcolor{keywordflow}{signal}\textcolor{vhdlchar}{\_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00043           \textcolor{keywordflow}{signal}\textcolor{vhdlchar}{\_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00044           \textcolor{keywordflow}{signal}\textcolor{vhdlchar}{\_d2}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'};
+00045         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00046           \textcolor{keywordflow}{signal}\textcolor{vhdlchar}{\_d0}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{signal_in};
+00047             \textcolor{keywordflow}{signal}\textcolor{vhdlchar}{\_d1}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{signal_d0};
+00048             \textcolor{keywordflow}{signal}\textcolor{vhdlchar}{\_d2}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{signal_d1};
+00049         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00050     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process};
+00051      
+00052 \textcolor{vhdlchar}{signal_sinch}\textcolor{vhdlchar}{<=}  \textcolor{vhdlchar}{signal_d2}; 
+00053   
+00054 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00055 
+00056 
+00057 
+00058 
+\end{DoxyCode}

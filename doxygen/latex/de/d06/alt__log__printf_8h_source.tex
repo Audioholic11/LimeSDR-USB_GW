@@ -1,0 +1,354 @@
+\subsection{alt\+\_\+log\+\_\+printf.\+h}
+\label{alt__log__printf_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+log\+\_\+printf.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+log\+\_\+printf.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*  alt\_log\_printf.h}
+00002 \textcolor{comment}{ *}
+00003 \textcolor{comment}{ *  ALT\_LOG is designed to provide extra logging/debugging messages from HAL}
+00004 \textcolor{comment}{ *  through a different port than stdout.  It is enabled by the ALT\_LOG\_ENABLE}
+00005 \textcolor{comment}{ *  define, which needs to supplied at compile time.  When logging is turned off, }
+00006 \textcolor{comment}{ *  code size is unaffected.  Thus, this should be transparent to the user}
+00007 \textcolor{comment}{ *  when it is not actively turned on, and should not affect projects in any way.}
+00008 \textcolor{comment}{ *}
+00009 \textcolor{comment}{ *  There are macros sprinkled within different components, such as the jtag uart }
+00010 \textcolor{comment}{ *  and timer, in the HAL code.  They are always named ALT\_LOG\_<name>, and can be}
+00011 \textcolor{comment}{ *  safely ignored if ALT\_LOG is turned off. }
+00012 \textcolor{comment}{ *}
+00013 \textcolor{comment}{ *  To turn on ALT\_LOG, ALT\_LOG\_ENABLE must be defined, and ALT\_LOG\_PORT\_TYPE and}
+00014 \textcolor{comment}{ *  ALT\_LOG\_PORT\_BASE must be set in system.h.  This is done through editing }
+00015 \textcolor{comment}{ *  <project>.ptf, by editing the alt\_log\_port\_type & alt\_log\_port\_base settings.}
+00016 \textcolor{comment}{ *  See the documentation html file for examples.}
+00017 \textcolor{comment}{ *}
+00018 \textcolor{comment}{ *  When it is turned on, it will output extra HAL messages to a port specified}
+00019 \textcolor{comment}{ *  in system.h.  This can be a UART or JTAG UART port.  By default it will }
+00020 \textcolor{comment}{ *  output boot messages, detailing every step of the boot process.  }
+00021 \textcolor{comment}{ *}
+00022 \textcolor{comment}{ *  Extra logging is designed to be enabled by flags, which are defined in }
+00023 \textcolor{comment}{ *  alt\_log\_printf.c.  The default value is that all flags are off, so only the}
+00024 \textcolor{comment}{ *  boot up logging messages show up.  ALT\_LOG\_FLAGS can be set to enable certain}
+00025 \textcolor{comment}{ *  groupings of flags, and that grouping is done in this file.  Each flag can }
+00026 \textcolor{comment}{ *  also be overridden with a -D at compile time.}
+00027 \textcolor{comment}{ *}
+00028 \textcolor{comment}{ *  This header file includes the necessary prototypes for using the alt\_log}
+00029 \textcolor{comment}{ *  functions.  It also contains all the macros that are used to remove the code}
+00030 \textcolor{comment}{ *  from alt log is turned off.  Also, the macros in other HAL files are defined }
+00031 \textcolor{comment}{ *  here at the bottom.  These macros all call some C function that is in }
+00032 \textcolor{comment}{ *  alt\_log\_printf.c.}
+00033 \textcolor{comment}{ *}
+00034 \textcolor{comment}{ *  The logging has functions for printing in C (ALT\_LOG\_PRINTF) and in assembly}
+00035 \textcolor{comment}{ *  (ALT\_LOG\_PUTS).  This was needed because the assembly printing occurs before}
+00036 \textcolor{comment}{ *  the device is initialized.  The assembly function corrupts register R4-R7, }
+00037 \textcolor{comment}{ *  which are not used in the normal boot process.  For this reason, do not call}
+00038 \textcolor{comment}{ *  the assembly function in C.}
+00039 \textcolor{comment}{ *}
+00040 \textcolor{comment}{ *  author: gkwan }
+00041 \textcolor{comment}{ */}
+00042 
+00043 
+00044 \textcolor{preprocessor}{#ifndef \_\_ALT\_LOG\_PRINTF\_H\_\_}
+00045 \textcolor{preprocessor}{#define \_\_ALT\_LOG\_PRINTF\_H\_\_}
+00046 
+00047 \textcolor{preprocessor}{#include <system.h>}
+00048 
+00049 \textcolor{comment}{/* Global switch to turn on logging functions */}
+00050 \textcolor{preprocessor}{#ifdef ALT\_LOG\_ENABLE}
+00051 
+00052     \textcolor{comment}{/* ALT\_LOG\_PORT\_TYPE values as defined in system.h.  They are defined as}
+00053 \textcolor{comment}{     * numbers here first becasue the C preprocessor does not handle string}
+00054 \textcolor{comment}{     * comparisons.  */}
+00055 \textcolor{preprocessor}{    #define ALTERA\_AVALON\_JTAG\_UART 1}
+00056 \textcolor{preprocessor}{    #define ALTERA\_AVALON\_UART 0}
+00057 
+00058     \textcolor{comment}{/* If this .h file is included by an assembly file, skip over include files}
+00059 \textcolor{comment}{     * that won't compile in assembly. */}
+00060 \textcolor{preprocessor}{    #ifndef ALT\_ASM\_SRC}
+00061 \textcolor{preprocessor}{        #include <stdarg.h>}
+00062 \textcolor{preprocessor}{        #include "sys/alt_alarm.h"}
+00063 \textcolor{preprocessor}{        #include "sys/alt_dev.h"}
+00064 \textcolor{preprocessor}{        #ifdef \_\_ALTERA\_AVALON\_JTAG\_UART }
+00065 \textcolor{preprocessor}{            #include "altera\_avalon\_jtag\_uart.h"}
+00066 \textcolor{preprocessor}{        #endif}
+00067 \textcolor{preprocessor}{    #endif }\textcolor{comment}{/* ALT\_ASM\_SRC */}\textcolor{preprocessor}{}
+00068 
+00069     \textcolor{comment}{/* These are included for the port register offsets and masks, needed}
+00070 \textcolor{comment}{     * to write to the port.  Only include if the port type is set correctly,}
+00071 \textcolor{comment}{     * otherwise error.  If alt\_log is turned on and the port to output to is}
+00072 \textcolor{comment}{     * incorrect or does not exist, then should exit. */}
+00073 \textcolor{preprocessor}{    #if ALT\_LOG\_PORT\_TYPE == ALTERA\_AVALON\_JTAG\_UART }
+00074 \textcolor{preprocessor}{        #ifdef \_\_ALTERA\_AVALON\_JTAG\_UART}
+00075 \textcolor{preprocessor}{            #include <altera\_avalon\_jtag\_uart\_regs.h>}
+00076 \textcolor{preprocessor}{        #else}
+00077 \textcolor{preprocessor}{            #error ALT\_LOG: JTAG\_UART port chosen, but no JTAG\_UART in system. }
+00078 \textcolor{preprocessor}{        #endif}
+00079 \textcolor{preprocessor}{    #elif ALT\_LOG\_PORT\_TYPE == ALTERA\_AVALON\_UART }
+00080 \textcolor{preprocessor}{        #ifdef \_\_ALTERA\_AVALON\_UART}
+00081 \textcolor{preprocessor}{            #include <altera_avalon_uart_regs.h>}
+00082 \textcolor{preprocessor}{        #else}
+00083 \textcolor{preprocessor}{            #error ALT\_LOG: UART Port chosen, but no UART in system.}
+00084 \textcolor{preprocessor}{        #endif}
+00085 \textcolor{preprocessor}{    #else}
+00086 \textcolor{preprocessor}{        #error ALT\_LOG: alt\_log\_port\_type declaration invalid!}
+00087 \textcolor{preprocessor}{    #endif}
+00088 
+00089     \textcolor{comment}{/* ALT\_LOG\_ENABLE turns on the basic printing function */}
+00090 \textcolor{preprocessor}{    #define ALT\_LOG\_PRINTF(...) do \{alt\_log\_printf\_proc(\_\_VA\_ARGS\_\_);\} while (0)}
+00091  
+00092     \textcolor{comment}{/* Assembly macro for printing in assembly, calls tx\_log\_str}
+00093 \textcolor{comment}{     * which is in alt\_log\_macro.S.}
+00094 \textcolor{comment}{     * If alt\_log\_boot\_on\_flag is 0, skips the printing */}
+00095 \textcolor{preprocessor}{    #define ALT\_LOG\_PUTS(str) movhi r4, %hiadj(alt\_log\_boot\_on\_flag) ; \(\backslash\)}
+00096 \textcolor{preprocessor}{         addi r4, r4, %lo(alt\_log\_boot\_on\_flag) ; \(\backslash\)}
+00097 \textcolor{preprocessor}{         ldwio r5, 0(r4) ; \(\backslash\)}
+00098 \textcolor{preprocessor}{         beq r0, r5, 0f ; \(\backslash\)}
+00099 \textcolor{preprocessor}{         movhi r4, %hiadj(str) ; \(\backslash\)}
+00100 \textcolor{preprocessor}{         addi r4, r4, %lo(str) ; \(\backslash\)}
+00101 \textcolor{preprocessor}{     call tx\_log\_str ; \(\backslash\)}
+00102 \textcolor{preprocessor}{       0:}
+00103     
+00104     \textcolor{comment}{/* These defines are here to faciliate the use of one output function }
+00105 \textcolor{comment}{     * (alt\_log\_txchar) to print to both the JTAG UART or the UART. Depending}
+00106 \textcolor{comment}{     * on the port type, the status register, read mask, and output register }
+00107 \textcolor{comment}{     * are set to the appropriate value for the port.  */}
+00108 \textcolor{preprocessor}{    #if ALT\_LOG\_PORT\_TYPE == ALTERA\_AVALON\_JTAG\_UART }
+00109 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_REG\_RD IORD\_ALTERA\_AVALON\_JTAG\_UART\_CONTROL}
+00110 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_MSK ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_WSPACE\_MSK}
+00111 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_TXDATA\_WR IOWR\_ALTERA\_AVALON\_JTAG\_UART\_DATA}
+00112 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_REG\_OFFSET (ALTERA\_AVALON\_JTAG\_UART\_CONTROL\_REG*0x4)}
+00113 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_TXDATA\_REG\_OFFSET (ALTERA\_AVALON\_JTAG\_UART\_DATA\_REG*0x4)}
+00114 \textcolor{preprocessor}{    #elif ALT\_LOG\_PORT\_TYPE == ALTERA\_AVALON\_UART }
+00115 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_REG\_RD IORD\_ALTERA\_AVALON\_UART\_STATUS}
+00116 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_MSK ALTERA\_AVALON\_UART\_STATUS\_TRDY\_MSK}
+00117 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_TXDATA\_WR IOWR\_ALTERA\_AVALON\_UART\_TXDATA}
+00118 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_REG\_OFFSET (ALTERA\_AVALON\_UART\_STATUS\_REG*0x4)}
+00119 \textcolor{preprocessor}{      #define ALT\_LOG\_PRINT\_TXDATA\_REG\_OFFSET (ALTERA\_AVALON\_UART\_TXDATA\_REG*0x4)}
+00120 \textcolor{preprocessor}{    #endif }\textcolor{comment}{/* ALT\_LOG\_PORT */}\textcolor{preprocessor}{}
+00121 
+00122     \textcolor{comment}{/* Grouping of flags via ALT\_LOG\_FLAGS.  Each specific flag can be set via }
+00123 \textcolor{comment}{     * -D at compile time, or else they'll be set to a default value according}
+00124 \textcolor{comment}{     * to ALT\_LOG\_FLAGS.  ALT\_LOG\_FLAGS = 0 or not set is the default, where }
+00125 \textcolor{comment}{     * only the boot messages will be printed. As ALT\_LOG\_FLAGS increase, they}
+00126 \textcolor{comment}{     * increase in intrusiveness to the program, and will affect performance.}
+00127 \textcolor{comment}{     *}
+00128 \textcolor{comment}{     * Flag Level 1 - turns on system clock and JTAG UART startup status}
+00129 \textcolor{comment}{     *            2 - turns on write echo and JTAG\_UART alarm (periodic report)}
+00130 \textcolor{comment}{     *            3 - turns on JTAG UART ISR logging - will slow performance}
+00131 \textcolor{comment}{     *                significantly. }
+00132 \textcolor{comment}{     *           -1 - All logging output is off, but if ALT\_LOG\_ENABLE is }
+00133 \textcolor{comment}{     *                defined all logging function is built and code size }
+00134 \textcolor{comment}{     *                remains constant }
+00135 \textcolor{comment}{     *}
+00136 \textcolor{comment}{     * Flag settings - 1 = on, 0 = off. */}
+00137 
+00138     \textcolor{comment}{/* This flag turns on "boot" messages for printing.  This includes messages}
+00139 \textcolor{comment}{     * during crt0.S, then alt\_main, and finally alt\_exit. */}
+00140 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_BOOT\_ON\_FLAG\_SETTING}
+00141 \textcolor{preprocessor}{        #if ALT\_LOG\_FLAGS == 1}
+00142 \textcolor{preprocessor}{            #define ALT\_LOG\_BOOT\_ON\_FLAG\_SETTING 0x1}
+00143 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 2}
+00144 \textcolor{preprocessor}{            #define ALT\_LOG\_BOOT\_ON\_FLAG\_SETTING 0x1}
+00145 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 3}
+00146 \textcolor{preprocessor}{            #define ALT\_LOG\_BOOT\_ON\_FLAG\_SETTING 0x1}
+00147 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == -1 }\textcolor{comment}{/* silent mode */}\textcolor{preprocessor}{}
+00148 \textcolor{preprocessor}{            #define ALT\_LOG\_BOOT\_ON\_FLAG\_SETTING 0x0}
+00149 \textcolor{preprocessor}{        #else }\textcolor{comment}{/* default setting */}\textcolor{preprocessor}{}
+00150 \textcolor{preprocessor}{            #define ALT\_LOG\_BOOT\_ON\_FLAG\_SETTING 0x1}
+00151 \textcolor{preprocessor}{        #endif}
+00152 \textcolor{preprocessor}{    #endif }\textcolor{comment}{/* ALT\_LOG\_BOOT\_ON\_FLAG\_SETTING */}\textcolor{preprocessor}{}
+00153 
+00154 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_SYS\_CLK\_ON\_FLAG\_SETTING}
+00155 \textcolor{preprocessor}{        #if ALT\_LOG\_FLAGS == 1}
+00156 \textcolor{preprocessor}{            #define ALT\_LOG\_SYS\_CLK\_ON\_FLAG\_SETTING 0x1}
+00157 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 2}
+00158 \textcolor{preprocessor}{            #define ALT\_LOG\_SYS\_CLK\_ON\_FLAG\_SETTING 0x1}
+00159 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 3}
+00160 \textcolor{preprocessor}{            #define ALT\_LOG\_SYS\_CLK\_ON\_FLAG\_SETTING 0x1}
+00161 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == -1 }\textcolor{comment}{/* silent mode */}\textcolor{preprocessor}{ }
+00162 \textcolor{preprocessor}{            #define ALT\_LOG\_SYS\_CLK\_ON\_FLAG\_SETTING 0x0}
+00163 \textcolor{preprocessor}{        #else }\textcolor{comment}{/* default setting */}\textcolor{preprocessor}{}
+00164 \textcolor{preprocessor}{            #define ALT\_LOG\_SYS\_CLK\_ON\_FLAG\_SETTING 0x0}
+00165 \textcolor{preprocessor}{        #endif}
+00166 \textcolor{preprocessor}{    #endif }\textcolor{comment}{/* ALT\_LOG\_SYS\_CLK\_ON\_FLAG\_SETTING */}\textcolor{preprocessor}{}
+00167 
+00168 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_WRITE\_ON\_FLAG\_SETTING}
+00169 \textcolor{preprocessor}{        #if ALT\_LOG\_FLAGS == 1}
+00170 \textcolor{preprocessor}{            #define ALT\_LOG\_WRITE\_ON\_FLAG\_SETTING 0x0}
+00171 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 2}
+00172 \textcolor{preprocessor}{            #define ALT\_LOG\_WRITE\_ON\_FLAG\_SETTING 0x1}
+00173 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 3}
+00174 \textcolor{preprocessor}{            #define ALT\_LOG\_WRITE\_ON\_FLAG\_SETTING 0x1}
+00175 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == -1 }\textcolor{comment}{/* silent mode */}\textcolor{preprocessor}{}
+00176 \textcolor{preprocessor}{            #define ALT\_LOG\_WRITE\_ON\_FLAG\_SETTING 0x0}
+00177 \textcolor{preprocessor}{        #else }\textcolor{comment}{/* default setting */}\textcolor{preprocessor}{}
+00178 \textcolor{preprocessor}{            #define ALT\_LOG\_WRITE\_ON\_FLAG\_SETTING 0x0}
+00179 \textcolor{preprocessor}{        #endif}
+00180 \textcolor{preprocessor}{    #endif }\textcolor{comment}{/* ALT\_LOG\_WRITE\_ON\_FLAG\_SETTING */}\textcolor{preprocessor}{}
+00181 
+00182 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_JTAG\_UART\_ALARM\_ON\_FLAG\_SETTING}
+00183 \textcolor{preprocessor}{        #ifndef \_\_ALTERA\_AVALON\_JTAG\_UART }
+00184 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ALARM\_ON\_FLAG\_SETTING 0x0}
+00185 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 1}
+00186 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ALARM\_ON\_FLAG\_SETTING 0x0}
+00187 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 2}
+00188 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ALARM\_ON\_FLAG\_SETTING 0x1}
+00189 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 3}
+00190 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ALARM\_ON\_FLAG\_SETTING 0x1}
+00191 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == -1 }\textcolor{comment}{/* silent mode */}\textcolor{preprocessor}{}
+00192 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ALARM\_ON\_FLAG\_SETTING 0x0}
+00193 \textcolor{preprocessor}{        #else }\textcolor{comment}{/* default setting */}\textcolor{preprocessor}{}
+00194 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ALARM\_ON\_FLAG\_SETTING 0x0}
+00195 \textcolor{preprocessor}{        #endif}
+00196 \textcolor{preprocessor}{    #endif }\textcolor{comment}{/* ALT\_LOG\_JTAG\_UART\_ALARM\_ON\_FLAG\_SETTING */}\textcolor{preprocessor}{}
+00197 
+00198 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_JTAG\_UART\_STARTUP\_INFO\_ON\_FLAG\_SETTING}
+00199 \textcolor{preprocessor}{        #ifndef \_\_ALTERA\_AVALON\_JTAG\_UART }
+00200 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_STARTUP\_INFO\_ON\_FLAG\_SETTING 0x0}
+00201 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 1}
+00202 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_STARTUP\_INFO\_ON\_FLAG\_SETTING 0x1}
+00203 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 2}
+00204 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_STARTUP\_INFO\_ON\_FLAG\_SETTING 0x1}
+00205 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 3}
+00206 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_STARTUP\_INFO\_ON\_FLAG\_SETTING 0x1}
+00207 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == -1 }\textcolor{comment}{/* silent mode */}\textcolor{preprocessor}{}
+00208 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_STARTUP\_INFO\_ON\_FLAG\_SETTING 0x0}
+00209 \textcolor{preprocessor}{        #else }\textcolor{comment}{/* default setting */}\textcolor{preprocessor}{}
+00210 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_STARTUP\_INFO\_ON\_FLAG\_SETTING 0x0}
+00211 \textcolor{preprocessor}{        #endif}
+00212 \textcolor{preprocessor}{    #endif }\textcolor{comment}{/* ALT\_LOG\_JTAG\_UART\_STARTUP\_INFO\_FLAG\_SETTING */}\textcolor{preprocessor}{}
+00213 
+00214 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_JTAG\_UART\_ISR\_ON\_FLAG\_SETTING}
+00215 \textcolor{preprocessor}{        #ifndef \_\_ALTERA\_AVALON\_JTAG\_UART }
+00216 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ISR\_ON\_FLAG\_SETTING 0x0}
+00217 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 1}
+00218 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ISR\_ON\_FLAG\_SETTING 0x0}
+00219 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 2}
+00220 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ISR\_ON\_FLAG\_SETTING 0x0}
+00221 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == 3}
+00222 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ISR\_ON\_FLAG\_SETTING 0x1}
+00223 \textcolor{preprocessor}{        #elif ALT\_LOG\_FLAGS == -1 }\textcolor{comment}{/* silent mode */}\textcolor{preprocessor}{}
+00224 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ISR\_ON\_FLAG\_SETTING 0x0}
+00225 \textcolor{preprocessor}{        #else }\textcolor{comment}{/* default setting */}\textcolor{preprocessor}{}
+00226 \textcolor{preprocessor}{            #define ALT\_LOG\_JTAG\_UART\_ISR\_ON\_FLAG\_SETTING 0x0}
+00227 \textcolor{preprocessor}{        #endif}
+00228 \textcolor{preprocessor}{    #endif }\textcolor{comment}{/* ALT\_LOG\_JTAG\_UART\_ISR\_ON\_FLAG\_SETTING */}\textcolor{preprocessor}{}
+00229 
+00230 \textcolor{preprocessor}{#ifndef ALT\_ASM\_SRC}
+00231     \textcolor{comment}{/* Function Prototypes */}
+00232     \textcolor{keywordtype}{void} alt\_log\_txchar(\textcolor{keywordtype}{int} c,\textcolor{keywordtype}{char} *uartBase);
+00233     \textcolor{keywordtype}{void} alt\_log\_private\_printf(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt,\textcolor{keywordtype}{int} base,va\_list args);
+00234     \textcolor{keywordtype}{void} alt\_log\_repchar(\textcolor{keywordtype}{char} c,\textcolor{keywordtype}{int} r,\textcolor{keywordtype}{int} base);
+00235     \textcolor{keywordtype}{int} alt\_log\_printf\_proc(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, ... );
+00236     \textcolor{keywordtype}{void} alt\_log\_system\_clock();
+00237 \textcolor{preprocessor}{    #ifdef \_\_ALTERA\_AVALON\_JTAG\_UART }
+00238         alt_u32 altera\_avalon\_jtag\_uart\_report\_log(\textcolor{keywordtype}{void} * context);
+00239         \textcolor{keywordtype}{void} alt\_log\_jtag\_uart\_startup\_info(altera\_avalon\_jtag\_uart\_state* dev, \textcolor{keywordtype}{int} base);
+00240         \textcolor{keywordtype}{void} alt\_log\_jtag\_uart\_print\_control\_reg(altera\_avalon\_jtag\_uart\_state* dev, \(\backslash\)
+00241              \textcolor{keywordtype}{int} base, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* header);
+00242         \textcolor{keywordtype}{void} alt\_log\_jtag\_uart\_isr\_proc(\textcolor{keywordtype}{int} base, altera\_avalon\_jtag\_uart\_state* dev);
+00243 \textcolor{preprocessor}{    #endif}
+00244     \textcolor{keywordtype}{void} alt\_log\_write(\textcolor{keyword}{const} \textcolor{keywordtype}{void} *ptr, \textcolor{keywordtype}{size\_t} len);
+00245     
+00246     \textcolor{comment}{/* extern all global variables */}
+00247     \textcolor{keyword}{extern} \textcolor{keyword}{volatile} alt_u32 alt\_log\_boot\_on\_flag;
+00248     \textcolor{keyword}{extern} \textcolor{keyword}{volatile} alt_u8 alt\_log\_write\_on\_flag;
+00249     \textcolor{keyword}{extern} \textcolor{keyword}{volatile} alt_u8 alt\_log\_sys\_clk\_on\_flag;
+00250     \textcolor{keyword}{extern} \textcolor{keyword}{volatile} alt_u8 alt\_log\_jtag\_uart\_alarm\_on\_flag;
+00251     \textcolor{keyword}{extern} \textcolor{keyword}{volatile} alt_u8 alt\_log\_jtag\_uart\_isr\_on\_flag;
+00252     \textcolor{keyword}{extern} \textcolor{keyword}{volatile} alt_u8 alt\_log\_jtag\_uart\_startup\_info\_on\_flag;
+00253     \textcolor{keyword}{extern} \textcolor{keyword}{volatile} \textcolor{keywordtype}{int} alt\_log\_sys\_clk\_count;
+00254     \textcolor{keyword}{extern} \textcolor{keyword}{volatile} \textcolor{keywordtype}{int} alt\_system\_clock\_in\_sec;
+00255     \textcolor{keyword}{extern} alt_alarm alt\_log\_jtag\_uart\_alarm\_1;
+00256 \textcolor{preprocessor}{#endif  }\textcolor{comment}{/* ALT\_ASM\_SRC */}\textcolor{preprocessor}{}
+00257 
+00258 
+00259     \textcolor{comment}{/* Below are the MACRO defines used in various HAL files.  They check}
+00260 \textcolor{comment}{     * if their specific flag is turned on; if it is, then it executes its }
+00261 \textcolor{comment}{     * code.}
+00262 \textcolor{comment}{     *}
+00263 \textcolor{comment}{     * To keep this file reasonable, most of these macros calls functions,}
+00264 \textcolor{comment}{     * which are defined in alt\_log\_printf.c.  Look there for implementation}
+00265 \textcolor{comment}{     * details. */}
+00266   
+00267     \textcolor{comment}{/* Boot Messages Logging */}
+00268 \textcolor{preprocessor}{    #define ALT\_LOG\_PRINT\_BOOT(...) \(\backslash\)}
+00269 \textcolor{preprocessor}{       do \{ if (alt\_log\_boot\_on\_flag==1) \{ALT\_LOG\_PRINTF(\_\_VA\_ARGS\_\_);\} \(\backslash\)}
+00270 \textcolor{preprocessor}{          \} while (0)}
+00271 
+00272     \textcolor{comment}{/* JTAG UART Logging */}
+00273     \textcolor{comment}{/* number of ticks before alarm runs logging function */}
+00274 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_JTAG\_UART\_TICKS\_DIVISOR}
+00275 \textcolor{preprocessor}{        #define ALT\_LOG\_JTAG\_UART\_TICKS\_DIVISOR 10}
+00276 \textcolor{preprocessor}{    #endif}
+00277 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_JTAG\_UART\_TICKS}
+00278 \textcolor{preprocessor}{        #define ALT\_LOG\_JTAG\_UART\_TICKS \(\backslash\)}
+00279 \textcolor{preprocessor}{            (alt\_ticks\_per\_second()/ALT\_LOG\_JTAG\_UART\_TICKS\_DIVISOR)}
+00280 \textcolor{preprocessor}{    #endif}
+00281   
+00282     \textcolor{comment}{/* if there's a JTAG UART defined, then enable these macros */}
+00283 \textcolor{preprocessor}{    #ifdef \_\_ALTERA\_AVALON\_JTAG\_UART }
+00284 
+00285         \textcolor{comment}{/* Macro in altera\_avalon\_jtag\_uart.c, to register the alarm function.}
+00286 \textcolor{comment}{         * Also, the startup register info is also printed here, as this is}
+00287 \textcolor{comment}{         * called within the device driver initialization.  */}
+00288 \textcolor{preprocessor}{        #define ALT\_LOG\_JTAG\_UART\_ALARM\_REGISTER(dev, base) \(\backslash\)}
+00289 \textcolor{preprocessor}{            do \{ if (alt\_log\_jtag\_uart\_alarm\_on\_flag==1) \{ \(\backslash\)}
+00290 \textcolor{preprocessor}{                    alt\_alarm\_start(&alt\_log\_jtag\_uart\_alarm\_1, \(\backslash\)}
+00291 \textcolor{preprocessor}{                    ALT\_LOG\_JTAG\_UART\_TICKS, &altera\_avalon\_jtag\_uart\_report\_log,\(\backslash\)}
+00292 \textcolor{preprocessor}{                    dev);\} \(\backslash\)}
+00293 \textcolor{preprocessor}{                 if (alt\_log\_jtag\_uart\_startup\_info\_on\_flag==1) \{\(\backslash\)}
+00294 \textcolor{preprocessor}{                    alt\_log\_jtag\_uart\_startup\_info(dev, base);\} \(\backslash\)}
+00295 \textcolor{preprocessor}{               \} while (0)}
+00296   
+00297         \textcolor{comment}{/* JTAG UART IRQ Logging (when buffer is empty) }
+00298 \textcolor{comment}{         * Inserted in the ISR in altera\_avalon\_jtag\_uart.c */}
+00299 \textcolor{preprocessor}{        #define ALT\_LOG\_JTAG\_UART\_ISR\_FUNCTION(base, dev) \(\backslash\)}
+00300 \textcolor{preprocessor}{            do \{ alt\_log\_jtag\_uart\_isr\_proc(base, dev); \} while (0) }
+00301     \textcolor{comment}{/* else, define macros to nothing.  Or else the jtag\_uart specific types}
+00302 \textcolor{comment}{     * will throw compiler errors */}
+00303 \textcolor{preprocessor}{    #else}
+00304 \textcolor{preprocessor}{        #define ALT\_LOG\_JTAG\_UART\_ALARM\_REGISTER(dev, base) }
+00305 \textcolor{preprocessor}{        #define ALT\_LOG\_JTAG\_UART\_ISR\_FUNCTION(base, dev) }
+00306 \textcolor{preprocessor}{    #endif}
+00307 
+00308     \textcolor{comment}{/* System clock logging}
+00309 \textcolor{comment}{     * How often (in seconds) the system clock logging prints.}
+00310 \textcolor{comment}{     * The default value is every 1 second */}
+00311 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_SYS\_CLK\_INTERVAL\_MULTIPLIER}
+00312 \textcolor{preprocessor}{    #define ALT\_LOG\_SYS\_CLK\_INTERVAL\_MULTIPLIER 1}
+00313 \textcolor{preprocessor}{    #endif}
+00314 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_SYS\_CLK\_INTERVAL}
+00315 \textcolor{preprocessor}{    #define ALT\_LOG\_SYS\_CLK\_INTERVAL \(\backslash\)}
+00316 \textcolor{preprocessor}{        (alt\_ticks\_per\_second()*ALT\_LOG\_SYS\_CLK\_INTERVAL\_MULTIPLIER)}
+00317 \textcolor{preprocessor}{    #endif}
+00318 
+00319     \textcolor{comment}{/* System clock logging - prints a message every interval (set above) }
+00320 \textcolor{comment}{     * to show that the system clock is alive. }
+00321 \textcolor{comment}{     * This macro is used in altera\_avalon\_timer\_sc.c */}
+00322 \textcolor{preprocessor}{    #define ALT\_LOG\_SYS\_CLK\_HEARTBEAT() \(\backslash\)}
+00323 \textcolor{preprocessor}{        do \{ alt\_log\_system\_clock(); \} while (0)}
+00324 
+00325     \textcolor{comment}{/* alt\_write\_logging - echos a message every time write() is called,}
+00326 \textcolor{comment}{     * displays the first ALT\_LOG\_WRITE\_ECHO\_LEN characters.}
+00327 \textcolor{comment}{     * This macro is used in alt\_write.c */}
+00328 \textcolor{preprocessor}{    #ifndef ALT\_LOG\_WRITE\_ECHO\_LEN}
+00329 \textcolor{preprocessor}{        #define ALT\_LOG\_WRITE\_ECHO\_LEN 15}
+00330 \textcolor{preprocessor}{    #endif}
+00331 
+00332 \textcolor{preprocessor}{    #define ALT\_LOG\_WRITE\_FUNCTION(ptr,len) \(\backslash\)}
+00333 \textcolor{preprocessor}{        do \{ alt\_log\_write(ptr,len); \} while (0)}
+00334 
+00335 \textcolor{preprocessor}{#else }\textcolor{comment}{/* ALT\_LOG\_ENABLE not defined */}\textcolor{preprocessor}{}
+00336 
+00337     \textcolor{comment}{/* logging is off, set all relevant macros to null */}
+00338 \textcolor{preprocessor}{    #define ALT\_LOG\_PRINT\_BOOT(...)}
+00339 \textcolor{preprocessor}{    #define ALT\_LOG\_PRINTF(...)}
+00340 \textcolor{preprocessor}{    #define ALT\_LOG\_JTAG\_UART\_ISR\_FUNCTION(base, dev) }
+00341 \textcolor{preprocessor}{    #define ALT\_LOG\_JTAG\_UART\_ALARM\_REGISTER(dev, base) }
+00342 \textcolor{preprocessor}{    #define ALT\_LOG\_SYS\_CLK\_HEARTBEAT()}
+00343 \textcolor{preprocessor}{    #define ALT\_LOG\_PUTS(str) }
+00344 \textcolor{preprocessor}{    #define ALT\_LOG\_WRITE\_FUNCTION(ptr,len) }
+00345 
+00346 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_LOG\_ENABLE */}\textcolor{preprocessor}{}
+00347 
+00348 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_LOG\_PRINTF\_H\_\_ */}\textcolor{preprocessor}{}
+00349 
+\end{DoxyCode}

@@ -1,0 +1,77 @@
+\subsection{lms7002\+\_\+ddin.\+vhd}
+\label{rx__path__top_2diq2fifo_2synth_2lms7002__ddin_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/diq2fifo/synth/lms7002\+\_\+ddin.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+path\+\_\+top/diq2fifo/synth/lms7002\+\_\+ddin.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    lms7002\_ddin.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: takes data from lms7002 in double data rate}
+00004 \textcolor{keyword}{-- DATE:    Mar 14, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{vhdlkeyword}{LIBRARY }\textcolor{keywordflow}{altera\_mf};
+00013 \textcolor{vhdlkeyword}{USE }altera_mf.altera\_mf\_components.\textcolor{keywordflow}{all};
+00014 
+00015 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00016 \textcolor{keyword}{-- Entity declaration}
+00017 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00018 \textcolor{keywordflow}{entity }lms7002_ddin \textcolor{keywordflow}{is}
+00019     \textcolor{keywordflow}{generic}\textcolor{vhdlchar}{(} \textcolor{vhdlchar}{dev_family}             \textcolor{vhdlchar}{:} \textcolor{comment}{string} \textcolor{vhdlchar}{:=} \textcolor{keyword}{"Cyclone IV E"};
+00020                 \textcolor{vhdlchar}{iq_width}                    \textcolor{vhdlchar}{:} \textcolor{comment}{integer} \textcolor{vhdlchar}{:=}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{12};
+00021                 \textcolor{vhdlchar}{invert_input_clocks} \textcolor{vhdlchar}{:} \textcolor{comment}{string} \textcolor{vhdlchar}{:=} \textcolor{keyword}{"ON"}
+00022     \textcolor{vhdlchar}{)};
+00023     \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}
+00024 \textcolor{keyword}{      --input ports }
+00025       \textcolor{vhdlchar}{clk}           \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00026       \textcolor{vhdlchar}{reset_n}       \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00027         \textcolor{vhdlchar}{rxiq}            \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width}\textcolor{vhdlchar}{-}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00028         \textcolor{vhdlchar}{rxiqsel}     \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00029 \textcolor{keyword}{        --output ports }
+00030         \textcolor{vhdlchar}{data_out_h}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00031         \textcolor{vhdlchar}{data_out_l}  \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}
+00032         
+00033         \textcolor{vhdlchar}{)};
+00034 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{lms7002\_ddin};
+00035 
+00036 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00037 \textcolor{keyword}{-- Architecture}
+00038 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00039 \textcolor{keywordflow}{architecture} arch \textcolor{keywordflow}{of} lms7002_ddin is
+00040 \textcolor{keyword}{--declare signals,  components here}
+00041 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{aclr}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00042 \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{datain}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{iq_width} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00043 
+00044 \textcolor{vhdlkeyword}{begin}
+00045 
+00046 \textcolor{vhdlchar}{datain}\textcolor{vhdlchar}{<=}\textcolor{vhdlchar}{rxiqsel} \textcolor{vhdlchar}{&} \textcolor{vhdlchar}{rxiq};
+00047 
+00048 \textcolor{vhdlchar}{aclr}\textcolor{vhdlchar}{<=}\textcolor{keywordflow}{not} \textcolor{vhdlchar}{reset_n};
+00049 
+00050     ALTDDIO\_IN\_component : ALTDDIO\_IN
+00051     \textcolor{keywordflow}{GENERIC} \textcolor{keywordflow}{MAP} (
+00052         intended\_device\_family  => dev_family,
+00053         invert\_input\_clocks         => invert_input_clocks,
+00054         lpm\_hint                    => \textcolor{keyword}{"UNUSED"},
+00055         lpm\_type                    => \textcolor{keyword}{"altddio\_in"},
+00056         power\_up\_high               => \textcolor{keyword}{"OFF"},
+00057         width                       => iq\_width+1
+00058     \textcolor{vhdlchar}{)}
+00059     \textcolor{keywordflow}{PORT} \textcolor{keywordflow}{MAP} (
+00060         aclr            => aclr,
+00061         datain      => datain,
+00062         inclock         => clk,
+00063         dataout\_h   => data_out_h,
+00064         dataout\_l   => data_out_l
+00065     \textcolor{vhdlchar}{)};
+00066   
+00067 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{arch};   
+00068 
+00069 
+00070 
+00071 
+00072 
+\end{DoxyCode}

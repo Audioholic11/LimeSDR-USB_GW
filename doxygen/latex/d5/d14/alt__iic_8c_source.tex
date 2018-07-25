@@ -1,0 +1,83 @@
+\subsection{alt\+\_\+iic.\+c}
+\label{alt__iic_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+iic.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+iic.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2009 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{******************************************************************************/}
+00030 \textcolor{preprocessor}{#include "system.h"}
+00031 
+00032 \textcolor{comment}{/*}
+00033 \textcolor{comment}{ * This file implements the HAL Enhanced interrupt API for Nios II processors}
+00034 \textcolor{comment}{ * with an internal interrupt controller (IIC). For most routines, this serves }
+00035 \textcolor{comment}{ * as a wrapper layer over the legacy interrupt API (which must be used with }
+00036 \textcolor{comment}{ * the IIC only). }
+00037 \textcolor{comment}{ *}
+00038 \textcolor{comment}{ * Use of the enhanced API is recommended so that application and device}
+00039 \textcolor{comment}{ * drivers are compatible with a Nios II system configured with an external }
+00040 \textcolor{comment}{ * interrupt controller (EIC), or IIC. This will afford maximum portability. }
+00041 \textcolor{comment}{ *}
+00042 \textcolor{comment}{ * If an EIC is present, the EIC device driver must provide these routines, }
+00043 \textcolor{comment}{ * because their operation will be specific to that EIC type. }
+00044 \textcolor{comment}{ */}
+00045 \textcolor{preprocessor}{#ifndef NIOS2\_EIC\_PRESENT}
+00046 \textcolor{preprocessor}{#ifdef ALT\_ENHANCED\_INTERRUPT\_API\_PRESENT}
+00047 
+00048 \textcolor{preprocessor}{#include "sys/alt_irq.h"}
+00049 \textcolor{preprocessor}{#include "priv/alt_iic_isr_register.h"}
+00050 \textcolor{preprocessor}{#include "priv/alt_legacy_irq.h"}
+00051                             
+00060 \textcolor{keywordtype}{int} alt\_ic\_isr\_register(alt_u32 ic\_id, alt_u32 irq, alt_isr_func isr, 
+00061   \textcolor{keywordtype}{void} *isr\_context, \textcolor{keywordtype}{void} *flags)
+00062 \{
+00063     \textcolor{keywordflow}{return} alt_iic_isr_register(ic\_id, irq, isr, isr\_context, flags);
+00064 \}  
+00065 
+00072 \textcolor{keywordtype}{int} alt\_ic\_irq\_enable (alt_u32 ic\_id, alt_u32 irq)
+00073 \{
+00074     \textcolor{keywordflow}{return} alt_irq_enable(irq);
+00075 \}
+00076 
+00083 \textcolor{keywordtype}{int} alt\_ic\_irq\_disable(alt_u32 ic\_id, alt_u32 irq)
+00084 \{
+00085     \textcolor{keywordflow}{return} alt_irq_disable(irq);
+00086 \}
+00087 
+00096 alt_u32 alt\_ic\_irq\_enabled(alt_u32 ic\_id, alt_u32 irq)
+00097 \{
+00098     alt_u32 irq\_enabled;
+00099 
+00100     NIOS2_READ_IENABLE(irq\_enabled);
+00101 
+00102     \textcolor{keywordflow}{return} (irq\_enabled & (1 << irq)) ? 1: 0;
+00103 \}
+00104 
+00105 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_ENHANCED\_INTERRUPT\_API\_PRESENT */}\textcolor{preprocessor}{}
+00106 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* NIOS2\_EIC\_PRESENT */}\textcolor{preprocessor}{}
+\end{DoxyCode}

@@ -1,0 +1,42 @@
+\subsection{altera\+\_\+nios2\+\_\+gen2\+\_\+irq.\+c}
+\label{altera__nios2__gen2__irq_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/altera\+\_\+nios2\+\_\+gen2\+\_\+irq.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/altera\+\_\+nios2\+\_\+gen2\+\_\+irq.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * Copyright (c) 2009 Altera Corporation, San Jose, California, USA.  }
+00003 \textcolor{comment}{ * All rights reserved.}
+00004 \textcolor{comment}{ * }
+00005 \textcolor{comment}{ * Permission is hereby granted, free of charge, to any person obtaining a copy}
+00006 \textcolor{comment}{ * of this software and associated documentation files (the "Software"), to }
+00007 \textcolor{comment}{ * deal in the Software without restriction, including without limitation the }
+00008 \textcolor{comment}{ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or}
+00009 \textcolor{comment}{ * sell copies of the Software, and to permit persons to whom the Software is }
+00010 \textcolor{comment}{ * furnished to do so, subject to the following conditions:}
+00011 \textcolor{comment}{ *}
+00012 \textcolor{comment}{ * The above copyright notice and this permission notice shall be included in }
+00013 \textcolor{comment}{ * all copies or substantial portions of the Software.}
+00014 \textcolor{comment}{ * }
+00015 \textcolor{comment}{ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR }
+00016 \textcolor{comment}{ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, }
+00017 \textcolor{comment}{ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE}
+00018 \textcolor{comment}{ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER }
+00019 \textcolor{comment}{ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING }
+00020 \textcolor{comment}{ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER }
+00021 \textcolor{comment}{ * DEALINGS IN THE SOFTWARE.}
+00022 \textcolor{comment}{ * }
+00023 \textcolor{comment}{ * altera\_nios2\_gen2\_irq.c - Support for Nios II internal interrupt controller.}
+00024 \textcolor{comment}{ *}
+00025 \textcolor{comment}{ */}
+00026 
+00027 \textcolor{preprocessor}{#include "sys/alt_irq.h"}
+00028 \textcolor{preprocessor}{#include "altera_nios2_gen2_irq.h"}
+00029 
+00030 \textcolor{comment}{/*}
+00031 \textcolor{comment}{ * To initialize the internal interrupt controller, just clear the IENABLE}
+00032 \textcolor{comment}{ * register so that all possible IRQs are disabled.}
+00033 \textcolor{comment}{ */}
+00034 \textcolor{keywordtype}{void} altera_nios2_gen2_irq_init(\textcolor{keywordtype}{void}) 
+00035 \{
+00036     NIOS2_WRITE_IENABLE(0);
+00037 \}
+\end{DoxyCode}

@@ -1,0 +1,981 @@
+\subsection{main.\+c}
+\label{main_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/main.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+app/main.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * main.c}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Jan 22, 2016}
+00005 \textcolor{comment}{ *      Author: zydrunas}
+00006 \textcolor{comment}{ */}
+00007 
+00008 
+00009 \textcolor{preprocessor}{#include "io.h"}
+00010 \textcolor{preprocessor}{#include "system.h"}
+00011 \textcolor{comment}{//#include <stdio.h>}
+00012 \textcolor{preprocessor}{#include <stdint.h>}
+00013 \textcolor{preprocessor}{#include <string.h>}
+00014 \textcolor{preprocessor}{#include <altera_avalon_spi.h>}
+00015 \textcolor{preprocessor}{#include "alt_types.h"}
+00016 
+00017 \textcolor{preprocessor}{#include "LMS64C_protocol.h"}
+00018 \textcolor{preprocessor}{#include "sodera_pcie_brd_v1r0.h"}
+00019 \textcolor{comment}{//#include "spi\_flash\_lib.h"}
+00020 \textcolor{preprocessor}{#include "i2c_opencores.h"}
+00021 
+00022 \textcolor{preprocessor}{#define sbi(p,n) ((p) |= (1UL << (n)))}
+00023 \textcolor{preprocessor}{#define cbi(p,n) ((p) &= ~(1 << (n)))}
+00024 
+00025 \textcolor{comment}{//get info}
+00026 \textcolor{comment}{//#define FW\_VER                1 //Initial version}
+00027 \textcolor{comment}{//#define FW\_VER                3 //}
+00028 \textcolor{preprocessor}{#define FW\_VER              4 //Commands CMD\_GPIO\_WR, CMD\_GPIO\_RD, CMD\_GPIO\_DIR\_WR and CMD\_GPIO\_DIR\_RD
+       added}
+00029 
+00030 
+00031 \textcolor{preprocessor}{#define SPI\_NR\_LMS7002M 0}
+00032 \textcolor{preprocessor}{#define SPI\_NR\_BRD      1}
+00033 \textcolor{preprocessor}{#define SPI\_NR\_DAC      0}
+00034 \textcolor{preprocessor}{#define SPI\_NR\_ADF4002  0}
+00035 \textcolor{comment}{//#define SPI\_NR\_FLASH    0}
+00036 
+00037 \textcolor{comment}{//CMD\_PROG\_MCU}
+00038 \textcolor{preprocessor}{#define PROG\_EEPROM 1}
+00039 \textcolor{preprocessor}{#define PROG\_SRAM   2}
+00040 \textcolor{preprocessor}{#define BOOT\_MCU    3}
+00041 
+00043 \textcolor{preprocessor}{#define MCU\_CONTROL\_REG 0x02}
+00044 \textcolor{preprocessor}{#define MCU\_STATUS\_REG  0x03}
+00045 \textcolor{preprocessor}{#define MCU\_FIFO\_WR\_REG 0x04}
+00046 
+00047 \textcolor{preprocessor}{#define MAX\_MCU\_RETRIES 30}
+00048 uint8\_t MCU_retries;
+00049 
+00050 uint8\_t test, block, cmd_errors, glEp0Buffer_Rx[64], glEp0Buffer_Tx[64];
+00051 tLMS_Ctrl_Packet *LMS_Ctrl_Packet_Tx = (tLMS_Ctrl_Packet*)glEp0Buffer_Tx;
+00052 tLMS_Ctrl_Packet *LMS_Ctrl_Packet_Rx = (tLMS_Ctrl_Packet*)glEp0Buffer_Rx;
+00053 
+00054 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} dac_val = 134;
+00055 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} dac_data[2];
+00056 
+00057 \textcolor{keywordtype}{signed} \textcolor{keywordtype}{short} \textcolor{keywordtype}{int} converted_val = 300;
+00058 
+00059 \textcolor{keywordtype}{int} flash_page = 0, flash_page_data_cnt = 0, flash_data_cnt_free = 0, 
+      flash_data_counter_to_copy = 0;
+00060 \textcolor{comment}{//FPGA conf}
+00061 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} last_portion, current_portion, fpga_data;
+00062 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} data_cnt;
+00063 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} sc_brdg_data[4];
+00064 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} flash_page_data[FLASH_PAGE_SIZE];
+00065 tBoard_Config_FPGA *Board_Config_FPGA = (tBoard_Config_FPGA*) flash_page_data;
+00066 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} fpga_byte;
+00067 
+00068 
+00072 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} Check_many_blocks (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} block\_size)
+00073 \{
+00074     \textcolor{keywordflow}{if} (LMS\_Ctrl\_Packet\_Rx->Header.Data_blocks > (\textcolor{keyword}{sizeof}(LMS\_Ctrl\_Packet\_Tx->
+      Data_field)/block\_size))
+00075     \{
+00076         LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_BLOCKS_ERROR_CMD;
+00077         \textcolor{keywordflow}{return} 1;
+00078     \}
+00079     \textcolor{keywordflow}{else} \textcolor{keywordflow}{return} 0;
+00080     \textcolor{keywordflow}{return} 1;
+00081 \}
+00082 
+00086 \textcolor{keywordtype}{void} getFifoData(uint8\_t *buf, uint8\_t k)
+00087 \{
+00088     uint8\_t cnt = 0;
+00089     uint32\_t* dest = (uint32\_t*)buf;
+00090     \textcolor{keywordflow}{for}(cnt=0; cnt<k/\textcolor{keyword}{sizeof}(uint32\_t); ++cnt)
+00091     \{
+00092         dest[cnt] = IORD(AV_FIFO_INT_0_BASE, 1);    \textcolor{comment}{// Read Data from FIFO}
+00093     \};
+00094 \}
+00095 
+00096 
+00100 \textcolor{keywordtype}{void} set_led(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} led\_pattern)
+00101 \{
+00102     IOWR(LEDS_BASE, 0, led\_pattern);               \textcolor{comment}{// writes register}
+00103 \}
+00104 
+00105 
+00110 \textcolor{keywordtype}{void} Configure_LM75(\textcolor{keywordtype}{void})
+00111 \{
+00112     \textcolor{keywordtype}{int} spirez;
+00113 
+00114     \textcolor{comment}{// OS polarity configuration}
+00115     spirez = I2C_start(I2C_OPENCORES_0_BASE, LM75_I2C_ADDR, 0);
+00116     spirez = I2C_write(I2C_OPENCORES_0_BASE, 0x01, 0);              \textcolor{comment}{// Pointer = configuration register}
+00117     \textcolor{comment}{//spirez = I2C\_start(I2C\_OPENCORES\_0\_BASE, LM75\_I2C\_ADDR, 1);}
+00118     spirez = I2C_write(I2C_OPENCORES_0_BASE, 0x04, 1);              \textcolor{comment}{//Configuration value: OS polarity = 1,
+       Comparator/int = 0, Shutdown = 0}
+00119 
+00120     \textcolor{comment}{// THYST configuration}
+00121     spirez = I2C_start(I2C_OPENCORES_0_BASE, LM75_I2C_ADDR, 0);
+00122     spirez = I2C_write(I2C_OPENCORES_0_BASE, 0x02, 0);              \textcolor{comment}{// Pointer = THYST register}
+00123     \textcolor{comment}{//spirez = I2C\_start(I2C\_OPENCORES\_0\_BASE, LM75\_I2C\_ADDR, 1);}
+00124     spirez = I2C_write(I2C_OPENCORES_0_BASE, 45, 0);                \textcolor{comment}{// Set THYST H}
+00125     spirez = I2C_write(I2C_OPENCORES_0_BASE,  0, 1);                \textcolor{comment}{// Set THYST L}
+00126 
+00127     \textcolor{comment}{// TOS configuration}
+00128     spirez = I2C_start(I2C_OPENCORES_0_BASE, LM75_I2C_ADDR, 0);
+00129     spirez = I2C_write(I2C_OPENCORES_0_BASE, 0x03, 0);              \textcolor{comment}{// Pointer = TOS register}
+00130     \textcolor{comment}{//spirez = I2C\_start(I2C\_OPENCORES\_0\_BASE, LM75\_I2C\_ADDR, 1);}
+00131     spirez = I2C_write(I2C_OPENCORES_0_BASE, 55, 0);                \textcolor{comment}{// Set TOS H}
+00132     spirez = I2C_write(I2C_OPENCORES_0_BASE,  0, 1);                \textcolor{comment}{// Set TOS L}
+00133 \}
+00134 
+00135 
+00136 \textcolor{comment}{/*}
+00137 \textcolor{comment}{void testFlash(void)}
+00138 \textcolor{comment}{\{}
+00139 \textcolor{comment}{    uint16\_t cnt = 0, page = 0;}
+00140 \textcolor{comment}{    uint8\_t spirez;}
+00141 \textcolor{comment}{}
+00142 \textcolor{comment}{}
+00143 \textcolor{comment}{    spirez = FlashSpiEraseSector(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, CyTrue, 0);}
+00144 \textcolor{comment}{}
+00145 \textcolor{comment}{    for(page = 0; page < 10; page++)}
+00146 \textcolor{comment}{    \{}
+00147 \textcolor{comment}{        for(cnt = 0; cnt < 256; cnt++)}
+00148 \textcolor{comment}{        \{}
+00149 \textcolor{comment}{            flash\_page\_data[cnt] = cnt+page;}
+00150 \textcolor{comment}{        \}}
+00151 \textcolor{comment}{        spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, page, FLASH\_PAGE\_SIZE, flash\_page\_data,
+       0);}
+00152 \textcolor{comment}{    \}}
+00153 \textcolor{comment}{}
+00154 \textcolor{comment}{    for(page = 0; page < 10; page++)}
+00155 \textcolor{comment}{    \{}
+00156 \textcolor{comment}{        spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, page, FLASH\_PAGE\_SIZE, flash\_page\_data,
+       1);}
+00157 \textcolor{comment}{    \}}
+00158 \textcolor{comment}{}
+00159 \textcolor{comment}{\}}
+00160 \textcolor{comment}{*/}
+00161 
+00162 
+00168 \textcolor{keywordtype}{void} Control_TCXO_DAC (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} oe, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *data) \textcolor{comment}{//controls DAC (AD5601)}
+00169 \{
+00170     \textcolor{keyword}{volatile} \textcolor{keywordtype}{int} spirez;
+00171     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} DAC\_data[2];
+00172 
+00173     \textcolor{keywordflow}{if} (oe == 0) \textcolor{comment}{//set DAC out to three-state}
+00174     \{
+00175         DAC\_data[0] = 0xC0; \textcolor{comment}{//POWER-DOWN MODE = THREE-STATE (MSB bits = 11) + MSB data}
+00176         DAC\_data[1] = 0x00; \textcolor{comment}{//LSB data}
+00177 
+00178         spirez = alt_avalon_spi_command(SPI_1_DAC_BASE, SPI_NR_DAC, 2, DAC\_data, 0, NULL, 0);
+00179     \}
+00180     \textcolor{keywordflow}{else} \textcolor{comment}{//enable DAC output, set new val}
+00181     \{
+00182         DAC\_data[0] = (*data) >>2; \textcolor{comment}{//POWER-DOWN MODE = NORMAL OPERATION (MSB bits =00) + MSB data}
+00183         DAC\_data[1] = (*data) <<6; \textcolor{comment}{//LSB data}
+00184 
+00185         spirez = alt_avalon_spi_command(SPI_1_DAC_BASE, SPI_NR_DAC, 2, DAC\_data, 0, NULL, 0);
+00186     \}
+00187 \}
+00188 
+00194 \textcolor{keywordtype}{void} Control_TCXO_ADF (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} oe, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *data) \textcolor{comment}{//controls ADF4002}
+00195 \{
+00196     \textcolor{keyword}{volatile} \textcolor{keywordtype}{int} spirez;
+00197     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} ADF\_data[12], ADF\_block;
+00198 
+00199     \textcolor{keywordflow}{if} (oe == 0) \textcolor{comment}{//set ADF4002 CP to three-state and MUX\_OUT to DGND}
+00200     \{
+00201         ADF\_data[0] = 0x1f;
+00202         ADF\_data[1] = 0x81;
+00203         ADF\_data[2] = 0xf3;
+00204         ADF\_data[3] = 0x1f;
+00205         ADF\_data[4] = 0x81;
+00206         ADF\_data[5] = 0xf2;
+00207         ADF\_data[6] = 0x00;
+00208         ADF\_data[7] = 0x01;
+00209         ADF\_data[8] = 0xf4;
+00210         ADF\_data[9] = 0x01;
+00211         ADF\_data[10] = 0x80;
+00212         ADF\_data[11] = 0x01;
+00213 
+00214         \textcolor{comment}{//Reconfigure\_SPI\_for\_LMS();}
+00215 
+00216         \textcolor{comment}{//write data to ADF}
+00217         \textcolor{keywordflow}{for}(ADF\_block = 0; ADF\_block < 4; ADF\_block++)
+00218         \{
+00219             spirez = alt_avalon_spi_command(SPI_1_ADF_BASE, SPI_NR_ADF4002, 3, &ADF\_data[ADF\_block*3], 0, 
+      NULL, 0);
+00220         \}
+00221     \}
+00222     \textcolor{keywordflow}{else} \textcolor{comment}{//set PLL parameters, 4 blocks must be written}
+00223     \{
+00224         spirez = alt_avalon_spi_command(SPI_1_ADF_BASE, SPI_NR_ADF4002, 3, data, 0, NULL, 0);
+00225     \}
+00226 \}
+00227 
+00228 
+00229 
+00230 
+00236 \textcolor{keywordtype}{int} main()
+00237 \{
+00238     uint32\_t* dest = (uint32\_t*)glEp0Buffer_Tx;
+00239     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} led\_pattern = 0x00;
+00240     \textcolor{comment}{//volatile uint32\_t *uart = (volatile uint32\_t*) UART\_BASE;}
+00241     \textcolor{comment}{//char *str = "Hello from NIOS II\(\backslash\)r\(\backslash\)n";}
+00242 
+00243     \textcolor{keyword}{volatile} \textcolor{keywordtype}{int} spirez;
+00244     \textcolor{keywordtype}{char} cnt = 0;
+00245 
+00246     uint8\_t status = 0;
+00247 
+00248     \textcolor{comment}{//Reset LMS7}
+00249     IOWR(LMS_CTR_GPIO_BASE, 0, 0x06);
+00250     IOWR(LMS_CTR_GPIO_BASE, 0, 0x07);
+00251 
+00252     \textcolor{comment}{//}
+00253     uint8\_t spi\_wrbuf1[2] = \{0x00, 0x20\};
+00254     uint8\_t spi\_wrbuf2[6] = \{0x80, 0x20, 0xFF, 0xFD, 0x00, 0x20\};
+00255     \textcolor{comment}{//uint8\_t spi\_rdbuf[2] = \{0x01, 0x00\};}
+00256 
+00257     \textcolor{comment}{// Write initial data to the DAC}
+00258     \textcolor{comment}{//dac\_data[0] = (dac\_val) >>2; //POWER-DOWN MODE = NORMAL OPERATION (MSB bits =00) + MSB data}
+00259     \textcolor{comment}{//dac\_data[1] = (dac\_val) <<6; //LSB data}
+00260     \textcolor{comment}{//spirez = alt\_avalon\_spi\_command(SPI\_1\_DAC\_BASE, SPI\_NR\_DAC, 2, dac\_data, 0, NULL, 0);}
+00261 
+00262     \textcolor{comment}{//write default TCXO DAC value}
+00263     Control_TCXO_ADF (0, NULL); \textcolor{comment}{//set ADF4002 CP to three-state}
+00264     dac_val = 125; \textcolor{comment}{//default DAC value}
+00265     Control_TCXO_DAC (1, &dac_val); \textcolor{comment}{//enable DAC output, set new val}
+00266 
+00267 
+00268     \textcolor{comment}{//FLASH MEMORY}
+00269     \textcolor{comment}{/*}
+00270 \textcolor{comment}{    spi\_wrbuf1[0] = FLASH\_CMD\_READJEDECID;  //}
+00271 \textcolor{comment}{    spirez = alt\_avalon\_spi\_command(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 1, spi\_wrbuf1, 3, spi\_wrbuf2, 0);}
+00272 \textcolor{comment}{    */}
+00273 
+00274     \textcolor{comment}{//flash\_page\_data[FLASH\_PAGE\_SIZE];}
+00275     \textcolor{comment}{//testFlash();}
+00276     \textcolor{comment}{/*}
+00277 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0000, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00278 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0001, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00279 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0002, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00280 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0003, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00281 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0004, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00282 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0005, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00283 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0006, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00284 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0007, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00285 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0008, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00286 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0009, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00287 \textcolor{comment}{    spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x000A, FLASH\_PAGE\_SIZE, flash\_page\_data, 1);}
+00288 \textcolor{comment}{    //spirez = FlashSpiTransfer(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 0x0010, 10, flash\_page\_data, 1);}
+00289 \textcolor{comment}{    */}
+00290 
+00291     \textcolor{comment}{// I2C initialiazation}
+00292     I2C_init(I2C_OPENCORES_0_BASE, ALT_CPU_FREQ, 400000);
+00293 
+00294     \textcolor{comment}{// Configure LM75}
+00295     Configure_LM75();
+00296 \textcolor{comment}{/*}
+00297 \textcolor{comment}{    //Si5351C}
+00298 \textcolor{comment}{    spirez = I2C\_start(I2C\_OPENCORES\_0\_BASE, SI5351\_I2C\_ADDR, 0);}
+00299 \textcolor{comment}{    spirez = I2C\_write(I2C\_OPENCORES\_0\_BASE, 0x09, 0);}
+00300 \textcolor{comment}{    spirez = I2C\_write(I2C\_OPENCORES\_0\_BASE, 0x0F, 1);}
+00301 \textcolor{comment}{}
+00302 \textcolor{comment}{}
+00303 \textcolor{comment}{    spirez = I2C\_start(I2C\_OPENCORES\_0\_BASE, SI5351\_I2C\_ADDR, 0);}
+00304 \textcolor{comment}{    spirez = I2C\_write(I2C\_OPENCORES\_0\_BASE, 0x09, 1);}
+00305 \textcolor{comment}{    spirez = I2C\_start(I2C\_OPENCORES\_0\_BASE, SI5351\_I2C\_ADDR, 1);}
+00306 \textcolor{comment}{    spirez = I2C\_read(I2C\_OPENCORES\_0\_BASE, 1);}
+00307 \textcolor{comment}{*/}
+00308 
+00309  \textcolor{comment}{/*}
+00310 \textcolor{comment}{    // LM75}
+00311 \textcolor{comment}{    spirez = I2C\_start(I2C\_OPENCORES\_0\_BASE, LM75\_I2C\_ADDR, 0);}
+00312 \textcolor{comment}{    spirez = I2C\_write(I2C\_OPENCORES\_0\_BASE, 0x00, 1);              // Pointer = temperature register}
+00313 \textcolor{comment}{    spirez = I2C\_start(I2C\_OPENCORES\_0\_BASE, LM75\_I2C\_ADDR, 1);}
+00314 \textcolor{comment}{}
+00315 \textcolor{comment}{    converted\_val = (signed short int)I2C\_read(I2C\_OPENCORES\_0\_BASE, 0);}
+00316 \textcolor{comment}{    //converted\_val = 0xE7 << 8;    // Test -25 deg}
+00317 \textcolor{comment}{    converted\_val = 10 * (converted\_val >> 8);}
+00318 \textcolor{comment}{    spirez = I2C\_read(I2C\_OPENCORES\_0\_BASE, 1);}
+00319 \textcolor{comment}{}
+00320 \textcolor{comment}{    if(spirez & 0x80) converted\_val = converted\_val + 5;}
+00321 \textcolor{comment}{*/}
+00322 
+00323     \textcolor{keywordflow}{while} (1)   \textcolor{comment}{// infinite loop}
+00324     \{
+00325         \textcolor{comment}{//led\_pattern = IORD(SWITCH\_BASE, 0);     // gets LEDs}
+00326         \textcolor{comment}{//set\_led(led\_pattern<<3);                     // sets LEDs}
+00327 
+00328 
+00329         \textcolor{comment}{// SPI}
+00330         \textcolor{comment}{//spirez = alt\_avalon\_spi\_command(SPI\_LMS\_BASE, 0, 2, spi\_wrbuf1, 2, spi\_rdbuf, 0);}
+00331         \textcolor{comment}{//spirez = alt\_avalon\_spi\_command(SPI\_LMS\_BASE, 0, 6, spi\_wrbuf2, 2, spi\_rdbuf, 0);}
+00332         \textcolor{comment}{//spirez = alt\_avalon\_spi\_command(SPI\_LMS\_BASE, 0, 2, spi\_wrbuf1, 2, spi\_rdbuf, 0);}
+00333 
+00334         \textcolor{comment}{//FLASH MEMORY}
+00335         \textcolor{comment}{//spi\_wrbuf1[0] = ReverseBitOrder(0x9F);    //}
+00336         \textcolor{comment}{//spirez = alt\_avalon\_spi\_command(SPI\_FPGA\_AS\_BASE, SPI\_NR\_FLASH, 1, spi\_wrbuf1, 3, spi\_wrbuf2, 0);}
+00337         \textcolor{comment}{//spi\_wrbuf2[0] = ReverseBitOrder(spi\_wrbuf2[0]);}
+00338         \textcolor{comment}{//spi\_wrbuf2[1] = ReverseBitOrder(spi\_wrbuf2[1]);}
+00339         \textcolor{comment}{//spi\_wrbuf2[2] = ReverseBitOrder(spi\_wrbuf2[2]);}
+00340 
+00341 
+00342 
+00343 
+00344         \textcolor{comment}{// FIFO}
+00345         \textcolor{comment}{//IOWR(AV\_FIFO\_INT\_0\_BASE, 0, cnt);     // Write Data to FIFO}
+00346         \textcolor{comment}{//cnt++;}
+00347         spirez = IORD(AV_FIFO_INT_0_BASE, 2);   \textcolor{comment}{// Read FIFO Status}
+00348         \textcolor{keywordflow}{if}(!(spirez & 0x01))
+00349         \{
+00350             IOWR(AV_FIFO_INT_0_BASE, 3, 1);     \textcolor{comment}{// Toggle FIFO reset}
+00351             IOWR(AV_FIFO_INT_0_BASE, 3, 0);     \textcolor{comment}{// Toggle FIFO reset}
+00352             led\_pattern = IORD(LEDS_BASE, 0);   \textcolor{comment}{// gets LEDs}
+00353             set_led(led\_pattern|0x01);         \textcolor{comment}{// sets LEDs (set first LED to HIGH)}
+00354             \textcolor{comment}{//Read packet from the FIFO}
+00355             getFifoData(glEp0Buffer_Rx, 64);
+00356 
+00357             memset (glEp0Buffer_Tx, 0, \textcolor{keyword}{sizeof}(glEp0Buffer_Tx)); \textcolor{comment}{//fill whole tx buffer with zeros}
+00358             cmd_errors = 0;
+00359 
+00360             LMS\_Ctrl\_Packet\_Tx->Header.Command = LMS\_Ctrl\_Packet\_Rx->Header.
+      Command;
+00361             LMS\_Ctrl\_Packet\_Tx->Header.Data_blocks = LMS\_Ctrl\_Packet\_Rx->Header.
+      Data_blocks;
+00362             LMS\_Ctrl\_Packet\_Tx->Header.Periph_ID = LMS\_Ctrl\_Packet\_Rx->Header.
+      Periph_ID;
+00363             LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_BUSY_CMD;
+00364 
+00365             \textcolor{keywordflow}{switch}(LMS\_Ctrl\_Packet\_Rx->Header.Command)
+00366             \{
+00367 
+00368                 \textcolor{keywordflow}{case} CMD_GET_INFO:
+00369 
+00370                     LMS\_Ctrl\_Packet\_Tx->Data_field[0] = FW_VER;
+00371                     LMS\_Ctrl\_Packet\_Tx->Data_field[1] = DEV_TYPE;
+00372                     LMS\_Ctrl\_Packet\_Tx->Data_field[2] = LMS_PROTOCOL_VER;
+00373                     LMS\_Ctrl\_Packet\_Tx->Data_field[3] = HW_VER;
+00374                     LMS\_Ctrl\_Packet\_Tx->Data_field[4] = EXP_BOARD;
+00375 
+00376                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00377                 \textcolor{keywordflow}{break};
+00378 
+00379 
+00380                 \textcolor{keywordflow}{case} CMD_LMS_RST:
+00381 
+00382                     \textcolor{keywordflow}{switch} (LMS\_Ctrl\_Packet\_Rx->Data_field[0])
+00383                     \{
+00384                         \textcolor{keywordflow}{case} LMS_RST_DEACTIVATE:
+00385                             IOWR(LMS_CTR_GPIO_BASE, 0, 0x07);
+00386                         \textcolor{keywordflow}{break};
+00387 
+00388                         \textcolor{keywordflow}{case} LMS_RST_ACTIVATE:
+00389                             IOWR(LMS_CTR_GPIO_BASE, 0, 0x06);
+00390                         \textcolor{keywordflow}{break};
+00391 
+00392                         \textcolor{keywordflow}{case} LMS_RST_PULSE:
+00393                             IOWR(LMS_CTR_GPIO_BASE, 0, 0x06);
+00394                             \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"}); \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"}); \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"}); \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"}); \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"});
+00395                             \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"}); \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"}); \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"}); \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"}); \textcolor{keyword}{asm}(\textcolor{stringliteral}{"nop"});
+00396                             IOWR(LMS_CTR_GPIO_BASE, 0, 0x07);
+00397                         \textcolor{keywordflow}{break};
+00398 
+00399                         \textcolor{keywordflow}{default}:
+00400                             cmd_errors++;
+00401                         \textcolor{keywordflow}{break};
+00402                     \}
+00403 
+00404                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00405                 \textcolor{keywordflow}{break};
+00406 
+00407 
+00408                 \textcolor{keywordflow}{case} CMD_LMS7002_WR:
+00409                     \textcolor{keywordflow}{if}(Check_many_blocks (4)) \textcolor{keywordflow}{break};
+00410 
+00411                     \textcolor{comment}{//CyU3PGpioSetValue (FX3\_SPI\_CS, CyFalse); //Enable LMS's SPI}
+00412 
+00413                     \textcolor{keywordflow}{for}(block = 0; block < LMS\_Ctrl\_Packet\_Rx->Header.
+      Data_blocks; block++)
+00414                     \{
+00415                         \textcolor{comment}{//write reg addr}
+00416                         sbi(LMS\_Ctrl\_Packet\_Rx->Data_field[0 + (block * 4)], 7); \textcolor{comment}{//set write bit}
+00417                         \textcolor{comment}{/*}
+00418 \textcolor{comment}{                        CyU3PSpiTransmitWords (&LMS\_Ctrl\_Packet\_Rx->Data\_field[0 + (block * 4)], 1); //reg
+       addr MSB with write bit}
+00419 \textcolor{comment}{                        CyU3PSpiTransmitWords (&LMS\_Ctrl\_Packet\_Rx->Data\_field[1 + (block * 4)], 1); //reg
+       addr LSB}
+00420 \textcolor{comment}{}
+00421 \textcolor{comment}{                        //write reg data}
+00422 \textcolor{comment}{                        CyU3PSpiTransmitWords (&LMS\_Ctrl\_Packet\_Rx->Data\_field[2 + (block * 4)], 1); //reg
+       data MSB}
+00423 \textcolor{comment}{                        CyU3PSpiTransmitWords (&LMS\_Ctrl\_Packet\_Rx->Data\_field[3 + (block * 4)], 1); //reg
+       data LSB}
+00424 \textcolor{comment}{                        */}
+00425                         spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 4, &LMS\_Ctrl\_Packet\_Rx->Data_field[0 + (block * 4)], 0, NULL, 0);
+00426                     \}
+00427 
+00428                     \textcolor{comment}{//CyU3PGpioSetValue (FX3\_SPI\_CS, CyTrue); //Disable LMS's SPI}
+00429 
+00430                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00431                 \textcolor{keywordflow}{break};
+00432 
+00433 
+00434                 \textcolor{keywordflow}{case} CMD_LMS7002_RD:
+00435                     \textcolor{keywordflow}{if}(Check_many_blocks (4)) \textcolor{keywordflow}{break};
+00436 
+00437                     \textcolor{comment}{//CyU3PGpioSetValue (FX3\_SPI\_CS, CyFalse); //Enable LMS's SPI}
+00438 
+00439                     \textcolor{keywordflow}{for}(block = 0; block < LMS\_Ctrl\_Packet\_Rx->Header.
+      Data_blocks; block++)
+00440                     \{
+00441 
+00442                         \textcolor{comment}{//write reg addr}
+00443                         cbi(LMS\_Ctrl\_Packet\_Rx->Data_field[0 + (block * 2)], 7);  \textcolor{comment}{//clear write bit}
+00444                         \textcolor{comment}{/*}
+00445 \textcolor{comment}{                          CyU3PSpiTransmitWords (&LMS\_Ctrl\_Packet\_Rx->Data\_field[0 + (block * 2)], 1); //
+      reg addr MSB}
+00446 \textcolor{comment}{                          CyU3PSpiTransmitWords (&LMS\_Ctrl\_Packet\_Rx->Data\_field[1 + (block * 2)], 1); //
+      reg addr LSB}
+00447 \textcolor{comment}{}
+00448 \textcolor{comment}{                        LMS\_Ctrl\_Packet\_Tx->Data\_field[0 + (block * 4)] = LMS\_Ctrl\_Packet\_Rx->Data\_field[0
+       + (block * 2)];}
+00449 \textcolor{comment}{                        LMS\_Ctrl\_Packet\_Tx->Data\_field[1 + (block * 4)] = LMS\_Ctrl\_Packet\_Rx->Data\_field[1
+       + (block * 2)];}
+00450 \textcolor{comment}{}
+00451 \textcolor{comment}{                        //read reg data}
+00452 \textcolor{comment}{                        CyU3PSpiReceiveWords (&LMS\_Ctrl\_Packet\_Tx->Data\_field[2 + (block * 4)], 1); //reg
+       data MSB}
+00453 \textcolor{comment}{                        CyU3PSpiReceiveWords (&LMS\_Ctrl\_Packet\_Tx->Data\_field[3 + (block * 4)], 1); //reg
+       data LSB}
+00454 \textcolor{comment}{                        */}
+00455                         spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 2, &LMS\_Ctrl\_Packet\_Rx->Data_field[0 + (block * 2)], 2, &LMS\_Ctrl\_Packet\_Tx->
+      Data_field[2 + (block * 4)], 0);
+00456                     \}
+00457 
+00458                     \textcolor{comment}{//CyU3PGpioSetValue (FX3\_SPI\_CS, CyTrue); //Disable LMS's SPI}
+00459 
+00460                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00461                 \textcolor{keywordflow}{break};
+00462 
+00463 
+00464                 \textcolor{keywordflow}{case} CMD_BRDSPI16_WR:
+00465                     \textcolor{keywordflow}{if}(Check_many_blocks (4)) \textcolor{keywordflow}{break};
+00466 
+00467                     \textcolor{keywordflow}{for}(block = 0; block < LMS\_Ctrl\_Packet\_Rx->Header.
+      Data_blocks; block++)
+00468                     \{
+00469                         \textcolor{comment}{//write reg addr}
+00470                         sbi(LMS\_Ctrl\_Packet\_Rx->Data_field[0 + (block * 4)], 7); \textcolor{comment}{//set write bit}
+00471                         spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_BRD, 4, &LMS\_Ctrl\_Packet\_Rx->
+      Data_field[0 + (block * 4)], 0, NULL, 0);
+00472                     \}
+00473 
+00474                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00475                 \textcolor{keywordflow}{break};
+00476 
+00477 
+00478                 \textcolor{keywordflow}{case} CMD_BRDSPI16_RD:
+00479                     \textcolor{keywordflow}{if}(Check_many_blocks (4)) \textcolor{keywordflow}{break};
+00480 
+00481                     \textcolor{keywordflow}{for}(block = 0; block < LMS\_Ctrl\_Packet\_Rx->Header.
+      Data_blocks; block++)
+00482                     \{
+00483 
+00484                         \textcolor{comment}{//write reg addr}
+00485                         cbi(LMS\_Ctrl\_Packet\_Rx->Data_field[0 + (block * 2)], 7);  \textcolor{comment}{//clear write bit}
+00486                         spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_BRD, 2, &LMS\_Ctrl\_Packet\_Rx->
+      Data_field[0 + (block * 2)], 2, &LMS\_Ctrl\_Packet\_Tx->Data_field[2 + (block * 4)], 0);
+00487                     \}
+00488 
+00489                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00490                 \textcolor{keywordflow}{break};
+00491 
+00492 
+00493                 \textcolor{keywordflow}{case} CMD_ADF4002_WR:
+00494                     \textcolor{keywordflow}{if}(Check_many_blocks (3)) \textcolor{keywordflow}{break};
+00495 \textcolor{comment}{/*}
+00496 \textcolor{comment}{                    for(block = 0; block < LMS\_Ctrl\_Packet\_Rx->Header.Data\_blocks; block++)}
+00497 \textcolor{comment}{                    \{}
+00498 \textcolor{comment}{                        switch(LMS\_Ctrl\_Packet\_Rx->Header.Periph\_ID)}
+00499 \textcolor{comment}{                        \{}
+00500 \textcolor{comment}{                            case 0: //onboard}
+00501 \textcolor{comment}{                                //CyU3PGpioSetValue (FX3\_ADF\_SNN, CyFalse); //Enable onboard ADF's SPI}
+00502 \textcolor{comment}{                                break;}
+00503 \textcolor{comment}{                            case 1: //fmc}
+00504 \textcolor{comment}{                                //Modify\_BRDSPI16\_Reg\_bits (0x14, BRD\_SPI\_ADF\_SS, BRD\_SPI\_ADF\_SS, 0); //
+      Enable ADF's SPI}
+00505 \textcolor{comment}{                                break;}
+00506 \textcolor{comment}{                            default:}
+00507 \textcolor{comment}{                                cmd\_errors++;}
+00508 \textcolor{comment}{                                break;}
+00509 \textcolor{comment}{                        \}}
+00510 \textcolor{comment}{}
+00511 \textcolor{comment}{                        //CyU3PSpiTransmitWords (&LMS\_Ctrl\_Packet\_Rx->Data\_field[0 + (block*3)], 1);}
+00512 \textcolor{comment}{                        //CyU3PSpiTransmitWords (&LMS\_Ctrl\_Packet\_Rx->Data\_field[1 + (block*3)], 1);}
+00513 \textcolor{comment}{                        //CyU3PSpiTransmitWords (&LMS\_Ctrl\_Packet\_Rx->Data\_field[2 + (block*3)], 1);}
+00514 \textcolor{comment}{                        spirez = alt\_avalon\_spi\_command(SPI\_1\_ADF\_BASE, SPI\_NR\_ADF4002, 3,
+       &LMS\_Ctrl\_Packet\_Rx->Data\_field[0 + (block*3)], 0, NULL, 0);}
+00515 \textcolor{comment}{}
+00516 \textcolor{comment}{                        switch(LMS\_Ctrl\_Packet\_Rx->Header.Periph\_ID)}
+00517 \textcolor{comment}{                        \{}
+00518 \textcolor{comment}{                            case 0: //onboard}
+00519 \textcolor{comment}{                                //CyU3PGpioSetValue (FX3\_ADF\_SNN, CyTrue); //Disable ADF's SPI}
+00520 \textcolor{comment}{                            break;}
+00521 \textcolor{comment}{                            case 1: //fmc}
+00522 \textcolor{comment}{                                //Modify\_BRDSPI16\_Reg\_bits (0x14, BRD\_SPI\_ADF\_SS, BRD\_SPI\_ADF\_SS, 1); //
+      Disable ADF's SPI}
+00523 \textcolor{comment}{                            break;}
+00524 \textcolor{comment}{                            default:}
+00525 \textcolor{comment}{                                cmd\_errors++;}
+00526 \textcolor{comment}{                            break;}
+00527 \textcolor{comment}{                        \}}
+00528 \textcolor{comment}{                    \}}
+00529 \textcolor{comment}{*/}
+00530                     Control_TCXO_DAC (0, NULL); \textcolor{comment}{//set DAC out to three-state}
+00531 
+00532                     \textcolor{keywordflow}{for}(block = 0; block < LMS\_Ctrl\_Packet\_Rx->Header.
+      Data_blocks; block++)
+00533                     \{
+00534                         Control_TCXO_ADF (1, &LMS\_Ctrl\_Packet\_Rx->Data_field[0 + (
+      block*3)]); \textcolor{comment}{//write data to ADF}
+00535                     \}
+00536 
+00537                     \textcolor{keywordflow}{if}(cmd_errors) LMS\_Ctrl\_Packet\_Tx->Header.Status = 
+      STATUS_INVALID_PERIPH_ID_CMD;
+00538                     \textcolor{keywordflow}{else} LMS\_Ctrl\_Packet\_Tx->Header.Status = 
+      STATUS_COMPLETED_CMD;
+00539                 \textcolor{keywordflow}{break};
+00540 
+00541 
+00542                 \textcolor{keywordflow}{case} CMD_ANALOG_VAL_RD:
+00543 
+00544                     \textcolor{keywordflow}{for}(block = 0; block < LMS\_Ctrl\_Packet\_Rx->Header.
+      Data_blocks; block++)
+00545                     \{
+00546 
+00547 
+00548                         \textcolor{comment}{//signed short int converted\_val = 300;}
+00549 
+00550                         \textcolor{keywordflow}{switch} (LMS\_Ctrl\_Packet\_Rx->Data_field[0 + (block)])\textcolor{comment}{//ch}
+00551                         \{
+00552                             \textcolor{keywordflow}{case} 0:\textcolor{comment}{//dac val}
+00553 
+00554                                 LMS\_Ctrl\_Packet\_Tx->Data_field[0 + (block * 4)] = LMS\_Ctrl\_Packet\_Rx->
+      Data_field[block]; \textcolor{comment}{//ch}
+00555                                 LMS\_Ctrl\_Packet\_Tx->Data_field[1 + (block * 4)] = 0x00; \textcolor{comment}{//RAW //unit, power}
+00556 
+00557                                 LMS\_Ctrl\_Packet\_Tx->Data_field[2 + (block * 4)] = 0; \textcolor{comment}{//signed val, MSB byte}
+00558                                 LMS\_Ctrl\_Packet\_Tx->Data_field[3 + (block * 4)] = 
+      dac_val; \textcolor{comment}{//signed val, LSB byte}
+00559                                 \textcolor{keywordflow}{break};
+00560 
+00561                             \textcolor{keywordflow}{case} 1: \textcolor{comment}{//temperature}
+00562 \textcolor{comment}{/*}
+00563 \textcolor{comment}{                                I2C\_Addr = 0x90; //LM75 I2C\_ADDR}
+00564 \textcolor{comment}{}
+00565 \textcolor{comment}{                                //read byte}
+00566 \textcolor{comment}{                                preamble.length = 3;}
+00567 \textcolor{comment}{}
+00568 \textcolor{comment}{                                I2C\_Addr &= ~(1 << 0);//write addr}
+00569 \textcolor{comment}{                                preamble.buffer[0] = I2C\_Addr;}
+00570 \textcolor{comment}{}
+00571 \textcolor{comment}{                                preamble.buffer[1] = 0x00; //temperature}
+00572 \textcolor{comment}{}
+00573 \textcolor{comment}{                                I2C\_Addr |= 1 << 0; //read addr}
+00574 \textcolor{comment}{}
+00575 \textcolor{comment}{                                preamble.buffer[2] = I2C\_Addr;}
+00576 \textcolor{comment}{                                preamble.ctrlMask  = 0x0002;}
+00577 \textcolor{comment}{}
+00578 \textcolor{comment}{                                if( CyU3PI2cReceiveBytes (&preamble, &sc\_brdg\_data[0], 2, 0)  !=
+       CY\_U3P\_SUCCESS)  cmd\_errors++;}
+00579 \textcolor{comment}{}
+00580 \textcolor{comment}{                                //converted\_val = 0x1234; //35,678C}
+00581 \textcolor{comment}{*/}
+00582 
+00583                                 spirez = I2C_start(I2C_OPENCORES_0_BASE, 
+      LM75_I2C_ADDR, 0);
+00584                                 spirez = I2C_write(I2C_OPENCORES_0_BASE, 0x00, 1);              \textcolor{comment}{// Pointer
+       = temperature register}
+00585                                 spirez = I2C_start(I2C_OPENCORES_0_BASE, 
+      LM75_I2C_ADDR, 1);
+00586 
+00587                                 \textcolor{comment}{// Read temperature and recalculate}
+00588                                 converted_val = (\textcolor{keywordtype}{signed} \textcolor{keywordtype}{short} int)I2C_read(
+      I2C_OPENCORES_0_BASE, 0);
+00589                                 converted_val = converted_val << 8;
+00590                                 converted_val = 10 * (converted_val >> 8);
+00591                                 spirez = I2C_read(I2C_OPENCORES_0_BASE, 1);
+00592                                 \textcolor{keywordflow}{if}(spirez & 0x80) converted_val = converted_val + 5;
+00593 
+00594 
+00595 
+00596 \textcolor{comment}{/*}
+00597 \textcolor{comment}{                                converted\_val = (((signed short int)sc\_brdg\_data[0]) << 8) + 0;//
+      sc\_brdg\_data[1];}
+00598 \textcolor{comment}{                                converted\_val = (converted\_val/256)*10;}
+00599 \textcolor{comment}{}
+00600 \textcolor{comment}{                                if(sc\_brdg\_data[1]&0x80) converted\_val = converted\_val + 5;}
+00601 \textcolor{comment}{*/}
+00602                                 LMS\_Ctrl\_Packet\_Tx->Data_field[0 + (block * 4)] = LMS\_Ctrl\_Packet\_Rx->
+      Data_field[block]; \textcolor{comment}{//ch}
+00603                                 LMS\_Ctrl\_Packet\_Tx->Data_field[1 + (block * 4)] = 0x50; \textcolor{comment}{//mC //unit, power}
+00604 
+00605                                 LMS\_Ctrl\_Packet\_Tx->Data_field[2 + (block * 4)] = (
+      converted_val >> 8); \textcolor{comment}{//signed val, MSB byte}
+00606                                 LMS\_Ctrl\_Packet\_Tx->Data_field[3 + (block * 4)] = 
+      converted_val; \textcolor{comment}{//signed val, LSB byte}
+00607 
+00608                             \textcolor{keywordflow}{break};
+00609 
+00610                             \textcolor{keywordflow}{default}:
+00611                                 cmd_errors++;
+00612                             \textcolor{keywordflow}{break};
+00613                         \}
+00614                     \}
+00615 
+00616                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00617 
+00618                 \textcolor{keywordflow}{break};
+00619 
+00620 
+00621                 \textcolor{keywordflow}{case} CMD_ANALOG_VAL_WR:
+00622                     \textcolor{keywordflow}{if}(Check_many_blocks (4)) \textcolor{keywordflow}{break};
+00623 
+00624                     \textcolor{keywordflow}{for}(block = 0; block < LMS\_Ctrl\_Packet\_Rx->Header.
+      Data_blocks; block++)
+00625                     \{
+00626                         \textcolor{keywordflow}{switch} (LMS\_Ctrl\_Packet\_Rx->Data_field[0 + (block * 4)]) \textcolor{comment}{//do something according
+       to channel}
+00627                         \{
+00628                             \textcolor{keywordflow}{case} 0: \textcolor{comment}{//TCXO DAC}
+00629                                 \textcolor{keywordflow}{if} (LMS\_Ctrl\_Packet\_Rx->Data_field[1 + (block * 4)] == 0) \textcolor{comment}{//RAW units?}
+00630                                 \{
+00631                                     \textcolor{keywordflow}{if}(LMS\_Ctrl\_Packet\_Rx->Data_field[2 + (block * 4)] == 0) \textcolor{comment}{//MSB byte
+       empty?}
+00632                                     \{
+00633                                         Control_TCXO_ADF(0, NULL); \textcolor{comment}{//set ADF4002 CP to three-state}
+00634 
+00635                                         \textcolor{comment}{//write data to DAC}
+00636                                         dac_val = LMS\_Ctrl\_Packet\_Rx->Data_field[3 + (
+      block * 4)];
+00637                                         Control_TCXO_DAC(1, &dac_val); \textcolor{comment}{//enable DAC output, set new val}
+00638 \textcolor{comment}{/*}
+00639 \textcolor{comment}{                                        dac\_data[0] = (dac\_val >> 2) & 0x3F; //POWER-DOWN MODE = NORMAL
+       OPERATION (MSB bits =00) + MSB data}
+00640 \textcolor{comment}{                                        dac\_data[1] = (dac\_val << 6) & 0xC0; //LSB data}
+00641 \textcolor{comment}{}
+00642 \textcolor{comment}{                                        //if( CyU3PI2cTransmitBytes (&preamble, &sc\_brdg\_data[0], 2, 0) !=
+       CY\_U3P\_SUCCESS)  cmd\_errors++;}
+00643 \textcolor{comment}{                                        spirez = alt\_avalon\_spi\_command(SPI\_1\_DAC\_BASE, SPI\_NR\_DAC, 2,
+       dac\_data, 0, NULL, 0);}
+00644 \textcolor{comment}{*/}
+00645                                     \}
+00646                                     \textcolor{keywordflow}{else} cmd_errors++;
+00647                                 \}
+00648                                 \textcolor{keywordflow}{else} cmd_errors++;
+00649 
+00650                             \textcolor{keywordflow}{break};
+00651 
+00652                             \textcolor{keywordflow}{default}:
+00653                                 cmd_errors++;
+00654                             \textcolor{keywordflow}{break};
+00655                         \}
+00656                     \}
+00657 
+00658 
+00659                     \textcolor{keywordflow}{if}(cmd_errors) LMS\_Ctrl\_Packet\_Tx->Header.Status = 
+      STATUS_ERROR_CMD;
+00660                     \textcolor{keywordflow}{else} LMS\_Ctrl\_Packet\_Tx->Header.Status = 
+      STATUS_COMPLETED_CMD;
+00661 
+00662                 \textcolor{keywordflow}{break};
+00663 
+00664 
+00665                 \textcolor{keywordflow}{case} CMD_LMS_MCU_FW_WR:
+00666 
+00667                     current_portion = LMS\_Ctrl\_Packet\_Rx->Data_field[1];
+00668 
+00669                     \textcolor{comment}{//check if portions are send in correct order}
+00670                     \textcolor{keywordflow}{if}(current_portion != 0) \textcolor{comment}{//not first portion?}
+00671                     \{
+00672                         \textcolor{keywordflow}{if}(last_portion != (current_portion - 1)) \textcolor{comment}{//portion number increments?}
+00673                         \{
+00674                             LMS\_Ctrl\_Packet\_Tx->Header.Status = 
+      STATUS_WRONG_ORDER_CMD;
+00675                             \textcolor{keywordflow}{break};
+00676                         \}
+00677                     \}
+00678 
+00679                     \textcolor{keywordflow}{if} (current_portion == 0) \textcolor{comment}{//PORTION\_NR = first fifo}
+00680                     \{
+00681                         \textcolor{comment}{//reset mcu}
+00682                         \textcolor{comment}{//write reg addr - mSPI\_REG2 (Controls MCU input pins)}
+00683                         sc_brdg_data[0] = (0x80); \textcolor{comment}{//reg addr MSB with write bit}
+00684                         sc_brdg_data[1] = (MCU_CONTROL_REG); \textcolor{comment}{//reg addr LSB}
+00685 
+00686                         sc_brdg_data[2] = (0x00); \textcolor{comment}{//reg data MSB}
+00687                         sc_brdg_data[3] = (0x00); \textcolor{comment}{//reg data LSB //8}
+00688 
+00689                         spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+00690 
+00691                         \textcolor{comment}{//set mode}
+00692                         \textcolor{comment}{//write reg addr - mSPI\_REG2 (Controls MCU input pins)}
+00693                         sc_brdg_data[0] = (0x80); \textcolor{comment}{//reg addr MSB with write bit}
+00694                         sc_brdg_data[1] = (MCU_CONTROL_REG); \textcolor{comment}{//reg addr LSB}
+00695 
+00696                         sc_brdg_data[2] = (0x00); \textcolor{comment}{//reg data MSB}
+00697 
+00698                         \textcolor{comment}{//reg data LSB}
+00699                         \textcolor{keywordflow}{switch} (LMS\_Ctrl\_Packet\_Rx->Data_field[0]) \textcolor{comment}{//PROG\_MODE}
+00700                         \{
+00701                             \textcolor{keywordflow}{case} PROG_EEPROM:
+00702                                 sc_brdg_data[3] = (0x01); \textcolor{comment}{//Programming both EEPROM and SRAM  //8}
+00703                                 spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+00704                                 \textcolor{keywordflow}{break};
+00705 
+00706                             \textcolor{keywordflow}{case} PROG_SRAM:
+00707                                 sc_brdg_data[3] =(0x02); \textcolor{comment}{//Programming only SRAM  //8}
+00708                                 spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+00709                                 \textcolor{keywordflow}{break};
+00710 
+00711 
+00712                             \textcolor{keywordflow}{case} BOOT_MCU:
+00713                                 sc_brdg_data[3] = (0x03); \textcolor{comment}{//Programming both EEPROM and SRAM  //8}
+00714                                 spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+00715 
+00716                                 \textcolor{comment}{//spi read}
+00717                                 \textcolor{comment}{//write reg addr}
+00718                                 sc_brdg_data[0] = (0x00); \textcolor{comment}{//reg addr MSB}
+00719                                 sc_brdg_data[1] = (MCU_STATUS_REG); \textcolor{comment}{//reg addr LSB}
+00720 
+00721                                 spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 2, &sc_brdg_data[0], 2, &sc_brdg_data[0], 0);
+00722 
+00723                                 \textcolor{keywordflow}{goto} BOOTING;
+00724 
+00725                                 \textcolor{keywordflow}{break};
+00726                         \}
+00727                     \}
+00728 
+00729                     MCU_retries = 0;
+00730 
+00731                     \textcolor{comment}{//wait till EMPTY\_WRITE\_BUFF = 1}
+00732                     \textcolor{keywordflow}{while} (MCU_retries < MAX_MCU_RETRIES)
+00733                     \{
+00734                         \textcolor{comment}{//read status reg}
+00735 
+00736                         \textcolor{comment}{//spi read}
+00737                         \textcolor{comment}{//write reg addr}
+00738                         sc_brdg_data[0] = (0x00); \textcolor{comment}{//reg addr MSB}
+00739                         sc_brdg_data[1] = (MCU_STATUS_REG); \textcolor{comment}{//reg addr LSB}
+00740 
+00741                         spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 2, &sc_brdg_data[0], 2, &sc_brdg_data[0], 0);
+00742 
+00743                         \textcolor{keywordflow}{if} (sc_brdg_data[1] &0x01) \textcolor{keywordflow}{break}; \textcolor{comment}{//EMPTY\_WRITE\_BUFF = 1}
+00744 
+00745                         MCU_retries++;
+00746                         usleep (30);
+00747                     \}
+00748 
+00749                     \textcolor{comment}{//write 32 bytes to FIFO}
+00750                     \textcolor{keywordflow}{for}(block = 0; block < 32; block++)
+00751                     \{
+00752                         \textcolor{comment}{/*}
+00753 \textcolor{comment}{                        //wait till EMPTY\_WRITE\_BUFF = 1}
+00754 \textcolor{comment}{                        while (MCU\_retries < MAX\_MCU\_RETRIES)}
+00755 \textcolor{comment}{                        \{}
+00756 \textcolor{comment}{                            //read status reg}
+00757 \textcolor{comment}{}
+00758 \textcolor{comment}{                            //spi read}
+00759 \textcolor{comment}{                            //write reg addr}
+00760 \textcolor{comment}{                            SPI\_SendByte(0x00); //reg addr MSB}
+00761 \textcolor{comment}{                            SPI\_SendByte(MCU\_STATUS\_REG); //reg addr LSB}
+00762 \textcolor{comment}{}
+00763 \textcolor{comment}{                            //read reg data}
+00764 \textcolor{comment}{                            SPI\_TransferByte(0x00); //reg data MSB}
+00765 \textcolor{comment}{                            temp\_status = SPI\_TransferByte(0x00); //reg data LSB}
+00766 \textcolor{comment}{}
+00767 \textcolor{comment}{                            if (temp\_status &0x01) break;}
+00768 \textcolor{comment}{}
+00769 \textcolor{comment}{                            MCU\_retries++;}
+00770 \textcolor{comment}{                            Delay\_us (30);}
+00771 \textcolor{comment}{                        \}*/}
+00772 
+00773                         \textcolor{comment}{//write reg addr - mSPI\_REG4 (Writes one byte of data to MCU  )}
+00774                         sc_brdg_data[0] = (0x80); \textcolor{comment}{//reg addr MSB with write bit}
+00775                         sc_brdg_data[1] = (MCU_FIFO_WR_REG); \textcolor{comment}{//reg addr LSB}
+00776 
+00777                         sc_brdg_data[2] = (0x00); \textcolor{comment}{//reg data MSB}
+00778                         sc_brdg_data[3] = (LMS\_Ctrl\_Packet\_Rx->Data_field[2 + 
+      block]); \textcolor{comment}{//reg data LSB //8}
+00779 
+00780                         spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+00781 
+00782                         MCU_retries = 0;
+00783                     \}
+00784 
+00785                     MCU_retries = 0;
+00786 
+00787                     \textcolor{comment}{//wait till EMPTY\_WRITE\_BUFF = 1}
+00788                     \textcolor{keywordflow}{while} (MCU_retries < 500)
+00789                     \{
+00790                         \textcolor{comment}{//read status reg}
+00791 
+00792                         \textcolor{comment}{//spi read}
+00793                         \textcolor{comment}{//write reg addr}
+00794                         sc_brdg_data[0] = (0x00); \textcolor{comment}{//reg addr MSB}
+00795                         sc_brdg_data[1] = (MCU_STATUS_REG); \textcolor{comment}{//reg addr LSB}
+00796 
+00797                         spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 2, &sc_brdg_data[0], 2, &sc_brdg_data[0], 0);
+00798 
+00799                         \textcolor{keywordflow}{if} (sc_brdg_data[1] &0x01) \textcolor{keywordflow}{break}; \textcolor{comment}{//EMPTY\_WRITE\_BUFF = 1}
+00800 
+00801                         MCU_retries++;
+00802                         usleep (30);
+00803                     \}
+00804 
+00805 
+00806                     \textcolor{keywordflow}{if} (current_portion  == 255) \textcolor{comment}{//PORTION\_NR = last fifo}
+00807                     \{
+00808                         \textcolor{comment}{//chek programmed bit}
+00809 
+00810                         MCU_retries = 0;
+00811 
+00812                         \textcolor{comment}{//wait till PROGRAMMED = 1}
+00813                         \textcolor{keywordflow}{while} (MCU_retries < MAX_MCU_RETRIES)
+00814                         \{
+00815                             \textcolor{comment}{//read status reg}
+00816 
+00817                             \textcolor{comment}{//spi read}
+00818                             \textcolor{comment}{//write reg addr}
+00819                             sc_brdg_data[0] = (0x00); \textcolor{comment}{//reg addr MSB}
+00820                             sc_brdg_data[1] = (MCU_STATUS_REG); \textcolor{comment}{//reg addr LSB}
+00821 
+00822                             spirez = alt_avalon_spi_command(SPI_LMS_BASE, 
+      SPI_NR_LMS7002M, 2, &sc_brdg_data[0], 2, &sc_brdg_data[0], 0);
+00823 
+00824                             \textcolor{keywordflow}{if} (sc_brdg_data[1] &0x40) \textcolor{keywordflow}{break}; \textcolor{comment}{//PROGRAMMED = 1}
+00825 
+00826                             MCU_retries++;
+00827                             usleep (30);
+00828                         \}
+00829 
+00830                         \textcolor{keywordflow}{if} (MCU_retries == MAX_MCU_RETRIES) cmd_errors++;
+00831                     \}
+00832 
+00833                     last_portion = current_portion; \textcolor{comment}{//save last portion number}
+00834 
+00835                     BOOTING:
+00836 
+00837                     \textcolor{keywordflow}{if}(cmd_errors) LMS\_Ctrl\_Packet\_Tx->Header.Status = 
+      STATUS_ERROR_CMD;
+00838                     \textcolor{keywordflow}{else} LMS\_Ctrl\_Packet\_Tx->Header.Status = 
+      STATUS_COMPLETED_CMD;
+00839 
+00840                 \textcolor{keywordflow}{break};
+00841 
+00842 
+00843                 \textcolor{keywordflow}{case} CMD_GPIO_DIR_WR:
+00844                     \textcolor{comment}{//if(Check\_many\_blocks (2)) break;}
+00845 
+00846                     \textcolor{comment}{//write reg addr}
+00847                     sc_brdg_data[0] = 0x80;     \textcolor{comment}{// Write command & BOARD\_GPIO\_DIR register address MSB}
+00848                     sc_brdg_data[1] = 0xC4;     \textcolor{comment}{// BOARD\_GPIO\_DIR register address LSB}
+00849                     sc_brdg_data[2] = LMS\_Ctrl\_Packet\_Rx->Data_field[1];    \textcolor{comment}{// Data fields swapped, while
+       MSB in the data packet is in the}
+00850                     sc_brdg_data[3] = LMS\_Ctrl\_Packet\_Rx->Data_field[0];    \textcolor{comment}{// leftmost byte}
+00851                     spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_BRD, 4, 
+      sc_brdg_data, 0, NULL, 0);
+00852 
+00853                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00854                 \textcolor{keywordflow}{break};
+00855 
+00856 
+00857                 \textcolor{keywordflow}{case} CMD_GPIO_DIR_RD:
+00858                     \textcolor{comment}{//if(Check\_many\_blocks (2)) break;}
+00859 
+00860                     \textcolor{comment}{//write reg addr}
+00861                     sc_brdg_data[0] = 0x00;     \textcolor{comment}{// Read command & BOARD\_GPIO\_DIR register address MSB}
+00862                     sc_brdg_data[1] = 0xC4;     \textcolor{comment}{// BOARD\_GPIO\_DIR register address LSB}
+00863                     spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_BRD, 2, 
+      sc_brdg_data, 2, &sc_brdg_data[2], 0);
+00864 
+00865                     LMS\_Ctrl\_Packet\_Tx->Data_field[0] = sc_brdg_data[3];    \textcolor{comment}{// Data fields swapped, while
+       MSB in the data packet is in the}
+00866                     LMS\_Ctrl\_Packet\_Tx->Data_field[1] = sc_brdg_data[2];    \textcolor{comment}{// leftmost byte}
+00867 
+00868                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00869                 \textcolor{keywordflow}{break};
+00870 
+00871 
+00872                 \textcolor{keywordflow}{case} CMD_GPIO_WR:
+00873                     \textcolor{comment}{//if(Check\_many\_blocks (2)) break;}
+00874 
+00875                     \textcolor{comment}{//write reg addr}
+00876                     sc_brdg_data[0] = 0x80;     \textcolor{comment}{// Write command & BOARD\_GPIO\_VAL register address MSB}
+00877                     sc_brdg_data[1] = 0xC6;     \textcolor{comment}{// BOARD\_GPIO\_VAL register address LSB}
+00878                     sc_brdg_data[2] = LMS\_Ctrl\_Packet\_Rx->Data_field[1];    \textcolor{comment}{// Data fields swapped, while
+       MSB in the data packet is in the}
+00879                     sc_brdg_data[3] = LMS\_Ctrl\_Packet\_Rx->Data_field[0];    \textcolor{comment}{// leftmost byte}
+00880                     spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_BRD, 4, 
+      sc_brdg_data, 0, NULL, 0);
+00881 
+00882                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00883                 \textcolor{keywordflow}{break};
+00884 
+00885 
+00886                 \textcolor{keywordflow}{case} CMD_GPIO_RD:
+00887                     \textcolor{comment}{//if(Check\_many\_blocks (2)) break;}
+00888 
+00889                     \textcolor{comment}{//write reg addr}
+00890                     sc_brdg_data[0] = 0x00;     \textcolor{comment}{// Read command & BOARD\_GPIO\_RD register address MSB}
+00891                     sc_brdg_data[1] = 0xC2;     \textcolor{comment}{// BOARD\_GPIO\_RD register address LSB}
+00892                     spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_BRD, 2, 
+      sc_brdg_data, 2, &sc_brdg_data[2], 0);
+00893 
+00894                     LMS\_Ctrl\_Packet\_Tx->Data_field[0] = sc_brdg_data[3];    \textcolor{comment}{// Data fields swapped, while
+       MSB in the data packet is in the}
+00895                     LMS\_Ctrl\_Packet\_Tx->Data_field[1] = sc_brdg_data[2];    \textcolor{comment}{// leftmost byte}
+00896 
+00897                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_COMPLETED_CMD;
+00898                 \textcolor{keywordflow}{break};
+00899 
+00900 
+00901                 \textcolor{keywordflow}{default}:
+00902                     \textcolor{comment}{/* This is unknown request. */}
+00903                     \textcolor{comment}{//isHandled = CyFalse;}
+00904                     LMS\_Ctrl\_Packet\_Tx->Header.Status = STATUS_UNKNOWN_CMD;
+00905                 \textcolor{keywordflow}{break};
+00906             \}
+00907 
+00908             \textcolor{comment}{//Send response to the command}
+00909             \textcolor{keywordflow}{for}(cnt=0; cnt<64/\textcolor{keyword}{sizeof}(uint32\_t); ++cnt)
+00910             \{
+00911                 IOWR(AV_FIFO_INT_0_BASE, 0, dest[cnt]);
+00912             \};
+00913 
+00914             led\_pattern = IORD(LEDS_BASE, 0);   \textcolor{comment}{// gets LEDs}
+00915             set_led(led\_pattern&0xFE);          \textcolor{comment}{// sets LEDs (set first LED to LOW)}
+00916 
+00917 
+00918         \};
+00919 
+00920         \textcolor{comment}{//IOWR(AV\_FIFO\_INT\_0\_BASE, 0, cnt);     // Write Data to FIFO}
+00921         \textcolor{comment}{//IOWR(AV\_FIFO\_INT\_0\_BASE, 3, 1);       // Toggle FIFO reset}
+00922         \textcolor{comment}{//IOWR(AV\_FIFO\_INT\_0\_BASE, 3, 0);       // Toggle FIFO reset}
+00923 
+00924     \}
+00925 
+00926     \textcolor{keywordflow}{return} 0;   \textcolor{comment}{//Just make compiler happy!}
+00927 \}
+\end{DoxyCode}

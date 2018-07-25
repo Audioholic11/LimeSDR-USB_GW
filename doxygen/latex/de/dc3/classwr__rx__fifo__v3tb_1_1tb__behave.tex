@@ -1,0 +1,287 @@
+\subsection{tb\+\_\+behave Architecture Reference}
+\label{classwr__rx__fifo__v3tb_1_1tb__behave}\index{tb\+\_\+behave@{tb\+\_\+behave}}
+
+
+Collaboration diagram for tb\+\_\+behave\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=155pt]{d1/de4/classwr__rx__fifo__v3tb_1_1tb__behave__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Processes}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clock0}{\bfseries  (  )}
+\item 
+{\bf clock}{\bfseries  (  )}
+\item 
+{\bf res}{\bfseries  (  )}
+\end{DoxyCompactItemize}
+\subsubsection*{Components}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf fifo\+\_\+inst}  {\bfseries }  
+\end{DoxyCompactItemize}
+\subsubsection*{Constants}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf clk0\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf clk1\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Signals}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf data\+\_\+h} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf data\+\_\+l} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf clk0} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf clk1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reset\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fr\+\_\+start} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\textquotesingle{}}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\textquotesingle{}}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf mimo\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\textquotesingle{}}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\textquotesingle{}}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf ch\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} 11 \char`\"{}}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+wr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf diq} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{23} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf diq\+\_\+tx} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+q} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rdempty} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf fifo\+\_\+read} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf diq\+\_\+h} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf diq\+\_\+l} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+\subsubsection*{Instantiations}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf dut}  {\bfseries entity test\+\_\+data\+\_\+dd}   
+\item 
+{\bf dut2}  {\bfseries entity wr\+\_\+rx\+\_\+fifo\+\_\+v3}   
+\item 
+{\bf fifo}  {\bfseries fifo\+\_\+inst}   
+\item 
+{\bf txfifo\+\_\+rd}  {\bfseries entity rd\+\_\+tx\+\_\+fifo}   
+\item 
+{\bf dd}  {\bfseries entity lms7002\+\_\+ddout}   
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 23} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+
+
+\subsubsection{Member Function Documentation}
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!clock@{clock}}
+\index{clock@{clock}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{clock}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} clock ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_af761a67e9d7ce9e23381088b6f2ae893}
+
+
+Definition at line {\bf 89} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!clock0@{clock0}}
+\index{clock0@{clock0}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{clock0}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} clock0 ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a0ffcf9b3fa89917ed2b73a96f170b7ae}
+
+
+Definition at line {\bf 83} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!res@{res}}
+\index{res@{res}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{res}]{\setlength{\rightskip}{0pt plus 5cm} {\bfseries \textcolor{vhdlchar}{ }} res ( ) \hspace{0.3cm}{\ttfamily [Process]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_ab0bd7560790c13b656fd58e17e35143e}
+
+
+Definition at line {\bf 95} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!ch\+\_\+en@{ch\+\_\+en}}
+\index{ch\+\_\+en@{ch\+\_\+en}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{ch\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ch\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} 11 \char`\"{}}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a1e134c20b9493590d25b7099d98704b4}
+
+
+Definition at line {\bf 38} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!clk0@{clk0}}
+\index{clk0@{clk0}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{clk0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk0} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a693d72741b9413130fe2d67511b642be}
+
+
+Definition at line {\bf 30} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!clk0\+\_\+period@{clk0\+\_\+period}}
+\index{clk0\+\_\+period@{clk0\+\_\+period}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{clk0\+\_\+period}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk0\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_ad03d90619a1930e0f5daa16a616edd90}
+
+
+Definition at line {\bf 24} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!clk1@{clk1}}
+\index{clk1@{clk1}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{clk1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk1} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_ade95921e47b0e4d2d11e496794648550}
+
+
+Definition at line {\bf 30} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!clk1\+\_\+period@{clk1\+\_\+period}}
+\index{clk1\+\_\+period@{clk1\+\_\+period}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{clk1\+\_\+period}]{\setlength{\rightskip}{0pt plus 5cm}{\bf clk1\+\_\+period} {\bfseries \textcolor{comment}{time}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{10} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ns}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Constant]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_aed19b0dc48aba325370146bf0b89ab44}
+
+
+Definition at line {\bf 25} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!data\+\_\+h@{data\+\_\+h}}
+\index{data\+\_\+h@{data\+\_\+h}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{data\+\_\+h}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+h} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a92ac726006e3bfd64c6f246105aa9ad5}
+
+
+Definition at line {\bf 28} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!data\+\_\+l@{data\+\_\+l}}
+\index{data\+\_\+l@{data\+\_\+l}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{data\+\_\+l}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+l} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{12} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a7f8d751f575175e5c2f7f2a0b9e10778}
+
+
+Definition at line {\bf 29} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!dd@{dd}}
+\index{dd@{dd}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{dd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dd} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{lms7002\+\_\+ddout}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a11ddbaf3386aea1f2974eee984542152}
+
+
+Definition at line {\bf 193} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!diq@{diq}}
+\index{diq@{diq}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{diq}]{\setlength{\rightskip}{0pt plus 5cm}{\bf diq} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{23} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_abc6bb22e584e9050ea95992a6f561d41}
+
+
+Definition at line {\bf 42} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!diq\+\_\+h@{diq\+\_\+h}}
+\index{diq\+\_\+h@{diq\+\_\+h}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{diq\+\_\+h}]{\setlength{\rightskip}{0pt plus 5cm}{\bf diq\+\_\+h} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a408a62e9c9a41e586feb1661d7e56bc2}
+
+
+Definition at line {\bf 46} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!diq\+\_\+l@{diq\+\_\+l}}
+\index{diq\+\_\+l@{diq\+\_\+l}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{diq\+\_\+l}]{\setlength{\rightskip}{0pt plus 5cm}{\bf diq\+\_\+l} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{15} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_addad28e1b2edafcf5a3a981fd79c828d}
+
+
+Definition at line {\bf 47} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!diq\+\_\+tx@{diq\+\_\+tx}}
+\index{diq\+\_\+tx@{diq\+\_\+tx}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{diq\+\_\+tx}]{\setlength{\rightskip}{0pt plus 5cm}{\bf diq\+\_\+tx} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a646a98532e7188d607a26fee2756e5c9}
+
+
+Definition at line {\bf 43} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!dut@{dut}}
+\index{dut@{dut}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{dut}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dut} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{test\+\_\+data\+\_\+dd}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a623de4718fe48a8e036a1041bd516956}
+
+
+Definition at line {\bf 113} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!dut2@{dut2}}
+\index{dut2@{dut2}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{dut2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dut2} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{wr\+\_\+rx\+\_\+fifo\+\_\+v3}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a3d8cc8b3260687b60087e57b4869d43e}
+
+
+Definition at line {\bf 130} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!fifo@{fifo}}
+\index{fifo@{fifo}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{fifo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo} {\bfseries \textcolor{vhdlchar}{fifo\+\_\+inst}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a576cc2b7670fbb1753a2eb96fe3c0d1d}
+
+
+Definition at line {\bf 157} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!fifo\+\_\+inst@{fifo\+\_\+inst}}
+\index{fifo\+\_\+inst@{fifo\+\_\+inst}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{fifo\+\_\+inst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+inst} {\bfseries \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Component]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_ad96bb2323ad696436bccbd33dd3a05ed}
+
+
+Definition at line {\bf 50} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!fifo\+\_\+q@{fifo\+\_\+q}}
+\index{fifo\+\_\+q@{fifo\+\_\+q}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{fifo\+\_\+q}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+q} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{31} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_ab5f9deb368b9106fe9b4e68c6f983f7c}
+
+
+Definition at line {\bf 43} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!fifo\+\_\+read@{fifo\+\_\+read}}
+\index{fifo\+\_\+read@{fifo\+\_\+read}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{fifo\+\_\+read}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+read} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a007eab50bd9bbde3a9e13da3f2069c92}
+
+
+Definition at line {\bf 45} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!fifo\+\_\+wr@{fifo\+\_\+wr}}
+\index{fifo\+\_\+wr@{fifo\+\_\+wr}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{fifo\+\_\+wr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fifo\+\_\+wr} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_ac40753676a66294d87b19302e432e81c}
+
+
+Definition at line {\bf 41} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!fr\+\_\+start@{fr\+\_\+start}}
+\index{fr\+\_\+start@{fr\+\_\+start}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{fr\+\_\+start}]{\setlength{\rightskip}{0pt plus 5cm}{\bf fr\+\_\+start} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\textquotesingle{}}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\textquotesingle{}}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_ac713af2d266e8b4d299e5f2b19f4f6e8}
+
+
+Definition at line {\bf 36} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!mimo\+\_\+en@{mimo\+\_\+en}}
+\index{mimo\+\_\+en@{mimo\+\_\+en}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{mimo\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mimo\+\_\+en} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\textquotesingle{}}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\textquotesingle{}}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a7825de740f5caa8b64ff7a9d47994d6c}
+
+
+Definition at line {\bf 37} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!rdempty@{rdempty}}
+\index{rdempty@{rdempty}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{rdempty}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rdempty} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a9cb5832d14ca2029692d113b7be09ed5}
+
+
+Definition at line {\bf 44} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!reset\+\_\+n@{reset\+\_\+n}}
+\index{reset\+\_\+n@{reset\+\_\+n}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reset\+\_\+n} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Signal]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a1f070fd63a3a7fa45c907335ea870c5b}
+
+
+Definition at line {\bf 31} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+\index{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}!txfifo\+\_\+rd@{txfifo\+\_\+rd}}
+\index{txfifo\+\_\+rd@{txfifo\+\_\+rd}!wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave@{wr\+\_\+rx\+\_\+fifo\+\_\+v3tb\+::tb\+\_\+behave}}
+\paragraph[{txfifo\+\_\+rd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf txfifo\+\_\+rd} {\bfseries \textcolor{keywordflow}{entity}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{rd\+\_\+tx\+\_\+fifo}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Instantiation]}}\label{classwr__rx__fifo__v3tb_1_1tb__behave_a4b491940b134506384e92128e138f3dc}
+
+
+Definition at line {\bf 177} of file {\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/rx\+\_\+modules/{\bf wr\+\_\+rx\+\_\+fifo\+\_\+v3tb.\+vhd}\end{DoxyCompactItemize}

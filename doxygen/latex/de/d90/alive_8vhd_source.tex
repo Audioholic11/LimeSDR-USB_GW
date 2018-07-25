@@ -1,0 +1,47 @@
+\subsection{alive.\+vhd}
+\label{alive_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/alive.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/general/alive.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    alive.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: Frequency divider implementation using counter.}
+00004 \textcolor{keyword}{-- DATE:    22 Sep 2014}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:   }
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00011 
+00012 \textcolor{keyword}{--=============================================}
+00013 \textcolor{keyword}{-- Entity}
+00014 \textcolor{keyword}{--=============================================}
+00015 \textcolor{keywordflow}{entity }alive \textcolor{keywordflow}{is} \textcolor{keywordflow}{port}
+00016     \textcolor{vhdlchar}{(}
+00017          \textcolor{vhdlchar}{rst}\textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00018          \textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{comment}{std\_logic};
+00019          \textcolor{vhdlchar}{beat}\textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}
+00020     \textcolor{vhdlchar}{)};
+00021 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{alive};
+00022 
+00023 \textcolor{keyword}{--=============================================}
+00024 \textcolor{keyword}{-- Architecture}
+00025 \textcolor{keyword}{--=============================================}
+00026 \textcolor{keywordflow}{architecture} alive\_arch \textcolor{keywordflow}{of} alive is
+00027     \textcolor{keywordflow}{signal} \textcolor{vhdlchar}{cnt}\textcolor{vhdlchar}{:} \textcolor{comment}{unsigned} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{23} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00028 \textcolor{vhdlkeyword}{begin}
+00029 
+00030     cntp: \textcolor{keywordflow}{process} (clk, rst)
+00031 \textcolor{vhdlkeyword}{    begin}
+00032         \textcolor{keywordflow}{if} \textcolor{vhdlchar}{rst} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'} \textcolor{keywordflow}{then}
+00033             \textcolor{vhdlchar}{cnt} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{(}\textcolor{keywordflow}{others} \textcolor{vhdlchar}{=}\textcolor{vhdlchar}{>} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)};
+00034         \textcolor{keywordflow}{elsif} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{clk}\textcolor{vhdlchar}{'}\textcolor{vhdlkeyword}{event} \textcolor{keywordflow}{and} \textcolor{vhdlchar}{clk} \textcolor{vhdlchar}{=} \textcolor{vhdlchar}{'}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1}\textcolor{vhdlchar}{'}\textcolor{vhdlchar}{)} \textcolor{keywordflow}{then}
+00035             \textcolor{vhdlchar}{cnt} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{cnt} \textcolor{vhdlchar}{+} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00036         \textcolor{keywordflow}{end} \textcolor{keywordflow}{if};
+00037     \textcolor{keywordflow}{end} \textcolor{keywordflow}{process} \textcolor{vhdlchar}{cntp};
+00038     
+00039     \textcolor{vhdlchar}{beat} \textcolor{vhdlchar}{<=} \textcolor{vhdlchar}{cnt}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{22}\textcolor{vhdlchar}{)};
+00040 
+00041 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{alive\_arch};
+00042 
+\end{DoxyCode}

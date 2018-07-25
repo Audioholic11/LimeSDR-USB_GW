@@ -1,0 +1,105 @@
+\subsection{alt\+\_\+sys\+\_\+wrappers.\+h}
+\label{alt__sys__wrappers_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sys\+\_\+wrappers.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/sys/alt\+\_\+sys\+\_\+wrappers.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef \_\_ALT\_SYS\_WRAPPERS\_H\_\_}
+00002 \textcolor{preprocessor}{#define \_\_ALT\_SYS\_WRAPPERS\_H\_\_}
+00003 
+00004 \textcolor{comment}{/******************************************************************************}
+00005 \textcolor{comment}{*                                                                             *}
+00006 \textcolor{comment}{* License Agreement                                                           *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Copyright (c) 2003 Altera Corporation, San Jose, California, USA.           *}
+00009 \textcolor{comment}{* All rights reserved.                                                        *}
+00010 \textcolor{comment}{*                                                                             *}
+00011 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00012 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00013 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00014 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00015 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00016 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00019 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00020 \textcolor{comment}{*                                                                             *}
+00021 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00022 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00023 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00024 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00025 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00026 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00027 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00030 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00031 \textcolor{comment}{*                                                                             *}
+00032 \textcolor{comment}{******************************************************************************/}
+00033 
+00034 \textcolor{comment}{/*}
+00035 \textcolor{comment}{ * This file provides the prototypes for the HAL 'UNIX style functions. The}
+00036 \textcolor{comment}{ * names of these functions are defined in alt\_syscall.h. THese are defined to}
+00037 \textcolor{comment}{ * be the standard names when running the standalone HAL, e.g. open(), close()}
+00038 \textcolor{comment}{ * etc., but the names may be redefined as a part of an operating system port}
+00039 \textcolor{comment}{ * in order to avoid name clashes.}
+00040 \textcolor{comment}{ */}
+00041 
+00042 \textcolor{preprocessor}{#include "os/alt_syscall.h"}
+00043 
+00044 \textcolor{preprocessor}{#include <unistd.h>}
+00045 \textcolor{preprocessor}{#include <sys/times.h>}
+00046 \textcolor{preprocessor}{#include <sys/types.h>}
+00047 \textcolor{preprocessor}{#include <sys/stat.h>}
+00048 \textcolor{preprocessor}{#include <sys/time.h>}
+00049 \textcolor{preprocessor}{#include <sys/times.h>}
+00050 
+00051 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_CLOSE (\textcolor{keywordtype}{int} \_\_fd);
+00052 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_EXECVE (\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\_\_path, 
+00053                            \textcolor{keywordtype}{char} * \textcolor{keyword}{const} \_\_argv[], 
+00054                            \textcolor{keywordtype}{char} * \textcolor{keyword}{const} \_\_envp[]);
+00055 \textcolor{keyword}{extern} \textcolor{keywordtype}{void}    ALT_EXIT (\textcolor{keywordtype}{int} \_\_status);
+00056 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_FSTAT (\textcolor{keywordtype}{int} file, \textcolor{keyword}{struct} stat *st);
+00057 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_FCNTL (\textcolor{keywordtype}{int} file, \textcolor{keywordtype}{int} cmd, ...);
+00058 \textcolor{keyword}{extern} pid\_t   ALT_FORK (\textcolor{keywordtype}{void});
+00059 \textcolor{keyword}{extern} pid\_t   ALT_GETPID (\textcolor{keywordtype}{void});
+00060 
+00061 \textcolor{preprocessor}{#if defined (\_\_GNUC\_\_) && \_\_GNUC\_\_ >= 4}
+00062 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_GETTIMEOFDAY (\textcolor{keyword}{struct} timeval  *ptimeval, 
+00063                                  \textcolor{keywordtype}{void} *ptimezone);
+00064 \textcolor{preprocessor}{#else}
+00065 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_GETTIMEOFDAY (\textcolor{keyword}{struct} timeval  *ptimeval, 
+00066                                  \textcolor{keyword}{struct} timezone *ptimezone);
+00067 \textcolor{preprocessor}{#endif}
+00068 
+00069 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_IOCTL (\textcolor{keywordtype}{int} file, \textcolor{keywordtype}{int} req, \textcolor{keywordtype}{void}* arg);
+00070 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_ISATTY (\textcolor{keywordtype}{int} file);
+00071 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_KILL (\textcolor{keywordtype}{int} pid, \textcolor{keywordtype}{int} sig);
+00072 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_LINK (\textcolor{keyword}{const} \textcolor{keywordtype}{char} *existing, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\textcolor{keyword}{new});
+00073 \textcolor{keyword}{extern} off\_t   ALT_LSEEK (\textcolor{keywordtype}{int} file, off\_t ptr, \textcolor{keywordtype}{int} dir);
+00074 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_OPEN (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* file, \textcolor{keywordtype}{int} flags, ...);
+00075 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_READ (\textcolor{keywordtype}{int} file, \textcolor{keywordtype}{void} *ptr, \textcolor{keywordtype}{size\_t} len);
+00076 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_RENAME (\textcolor{keywordtype}{char} *existing, \textcolor{keywordtype}{char} *\textcolor{keyword}{new});
+00077 \textcolor{keyword}{extern} \textcolor{keywordtype}{void}*   ALT_SBRK (ptrdiff\_t incr);
+00078 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_SETTIMEOFDAY (\textcolor{keyword}{const} \textcolor{keyword}{struct} timeval  *t,
+00079                                  \textcolor{keyword}{const} \textcolor{keyword}{struct} timezone *tz);
+00080 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_STAT (\textcolor{keyword}{const} \textcolor{keywordtype}{char} *file, \textcolor{keyword}{struct} stat *st);
+00081 \textcolor{keyword}{extern} clock\_t ALT_TIMES (\textcolor{keyword}{struct} tms *buf);
+00082 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_UNLINK (\textcolor{keyword}{const} \textcolor{keywordtype}{char} *name);
+00083 
+00084 \textcolor{preprocessor}{#if defined (\_\_GNUC\_\_) && \_\_GNUC\_\_ >= 4}
+00085 \textcolor{keywordtype}{int} ALT_USLEEP (useconds\_t us);
+00086 \textcolor{preprocessor}{#else}
+00087 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}   ALT_USLEEP (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} us);
+00088 \textcolor{preprocessor}{#endif}
+00089 
+00090 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_WAIT (\textcolor{keywordtype}{int} *status);
+00091 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}     ALT_WRITE (\textcolor{keywordtype}{int} file, \textcolor{keyword}{const} \textcolor{keywordtype}{void} *ptr, \textcolor{keywordtype}{size\_t} len);
+00092 
+00093 
+00094 \textcolor{keyword}{extern} \textcolor{keywordtype}{char}** ALT_ENVIRON;
+00095 
+00096 \textcolor{comment}{/*}
+00097 \textcolor{comment}{ *}
+00098 \textcolor{comment}{ */}
+00099 
+00100 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_SYS\_WRAPPERS\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

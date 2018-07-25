@@ -1,0 +1,130 @@
+\subsection{alt\+\_\+gettod.\+c}
+\label{alt__gettod_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gettod.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+gettod.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2004 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include <sys/time.h>}
+00034 \textcolor{preprocessor}{#include <sys/times.h>}
+00035 \textcolor{preprocessor}{#include <errno.h>}
+00036 
+00037 \textcolor{preprocessor}{#include "sys/alt_alarm.h"}
+00038 \textcolor{preprocessor}{#include "alt_types.h"}
+00039 \textcolor{preprocessor}{#include "os/alt_syscall.h"}
+00040 
+00041 \textcolor{comment}{/*}
+00042 \textcolor{comment}{ * Macro defining the number of micoseconds in a second.}
+00043 \textcolor{comment}{ */}
+00044 
+00045 \textcolor{preprocessor}{#define ALT\_US (1000000)}
+00046 
+00047 \textcolor{comment}{/*}
+00048 \textcolor{comment}{ * "alt\_timezone" and "alt\_resettime" are the values of the the reset time and}
+00049 \textcolor{comment}{ * time zone set through the last call to settimeofday(). By default they are}
+00050 \textcolor{comment}{ * zero initialised.}
+00051 \textcolor{comment}{ */}
+00052 
+00053 \textcolor{keyword}{struct }timezone alt_timezone = \{0, 0\};
+00054 \textcolor{keyword}{struct }timeval  alt_resettime = \{0, 0\};
+00055 
+00056 \textcolor{comment}{/*}
+00057 \textcolor{comment}{ * gettimeofday() can be called to obtain a time structure which indicates the}
+00058 \textcolor{comment}{ * current "wall clock" time. This is calculated using the elapsed number of}
+00059 \textcolor{comment}{ * system clock ticks, and the value of "alt\_resettime" and "alt\_timezone" set}
+00060 \textcolor{comment}{ * through the last call to settimeofday().  }
+00061 \textcolor{comment}{ *}
+00062 \textcolor{comment}{ * Warning: if this function is called concurrently with a call to }
+00063 \textcolor{comment}{ * settimeofday(), the value returned by gettimeofday() will be unreliable. }
+00064 \textcolor{comment}{ *}
+00065 \textcolor{comment}{ * ALT\_GETTIMEOFDAY is mapped onto the gettimeofday() system call in }
+00066 \textcolor{comment}{ * alt\_syscall.h}
+00067 \textcolor{comment}{ */}
+00068  
+00069 
+00070 \textcolor{preprocessor}{#if defined (\_\_GNUC\_\_) && (\_\_GNUC\_\_ >= 4)}
+00071 \textcolor{keywordtype}{int} ALT_GETTIMEOFDAY (\textcolor{keyword}{struct} timeval  *ptimeval, \textcolor{keywordtype}{void} *ptimezone\_vptr)
+00072 \{
+00073   \textcolor{keyword}{struct }timezone *ptimezone = (\textcolor{keyword}{struct }timezone*)ptimezone\_vptr;
+00074 \textcolor{preprocessor}{#else}
+00075 \textcolor{keywordtype}{int} ALT_GETTIMEOFDAY (\textcolor{keyword}{struct} timeval  *ptimeval, \textcolor{keyword}{struct} timezone *ptimezone)
+00076 \{
+00077 \textcolor{preprocessor}{#endif}
+00078   
+00079   alt_u32 nticks = alt_nticks (); 
+00080   alt_u32 tick\_rate = alt_ticks_per_second ();
+00081 
+00082   \textcolor{comment}{/* }
+00083 \textcolor{comment}{   * Check to see if the system clock is running. This is indicated by a }
+00084 \textcolor{comment}{   * non-zero system clock rate. If the system clock is not running, an error}
+00085 \textcolor{comment}{   * is generated and the contents of "ptimeval" and "ptimezone" are not}
+00086 \textcolor{comment}{   * updated.}
+00087 \textcolor{comment}{   */}
+00088 
+00089   \textcolor{keywordflow}{if} (tick\_rate)
+00090   \{
+00091     ptimeval->tv\_sec  = alt_resettime.tv\_sec  + nticks/tick\_rate;
+00092     ptimeval->tv\_usec = alt_resettime.tv\_usec +
+00093      (alt_u32)(((alt_u64)nticks*(ALT_US/tick\_rate))%ALT_US);
+00094       
+00095     \textcolor{keywordflow}{while}(ptimeval->tv\_usec < 0) \{
+00096       \textcolor{keywordflow}{if} (ptimeval->tv\_sec <= 0)
+00097       \{
+00098           ptimeval->tv\_sec = 0;
+00099           ptimeval->tv\_usec = 0;
+00100           \textcolor{keywordflow}{break};
+00101       \}
+00102       \textcolor{keywordflow}{else}
+00103       \{
+00104           ptimeval->tv\_sec--;
+00105           ptimeval->tv\_usec += ALT_US;
+00106       \}
+00107     \}
+00108     
+00109     \textcolor{keywordflow}{while}(ptimeval->tv\_usec >= ALT_US) \{
+00110       ptimeval->tv\_sec++;
+00111       ptimeval->tv\_usec -= ALT_US;
+00112     \}
+00113       
+00114     \textcolor{keywordflow}{if} (ptimezone)
+00115     \{ 
+00116       ptimezone->tz\_minuteswest = alt_timezone.tz\_minuteswest;
+00117       ptimezone->tz\_dsttime     = alt_timezone.tz\_dsttime;
+00118     \}
+00119 
+00120     \textcolor{keywordflow}{return} 0;
+00121   \}
+00122 
+00123   \textcolor{keywordflow}{return} -ENOTSUP;
+00124 \}
+00125 
+\end{DoxyCode}

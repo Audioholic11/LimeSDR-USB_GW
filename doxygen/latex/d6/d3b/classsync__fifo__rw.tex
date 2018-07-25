@@ -1,0 +1,151 @@
+\subsection{sync\+\_\+fifo\+\_\+rw Entity Reference}
+\label{classsync__fifo__rw}\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+
+
+Inheritance diagram for sync\+\_\+fifo\+\_\+rw\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{d5/d25/classsync__fifo__rw__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sync\+\_\+fifo\+\_\+rw\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{dc/ded/classsync__fifo__rw__coll__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Entities}
+\begin{DoxyCompactItemize}
+\item 
+{\bf arch} architecture
+\end{DoxyCompactItemize}
+\subsubsection*{Libraries}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf ieee} 
+\end{DoxyCompactItemize}
+\subsubsection*{Use Clauses}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf std\+\_\+logic\+\_\+1164}   
+\item 
+{\bf numeric\+\_\+std}   
+\end{DoxyCompactItemize}
+\subsubsection*{Generics}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf dev\+\_\+family} {\bfseries {\bfseries \textcolor{comment}{string}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} Cyclone I\+V E \char`\"{}}\textcolor{vhdlchar}{ }}}
+\item 
+{\bf data\+\_\+w} {\bfseries {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{64} \textcolor{vhdlchar}{ }}}
+\end{DoxyCompactItemize}
+\subsubsection*{Ports}
+ \begin{DoxyCompactItemize}
+\item 
+{\bf wclk}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf rclk}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf reset\+\_\+n}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf sync\+\_\+en}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf sync\+\_\+data}  {\bfseries {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+w}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\item 
+{\bf sync\+\_\+q}  {\bfseries {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }}} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+w}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} 
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+
+
+Definition at line {\bf 15} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!data\+\_\+w@{data\+\_\+w}}
+\index{data\+\_\+w@{data\+\_\+w}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{data\+\_\+w}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\+\_\+w} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{integer}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{64} \textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classsync__fifo__rw_abe368ea8e238620b0e57bbbdcf4fe2bf}
+
+
+Definition at line {\bf 18} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!dev\+\_\+family@{dev\+\_\+family}}
+\index{dev\+\_\+family@{dev\+\_\+family}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{dev\+\_\+family}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dev\+\_\+family} {\bfseries \textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{string}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{\+:}\textcolor{vhdlchar}{=}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{keyword}{\char`\"{} Cyclone I\+V E \char`\"{}}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Generic]}}\label{classsync__fifo__rw_a1314572919959082d23e5f98e64a0ce2}
+
+
+Definition at line {\bf 16} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!ieee@{ieee}}
+\index{ieee@{ieee}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{ieee}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ieee}\hspace{0.3cm}{\ttfamily [Library]}}\label{classsync__fifo__rw_a0a6af6eef40212dbaf130d57ce711256}
+
+
+Definition at line {\bf 8} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!numeric\+\_\+std@{numeric\+\_\+std}}
+\index{numeric\+\_\+std@{numeric\+\_\+std}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{numeric\+\_\+std}]{\setlength{\rightskip}{0pt plus 5cm}{\bf numeric\+\_\+std}\hspace{0.3cm}{\ttfamily [Package]}}\label{classsync__fifo__rw_a2edc34402b573437d5f25fa90ba4013e}
+
+
+Definition at line {\bf 10} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!rclk@{rclk}}
+\index{rclk@{rclk}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{rclk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rclk} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classsync__fifo__rw_adc5af5020d304d578fa740a33045fec7}
+
+
+Definition at line {\bf 22} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!reset\+\_\+n@{reset\+\_\+n}}
+\index{reset\+\_\+n@{reset\+\_\+n}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{reset\+\_\+n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf reset\+\_\+n} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classsync__fifo__rw_a446ea52ed8c4a84181a47d9165ce41a5}
+
+
+Definition at line {\bf 23} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}}
+\index{std\+\_\+logic\+\_\+1164@{std\+\_\+logic\+\_\+1164}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{std\+\_\+logic\+\_\+1164}]{\setlength{\rightskip}{0pt plus 5cm}{\bf std\+\_\+logic\+\_\+1164}\hspace{0.3cm}{\ttfamily [Package]}}\label{classsync__fifo__rw_acd03516902501cd1c7296a98e22c6fcb}
+
+
+Definition at line {\bf 9} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!sync\+\_\+data@{sync\+\_\+data}}
+\index{sync\+\_\+data@{sync\+\_\+data}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{sync\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+data} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+w}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classsync__fifo__rw_a6149d3931802dc37494a4632a6d13eb3}
+
+
+Definition at line {\bf 25} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!sync\+\_\+en@{sync\+\_\+en}}
+\index{sync\+\_\+en@{sync\+\_\+en}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{sync\+\_\+en}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+en} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classsync__fifo__rw_a1aa51cd875ccc79150cf0f0e0c14a644}
+
+
+Definition at line {\bf 24} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!sync\+\_\+q@{sync\+\_\+q}}
+\index{sync\+\_\+q@{sync\+\_\+q}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{sync\+\_\+q}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sync\+\_\+q} {\bfseries \textcolor{keywordflow}{out}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic\+\_\+vector}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{(}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ }{\bfseries {\bf data\+\_\+w}} \textcolor{vhdlchar}{-\/}\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{1} \textcolor{vhdlchar}{ }\textcolor{keywordflow}{downto}\textcolor{vhdlchar}{ }\textcolor{vhdlchar}{ } \textcolor{vhdldigit}{0} \textcolor{vhdlchar}{ }\textcolor{vhdlchar}{)}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classsync__fifo__rw_a5a44e3a82c3752e272a3d73601e9c7ad}
+
+
+Definition at line {\bf 31} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+\index{sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}!wclk@{wclk}}
+\index{wclk@{wclk}!sync\+\_\+fifo\+\_\+rw@{sync\+\_\+fifo\+\_\+rw}}
+\paragraph[{wclk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf wclk} {\bfseries \textcolor{keywordflow}{in}\textcolor{vhdlchar}{ }} {\bfseries \textcolor{comment}{std\+\_\+logic}\textcolor{vhdlchar}{ }} \hspace{0.3cm}{\ttfamily [Port]}}\label{classsync__fifo__rw_adc5d3b386b1979488fb85997e33fbd78}
+
+
+Definition at line {\bf 21} of file {\bf sync\+\_\+fifo\+\_\+rw.\+vhd}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/tx\+\_\+packets/{\bf sync\+\_\+fifo\+\_\+rw.\+vhd}\end{DoxyCompactItemize}

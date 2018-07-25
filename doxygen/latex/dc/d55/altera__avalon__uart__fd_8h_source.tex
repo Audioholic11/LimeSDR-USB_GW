@@ -1,0 +1,148 @@
+\subsection{altera\+\_\+avalon\+\_\+uart\+\_\+fd.\+h}
+\label{altera__avalon__uart__fd_8h_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/altera\+\_\+avalon\+\_\+uart\+\_\+fd.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/inc/altera\+\_\+avalon\+\_\+uart\+\_\+fd.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2007 Altera Corporation, San Jose, California, USA.           *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{******************************************************************************/}
+00030 
+00031 \textcolor{preprocessor}{#ifndef \_\_ALT\_AVALON\_UART\_FD\_H\_\_}
+00032 \textcolor{preprocessor}{#define \_\_ALT\_AVALON\_UART\_FD\_H\_\_}
+00033 
+00034 \textcolor{preprocessor}{#include "sys/alt_dev.h"}
+00035 
+00036 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00037 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"}
+00038 \{
+00039 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00040 
+00041 \textcolor{comment}{/*}
+00042 \textcolor{comment}{ * Externally referenced routines}
+00043 \textcolor{comment}{ */}
+00044 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} altera_avalon_uart_read_fd (alt_fd* fd, \textcolor{keywordtype}{char}* ptr, \textcolor{keywordtype}{int} len);
+00045 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} altera_avalon_uart_write_fd (alt_fd* fd, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* ptr,
+00046   \textcolor{keywordtype}{int} len);
+00047 
+00048 \textcolor{comment}{/*}
+00049 \textcolor{comment}{ * Device structure definition. This is needed by alt\_sys\_init in order to }
+00050 \textcolor{comment}{ * reserve memory for the device instance.}
+00051 \textcolor{comment}{ */}
+00052 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }altera_avalon_uart_dev_s
+00053 \{
+00054   alt_dev        dev;
+00055   altera_avalon_uart_state state;
+00056 \} altera_avalon_uart_dev;
+00057 
+00058 \textcolor{preprocessor}{#if defined(ALT\_USE\_SMALL\_DRIVERS) || defined(ALTERA\_AVALON\_UART\_SMALL)}
+00059 
+00060 \textcolor{comment}{/*}
+00061 \textcolor{comment}{ * Macros used by alt\_sys\_init when the ALT file descriptor facility is used.}
+00062 \textcolor{comment}{ */}
+00063 
+00064 \textcolor{preprocessor}{#define ALTERA\_AVALON\_UART\_DEV\_INSTANCE(name, d)    \(\backslash\)}
+00065 \textcolor{preprocessor}{  static altera\_avalon\_uart\_dev d =                 \(\backslash\)}
+00066 \textcolor{preprocessor}{    \{                                               \(\backslash\)}
+00067 \textcolor{preprocessor}{      \{                                             \(\backslash\)}
+00068 \textcolor{preprocessor}{        ALT\_LLIST\_ENTRY,                            \(\backslash\)}
+00069 \textcolor{preprocessor}{        name##\_NAME,                                \(\backslash\)}
+00070 \textcolor{preprocessor}{        NULL, }\textcolor{comment}{/* open */}\textcolor{preprocessor}{                            \(\backslash\)}
+00071 \textcolor{preprocessor}{        NULL, }\textcolor{comment}{/* close */}\textcolor{preprocessor}{                           \(\backslash\)}
+00072 \textcolor{preprocessor}{        altera\_avalon\_uart\_read\_fd,                 \(\backslash\)}
+00073 \textcolor{preprocessor}{        altera\_avalon\_uart\_write\_fd,                \(\backslash\)}
+00074 \textcolor{preprocessor}{        NULL, }\textcolor{comment}{/* lseek */}\textcolor{preprocessor}{                           \(\backslash\)}
+00075 \textcolor{preprocessor}{        NULL, }\textcolor{comment}{/* fstat */}\textcolor{preprocessor}{                           \(\backslash\)}
+00076 \textcolor{preprocessor}{        NULL, }\textcolor{comment}{/* ioctl */}\textcolor{preprocessor}{                           \(\backslash\)}
+00077 \textcolor{preprocessor}{      \},                                            \(\backslash\)}
+00078 \textcolor{preprocessor}{      \{                                             \(\backslash\)}
+00079 \textcolor{preprocessor}{        name##\_BASE,                                \(\backslash\)}
+00080 \textcolor{preprocessor}{      \}                                             \(\backslash\)}
+00081 \textcolor{preprocessor}{    \}}
+00082 
+00083 \textcolor{preprocessor}{#define ALTERA\_AVALON\_UART\_DEV\_INIT(name, d) alt\_dev\_reg (&d.dev)}
+00084 
+00085 \textcolor{preprocessor}{#else }\textcolor{comment}{/* use fast version of the driver */}\textcolor{preprocessor}{}
+00086 
+00087 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} altera_avalon_uart_ioctl_fd (alt_fd* fd, \textcolor{keywordtype}{int} req, \textcolor{keywordtype}{void}* arg);
+00088 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} altera_avalon_uart_close_fd(alt_fd* fd);
+00089 
+00090 \textcolor{preprocessor}{#ifdef ALTERA\_AVALON\_UART\_USE\_IOCTL}
+00091 \textcolor{preprocessor}{#define ALTERA\_AVALON\_UART\_IOCTL\_FD altera\_avalon\_uart\_ioctl\_fd}
+00092 \textcolor{preprocessor}{#else}
+00093 \textcolor{preprocessor}{#define ALTERA\_AVALON\_UART\_IOCTL\_FD NULL}
+00094 \textcolor{preprocessor}{#endif}
+00095 
+00096 \textcolor{preprocessor}{#define ALTERA\_AVALON\_UART\_DEV\_INSTANCE(name, d)       \(\backslash\)}
+00097 \textcolor{preprocessor}{  static altera\_avalon\_uart\_dev d =                    \(\backslash\)}
+00098 \textcolor{preprocessor}{   \{                                                   \(\backslash\)}
+00099 \textcolor{preprocessor}{     \{                                                 \(\backslash\)}
+00100 \textcolor{preprocessor}{       ALT\_LLIST\_ENTRY,                                \(\backslash\)}
+00101 \textcolor{preprocessor}{       name##\_NAME,                                    \(\backslash\)}
+00102 \textcolor{preprocessor}{       NULL, }\textcolor{comment}{/* open */}\textcolor{preprocessor}{                                \(\backslash\)}
+00103 \textcolor{preprocessor}{       altera\_avalon\_uart\_close\_fd,                    \(\backslash\)}
+00104 \textcolor{preprocessor}{       altera\_avalon\_uart\_read\_fd,                     \(\backslash\)}
+00105 \textcolor{preprocessor}{       altera\_avalon\_uart\_write\_fd,                    \(\backslash\)}
+00106 \textcolor{preprocessor}{       NULL, }\textcolor{comment}{/* lseek */}\textcolor{preprocessor}{                               \(\backslash\)}
+00107 \textcolor{preprocessor}{       NULL, }\textcolor{comment}{/* fstat */}\textcolor{preprocessor}{                               \(\backslash\)}
+00108 \textcolor{preprocessor}{       ALTERA\_AVALON\_UART\_IOCTL\_FD,                    \(\backslash\)}
+00109 \textcolor{preprocessor}{     \},                                                \(\backslash\)}
+00110 \textcolor{preprocessor}{     \{                                                 \(\backslash\)}
+00111 \textcolor{preprocessor}{       (void*) name##\_BASE,                            \(\backslash\)}
+00112 \textcolor{preprocessor}{       0,                                              \(\backslash\)}
+00113 \textcolor{preprocessor}{       0,                                              \(\backslash\)}
+00114 \textcolor{preprocessor}{       0,                                              \(\backslash\)}
+00115 \textcolor{preprocessor}{       0,                                              \(\backslash\)}
+00116 \textcolor{preprocessor}{       0,                                              \(\backslash\)}
+00117 \textcolor{preprocessor}{       ALTERA\_AVALON\_UART\_TERMIOS(name##\_STOP\_BITS,    \(\backslash\)}
+00118 \textcolor{preprocessor}{                               (name##\_PARITY == 'N'), \(\backslash\)}
+00119 \textcolor{preprocessor}{                               (name##\_PARITY == 'O'), \(\backslash\)}
+00120 \textcolor{preprocessor}{                               name##\_DATA\_BITS,       \(\backslash\)}
+00121 \textcolor{preprocessor}{                               name##\_USE\_CTS\_RTS,     \(\backslash\)}
+00122 \textcolor{preprocessor}{                               name##\_BAUD)            \(\backslash\)}
+00123 \textcolor{preprocessor}{       ALTERA\_AVALON\_UART\_FREQ(name)                   \(\backslash\)}
+00124 \textcolor{preprocessor}{       (name##\_FIXED\_BAUD ? ALT\_AVALON\_UART\_FB : 0) |  \(\backslash\)}
+00125 \textcolor{preprocessor}{         (name##\_USE\_CTS\_RTS ? ALT\_AVALON\_UART\_FC : 0) \(\backslash\)}
+00126 \textcolor{preprocessor}{     \}                                                 \(\backslash\)}
+00127 \textcolor{preprocessor}{   \}}
+00128 
+00129 \textcolor{preprocessor}{#define ALTERA\_AVALON\_UART\_DEV\_INIT(name, d)           \(\backslash\)}
+00130 \textcolor{preprocessor}{  \{                                                    \(\backslash\)}
+00131 \textcolor{preprocessor}{    ALTERA\_AVALON\_UART\_STATE\_INIT(name, d.state);      \(\backslash\)}
+00132 \textcolor{preprocessor}{                                                       \(\backslash\)}
+00133 \textcolor{preprocessor}{    }\textcolor{comment}{/* make the device available to the system */}\textcolor{preprocessor}{      \(\backslash\)}
+00134 \textcolor{preprocessor}{    alt\_dev\_reg(&d.dev);                               \(\backslash\)}
+00135 \textcolor{preprocessor}{  \}}
+00136 
+00137 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* fast driver */}\textcolor{preprocessor}{}
+00138 
+00139 \textcolor{preprocessor}{#ifdef \_\_cplusplus}
+00140 \}
+00141 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}
+00142 
+00143 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* \_\_ALT\_AVALON\_UART\_FD\_H\_\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

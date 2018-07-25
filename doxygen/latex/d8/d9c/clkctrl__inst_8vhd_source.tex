@@ -1,0 +1,20 @@
+\subsection{clkctrl\+\_\+inst.\+vhd}
+\label{clkctrl__inst_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/clkctrl/clkctrl/clkctrl\+\_\+inst.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/ip/clkctrl/clkctrl/clkctrl\+\_\+inst.\+vhd}}
+
+\begin{DoxyCode}
+00001     \textcolor{keywordflow}{component} clkctrl \textcolor{keywordflow}{is}
+00002         \textcolor{keywordflow}{port} (
+00003             inclk  : \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic} := 'X'; \textcolor{keyword}{-- inclk}
+00004             ena    : \textcolor{keywordflow}{in}  \textcolor{comment}{std\_logic} := 'X'; \textcolor{keyword}{-- ena}
+00005             outclk : \textcolor{keywordflow}{out} \textcolor{comment}{std\_logic}\textcolor{keyword}{         -- outclk}
+00006         );
+00007     \textcolor{keywordflow}{end} \textcolor{keywordflow}{component} \textcolor{vhdlchar}{clkctrl};
+00008 
+00009     u0 : \textcolor{keywordflow}{component} clkctrl
+00010         \textcolor{keywordflow}{port} \textcolor{keywordflow}{map} (
+00011             inclk  => CONNECTED\_TO\_inclk,\textcolor{keyword}{  --  altclkctrl\_input.inclk}
+00012             ena    => CONNECTED\_TO\_ena,\textcolor{keyword}{    --                  .ena}
+00013             outclk => CONNECTED\_TO\_outclk  \textcolor{keyword}{-- altclkctrl\_output.outclk}
+00014         \textcolor{vhdlchar}{)};
+00015 
+\end{DoxyCode}

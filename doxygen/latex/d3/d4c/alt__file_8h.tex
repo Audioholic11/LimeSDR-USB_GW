@@ -1,0 +1,373 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/priv/alt\+\_\+file.h File Reference}
+\label{alt__file_8h}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/priv/alt\+\_\+file.\+h@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/inc/priv/alt\+\_\+file.\+h}}
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+dev.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+llist.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}os/alt\+\_\+sem.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}alt\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for alt\+\_\+file.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/df3/alt__file_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d9d/alt__file_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL}~0x80000000
+\item 
+\#define {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV}~0x40000000
+\item 
+\#define {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}~({\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL} $\vert$ {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV})
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf alt\+\_\+dev} $\ast$ {\bf alt\+\_\+find\+\_\+dev} (const char $\ast$name, {\bf alt\+\_\+llist} $\ast$list)
+\item 
+{\bf alt\+\_\+dev} $\ast$ {\bf alt\+\_\+find\+\_\+file} (const char $\ast$name)
+\item 
+int {\bf alt\+\_\+get\+\_\+fd} ({\bf alt\+\_\+dev} $\ast$dev)
+\item 
+void {\bf alt\+\_\+release\+\_\+fd} (int fd)
+\item 
+int {\bf alt\+\_\+fd\+\_\+lock} ({\bf alt\+\_\+fd} $\ast$fd)
+\item 
+int {\bf alt\+\_\+fd\+\_\+unlock} ({\bf alt\+\_\+fd} $\ast$fd)
+\item 
+void {\bf alt\+\_\+io\+\_\+redirect} (const char $\ast$stdout\+\_\+dev, const char $\ast$stdin\+\_\+dev, const char $\ast$stderr\+\_\+dev)
+\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+{\bf alt\+\_\+fd} {\bf alt\+\_\+fd\+\_\+list} [$\,$]
+\item 
+{\bf alt\+\_\+llist} {\bf alt\+\_\+dev\+\_\+list}
+\item 
+{\bf alt\+\_\+llist} {\bf alt\+\_\+fs\+\_\+list}
+\item 
+{\bf alt\+\_\+32} {\bf alt\+\_\+max\+\_\+fd}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Macro Definition Documentation}
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV@{A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV}}
+\index{A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV@{A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV~0x40000000}\label{alt__file_8h_a801310af44abcb36c08fece28bbefa64}
+
+
+Definition at line {\bf 131} of file {\bf alt\+\_\+file.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+file\+\_\+locked()}, and {\bf A\+L\+T\+\_\+\+I\+O\+C\+T\+L()}.
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL@{A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL}}
+\index{A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL@{A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL~0x80000000}\label{alt__file_8h_a758a1cad215aceeed0cf5d4e8b4fdb05}
+
+
+Definition at line {\bf 130} of file {\bf alt\+\_\+file.\+h}.
+
+
+
+Referenced by {\bf alt\+\_\+fd\+\_\+lock()}, {\bf alt\+\_\+fd\+\_\+unlock()}, and {\bf alt\+\_\+file\+\_\+locked()}.
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!A\+L\+T\+\_\+\+F\+D\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK@{A\+L\+T\+\_\+\+F\+D\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}}
+\index{A\+L\+T\+\_\+\+F\+D\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK@{A\+L\+T\+\_\+\+F\+D\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{A\+L\+T\+\_\+\+F\+D\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+T\+\_\+\+F\+D\+\_\+\+F\+L\+A\+G\+S\+\_\+\+M\+A\+SK~({\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL} $\vert$ {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+D\+EV})}\label{alt__file_8h_af88e1c645c7ca03fc5cb4ecd17c6c148}
+
+
+Definition at line {\bf 133} of file {\bf alt\+\_\+file.\+h}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+F\+C\+N\+T\+L()}, and {\bf A\+L\+T\+\_\+\+O\+P\+E\+N()}.
+
+
+
+\subsubsection{Function Documentation}
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+fd\+\_\+lock@{alt\+\_\+fd\+\_\+lock}}
+\index{alt\+\_\+fd\+\_\+lock@{alt\+\_\+fd\+\_\+lock}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+fd\+\_\+lock(alt\+\_\+fd $\ast$fd)}]{\setlength{\rightskip}{0pt plus 5cm}int alt\+\_\+fd\+\_\+lock (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+fd} $\ast$}]{fd}
+\end{DoxyParamCaption}
+)}\label{alt__file_8h_a0dee18bd04d0adc10f99016076b8f2b2}
+
+
+Definition at line {\bf 54} of file {\bf alt\+\_\+fd\+\_\+lock.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL}, {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+max\+\_\+fd}, {\bf A\+L\+T\+\_\+\+S\+E\+M\+\_\+\+P\+E\+ND}, {\bf A\+L\+T\+\_\+\+S\+E\+M\+\_\+\+P\+O\+ST}, {\bf alt\+\_\+fd\+\_\+s\+::dev}, and {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+I\+O\+C\+T\+L()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{d3/d4c/alt__file_8h_a0dee18bd04d0adc10f99016076b8f2b2_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+fd\+\_\+unlock@{alt\+\_\+fd\+\_\+unlock}}
+\index{alt\+\_\+fd\+\_\+unlock@{alt\+\_\+fd\+\_\+unlock}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+fd\+\_\+unlock(alt\+\_\+fd $\ast$fd)}]{\setlength{\rightskip}{0pt plus 5cm}int alt\+\_\+fd\+\_\+unlock (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+fd} $\ast$}]{fd}
+\end{DoxyParamCaption}
+)}\label{alt__file_8h_a8eb01b988ade948dc5439b35033b1e0f}
+
+
+Definition at line {\bf 52} of file {\bf alt\+\_\+fd\+\_\+unlock.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+F\+D\+\_\+\+E\+X\+CL}, and {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+I\+O\+C\+T\+L()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{d3/d4c/alt__file_8h_a8eb01b988ade948dc5439b35033b1e0f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+find\+\_\+dev@{alt\+\_\+find\+\_\+dev}}
+\index{alt\+\_\+find\+\_\+dev@{alt\+\_\+find\+\_\+dev}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+find\+\_\+dev(const char $\ast$name, alt\+\_\+llist $\ast$list)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+dev}$\ast$ alt\+\_\+find\+\_\+dev (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{{\bf alt\+\_\+llist} $\ast$}]{list}
+\end{DoxyParamCaption}
+)}\label{alt__file_8h_a878f31e9952cfe3a924ce7cb46ccdccb}
+
+
+Definition at line {\bf 54} of file {\bf alt\+\_\+find\+\_\+dev.\+c}.
+
+
+
+References {\bf alt\+\_\+dev\+\_\+s\+::llist}, {\bf alt\+\_\+dev\+\_\+s\+::name}, and {\bf alt\+\_\+llist\+\_\+s\+::next}.
+
+
+
+Referenced by {\bf alt\+\_\+dma\+\_\+rxchan\+\_\+open()}, {\bf alt\+\_\+dma\+\_\+txchan\+\_\+open()}, {\bf alt\+\_\+flash\+\_\+open\+\_\+dev()}, and {\bf A\+L\+T\+\_\+\+O\+P\+E\+N()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d4c/alt__file_8h_a878f31e9952cfe3a924ce7cb46ccdccb_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+find\+\_\+file@{alt\+\_\+find\+\_\+file}}
+\index{alt\+\_\+find\+\_\+file@{alt\+\_\+find\+\_\+file}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+find\+\_\+file(const char $\ast$name)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+dev}$\ast$ alt\+\_\+find\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{alt__file_8h_a59675b3f5b16c4e0e3918d7fdb1914f3}
+
+
+Definition at line {\bf 54} of file {\bf alt\+\_\+find\+\_\+file.\+c}.
+
+
+
+References {\bf alt\+\_\+fs\+\_\+list}, {\bf alt\+\_\+dev\+\_\+s\+::llist}, {\bf alt\+\_\+dev\+\_\+s\+::name}, and {\bf alt\+\_\+llist\+\_\+s\+::next}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+O\+P\+E\+N()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{d3/d4c/alt__file_8h_a59675b3f5b16c4e0e3918d7fdb1914f3_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+get\+\_\+fd@{alt\+\_\+get\+\_\+fd}}
+\index{alt\+\_\+get\+\_\+fd@{alt\+\_\+get\+\_\+fd}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+get\+\_\+fd(alt\+\_\+dev $\ast$dev)}]{\setlength{\rightskip}{0pt plus 5cm}int alt\+\_\+get\+\_\+fd (
+\begin{DoxyParamCaption}
+\item[{{\bf alt\+\_\+dev} $\ast$}]{dev}
+\end{DoxyParamCaption}
+)}\label{alt__file_8h_a816c00867cd975c4eee5dc17fac03d16}
+
+
+Definition at line {\bf 54} of file {\bf alt\+\_\+get\+\_\+fd.\+c}.
+
+
+
+References {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+max\+\_\+fd}, {\bf A\+L\+T\+\_\+\+M\+A\+X\+\_\+\+FD}, {\bf A\+L\+T\+\_\+\+S\+E\+M\+\_\+\+P\+E\+ND}, {\bf A\+L\+T\+\_\+\+S\+E\+M\+\_\+\+P\+O\+ST}, and {\bf alt\+\_\+fd\+\_\+s\+::dev}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+O\+P\+E\+N()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{d3/d4c/alt__file_8h_a816c00867cd975c4eee5dc17fac03d16_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+io\+\_\+redirect@{alt\+\_\+io\+\_\+redirect}}
+\index{alt\+\_\+io\+\_\+redirect@{alt\+\_\+io\+\_\+redirect}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+io\+\_\+redirect(const char $\ast$stdout\+\_\+dev, const char $\ast$stdin\+\_\+dev, const char $\ast$stderr\+\_\+dev)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+io\+\_\+redirect (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{stdout\+\_\+dev, }
+\item[{const char $\ast$}]{stdin\+\_\+dev, }
+\item[{const char $\ast$}]{stderr\+\_\+dev}
+\end{DoxyParamCaption}
+)}\label{alt__file_8h_a825bb530fea653ed149df14bbc62f9a2}
+
+
+Definition at line {\bf 85} of file {\bf alt\+\_\+io\+\_\+redirect.\+c}.
+
+
+
+References {\bf alt\+\_\+fd\+\_\+list}, and {\bf alt\+\_\+open\+\_\+fd()}.
+
+
+
+Referenced by {\bf alt\+\_\+main()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d4c/alt__file_8h_a825bb530fea653ed149df14bbc62f9a2_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{d3/d4c/alt__file_8h_a825bb530fea653ed149df14bbc62f9a2_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+release\+\_\+fd@{alt\+\_\+release\+\_\+fd}}
+\index{alt\+\_\+release\+\_\+fd@{alt\+\_\+release\+\_\+fd}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+release\+\_\+fd(int fd)}]{\setlength{\rightskip}{0pt plus 5cm}void alt\+\_\+release\+\_\+fd (
+\begin{DoxyParamCaption}
+\item[{int}]{fd}
+\end{DoxyParamCaption}
+)}\label{alt__file_8h_af5fe09b66b5c62c3bedfa9ca8be4ef22}
+
+
+Definition at line {\bf 44} of file {\bf alt\+\_\+release\+\_\+fd.\+c}.
+
+
+
+References {\bf alt\+\_\+fd\+\_\+list}, {\bf alt\+\_\+fd\+\_\+s\+::dev}, and {\bf alt\+\_\+fd\+\_\+s\+::fd\+\_\+flags}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+C\+L\+O\+S\+E()}, {\bf A\+L\+T\+\_\+\+O\+P\+E\+N()}, and {\bf alt\+\_\+open\+\_\+fd()}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d4c/alt__file_8h_af5fe09b66b5c62c3bedfa9ca8be4ef22_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsubsection{Variable Documentation}
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+dev\+\_\+list@{alt\+\_\+dev\+\_\+list}}
+\index{alt\+\_\+dev\+\_\+list@{alt\+\_\+dev\+\_\+list}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+dev\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+llist} alt\+\_\+dev\+\_\+list}\label{alt__file_8h_a39bed231770a966001ae9f4cd2ce4074}
+
+
+Definition at line {\bf 68} of file {\bf alt\+\_\+dev.\+c}.
+
+
+
+Referenced by {\bf alt\+\_\+dev\+\_\+reg()}.
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+fd\+\_\+list@{alt\+\_\+fd\+\_\+list}}
+\index{alt\+\_\+fd\+\_\+list@{alt\+\_\+fd\+\_\+list}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+fd\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+fd} alt\+\_\+fd\+\_\+list[$\,$]}\label{alt__file_8h_aeb233a450b991f48b21139adfcb89153}
+
+
+Definition at line {\bf 131} of file {\bf alt\+\_\+dev.\+c}.
+
+
+
+Referenced by {\bf A\+L\+T\+\_\+\+C\+L\+O\+S\+E()}, {\bf A\+L\+T\+\_\+\+F\+C\+N\+T\+L()}, {\bf alt\+\_\+fd\+\_\+lock()}, {\bf alt\+\_\+file\+\_\+locked()}, {\bf A\+L\+T\+\_\+\+F\+S\+T\+A\+T()}, {\bf alt\+\_\+get\+\_\+fd()}, {\bf alt\+\_\+getchar()}, {\bf alt\+\_\+io\+\_\+redirect()}, {\bf A\+L\+T\+\_\+\+I\+O\+C\+T\+L()}, {\bf A\+L\+T\+\_\+\+I\+S\+A\+T\+T\+Y()}, {\bf A\+L\+T\+\_\+\+L\+S\+E\+E\+K()}, {\bf A\+L\+T\+\_\+\+O\+P\+E\+N()}, {\bf alt\+\_\+open\+\_\+fd()}, {\bf A\+L\+T\+\_\+\+R\+E\+A\+D()}, {\bf alt\+\_\+release\+\_\+fd()}, and {\bf A\+L\+T\+\_\+\+W\+R\+I\+T\+E()}.
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+fs\+\_\+list@{alt\+\_\+fs\+\_\+list}}
+\index{alt\+\_\+fs\+\_\+list@{alt\+\_\+fs\+\_\+list}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+fs\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+llist} alt\+\_\+fs\+\_\+list}\label{alt__file_8h_a10012e4d88a121b82154d9f377cee46d}
+
+
+Referenced by {\bf alt\+\_\+find\+\_\+file()}, and {\bf alt\+\_\+fs\+\_\+reg()}.
+
+\index{alt\+\_\+file.\+h@{alt\+\_\+file.\+h}!alt\+\_\+max\+\_\+fd@{alt\+\_\+max\+\_\+fd}}
+\index{alt\+\_\+max\+\_\+fd@{alt\+\_\+max\+\_\+fd}!alt\+\_\+file.\+h@{alt\+\_\+file.\+h}}
+\paragraph[{alt\+\_\+max\+\_\+fd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf alt\+\_\+32} alt\+\_\+max\+\_\+fd}\label{alt__file_8h_aefa50a1243bc074834e3140d00a7eca0}
+
+
+Definition at line {\bf 118} of file {\bf alt\+\_\+dev.\+c}.
+
+
+
+Referenced by {\bf alt\+\_\+fd\+\_\+lock()}, {\bf alt\+\_\+file\+\_\+locked()}, and {\bf alt\+\_\+get\+\_\+fd()}.
+

@@ -1,0 +1,71 @@
+\subsection{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+write.c File Reference}
+\label{altera__avalon__uart__write_8c}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+write.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/drivers/src/altera\+\_\+avalon\+\_\+uart\+\_\+write.\+c}}
+{\ttfamily \#include $<$fcntl.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+dev.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+irq.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/ioctl.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/alt\+\_\+errno.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}altera\+\_\+avalon\+\_\+uart\+\_\+regs.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}altera\+\_\+avalon\+\_\+uart.\+h\char`\"{}}\\*
+Include dependency graph for altera\+\_\+avalon\+\_\+uart\+\_\+write.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/d1d/altera__avalon__uart__write_8c__incl}
+\end{center}
+\end{figure}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf altera\+\_\+avalon\+\_\+uart\+\_\+write} ({\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$sp, const char $\ast$ptr, int len, int flags)
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Function Documentation}
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+write.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+write.\+c}!altera\+\_\+avalon\+\_\+uart\+\_\+write@{altera\+\_\+avalon\+\_\+uart\+\_\+write}}
+\index{altera\+\_\+avalon\+\_\+uart\+\_\+write@{altera\+\_\+avalon\+\_\+uart\+\_\+write}!altera\+\_\+avalon\+\_\+uart\+\_\+write.\+c@{altera\+\_\+avalon\+\_\+uart\+\_\+write.\+c}}
+\paragraph[{altera\+\_\+avalon\+\_\+uart\+\_\+write(altera\+\_\+avalon\+\_\+uart\+\_\+state $\ast$sp, const char $\ast$ptr, int len, int flags)}]{\setlength{\rightskip}{0pt plus 5cm}int altera\+\_\+avalon\+\_\+uart\+\_\+write (
+\begin{DoxyParamCaption}
+\item[{{\bf altera\+\_\+avalon\+\_\+uart\+\_\+state} $\ast$}]{sp, }
+\item[{const char $\ast$}]{ptr, }
+\item[{int}]{len, }
+\item[{int}]{flags}
+\end{DoxyParamCaption}
+)}\label{altera__avalon__uart__write_8c_ad45290e665fecada6a8ed1dd102135a9}
+
+
+Definition at line {\bf 124} of file {\bf altera\+\_\+avalon\+\_\+uart\+\_\+write.\+c}.
+
+
+
+References {\bf A\+L\+T\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+B\+U\+F\+\_\+\+M\+SK}, {\bf A\+L\+T\+\_\+\+E\+R\+R\+NO}, {\bf A\+L\+T\+\_\+\+F\+L\+A\+G\+\_\+\+P\+E\+ND}, {\bf alt\+\_\+irq\+\_\+disable\+\_\+all()}, {\bf alt\+\_\+irq\+\_\+enable\+\_\+all()}, {\bf A\+L\+T\+\_\+\+S\+E\+M\+\_\+\+P\+E\+ND}, {\bf A\+L\+T\+\_\+\+S\+E\+M\+\_\+\+P\+O\+ST}, {\bf A\+L\+T\+\_\+\+U\+A\+R\+T\+\_\+\+W\+R\+I\+T\+E\+\_\+\+R\+DY}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+D\+C\+T\+S\+\_\+\+M\+SK}, {\bf A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+T\+R\+D\+Y\+\_\+\+M\+SK}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::base}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::ctrl}, {\bf I\+O\+W\+R\+\_\+\+A\+L\+T\+E\+R\+A\+\_\+\+A\+V\+A\+L\+O\+N\+\_\+\+U\+A\+R\+T\+\_\+\+C\+O\+N\+T\+R\+OL}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::tx\+\_\+buf}, {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::tx\+\_\+end}, and {\bf altera\+\_\+avalon\+\_\+uart\+\_\+state\+\_\+s\+::tx\+\_\+start}.
+
+
+
+Referenced by {\bf altera\+\_\+avalon\+\_\+uart\+\_\+write\+\_\+fd()}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/d33/altera__avalon__uart__write_8c_ad45290e665fecada6a8ed1dd102135a9_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{dc/d33/altera__avalon__uart__write_8c_ad45290e665fecada6a8ed1dd102135a9_icgraph}
+\end{center}
+\end{figure}
+
+

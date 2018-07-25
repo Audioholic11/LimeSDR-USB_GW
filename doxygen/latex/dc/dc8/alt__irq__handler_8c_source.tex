@@ -1,0 +1,174 @@
+\subsection{alt\+\_\+irq\+\_\+handler.\+c}
+\label{alt__irq__handler_8c_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+irq\+\_\+handler.\+c@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/software/lms\+\_\+ctr\+\_\+bsp/\+H\+A\+L/src/alt\+\_\+irq\+\_\+handler.\+c}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/******************************************************************************}
+00002 \textcolor{comment}{*                                                                             *}
+00003 \textcolor{comment}{* License Agreement                                                           *}
+00004 \textcolor{comment}{*                                                                             *}
+00005 \textcolor{comment}{* Copyright (c) 2009      Altera Corporation, San Jose, California, USA.      *}
+00006 \textcolor{comment}{* All rights reserved.                                                        *}
+00007 \textcolor{comment}{*                                                                             *}
+00008 \textcolor{comment}{* Permission is hereby granted, free of charge, to any person obtaining a     *}
+00009 \textcolor{comment}{* copy of this software and associated documentation files (the "Software"),  *}
+00010 \textcolor{comment}{* to deal in the Software without restriction, including without limitation   *}
+00011 \textcolor{comment}{* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *}
+00012 \textcolor{comment}{* and/or sell copies of the Software, and to permit persons to whom the       *}
+00013 \textcolor{comment}{* Software is furnished to do so, subject to the following conditions:        *}
+00014 \textcolor{comment}{*                                                                             *}
+00015 \textcolor{comment}{* The above copyright notice and this permission notice shall be included in  *}
+00016 \textcolor{comment}{* all copies or substantial portions of the Software.                         *}
+00017 \textcolor{comment}{*                                                                             *}
+00018 \textcolor{comment}{* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *}
+00019 \textcolor{comment}{* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *}
+00020 \textcolor{comment}{* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *}
+00021 \textcolor{comment}{* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *}
+00022 \textcolor{comment}{* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *}
+00023 \textcolor{comment}{* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *}
+00024 \textcolor{comment}{* DEALINGS IN THE SOFTWARE.                                                   *}
+00025 \textcolor{comment}{*                                                                             *}
+00026 \textcolor{comment}{* This agreement shall be governed in all respects by the laws of the State   *}
+00027 \textcolor{comment}{* of California and by the laws of the United States of America.              *}
+00028 \textcolor{comment}{*                                                                             *}
+00029 \textcolor{comment}{* Altera does not recommend, suggest or require that this reference design    *}
+00030 \textcolor{comment}{* file be used in conjunction or combination with any other product.          *}
+00031 \textcolor{comment}{******************************************************************************/}
+00032 
+00033 \textcolor{preprocessor}{#include <errno.h>}
+00034 \textcolor{preprocessor}{#include "system.h"}
+00035 
+00036 \textcolor{comment}{/*}
+00037 \textcolor{comment}{ * This interrupt handler only works with an internal interrupt controller}
+00038 \textcolor{comment}{ * (IIC). Processors with an external interrupt controller (EIC) use an }
+00039 \textcolor{comment}{ * implementation provided by an EIC driver.}
+00040 \textcolor{comment}{ */}
+00041 \textcolor{preprocessor}{#ifndef ALT\_CPU\_EIC\_PRESENT}
+00042 
+00043 \textcolor{preprocessor}{#include "sys/alt_irq.h"}
+00044 \textcolor{preprocessor}{#include "os/alt_hooks.h"}
+00045 
+00046 \textcolor{preprocessor}{#include "alt_types.h"}
+00047 
+00048 \textcolor{comment}{/*}
+00049 \textcolor{comment}{ * A table describing each interrupt handler. The index into the array is the}
+00050 \textcolor{comment}{ * interrupt id associated with the handler. }
+00051 \textcolor{comment}{ *}
+00052 \textcolor{comment}{ * When an interrupt occurs, the associated handler is called with}
+00053 \textcolor{comment}{ * the argument stored in the context member.}
+00054 \textcolor{comment}{ */}
+00055 \textcolor{keyword}{struct }ALT_IRQ_HANDLER
+00056 \{
+00057 \textcolor{preprocessor}{#ifdef ALT\_ENHANCED\_INTERRUPT\_API\_PRESENT}
+00058   void (*handler)(\textcolor{keywordtype}{void}*);
+00059 \textcolor{preprocessor}{#else}
+00060   void (*handler)(\textcolor{keywordtype}{void}*, alt_u32);
+00061 \textcolor{preprocessor}{#endif}
+00062   \textcolor{keywordtype}{void} *context;
+00063 \} alt_irq[ALT_NIRQ];
+00064 
+00065 \textcolor{comment}{/*}
+00066 \textcolor{comment}{ * alt\_irq\_handler() is called by the interrupt exception handler in order to }
+00067 \textcolor{comment}{ * process any outstanding interrupts. }
+00068 \textcolor{comment}{ *}
+00069 \textcolor{comment}{ * It is defined here since it is linked in using weak linkage. }
+00070 \textcolor{comment}{ * This means that if there is never a call to alt\_irq\_register() (above) then}
+00071 \textcolor{comment}{ * this function will not get linked in to the executable. This is acceptable}
+00072 \textcolor{comment}{ * since if no handler is ever registered, then an interrupt can never occur.}
+00073 \textcolor{comment}{ *}
+00074 \textcolor{comment}{ * If Nios II interrupt vector custom instruction exists, use it to accelerate}
+00075 \textcolor{comment}{ * the dispatch of interrupt handlers.  The Nios II interrupt vector custom }
+00076 \textcolor{comment}{ * instruction is present if the macro ALT\_CI\_INTERRUPT\_VECTOR defined.}
+00077 \textcolor{comment}{ */}
+00078 
+00079 \textcolor{keywordtype}{void} alt_irq_handler (\textcolor{keywordtype}{void}) __attribute__ ((section (".exceptions")));
+00080 \textcolor{keywordtype}{void} alt_irq_handler (\textcolor{keywordtype}{void})
+00081 \{
+00082 \textcolor{preprocessor}{#ifdef ALT\_CI\_INTERRUPT\_VECTOR}
+00083   alt_32 offset;
+00084   \textcolor{keywordtype}{char}*  alt\_irq\_base = (\textcolor{keywordtype}{char}*)alt_irq;
+00085 \textcolor{preprocessor}{#else}
+00086   alt_u32 active;
+00087   alt_u32 mask;
+00088   alt_u32 i;
+00089 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_CI\_INTERRUPT\_VECTOR */}\textcolor{preprocessor}{}
+00090   
+00091   \textcolor{comment}{/*}
+00092 \textcolor{comment}{   * Notify the operating system that we are at interrupt level.}
+00093 \textcolor{comment}{   */} 
+00094   
+00095   ALT_OS_INT_ENTER();
+00096 
+00097 \textcolor{preprocessor}{#ifdef ALT\_CI\_INTERRUPT\_VECTOR}
+00098   \textcolor{comment}{/*}
+00099 \textcolor{comment}{   * Call the interrupt vector custom instruction using the }
+00100 \textcolor{comment}{   * ALT\_CI\_INTERRUPT\_VECTOR macro.}
+00101 \textcolor{comment}{   * It returns the offset into the vector table of the lowest-valued pending}
+00102 \textcolor{comment}{   * interrupt (corresponds to highest priority) or a negative value if none.}
+00103 \textcolor{comment}{   * The custom instruction assumes that each table entry is eight bytes.}
+00104 \textcolor{comment}{   */}
+00105   \textcolor{keywordflow}{while} ((offset = ALT\_CI\_INTERRUPT\_VECTOR) >= 0) \{
+00106     \textcolor{keyword}{struct }ALT_IRQ_HANDLER* handler\_entry = 
+00107       (\textcolor{keyword}{struct }ALT_IRQ_HANDLER*)(alt\_irq\_base + offset);
+00108 \textcolor{preprocessor}{#ifdef ALT\_ENHANCED\_INTERRUPT\_API\_PRESENT}
+00109     handler\_entry->handler(handler\_entry->context);
+00110 \textcolor{preprocessor}{#else}
+00111     handler\_entry->handler(handler\_entry->context, offset >> 3);
+00112 \textcolor{preprocessor}{#endif}
+00113   \}
+00114 \textcolor{preprocessor}{#else }\textcolor{comment}{/* ALT\_CI\_INTERRUPT\_VECTOR */}\textcolor{preprocessor}{}
+00115   \textcolor{comment}{/* }
+00116 \textcolor{comment}{   * Obtain from the interrupt controller a bit list of pending interrupts,}
+00117 \textcolor{comment}{   * and then process the highest priority interrupt. This process loops, }
+00118 \textcolor{comment}{   * loading the active interrupt list on each pass until alt\_irq\_pending() }
+00119 \textcolor{comment}{   * return zero.}
+00120 \textcolor{comment}{   * }
+00121 \textcolor{comment}{   * The maximum interrupt latency for the highest priority interrupt is}
+00122 \textcolor{comment}{   * reduced by finding out which interrupts are pending as late as possible.}
+00123 \textcolor{comment}{   * Consider the case where the high priority interupt is asserted during}
+00124 \textcolor{comment}{   * the interrupt entry sequence for a lower priority interrupt to see why}
+00125 \textcolor{comment}{   * this is the case.}
+00126 \textcolor{comment}{   */}
+00127 
+00128   active = alt_irq_pending ();
+00129 
+00130   \textcolor{keywordflow}{do}
+00131   \{
+00132     i = 0;
+00133     mask = 1;
+00134 
+00135     \textcolor{comment}{/*}
+00136 \textcolor{comment}{     * Test each bit in turn looking for an active interrupt. Once one is }
+00137 \textcolor{comment}{     * found, the interrupt handler asigned by a call to alt\_irq\_register() is}
+00138 \textcolor{comment}{     * called to clear the interrupt condition.}
+00139 \textcolor{comment}{     */}
+00140 
+00141     \textcolor{keywordflow}{do}
+00142     \{
+00143       \textcolor{keywordflow}{if} (active & mask)
+00144       \{ 
+00145 \textcolor{preprocessor}{#ifdef ALT\_ENHANCED\_INTERRUPT\_API\_PRESENT}
+00146         alt_irq[i].handler(alt_irq[i].context); 
+00147 \textcolor{preprocessor}{#else}
+00148         alt_irq[i].handler(alt_irq[i].context, i); 
+00149 \textcolor{preprocessor}{#endif}
+00150         \textcolor{keywordflow}{break};
+00151       \}
+00152       mask <<= 1;
+00153       i++;
+00154 
+00155     \} \textcolor{keywordflow}{while} (1);
+00156 
+00157     active = alt_irq_pending ();
+00158     
+00159   \} \textcolor{keywordflow}{while} (active);
+00160 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_CI\_INTERRUPT\_VECTOR */}\textcolor{preprocessor}{}
+00161 
+00162   \textcolor{comment}{/*}
+00163 \textcolor{comment}{   * Notify the operating system that interrupt processing is complete.}
+00164 \textcolor{comment}{   */} 
+00165 
+00166   ALT_OS_INT_EXIT();
+00167 \}
+00168 
+00169 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ALT\_CPU\_EIC\_PRESENT */}\textcolor{preprocessor}{}
+\end{DoxyCode}

@@ -1,0 +1,29 @@
+\subsection{revision.\+vhd}
+\label{revision_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/revision/revision.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/revision/revision.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00002 \textcolor{keyword}{-- FILE:    revisions.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION: Project revision constatns}
+00004 \textcolor{keyword}{-- DATE:    Aug 22, 2016}
+00005 \textcolor{keyword}{-- AUTHOR(s):   Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ---------------------------------------------------------------------------- }
+00008 \textcolor{vhdlkeyword}{LIBRARY }\textcolor{keywordflow}{ieee};
+00009 \textcolor{vhdlkeyword}{use }IEEE.std\_logic\_1164.\textcolor{keywordflow}{all};
+00010 \textcolor{vhdlkeyword}{use }IEEE.std\_logic\_arith.\textcolor{keywordflow}{all};
+00011 \textcolor{vhdlkeyword}{use }IEEE.std\_logic\_unsigned.\textcolor{keywordflow}{all};
+00012 
+00013 \textcolor{keywordflow}{package }revisions \textcolor{keywordflow}{is}
+00014     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{MAJOR_REV} \textcolor{vhdlchar}{:} \textcolor{comment}{INTEGER} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00015     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{MINOR_REV} \textcolor{vhdlchar}{:} \textcolor{comment}{INTEGER} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00016     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{BETA_REV} \textcolor{vhdlchar}{:} \textcolor{comment}{INTEGER} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1};
+00017     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{COMPILE_REV} \textcolor{vhdlchar}{:} \textcolor{comment}{INTEGER} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{26};
+00018     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{COMPILE_YEAR_STAMP} \textcolor{vhdlchar}{:} \textcolor{comment}{INTEGER} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{18};
+00019     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{COMPILE_MONTH_STAMP} \textcolor{vhdlchar}{:} \textcolor{comment}{INTEGER} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{07};
+00020     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{COMPILE_DAY_STAMP} \textcolor{vhdlchar}{:} \textcolor{comment}{INTEGER} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{17};
+00021     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{COMPILE_HOUR_STAMP} \textcolor{vhdlchar}{:} \textcolor{comment}{INTEGER} \textcolor{vhdlchar}{:=} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{12};
+00022     
+00023     \textcolor{keywordflow}{constant} \textcolor{vhdlchar}{MAGIC_NUM} \textcolor{vhdlchar}{:} \textcolor{comment}{STD\_LOGIC\_VECTOR}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)} \textcolor{vhdlchar}{:=} \textcolor{vhdlchar}{X}\textcolor{keyword}{"D8A5F009"};
+00024 \textcolor{keywordflow}{end} \textcolor{vhdlchar}{revisions};
+\end{DoxyCode}

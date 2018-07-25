@@ -1,0 +1,100 @@
+\subsection{pllcfg\+\_\+pkg.\+vhd}
+\label{pllcfg__pkg_8vhd_source}\index{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/pllcfg\+\_\+pkg.\+vhd@{/home/erik/git/dev/\+Lime\+S\+D\+R-\/\+U\+S\+B\+\_\+\+G\+W/src/spi/pllcfg\+\_\+pkg.\+vhd}}
+
+\begin{DoxyCode}
+00001 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00002 \textcolor{keyword}{-- FILE:          pllcfg\_pkg.vhd}
+00003 \textcolor{keyword}{-- DESCRIPTION:   Package for fpgacfg module}
+00004 \textcolor{keyword}{-- DATE:          11:13 AM Friday, May 11, 2018}
+00005 \textcolor{keyword}{-- AUTHOR(s):     Lime Microsystems}
+00006 \textcolor{keyword}{-- REVISIONS:}
+00007 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00008 
+00009 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00010 \textcolor{keyword}{--NOTES:}
+00011 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00012 \textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};
+00013 \textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};
+00014 \textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};
+00015 
+00016 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00017 \textcolor{keyword}{-- Package declaration}
+00018 \textcolor{keyword}{-- ----------------------------------------------------------------------------}
+00019 \textcolor{keywordflow}{package }pllcfg_pkg \textcolor{keywordflow}{is}
+00020    
+00021 \textcolor{keyword}{   -- Outputs from the }
+00022    \textcolor{keywordflow}{type} \textcolor{vhdlchar}{t_FROM_PLLCFG} \textcolor{keywordflow}{is} \textcolor{keywordflow}{record}
+00023 \textcolor{keyword}{      -- PLL Configuratioin Related}
+00024       \textcolor{vhdlchar}{phcfg_start}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00025       \textcolor{vhdlchar}{pllcfg_start}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00026       \textcolor{vhdlchar}{pllrst_start}      \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00027       \textcolor{vhdlchar}{phcfg_updn}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00028       \textcolor{vhdlchar}{cnt_ind}           \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --}
+00029       \textcolor{vhdlchar}{pll_ind}           \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --}
+00030       \textcolor{vhdlchar}{phcfg_mode}        \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00031       \textcolor{vhdlchar}{phcfg_tst}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00032     
+00033       \textcolor{vhdlchar}{cnt_phase}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --}
+00034 \textcolor{keyword}{      --pllcfg\_bs       : out std\_logic\_vector(3 downto 0); -- (for Cyclone V)}
+00035       \textcolor{vhdlchar}{chp_curr}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{2} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ --}
+00036       \textcolor{vhdlchar}{pllcfg_vcodiv}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00037       \textcolor{vhdlchar}{pllcfg_lf_res}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{4} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- (for Cyclone IV)}
+00038       \textcolor{vhdlchar}{pllcfg_lf_cap}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- (for cyclone IV)}
+00039          
+00040       \textcolor{vhdlchar}{m_odddiv}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00041       \textcolor{vhdlchar}{m_byp}             \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00042       \textcolor{vhdlchar}{n_odddiv}          \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00043       \textcolor{vhdlchar}{n_byp}             \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00044       
+00045       \textcolor{vhdlchar}{c0_odddiv}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00046       \textcolor{vhdlchar}{c0_byp}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00047       \textcolor{vhdlchar}{c1_odddiv}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00048       \textcolor{vhdlchar}{c1_byp}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00049       \textcolor{vhdlchar}{c2_odddiv}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00050       \textcolor{vhdlchar}{c2_byp}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00051       \textcolor{vhdlchar}{c3_odddiv}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00052       \textcolor{vhdlchar}{c3_byp}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00053       \textcolor{vhdlchar}{c4_odddiv}         \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00054       \textcolor{vhdlchar}{c4_byp}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};\textcolor{keyword}{ --}
+00055 \textcolor{keyword}{      --c5\_odddiv       : std\_logic; --}
+00056 \textcolor{keyword}{      --c5\_byp          : std\_logic; --}
+00057 \textcolor{keyword}{      --c6\_odddiv       : std\_logic; --}
+00058 \textcolor{keyword}{      --c6\_byp          : std\_logic; --}
+00059 \textcolor{keyword}{      --c7\_odddiv       : std\_logic; --}
+00060 \textcolor{keyword}{      --c7\_byp          : std\_logic; --}
+00061 \textcolor{keyword}{      --c8\_odddiv       : std\_logic; --}
+00062 \textcolor{keyword}{      --c8\_byp          : std\_logic; --}
+00063 \textcolor{keyword}{      --c9\_odddiv       : std\_logic; --}
+00064 \textcolor{keyword}{      --c9\_byp          : std\_logic; --}
+00065       \textcolor{vhdlchar}{n_cnt}             \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- }
+00066       \textcolor{vhdlchar}{m_cnt}             \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- }
+00067 \textcolor{keyword}{      --m\_frac          : std\_logic\_vector(31 downto 0); -- }
+00068       \textcolor{vhdlchar}{c0_cnt}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- }
+00069       \textcolor{vhdlchar}{c1_cnt}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- }
+00070       \textcolor{vhdlchar}{c2_cnt}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- }
+00071       \textcolor{vhdlchar}{c3_cnt}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- }
+00072       \textcolor{vhdlchar}{c4_cnt}            \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};\textcolor{keyword}{ -- }
+00073 \textcolor{keyword}{      --c5\_cnt          : std\_logic\_vector(15 downto 0); -- }
+00074 \textcolor{keyword}{      --c6\_cnt          : std\_logic\_vector(15 downto 0); -- }
+00075 \textcolor{keyword}{      --c7\_cnt          : std\_logic\_vector(15 downto 0); -- }
+00076 \textcolor{keyword}{      --c8\_cnt          : std\_logic\_vector(15 downto 0); -- }
+00077 \textcolor{keyword}{      --c9\_cnt          : std\_logic\_vector(15 downto 0) --}
+00078       \textcolor{vhdlchar}{auto_phcfg_smpls}  \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00079       \textcolor{vhdlchar}{auto_phcfg_step}   \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00080    \textcolor{keywordflow}{end} \textcolor{keywordflow}{record} \textcolor{vhdlchar}{t_FROM_PLLCFG};
+00081   
+00082 \textcolor{keyword}{   -- Inputs to the .}
+00083    \textcolor{keywordflow}{type} \textcolor{vhdlchar}{t_TO_PLLCFG} \textcolor{keywordflow}{is} \textcolor{keywordflow}{record}
+00084 \textcolor{keyword}{      -- Status Inputs}
+00085       \textcolor{vhdlchar}{pllcfg_busy}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00086       \textcolor{vhdlchar}{pllcfg_done}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00087       \textcolor{vhdlchar}{phcfg_done}     \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00088       \textcolor{vhdlchar}{phcfg_error}    \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic};
+00089 \textcolor{keyword}{      -- PLL Lock flags}
+00090       \textcolor{vhdlchar}{pll_lock}       \textcolor{vhdlchar}{:} \textcolor{comment}{std\_logic\_vector}\textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{15} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};
+00091    \textcolor{keywordflow}{end} \textcolor{keywordflow}{record} \textcolor{vhdlchar}{t_TO_PLLCFG};
+00092    
+00093 
+00094       
+00095 \textcolor{keywordflow}{end} \textcolor{keywordflow}{package} \textcolor{vhdlchar}{pllcfg\_pkg};
+\end{DoxyCode}

@@ -17,7 +17,8 @@ module gpio_sync_FSM(RSET,CLK,SIG,E,L,U_D,TRIG);
 	parameter [2:1] A = 2'b00, B = 2'b01, C = 2'b10, D = 2'b11;
 	
 	//Define the next state combinational circuit
-	always @(CLK,SIG)
+	always @(CLK,SIG) 
+	begin
 		case(y)
 			A: if(CLK ==1)  Y=B;
 				else   			Y=A;
@@ -29,13 +30,18 @@ module gpio_sync_FSM(RSET,CLK,SIG,E,L,U_D,TRIG);
 				else   			Y=D;
 			default: Y=2'bxx;
 		endcase
+	end
 	
 	//define  the sequenctial block
 	
-	always @(negedge RSET,posedge CLK)
-		if (RSET ==0) y<=A;
-		else y <= Y;
-		
+	always @(negedge RSET,posedge CLK) 
+	begin
+		if (RSET ==0) 
+			y<=A;
+		else 
+			y<=Y;
+	end
+	
 	//define output
 	assign E = (y== B) | (y == C) | (y==D);
 	assign L = (y == A);
