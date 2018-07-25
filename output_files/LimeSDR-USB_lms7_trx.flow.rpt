@@ -1,0 +1,214 @@
+Flow report for LimeSDR-USB_lms7_trx
+Wed Jul 25 13:13:27 2018
+Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+  8. Flow Messages
+  9. Flow Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2015 Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++----------------------------------------------------------------------------------+
+; Flow Summary                                                                     ;
++------------------------------------+---------------------------------------------+
+; Flow Status                        ; Successful - Wed Jul 25 13:13:26 2018       ;
+; Quartus Prime Version              ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
+; Revision Name                      ; LimeSDR-USB_lms7_trx                        ;
+; Top-level Entity Name              ; lms7_trx_top                                ;
+; Family                             ; Cyclone IV E                                ;
+; Device                             ; EP4CE40F23C8                                ;
+; Timing Models                      ; Final                                       ;
+; Total logic elements               ; 32,359                                      ;
+;     Total combinational functions  ; 23,031                                      ;
+;     Dedicated logic registers      ; 20,212                                      ;
+; Total registers                    ; 20426                                       ;
+; Total pins                         ; 223                                         ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 803,680                                     ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 4                                           ;
++------------------------------------+---------------------------------------------+
+
+
++------------------------------------------+
+; Flow Settings                            ;
++-------------------+----------------------+
+; Option            ; Setting              ;
++-------------------+----------------------+
+; Start date & time ; 07/25/2018 13:10:00  ;
+; Main task         ; Compilation          ;
+; Revision Name     ; LimeSDR-USB_lms7_trx ;
++-------------------+----------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                                                           ;
++------------------------------------------------+--------------------------------------------------------------------------------+----------------------+------------------+----------------+
+; Assignment Name                                ; Value                                                                          ; Default Value        ; Entity Name      ; Section Id     ;
++------------------------------------------------+--------------------------------------------------------------------------------+----------------------+------------------+----------------+
+; COMPILER_SIGNATURE_ID                          ; 28974336906223.153254580006737                                                 ; --                   ; --               ; --             ;
+; EDA_DESIGN_EXTRA_ALTERA_SIM_LIB                ; cycloneiii                                                                     ; --                   ; --               ; eda_simulation ;
+; EDA_DESIGN_EXTRA_ALTERA_SIM_LIB                ; cycloneiii                                                                     ; --                   ; --               ; eda_simulation ;
+; EDA_DESIGN_INSTANCE_NAME                       ; NA                                                                             ; --                   ; --               ; rx_path_top_tb ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST                ; Off                                                                            ; --                   ; --               ; eda_simulation ;
+; EDA_NATIVELINK_SIMULATION_TEST_BENCH           ; rx_path_top_tb                                                                 ; --                   ; --               ; eda_simulation ;
+; EDA_OUTPUT_DATA_FORMAT                         ; Vhdl                                                                           ; --                   ; --               ; eda_simulation ;
+; EDA_SIMULATION_RUN_SCRIPT                      ; src/rx_path_top/rx_path/compile.tcl                                            ; --                   ; --               ; eda_simulation ;
+; EDA_SIMULATION_TOOL                            ; ModelSim-Altera (VHDL)                                                         ; <None>               ; --               ; --             ;
+; EDA_TEST_BENCH_ENABLE_STATUS                   ; COMMAND_MACRO_MODE                                                             ; --                   ; --               ; eda_simulation ;
+; EDA_TEST_BENCH_FILE                            ; src/rx_path_top/rx_path/sim/rx_path_top_tb.vhd                                 ; --                   ; --               ; rx_path_top_tb ;
+; EDA_TEST_BENCH_MODULE_NAME                     ; rx_path_top_tb                                                                 ; --                   ; --               ; rx_path_top_tb ;
+; EDA_TEST_BENCH_NAME                            ; rx_path_top_tb                                                                 ; --                   ; --               ; eda_simulation ;
+; EDA_USER_COMPILED_SIMULATION_LIBRARY_DIRECTORY ; <None>                                                                         ; --                   ; --               ; eda_simulation ;
+; ENABLE_SIGNALTAP                               ; Off                                                                            ; --                   ; --               ; --             ;
+; FITTER_EFFORT                                  ; Standard Fit                                                                   ; Auto Fit             ; --               ; --             ;
+; MAX_CORE_JUNCTION_TEMP                         ; 85                                                                             ; --                   ; --               ; --             ;
+; MIN_CORE_JUNCTION_TEMP                         ; 0                                                                              ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; lms_ctr/synthesis/../lms_ctr.cmp                                               ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; lms_ctr/synthesis/../../lms_ctr.qsys                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2.vhd                                                               ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2.cmp                                                               ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2.bsf                                                               ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2.qip                                                               ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_example_driver.vhdl                                               ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_example_top.vhdl                                                  ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_ex_lfsr8.vhdl                                                     ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/testbench/ddr2_example_top_tb.vhdl                                     ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/testbench/ddr2_mem_model.vhdl                                          ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/testbench/ddr2_full_mem_model.vhdl                                     ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_pin_assignments.tcl                                               ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy.vhd                                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy.cmp                                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy.bsf                                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy.qip                                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_alt_mem_phy_seq_wrapper.v                                     ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_alt_mem_phy_seq.vhd                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_alt_mem_phy.v                                                 ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_alt_mem_phy_pll.vhd                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_pin_assignments.tcl                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_ddr_pins.tcl                                                  ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_report_timing.tcl                                             ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_report_timing_core.tcl                                        ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_ddr_timing.tcl                                                ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy_alt_mem_phy_pll.cmp                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/alt_mem_phy_defines.v                                                  ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2/ddr2_phy.ppf                                                           ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/clkctrl/clkctrl/synthesis/../clkctrl.cmp                                    ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/clkctrl/clkctrl/synthesis/../../clkctrl.qsys                                ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2_traffic_gen/ddr2_traffic_gen/synthesis/../ddr2_traffic_gen.cmp         ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddr2_traffic_gen/ddr2_traffic_gen/synthesis/../../ddr2_traffic_gen.qsys     ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/pll_reconfig_module/pll_reconfig_module.bsf                                 ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/pll_reconfig_module/pll_reconfig_module.cmp                                 ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddo/ddrox1.bsf                                                              ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddo/ddrox1_inst.vhd                                                         ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddo/ddrox1.inc                                                              ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddo/ddrox1.cmp                                                              ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/ddo/ddrox1.ppf                                                              ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/pll/pll.bsf                                                                 ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/pll/pll.cmp                                                                 ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/pll/pll.ppf                                                                 ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/fpga_pll/fpga_pll.bsf                                                       ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/fpga_pll/fpga_pll.cmp                                                       ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/fpga_pll/fpga_pll.ppf                                                       ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/txpll/txpll.bsf                                                             ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/txpll/txpll.cmp                                                             ; --                   ; --               ; --             ;
+; MISC_FILE                                      ; ip/txpll/txpll.ppf                                                             ; --                   ; --               ; --             ;
+; OPTIMIZATION_MODE                              ; High Performance Effort                                                        ; Balanced             ; --               ; --             ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS                 ; Half Signal Swing                                                              ; --                   ; --               ; --             ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS                 ; Half Signal Swing                                                              ; --                   ; --               ; --             ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS                ; Half Vccio                                                                     ; --                   ; --               ; --             ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS                ; Half Vccio                                                                     ; --                   ; --               ; --             ;
+; PARTITION_COLOR                                ; 16764057                                                                       ; --                   ; lms7_trx_top     ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL            ; PLACEMENT_AND_ROUTING                                                          ; --                   ; lms7_trx_top     ; Top            ;
+; PARTITION_NETLIST_TYPE                         ; SOURCE                                                                         ; --                   ; lms7_trx_top     ; Top            ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC                 ; On                                                                             ; Off                  ; --               ; --             ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING           ; On                                                                             ; Off                  ; --               ; --             ;
+; PLACEMENT_EFFORT_MULTIPLIER                    ; 4.0                                                                            ; 1.0                  ; --               ; --             ;
+; POST_FLOW_SCRIPT_FILE                          ; quartus_sh:gen_prg_files.tcl                                                   ; --                   ; --               ; --             ;
+; POWER_BOARD_THERMAL_MODEL                      ; None (CONSERVATIVE)                                                            ; --                   ; --               ; --             ;
+; POWER_PRESET_COOLING_SOLUTION                  ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                                          ; --                   ; --               ; --             ;
+; PRE_FLOW_SCRIPT_FILE                           ; quartus_sh:gui.tcl                                                             ; --                   ; --               ; --             ;
+; PROJECT_OUTPUT_DIRECTORY                       ; output_files                                                                   ; --                   ; --               ; --             ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL               ; MAXIMUM                                                                        ; Normal               ; --               ; --             ;
+; SEARCH_PATH                                    ; h:\working_dir\altera\limesdr-usb\lms7_trx\symbols                             ; --                   ; --               ; --             ;
+; SEARCH_PATH                                    ; symbols/                                                                       ; --                   ; --               ; --             ;
+; SEARCH_PATH                                    ; ip/ddr2/.                                                                      ; --                   ; --               ; --             ;
+; SEARCH_PATH                                    ; ip/ddr2/ddr2_high_performance_controller-library                               ; --                   ; --               ; --             ;
+; SEARCH_PATH                                    ; ip/ddr2/.                                                                      ; --                   ; --               ; --             ;
+; SEARCH_PATH                                    ; ip/ddr2/altmemphy-library                                                      ; --                   ; --               ; --             ;
+; SEARCH_PATH                                    ; software/lms_ctr_app/mem_init/                                                 ; --                   ; --               ; --             ;
+; SLD_FILE                                       ; lms_ctr/synthesis/lms_ctr.regmap                                               ; --                   ; --               ; --             ;
+; SLD_FILE                                       ; lms_ctr/synthesis/lms_ctr.debuginfo                                            ; --                   ; --               ; --             ;
+; SLD_FILE                                       ; ip/clkctrl/clkctrl/synthesis/clkctrl.debuginfo                                 ; --                   ; --               ; --             ;
+; SLD_FILE                                       ; ip/ddr2_traffic_gen/ddr2_traffic_gen/synthesis/ddr2_traffic_gen.debuginfo      ; --                   ; --               ; --             ;
+; SLD_INFO                                       ; QSYS_NAME clkctrl HAS_SOPCINFO 1 GENERATION_ID 1493105740                      ; --                   ; clkctrl          ; --             ;
+; SLD_INFO                                       ; QSYS_NAME ddr2_traffic_gen HAS_SOPCINFO 1 GENERATION_ID 1476969150             ; --                   ; ddr2_traffic_gen ; --             ;
+; SLD_INFO                                       ; QSYS_NAME lms_ctr HAS_SOPCINFO 1 GENERATION_ID 1476792439                      ; --                   ; lms_ctr          ; --             ;
+; SOPCINFO_FILE                                  ; lms_ctr/synthesis/../../lms_ctr.sopcinfo                                       ; --                   ; --               ; --             ;
+; SOPCINFO_FILE                                  ; ip/clkctrl/clkctrl/synthesis/../../clkctrl.sopcinfo                            ; --                   ; --               ; --             ;
+; SOPCINFO_FILE                                  ; ip/ddr2_traffic_gen/ddr2_traffic_gen/synthesis/../../ddr2_traffic_gen.sopcinfo ; --                   ; --               ; --             ;
+; SPECTRAQ_PHYSICAL_SYNTHESIS                    ; On                                                                             ; Off                  ; --               ; --             ;
+; SYNTHESIS_ONLY_QIP                             ; On                                                                             ; --                   ; --               ; --             ;
+; SYNTHESIS_ONLY_QIP                             ; On                                                                             ; --                   ; --               ; --             ;
+; SYNTHESIS_ONLY_QIP                             ; On                                                                             ; --                   ; --               ; --             ;
+; TOP_LEVEL_ENTITY                               ; lms7_trx_top                                                                   ; LimeSDR-USB_lms7_trx ; --               ; --             ;
+; USE_SIGNALTAP_FILE                             ; signal_tap/debug.stp                                                           ; --                   ; --               ; --             ;
++------------------------------------------------+--------------------------------------------------------------------------------+----------------------+------------------+----------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                        ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis ; 00:03:17     ; 1.0                     ; 1798 MB             ; 00:03:46                           ;
+; Total                ; 00:03:17     ; --                      ; --                  ; 00:03:46                           ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++------------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                          ;
++----------------------+--------------------+----------------+------------+----------------+
+; Module Name          ; Machine Hostname   ; OS Name        ; OS Version ; Processor type ;
++----------------------+--------------------+----------------+------------+----------------+
+; Analysis & Synthesis ; erik-Blade-Stealth ; Ubuntu 16.04.4 ; 16         ; x86_64         ;
++----------------------+--------------------+----------------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off lms7_trx -c LimeSDR-USB_lms7_trx
+
+
+
