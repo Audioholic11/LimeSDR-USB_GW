@@ -50,7 +50,9 @@ entity rxtx_top is
       --WFM player parameters
       WFM_WFM_INFIFO_SIZE     : integer := 12;
       WFM_DATA_WIDTH          : integer := 32;
-      WFM_IQ_WIDTH            : integer := 12
+      WFM_IQ_WIDTH            : integer := 12;
+		--chirp sync
+		CHIRP_SYNC_WIDTH			: integer := 64
    );
    port (
       -- Configuration memory ports     
@@ -112,7 +114,15 @@ entity rxtx_top is
       rx_smpl_cmp_start       : in     std_logic;
       rx_smpl_cmp_length      : in     std_logic_vector(15 downto 0);
       rx_smpl_cmp_done        : out    std_logic;
-      rx_smpl_cmp_err         : out    std_logic      
+      rx_smpl_cmp_err         : out    std_logic;
+			-- chirp sync
+		sync_sig						: in 		std_logic;
+		chirp_sync_en				: in     std_logic;
+		
+		--Testout
+		test0							: out std_logic;
+		test1							: out std_logic;
+		test2							: out std_logic
       );
 end rxtx_top;
 
@@ -156,10 +166,18 @@ signal inst3_diq_l               : std_logic_vector(TX_IQ_WIDTH downto 0);
 signal inst5_reset_n             : std_logic;
 signal inst5_smpl_nr_cnt         : std_logic_vector(63 downto 0);
 signal inst5_pct_hdr_cap         : std_logic;
+signal inst5_smplfifo_wrreq		: std_logic;
 
 --inst6
 signal inst6_reset_n             : std_logic;
 signal inst6_pulse               : std_logic;
+
+--inst7
+signal inst7_sync_sig				: std_logic;
+signal inst7_sync_period			: std_logic_vector(CHIRP_SYNC_WIDTH-1 downto 0);
+signal inst7_sync_trig				: std_logic;
+signal inst7_TESTOUT					: std_logic;
+signal inst7_chirp_sync_en			: std_logic;
 
 begin
    
@@ -175,11 +193,14 @@ begin
    -- Reset signal for inst0 with synchronous removal to rx_clk clock domain, 
    sync_reg1 : entity work.sync_reg 
    port map(rx_clk, inst0_reset_n, '1', rx_pct_fifo_aclrn_req);
+	
+	inst7_chirp_sync_en <= chirp_sync_en;
      
 -- ----------------------------------------------------------------------------
 -- tx_path_top instance.
 -- 
--- ----------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------	
+	
    process(tx_clk, inst1_reset_n)
       begin
       if inst1_reset_n = '0' then 
@@ -234,6 +255,7 @@ begin
       mimo_en              => from_fpgacfg.mimo_int_en,    -- SISO: 1; MIMO: 0
       ch_en                => from_fpgacfg.ch_en(1 downto 0),      --"11" - Ch. A, "10" - Ch. B, "11" - Ch. A and Ch. B. 
       fidm                 => '0',       -- Frame start at fsync = 0, when 0. Frame start at fsync = 1, when 1.
+		chirp_sync_en			=> inst7_chirp_sync_en,  -- chirp sync enable
       sample_width         => from_fpgacfg.smpl_width, --"10"-12bit, "01"-14bit, "00"-16bit;
       --Tx interface data 
       DIQ                  => open,
@@ -388,12 +410,13 @@ begin
       ddr_en               => from_fpgacfg.ddr_en,     -- DDR: 1; SDR: 0
       mimo_en              => from_fpgacfg.mimo_int_en,    -- SISO: 1; MIMO: 0
       ch_en                => from_fpgacfg.ch_en(1 downto 0),      --"01" - Ch. A, "10" - Ch. B, "11" - Ch. A and Ch. B. 
-      fidm                 => '0',       -- Frame start at fsync = 0, when 0. Frame start at fsync = 1, when 1.
+      fidm                 => '0',       -- Frame start at fsync = 0, when 0. Frame start at fsync = 1, when 
+		chirp_sync_en			=> inst7_chirp_sync_en, -- chirp sync enable1.
       --Rx interface data 
       DIQ                  => rx_DIQ,
       fsync                => rx_fsync,
       --samples
-      smpl_fifo_wrreq_out  => open,
+      smpl_fifo_wrreq_out  => inst5_smplfifo_wrreq,
       --Packet fifo ports 
       pct_fifo_wusedw      => rx_pct_fifo_wusedw,
       pct_fifo_wrreq       => rx_pct_fifo_wrreq,
@@ -411,7 +434,12 @@ begin
       smpl_cmp_start       => rx_smpl_cmp_start,
       smpl_cmp_length      => rx_smpl_cmp_length,
       smpl_cmp_done        => rx_smpl_cmp_done,
-      smpl_cmp_err         => rx_smpl_cmp_err
+      smpl_cmp_err         => rx_smpl_cmp_err,
+		--chirp_sync
+		chirp_sync_length		=> inst7_sync_period,
+		chirp_sync_trig		=> inst7_sync_trig,
+		bit_pack_valid			=> open,
+		smpl_buff_rdreq		=> open
    );
    
 -- ----------------------------------------------------------------------------
@@ -426,13 +454,44 @@ begin
       pulse       => inst6_pulse
    );
    
-   
+-- ----------------------------------------------------------------------------
+-- gpio chirp sync
+-- 
+-- ----------------------------------------------------------------------------  	
+	gpio_chirp_sync_top_inst7 : entity work.gpio_chirp_sync_top
+	generic map(
+      chirp_sync_width 		=> CHIRP_SYNC_WIDTH --bus width in bits  
+   )
+   port map(
+      clk               	=> rx_clk,
+		counter_clk				=> inst5_smplfifo_wrreq,
+      reset_n           	=> rx_clk_reset_n,
+		
+		-- Chirp Sync I/Os
+		sync_sig					=> sync_sig,
+		sync_period				=> inst7_sync_period,--(chirp_sync_width-1 downto 0);
+		sync_trig				=> inst7_sync_trig,
+		
+		TESTOUT					=> inst7_TESTOUT,
+      
+		--Mode settings		
+		sample_width         => from_fpgacfg.smpl_width, --"10"-12bit, "01"-14bit, "00"-16bit;
+      mode                 => from_fpgacfg.mode,       -- JESD207: 1; TRXIQ: 0
+      trxiqpulse           => from_fpgacfg.trxiq_pulse, -- trxiqpulse on: 1; trxiqpulse off: 0
+      ddr_en               => from_fpgacfg.ddr_en,     -- DDR: 1; SDR: 0
+      mimo_en              => from_fpgacfg.mimo_int_en,    -- SISO: 1; MIMO: 0
+      ch_en                => from_fpgacfg.ch_en(1 downto 0),      --"01" - Ch. A, "10" - Ch. B, "11" - Ch. A and Ch. B. 
+     
+		chirp_sync_en			=> inst7_chirp_sync_en
+	);
 -- ----------------------------------------------------------------------------
 -- Output ports 
 -- ---------------------------------------------------------------------------- 
    wfm_phy_clk             <= inst2_phy_clk;
   
-   
+   test0							<=inst7_sync_trig;
+	test1							<=rx_smpl_cmp_err;
+	test2							<=from_fpgacfg.ddr_en;
   
 end arch;   
 

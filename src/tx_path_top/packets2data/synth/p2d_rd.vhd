@@ -45,7 +45,9 @@ entity p2d_rd is
       pct_buff_sel            : out std_logic_vector(3 downto 0);
       pct_buff_clr_n          : out std_logic_vector(N_BUFF-1 downto 0);
       
-      smpl_buff_almost_full   : in std_logic
+      smpl_buff_almost_full   : in std_logic;
+		
+		chirp_sync_en				: in std_logic
      
    );
 end p2d_rd;
@@ -76,6 +78,8 @@ signal rd_cnt                       : unsigned(15 downto 0);
 type state_type is (idle, switch_next_buff, check_next_buf, rd_buff, rd_hold, clr_buff);
 signal current_state, next_state : state_type;   
 
+signal inst_chirp_sync_en 			: std_logic;
+
 -- Component declaration
 COMPONENT lpm_compare
    GENERIC (
@@ -94,6 +98,8 @@ COMPONENT lpm_compare
    END COMPONENT;
 
 begin
+
+inst_chirp_sync_en <= chirp_sync_en;
    
 -- ----------------------------------------------------------------------------
 -- Capture pct_hdr_0 and pct_hdr_1 to array
@@ -264,7 +270,7 @@ begin
          
          when rd_buff =>
             if smpl_buff_almost_full = '0' then
-               if rd_cnt < ((PCT_SIZE-PCT_HDR_SIZE)*8)/64 - 1 then 
+               if rd_cnt < ((PCT_SIZE-PCT_HDR_SIZE)*8)/64 - 1  - to_integer(unsigned'('0' & inst_chirp_sync_en)) then 
                   next_state <= rd_buff;
                else 
                   next_state <= switch_next_buff;

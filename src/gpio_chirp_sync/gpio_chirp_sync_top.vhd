@@ -27,9 +27,9 @@ entity gpio_chirp_sync_top is
       reset_n           	: in std_logic;
 		
 		-- Chirp Sync I/Os
-		chirp_sig				: in std_logic;
+		sync_sig				: in std_logic;
 		sync_period				: out std_logic_vector(chirp_sync_width-1 downto 0);
-		chirp_trig				: out std_logic;
+		sync_trig				: out std_logic;
 		
 		TESTOUT					: out std_logic;
       
@@ -83,17 +83,17 @@ signal counter_enable			: std_logic;
 -- ----------------------------------------------------------------------------		  
 -- gpio_sync_FSM(RSET,CLK,SIG,E,L,U_D,TRIG);
 -- ----------------------------------------------------------------------------
-component gpio_sync_FSM is
-	port(
-		RSET 		: in std_logic;
-		CLK		: in std_logic;
-		SIG		: in std_logic;
-		E			: out std_logic;
-		L			: out std_logic;
-		U_D		: out std_logic;
-		TRIG		: out std_logic		
-		);
-end component;
+--component gpio_sync_FSM is
+--	port(
+--		RSET 		: in std_logic;
+--		CLK		: in std_logic;
+--		SIG		: in std_logic;
+--		E			: out std_logic;
+--		L			: out std_logic;
+--		U_D		: out std_logic;
+--		TRIG		: out std_logic		
+--		);
+--end component;
 
 
 begin
@@ -101,11 +101,26 @@ begin
 
 --sld_counter <= '0';
 sclr_counter <= '0';
-data_counter <= std_logic_vector(to_unsigned(1, data_counter'length));
---counter_enable <= inst0_enable_counter and counter_clk;
-counter_enable <= inst0_enable_counter;
+data_counter <= std_logic_vector(to_unsigned(0, data_counter'length));
 
-inst0_chirp_signal <= chirp_sig;
+enable_counter_clk_sync: process(reset_n, clk)
+	begin
+		if reset_n='0' then
+			counter_enable <= '0';         
+		elsif (clk'event and clk = '1') then
+			if (inst0_enable_counter = '1') then
+				counter_enable <= inst0_enable_counter and counter_clk;
+			else
+				counter_enable <= counter_enable;
+			end if;
+	 end if;
+	end process enable_counter_clk_sync;
+	
+	
+--counter_enable <= inst0_enable_counter and counter_clk;
+--counter_enable <= inst0_enable_counter;
+
+inst0_chirp_signal <= sync_sig;
 
  -- --------------------------------------------------------------------------		  
 -- gpio_sync_FSM(RSET,CLK,SIG,CLK_1,E,L,U_D,TRIG);
@@ -202,9 +217,9 @@ port map(clk, '1', ch_en, ch_en_sync);
 -- ----------------------------------------------------------------------------
 -- Outputs
 -- ----------------------------------------------------------------------------
-chirp_trig <= inst0_chirp_trig;
+sync_trig <= inst0_chirp_trig;
 sync_period <= q_hold;
 
-TESTOUT <= inst5_q(1);
+TESTOUT <= inst5_q(0);
 
 end arch;   

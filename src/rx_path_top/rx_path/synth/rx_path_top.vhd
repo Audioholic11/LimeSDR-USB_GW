@@ -43,6 +43,7 @@ entity rx_path_top is
       pct_fifo_wusedw      : in std_logic_vector(pct_buff_wrusedw_w-1 downto 0);
       pct_fifo_wrreq       : out std_logic;
       pct_fifo_wdata       : out std_logic_vector(63 downto 0);
+		pct_hdr_cap          : out std_logic;
       --sample nr
       clr_smpl_nr          : in std_logic;
       ld_smpl_nr           : in std_logic;
@@ -117,6 +118,7 @@ signal inst3_q                : std_logic_vector(63 downto 0);
 
 --inst2
 signal inst4_q                : std_logic_vector(63 downto 0);
+
 
 --internal signals
 type my_array is array (0 to 5) of std_logic_vector(63 downto 0);
@@ -277,8 +279,7 @@ inst2_smpl_buff_rddata <=  inst1_q(47 downto 36) & "0000" &
   inst2_pct_hdr_0(63 downto 48)  <=x"0605";
         
 --footer0
-  inst2_pct_ftr_0(31 downto 0)	<= chirp_sync_length(31 downto 0);
-  inst2_pct_ftr_0(63 downto 32)	<= x"00000000";
+  inst2_pct_ftr_0(63 downto 0)	<= chirp_sync_length(63 downto 0);
   
 --footer1
 	ftr1_trigger_hold: process(reset_n, clk)
@@ -314,6 +315,7 @@ data2packets_top_inst2 : entity work.data2packets_top
       pct_buff_wrusedw  => pct_fifo_wusedw,
       pct_buff_wrreq    => pct_fifo_wrreq,
       pct_buff_wrdata   => pct_fifo_wdata,
+		pct_hdr_cap       => pct_hdr_cap,
       smpl_buff_rdusedw => inst1_rdusedw,
       smpl_buff_rdreq   => inst2_smpl_buff_rdreq,
       smpl_buff_rddata  => inst2_smpl_buff_rddata,

@@ -42,7 +42,7 @@ entity lms7_trx_top is
       FX3_EP8F_WWIDTH         : integer := 32;     -- Control FPGA->PC, wr width
       -- 
       TX_N_BUFF               : integer := 4;      -- N 4KB buffers in TX interface (2 OR 4)
-      TX_PCT_SIZE             : integer := 4096;   -- TX packet size in bytes
+      TX_PCT_SIZE             : integer := 2048;   -- TX packet size in bytes
       TX_IN_PCT_HDR_SIZE      : integer := 16;
       WFM_INFIFO_SIZE         : integer := 4096;   -- WFM in FIFO buffer size in bytes 
       -- Internal configuration memory 
@@ -275,7 +275,9 @@ signal inst6_wfm_in_pct_reset_n_req : std_logic;
 signal inst6_wfm_in_pct_rdreq       : std_logic;
 signal inst6_wfm_phy_clk            : std_logic;
 
-
+signal inst6_test0						: std_logic;
+signal inst6_test1						: std_logic;
+signal inst6_test2						: std_logic;
 
 
 begin
@@ -583,7 +585,7 @@ begin
       led3_r               => FX3_LED_R,     
       --GPIO
       gpio_dir             => (others=>'1'),
-      gpio_out_val         => "0000" & inst6_tx_pct_loss_flg & inst1_txpll_locked & inst1_rxpll_locked & inst6_tx_txant_en,
+      gpio_out_val         => "0" & inst6_test0 & inst6_test1 & inst6_test2 & inst6_tx_pct_loss_flg & inst1_txpll_locked & inst1_rxpll_locked & inst6_tx_txant_en,
       gpio_rd_val          => open,
       gpio                 => FPGA_GPIO,      
       --Fan control
@@ -699,7 +701,15 @@ begin
       rx_smpl_cmp_start       => inst1_txpll_smpl_cmp_en OR inst1_rxpll_smpl_cmp_en,
       rx_smpl_cmp_length      => inst1_rxpll_smpl_cmp_cnt,
       rx_smpl_cmp_done        => inst6_rx_smpl_cmp_done,
-      rx_smpl_cmp_err         => inst6_rx_smpl_cmp_err     
+      rx_smpl_cmp_err         => inst6_rx_smpl_cmp_err,
+		-- chirp sync
+		sync_sig						=> FPGA_GPIO(7),
+		chirp_sync_en				=> inst0_from_fpgacfg.CHIRP_SYNC_EN,
+		
+		--Testout
+		test0							=> inst6_test0,
+		test1							=> inst6_test1,
+		test2							=> inst6_test2
    );
    
 -- ----------------------------------------------------------------------------

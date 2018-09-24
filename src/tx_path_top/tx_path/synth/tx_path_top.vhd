@@ -54,6 +54,7 @@ entity tx_path_top is
       mimo_en              : in std_logic; -- SISO: 1; MIMO: 0
       ch_en                : in std_logic_vector(1 downto 0); --"11" - Ch. A, "10" - Ch. B, "11" - Ch. A and Ch. B. 
       fidm                 : in std_logic; -- External Frame ID mode. Frame start at fsync = 0, when 0. Frame start at fsync = 1, when 1.
+		chirp_sync_en			: in std_logic; -- chirp sync enable
       sample_width         : in std_logic_vector(1 downto 0); --"10"-12bit, "01"-14bit, "00"-16bit;
       --Tx interface data 
       DIQ                  : out std_logic_vector(iq_width-1 downto 0);
@@ -87,6 +88,7 @@ signal trxiqpulse_sync_iq_rdclk     : std_logic;
 signal ddr_en_sync_iq_rdclk         : std_logic;
 signal mimo_en_sync_iq_rdclk        : std_logic;
 signal fidm_sync_iq_rdclk           : std_logic;
+signal chirp_sync_en_iq_rdclk			: std_logic;
 signal ch_en_sync_iq_rdclk          : std_logic_vector(1 downto 0);
 signal sample_width_sync_iq_rdclk   : std_logic_vector(1 downto 0);
 
@@ -147,6 +149,9 @@ sync_reg7 : entity work.sync_reg
 sync_reg8 : entity work.sync_reg 
  port map(iq_rdclk, '1', reset_n, reset_n_sync_iq_rdclk); 
  
+sync_reg9 : entity work.sync_reg 
+port map(iq_rdclk, '1', chirp_sync_en, chirp_sync_en_iq_rdclk);
+--chirp_sync_en_iq_rdclk <= chirp_sync_en;
  
 bus_sync_reg0 : entity work.bus_sync_reg
  generic map (2) 
@@ -228,13 +233,17 @@ begin
 end process;
 
 
-process(sample_width)
+pct_size_proc : process(sample_width,chirp_sync_en_iq_rdclk)
 begin
-      if sample_width = "01" then 
-         inst0_pct_size <= x"0100";
-      else 
-         inst0_pct_size <= x"0400";
-      end if;
+		if (chirp_sync_en_iq_rdclk='1') then
+			inst0_pct_size <= x"0200";--for chirp sync
+		else
+			if sample_width = "01" then 
+				inst0_pct_size <= x"0100";
+			else 
+				inst0_pct_size <= x"0400";
+			end if;
+		end if;
 end process;
 
 -- reset_n_sync_iq_rdclk is delayed two cycles, this helps awoid throwing 
@@ -305,6 +314,7 @@ generic map(
       mimo_en           => mimo_en_sync_iq_rdclk,	
       ch_en             => ch_en_sync_iq_rdclk,
       sample_width      => sample_width_sync_iq_rdclk,
+		chirp_sync_en		=> chirp_sync_en_iq_rdclk,
       
       pct_size          => inst0_pct_size,
       

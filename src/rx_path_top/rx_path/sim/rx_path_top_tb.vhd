@@ -22,14 +22,14 @@ end rx_path_top_tb;
 -- ----------------------------------------------------------------------------
 
 architecture tb_behave of rx_path_top_tb is
-   constant clk0_period   : time := 50 ns;
-   constant clk1_period   : time := 50 ns; 
-	constant chirp_period  	: time := 100.1 us;
+   constant clk0_period   : time := 10 ns;
+   constant clk1_period   : time := 10 ns; 
+	constant chirp_period  	: time := 20 us;
    --signals
 	signal clk0,clk1		   : std_logic;
 	signal reset_n          : std_logic; 
    
-   signal sample_width     : std_logic_vector(1 downto 0) := "10";
+   signal sample_width     : std_logic_vector(1 downto 0) := "00"; --"10"-12bit, "01"-14bit, "00"-16bit;
    signal smpl_nr_delay    : integer := 3422; -- delay value through buffers to successfully synchronize   
    signal mode			      : std_logic:='0'; -- JESD207: 1; TRXIQ: 0
 	signal trxiqpulse	      : std_logic:='0'; -- trxiqpulse on: 1; trxiqpulse off: 0
@@ -46,6 +46,8 @@ architecture tb_behave of rx_path_top_tb is
 	--ins1 signals
 	--signal inst1_fifo_wrreq	: std_logic;
 	--signal inst1_fifo_wdata : std_logic_vector(47 downto 0);
+	
+	signal inst1_smplfifo_wrreq	: std_logic;
    
    signal inst1_pct_fifo_wrreq   : std_logic;
    signal inst1_pct_fifo_wdata   : std_logic_vector(63 downto 0);
@@ -54,7 +56,7 @@ architecture tb_behave of rx_path_top_tb is
 	
 	--chirp sig
 	signal chirp_sig					: std_logic;
-	signal chirp_sync_en				: std_logic := '0';
+	signal chirp_sync_en				: std_logic := '1';
 	
 	signal sync_period				: std_logic_vector(63 downto 0);
 	signal chirp_trig					: std_logic;
@@ -94,7 +96,7 @@ begin
 		 chirp_sig <= '1'; wait for chirp_period/2;
 	end process chirp_sig_input;
 	
-	inst2_counter_enable <= inst0_fsync;
+	inst2_counter_enable <= inst1_smplfifo_wrreq;
 -- gpio_chirp_sync_top instance
 	inst2_gpio_chirp_sync_top : entity work.gpio_chirp_sync_top
 generic map(
@@ -106,9 +108,11 @@ port map (
 	reset_n           	=> reset_n,
 
 	-- Chirp Sync I/Os
-	chirp_sig				=> chirp_sig,
+	sync_sig				=> chirp_sig,
 	sync_period				=> sync_period,
-	chirp_trig				=> chirp_trig,
+	sync_trig				=> chirp_trig,
+	
+	TESTOUT					=> open,
 		
 	--Mode settings
 	sample_width         => sample_width,
@@ -123,7 +127,11 @@ port map (
 -- simulated data
    inst0_LMS7002_DIQ2 : entity work.LMS7002_DIQ2_sim 
 generic map (
-	file_name => "sim/adc_data_Packet680.txt",
+	--file_name => "sim/adc_data",
+	--file_name => "sim/adc_data_12b_chirp",
+	file_name => "sim/adc_data_16b_chirp",
+	--file_name => "sim/adc_data_12b_full",
+	--file_name => "sim/adc_data_16b_full",
 	data_width => 12
 )
 port map(
@@ -162,11 +170,16 @@ inst1_rx_path_top : entity work.rx_path_top
 		ch_en			         => ch_en,
 		fidm			         => fidm,
 		chirp_sync_en			=> chirp_sync_en,
+		--Limelight Rx
       DIQ		 	         => inst0_DIQ,
 		fsync	 	            => inst0_fsync,
+		--samples
+      smpl_fifo_wrreq_out  => inst1_smplfifo_wrreq,
+		--pct
       pct_fifo_wusedw      => (others=>'0'),
       pct_fifo_wrreq       => inst1_pct_fifo_wrreq,
       pct_fifo_wdata       => inst1_pct_fifo_wdata,
+		--smpl_cmp
       clr_smpl_nr          => '0',
       ld_smpl_nr           => '0',
       smpl_nr_in           => (others=> '0'),
@@ -191,8 +204,11 @@ inst1_rx_path_top : entity work.rx_path_top
 -- Write packet output to file
 -- ----------------------------------------------------------------------------       
 process(clk0) is
-   -- FILE out_file  : TEXT OPEN WRITE_MODE IS "sim/out_pct";
-    FILE out_file  : TEXT OPEN WRITE_MODE IS "sim/out_pct_6_12b";
+   --FILE out_file  : TEXT OPEN WRITE_MODE IS "sim/out_pct_12b_chirp";
+	FILE out_file  : TEXT OPEN WRITE_MODE IS "sim/out_pct_16b_chirp";
+	--FILE out_file  : TEXT OPEN WRITE_MODE IS "sim/out_pct_12b_full";
+	--FILE out_file  : TEXT OPEN WRITE_MODE IS "sim/out_pct_16b_full";
+   -- FILE out_file  : TEXT OPEN WRITE_MODE IS "sim/out_pct_6_12b";
    -- FILE out_file  : TEXT OPEN WRITE_MODE IS "sim/out_pct_6_14b";
    -- FILE out_file  : TEXT OPEN WRITE_MODE IS "sim/out_pct_6_16b";
    variable out_line : LINE;
@@ -217,7 +233,7 @@ begin
 end process;
 	
 	
-	end tb_behave;
+end tb_behave;
   
   
 
